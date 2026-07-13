@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,12 +20,17 @@ import {
 } from '@binance/common';
 import {
     DiffBookDepthStreamsRequest,
+    Hour24TickerRequest,
     IndividualSymbolBookTickerStreamsRequest,
     PartialBookDepthStreamsRequest,
-    Ticker24HourRequest,
     TradeStreamsRequest,
 } from '../../../src/websocket-streams';
-import { PublicApi } from '../../../src/websocket-streams';
+import {
+    PublicApi,
+    DiffBookDepthStreamsUpdateSpeedEnum,
+    PartialBookDepthStreamsLevelEnum,
+    PartialBookDepthStreamsUpdateSpeedEnum,
+} from '../../../src/websocket-streams';
 import { mockSubscription } from './utils';
 
 describe('PublicApi', () => {
@@ -33,8 +38,8 @@ describe('PublicApi', () => {
         it('should execute diffBookDepthStreams() successfully', async () => {
             const params: DiffBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
+                updateSpeed: DiffBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
                 id: 532601580,
-                updateSpeed: 'updateSpeed_example',
             };
 
             const mockResponse = JSONParse(
@@ -46,8 +51,8 @@ describe('PublicApi', () => {
                     U: 465,
                     u: 465,
                     pu: 464,
-                    b: [['1100.000', '0.6000']],
-                    a: [['1300.000', '0.6000']],
+                    b: [['1100.000']],
+                    a: [['1300.000']],
                 })
             );
 
@@ -65,8 +70,8 @@ describe('PublicApi', () => {
 
             const params: DiffBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
+                updateSpeed: DiffBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
                 id: 532601580,
-                updateSpeed: 'updateSpeed_example',
             };
 
             const mockResponse = JSONParse(
@@ -78,8 +83,8 @@ describe('PublicApi', () => {
                     U: 465,
                     u: 465,
                     pu: 464,
-                    b: [['1100.000', '0.6000']],
-                    a: [['1300.000', '0.6000']],
+                    b: [['1100.000']],
+                    a: [['1300.000']],
                 })
             );
 
@@ -108,12 +113,137 @@ describe('PublicApi', () => {
 
             const _params: DiffBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
+                updateSpeed: DiffBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
 
             expect(() => websocketStreamApi.diffBookDepthStreams(params)).toThrow(
                 'Required parameter symbol was null or undefined when calling diffBookDepthStreams.'
+            );
+        });
+
+        it('should throw RequiredError when updateSpeed is missing', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['public']);
+            const websocketStreamApi = new PublicApi(websocketStreamClient);
+
+            const _params: DiffBookDepthStreamsRequest = {
+                symbol: 'btcusdt',
+                updateSpeed: DiffBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.updateSpeed;
+
+            expect(() => websocketStreamApi.diffBookDepthStreams(params)).toThrow(
+                'Required parameter updateSpeed was null or undefined when calling diffBookDepthStreams.'
+            );
+        });
+    });
+
+    describe('hour24Ticker()', () => {
+        it('should execute hour24Ticker() successfully', async () => {
+            const params: Hour24TickerRequest = {
+                symbol: 'btcusdt',
+                id: 532601580,
+                expirationDate: '251230',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: '24hrTicker',
+                    E: 1764080707933,
+                    s: 'ETH-251226-3000-C',
+                    p: '0.0000',
+                    P: '0.00',
+                    w: '200.0000',
+                    c: '200.0000',
+                    Q: '1.0000',
+                    o: '200.0000',
+                    h: '200.0000',
+                    l: '200.0000',
+                    v: '9.0000',
+                    q: '1800.0000',
+                    O: 1764051060000,
+                    C: 1764080707933,
+                    F: 1,
+                    L: 22,
+                    n: 9,
+                })
+            );
+
+            mockSubscription(
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@optionTicker<expirationDate>'.slice(1), params as unknown as Record<string, Hour24TickerRequest>)}`,
+                mockResponse
+            );
+        });
+
+        it('should handle hour24Ticker() WebSocket stream data', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['public']);
+            const websocketStreamApi = new PublicApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'public';
+
+            const params: Hour24TickerRequest = {
+                symbol: 'btcusdt',
+                id: 532601580,
+                expirationDate: '251230',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: '24hrTicker',
+                    E: 1764080707933,
+                    s: 'ETH-251226-3000-C',
+                    p: '0.0000',
+                    P: '0.00',
+                    w: '200.0000',
+                    c: '200.0000',
+                    Q: '1.0000',
+                    o: '200.0000',
+                    h: '200.0000',
+                    l: '200.0000',
+                    v: '9.0000',
+                    q: '1800.0000',
+                    O: 1764051060000,
+                    C: 1764080707933,
+                    F: 1,
+                    L: 22,
+                    n: 9,
+                })
+            );
+
+            const stream = websocketStreamApi.hour24Ticker(params);
+            const mockCallback = jest.fn(() => {});
+            stream.on('message', mockCallback);
+
+            websocketStreamClient['onMessage'](
+                JSONStringify({
+                    stream: replaceWebsocketStreamsPlaceholders(
+                        '/<symbol>@optionTicker<expirationDate>'.slice(1),
+                        params as unknown as Record<string, Hour24TickerRequest>
+                    ),
+                    data: mockResponse,
+                }),
+                websocketStreamClient.connectionPool[0]
+            );
+
+            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
+        });
+
+        it('should throw RequiredError when symbol is missing', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['public']);
+            const websocketStreamApi = new PublicApi(websocketStreamClient);
+
+            const _params: Hour24TickerRequest = {
+                symbol: 'btcusdt',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            expect(() => websocketStreamApi.hour24Ticker(params)).toThrow(
+                'Required parameter symbol was null or undefined when calling hour24Ticker.'
             );
         });
     });
@@ -212,9 +342,9 @@ describe('PublicApi', () => {
         it('should execute partialBookDepthStreams() successfully', async () => {
             const params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
-                level: 'example_value',
+                level: PartialBookDepthStreamsLevelEnum.LEVEL_5,
+                updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
                 id: 532601580,
-                updateSpeed: 'updateSpeed_example',
             };
 
             const mockResponse = JSONParse(
@@ -226,8 +356,8 @@ describe('PublicApi', () => {
                     U: 465,
                     u: 465,
                     pu: 464,
-                    b: [['1100.000', '0.6000']],
-                    a: [['1300.000', '0.6000']],
+                    b: [['1100.000']],
+                    a: [['1300.000']],
                 })
             );
 
@@ -245,9 +375,9 @@ describe('PublicApi', () => {
 
             const params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
-                level: 'example_value',
+                level: PartialBookDepthStreamsLevelEnum.LEVEL_5,
+                updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
                 id: 532601580,
-                updateSpeed: 'updateSpeed_example',
             };
 
             const mockResponse = JSONParse(
@@ -259,8 +389,8 @@ describe('PublicApi', () => {
                     U: 465,
                     u: 465,
                     pu: 464,
-                    b: [['1100.000', '0.6000']],
-                    a: [['1300.000', '0.6000']],
+                    b: [['1100.000']],
+                    a: [['1300.000']],
                 })
             );
 
@@ -289,7 +419,8 @@ describe('PublicApi', () => {
 
             const _params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
-                level: 'example_value',
+                level: PartialBookDepthStreamsLevelEnum.LEVEL_5,
+                updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -306,7 +437,8 @@ describe('PublicApi', () => {
 
             const _params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
-                level: 'example_value',
+                level: PartialBookDepthStreamsLevelEnum.LEVEL_5,
+                updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
             };
             const params = Object.assign({ ..._params });
             delete params?.level;
@@ -315,109 +447,22 @@ describe('PublicApi', () => {
                 'Required parameter level was null or undefined when calling partialBookDepthStreams.'
             );
         });
-    });
 
-    describe('ticker24Hour()', () => {
-        it('should execute ticker24Hour() successfully', async () => {
-            const params: Ticker24HourRequest = {
-                symbol: 'btcusdt',
-                id: 532601580,
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: '24hrTicker',
-                    E: 1764080707933,
-                    s: 'ETH-251226-3000-C',
-                    p: '0.0000',
-                    P: '0.00',
-                    w: '200.0000',
-                    c: '200.0000',
-                    Q: '1.0000',
-                    o: '200.0000',
-                    h: '200.0000',
-                    l: '200.0000',
-                    v: '9.0000',
-                    q: '1800.0000',
-                    O: 1764051060000,
-                    C: 1764080707933,
-                    F: 1,
-                    L: 22,
-                    n: 9,
-                })
-            );
-
-            mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@optionTicker'.slice(1), params as unknown as Record<string, Ticker24HourRequest>)}`,
-                mockResponse
-            );
-        });
-
-        it('should handle ticker24Hour() WebSocket stream data', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['public']);
-            const websocketStreamApi = new PublicApi(websocketStreamClient);
-            websocketStreamClient.connectionPool[0].urlPath = 'public';
-
-            const params: Ticker24HourRequest = {
-                symbol: 'btcusdt',
-                id: 532601580,
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: '24hrTicker',
-                    E: 1764080707933,
-                    s: 'ETH-251226-3000-C',
-                    p: '0.0000',
-                    P: '0.00',
-                    w: '200.0000',
-                    c: '200.0000',
-                    Q: '1.0000',
-                    o: '200.0000',
-                    h: '200.0000',
-                    l: '200.0000',
-                    v: '9.0000',
-                    q: '1800.0000',
-                    O: 1764051060000,
-                    C: 1764080707933,
-                    F: 1,
-                    L: 22,
-                    n: 9,
-                })
-            );
-
-            const stream = websocketStreamApi.ticker24Hour(params);
-            const mockCallback = jest.fn(() => {});
-            stream.on('message', mockCallback);
-
-            websocketStreamClient['onMessage'](
-                JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@optionTicker'.slice(1),
-                        params as unknown as Record<string, Ticker24HourRequest>
-                    ),
-                    data: mockResponse,
-                }),
-                websocketStreamClient.connectionPool[0]
-            );
-
-            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
-        });
-
-        it('should throw RequiredError when symbol is missing', () => {
+        it('should throw RequiredError when updateSpeed is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
             const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['public']);
             const websocketStreamApi = new PublicApi(websocketStreamClient);
 
-            const _params: Ticker24HourRequest = {
+            const _params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
+                level: PartialBookDepthStreamsLevelEnum.LEVEL_5,
+                updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
             };
             const params = Object.assign({ ..._params });
-            delete params?.symbol;
+            delete params?.updateSpeed;
 
-            expect(() => websocketStreamApi.ticker24Hour(params)).toThrow(
-                'Required parameter symbol was null or undefined when calling ticker24Hour.'
+            expect(() => websocketStreamApi.partialBookDepthStreams(params)).toThrow(
+                'Required parameter updateSpeed was null or undefined when calling partialBookDepthStreams.'
             );
         });
     });

@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -35,6 +35,7 @@ import {
     QueryCurrentOpenOptionOrdersRequest,
     QueryOptionOrderHistoryRequest,
     QuerySingleOrderRequest,
+    TradfiOptionsContractRequest,
     UserCommissionRequest,
     UserExerciseRecordRequest,
 } from '../../../src/rest-api';
@@ -50,6 +51,7 @@ import type {
     QueryCurrentOpenOptionOrdersResponse,
     QueryOptionOrderHistoryResponse,
     QuerySingleOrderResponse,
+    TradfiOptionsContractResponse,
     UserCommissionResponse,
     UserExerciseRecordResponse,
 } from '../../../src/rest-api/types';
@@ -70,51 +72,8 @@ describe('TradeApi', () => {
 
     describe('accountTradeList()', () => {
         it('should execute accountTradeList() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        id: 4611875134427365000,
-                        tradeId: 239,
-                        orderId: 4611875134427365000,
-                        symbol: 'BTC-200730-9000-C',
-                        price: '100',
-                        quantity: '1',
-                        fee: '0',
-                        realizedProfit: '0.00000000',
-                        side: 'BUY',
-                        type: 'LIMIT',
-                        liquidity: 'TAKER',
-                        time: 1592465880683,
-                        priceScale: 2,
-                        quantityScale: 2,
-                        optionSide: 'CALL',
-                        quoteAsset: 'USDT',
-                    },
-                ])
-            );
-
-            const spy = jest.spyOn(client, 'accountTradeList').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<AccountTradeListResponse>)
-            );
-            const response = await client.accountTradeList();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute accountTradeList() successfully with optional parameters', async () => {
             const params: AccountTradeListRequest = {
-                symbol: 'symbol_example',
-                fromId: 1,
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-                limit: 100,
-                recvWindow: 5000,
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(
@@ -126,7 +85,7 @@ describe('TradeApi', () => {
                         symbol: 'BTC-200730-9000-C',
                         price: '100',
                         quantity: '1',
-                        fee: '0',
+                        fee: '-1.04378629',
                         realizedProfit: '0.00000000',
                         side: 'BUY',
                         type: 'LIMIT',
@@ -154,7 +113,70 @@ describe('TradeApi', () => {
             spy.mockRestore();
         });
 
+        it('should execute accountTradeList() successfully with optional parameters', async () => {
+            const params: AccountTradeListRequest = {
+                symbol: 'BTC-200730-9000-C',
+                fromId: 1,
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                limit: 20,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 4611875134427365000,
+                        tradeId: 239,
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        fee: '-1.04378629',
+                        realizedProfit: '0.00000000',
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        liquidity: 'TAKER',
+                        time: 1592465880683,
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                    },
+                ])
+            );
+
+            const spy = jest.spyOn(client, 'accountTradeList').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<AccountTradeListResponse>)
+            );
+            const response = await client.accountTradeList(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: AccountTradeListRequest = {
+                symbol: 'BTC-200730-9000-C',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.accountTradeList(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling accountTradeList.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
+            const params: AccountTradeListRequest = {
+                symbol: 'BTC-200730-9000-C',
+            };
+
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -165,7 +187,7 @@ describe('TradeApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'accountTradeList').mockRejectedValueOnce(mockError);
-            await expect(client.accountTradeList()).rejects.toThrow('ResponseError');
+            await expect(client.accountTradeList(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -173,7 +195,7 @@ describe('TradeApi', () => {
     describe('cancelAllOptionOrdersByUnderlying()', () => {
         it('should execute cancelAllOptionOrdersByUnderlying() successfully with required parameters only', async () => {
             const params: CancelAllOptionOrdersByUnderlyingRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success' }));
@@ -194,7 +216,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelAllOptionOrdersByUnderlying() successfully with optional parameters', async () => {
             const params: CancelAllOptionOrdersByUnderlyingRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -216,7 +238,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when underlying is missing', async () => {
             const _params: CancelAllOptionOrdersByUnderlyingRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.underlying;
@@ -228,7 +250,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAllOptionOrdersByUnderlyingRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -253,7 +275,7 @@ describe('TradeApi', () => {
     describe('cancelAllOptionOrdersOnSpecificSymbol()', () => {
         it('should execute cancelAllOptionOrdersOnSpecificSymbol() successfully with required parameters only', async () => {
             const params: CancelAllOptionOrdersOnSpecificSymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(JSONStringify({ code: '0', msg: 'success' }));
@@ -274,7 +296,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelAllOptionOrdersOnSpecificSymbol() successfully with optional parameters', async () => {
             const params: CancelAllOptionOrdersOnSpecificSymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 recvWindow: 5000,
             };
 
@@ -296,7 +318,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelAllOptionOrdersOnSpecificSymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -308,7 +330,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAllOptionOrdersOnSpecificSymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             const errorResponse = {
@@ -333,7 +355,7 @@ describe('TradeApi', () => {
     describe('cancelMultipleOptionOrders()', () => {
         it('should execute cancelMultipleOptionOrders() successfully with required parameters only', async () => {
             const params: CancelMultipleOptionOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(
@@ -344,21 +366,22 @@ describe('TradeApi', () => {
                         price: '100',
                         quantity: '1',
                         executedQty: '0',
+                        fee: '0',
                         side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
                         createTime: 1592465880683,
                         updateTime: 1566818724722,
-                        status: 'NEW',
+                        status: 'ACCEPTED',
                         avgPrice: '0',
-                        source: 'API',
                         clientOrderId: '',
                         priceScale: 3,
                         quantityScale: 4,
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
                         mmp: false,
+                        source: 'API',
                         selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
@@ -380,7 +403,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelMultipleOptionOrders() successfully with optional parameters', async () => {
             const params: CancelMultipleOptionOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 orderIds: [4611875134427365000],
                 clientOrderIds: ['my_id_1'],
                 recvWindow: 5000,
@@ -394,21 +417,22 @@ describe('TradeApi', () => {
                         price: '100',
                         quantity: '1',
                         executedQty: '0',
+                        fee: '0',
                         side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
                         createTime: 1592465880683,
                         updateTime: 1566818724722,
-                        status: 'NEW',
+                        status: 'ACCEPTED',
                         avgPrice: '0',
-                        source: 'API',
                         clientOrderId: '',
                         priceScale: 3,
                         quantityScale: 4,
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
                         mmp: false,
+                        source: 'API',
                         selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
@@ -430,7 +454,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelMultipleOptionOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -442,7 +466,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelMultipleOptionOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             const errorResponse = {
@@ -467,7 +491,7 @@ describe('TradeApi', () => {
     describe('cancelOptionOrder()', () => {
         it('should execute cancelOptionOrder() successfully with required parameters only', async () => {
             const params: CancelOptionOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(
@@ -512,9 +536,9 @@ describe('TradeApi', () => {
 
         it('should execute cancelOptionOrder() successfully with optional parameters', async () => {
             const params: CancelOptionOrderRequest = {
-                symbol: 'symbol_example',
-                orderId: 1,
-                clientOrderId: '1',
+                symbol: 'BTC-200730-9000-C',
+                orderId: 4611875134427365000,
+                clientOrderId: '10000',
                 recvWindow: 5000,
             };
 
@@ -560,7 +584,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelOptionOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -572,7 +596,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelOptionOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             const errorResponse = {
@@ -593,7 +617,7 @@ describe('TradeApi', () => {
     describe('newOrder()', () => {
         it('should execute newOrder() successfully with required parameters only', async () => {
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
                 quantity: 1.0,
@@ -606,10 +630,12 @@ describe('TradeApi', () => {
                     price: '100',
                     quantity: '1',
                     executedQty: '0',
+                    fee: 0,
                     side: 'BUY',
                     type: 'LIMIT',
                     timeInForce: 'GTC',
                     reduceOnly: false,
+                    postOnly: false,
                     createTime: 1592465880683,
                     updateTime: 1566818724722,
                     status: 'NEW',
@@ -641,7 +667,7 @@ describe('TradeApi', () => {
 
         it('should execute newOrder() successfully with optional parameters', async () => {
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
                 quantity: 1.0,
@@ -652,7 +678,7 @@ describe('TradeApi', () => {
                 newOrderRespType: NewOrderNewOrderRespTypeEnum.ACK,
                 clientOrderId: '1',
                 isMmp: true,
-                selfTradePreventionMode: NewOrderSelfTradePreventionModeEnum.EXPIRE_TAKER,
+                selfTradePreventionMode: NewOrderSelfTradePreventionModeEnum.NONE,
                 recvWindow: 5000,
             };
 
@@ -663,10 +689,12 @@ describe('TradeApi', () => {
                     price: '100',
                     quantity: '1',
                     executedQty: '0',
+                    fee: 0,
                     side: 'BUY',
                     type: 'LIMIT',
                     timeInForce: 'GTC',
                     reduceOnly: false,
+                    postOnly: false,
                     createTime: 1592465880683,
                     updateTime: 1566818724722,
                     status: 'NEW',
@@ -698,7 +726,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
                 quantity: 1.0,
@@ -713,7 +741,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
                 quantity: 1.0,
@@ -728,7 +756,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
                 quantity: 1.0,
@@ -743,7 +771,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
                 quantity: 1.0,
@@ -758,7 +786,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
                 quantity: 1.0,
@@ -820,7 +848,7 @@ describe('TradeApi', () => {
 
         it('should execute optionPositionInformation() successfully with optional parameters', async () => {
             const params: OptionPositionInformationRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 recvWindow: 5000,
             };
 
@@ -893,15 +921,16 @@ describe('TradeApi', () => {
                         price: '100',
                         quantity: '1',
                         executedQty: '0',
+                        fee: 0,
                         side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
+                        postOnly: false,
                         createTime: 1592465880683,
                         updateTime: 1566818724722,
                         status: 'NEW',
                         avgPrice: '0',
-                        source: 'API',
                         clientOrderId: '',
                         priceScale: 2,
                         quantityScale: 2,
@@ -909,6 +938,7 @@ describe('TradeApi', () => {
                         quoteAsset: 'USDT',
                         mmp: false,
                         selfTradePreventionMode: 'EXPIRE_MAKER',
+                        source: 'API',
                     },
                 ])
             );
@@ -941,15 +971,16 @@ describe('TradeApi', () => {
                         price: '100',
                         quantity: '1',
                         executedQty: '0',
+                        fee: 0,
                         side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
+                        postOnly: false,
                         createTime: 1592465880683,
                         updateTime: 1566818724722,
                         status: 'NEW',
                         avgPrice: '0',
-                        source: 'API',
                         clientOrderId: '',
                         priceScale: 2,
                         quantityScale: 2,
@@ -957,6 +988,7 @@ describe('TradeApi', () => {
                         quoteAsset: 'USDT',
                         mmp: false,
                         selfTradePreventionMode: 'EXPIRE_MAKER',
+                        source: 'API',
                     },
                 ])
             );
@@ -1052,8 +1084,8 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentOpenOptionOrders() successfully with optional parameters', async () => {
             const params: QueryCurrentOpenOptionOrdersRequest = {
-                symbol: 'symbol_example',
-                orderId: 1,
+                symbol: 'BTC-200730-9000-C',
+                orderId: 4611875134427365000,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 recvWindow: 5000,
@@ -1121,25 +1153,25 @@ describe('TradeApi', () => {
     describe('queryOptionOrderHistory()', () => {
         it('should execute queryOptionOrderHistory() successfully with required parameters only', async () => {
             const params: QueryOptionOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        orderId: 4611922413427360000,
-                        symbol: 'BTC-220715-2000-C',
-                        price: '18000.00000000',
-                        quantity: '-0.50000000',
-                        executedQty: '-0.50000000',
-                        side: 'SELL',
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        executedQty: '0',
+                        side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
-                        createTime: 1657867694244,
-                        updateTime: 1657867888216,
-                        status: 'FILLED',
-                        avgPrice: '18000.00000000',
+                        createTime: 1592465880683,
+                        updateTime: 1592465880683,
+                        status: 'ACCEPTED',
+                        avgPrice: '0',
                         clientOrderId: '',
                         priceScale: 2,
                         quantityScale: 2,
@@ -1166,30 +1198,30 @@ describe('TradeApi', () => {
 
         it('should execute queryOptionOrderHistory() successfully with optional parameters', async () => {
             const params: QueryOptionOrderHistoryRequest = {
-                symbol: 'symbol_example',
-                orderId: 1,
+                symbol: 'BTC-200730-9000-C',
+                orderId: 4611875134427365000,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 20,
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        orderId: 4611922413427360000,
-                        symbol: 'BTC-220715-2000-C',
-                        price: '18000.00000000',
-                        quantity: '-0.50000000',
-                        executedQty: '-0.50000000',
-                        side: 'SELL',
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        executedQty: '0',
+                        side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
-                        createTime: 1657867694244,
-                        updateTime: 1657867888216,
-                        status: 'FILLED',
-                        avgPrice: '18000.00000000',
+                        createTime: 1592465880683,
+                        updateTime: 1592465880683,
+                        status: 'ACCEPTED',
+                        avgPrice: '0',
                         clientOrderId: '',
                         priceScale: 2,
                         quantityScale: 2,
@@ -1216,7 +1248,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryOptionOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1228,7 +1260,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryOptionOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             const errorResponse = {
@@ -1251,7 +1283,7 @@ describe('TradeApi', () => {
     describe('querySingleOrder()', () => {
         it('should execute querySingleOrder() successfully with required parameters only', async () => {
             const params: QuerySingleOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(
@@ -1265,6 +1297,7 @@ describe('TradeApi', () => {
                     type: 'LIMIT',
                     timeInForce: 'GTC',
                     reduceOnly: false,
+                    postOnly: false,
                     createTime: 1592465880683,
                     updateTime: 1566818724722,
                     status: 'NEW',
@@ -1295,9 +1328,9 @@ describe('TradeApi', () => {
 
         it('should execute querySingleOrder() successfully with optional parameters', async () => {
             const params: QuerySingleOrderRequest = {
-                symbol: 'symbol_example',
-                orderId: 1,
-                clientOrderId: '1',
+                symbol: 'BTC-200730-9000-C',
+                orderId: 4611875134427365000,
+                clientOrderId: 'abc123',
                 recvWindow: 5000,
             };
 
@@ -1312,6 +1345,7 @@ describe('TradeApi', () => {
                     type: 'LIMIT',
                     timeInForce: 'GTC',
                     reduceOnly: false,
+                    postOnly: false,
                     createTime: 1592465880683,
                     updateTime: 1566818724722,
                     status: 'NEW',
@@ -1342,7 +1376,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QuerySingleOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1354,7 +1388,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QuerySingleOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             const errorResponse = {
@@ -1372,17 +1406,69 @@ describe('TradeApi', () => {
         });
     });
 
+    describe('tradfiOptionsContract()', () => {
+        it('should execute tradfiOptionsContract() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
+
+            const spy = jest.spyOn(client, 'tradfiOptionsContract').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<TradfiOptionsContractResponse>)
+            );
+            const response = await client.tradfiOptionsContract();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute tradfiOptionsContract() successfully with optional parameters', async () => {
+            const params: TradfiOptionsContractRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
+
+            const spy = jest.spyOn(client, 'tradfiOptionsContract').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<TradfiOptionsContractResponse>)
+            );
+            const response = await client.tradfiOptionsContract(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'tradfiOptionsContract')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.tradfiOptionsContract()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('userCommission()', () => {
         it('should execute userCommission() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     commissions: [
                         { underlying: 'BTCUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'ETHUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'BNBUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'SOLUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'XRPUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'DOGEUSDT', makerFee: '0.000240', takerFee: '0.000240' },
                     ],
                 })
             );
@@ -1410,11 +1496,6 @@ describe('TradeApi', () => {
                 JSONStringify({
                     commissions: [
                         { underlying: 'BTCUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'ETHUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'BNBUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'SOLUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'XRPUSDT', makerFee: '0.000240', takerFee: '0.000240' },
-                        { underlying: 'DOGEUSDT', makerFee: '0.000240', takerFee: '0.000240' },
                     ],
                 })
             );
@@ -1487,10 +1568,10 @@ describe('TradeApi', () => {
 
         it('should execute userExerciseRecord() successfully with optional parameters', async () => {
             const params: UserExerciseRecordRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 20,
                 recvWindow: 5000,
             };
 

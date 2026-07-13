@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,109 +20,109 @@
  */
 export interface Ticker24hrPriceChangeStatisticsResponseInner {
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     symbol?: string;
     /**
-     *
+     * 24-hour price change
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     priceChange?: string;
     /**
-     *
+     * 24-hour percent price change
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     priceChangePercent?: string;
     /**
-     *
+     * Last trade price
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     lastPrice?: string;
     /**
-     *
+     * Last trade amount
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     lastQty?: string;
     /**
-     *
+     * 24-hour open price
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     open?: string;
     /**
-     *
+     * 24-hour high
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     high?: string;
     /**
-     *
+     * 24-hour low
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     low?: string;
     /**
-     *
+     * Trading volume(contracts)
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     volume?: string;
     /**
-     *
+     * Trade amount(in quote asset)
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     amount?: string;
     /**
-     *
+     * The best buy price
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     bidPrice?: string;
     /**
-     *
+     * The best sell price
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     askPrice?: string;
     /**
-     *
+     * Time the first trade occurred within the last 24 hours
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     openTime?: number | bigint;
     /**
-     *
+     * Time the last trade occurred within the last 24 hours
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     closeTime?: number | bigint;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     firstTradeId?: number | bigint;
     /**
-     *
+     * Number of trades
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     tradeCount?: number | bigint;
     /**
-     *
+     * Strike price
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     strikePrice?: string;
     /**
-     *
+     * return estimated settlement price one hour before exercise, return index price at other times
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */

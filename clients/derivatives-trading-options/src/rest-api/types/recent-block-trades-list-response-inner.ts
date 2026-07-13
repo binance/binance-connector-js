@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface RecentBlockTradesListResponseInner {
     /**
-     *
+     * id
      * @type {number | bigint}
      * @memberof RecentBlockTradesListResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * trade Id
      * @type {number | bigint}
      * @memberof RecentBlockTradesListResponseInner
      */
     tradeId?: number | bigint;
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof RecentBlockTradesListResponseInner
      */
     symbol?: string;
     /**
-     *
+     * price
      * @type {string}
      * @memberof RecentBlockTradesListResponseInner
      */
     price?: string;
     /**
-     *
+     * qty
      * @type {string}
      * @memberof RecentBlockTradesListResponseInner
      */
     qty?: string;
     /**
-     *
+     * quote Qty
      * @type {string}
      * @memberof RecentBlockTradesListResponseInner
      */
     quoteQty?: string;
     /**
-     *
+     * side
      * @type {number | bigint}
      * @memberof RecentBlockTradesListResponseInner
      */
     side?: number | bigint;
     /**
-     *
+     * time
      * @type {number | bigint}
      * @memberof RecentBlockTradesListResponseInner
      */

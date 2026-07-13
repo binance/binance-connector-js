@@ -1,5 +1,6 @@
 import {
     DerivativesTradingOptions,
+    DerivativesTradingOptionsWebsocketStreams,
     DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_PROD_URL,
 } from '../../src';
 
@@ -16,6 +17,9 @@ async function diffBookDepthStreams() {
 
         const stream = connection.diffBookDepthStreams({
             symbol: 'btcusdt',
+            updateSpeed:
+                DerivativesTradingOptionsWebsocketStreams.DiffBookDepthStreamsUpdateSpeedEnum
+                    .UPDATE_SPEED_100ms,
         });
 
         stream.on('message', (data) => {

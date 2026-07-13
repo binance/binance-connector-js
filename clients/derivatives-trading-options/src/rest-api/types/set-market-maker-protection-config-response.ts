@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface SetMarketMakerProtectionConfigResponse {
     /**
-     *
+     * underlying Id
      * @type {number | bigint}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
     underlyingId?: number | bigint;
     /**
-     *
+     * underlying
      * @type {string}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
     underlying?: string;
     /**
-     *
+     * window Time In Milliseconds
      * @type {number | bigint}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
     windowTimeInMilliseconds?: number | bigint;
     /**
-     *
+     * frozen Time In Milliseconds
      * @type {number | bigint}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
     frozenTimeInMilliseconds?: number | bigint;
     /**
-     *
+     * qty Limit
      * @type {string}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
     qtyLimit?: string;
     /**
-     *
+     * delta Limit
      * @type {string}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
     deltaLimit?: string;
     /**
-     *
+     * last Trigger Time
      * @type {number | bigint}
      * @memberof SetMarketMakerProtectionConfigResponse
      */

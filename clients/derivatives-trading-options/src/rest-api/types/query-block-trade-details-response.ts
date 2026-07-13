@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,37 +25,37 @@ import type { QueryBlockTradeDetailsResponseLegsInner } from './query-block-trad
  */
 export interface QueryBlockTradeDetailsResponse {
     /**
-     *
+     * block Trade Settlement Key
      * @type {string}
      * @memberof QueryBlockTradeDetailsResponse
      */
     blockTradeSettlementKey?: string;
     /**
-     *
+     * expire Time
      * @type {number | bigint}
      * @memberof QueryBlockTradeDetailsResponse
      */
     expireTime?: number | bigint;
     /**
-     *
+     * liquidity
      * @type {string}
      * @memberof QueryBlockTradeDetailsResponse
      */
     liquidity?: string;
     /**
-     *
+     * status
      * @type {string}
      * @memberof QueryBlockTradeDetailsResponse
      */
     status?: string;
     /**
-     *
+     * create Time
      * @type {number | bigint}
      * @memberof QueryBlockTradeDetailsResponse
      */
     createTime?: number | bigint;
     /**
-     *
+     * legs
      * @type {Array<QueryBlockTradeDetailsResponseLegsInner>}
      * @memberof QueryBlockTradeDetailsResponse
      */

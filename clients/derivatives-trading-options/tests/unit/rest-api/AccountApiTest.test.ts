@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AccountApi } from '../../../src/rest-api';
+import { AccountApi, AccountFundingFlowCurrencyEnum } from '../../../src/rest-api';
 import {
     AccountFundingFlowRequest,
     OptionMarginAccountInformationRequest,
@@ -42,7 +42,7 @@ describe('AccountApi', () => {
     describe('accountFundingFlow()', () => {
         it('should execute accountFundingFlow() successfully with required parameters only', async () => {
             const params: AccountFundingFlowRequest = {
-                currency: 'currency_example',
+                currency: AccountFundingFlowCurrencyEnum.USDT,
             };
 
             mockResponse = JSONParse(
@@ -53,20 +53,6 @@ describe('AccountApi', () => {
                         amount: '-0.552',
                         type: 'FEE',
                         createDate: 1592449456000,
-                    },
-                    {
-                        id: 1125899906842624000,
-                        asset: 'USDT',
-                        amount: '100',
-                        type: 'CONTRACT',
-                        createDate: 1592449456000,
-                    },
-                    {
-                        id: 1125899906842624000,
-                        asset: 'USDT',
-                        amount: '10000',
-                        type: 'TRANSFER',
-                        createDate: 1592448410000,
                     },
                 ])
             );
@@ -87,11 +73,11 @@ describe('AccountApi', () => {
 
         it('should execute accountFundingFlow() successfully with optional parameters', async () => {
             const params: AccountFundingFlowRequest = {
-                currency: 'currency_example',
-                recordId: 1,
+                currency: AccountFundingFlowCurrencyEnum.USDT,
+                recordId: 100000,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 20,
                 recvWindow: 5000,
             };
 
@@ -103,20 +89,6 @@ describe('AccountApi', () => {
                         amount: '-0.552',
                         type: 'FEE',
                         createDate: 1592449456000,
-                    },
-                    {
-                        id: 1125899906842624000,
-                        asset: 'USDT',
-                        amount: '100',
-                        type: 'CONTRACT',
-                        createDate: 1592449456000,
-                    },
-                    {
-                        id: 1125899906842624000,
-                        asset: 'USDT',
-                        amount: '10000',
-                        type: 'TRANSFER',
-                        createDate: 1592448410000,
                     },
                 ])
             );
@@ -137,7 +109,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when currency is missing', async () => {
             const _params: AccountFundingFlowRequest = {
-                currency: 'currency_example',
+                currency: AccountFundingFlowCurrencyEnum.USDT,
             };
             const params = Object.assign({ ..._params });
             delete params?.currency;
@@ -149,7 +121,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AccountFundingFlowRequest = {
-                currency: 'currency_example',
+                currency: AccountFundingFlowCurrencyEnum.USDT,
             };
 
             const errorResponse = {
@@ -174,17 +146,23 @@ describe('AccountApi', () => {
                     asset: [
                         {
                             asset: 'USDT',
-                            marginBalance: '99998.87365244',
-                            equity: '99998.87365244',
-                            available: '96883.72734374',
-                            initialMargin: '3115.14630870',
-                            maintMargin: '0.00000000',
-                            unrealizedPNL: '0.00000000',
-                            adjustedEquity: '99998.87365244',
+                            marginBalance: '10099.448',
+                            equity: '10094.44662',
+                            available: '8725.92524',
+                            initialMargin: '1084.52138',
+                            maintMargin: '151.00138',
+                            unrealizedPNL: '-5.00138',
+                            adjustedEquity: '34.13282285',
                         },
                     ],
                     greek: [
-                        { underlying: 'BTCUSDT', delta: '0', theta: '0', gamma: '0', vega: '0' },
+                        {
+                            underlying: 'BTCUSDT',
+                            delta: '-0.05',
+                            gamma: '-0.002',
+                            theta: '-0.05',
+                            vega: '-0.002',
+                        },
                     ],
                     time: 1762843368098,
                     canTrade: true,
@@ -219,17 +197,23 @@ describe('AccountApi', () => {
                     asset: [
                         {
                             asset: 'USDT',
-                            marginBalance: '99998.87365244',
-                            equity: '99998.87365244',
-                            available: '96883.72734374',
-                            initialMargin: '3115.14630870',
-                            maintMargin: '0.00000000',
-                            unrealizedPNL: '0.00000000',
-                            adjustedEquity: '99998.87365244',
+                            marginBalance: '10099.448',
+                            equity: '10094.44662',
+                            available: '8725.92524',
+                            initialMargin: '1084.52138',
+                            maintMargin: '151.00138',
+                            unrealizedPNL: '-5.00138',
+                            adjustedEquity: '34.13282285',
                         },
                     ],
                     greek: [
-                        { underlying: 'BTCUSDT', delta: '0', theta: '0', gamma: '0', vega: '0' },
+                        {
+                            underlying: 'BTCUSDT',
+                            delta: '-0.05',
+                            gamma: '-0.002',
+                            theta: '-0.05',
+                            vega: '-0.002',
+                        },
                     ],
                     time: 1762843368098,
                     canTrade: true,

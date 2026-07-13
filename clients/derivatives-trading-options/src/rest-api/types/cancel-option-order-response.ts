@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,121 +20,121 @@
  */
 export interface CancelOptionOrderResponse {
     /**
-     *
+     * System order number
      * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Option trading pair
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Order Price
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     price?: string;
     /**
-     *
+     * Order Quantity
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     quantity?: string;
     /**
-     *
+     * Number of executed quantity
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Buy/sell direction
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     side?: string;
     /**
-     *
+     * Order type
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     type?: string;
     /**
-     *
+     * Time in force method
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Order is reduce only Y/N
      * @type {boolean}
      * @memberof CancelOptionOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Order Time
      * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
     createDate?: number | bigint;
     /**
-     *
+     * Update time
      * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Order status
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     status?: string;
     /**
-     *
+     * Average price of completed trade
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * source
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     source?: string;
     /**
-     *
+     * Client order ID
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * price Scale
      * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity Scale
      * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * option Side
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     optionSide?: string;
     /**
-     *
+     * quote Asset
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
     quoteAsset?: string;
     /**
-     *
+     * mmp
      * @type {boolean}
      * @memberof CancelOptionOrderResponse
      */

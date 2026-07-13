@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,11 +16,11 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MarkPriceResponseInner } from './mark-price-response-inner';
+import type { OptionMarkPriceResponseInner } from './option-mark-price-response-inner';
 
 /**
  *
  * @export
- * @interface MarkPriceResponse
+ * @interface OptionMarkPriceResponse
  */
-export interface MarkPriceResponse extends Array<MarkPriceResponseInner> {}
+export interface OptionMarkPriceResponse extends Array<OptionMarkPriceResponseInner> {}

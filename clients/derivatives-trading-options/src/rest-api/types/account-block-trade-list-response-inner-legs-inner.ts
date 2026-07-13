@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,115 +20,115 @@
  */
 export interface AccountBlockTradeListResponseInnerLegsInner {
     /**
-     *
+     * create Time
      * @type {number | bigint}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     createTime?: number | bigint;
     /**
-     *
+     * update Time
      * @type {number | bigint}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     symbol?: string;
     /**
-     *
+     * order Id
      * @type {string}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     orderId?: string;
     /**
-     *
+     * order Price
      * @type {number}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     orderPrice?: number;
     /**
-     *
+     * order Quantity
      * @type {number}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     orderQuantity?: number;
     /**
-     *
+     * order Status
      * @type {string}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     orderStatus?: string;
     /**
-     *
+     * executed Qty
      * @type {number}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     executedQty?: number;
     /**
-     *
+     * executed Amount
      * @type {number}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     executedAmount?: number;
     /**
-     *
+     * fee
      * @type {number}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     fee?: number;
     /**
-     *
+     * order Type
      * @type {string}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     orderType?: string;
     /**
-     *
+     * order Side
      * @type {string}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     orderSide?: string;
     /**
-     *
+     * id
      * @type {string}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     id?: string;
     /**
-     *
+     * trade Id
      * @type {number | bigint}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     tradeId?: number | bigint;
     /**
-     *
+     * trade Price
      * @type {number}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     tradePrice?: number;
     /**
-     *
+     * trade Qty
      * @type {number}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     tradeQty?: number;
     /**
-     *
+     * trade Time
      * @type {number | bigint}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     tradeTime?: number | bigint;
     /**
-     *
+     * liquidity
      * @type {string}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
     liquidity?: string;
     /**
-     *
+     * commission
      * @type {number}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */

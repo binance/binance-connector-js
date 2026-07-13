@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,151 +20,151 @@
  */
 export interface OrderTradeUpdateO {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     s?: string;
     /**
-     *
+     * Client Order Id
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     c?: string;
     /**
-     *
+     * Side
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     S?: string;
     /**
-     *
+     * Order Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     o?: string;
     /**
-     *
+     * Time in Force
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     f?: string;
     /**
-     *
+     * Original Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     q?: string;
     /**
-     *
+     * Original Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     p?: string;
     /**
-     *
+     * Average Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     ap?: string;
     /**
-     *
+     * Execution Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     x?: string;
     /**
-     *
+     * Order Status
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     X?: string;
     /**
-     *
+     * Order Id
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     i?: number | bigint;
     /**
-     *
+     * Order Last Filled Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     l?: string;
     /**
-     *
+     * Order Filled Accumulated Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     z?: string;
     /**
-     *
+     * Last Filled Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     L?: string;
     /**
-     *
+     * Commission Asset
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     N?: string;
     /**
-     *
+     * Commission, negative means fee charge
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     n?: string;
     /**
-     *
+     * Order Trade Time
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     T?: number | bigint;
     /**
-     *
+     * Trade Id
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     t?: number | bigint;
     /**
-     *
+     * Bids qty
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     b?: string;
     /**
-     *
+     * Ask qty
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     a?: string;
     /**
-     *
+     * Is this trade the maker side?
      * @type {boolean}
      * @memberof OrderTradeUpdateO
      */
     m?: boolean;
     /**
-     *
+     * Is this reduce only
      * @type {boolean}
      * @memberof OrderTradeUpdateO
      */
     R?: boolean;
     /**
-     *
+     * Original Order Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     ot?: string;
     /**
-     *
+     * Realized Profit of the trade
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     rp?: string;
     /**
-     *
+     * STP mode
      * @type {string}
      * @memberof OrderTradeUpdateO
      */

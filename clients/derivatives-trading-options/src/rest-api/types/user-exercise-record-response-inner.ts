@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,79 +20,79 @@
  */
 export interface UserExerciseRecordResponseInner {
     /**
-     *
+     * id
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     id?: string;
     /**
-     *
+     * currency
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     currency?: string;
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     symbol?: string;
     /**
-     *
+     * exercise Price
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     exercisePrice?: string;
     /**
-     *
+     * quantity
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     quantity?: string;
     /**
-     *
+     * amount
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     amount?: string;
     /**
-     *
+     * fee
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     fee?: string;
     /**
-     *
+     * create Date
      * @type {number | bigint}
      * @memberof UserExerciseRecordResponseInner
      */
     createDate?: number | bigint;
     /**
-     *
+     * price Scale
      * @type {number | bigint}
      * @memberof UserExerciseRecordResponseInner
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity Scale
      * @type {number | bigint}
      * @memberof UserExerciseRecordResponseInner
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * option Side
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     optionSide?: string;
     /**
-     *
+     * position Side
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * quote Asset
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */

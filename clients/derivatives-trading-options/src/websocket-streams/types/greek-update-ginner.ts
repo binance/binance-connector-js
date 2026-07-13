@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface GreekUpdateGInner {
     /**
-     *
+     * Underlying
      * @type {string}
      * @memberof GreekUpdateGInner
      */
     u?: string;
     /**
-     *
+     * Delta
      * @type {string}
      * @memberof GreekUpdateGInner
      */
     d?: string;
     /**
-     *
+     * Gamma
      * @type {string}
      * @memberof GreekUpdateGInner
      */
     g?: string;
     /**
-     *
+     * Theta
      * @type {string}
      * @memberof GreekUpdateGInner
      */
     t?: string;
     /**
-     *
+     * Vega
      * @type {string}
      * @memberof GreekUpdateGInner
      */

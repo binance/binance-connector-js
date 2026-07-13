@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -21,9 +21,9 @@ import {
 import type {
     IndexPriceStreamsResponse,
     KlineCandlestickStreamsResponse,
-    MarkPriceResponse,
     NewSymbolInfoResponse,
     OpenInterestResponse,
+    OptionMarkPriceResponse,
 } from '../types';
 
 const MarketApiParamCreator = function () {
@@ -48,12 +48,16 @@ const MarketApiParamCreator = function () {
          *
          * @summary Kline/Candlestick Streams
          * @param {string} symbol The symbol parameter
-         * @param {string} interval The interval parameter
+         * @param {KlineCandlestickStreamsIntervalEnum} interval The interval parameter
          * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        klineCandlestickStreams: (symbol: string, interval: string, id?: number): string => {
+        klineCandlestickStreams: (
+            symbol: string,
+            interval: KlineCandlestickStreamsIntervalEnum,
+            id?: number
+        ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('klineCandlestickStreams', 'symbol', symbol);
             // verify required parameter 'interval' is not null or undefined
@@ -62,26 +66,6 @@ const MarketApiParamCreator = function () {
             return replaceWebsocketStreamsPlaceholders('/<symbol>@kline_<interval>'.slice(1), {
                 symbol,
                 interval,
-                id,
-            });
-        },
-        /**
-         * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
-         *
-         * Update Speed: 1000ms
-         *
-         * @summary Mark Price
-         * @param {string} underlying The underlying parameter
-         * @param {number} [id] Unique WebSocket request ID.
-         *
-         * @throws {RequiredError}
-         */
-        markPrice: (underlying: string, id?: number): string => {
-            // verify required parameter 'underlying' is not null or undefined
-            assertParamExists('markPrice', 'underlying', underlying);
-
-            return replaceWebsocketStreamsPlaceholders('/<underlying>@optionMarkPrice'.slice(1), {
-                underlying,
                 id,
             });
         },
@@ -104,19 +88,42 @@ const MarketApiParamCreator = function () {
          * Update Speed: 60s
          *
          * @summary Open Interest
+         * @param {string} underlying The underlying parameter
          * @param {string} expirationDate The expirationDate parameter
          * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        openInterest: (expirationDate: string, id?: number): string => {
+        openInterest: (underlying: string, expirationDate: string, id?: number): string => {
+            // verify required parameter 'underlying' is not null or undefined
+            assertParamExists('openInterest', 'underlying', underlying);
             // verify required parameter 'expirationDate' is not null or undefined
             assertParamExists('openInterest', 'expirationDate', expirationDate);
 
             return replaceWebsocketStreamsPlaceholders(
-                '/underlying@optionOpenInterest@<expirationDate>'.slice(1),
-                { expirationDate, id }
+                '/<underlying>@openInterest@<expirationDate>'.slice(1),
+                { underlying, expirationDate, id }
             );
+        },
+        /**
+         * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
+         *
+         * Update Speed: 1000ms
+         *
+         * @summary Option Mark Price
+         * @param {string} underlying The underlying parameter
+         * @param {number} [id] Unique WebSocket request ID.
+         *
+         * @throws {RequiredError}
+         */
+        optionMarkPrice: (underlying: string, id?: number): string => {
+            // verify required parameter 'underlying' is not null or undefined
+            assertParamExists('optionMarkPrice', 'underlying', underlying);
+
+            return replaceWebsocketStreamsPlaceholders('/<underlying>@optionMarkPrice'.slice(1), {
+                underlying,
+                id,
+            });
         },
     };
 };
@@ -159,20 +166,6 @@ export interface MarketApiInterface {
     ): WebsocketStream<KlineCandlestickStreamsResponse>;
 
     /**
-     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
-     *
-     * Update Speed: 1000ms
-     *
-     * @summary Mark Price
-     * @param {MarkPriceRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<MarkPriceResponse>}
-     * @throws {RequiredError}
-     * @memberof MarketApiInterface
-     */
-    markPrice(requestParameters: MarkPriceRequest): WebsocketStream<MarkPriceResponse>;
-
-    /**
      * New symbol listing stream.
      *
      * Update Speed: 50ms
@@ -199,6 +192,22 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     openInterest(requestParameters: OpenInterestRequest): WebsocketStream<OpenInterestResponse>;
+
+    /**
+     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
+     *
+     * Update Speed: 1000ms
+     *
+     * @summary Option Mark Price
+     * @param {OptionMarkPriceRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<OptionMarkPriceResponse>}
+     * @throws {RequiredError}
+     * @memberof MarketApiInterface
+     */
+    optionMarkPrice(
+        requestParameters: OptionMarkPriceRequest
+    ): WebsocketStream<OptionMarkPriceResponse>;
 }
 
 /**
@@ -228,35 +237,15 @@ export interface KlineCandlestickStreamsRequest {
 
     /**
      * The interval parameter
-     * @type {string}
+     * @type {'1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '12h' | '1d' | '3d' | '1w'}
      * @memberof MarketApiKlineCandlestickStreams
      */
-    readonly interval: string;
+    readonly interval: KlineCandlestickStreamsIntervalEnum;
 
     /**
      * Unique WebSocket request ID.
      * @type {number}
      * @memberof MarketApiKlineCandlestickStreams
-     */
-    readonly id?: number;
-}
-
-/**
- * Request parameters for markPrice operation in MarketApi.
- * @interface MarkPriceRequest
- */
-export interface MarkPriceRequest {
-    /**
-     * The underlying parameter
-     * @type {string}
-     * @memberof MarketApiMarkPrice
-     */
-    readonly underlying: string;
-
-    /**
-     * Unique WebSocket request ID.
-     * @type {number}
-     * @memberof MarketApiMarkPrice
      */
     readonly id?: number;
 }
@@ -280,6 +269,13 @@ export interface NewSymbolInfoRequest {
  */
 export interface OpenInterestRequest {
     /**
+     * The underlying parameter
+     * @type {string}
+     * @memberof MarketApiOpenInterest
+     */
+    readonly underlying: string;
+
+    /**
      * The expirationDate parameter
      * @type {string}
      * @memberof MarketApiOpenInterest
@@ -290,6 +286,26 @@ export interface OpenInterestRequest {
      * Unique WebSocket request ID.
      * @type {number}
      * @memberof MarketApiOpenInterest
+     */
+    readonly id?: number;
+}
+
+/**
+ * Request parameters for optionMarkPrice operation in MarketApi.
+ * @interface OptionMarkPriceRequest
+ */
+export interface OptionMarkPriceRequest {
+    /**
+     * The underlying parameter
+     * @type {string}
+     * @memberof MarketApiOptionMarkPrice
+     */
+    readonly underlying: string;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {number}
+     * @memberof MarketApiOptionMarkPrice
      */
     readonly id?: number;
 }
@@ -318,7 +334,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<IndexPriceStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Index-Price-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#index-price-streams Binance API Documentation}
      */
     public indexPriceStreams(
         requestParameters: IndexPriceStreamsRequest = {}
@@ -343,7 +359,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<KlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#kline-candlestick-streams Binance API Documentation}
      */
     public klineCandlestickStreams(
         requestParameters: KlineCandlestickStreamsRequest
@@ -363,32 +379,6 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
-     *
-     * Update Speed: 1000ms
-     *
-     * @summary Mark Price
-     * @param {MarkPriceRequest} requestParameters Request parameters.
-     * @returns {WebsocketStream<MarkPriceResponse>}
-     * @throws {RequiredError}
-     * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Mark-Price Binance API Documentation}
-     */
-    public markPrice(requestParameters: MarkPriceRequest): WebsocketStream<MarkPriceResponse> {
-        const stream = this.localVarParamCreator.markPrice(
-            requestParameters?.underlying,
-            requestParameters?.id
-        );
-
-        return createStreamHandler<MarkPriceResponse>(
-            this.websocketBase,
-            stream,
-            requestParameters?.id,
-            'market'
-        );
-    }
-
-    /**
      * New symbol listing stream.
      *
      * Update Speed: 50ms
@@ -398,7 +388,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<NewSymbolInfoResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/New-Symbol-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#new-symbol-info Binance API Documentation}
      */
     public newSymbolInfo(
         requestParameters: NewSymbolInfoRequest = {}
@@ -423,12 +413,13 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<OpenInterestResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Open-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#open-interest Binance API Documentation}
      */
     public openInterest(
         requestParameters: OpenInterestRequest
     ): WebsocketStream<OpenInterestResponse> {
         const stream = this.localVarParamCreator.openInterest(
+            requestParameters?.underlying,
             requestParameters?.expirationDate,
             requestParameters?.id
         );
@@ -440,4 +431,48 @@ export class MarketApi implements MarketApiInterface {
             'market'
         );
     }
+
+    /**
+     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
+     *
+     * Update Speed: 1000ms
+     *
+     * @summary Option Mark Price
+     * @param {OptionMarkPriceRequest} requestParameters Request parameters.
+     * @returns {WebsocketStream<OptionMarkPriceResponse>}
+     * @throws {RequiredError}
+     * @memberof MarketApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#option-mark-price Binance API Documentation}
+     */
+    public optionMarkPrice(
+        requestParameters: OptionMarkPriceRequest
+    ): WebsocketStream<OptionMarkPriceResponse> {
+        const stream = this.localVarParamCreator.optionMarkPrice(
+            requestParameters?.underlying,
+            requestParameters?.id
+        );
+
+        return createStreamHandler<OptionMarkPriceResponse>(
+            this.websocketBase,
+            stream,
+            requestParameters?.id,
+            'market'
+        );
+    }
+}
+
+export enum KlineCandlestickStreamsIntervalEnum {
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
 }

@@ -16,19 +16,19 @@
 /**
  *
  * @export
- * @interface StartUserDataStreamResponse
+ * @interface TradfiOptionsContractResponse
  */
-export interface StartUserDataStreamResponse {
+export interface TradfiOptionsContractResponse {
     /**
-     * listen Key
-     * @type {string}
-     * @memberof StartUserDataStreamResponse
-     */
-    listenKey?: string;
-    /**
-     * Listen key expiration timestamp in milliseconds
+     *
      * @type {number | bigint}
-     * @memberof StartUserDataStreamResponse
+     * @memberof TradfiOptionsContractResponse
      */
-    expiration?: number | bigint;
+    code?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof TradfiOptionsContractResponse
+     */
+    msg?: string;
 }

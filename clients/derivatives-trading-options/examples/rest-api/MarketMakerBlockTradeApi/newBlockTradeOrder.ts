@@ -1,5 +1,6 @@
 import {
     DerivativesTradingOptions,
+    DerivativesTradingOptionsRestAPI,
     DERIVATIVES_TRADING_OPTIONS_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -13,7 +14,7 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 async function newBlockTradeOrder() {
     try {
         const response = await client.restAPI.newBlockTradeOrder({
-            liquidity: 'liquidity_example',
+            liquidity: DerivativesTradingOptionsRestAPI.NewBlockTradeOrderLiquidityEnum.TAKER,
             legs: [],
         });
 

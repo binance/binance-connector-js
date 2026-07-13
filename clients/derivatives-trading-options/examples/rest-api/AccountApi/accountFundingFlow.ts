@@ -1,5 +1,6 @@
 import {
     DerivativesTradingOptions,
+    DerivativesTradingOptionsRestAPI,
     DERIVATIVES_TRADING_OPTIONS_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -13,7 +14,7 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 async function accountFundingFlow() {
     try {
         const response = await client.restAPI.accountFundingFlow({
-            currency: 'currency_example',
+            currency: DerivativesTradingOptionsRestAPI.AccountFundingFlowCurrencyEnum.USDT,
         });
 
         const rateLimits = response.rateLimits!;

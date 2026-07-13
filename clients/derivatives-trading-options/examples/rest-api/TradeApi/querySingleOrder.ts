@@ -13,7 +13,7 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 async function querySingleOrder() {
     try {
         const response = await client.restAPI.querySingleOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTC-200730-9000-C',
         });
 
         const rateLimits = response.rateLimits!;

@@ -12,7 +12,9 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 
 async function getMarketMakerProtectionConfig() {
     try {
-        const response = await client.restAPI.getMarketMakerProtectionConfig();
+        const response = await client.restAPI.getMarketMakerProtectionConfig({
+            underlying: 'BTCUSDT',
+        });
 
         const rateLimits = response.rateLimits!;
         console.log('getMarketMakerProtectionConfig() rate limits:', rateLimits);

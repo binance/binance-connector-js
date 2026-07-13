@@ -12,7 +12,9 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 
 async function accountTradeList() {
     try {
-        const response = await client.restAPI.accountTradeList();
+        const response = await client.restAPI.accountTradeList({
+            symbol: 'BTC-200730-9000-C',
+        });
 
         const rateLimits = response.rateLimits!;
         console.log('accountTradeList() rate limits:', rateLimits);

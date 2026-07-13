@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -63,6 +63,7 @@ import type {
     QueryCurrentOpenOptionOrdersRequest,
     QueryOptionOrderHistoryRequest,
     QuerySingleOrderRequest,
+    TradfiOptionsContractRequest,
     UserCommissionRequest,
     UserExerciseRecordRequest,
 } from './modules/trade-api';
@@ -110,6 +111,7 @@ import type {
     QueryCurrentOpenOptionOrdersResponse,
     QueryOptionOrderHistoryResponse,
     QuerySingleOrderResponse,
+    TradfiOptionsContractResponse,
     UserCommissionResponse,
     UserExerciseRecordResponse,
 } from './types';
@@ -190,17 +192,19 @@ export class RestAPI {
     /**
      * Query account funding flows.
      *
+     * Weight(IP): 1
      *
-     * Only support querying data in the past 3 months
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Only support querying data in the past 3 months
      *
      * @summary Account Funding Flow (USER_DATA)
      * @param {AccountFundingFlowRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountFundingFlowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/account/Account-Funding-Flow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/account#account-funding-flow Binance API Documentation}
      */
     accountFundingFlow(
         requestParameters: AccountFundingFlowRequest
@@ -211,14 +215,16 @@ export class RestAPI {
     /**
      * Get current account information.
      *
-     * Weight: 3
+     * Weight(IP): 3
+     *
+     * Security Type: USER_DATA
      *
      * @summary Option Margin Account Information (USER_DATA)
      * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OptionMarginAccountInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/account/Option-Margin-Account-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/account#option-margin-account-information Binance API Documentation}
      */
     optionMarginAccountInformation(
         requestParameters: OptionMarginAccountInformationRequest = {}
@@ -229,13 +235,13 @@ export class RestAPI {
     /**
      * Test connectivity to the Rest API and get the current server time.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Check Server Time
      *
      * @returns {Promise<RestApiResponse<CheckServerTimeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Check-Server-Time Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#check-server-time Binance API Documentation}
      */
     checkServerTime(): Promise<RestApiResponse<CheckServerTimeResponse>> {
         return this.marketDataApi.checkServerTime();
@@ -244,13 +250,13 @@ export class RestAPI {
     /**
      * Current exchange trading rules and symbol information
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Exchange Information
      *
      * @returns {Promise<RestApiResponse<ExchangeInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Exchange-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#exchange-information Binance API Documentation}
      */
     exchangeInformation(): Promise<RestApiResponse<ExchangeInformationResponse>> {
         return this.marketDataApi.exchangeInformation();
@@ -258,17 +264,18 @@ export class RestAPI {
 
     /**
      * Get historical exercise records.
+     *
      * REALISTIC_VALUE_STRICKEN -> Exercised
      * EXTRINSIC_VALUE_EXPIRED -> Expired OTM
      *
-     * Weight: 3
+     * Weight(IP): 3
      *
      * @summary Historical Exercise Records
      * @param {HistoricalExerciseRecordsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<HistoricalExerciseRecordsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Historical-Exercise-Records Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#historical-exercise-records Binance API Documentation}
      */
     historicalExerciseRecords(
         requestParameters: HistoricalExerciseRecordsRequest = {}
@@ -279,33 +286,33 @@ export class RestAPI {
     /**
      * Get spot index price for option underlying.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Index Price
      * @param {IndexPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<IndexPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Symbol-Price-Ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#index-price Binance API Documentation}
      */
     indexPrice(requestParameters: IndexPriceRequest): Promise<RestApiResponse<IndexPriceResponse>> {
         return this.marketDataApi.indexPrice(requestParameters);
     }
 
     /**
-     * Kline/candlestick bars for an option symbol.
-     * Klines are uniquely identified by their open time.
+     * Kline/candlestick bars for an option symbol. Klines are uniquely identified by their open time.
      *
-     * If startTime and endTime are not sent, the most recent klines are returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent klines are returned.
      *
      * @summary Kline/Candlestick Data
      * @param {KlineCandlestickDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<KlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#kline-candlestick-data Binance API Documentation}
      */
     klineCandlestickData(
         requestParameters: KlineCandlestickDataRequest
@@ -316,14 +323,14 @@ export class RestAPI {
     /**
      * Get open interest for specific underlying asset on specific expiration date.
      *
-     * Weight: 0
+     * Weight(IP): 0
      *
      * @summary Open Interest
      * @param {OpenInterestRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OpenInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Open-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#open-interest Binance API Documentation}
      */
     openInterest(
         requestParameters: OpenInterestRequest
@@ -334,14 +341,14 @@ export class RestAPI {
     /**
      * Option mark price and greek info.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
      * @summary Option Mark Price
      * @param {OptionMarkPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OptionMarkPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Option-Mark-Price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#option-mark-price Binance API Documentation}
      */
     optionMarkPrice(
         requestParameters: OptionMarkPriceRequest = {}
@@ -364,7 +371,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<OrderBookResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Order-Book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#order-book Binance API Documentation}
      */
     orderBook(requestParameters: OrderBookRequest): Promise<RestApiResponse<OrderBookResponse>> {
         return this.marketDataApi.orderBook(requestParameters);
@@ -373,14 +380,14 @@ export class RestAPI {
     /**
      * Get recent block trades
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
      * @summary Recent Block Trades List
      * @param {RecentBlockTradesListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RecentBlockTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Recent-Block-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#recent-block-trades-list Binance API Documentation}
      */
     recentBlockTradesList(
         requestParameters: RecentBlockTradesListRequest = {}
@@ -391,14 +398,14 @@ export class RestAPI {
     /**
      * Get recent market trades
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
      * @summary Recent Trades List
      * @param {RecentTradesListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RecentTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Recent-Trades-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#recent-trades-list Binance API Documentation}
      */
     recentTradesList(
         requestParameters: RecentTradesListRequest
@@ -409,13 +416,13 @@ export class RestAPI {
     /**
      * Test connectivity to the Rest API.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Test Connectivity
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Test-Connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#test-connectivity Binance API Documentation}
      */
     testConnectivity(): Promise<RestApiResponse<void>> {
         return this.marketDataApi.testConnectivity();
@@ -424,14 +431,14 @@ export class RestAPI {
     /**
      * 24 hour rolling window price change statistics.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
      * @summary 24hr Ticker Price Change Statistics
      * @param {Ticker24hrPriceChangeStatisticsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<Ticker24hrPriceChangeStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/24hr-Ticker-Price-Change-Statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-data#ticker24hr-price-change-statistics Binance API Documentation}
      */
     ticker24hrPriceChangeStatistics(
         requestParameters: Ticker24hrPriceChangeStatisticsRequest = {}
@@ -442,14 +449,16 @@ export class RestAPI {
     /**
      * Accept a block trade order
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Accept Block Trade Order (TRADE)
      * @param {AcceptBlockTradeOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AcceptBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Accept-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#accept-block-trade-order Binance API Documentation}
      */
     acceptBlockTradeOrder(
         requestParameters: AcceptBlockTradeOrderRequest
@@ -460,14 +469,16 @@ export class RestAPI {
     /**
      * Gets block trades for a specific account.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account Block Trade List (USER_DATA)
      * @param {AccountBlockTradeListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountBlockTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Account-Block-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#account-block-trade-list Binance API Documentation}
      */
     accountBlockTradeList(
         requestParameters: AccountBlockTradeListRequest = {}
@@ -478,14 +489,16 @@ export class RestAPI {
     /**
      * Cancel a block trade order.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel Block Trade Order (TRADE)
      * @param {CancelBlockTradeOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Cancel-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#cancel-block-trade-order Binance API Documentation}
      */
     cancelBlockTradeOrder(
         requestParameters: CancelBlockTradeOrderRequest
@@ -496,14 +509,16 @@ export class RestAPI {
     /**
      * Extends a block trade expire time by 30 mins from the current time.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Extend Block Trade Order (TRADE)
      * @param {ExtendBlockTradeOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ExtendBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Extend-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#extend-block-trade-order Binance API Documentation}
      */
     extendBlockTradeOrder(
         requestParameters: ExtendBlockTradeOrderRequest
@@ -514,14 +529,16 @@ export class RestAPI {
     /**
      * Send in a new block trade order.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary New Block Trade Order (TRADE)
      * @param {NewBlockTradeOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<NewBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/New-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#new-block-trade-order Binance API Documentation}
      */
     newBlockTradeOrder(
         requestParameters: NewBlockTradeOrderRequest
@@ -532,14 +549,16 @@ export class RestAPI {
     /**
      * Query block trade details; returns block trade details from counterparty's perspective.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Block Trade Details (USER_DATA)
      * @param {QueryBlockTradeDetailsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryBlockTradeDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Query-Block-Trade-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#query-block-trade-details Binance API Documentation}
      */
     queryBlockTradeDetails(
         requestParameters: QueryBlockTradeDetailsRequest
@@ -550,14 +569,16 @@ export class RestAPI {
     /**
      * Check block trade order status.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Query Block Trade Order (TRADE)
      * @param {QueryBlockTradeOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Query-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#query-block-trade-order Binance API Documentation}
      */
     queryBlockTradeOrder(
         requestParameters: QueryBlockTradeOrderRequest = {}
@@ -568,16 +589,19 @@ export class RestAPI {
     /**
      * This endpoint resets the time from which the countdown will begin to the time this messaged is received.  It should be called repeatedly as heartbeats.  Multiple heartbeats can be updated at once by specifying the underlying symbols as a list (ex. BTCUSDT,ETHUSDT) in the underlyings parameter.
      *
-     * The response will only include underlying symbols where the heartbeat has been successfully updated.
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - The response will only include underlying symbols where the heartbeat has been successfully updated.
      *
      * @summary Auto-Cancel All Open Orders (Kill-Switch) Heartbeat (TRADE)
      * @param {AutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Auto-Cancel-All-Open-Orders-Heartbeat Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#auto-cancel-all-open-orders Binance API Documentation}
      */
     autoCancelAllOpenOrders(
         requestParameters: AutoCancelAllOpenOrdersRequest
@@ -588,16 +612,19 @@ export class RestAPI {
     /**
      * This endpoint returns the auto-cancel parameters for each underlying symbol. Note only active auto-cancel parameters will be returned, if countdownTime is set to 0 (ie. countdownTime has been turned off), the underlying symbol and corresponding countdownTime parameter will not be returned in the response.
      *
-     * countdownTime = 0 means the function is disabled.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - countdownTime = 0 means the function is disabled.
      *
      * @summary Get Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
      * @param {GetAutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetAutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Get-Auto-Cancel-All-Open-Orders-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#get-auto-cancel-all-open-orders Binance API Documentation}
      */
     getAutoCancelAllOpenOrders(
         requestParameters: GetAutoCancelAllOpenOrdersRequest = {}
@@ -608,17 +635,19 @@ export class RestAPI {
     /**
      * Get config for MMP.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Get Market Maker Protection Config (TRADE)
      * @param {GetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Get-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#get-market-maker-protection-config Binance API Documentation}
      */
     getMarketMakerProtectionConfig(
-        requestParameters: GetMarketMakerProtectionConfigRequest = {}
+        requestParameters: GetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<GetMarketMakerProtectionConfigResponse>> {
         return this.marketMakerEndpointsApi.getMarketMakerProtectionConfig(requestParameters);
     }
@@ -626,17 +655,19 @@ export class RestAPI {
     /**
      * Reset MMP, start MMP order again.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Reset Market Maker Protection Config (TRADE)
      * @param {ResetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ResetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Reset-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#reset-market-maker-protection-config Binance API Documentation}
      */
     resetMarketMakerProtectionConfig(
-        requestParameters: ResetMarketMakerProtectionConfigRequest = {}
+        requestParameters: ResetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<ResetMarketMakerProtectionConfigResponse>> {
         return this.marketMakerEndpointsApi.resetMarketMakerProtectionConfig(requestParameters);
     }
@@ -644,20 +675,21 @@ export class RestAPI {
     /**
      * This endpoint sets the parameters of the auto-cancel feature which cancels all open orders (both market maker protection and non market maker protection order types) of the underlying symbol at the end of the specified countdown time period if no heartbeat message is sent.  After the countdown time period, all open orders will be cancelled and new orders will be rejected with error code -2010 until either a heartbeat message is sent or the auto-cancel feature is turned off by setting countdownTime to 0.
      *
+     * Weight(IP): 1
      *
-     * This rest endpoint sets up the parameters to cancel your open orders in case of an outage or disconnection.
-     * Example usage:
-     * Call this endpoint with a countdownTime value of 10000 (10 seconds) to turn on the auto-cancel feature. If the corresponding countdownCancelAllHeartBeat endpoint is not called within 10 seconds with the specified underlying symbol, all open orders of the specified symbol will be automatically canceled. If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
-     * The system will check all countdowns approximately every 100 milliseconds, **please note that sufficient redundancy should be considered when using this function**. We do not recommend setting the countdown time to be too precise or too small.
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - This rest endpoint sets up the parameters to cancel your open orders in case of an outage or disconnection.
+     * - Example usage: > Call this endpoint with a countdownTime value of 10000 (10 seconds) to turn on the auto-cancel feature. If the corresponding countdownCancelAllHeartBeat endpoint is not called within 10 seconds with the specified underlying symbol, all open orders of the specified symbol will be automatically canceled. If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
+     * - The system will check all countdowns approximately every 100 milliseconds, **please note that sufficient redundancy should be considered when using this function**. We do not recommend setting the countdown time to be too precise or too small.
      *
      * @summary Set Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
      * @param {SetAutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetAutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Set-Auto-Cancel-All-Open-Orders-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#set-auto-cancel-all-open-orders Binance API Documentation}
      */
     setAutoCancelAllOpenOrders(
         requestParameters: SetAutoCancelAllOpenOrdersRequest
@@ -666,20 +698,21 @@ export class RestAPI {
     }
 
     /**
-     * Set config for MMP.
-     * Market Maker Protection(MMP) is a set of protection mechanism for option market maker, this mechanism is able to prevent mass trading in short period time. Once market maker's account branches the threshold, the Market Maker Protection will be triggered. When Market Maker Protection triggers, all the current MMP orders will be canceled, new MMP orders will be rejected. Market maker can use this time to reevaluate market and modify order price.
+     * Set config for MMP. Market Maker Protection(MMP) is a set of protection mechanism for option market maker, this mechanism is able to prevent mass trading in short period time. Once market maker's account branches the threshold, the Market Maker Protection will be triggered. When Market Maker Protection triggers, all the current MMP orders will be canceled, new MMP orders will be rejected. Market maker can use this time to reevaluate market and modify order price.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Set Market Maker Protection Config (TRADE)
      * @param {SetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Set-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#set-market-maker-protection-config Binance API Documentation}
      */
     setMarketMakerProtectionConfig(
-        requestParameters: SetMarketMakerProtectionConfigRequest = {}
+        requestParameters: SetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<SetMarketMakerProtectionConfigResponse>> {
         return this.marketMakerEndpointsApi.setMarketMakerProtectionConfig(requestParameters);
     }
@@ -687,19 +720,19 @@ export class RestAPI {
     /**
      * Get trades for a specific account and symbol.
      *
-     * Only support querying trades in the past 3 months
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Account-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#account-trade-list Binance API Documentation}
      */
     accountTradeList(
-        requestParameters: AccountTradeListRequest = {}
+        requestParameters: AccountTradeListRequest
     ): Promise<RestApiResponse<AccountTradeListResponse>> {
         return this.tradeApi.accountTradeList(requestParameters);
     }
@@ -707,14 +740,16 @@ export class RestAPI {
     /**
      * Cancel all active orders on specified underlying.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel All Option Orders By Underlying (TRADE)
      * @param {CancelAllOptionOrdersByUnderlyingRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelAllOptionOrdersByUnderlyingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-All-Option-Orders-By-Underlying Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#cancel-all-option-orders-by-underlying Binance API Documentation}
      */
     cancelAllOptionOrdersByUnderlying(
         requestParameters: CancelAllOptionOrdersByUnderlyingRequest
@@ -725,14 +760,16 @@ export class RestAPI {
     /**
      * Cancel all active order on a symbol.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel all Option orders on specific symbol (TRADE)
      * @param {CancelAllOptionOrdersOnSpecificSymbolRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelAllOptionOrdersOnSpecificSymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-all-Option-orders-on-specific-symbol Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#cancel-all-option-orders-on-specific-symbol Binance API Documentation}
      */
     cancelAllOptionOrdersOnSpecificSymbol(
         requestParameters: CancelAllOptionOrdersOnSpecificSymbolRequest
@@ -743,16 +780,19 @@ export class RestAPI {
     /**
      * Cancel multiple orders.
      *
-     * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Weight(IP): 5
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - At least one instance of `orderId` and `clientOrderId` must be sent.
      *
      * @summary Cancel Multiple Option Orders (TRADE)
      * @param {CancelMultipleOptionOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelMultipleOptionOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-Multiple-Option-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#cancel-multiple-option-orders Binance API Documentation}
      */
     cancelMultipleOptionOrders(
         requestParameters: CancelMultipleOptionOrdersRequest
@@ -763,16 +803,19 @@ export class RestAPI {
     /**
      * Cancel an active order.
      *
-     * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - At least one instance of `orderId` and `clientOrderId` must be sent.
      *
      * @summary Cancel Option Order (TRADE)
      * @param {CancelOptionOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelOptionOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-Option-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#cancel-option-order Binance API Documentation}
      */
     cancelOptionOrder(
         requestParameters: CancelOptionOrderRequest
@@ -783,14 +826,21 @@ export class RestAPI {
     /**
      * Send a new order.
      *
-     * Weight: 0
+     * Security Type: TRADE
+     *
+     * Notes:
+     * Some parameters are mandatory depending on the order type as follows:
+     *
+     * Type | Mandatory parameters
+     * ------------ | ------------
+     * LIMIT | timeInForce, quantity, price
      *
      * @summary New Order (TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<NewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#new-order Binance API Documentation}
      */
     newOrder(requestParameters: NewOrderRequest): Promise<RestApiResponse<NewOrderResponse>> {
         return this.tradeApi.newOrder(requestParameters);
@@ -799,14 +849,16 @@ export class RestAPI {
     /**
      * Get current position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Option Position Information (USER_DATA)
      * @param {OptionPositionInformationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OptionPositionInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Option-Position-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#option-position-information Binance API Documentation}
      */
     optionPositionInformation(
         requestParameters: OptionPositionInformationRequest = {}
@@ -817,17 +869,26 @@ export class RestAPI {
     /**
      * Send multiple option orders.
      *
-     * Parameter rules are same with New Order
-     * Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: TRADE
      *
-     * @summary Place Multiple Orders(TRADE)
+     * Notes:
+     * Some parameters are mandatory depending on the order type as follows:
+     *
+     * Type | Mandatory parameters
+     * ------------ | ------------
+     * LIMIT | timeInForce, quantity, price
+     *
+     * - Parameter rules are same with New Order
+     * - Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     *
+     * @summary Place Multiple Orders (TRADE)
      * @param {PlaceMultipleOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PlaceMultipleOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Place-Multiple-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#place-multiple-orders Binance API Documentation}
      */
     placeMultipleOrders(
         requestParameters: PlaceMultipleOrdersRequest
@@ -840,12 +901,14 @@ export class RestAPI {
      *
      * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
      *
+     * Security Type: USER_DATA
+     *
      * @summary Query Current Open Option Orders (USER_DATA)
      * @param {QueryCurrentOpenOptionOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryCurrentOpenOptionOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Current-Open-Option-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#query-current-open-option-orders Binance API Documentation}
      */
     queryCurrentOpenOptionOrders(
         requestParameters: QueryCurrentOpenOptionOrdersRequest = {}
@@ -856,14 +919,16 @@ export class RestAPI {
     /**
      * Query all finished orders within 5 days, finished status: CANCELLED FILLED REJECTED.
      *
-     * Weight: 3
+     * Weight(IP): 3
+     *
+     * Security Type: TRADE
      *
      * @summary Query Option Order History (TRADE)
      * @param {QueryOptionOrderHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryOptionOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Option-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#query-option-order-history Binance API Documentation}
      */
     queryOptionOrderHistory(
         requestParameters: QueryOptionOrderHistoryRequest
@@ -879,17 +944,19 @@ export class RestAPI {
      * order has NO filled trade, **AND**
      * created time + 3 days < current time
      *
+     * Weight(IP): 1
      *
-     * Either `orderId` or `clientOrderId ` must be sent.
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - Either `orderId` or `clientOrderId ` must be sent.
      *
      * @summary Query Single Order (TRADE)
      * @param {QuerySingleOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySingleOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Single-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#query-single-order Binance API Documentation}
      */
     querySingleOrder(
         requestParameters: QuerySingleOrderRequest
@@ -898,16 +965,38 @@ export class RestAPI {
     }
 
     /**
+     * Sign TradFi Options agreement contract
+     *
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary TradFi Options Contract (USER_DATA)
+     * @param {TradfiOptionsContractRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<TradfiOptionsContractResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#tradfi-options-contract Binance API Documentation}
+     */
+    tradfiOptionsContract(
+        requestParameters: TradfiOptionsContractRequest = {}
+    ): Promise<RestApiResponse<TradfiOptionsContractResponse>> {
+        return this.tradeApi.tradfiOptionsContract(requestParameters);
+    }
+
+    /**
      * Get account commission.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Commission (USER_DATA)
      * @param {UserCommissionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<UserCommissionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/User-Commission Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#user-commission Binance API Documentation}
      */
     userCommission(
         requestParameters: UserCommissionRequest = {}
@@ -918,14 +1007,16 @@ export class RestAPI {
     /**
      * Get account exercise records.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Exercise Record (USER_DATA)
      * @param {UserExerciseRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<UserExerciseRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/User-Exercise-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#user-exercise-record Binance API Documentation}
      */
     userExerciseRecord(
         requestParameters: UserExerciseRecordRequest = {}
@@ -936,28 +1027,34 @@ export class RestAPI {
     /**
      * Close out a user data stream.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Close User Data Stream (USER_STREAM)
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/user-data-streams/Close-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/user-data-streams#close-user-data-stream Binance API Documentation}
      */
     closeUserDataStream(): Promise<RestApiResponse<void>> {
         return this.userDataStreamsApi.closeUserDataStream();
     }
 
     /**
-     * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 60 minutes.
+     * Keepalive a user data stream to prevent a time out. User data streams
+     * will close after 60 minutes. It's recommended to send a ping about every
+     * 60 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/user-data-streams/Keepalive-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/user-data-streams#keepalive-user-data-stream Binance API Documentation}
      */
     keepaliveUserDataStream(): Promise<RestApiResponse<void>> {
         return this.userDataStreamsApi.keepaliveUserDataStream();
@@ -966,13 +1063,15 @@ export class RestAPI {
     /**
      * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Start User Data Stream (USER_STREAM)
      *
      * @returns {Promise<RestApiResponse<StartUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/user-data-streams/Start-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/user-data-streams#start-user-data-stream Binance API Documentation}
      */
     startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>> {
         return this.userDataStreamsApi.startUserDataStream();

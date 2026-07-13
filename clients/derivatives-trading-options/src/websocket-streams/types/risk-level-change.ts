@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,25 +20,25 @@
  */
 export interface RiskLevelChange {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof RiskLevelChange
      */
     E?: number | bigint;
     /**
-     *
+     * Risk level. This feature only applies to VIP and Market Maker accounts. Risk level is re-evaluated on: funds transfer, trade fill, option expiry.
      * @type {string}
      * @memberof RiskLevelChange
      */
     s?: string;
     /**
-     *
+     * Margin balance
      * @type {string}
      * @memberof RiskLevelChange
      */
     mb?: string;
     /**
-     *
+     * Maintenance margin
      * @type {string}
      * @memberof RiskLevelChange
      */

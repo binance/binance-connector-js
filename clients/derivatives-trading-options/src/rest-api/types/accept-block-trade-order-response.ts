@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,37 +25,37 @@ import type { AcceptBlockTradeOrderResponseLegsInner } from './accept-block-trad
  */
 export interface AcceptBlockTradeOrderResponse {
     /**
-     *
+     * block Trade Settlement Key
      * @type {string}
      * @memberof AcceptBlockTradeOrderResponse
      */
     blockTradeSettlementKey?: string;
     /**
-     *
+     * expire Time
      * @type {number | bigint}
      * @memberof AcceptBlockTradeOrderResponse
      */
     expireTime?: number | bigint;
     /**
-     *
+     * liquidity
      * @type {string}
      * @memberof AcceptBlockTradeOrderResponse
      */
     liquidity?: string;
     /**
-     *
+     * status
      * @type {string}
      * @memberof AcceptBlockTradeOrderResponse
      */
     status?: string;
     /**
-     *
+     * create Time
      * @type {number | bigint}
      * @memberof AcceptBlockTradeOrderResponse
      */
     createTime?: number | bigint;
     /**
-     *
+     * legs
      * @type {Array<AcceptBlockTradeOrderResponseLegsInner>}
      * @memberof AcceptBlockTradeOrderResponse
      */

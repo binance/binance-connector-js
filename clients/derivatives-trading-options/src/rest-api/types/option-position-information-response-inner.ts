@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,97 +20,97 @@
  */
 export interface OptionPositionInformationResponseInner {
     /**
-     *
+     * Average entry price
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     entryPrice?: string;
     /**
-     *
+     * Option trading pair
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Position direction
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     side?: string;
     /**
-     *
+     * Number of positions (positive numbers represent long positions, negative number represent short positions)
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     quantity?: string;
     /**
-     *
+     * Current market value
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     markValue?: string;
     /**
-     *
+     * Unrealized profit/loss
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     unrealizedPNL?: string;
     /**
-     *
+     * Mark price
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     markPrice?: string;
     /**
-     *
+     * Strike price
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     strikePrice?: string;
     /**
-     *
+     * Exercise time
      * @type {number | bigint}
      * @memberof OptionPositionInformationResponseInner
      */
     expiryDate?: number | bigint;
     /**
-     *
+     * price Scale
      * @type {number | bigint}
      * @memberof OptionPositionInformationResponseInner
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity Scale
      * @type {number | bigint}
      * @memberof OptionPositionInformationResponseInner
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * option type
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     optionSide?: string;
     /**
-     *
+     * quote asset
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     quoteAsset?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof OptionPositionInformationResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * buy order qty
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
     bidQuantity?: string;
     /**
-     *
+     * sell order qty
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */

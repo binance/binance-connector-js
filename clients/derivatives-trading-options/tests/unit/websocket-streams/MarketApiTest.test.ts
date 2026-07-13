@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -21,11 +21,11 @@ import {
 import {
     IndexPriceStreamsRequest,
     KlineCandlestickStreamsRequest,
-    MarkPriceRequest,
     NewSymbolInfoRequest,
     OpenInterestRequest,
+    OptionMarkPriceRequest,
 } from '../../../src/websocket-streams';
-import { MarketApi } from '../../../src/websocket-streams';
+import { MarketApi, KlineCandlestickStreamsIntervalEnum } from '../../../src/websocket-streams';
 import { mockSubscription } from './utils';
 
 describe('MarketApi', () => {
@@ -38,7 +38,6 @@ describe('MarketApi', () => {
             const mockResponse = JSONParse(
                 JSONStringify([
                     { e: 'indexPrice', E: 1763092572229, s: 'ETHUSDT', p: '3224.51976744' },
-                    { e: 'indexPrice', E: 1763092572229, s: 'BTCUSDT', p: '99102.32326087' },
                 ])
             );
 
@@ -61,7 +60,6 @@ describe('MarketApi', () => {
             const mockResponse = JSONParse(
                 JSONStringify([
                     { e: 'indexPrice', E: 1763092572229, s: 'ETHUSDT', p: '3224.51976744' },
-                    { e: 'indexPrice', E: 1763092572229, s: 'BTCUSDT', p: '99102.32326087' },
                 ])
             );
 
@@ -88,7 +86,7 @@ describe('MarketApi', () => {
         it('should execute klineCandlestickStreams() successfully', async () => {
             const params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
-                interval: '1m',
+                interval: KlineCandlestickStreamsIntervalEnum.INTERVAL_1m,
                 id: 532601580,
             };
 
@@ -132,7 +130,7 @@ describe('MarketApi', () => {
 
             const params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
-                interval: '1m',
+                interval: KlineCandlestickStreamsIntervalEnum.INTERVAL_1m,
                 id: 532601580,
             };
 
@@ -187,7 +185,7 @@ describe('MarketApi', () => {
 
             const _params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
-                interval: '1m',
+                interval: KlineCandlestickStreamsIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -204,170 +202,13 @@ describe('MarketApi', () => {
 
             const _params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
-                interval: '1m',
+                interval: KlineCandlestickStreamsIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
 
             expect(() => websocketStreamApi.klineCandlestickStreams(params)).toThrow(
                 'Required parameter interval was null or undefined when calling klineCandlestickStreams.'
-            );
-        });
-    });
-
-    describe('markPrice()', () => {
-        it('should execute markPrice() successfully', async () => {
-            const params: MarkPriceRequest = {
-                underlying: 'btcusdt',
-                id: 532601580,
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        s: 'BTC-251120-126000-C',
-                        mp: '770.543',
-                        E: 1762867543321,
-                        e: 'markPrice',
-                        i: '104334.60217391',
-                        P: '0.000',
-                        bo: '0.000',
-                        ao: '900.000',
-                        bq: '0.0000',
-                        aq: '0.2000',
-                        b: '-1.0',
-                        a: '0.98161161',
-                        hl: '924.652',
-                        ll: '616.435',
-                        vo: '0.9408058',
-                        rf: '0.0',
-                        d: '0.11111964',
-                        t: '-164.26702615',
-                        g: '0.00001245',
-                        v: '30.63855919',
-                    },
-                    {
-                        s: 'BTC-251123-126000-C',
-                        mp: '1249.61',
-                        E: 1762867543321,
-                        e: 'markPrice',
-                        i: '104334.60217391',
-                        P: '0.000',
-                        bo: '1200.000',
-                        ao: '1300.000',
-                        bq: '0.3000',
-                        aq: '0.6000',
-                        b: '0.92159033',
-                        a: '0.94461441',
-                        hl: '1499.533',
-                        ll: '999.688',
-                        vo: '0.93310237',
-                        rf: '0.0',
-                        d: '0.14869196',
-                        t: '-172.12148811',
-                        g: '0.00001326',
-                        v: '43.43627792',
-                    },
-                ])
-            );
-
-            mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<underlying>@optionMarkPrice'.slice(1), params as unknown as Record<string, MarkPriceRequest>)}`,
-                mockResponse
-            );
-        });
-
-        it('should handle markPrice() WebSocket stream data', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
-            const websocketStreamApi = new MarketApi(websocketStreamClient);
-            websocketStreamClient.connectionPool[0].urlPath = 'market';
-
-            const params: MarkPriceRequest = {
-                underlying: 'btcusdt',
-                id: 532601580,
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        s: 'BTC-251120-126000-C',
-                        mp: '770.543',
-                        E: 1762867543321,
-                        e: 'markPrice',
-                        i: '104334.60217391',
-                        P: '0.000',
-                        bo: '0.000',
-                        ao: '900.000',
-                        bq: '0.0000',
-                        aq: '0.2000',
-                        b: '-1.0',
-                        a: '0.98161161',
-                        hl: '924.652',
-                        ll: '616.435',
-                        vo: '0.9408058',
-                        rf: '0.0',
-                        d: '0.11111964',
-                        t: '-164.26702615',
-                        g: '0.00001245',
-                        v: '30.63855919',
-                    },
-                    {
-                        s: 'BTC-251123-126000-C',
-                        mp: '1249.61',
-                        E: 1762867543321,
-                        e: 'markPrice',
-                        i: '104334.60217391',
-                        P: '0.000',
-                        bo: '1200.000',
-                        ao: '1300.000',
-                        bq: '0.3000',
-                        aq: '0.6000',
-                        b: '0.92159033',
-                        a: '0.94461441',
-                        hl: '1499.533',
-                        ll: '999.688',
-                        vo: '0.93310237',
-                        rf: '0.0',
-                        d: '0.14869196',
-                        t: '-172.12148811',
-                        g: '0.00001326',
-                        v: '43.43627792',
-                    },
-                ])
-            );
-
-            const stream = websocketStreamApi.markPrice(params);
-            const mockCallback = jest.fn(() => {});
-            stream.on('message', mockCallback);
-
-            websocketStreamClient['onMessage'](
-                JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
-                        '/<underlying>@optionMarkPrice'.slice(1),
-                        params as unknown as Record<string, MarkPriceRequest>
-                    ),
-                    data: mockResponse,
-                }),
-                websocketStreamClient.connectionPool[0]
-            );
-
-            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
-        });
-
-        it('should throw RequiredError when underlying is missing', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
-            const websocketStreamApi = new MarketApi(websocketStreamClient);
-
-            const _params: MarkPriceRequest = {
-                underlying: 'btcusdt',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.underlying;
-
-            expect(() => websocketStreamApi.markPrice(params)).toThrow(
-                'Required parameter underlying was null or undefined when calling markPrice.'
             );
         });
     });
@@ -448,6 +289,7 @@ describe('MarketApi', () => {
     describe('openInterest()', () => {
         it('should execute openInterest() successfully', async () => {
             const params: OpenInterestRequest = {
+                underlying: 'btcusdt',
                 expirationDate: '220930',
                 id: 532601580,
             };
@@ -465,7 +307,7 @@ describe('MarketApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/underlying@optionOpenInterest@<expirationDate>'.slice(1), params as unknown as Record<string, OpenInterestRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<underlying>@openInterest@<expirationDate>'.slice(1), params as unknown as Record<string, OpenInterestRequest>)}`,
                 mockResponse
             );
         });
@@ -477,6 +319,7 @@ describe('MarketApi', () => {
             websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: OpenInterestRequest = {
+                underlying: 'btcusdt',
                 expirationDate: '220930',
                 id: 532601580,
             };
@@ -500,7 +343,7 @@ describe('MarketApi', () => {
             websocketStreamClient['onMessage'](
                 JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/underlying@optionOpenInterest@<expirationDate>'.slice(1),
+                        '/<underlying>@openInterest@<expirationDate>'.slice(1),
                         params as unknown as Record<string, OpenInterestRequest>
                     ),
                     data: mockResponse,
@@ -511,12 +354,30 @@ describe('MarketApi', () => {
             expect(mockCallback).toHaveBeenCalledWith(mockResponse);
         });
 
+        it('should throw RequiredError when underlying is missing', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+
+            const _params: OpenInterestRequest = {
+                underlying: 'btcusdt',
+                expirationDate: '220930',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.underlying;
+
+            expect(() => websocketStreamApi.openInterest(params)).toThrow(
+                'Required parameter underlying was null or undefined when calling openInterest.'
+            );
+        });
+
         it('should throw RequiredError when expirationDate is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
             const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
             const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: OpenInterestRequest = {
+                underlying: 'btcusdt',
                 expirationDate: '220930',
             };
             const params = Object.assign({ ..._params });
@@ -524,6 +385,119 @@ describe('MarketApi', () => {
 
             expect(() => websocketStreamApi.openInterest(params)).toThrow(
                 'Required parameter expirationDate was null or undefined when calling openInterest.'
+            );
+        });
+    });
+
+    describe('optionMarkPrice()', () => {
+        it('should execute optionMarkPrice() successfully', async () => {
+            const params: OptionMarkPriceRequest = {
+                underlying: 'btcusdt',
+                id: 532601580,
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        s: 'BTC-251120-126000-C',
+                        mp: '770.543',
+                        E: 1762867543321,
+                        e: 'markPrice',
+                        i: '104334.60217391',
+                        P: '0.000',
+                        bo: '0.000',
+                        ao: '900.000',
+                        bq: '0.0000',
+                        aq: '0.2000',
+                        b: '-1.0',
+                        a: '0.98161161',
+                        hl: '924.652',
+                        ll: '616.435',
+                        vo: '0.9408058',
+                        rf: '0.0',
+                        d: '0.11111964',
+                        t: '-164.26702615',
+                        g: '0.00001245',
+                        v: '30.63855919',
+                    },
+                ])
+            );
+
+            mockSubscription(
+                `ws/${replaceWebsocketStreamsPlaceholders('/<underlying>@optionMarkPrice'.slice(1), params as unknown as Record<string, OptionMarkPriceRequest>)}`,
+                mockResponse
+            );
+        });
+
+        it('should handle optionMarkPrice() WebSocket stream data', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
+
+            const params: OptionMarkPriceRequest = {
+                underlying: 'btcusdt',
+                id: 532601580,
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        s: 'BTC-251120-126000-C',
+                        mp: '770.543',
+                        E: 1762867543321,
+                        e: 'markPrice',
+                        i: '104334.60217391',
+                        P: '0.000',
+                        bo: '0.000',
+                        ao: '900.000',
+                        bq: '0.0000',
+                        aq: '0.2000',
+                        b: '-1.0',
+                        a: '0.98161161',
+                        hl: '924.652',
+                        ll: '616.435',
+                        vo: '0.9408058',
+                        rf: '0.0',
+                        d: '0.11111964',
+                        t: '-164.26702615',
+                        g: '0.00001245',
+                        v: '30.63855919',
+                    },
+                ])
+            );
+
+            const stream = websocketStreamApi.optionMarkPrice(params);
+            const mockCallback = jest.fn(() => {});
+            stream.on('message', mockCallback);
+
+            websocketStreamClient['onMessage'](
+                JSONStringify({
+                    stream: replaceWebsocketStreamsPlaceholders(
+                        '/<underlying>@optionMarkPrice'.slice(1),
+                        params as unknown as Record<string, OptionMarkPriceRequest>
+                    ),
+                    data: mockResponse,
+                }),
+                websocketStreamClient.connectionPool[0]
+            );
+
+            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
+        });
+
+        it('should throw RequiredError when underlying is missing', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+
+            const _params: OptionMarkPriceRequest = {
+                underlying: 'btcusdt',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.underlying;
+
+            expect(() => websocketStreamApi.optionMarkPrice(params)).toThrow(
+                'Required parameter underlying was null or undefined when calling optionMarkPrice.'
             );
         });
     });

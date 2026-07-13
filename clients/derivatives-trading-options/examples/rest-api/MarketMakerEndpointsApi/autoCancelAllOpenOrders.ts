@@ -13,7 +13,7 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 async function autoCancelAllOpenOrders() {
     try {
         const response = await client.restAPI.autoCancelAllOpenOrders({
-            underlyings: 'underlyings_example',
+            underlyings: 'BTCUSDT,ETHUSDT',
         });
 
         const rateLimits = response.rateLimits!;

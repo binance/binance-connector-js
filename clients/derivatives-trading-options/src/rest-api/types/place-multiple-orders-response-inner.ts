@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,121 +20,127 @@
  */
 export interface PlaceMultipleOrdersResponseInner {
     /**
-     *
+     * System order number
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Option trading pair
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Order Price
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Order Quantity
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     quantity?: string;
     /**
-     *
+     * Number of executed quantity
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * fee
+     * @type {number | bigint}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    fee?: number | bigint;
+    /**
+     * Buy/sell direction
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Order type
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * Time in force method
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Order is reduce only Y/N
      * @type {boolean}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * post Only
+     * @type {boolean}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    postOnly?: boolean;
+    /**
+     * Order Time
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     createTime?: number | bigint;
     /**
-     *
+     * Update time
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Order status
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * Average price of completed trade
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
-     * @type {string}
-     * @memberof PlaceMultipleOrdersResponseInner
-     */
-    source?: string;
-    /**
-     *
+     * Client order ID
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * price Scale
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity Scale
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * option Side
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     optionSide?: string;
     /**
-     *
+     * quote Asset
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     quoteAsset?: string;
     /**
-     *
+     * mmp
      * @type {boolean}
      * @memberof PlaceMultipleOrdersResponseInner
      */
@@ -145,4 +151,10 @@ export interface PlaceMultipleOrdersResponseInner {
      * @memberof PlaceMultipleOrdersResponseInner
      */
     selfTradePreventionMode?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    source?: string;
 }

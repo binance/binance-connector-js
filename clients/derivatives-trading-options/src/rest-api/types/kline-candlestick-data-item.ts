@@ -16,12 +16,11 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { HistoricalExerciseRecordsResponseInner } from './historical-exercise-records-response-inner';
+import type { KlineCandlestickDataItemInner } from './kline-candlestick-data-item-inner';
 
 /**
  *
  * @export
- * @interface HistoricalExerciseRecordsResponse
+ * @interface KlineCandlestickDataItem
  */
-export interface HistoricalExerciseRecordsResponse
-    extends Array<HistoricalExerciseRecordsResponseInner> {}
+export interface KlineCandlestickDataItem extends Array<KlineCandlestickDataItemInner> {}

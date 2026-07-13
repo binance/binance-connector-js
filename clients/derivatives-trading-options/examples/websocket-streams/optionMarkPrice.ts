@@ -8,14 +8,14 @@ const configurationWebsocketStreams = {
 };
 const client = new DerivativesTradingOptions({ configurationWebsocketStreams });
 
-async function ticker24Hour() {
+async function optionMarkPrice() {
     let connection;
 
     try {
         connection = await client.websocketStreams.connect();
 
-        const stream = connection.ticker24Hour({
-            symbol: 'btcusdt',
+        const stream = connection.optionMarkPrice({
+            underlying: 'btcusdt',
         });
 
         stream.on('message', (data) => {
@@ -29,4 +29,4 @@ async function ticker24Hour() {
     }
 }
 
-ticker24Hour();
+optionMarkPrice();

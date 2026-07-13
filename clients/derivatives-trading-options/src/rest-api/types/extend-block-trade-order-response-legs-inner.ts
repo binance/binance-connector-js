@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,25 +20,25 @@
  */
 export interface ExtendBlockTradeOrderResponseLegsInner {
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof ExtendBlockTradeOrderResponseLegsInner
      */
     symbol?: string;
     /**
-     *
+     * side
      * @type {string}
      * @memberof ExtendBlockTradeOrderResponseLegsInner
      */
     side?: string;
     /**
-     *
+     * quantity
      * @type {string}
      * @memberof ExtendBlockTradeOrderResponseLegsInner
      */
     quantity?: string;
     /**
-     *
+     * price
      * @type {string}
      * @memberof ExtendBlockTradeOrderResponseLegsInner
      */

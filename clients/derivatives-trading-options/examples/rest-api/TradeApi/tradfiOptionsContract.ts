@@ -10,21 +10,18 @@ const configurationRestAPI = {
 };
 const client = new DerivativesTradingOptions({ configurationRestAPI });
 
-async function openInterest() {
+async function tradfiOptionsContract() {
     try {
-        const response = await client.restAPI.openInterest({
-            underlyingAsset: 'ETH/BTC',
-            expiration: '221225',
-        });
+        const response = await client.restAPI.tradfiOptionsContract();
 
         const rateLimits = response.rateLimits!;
-        console.log('openInterest() rate limits:', rateLimits);
+        console.log('tradfiOptionsContract() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('openInterest() response:', data);
+        console.log('tradfiOptionsContract() response:', data);
     } catch (error) {
-        console.error('openInterest() error:', error);
+        console.error('tradfiOptionsContract() error:', error);
     }
 }
 
-openInterest();
+tradfiOptionsContract();

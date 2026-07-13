@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -24,31 +24,31 @@ export interface PlaceMultipleOrdersOrdersParameterInner {
      * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    symbol?: string;
+    symbol: string;
     /**
      *
      * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    side?: PlaceMultipleOrdersOrdersParameterInnerSideEnum;
+    side: PlaceMultipleOrdersOrdersParameterInnerSideEnum;
     /**
      *
      * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    type?: PlaceMultipleOrdersOrdersParameterInnerTypeEnum;
+    type: PlaceMultipleOrdersOrdersParameterInnerTypeEnum;
     /**
-     *
-     * @type {string}
+     * Order Quantity
+     * @type {number}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    quantity?: string;
+    quantity: number;
     /**
-     *
-     * @type {string}
+     * Order Price
+     * @type {number}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    price?: string;
+    price?: number;
     /**
      *
      * @type {string}
@@ -57,16 +57,16 @@ export interface PlaceMultipleOrdersOrdersParameterInner {
     timeInForce?: PlaceMultipleOrdersOrdersParameterInnerTimeInForceEnum;
     /**
      *
-     * @type {string}
+     * @type {boolean}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    reduceOnly?: string;
+    reduceOnly?: boolean;
     /**
      *
-     * @type {string}
+     * @type {boolean}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    postOnly?: string;
+    postOnly?: boolean;
     /**
      *
      * @type {string}
@@ -74,19 +74,19 @@ export interface PlaceMultipleOrdersOrdersParameterInner {
      */
     newOrderRespType?: PlaceMultipleOrdersOrdersParameterInnerNewOrderRespTypeEnum;
     /**
-     *
+     * User-defined order ID cannot be repeated in pending orders
      * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
     clientOrderId?: string;
     /**
-     *
-     * @type {string}
+     * is market maker protection order
+     * @type {boolean}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    isMmp?: string;
+    isMmp?: boolean;
     /**
-     *
+     * EXPIRE_TAKER:expire taker order when STP triggers/ EXPIRE_MAKER:expire maker order when STP triggers/ EXPIRE_BOTH:expire both orders when STP triggers; Default EXPIRE_MAKER
      * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
@@ -124,8 +124,8 @@ export type PlaceMultipleOrdersOrdersParameterInnerNewOrderRespTypeEnum =
     (typeof PlaceMultipleOrdersOrdersParameterInnerNewOrderRespTypeEnum)[keyof typeof PlaceMultipleOrdersOrdersParameterInnerNewOrderRespTypeEnum];
 export const PlaceMultipleOrdersOrdersParameterInnerSelfTradePreventionModeEnum = {
     EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
     EXPIRE_MAKER: 'EXPIRE_MAKER',
+    EXPIRE_BOTH: 'EXPIRE_BOTH',
 } as const;
 
 export type PlaceMultipleOrdersOrdersParameterInnerSelfTradePreventionModeEnum =

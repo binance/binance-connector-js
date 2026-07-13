@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,103 +14,103 @@
  */
 
 /**
- *
+ * k
  * @export
  * @interface KlineCandlestickStreamsResponseK
  */
 export interface KlineCandlestickStreamsResponseK {
     /**
-     *
+     * kline start time
      * @type {number | bigint}
      * @memberof KlineCandlestickStreamsResponseK
      */
     t?: number | bigint;
     /**
-     *
+     * kline end time
      * @type {number | bigint}
      * @memberof KlineCandlestickStreamsResponseK
      */
     T?: number | bigint;
     /**
-     *
+     * Option trading symbol
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     s?: string;
     /**
-     *
+     * candle period
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     i?: string;
     /**
-     *
+     * first trade ID
      * @type {number | bigint}
      * @memberof KlineCandlestickStreamsResponseK
      */
     f?: number | bigint;
     /**
-     *
+     * last trade ID
      * @type {number | bigint}
      * @memberof KlineCandlestickStreamsResponseK
      */
     L?: number | bigint;
     /**
-     *
+     * open
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     o?: string;
     /**
-     *
+     * close
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     c?: string;
     /**
-     *
+     * high
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     h?: string;
     /**
-     *
+     * low
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     l?: string;
     /**
-     *
+     * volume(in contracts)
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     v?: string;
     /**
-     *
+     * number of trades
      * @type {number | bigint}
      * @memberof KlineCandlestickStreamsResponseK
      */
     n?: number | bigint;
     /**
-     *
+     * current candle has been completed Y/N
      * @type {boolean}
      * @memberof KlineCandlestickStreamsResponseK
      */
     x?: boolean;
     /**
-     *
+     * completed trade amount   (in quote asset)
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     q?: string;
     /**
-     *
+     * taker completed trade volume (in contracts)
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */
     V?: string;
     /**
-     *
+     * taker trade amount(in quote asset)
      * @type {string}
      * @memberof KlineCandlestickStreamsResponseK
      */

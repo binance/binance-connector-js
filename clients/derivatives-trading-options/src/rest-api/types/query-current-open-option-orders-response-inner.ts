@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,115 +20,115 @@
  */
 export interface QueryCurrentOpenOptionOrdersResponseInner {
     /**
-     *
+     * System order number
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Option trading pair
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Order Price
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Order Quantity
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     quantity?: string;
     /**
-     *
+     * Number of completed trades
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Buy/sell direction
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Order type
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * Time in force method
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Order is reduce only Y/N
      * @type {boolean}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Order Time
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     createTime?: number | bigint;
     /**
-     *
+     * Update Time
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Order status
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * Average price of completed trade
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Client order ID
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * price Scale
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity Scale
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * option Side
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     optionSide?: string;
     /**
-     *
+     * quote Asset
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     quoteAsset?: string;
     /**
-     *
+     * mmp
      * @type {boolean}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,121 +20,127 @@
  */
 export interface QuerySingleOrderResponse {
     /**
-     *
+     * System order id
      * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Option trading pair
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Order Price
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     price?: string;
     /**
-     *
+     * Order Quantity
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     quantity?: string;
     /**
-     *
+     * Number of executed quantity
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Buy/sell direction
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     side?: string;
     /**
-     *
+     * Order type
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     type?: string;
     /**
-     *
+     * Time in force method
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Order is reduce only Y/N
      * @type {boolean}
      * @memberof QuerySingleOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * post Only
+     * @type {boolean}
+     * @memberof QuerySingleOrderResponse
+     */
+    postOnly?: boolean;
+    /**
+     * Order Time
      * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
     createTime?: number | bigint;
     /**
-     *
+     * Update time
      * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Order status
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     status?: string;
     /**
-     *
+     * Average price of completed trade
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Client order ID
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * price Scale
      * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity Scale
      * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * option Side
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     optionSide?: string;
     /**
-     *
+     * quote Asset
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
     quoteAsset?: string;
     /**
-     *
+     * mmp
      * @type {boolean}
      * @memberof QuerySingleOrderResponse
      */
     mmp?: boolean;
     /**
-     *
+     * Self trade prevention mode.
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */

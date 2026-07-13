@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -36,12 +35,15 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
         /**
          * This endpoint resets the time from which the countdown will begin to the time this messaged is received.  It should be called repeatedly as heartbeats.  Multiple heartbeats can be updated at once by specifying the underlying symbols as a list (ex. BTCUSDT,ETHUSDT) in the underlyings parameter.
          *
-         * The response will only include underlying symbols where the heartbeat has been successfully updated.
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - The response will only include underlying symbols where the heartbeat has been successfully updated.
          *
          * @summary Auto-Cancel All Open Orders (Kill-Switch) Heartbeat (TRADE)
-         * @param {string} underlyings Option Underlying Symbols, e.g BTCUSDT,ETHUSDT
+         * @param {string} underlyings
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -79,13 +81,16 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
         /**
          * This endpoint returns the auto-cancel parameters for each underlying symbol. Note only active auto-cancel parameters will be returned, if countdownTime is set to 0 (ie. countdownTime has been turned off), the underlying symbol and corresponding countdownTime parameter will not be returned in the response.
          *
-         * countdownTime = 0 means the function is disabled.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - countdownTime = 0 means the function is disabled.
          *
          * @summary Get Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
-         * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [underlying] Underlying asset.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -119,18 +124,23 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
         /**
          * Get config for MMP.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: TRADE
          *
          * @summary Get Market Maker Protection Config (TRADE)
-         * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number | bigint} [recvWindow]
+         * @param {string} underlying Underlying asset.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
         getMarketMakerProtectionConfig: async (
-            underlying?: string,
+            underlying: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
+            // verify required parameter 'underlying' is not null or undefined
+            assertParamExists('getMarketMakerProtectionConfig', 'underlying', underlying);
+
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
@@ -157,18 +167,23 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
         /**
          * Reset MMP, start MMP order again.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: TRADE
          *
          * @summary Reset Market Maker Protection Config (TRADE)
-         * @param {string} [underlying] underlying, e.g BTCUSDT
+         * @param {string} underlying
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         resetMarketMakerProtectionConfig: async (
-            underlying?: string,
+            underlying: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
+            // verify required parameter 'underlying' is not null or undefined
+            assertParamExists('resetMarketMakerProtectionConfig', 'underlying', underlying);
+
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
@@ -195,16 +210,17 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
         /**
          * This endpoint sets the parameters of the auto-cancel feature which cancels all open orders (both market maker protection and non market maker protection order types) of the underlying symbol at the end of the specified countdown time period if no heartbeat message is sent.  After the countdown time period, all open orders will be cancelled and new orders will be rejected with error code -2010 until either a heartbeat message is sent or the auto-cancel feature is turned off by setting countdownTime to 0.
          *
+         * Weight(IP): 1
          *
-         * This rest endpoint sets up the parameters to cancel your open orders in case of an outage or disconnection.
-         * Example usage:
-         * Call this endpoint with a countdownTime value of 10000 (10 seconds) to turn on the auto-cancel feature. If the corresponding countdownCancelAllHeartBeat endpoint is not called within 10 seconds with the specified underlying symbol, all open orders of the specified symbol will be automatically canceled. If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
-         * The system will check all countdowns approximately every 100 milliseconds, **please note that sufficient redundancy should be considered when using this function**. We do not recommend setting the countdown time to be too precise or too small.
+         * Security Type: TRADE
          *
-         * Weight: 1
+         * Notes:
+         * - This rest endpoint sets up the parameters to cancel your open orders in case of an outage or disconnection.
+         * - Example usage: > Call this endpoint with a countdownTime value of 10000 (10 seconds) to turn on the auto-cancel feature. If the corresponding countdownCancelAllHeartBeat endpoint is not called within 10 seconds with the specified underlying symbol, all open orders of the specified symbol will be automatically canceled. If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
+         * - The system will check all countdowns approximately every 100 milliseconds, **please note that sufficient redundancy should be considered when using this function**. We do not recommend setting the countdown time to be too precise or too small.
          *
          * @summary Set Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
-         * @param {string} underlying Option underlying, e.g BTCUSDT
+         * @param {string} underlying
          * @param {number | bigint} countdownTime Countdown time in milliseconds (ex. 1,000 for 1 second). 0 to disable the timer. Negative values (ex. -10000) are not accepted. Minimum acceptable value is 5,000
          * @param {number | bigint} [recvWindow]
          *
@@ -247,29 +263,49 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             };
         },
         /**
-         * Set config for MMP.
-         * Market Maker Protection(MMP) is a set of protection mechanism for option market maker, this mechanism is able to prevent mass trading in short period time. Once market maker's account branches the threshold, the Market Maker Protection will be triggered. When Market Maker Protection triggers, all the current MMP orders will be canceled, new MMP orders will be rejected. Market maker can use this time to reevaluate market and modify order price.
+         * Set config for MMP. Market Maker Protection(MMP) is a set of protection mechanism for option market maker, this mechanism is able to prevent mass trading in short period time. Once market maker's account branches the threshold, the Market Maker Protection will be triggered. When Market Maker Protection triggers, all the current MMP orders will be canceled, new MMP orders will be rejected. Market maker can use this time to reevaluate market and modify order price.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: TRADE
          *
          * @summary Set Market Maker Protection Config (TRADE)
-         * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number | bigint} [windowTimeInMilliseconds] MMP Interval in milliseconds; Range (0,5000]
-         * @param {number | bigint} [frozenTimeInMilliseconds] MMP frozen time in milliseconds, if set to 0 manual reset is required
-         * @param {number} [qtyLimit] quantity limit
-         * @param {number} [deltaLimit] net delta limit
+         * @param {string} underlying
+         * @param {number | bigint} windowTimeInMilliseconds MMP Interval in milliseconds
+         * @param {number | bigint} frozenTimeInMilliseconds MMP frozen time in milliseconds, if set to 0 manual reset is required
+         * @param {number} qtyLimit quantity limit
+         * @param {number} deltaLimit net delta limit
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         setMarketMakerProtectionConfig: async (
-            underlying?: string,
-            windowTimeInMilliseconds?: number | bigint,
-            frozenTimeInMilliseconds?: number | bigint,
-            qtyLimit?: number,
-            deltaLimit?: number,
+            underlying: string,
+            windowTimeInMilliseconds: number | bigint,
+            frozenTimeInMilliseconds: number | bigint,
+            qtyLimit: number,
+            deltaLimit: number,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
+            // verify required parameter 'underlying' is not null or undefined
+            assertParamExists('setMarketMakerProtectionConfig', 'underlying', underlying);
+            // verify required parameter 'windowTimeInMilliseconds' is not null or undefined
+            assertParamExists(
+                'setMarketMakerProtectionConfig',
+                'windowTimeInMilliseconds',
+                windowTimeInMilliseconds
+            );
+            // verify required parameter 'frozenTimeInMilliseconds' is not null or undefined
+            assertParamExists(
+                'setMarketMakerProtectionConfig',
+                'frozenTimeInMilliseconds',
+                frozenTimeInMilliseconds
+            );
+            // verify required parameter 'qtyLimit' is not null or undefined
+            assertParamExists('setMarketMakerProtectionConfig', 'qtyLimit', qtyLimit);
+            // verify required parameter 'deltaLimit' is not null or undefined
+            assertParamExists('setMarketMakerProtectionConfig', 'deltaLimit', deltaLimit);
+
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
@@ -316,9 +352,12 @@ export interface MarketMakerEndpointsApiInterface {
     /**
      * This endpoint resets the time from which the countdown will begin to the time this messaged is received.  It should be called repeatedly as heartbeats.  Multiple heartbeats can be updated at once by specifying the underlying symbols as a list (ex. BTCUSDT,ETHUSDT) in the underlyings parameter.
      *
-     * The response will only include underlying symbols where the heartbeat has been successfully updated.
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - The response will only include underlying symbols where the heartbeat has been successfully updated.
      *
      * @summary Auto-Cancel All Open Orders (Kill-Switch) Heartbeat (TRADE)
      * @param {AutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
@@ -332,9 +371,12 @@ export interface MarketMakerEndpointsApiInterface {
     /**
      * This endpoint returns the auto-cancel parameters for each underlying symbol. Note only active auto-cancel parameters will be returned, if countdownTime is set to 0 (ie. countdownTime has been turned off), the underlying symbol and corresponding countdownTime parameter will not be returned in the response.
      *
-     * countdownTime = 0 means the function is disabled.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - countdownTime = 0 means the function is disabled.
      *
      * @summary Get Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
      * @param {GetAutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
@@ -348,7 +390,9 @@ export interface MarketMakerEndpointsApiInterface {
     /**
      * Get config for MMP.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Get Market Maker Protection Config (TRADE)
      * @param {GetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
@@ -357,12 +401,14 @@ export interface MarketMakerEndpointsApiInterface {
      * @memberof MarketMakerEndpointsApiInterface
      */
     getMarketMakerProtectionConfig(
-        requestParameters?: GetMarketMakerProtectionConfigRequest
+        requestParameters: GetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<GetMarketMakerProtectionConfigResponse>>;
     /**
      * Reset MMP, start MMP order again.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Reset Market Maker Protection Config (TRADE)
      * @param {ResetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
@@ -371,18 +417,19 @@ export interface MarketMakerEndpointsApiInterface {
      * @memberof MarketMakerEndpointsApiInterface
      */
     resetMarketMakerProtectionConfig(
-        requestParameters?: ResetMarketMakerProtectionConfigRequest
+        requestParameters: ResetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<ResetMarketMakerProtectionConfigResponse>>;
     /**
      * This endpoint sets the parameters of the auto-cancel feature which cancels all open orders (both market maker protection and non market maker protection order types) of the underlying symbol at the end of the specified countdown time period if no heartbeat message is sent.  After the countdown time period, all open orders will be cancelled and new orders will be rejected with error code -2010 until either a heartbeat message is sent or the auto-cancel feature is turned off by setting countdownTime to 0.
      *
+     * Weight(IP): 1
      *
-     * This rest endpoint sets up the parameters to cancel your open orders in case of an outage or disconnection.
-     * Example usage:
-     * Call this endpoint with a countdownTime value of 10000 (10 seconds) to turn on the auto-cancel feature. If the corresponding countdownCancelAllHeartBeat endpoint is not called within 10 seconds with the specified underlying symbol, all open orders of the specified symbol will be automatically canceled. If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
-     * The system will check all countdowns approximately every 100 milliseconds, **please note that sufficient redundancy should be considered when using this function**. We do not recommend setting the countdown time to be too precise or too small.
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - This rest endpoint sets up the parameters to cancel your open orders in case of an outage or disconnection.
+     * - Example usage: > Call this endpoint with a countdownTime value of 10000 (10 seconds) to turn on the auto-cancel feature. If the corresponding countdownCancelAllHeartBeat endpoint is not called within 10 seconds with the specified underlying symbol, all open orders of the specified symbol will be automatically canceled. If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
+     * - The system will check all countdowns approximately every 100 milliseconds, **please note that sufficient redundancy should be considered when using this function**. We do not recommend setting the countdown time to be too precise or too small.
      *
      * @summary Set Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
      * @param {SetAutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
@@ -394,10 +441,11 @@ export interface MarketMakerEndpointsApiInterface {
         requestParameters: SetAutoCancelAllOpenOrdersRequest
     ): Promise<RestApiResponse<SetAutoCancelAllOpenOrdersResponse>>;
     /**
-     * Set config for MMP.
-     * Market Maker Protection(MMP) is a set of protection mechanism for option market maker, this mechanism is able to prevent mass trading in short period time. Once market maker's account branches the threshold, the Market Maker Protection will be triggered. When Market Maker Protection triggers, all the current MMP orders will be canceled, new MMP orders will be rejected. Market maker can use this time to reevaluate market and modify order price.
+     * Set config for MMP. Market Maker Protection(MMP) is a set of protection mechanism for option market maker, this mechanism is able to prevent mass trading in short period time. Once market maker's account branches the threshold, the Market Maker Protection will be triggered. When Market Maker Protection triggers, all the current MMP orders will be canceled, new MMP orders will be rejected. Market maker can use this time to reevaluate market and modify order price.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Set Market Maker Protection Config (TRADE)
      * @param {SetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
@@ -406,7 +454,7 @@ export interface MarketMakerEndpointsApiInterface {
      * @memberof MarketMakerEndpointsApiInterface
      */
     setMarketMakerProtectionConfig(
-        requestParameters?: SetMarketMakerProtectionConfigRequest
+        requestParameters: SetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<SetMarketMakerProtectionConfigResponse>>;
 }
 
@@ -416,7 +464,7 @@ export interface MarketMakerEndpointsApiInterface {
  */
 export interface AutoCancelAllOpenOrdersRequest {
     /**
-     * Option Underlying Symbols, e.g BTCUSDT,ETHUSDT
+     *
      * @type {string}
      * @memberof MarketMakerEndpointsApiAutoCancelAllOpenOrders
      */
@@ -436,14 +484,14 @@ export interface AutoCancelAllOpenOrdersRequest {
  */
 export interface GetAutoCancelAllOpenOrdersRequest {
     /**
-     * underlying, e.g BTCUSDT
+     * Underlying asset.
      * @type {string}
      * @memberof MarketMakerEndpointsApiGetAutoCancelAllOpenOrders
      */
     readonly underlying?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiGetAutoCancelAllOpenOrders
      */
@@ -456,14 +504,14 @@ export interface GetAutoCancelAllOpenOrdersRequest {
  */
 export interface GetMarketMakerProtectionConfigRequest {
     /**
-     * underlying, e.g BTCUSDT
+     * Underlying asset.
      * @type {string}
      * @memberof MarketMakerEndpointsApiGetMarketMakerProtectionConfig
      */
-    readonly underlying?: string;
+    readonly underlying: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiGetMarketMakerProtectionConfig
      */
@@ -476,11 +524,11 @@ export interface GetMarketMakerProtectionConfigRequest {
  */
 export interface ResetMarketMakerProtectionConfigRequest {
     /**
-     * underlying, e.g BTCUSDT
+     *
      * @type {string}
      * @memberof MarketMakerEndpointsApiResetMarketMakerProtectionConfig
      */
-    readonly underlying?: string;
+    readonly underlying: string;
 
     /**
      *
@@ -496,7 +544,7 @@ export interface ResetMarketMakerProtectionConfigRequest {
  */
 export interface SetAutoCancelAllOpenOrdersRequest {
     /**
-     * Option underlying, e.g BTCUSDT
+     *
      * @type {string}
      * @memberof MarketMakerEndpointsApiSetAutoCancelAllOpenOrders
      */
@@ -523,39 +571,39 @@ export interface SetAutoCancelAllOpenOrdersRequest {
  */
 export interface SetMarketMakerProtectionConfigRequest {
     /**
-     * underlying, e.g BTCUSDT
+     *
      * @type {string}
      * @memberof MarketMakerEndpointsApiSetMarketMakerProtectionConfig
      */
-    readonly underlying?: string;
+    readonly underlying: string;
 
     /**
-     * MMP Interval in milliseconds; Range (0,5000]
+     * MMP Interval in milliseconds
      * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiSetMarketMakerProtectionConfig
      */
-    readonly windowTimeInMilliseconds?: number | bigint;
+    readonly windowTimeInMilliseconds: number | bigint;
 
     /**
      * MMP frozen time in milliseconds, if set to 0 manual reset is required
      * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiSetMarketMakerProtectionConfig
      */
-    readonly frozenTimeInMilliseconds?: number | bigint;
+    readonly frozenTimeInMilliseconds: number | bigint;
 
     /**
      * quantity limit
      * @type {number}
      * @memberof MarketMakerEndpointsApiSetMarketMakerProtectionConfig
      */
-    readonly qtyLimit?: number;
+    readonly qtyLimit: number;
 
     /**
      * net delta limit
      * @type {number}
      * @memberof MarketMakerEndpointsApiSetMarketMakerProtectionConfig
      */
-    readonly deltaLimit?: number;
+    readonly deltaLimit: number;
 
     /**
      *
@@ -581,16 +629,19 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
     /**
      * This endpoint resets the time from which the countdown will begin to the time this messaged is received.  It should be called repeatedly as heartbeats.  Multiple heartbeats can be updated at once by specifying the underlying symbols as a list (ex. BTCUSDT,ETHUSDT) in the underlyings parameter.
      *
-     * The response will only include underlying symbols where the heartbeat has been successfully updated.
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - The response will only include underlying symbols where the heartbeat has been successfully updated.
      *
      * @summary Auto-Cancel All Open Orders (Kill-Switch) Heartbeat (TRADE)
      * @param {AutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Auto-Cancel-All-Open-Orders-Heartbeat Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#auto-cancel-all-open-orders Binance API Documentation}
      */
     public async autoCancelAllOpenOrders(
         requestParameters: AutoCancelAllOpenOrdersRequest
@@ -614,16 +665,19 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
     /**
      * This endpoint returns the auto-cancel parameters for each underlying symbol. Note only active auto-cancel parameters will be returned, if countdownTime is set to 0 (ie. countdownTime has been turned off), the underlying symbol and corresponding countdownTime parameter will not be returned in the response.
      *
-     * countdownTime = 0 means the function is disabled.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - countdownTime = 0 means the function is disabled.
      *
      * @summary Get Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
      * @param {GetAutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetAutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Get-Auto-Cancel-All-Open-Orders-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#get-auto-cancel-all-open-orders Binance API Documentation}
      */
     public async getAutoCancelAllOpenOrders(
         requestParameters: GetAutoCancelAllOpenOrdersRequest = {}
@@ -647,17 +701,19 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
     /**
      * Get config for MMP.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Get Market Maker Protection Config (TRADE)
      * @param {GetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Get-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#get-market-maker-protection-config Binance API Documentation}
      */
     public async getMarketMakerProtectionConfig(
-        requestParameters: GetMarketMakerProtectionConfigRequest = {}
+        requestParameters: GetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<GetMarketMakerProtectionConfigResponse>> {
         const localVarAxiosArgs =
             await this.localVarAxiosParamCreator.getMarketMakerProtectionConfig(
@@ -679,17 +735,19 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
     /**
      * Reset MMP, start MMP order again.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Reset Market Maker Protection Config (TRADE)
      * @param {ResetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ResetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Reset-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#reset-market-maker-protection-config Binance API Documentation}
      */
     public async resetMarketMakerProtectionConfig(
-        requestParameters: ResetMarketMakerProtectionConfigRequest = {}
+        requestParameters: ResetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<ResetMarketMakerProtectionConfigResponse>> {
         const localVarAxiosArgs =
             await this.localVarAxiosParamCreator.resetMarketMakerProtectionConfig(
@@ -711,20 +769,21 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
     /**
      * This endpoint sets the parameters of the auto-cancel feature which cancels all open orders (both market maker protection and non market maker protection order types) of the underlying symbol at the end of the specified countdown time period if no heartbeat message is sent.  After the countdown time period, all open orders will be cancelled and new orders will be rejected with error code -2010 until either a heartbeat message is sent or the auto-cancel feature is turned off by setting countdownTime to 0.
      *
+     * Weight(IP): 1
      *
-     * This rest endpoint sets up the parameters to cancel your open orders in case of an outage or disconnection.
-     * Example usage:
-     * Call this endpoint with a countdownTime value of 10000 (10 seconds) to turn on the auto-cancel feature. If the corresponding countdownCancelAllHeartBeat endpoint is not called within 10 seconds with the specified underlying symbol, all open orders of the specified symbol will be automatically canceled. If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
-     * The system will check all countdowns approximately every 100 milliseconds, **please note that sufficient redundancy should be considered when using this function**. We do not recommend setting the countdown time to be too precise or too small.
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - This rest endpoint sets up the parameters to cancel your open orders in case of an outage or disconnection.
+     * - Example usage: > Call this endpoint with a countdownTime value of 10000 (10 seconds) to turn on the auto-cancel feature. If the corresponding countdownCancelAllHeartBeat endpoint is not called within 10 seconds with the specified underlying symbol, all open orders of the specified symbol will be automatically canceled. If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
+     * - The system will check all countdowns approximately every 100 milliseconds, **please note that sufficient redundancy should be considered when using this function**. We do not recommend setting the countdown time to be too precise or too small.
      *
      * @summary Set Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
      * @param {SetAutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetAutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Set-Auto-Cancel-All-Open-Orders-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#set-auto-cancel-all-open-orders Binance API Documentation}
      */
     public async setAutoCancelAllOpenOrders(
         requestParameters: SetAutoCancelAllOpenOrdersRequest
@@ -747,20 +806,21 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
     }
 
     /**
-     * Set config for MMP.
-     * Market Maker Protection(MMP) is a set of protection mechanism for option market maker, this mechanism is able to prevent mass trading in short period time. Once market maker's account branches the threshold, the Market Maker Protection will be triggered. When Market Maker Protection triggers, all the current MMP orders will be canceled, new MMP orders will be rejected. Market maker can use this time to reevaluate market and modify order price.
+     * Set config for MMP. Market Maker Protection(MMP) is a set of protection mechanism for option market maker, this mechanism is able to prevent mass trading in short period time. Once market maker's account branches the threshold, the Market Maker Protection will be triggered. When Market Maker Protection triggers, all the current MMP orders will be canceled, new MMP orders will be rejected. Market maker can use this time to reevaluate market and modify order price.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Set Market Maker Protection Config (TRADE)
      * @param {SetMarketMakerProtectionConfigRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Set-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-endpoints#set-market-maker-protection-config Binance API Documentation}
      */
     public async setMarketMakerProtectionConfig(
-        requestParameters: SetMarketMakerProtectionConfigRequest = {}
+        requestParameters: SetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<SetMarketMakerProtectionConfigResponse>> {
         const localVarAxiosArgs =
             await this.localVarAxiosParamCreator.setMarketMakerProtectionConfig(

@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,30 +20,30 @@ import type { UserDataStreamEventsResponse } from './types';
 import type {
     IndexPriceStreamsRequest,
     KlineCandlestickStreamsRequest,
-    MarkPriceRequest,
     NewSymbolInfoRequest,
     OpenInterestRequest,
+    OptionMarkPriceRequest,
 } from './modules/market-api';
 import type {
     DiffBookDepthStreamsRequest,
+    Hour24TickerRequest,
     IndividualSymbolBookTickerStreamsRequest,
     PartialBookDepthStreamsRequest,
-    Ticker24HourRequest,
     TradeStreamsRequest,
 } from './modules/public-api';
 
 import type {
     IndexPriceStreamsResponse,
     KlineCandlestickStreamsResponse,
-    MarkPriceResponse,
     NewSymbolInfoResponse,
     OpenInterestResponse,
+    OptionMarkPriceResponse,
 } from './types';
 import type {
     DiffBookDepthStreamsResponse,
+    Hour24TickerResponse,
     IndividualSymbolBookTickerStreamsResponse,
     PartialBookDepthStreamsResponse,
-    Ticker24HourResponse,
     TradeStreamsResponse,
 } from './types';
 
@@ -170,7 +170,7 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<IndexPriceStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Index-Price-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#index-price-streams Binance API Documentation}
      */
     indexPriceStreams(
         requestParameters: IndexPriceStreamsRequest = {}
@@ -188,28 +188,12 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<KlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#kline-candlestick-streams Binance API Documentation}
      */
     klineCandlestickStreams(
         requestParameters: KlineCandlestickStreamsRequest
     ): WebsocketStream<KlineCandlestickStreamsResponse> {
         return this.marketApi.klineCandlestickStreams(requestParameters);
-    }
-
-    /**
-     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
-     *
-     * Update Speed: 1000ms
-     *
-     * @summary Mark Price
-     * @param {MarkPriceRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<MarkPriceResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Mark-Price Binance API Documentation}
-     */
-    markPrice(requestParameters: MarkPriceRequest): WebsocketStream<MarkPriceResponse> {
-        return this.marketApi.markPrice(requestParameters);
     }
 
     /**
@@ -222,7 +206,7 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<NewSymbolInfoResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/New-Symbol-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#new-symbol-info Binance API Documentation}
      */
     newSymbolInfo(
         requestParameters: NewSymbolInfoRequest = {}
@@ -240,10 +224,28 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<OpenInterestResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Open-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#open-interest Binance API Documentation}
      */
     openInterest(requestParameters: OpenInterestRequest): WebsocketStream<OpenInterestResponse> {
         return this.marketApi.openInterest(requestParameters);
+    }
+
+    /**
+     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
+     *
+     * Update Speed: 1000ms
+     *
+     * @summary Option Mark Price
+     * @param {OptionMarkPriceRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<OptionMarkPriceResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/market#option-mark-price Binance API Documentation}
+     */
+    optionMarkPrice(
+        requestParameters: OptionMarkPriceRequest
+    ): WebsocketStream<OptionMarkPriceResponse> {
+        return this.marketApi.optionMarkPrice(requestParameters);
     }
 
     /**
@@ -256,12 +258,28 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<DiffBookDepthStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Diff-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#diff-book-depth-streams Binance API Documentation}
      */
     diffBookDepthStreams(
         requestParameters: DiffBookDepthStreamsRequest
     ): WebsocketStream<DiffBookDepthStreamsResponse> {
         return this.publicApi.diffBookDepthStreams(requestParameters);
+    }
+
+    /**
+     * 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
+     *
+     * Update Speed: 1000ms
+     *
+     * @summary 24-hour TICKER
+     * @param {Hour24TickerRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<Hour24TickerResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#hour24-ticker Binance API Documentation}
+     */
+    hour24Ticker(requestParameters: Hour24TickerRequest): WebsocketStream<Hour24TickerResponse> {
+        return this.publicApi.hour24Ticker(requestParameters);
     }
 
     /**
@@ -274,7 +292,7 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<IndividualSymbolBookTickerStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#individual-symbol-book-ticker-streams Binance API Documentation}
      */
     individualSymbolBookTickerStreams(
         requestParameters: IndividualSymbolBookTickerStreamsRequest
@@ -283,7 +301,7 @@ export class WebsocketStreamsConnection {
     }
 
     /**
-     * Top **<levels\>** bids and asks, Valid levels are **<levels\>** are 5, 10, 20.
+     * Top <levels> bids and asks. Valid <levels> are 5, 10, 20.
      *
      * Update Speed: 100ms or 500ms
      *
@@ -292,28 +310,12 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<PartialBookDepthStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Partial-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#partial-book-depth-streams Binance API Documentation}
      */
     partialBookDepthStreams(
         requestParameters: PartialBookDepthStreamsRequest
     ): WebsocketStream<PartialBookDepthStreamsResponse> {
         return this.publicApi.partialBookDepthStreams(requestParameters);
-    }
-
-    /**
-     * 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
-     *
-     * Update Speed: 1000ms
-     *
-     * @summary 24-hour TICKER
-     * @param {Ticker24HourRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<Ticker24HourResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/24-hour-TICKER Binance API Documentation}
-     */
-    ticker24Hour(requestParameters: Ticker24HourRequest): WebsocketStream<Ticker24HourResponse> {
-        return this.publicApi.ticker24Hour(requestParameters);
     }
 
     /**
@@ -326,7 +328,7 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<TradeStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Trade-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#trade-streams Binance API Documentation}
      */
     tradeStreams(requestParameters: TradeStreamsRequest): WebsocketStream<TradeStreamsResponse> {
         return this.publicApi.tradeStreams(requestParameters);

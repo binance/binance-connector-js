@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,49 +28,49 @@ import type { OptionMarginAccountInformationResponseGreekInner } from './option-
  */
 export interface OptionMarginAccountInformationResponse {
     /**
-     *
+     * asset
      * @type {Array<OptionMarginAccountInformationResponseAssetInner>}
      * @memberof OptionMarginAccountInformationResponse
      */
     asset?: Array<OptionMarginAccountInformationResponseAssetInner>;
     /**
-     *
+     * greek
      * @type {Array<OptionMarginAccountInformationResponseGreekInner>}
      * @memberof OptionMarginAccountInformationResponse
      */
     greek?: Array<OptionMarginAccountInformationResponseGreekInner>;
     /**
-     *
+     * time
      * @type {number | bigint}
      * @memberof OptionMarginAccountInformationResponse
      */
     time?: number | bigint;
     /**
-     *
+     * can Trade
      * @type {boolean}
      * @memberof OptionMarginAccountInformationResponse
      */
     canTrade?: boolean;
     /**
-     *
+     * can Deposit
      * @type {boolean}
      * @memberof OptionMarginAccountInformationResponse
      */
     canDeposit?: boolean;
     /**
-     *
+     * can Withdraw
      * @type {boolean}
      * @memberof OptionMarginAccountInformationResponse
      */
     canWithdraw?: boolean;
     /**
-     *
+     * reduce Only
      * @type {boolean}
      * @memberof OptionMarginAccountInformationResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Trade group ID
      * @type {number | bigint}
      * @memberof OptionMarginAccountInformationResponse
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { MarketMakerBlockTradeApi } from '../../../src/rest-api';
+import { MarketMakerBlockTradeApi, NewBlockTradeOrderLiquidityEnum } from '../../../src/rest-api';
 import {
     AcceptBlockTradeOrderRequest,
     AccountBlockTradeListRequest,
@@ -51,7 +51,7 @@ describe('MarketMakerBlockTradeApi', () => {
     describe('acceptBlockTradeOrder()', () => {
         it('should execute acceptBlockTradeOrder() successfully with required parameters only', async () => {
             const params: AcceptBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
             };
 
             mockResponse = JSONParse(
@@ -83,7 +83,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should execute acceptBlockTradeOrder() successfully with optional parameters', async () => {
             const params: AcceptBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
                 recvWindow: 5000,
             };
 
@@ -116,7 +116,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw RequiredError when blockOrderMatchingKey is missing', async () => {
             const _params: AcceptBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
             };
             const params = Object.assign({ ..._params });
             delete params?.blockOrderMatchingKey;
@@ -128,7 +128,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AcceptBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
             };
 
             const errorResponse = {
@@ -201,7 +201,7 @@ describe('MarketMakerBlockTradeApi', () => {
             const params: AccountBlockTradeListRequest = {
                 endTime: 1641782889000,
                 startTime: 1623319461670,
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -273,7 +273,7 @@ describe('MarketMakerBlockTradeApi', () => {
     describe('cancelBlockTradeOrder()', () => {
         it('should execute cancelBlockTradeOrder() successfully with required parameters only', async () => {
             const params: CancelBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
             };
 
             const spy = jest.spyOn(client, 'cancelBlockTradeOrder').mockReturnValue(
@@ -292,7 +292,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should execute cancelBlockTradeOrder() successfully with optional parameters', async () => {
             const params: CancelBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
                 recvWindow: 5000,
             };
 
@@ -312,7 +312,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw RequiredError when blockOrderMatchingKey is missing', async () => {
             const _params: CancelBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
             };
             const params = Object.assign({ ..._params });
             delete params?.blockOrderMatchingKey;
@@ -324,7 +324,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
             };
 
             const errorResponse = {
@@ -347,7 +347,7 @@ describe('MarketMakerBlockTradeApi', () => {
     describe('extendBlockTradeOrder()', () => {
         it('should execute extendBlockTradeOrder() successfully with required parameters only', async () => {
             const params: ExtendBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '3668822b8-1baa-6a2f-adb8-d3de6289b361',
             };
 
             mockResponse = JSONParse(
@@ -379,7 +379,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should execute extendBlockTradeOrder() successfully with optional parameters', async () => {
             const params: ExtendBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '3668822b8-1baa-6a2f-adb8-d3de6289b361',
                 recvWindow: 5000,
             };
 
@@ -412,7 +412,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw RequiredError when blockOrderMatchingKey is missing', async () => {
             const _params: ExtendBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '3668822b8-1baa-6a2f-adb8-d3de6289b361',
             };
             const params = Object.assign({ ..._params });
             delete params?.blockOrderMatchingKey;
@@ -424,7 +424,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ExtendBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '3668822b8-1baa-6a2f-adb8-d3de6289b361',
             };
 
             const errorResponse = {
@@ -447,7 +447,7 @@ describe('MarketMakerBlockTradeApi', () => {
     describe('newBlockTradeOrder()', () => {
         it('should execute newBlockTradeOrder() successfully with required parameters only', async () => {
             const params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
+                liquidity: NewBlockTradeOrderLiquidityEnum.MAKER,
                 legs: [],
             };
 
@@ -479,7 +479,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should execute newBlockTradeOrder() successfully with optional parameters', async () => {
             const params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
+                liquidity: NewBlockTradeOrderLiquidityEnum.MAKER,
                 legs: [],
                 recvWindow: 5000,
             };
@@ -512,7 +512,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw RequiredError when liquidity is missing', async () => {
             const _params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
+                liquidity: NewBlockTradeOrderLiquidityEnum.MAKER,
                 legs: [],
             };
             const params = Object.assign({ ..._params });
@@ -525,7 +525,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw RequiredError when legs is missing', async () => {
             const _params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
+                liquidity: NewBlockTradeOrderLiquidityEnum.MAKER,
                 legs: [],
             };
             const params = Object.assign({ ..._params });
@@ -538,7 +538,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
+                liquidity: NewBlockTradeOrderLiquidityEnum.MAKER,
                 legs: [],
             };
 
@@ -560,7 +560,7 @@ describe('MarketMakerBlockTradeApi', () => {
     describe('queryBlockTradeDetails()', () => {
         it('should execute queryBlockTradeDetails() successfully with required parameters only', async () => {
             const params: QueryBlockTradeDetailsRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '12b96c28-ba05-8906-c89t-703215cfb2e6',
             };
 
             mockResponse = JSONParse(
@@ -592,7 +592,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should execute queryBlockTradeDetails() successfully with optional parameters', async () => {
             const params: QueryBlockTradeDetailsRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '12b96c28-ba05-8906-c89t-703215cfb2e6',
                 recvWindow: 5000,
             };
 
@@ -625,7 +625,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw RequiredError when blockOrderMatchingKey is missing', async () => {
             const _params: QueryBlockTradeDetailsRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '12b96c28-ba05-8906-c89t-703215cfb2e6',
             };
             const params = Object.assign({ ..._params });
             delete params?.blockOrderMatchingKey;
@@ -637,7 +637,7 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryBlockTradeDetailsRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '12b96c28-ba05-8906-c89t-703215cfb2e6',
             };
 
             const errorResponse = {
@@ -676,21 +676,6 @@ describe('MarketMakerBlockTradeApi', () => {
                             },
                         ],
                     },
-                    {
-                        blockTradeSettlementKey: '28b96c28-ba05-6906-a47c-703215cfbfe6',
-                        expireTime: 1730171860460,
-                        liquidity: 'TAKER',
-                        status: 'RECEIVED',
-                        createTime: 1730170060462,
-                        legs: [
-                            {
-                                symbol: 'BNB-241101-700-C',
-                                side: 'BUY',
-                                quantity: '1.66',
-                                price: '20',
-                            },
-                        ],
-                    },
                 ])
             );
 
@@ -710,10 +695,10 @@ describe('MarketMakerBlockTradeApi', () => {
 
         it('should execute queryBlockTradeOrder() successfully with optional parameters', async () => {
             const params: QueryBlockTradeOrderRequest = {
-                blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+                blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
                 endTime: 1641782889000,
                 startTime: 1623319461670,
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -731,21 +716,6 @@ describe('MarketMakerBlockTradeApi', () => {
                                 side: 'BUY',
                                 quantity: '1.2',
                                 price: '2.8',
-                            },
-                        ],
-                    },
-                    {
-                        blockTradeSettlementKey: '28b96c28-ba05-6906-a47c-703215cfbfe6',
-                        expireTime: 1730171860460,
-                        liquidity: 'TAKER',
-                        status: 'RECEIVED',
-                        createTime: 1730170060462,
-                        legs: [
-                            {
-                                symbol: 'BNB-241101-700-C',
-                                side: 'BUY',
-                                quantity: '1.66',
-                                price: '20',
                             },
                         ],
                     },

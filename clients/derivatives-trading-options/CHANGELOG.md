@@ -1,5 +1,147 @@
 # Changelog
 
+## 16.0.0 - 2026-07-13
+
+### Added (3)
+
+#### REST API
+
+- `tradfiOptionsContract()` (`POST /eapi/v1/stock/contract`)
+
+#### WebSocket Streams
+
+- `hour24Ticker()` (`<symbol>@optionTicker<expirationDate>` stream)
+- `openInterest()` (`<underlying>@openInterest@<expirationDate>` stream)
+
+### Changed (21)
+
+#### REST API
+
+- Modified parameter `currency`:
+  - enum added: `USDT`
+  - affected methods:
+    - `accountFundingFlow()` (`GET /eapi/v1/bill`)
+- Modified parameter `deltaLimit`:
+  - required: `false` → `true`
+  - affected methods:
+    - `setMarketMakerProtectionConfig()` (`POST /eapi/v1/mmpSet`)
+- Modified parameter `frozenTimeInMilliseconds`:
+  - required: `false` → `true`
+  - affected methods:
+    - `setMarketMakerProtectionConfig()` (`POST /eapi/v1/mmpSet`)
+- Modified parameter `interval`:
+  - enum added: `1m`, `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `6h`, `8h`, `12h`, `1d`, `3d`, `1w`, `1M`
+  - affected methods:
+    - `klineCandlestickData()` (`GET /eapi/v1/klines`)
+- Modified parameter `legs`:
+  - items: required added: `symbol`, `side`, `type`, `quantity`
+  - items: property `price` added
+  - items: property `quantity` added
+  - items: property `side` added
+  - items: property `symbol` added
+  - items: property `type` added
+  - items: item property `price` added
+  - items: item property `quantity` added
+  - items: item property `side` added
+  - items: item property `symbol` added
+  - items: item property `type` added
+  - affected methods:
+    - `newBlockTradeOrder()` (`POST /eapi/v1/block/order/create`)
+- Modified parameter `liquidity`:
+  - enum added: `MAKER`, `TAKER`
+  - affected methods:
+    - `newBlockTradeOrder()` (`POST /eapi/v1/block/order/create`)
+- Modified parameter `orders`:
+  - items: required added: `symbol`, `side`, `type`, `quantity`
+  - items.`isMmp`: type `string` → `boolean`
+  - items.`postOnly`: type `string` → `boolean`
+  - items.`price`: type `string` → `number`
+  - items.`quantity`: type `string` → `number`
+  - items.`reduceOnly`: type `string` → `boolean`
+  - items.`isMmp`: type `string` → `boolean`
+  - items.`postOnly`: type `string` → `boolean`
+  - items.`price`: type `string` → `number`
+  - items.`quantity`: type `string` → `number`
+  - items.`reduceOnly`: type `string` → `boolean`
+  - affected methods:
+    - `placeMultipleOrders()` (`POST /eapi/v1/batchOrders`)
+- Modified parameter `qtyLimit`:
+  - required: `false` → `true`
+  - affected methods:
+    - `setMarketMakerProtectionConfig()` (`POST /eapi/v1/mmpSet`)
+- Modified parameter `selfTradePreventionMode`:
+  - enum added: `NONE`
+  - affected methods:
+    - `newOrder()` (`POST /eapi/v1/order`)
+- Modified parameter `symbol`:
+  - required: `false` → `true`
+  - affected methods:
+    - `accountTradeList()` (`GET /eapi/v1/userTrades`)
+- Modified parameter `underlying`:
+  - required: `false` → `true`
+  - affected methods:
+    - `getMarketMakerProtectionConfig()` (`GET /eapi/v1/mmp`)
+    - `resetMarketMakerProtectionConfig()` (`POST /eapi/v1/mmpReset`)
+    - `setMarketMakerProtectionConfig()` (`POST /eapi/v1/mmpSet`)
+- Modified parameter `windowTimeInMilliseconds`:
+  - required: `false` → `true`
+  - affected methods:
+    - `setMarketMakerProtectionConfig()` (`POST /eapi/v1/mmpSet`)
+- Modified response for `cancelMultipleOptionOrders()` (`DELETE /eapi/v1/batchOrders`):
+  - items: property `fee` added
+  - items: item property `fee` added
+
+- Modified response for `placeMultipleOrders()` (`POST /eapi/v1/batchOrders`):
+  - items: property `postOnly` added
+  - items: property `fee` added
+  - items: item property `postOnly` added
+  - items: item property `fee` added
+
+- Modified response for `orderBook()` (`GET /eapi/v1/depth`):
+  - `asks`.items: minItems `0` → `2`
+  - `asks`.items: maxItems `null` → `2`
+  - `bids`.items: minItems `0` → `2`
+  - `bids`.items: maxItems `null` → `2`
+
+- Modified response for `exchangeInformation()` (`GET /eapi/v1/exchangeInfo`):
+  - `optionSymbols`.items: property `underlyingType` added
+  - `optionSymbols`.items: property `contractType` added
+  - `optionSymbols`.items: property `nakedSell` added
+  - `optionSymbols`.items: item property `underlyingType` added
+  - `optionSymbols`.items: item property `contractType` added
+  - `optionSymbols`.items: item property `nakedSell` added
+
+- Modified response for `querySingleOrder()` (`GET /eapi/v1/order`):
+  - property `postOnly` added
+
+- Modified response for `newOrder()` (`POST /eapi/v1/order`):
+  - property `fee` added
+  - property `postOnly` added
+
+#### WebSocket Streams
+
+- Modified parameter `interval`:
+  - enum added: `1m`, `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `6h`, `12h`, `1d`, `3d`, `1w`
+  - affected methods:
+    - `klineCandlestickStreams()` (`<symbol>@kline_<interval>` stream)
+- Modified parameter `level`:
+  - enum added: `5`, `10`, `20`
+  - affected methods:
+    - `partialBookDepthStreams()` (`<symbol>@depth<level>@<updateSpeed>` stream)
+- Modified parameter `updateSpeed`:
+  - required: `false` → `true`
+  - enum added: `100ms`, `500ms`
+  - affected methods:
+    - `partialBookDepthStreams()` (`<symbol>@depth<level>@<updateSpeed>` stream)
+    - `diffBookDepthStreams()` (`<symbol>@depth@<updateSpeed>` stream)
+
+### Removed (2)
+
+#### WebSocket Streams
+
+- `/<symbol>@optionTicker()` (`<symbol>@optionTicker` stream)
+- `/underlying@optionOpenInterest@<expirationDate>()` (`underlying@optionOpenInterest@<expirationDate>` stream)
+
 ## 15.0.9 - 2026-06-18
 
 ### Changed (2)

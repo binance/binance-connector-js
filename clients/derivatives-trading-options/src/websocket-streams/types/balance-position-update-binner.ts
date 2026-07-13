@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface BalancePositionUpdateBInner {
     /**
-     *
+     * Margin asset
      * @type {string}
      * @memberof BalancePositionUpdateBInner
      */
     a?: string;
     /**
-     *
+     * Account balance
      * @type {string}
      * @memberof BalancePositionUpdateBInner
      */
     b?: string;
     /**
-     *
+     * Balance Change except PnL and Commission
      * @type {string}
      * @memberof BalancePositionUpdateBInner
      */

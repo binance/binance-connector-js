@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -50,10 +50,10 @@ describe('MarketMakerEndpointsApi', () => {
     describe('autoCancelAllOpenOrders()', () => {
         it('should execute autoCancelAllOpenOrders() successfully with required parameters only', async () => {
             const params: AutoCancelAllOpenOrdersRequest = {
-                underlyings: 'underlyings_example',
+                underlyings: 'BTCUSDT,ETHUSDT',
             };
 
-            mockResponse = JSONParse(JSONStringify({ underlyings: ['BTCUSDT', 'ETHUSDT'] }));
+            mockResponse = JSONParse(JSONStringify({ underlyings: ['BTCUSDT'] }));
 
             const spy = jest.spyOn(client, 'autoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -71,11 +71,11 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should execute autoCancelAllOpenOrders() successfully with optional parameters', async () => {
             const params: AutoCancelAllOpenOrdersRequest = {
-                underlyings: 'underlyings_example',
+                underlyings: 'BTCUSDT,ETHUSDT',
                 recvWindow: 5000,
             };
 
-            mockResponse = JSONParse(JSONStringify({ underlyings: ['BTCUSDT', 'ETHUSDT'] }));
+            mockResponse = JSONParse(JSONStringify({ underlyings: ['BTCUSDT'] }));
 
             const spy = jest.spyOn(client, 'autoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -93,7 +93,7 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should throw RequiredError when underlyings is missing', async () => {
             const _params: AutoCancelAllOpenOrdersRequest = {
-                underlyings: 'underlyings_example',
+                underlyings: 'BTCUSDT,ETHUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.underlyings;
@@ -105,7 +105,7 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AutoCancelAllOpenOrdersRequest = {
-                underlyings: 'underlyings_example',
+                underlyings: 'BTCUSDT,ETHUSDT',
             };
 
             const errorResponse = {
@@ -147,7 +147,7 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should execute getAutoCancelAllOpenOrders() successfully with optional parameters', async () => {
             const params: GetAutoCancelAllOpenOrdersRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -189,6 +189,10 @@ describe('MarketMakerEndpointsApi', () => {
 
     describe('getMarketMakerProtectionConfig()', () => {
         it('should execute getMarketMakerProtectionConfig() successfully with required parameters only', async () => {
+            const params: GetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+            };
+
             mockResponse = JSONParse(
                 JSONStringify({
                     underlyingId: 2,
@@ -209,7 +213,7 @@ describe('MarketMakerEndpointsApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<GetMarketMakerProtectionConfigResponse>)
             );
-            const response = await client.getMarketMakerProtectionConfig();
+            const response = await client.getMarketMakerProtectionConfig(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -217,7 +221,7 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should execute getMarketMakerProtectionConfig() successfully with optional parameters', async () => {
             const params: GetMarketMakerProtectionConfigRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -247,7 +251,23 @@ describe('MarketMakerEndpointsApi', () => {
             spy.mockRestore();
         });
 
+        it('should throw RequiredError when underlying is missing', async () => {
+            const _params: GetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.underlying;
+
+            await expect(client.getMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'Required parameter underlying was null or undefined when calling getMarketMakerProtectionConfig.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
+            const params: GetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+            };
+
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -260,13 +280,19 @@ describe('MarketMakerEndpointsApi', () => {
             const spy = jest
                 .spyOn(client, 'getMarketMakerProtectionConfig')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.getMarketMakerProtectionConfig()).rejects.toThrow('ResponseError');
+            await expect(client.getMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'ResponseError'
+            );
             spy.mockRestore();
         });
     });
 
     describe('resetMarketMakerProtectionConfig()', () => {
         it('should execute resetMarketMakerProtectionConfig() successfully with required parameters only', async () => {
+            const params: ResetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+            };
+
             mockResponse = JSONParse(
                 JSONStringify({
                     underlyingId: 2,
@@ -287,7 +313,7 @@ describe('MarketMakerEndpointsApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<ResetMarketMakerProtectionConfigResponse>)
             );
-            const response = await client.resetMarketMakerProtectionConfig();
+            const response = await client.resetMarketMakerProtectionConfig(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -295,7 +321,7 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should execute resetMarketMakerProtectionConfig() successfully with optional parameters', async () => {
             const params: ResetMarketMakerProtectionConfigRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -325,7 +351,23 @@ describe('MarketMakerEndpointsApi', () => {
             spy.mockRestore();
         });
 
+        it('should throw RequiredError when underlying is missing', async () => {
+            const _params: ResetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.underlying;
+
+            await expect(client.resetMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'Required parameter underlying was null or undefined when calling resetMarketMakerProtectionConfig.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
+            const params: ResetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+            };
+
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -338,7 +380,7 @@ describe('MarketMakerEndpointsApi', () => {
             const spy = jest
                 .spyOn(client, 'resetMarketMakerProtectionConfig')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.resetMarketMakerProtectionConfig()).rejects.toThrow(
+            await expect(client.resetMarketMakerProtectionConfig(params)).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();
@@ -348,12 +390,12 @@ describe('MarketMakerEndpointsApi', () => {
     describe('setAutoCancelAllOpenOrders()', () => {
         it('should execute setAutoCancelAllOpenOrders() successfully with required parameters only', async () => {
             const params: SetAutoCancelAllOpenOrdersRequest = {
-                underlying: 'underlying_example',
-                countdownTime: 789,
+                underlying: 'BTCUSDT',
+                countdownTime: 5000,
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ underlying: 'ETHUSDT', countdownTime: 30000 })
+                JSONStringify({ underlying: 'ETHUSDT', countdownTime: 100000 })
             );
 
             const spy = jest.spyOn(client, 'setAutoCancelAllOpenOrders').mockReturnValue(
@@ -372,13 +414,13 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should execute setAutoCancelAllOpenOrders() successfully with optional parameters', async () => {
             const params: SetAutoCancelAllOpenOrdersRequest = {
-                underlying: 'underlying_example',
-                countdownTime: 789,
+                underlying: 'BTCUSDT',
+                countdownTime: 5000,
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ underlying: 'ETHUSDT', countdownTime: 30000 })
+                JSONStringify({ underlying: 'ETHUSDT', countdownTime: 100000 })
             );
 
             const spy = jest.spyOn(client, 'setAutoCancelAllOpenOrders').mockReturnValue(
@@ -397,8 +439,8 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should throw RequiredError when underlying is missing', async () => {
             const _params: SetAutoCancelAllOpenOrdersRequest = {
-                underlying: 'underlying_example',
-                countdownTime: 789,
+                underlying: 'BTCUSDT',
+                countdownTime: 5000,
             };
             const params = Object.assign({ ..._params });
             delete params?.underlying;
@@ -410,8 +452,8 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should throw RequiredError when countdownTime is missing', async () => {
             const _params: SetAutoCancelAllOpenOrdersRequest = {
-                underlying: 'underlying_example',
-                countdownTime: 789,
+                underlying: 'BTCUSDT',
+                countdownTime: 5000,
             };
             const params = Object.assign({ ..._params });
             delete params?.countdownTime;
@@ -423,8 +465,8 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SetAutoCancelAllOpenOrdersRequest = {
-                underlying: 'underlying_example',
-                countdownTime: 789,
+                underlying: 'BTCUSDT',
+                countdownTime: 5000,
             };
 
             const errorResponse = {
@@ -448,6 +490,14 @@ describe('MarketMakerEndpointsApi', () => {
 
     describe('setMarketMakerProtectionConfig()', () => {
         it('should execute setMarketMakerProtectionConfig() successfully with required parameters only', async () => {
+            const params: SetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+                windowTimeInMilliseconds: 1000,
+                frozenTimeInMilliseconds: 1000,
+                qtyLimit: 1.0,
+                deltaLimit: 1.0,
+            };
+
             mockResponse = JSONParse(
                 JSONStringify({
                     underlyingId: 2,
@@ -468,7 +518,7 @@ describe('MarketMakerEndpointsApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<SetMarketMakerProtectionConfigResponse>)
             );
-            const response = await client.setMarketMakerProtectionConfig();
+            const response = await client.setMarketMakerProtectionConfig(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -476,9 +526,9 @@ describe('MarketMakerEndpointsApi', () => {
 
         it('should execute setMarketMakerProtectionConfig() successfully with optional parameters', async () => {
             const params: SetMarketMakerProtectionConfigRequest = {
-                underlying: 'underlying_example',
-                windowTimeInMilliseconds: 789,
-                frozenTimeInMilliseconds: 789,
+                underlying: 'BTCUSDT',
+                windowTimeInMilliseconds: 1000,
+                frozenTimeInMilliseconds: 1000,
                 qtyLimit: 1.0,
                 deltaLimit: 1.0,
                 recvWindow: 5000,
@@ -510,7 +560,95 @@ describe('MarketMakerEndpointsApi', () => {
             spy.mockRestore();
         });
 
+        it('should throw RequiredError when underlying is missing', async () => {
+            const _params: SetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+                windowTimeInMilliseconds: 1000,
+                frozenTimeInMilliseconds: 1000,
+                qtyLimit: 1.0,
+                deltaLimit: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.underlying;
+
+            await expect(client.setMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'Required parameter underlying was null or undefined when calling setMarketMakerProtectionConfig.'
+            );
+        });
+
+        it('should throw RequiredError when windowTimeInMilliseconds is missing', async () => {
+            const _params: SetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+                windowTimeInMilliseconds: 1000,
+                frozenTimeInMilliseconds: 1000,
+                qtyLimit: 1.0,
+                deltaLimit: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.windowTimeInMilliseconds;
+
+            await expect(client.setMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'Required parameter windowTimeInMilliseconds was null or undefined when calling setMarketMakerProtectionConfig.'
+            );
+        });
+
+        it('should throw RequiredError when frozenTimeInMilliseconds is missing', async () => {
+            const _params: SetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+                windowTimeInMilliseconds: 1000,
+                frozenTimeInMilliseconds: 1000,
+                qtyLimit: 1.0,
+                deltaLimit: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.frozenTimeInMilliseconds;
+
+            await expect(client.setMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'Required parameter frozenTimeInMilliseconds was null or undefined when calling setMarketMakerProtectionConfig.'
+            );
+        });
+
+        it('should throw RequiredError when qtyLimit is missing', async () => {
+            const _params: SetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+                windowTimeInMilliseconds: 1000,
+                frozenTimeInMilliseconds: 1000,
+                qtyLimit: 1.0,
+                deltaLimit: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.qtyLimit;
+
+            await expect(client.setMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'Required parameter qtyLimit was null or undefined when calling setMarketMakerProtectionConfig.'
+            );
+        });
+
+        it('should throw RequiredError when deltaLimit is missing', async () => {
+            const _params: SetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+                windowTimeInMilliseconds: 1000,
+                frozenTimeInMilliseconds: 1000,
+                qtyLimit: 1.0,
+                deltaLimit: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.deltaLimit;
+
+            await expect(client.setMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'Required parameter deltaLimit was null or undefined when calling setMarketMakerProtectionConfig.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
+            const params: SetMarketMakerProtectionConfigRequest = {
+                underlying: 'BTCUSDT',
+                windowTimeInMilliseconds: 1000,
+                frozenTimeInMilliseconds: 1000,
+                qtyLimit: 1.0,
+                deltaLimit: 1.0,
+            };
+
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -523,7 +661,9 @@ describe('MarketMakerEndpointsApi', () => {
             const spy = jest
                 .spyOn(client, 'setMarketMakerProtectionConfig')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.setMarketMakerProtectionConfig()).rejects.toThrow('ResponseError');
+            await expect(client.setMarketMakerProtectionConfig(params)).rejects.toThrow(
+                'ResponseError'
+            );
             spy.mockRestore();
         });
     });

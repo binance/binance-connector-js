@@ -13,7 +13,7 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 async function indexPrice() {
     try {
         const response = await client.restAPI.indexPrice({
-            underlying: 'underlying_example',
+            underlying: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

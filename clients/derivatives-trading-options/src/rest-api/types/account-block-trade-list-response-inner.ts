@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,25 +25,25 @@ import type { AccountBlockTradeListResponseInnerLegsInner } from './account-bloc
  */
 export interface AccountBlockTradeListResponseInner {
     /**
-     *
+     * parent Order Id
      * @type {string}
      * @memberof AccountBlockTradeListResponseInner
      */
     parentOrderId?: string;
     /**
-     *
+     * cross Type
      * @type {string}
      * @memberof AccountBlockTradeListResponseInner
      */
     crossType?: string;
     /**
-     *
+     * legs
      * @type {Array<AccountBlockTradeListResponseInnerLegsInner>}
      * @memberof AccountBlockTradeListResponseInner
      */
     legs?: Array<AccountBlockTradeListResponseInnerLegsInner>;
     /**
-     *
+     * block Trade Settlement Key
      * @type {string}
      * @memberof AccountBlockTradeListResponseInner
      */

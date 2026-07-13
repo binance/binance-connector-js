@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -29,23 +28,25 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query account funding flows.
          *
+         * Weight(IP): 1
          *
-         * Only support querying data in the past 3 months
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - Only support querying data in the past 3 months
          *
          * @summary Account Funding Flow (USER_DATA)
-         * @param {string} currency Asset type, only support USDT  as of now
-         * @param {number | bigint} [recordId] Return the recordId and subsequent data, the latest data is returned by default, e.g 100000
+         * @param {AccountFundingFlowCurrencyEnum} currency Asset type, only support USDT  as of now
+         * @param {number | bigint} [recordId] Return the recordId and subsequent data, the latest data is returned by default
          * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
          * @param {number | bigint} [endTime] End Time, e.g 1593512200000
-         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of result sets returned
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
         accountFundingFlow: async (
-            currency: string,
+            currency: AccountFundingFlowCurrencyEnum,
             recordId?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint,
@@ -93,10 +94,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current account information.
          *
-         * Weight: 3
+         * Weight(IP): 3
+         *
+         * Security Type: USER_DATA
          *
          * @summary Option Margin Account Information (USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -134,10 +137,12 @@ export interface AccountApiInterface {
     /**
      * Query account funding flows.
      *
+     * Weight(IP): 1
      *
-     * Only support querying data in the past 3 months
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Only support querying data in the past 3 months
      *
      * @summary Account Funding Flow (USER_DATA)
      * @param {AccountFundingFlowRequest} requestParameters Request parameters.
@@ -151,7 +156,9 @@ export interface AccountApiInterface {
     /**
      * Get current account information.
      *
-     * Weight: 3
+     * Weight(IP): 3
+     *
+     * Security Type: USER_DATA
      *
      * @summary Option Margin Account Information (USER_DATA)
      * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
@@ -171,13 +178,13 @@ export interface AccountApiInterface {
 export interface AccountFundingFlowRequest {
     /**
      * Asset type, only support USDT  as of now
-     * @type {string}
+     * @type {'USDT'}
      * @memberof AccountApiAccountFundingFlow
      */
-    readonly currency: string;
+    readonly currency: AccountFundingFlowCurrencyEnum;
 
     /**
-     * Return the recordId and subsequent data, the latest data is returned by default, e.g 100000
+     * Return the recordId and subsequent data, the latest data is returned by default
      * @type {number | bigint}
      * @memberof AccountApiAccountFundingFlow
      */
@@ -198,14 +205,14 @@ export interface AccountFundingFlowRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Number of result sets returned Default:100 Max:1000
+     * Number of result sets returned
      * @type {number | bigint}
      * @memberof AccountApiAccountFundingFlow
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof AccountApiAccountFundingFlow
      */
@@ -218,7 +225,7 @@ export interface AccountFundingFlowRequest {
  */
 export interface OptionMarginAccountInformationRequest {
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof AccountApiOptionMarginAccountInformation
      */
@@ -241,17 +248,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query account funding flows.
      *
+     * Weight(IP): 1
      *
-     * Only support querying data in the past 3 months
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Only support querying data in the past 3 months
      *
      * @summary Account Funding Flow (USER_DATA)
      * @param {AccountFundingFlowRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountFundingFlowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/account/Account-Funding-Flow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/account#account-funding-flow Binance API Documentation}
      */
     public async accountFundingFlow(
         requestParameters: AccountFundingFlowRequest
@@ -279,14 +288,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current account information.
      *
-     * Weight: 3
+     * Weight(IP): 3
+     *
+     * Security Type: USER_DATA
      *
      * @summary Option Margin Account Information (USER_DATA)
      * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OptionMarginAccountInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/account/Option-Margin-Account-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/account#option-margin-account-information Binance API Documentation}
      */
     public async optionMarginAccountInformation(
         requestParameters: OptionMarginAccountInformationRequest = {}
@@ -306,4 +317,8 @@ export class AccountApi implements AccountApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum AccountFundingFlowCurrencyEnum {
+    USDT = 'USDT',
 }

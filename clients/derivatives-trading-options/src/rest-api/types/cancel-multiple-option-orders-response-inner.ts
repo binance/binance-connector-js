@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,125 +20,131 @@
  */
 export interface CancelMultipleOptionOrdersResponseInner {
     /**
-     *
+     * System order number
      * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Option trading pair
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Order Price
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Order Quantity
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     quantity?: string;
     /**
-     *
+     * Number of completed quantity
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * fee
+     * @type {string}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    fee?: string;
+    /**
+     * Buy/sell direction
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Order type
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * Time in force method
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Order is reduce only Y/N
      * @type {boolean}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Order Time
      * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     createTime?: number | bigint;
     /**
-     *
+     * Update time
      * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Order status
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * Average price of completed trade
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     avgPrice?: string;
+    /**
+     * Client order ID
+     * @type {string}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    clientOrderId?: string;
+    /**
+     * price Scale
+     * @type {number | bigint}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    priceScale?: number | bigint;
+    /**
+     * quantity Scale
+     * @type {number | bigint}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    quantityScale?: number | bigint;
+    /**
+     * option Side
+     * @type {string}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    optionSide?: string;
+    /**
+     * quote Asset
+     * @type {string}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    quoteAsset?: string;
+    /**
+     * mmp
+     * @type {boolean}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    mmp?: boolean;
     /**
      *
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     source?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CancelMultipleOptionOrdersResponseInner
-     */
-    clientOrderId?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof CancelMultipleOptionOrdersResponseInner
-     */
-    priceScale?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof CancelMultipleOptionOrdersResponseInner
-     */
-    quantityScale?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof CancelMultipleOptionOrdersResponseInner
-     */
-    optionSide?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CancelMultipleOptionOrdersResponseInner
-     */
-    quoteAsset?: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof CancelMultipleOptionOrdersResponseInner
-     */
-    mmp?: boolean;
     /**
      *
      * @type {string}

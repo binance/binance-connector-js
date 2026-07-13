@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { MarketDataApi } from '../../../src/rest-api';
+import { MarketDataApi, KlineCandlestickDataIntervalEnum } from '../../../src/rest-api';
 import {
     HistoricalExerciseRecordsRequest,
     IndexPriceRequest,
@@ -57,7 +57,7 @@ describe('MarketDataApi', () => {
 
     describe('checkServerTime()', () => {
         it('should execute checkServerTime() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(JSONStringify({ serverTime: 1499827319559 }));
+            mockResponse = JSONParse(JSONStringify({ serverTime: 1592387156596 }));
 
             const spy = jest.spyOn(client, 'checkServerTime').mockReturnValue(
                 Promise.resolve({
@@ -113,9 +113,6 @@ describe('MarketDataApi', () => {
                                     minPrice: '0.02',
                                     maxPrice: '80000.01',
                                     tickSize: '0.01',
-                                },
-                                {
-                                    filterType: 'LOT_SIZE',
                                     minQty: '0.01',
                                     maxQty: '100',
                                     stepSize: '0.01',
@@ -136,6 +133,9 @@ describe('MarketDataApi', () => {
                             priceScale: 2,
                             quantityScale: 2,
                             quoteAsset: 'USDT',
+                            contractType: 'CRYPTO_OPTIONS',
+                            underlyingType: 'CRYPTO',
+                            nakedSell: false,
                             status: 'TRADING',
                         },
                     ],
@@ -145,18 +145,6 @@ describe('MarketDataApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 2400,
-                        },
-                        {
-                            rateLimitType: 'ORDERS',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 1200,
-                        },
-                        {
-                            rateLimitType: 'ORDERS',
-                            interval: 'SECOND',
-                            intervalNum: 10,
-                            limit: 300,
                         },
                     ],
                 })
@@ -222,10 +210,10 @@ describe('MarketDataApi', () => {
 
         it('should execute historicalExerciseRecords() successfully with optional parameters', async () => {
             const params: HistoricalExerciseRecordsRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 20,
             };
 
             mockResponse = JSONParse(
@@ -275,7 +263,7 @@ describe('MarketDataApi', () => {
     describe('indexPrice()', () => {
         it('should execute indexPrice() successfully with required parameters only', async () => {
             const params: IndexPriceRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -298,7 +286,7 @@ describe('MarketDataApi', () => {
 
         it('should execute indexPrice() successfully with optional parameters', async () => {
             const params: IndexPriceRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -321,7 +309,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when underlying is missing', async () => {
             const _params: IndexPriceRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.underlying;
@@ -333,7 +321,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: IndexPriceRequest = {
-                underlying: 'underlying_example',
+                underlying: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -354,28 +342,11 @@ describe('MarketDataApi', () => {
     describe('klineCandlestickData()', () => {
         it('should execute klineCandlestickData() successfully with required parameters only', async () => {
             const params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'BTC-200730-9000-C',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1762779600000,
-                        '1300.000',
-                        '1300.000',
-                        '1300.000',
-                        '1300.000',
-                        '0.1000',
-                        1762780499999,
-                        '130.0000000',
-                        1,
-                        '0.1000',
-                        '130.0000000',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1762779600000]]));
 
             const spy = jest.spyOn(client, 'klineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -393,31 +364,14 @@ describe('MarketDataApi', () => {
 
         it('should execute klineCandlestickData() successfully with optional parameters', async () => {
             const params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'BTC-200730-9000-C',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 20,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1762779600000,
-                        '1300.000',
-                        '1300.000',
-                        '1300.000',
-                        '1300.000',
-                        '0.1000',
-                        1762780499999,
-                        '130.0000000',
-                        1,
-                        '0.1000',
-                        '130.0000000',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1762779600000]]));
 
             const spy = jest.spyOn(client, 'klineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -435,8 +389,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'BTC-200730-9000-C',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -448,8 +402,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when interval is missing', async () => {
             const _params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'BTC-200730-9000-C',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -461,8 +415,8 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'BTC-200730-9000-C',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
             const errorResponse = {
@@ -483,8 +437,8 @@ describe('MarketDataApi', () => {
     describe('openInterest()', () => {
         it('should execute openInterest() successfully with required parameters only', async () => {
             const params: OpenInterestRequest = {
-                underlyingAsset: 'underlyingAsset_example',
-                expiration: 'expiration_example',
+                underlyingAsset: 'ETH/BTC',
+                expiration: '221225',
             };
 
             mockResponse = JSONParse(
@@ -514,8 +468,8 @@ describe('MarketDataApi', () => {
 
         it('should execute openInterest() successfully with optional parameters', async () => {
             const params: OpenInterestRequest = {
-                underlyingAsset: 'underlyingAsset_example',
-                expiration: 'expiration_example',
+                underlyingAsset: 'ETH/BTC',
+                expiration: '221225',
             };
 
             mockResponse = JSONParse(
@@ -545,8 +499,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when underlyingAsset is missing', async () => {
             const _params: OpenInterestRequest = {
-                underlyingAsset: 'underlyingAsset_example',
-                expiration: 'expiration_example',
+                underlyingAsset: 'ETH/BTC',
+                expiration: '221225',
             };
             const params = Object.assign({ ..._params });
             delete params?.underlyingAsset;
@@ -558,8 +512,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when expiration is missing', async () => {
             const _params: OpenInterestRequest = {
-                underlyingAsset: 'underlyingAsset_example',
-                expiration: 'expiration_example',
+                underlyingAsset: 'ETH/BTC',
+                expiration: '221225',
             };
             const params = Object.assign({ ..._params });
             delete params?.expiration;
@@ -571,8 +525,8 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: OpenInterestRequest = {
-                underlyingAsset: 'underlyingAsset_example',
-                expiration: 'expiration_example',
+                underlyingAsset: 'ETH/BTC',
+                expiration: '221225',
             };
 
             const errorResponse = {
@@ -627,7 +581,7 @@ describe('MarketDataApi', () => {
 
         it('should execute optionMarkPrice() successfully with optional parameters', async () => {
             const params: OptionMarkPriceRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(
@@ -682,7 +636,7 @@ describe('MarketDataApi', () => {
     describe('orderBook()', () => {
         it('should execute orderBook() successfully with required parameters only', async () => {
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(
@@ -710,8 +664,8 @@ describe('MarketDataApi', () => {
 
         it('should execute orderBook() successfully with optional parameters', async () => {
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
-                limit: 100,
+                symbol: 'BTC-200730-9000-C',
+                limit: 20,
             };
 
             mockResponse = JSONParse(
@@ -739,7 +693,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -751,7 +705,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             const errorResponse = {
@@ -783,16 +737,6 @@ describe('MarketDataApi', () => {
                         side: -1,
                         time: 1733950676483,
                     },
-                    {
-                        id: 1125899906901081000,
-                        tradeId: 161,
-                        symbol: 'XRP-250904-0.086-P',
-                        price: '3.0',
-                        qty: '-6.0',
-                        quoteQty: '-2.02',
-                        side: -1,
-                        time: 1733950488444,
-                    },
                 ])
             );
 
@@ -812,8 +756,8 @@ describe('MarketDataApi', () => {
 
         it('should execute recentBlockTradesList() successfully with optional parameters', async () => {
             const params: RecentBlockTradesListRequest = {
-                symbol: 'symbol_example',
-                limit: 100,
+                symbol: 'BTC-200730-9000-C',
+                limit: 20,
             };
 
             mockResponse = JSONParse(
@@ -827,16 +771,6 @@ describe('MarketDataApi', () => {
                         quoteQty: '-4.90',
                         side: -1,
                         time: 1733950676483,
-                    },
-                    {
-                        id: 1125899906901081000,
-                        tradeId: 161,
-                        symbol: 'XRP-250904-0.086-P',
-                        price: '3.0',
-                        qty: '-6.0',
-                        quoteQty: '-2.02',
-                        side: -1,
-                        time: 1733950488444,
                     },
                 ])
             );
@@ -876,7 +810,7 @@ describe('MarketDataApi', () => {
     describe('recentTradesList()', () => {
         it('should execute recentTradesList() successfully with required parameters only', async () => {
             const params: RecentTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(
@@ -910,8 +844,8 @@ describe('MarketDataApi', () => {
 
         it('should execute recentTradesList() successfully with optional parameters', async () => {
             const params: RecentTradesListRequest = {
-                symbol: 'symbol_example',
-                limit: 100,
+                symbol: 'BTC-200730-9000-C',
+                limit: 20,
             };
 
             mockResponse = JSONParse(
@@ -945,7 +879,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: RecentTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -957,7 +891,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: RecentTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             const errorResponse = {
@@ -1050,7 +984,7 @@ describe('MarketDataApi', () => {
 
         it('should execute ticker24hrPriceChangeStatistics() successfully with optional parameters', async () => {
             const params: Ticker24hrPriceChangeStatisticsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTC-200730-9000-C',
             };
 
             mockResponse = JSONParse(

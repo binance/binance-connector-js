@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,19 +25,19 @@ import type { KlineCandlestickStreamsResponseK } from './kline-candlestick-strea
  */
 export interface KlineCandlestickStreamsResponse {
     /**
-     *
+     * event type
      * @type {string}
      * @memberof KlineCandlestickStreamsResponse
      */
     e?: string;
     /**
-     *
+     * event time
      * @type {number | bigint}
      * @memberof KlineCandlestickStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Option trading symbol
      * @type {string}
      * @memberof KlineCandlestickStreamsResponse
      */

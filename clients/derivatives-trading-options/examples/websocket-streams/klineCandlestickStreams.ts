@@ -1,5 +1,6 @@
 import {
     DerivativesTradingOptions,
+    DerivativesTradingOptionsWebsocketStreams,
     DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_PROD_URL,
 } from '../../src';
 
@@ -16,7 +17,9 @@ async function klineCandlestickStreams() {
 
         const stream = connection.klineCandlestickStreams({
             symbol: 'btcusdt',
-            interval: '1m',
+            interval:
+                DerivativesTradingOptionsWebsocketStreams.KlineCandlestickStreamsIntervalEnum
+                    .INTERVAL_1m,
         });
 
         stream.on('message', (data) => {

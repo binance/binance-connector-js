@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,13 +20,13 @@
  */
 export interface GetAutoCancelAllOpenOrdersResponse {
     /**
-     *
+     * underlying
      * @type {string}
      * @memberof GetAutoCancelAllOpenOrdersResponse
      */
     underlying?: string;
     /**
-     *
+     * countdown Time
      * @type {number | bigint}
      * @memberof GetAutoCancelAllOpenOrdersResponse
      */

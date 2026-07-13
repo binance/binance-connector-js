@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,115 +16,115 @@
 /**
  *
  * @export
- * @interface Ticker24HourResponse
+ * @interface Hour24TickerResponse
  */
-export interface Ticker24HourResponse {
+export interface Hour24TickerResponse {
     /**
-     *
+     * Event type
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     s?: string;
     /**
-     *
+     * Price change
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     p?: string;
     /**
-     *
+     * Price change percent
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     P?: string;
     /**
-     *
+     * Weighted average price
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     w?: string;
     /**
-     *
+     * Last price
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     c?: string;
     /**
-     *
+     * Last quantity
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     Q?: string;
     /**
-     *
+     * Open price
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     o?: string;
     /**
-     *
+     * High price
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     l?: string;
     /**
-     *
+     * Trading volume(in contracts)
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     v?: string;
     /**
-     *
+     * trade amount(in quote asset)
      * @type {string}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     q?: string;
     /**
-     *
+     * Statistics open time
      * @type {number | bigint}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     O?: number | bigint;
     /**
-     *
+     * Statistics close time
      * @type {number | bigint}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     C?: number | bigint;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     F?: number | bigint;
     /**
-     *
+     * Last trade Id
      * @type {number | bigint}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     L?: number | bigint;
     /**
-     *
+     * Total number of trade
      * @type {number | bigint}
-     * @memberof Ticker24HourResponse
+     * @memberof Hour24TickerResponse
      */
     n?: number | bigint;
 }

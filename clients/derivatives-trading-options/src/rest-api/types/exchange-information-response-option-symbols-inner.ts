@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,109 +25,127 @@ import type { ExchangeInformationResponseOptionSymbolsInnerFiltersInner } from '
  */
 export interface ExchangeInformationResponseOptionSymbolsInner {
     /**
-     *
+     * expiry time
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     expiryDate?: number | bigint;
     /**
-     *
+     * filters
      * @type {Array<ExchangeInformationResponseOptionSymbolsInnerFiltersInner>}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     filters?: Array<ExchangeInformationResponseOptionSymbolsInnerFiltersInner>;
     /**
-     *
+     * Trading pair name
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     symbol?: string;
     /**
-     *
+     * Direction: CALL long, PUT short
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     side?: string;
     /**
-     *
+     * Strike price
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     strikePrice?: string;
     /**
-     *
+     * Name of the underlying asset of the option contract
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     underlying?: string;
     /**
-     *
+     * Contract unit, the quantity of the underlying asset represented by a single contract.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     unit?: number | bigint;
     /**
-     *
+     * liquidation fee rate
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     liquidationFeeRate?: string;
     /**
-     *
+     * Minimum order quantity
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     minQty?: string;
     /**
-     *
+     * Maximum order quantity
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     maxQty?: string;
     /**
-     *
+     * Initial Magin Ratio
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     initialMargin?: string;
     /**
-     *
+     * Maintenance Margin Ratio
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     maintenanceMargin?: string;
     /**
-     *
+     * Min Initial Margin Ratio
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     minInitialMargin?: string;
     /**
-     *
+     * Min Maintenance Margin Ratio
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     minMaintenanceMargin?: string;
     /**
-     *
+     * price precision
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity precision
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * Quotation asset
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     quoteAsset?: string;
     /**
-     *
+     * Contract type
+     * @type {string}
+     * @memberof ExchangeInformationResponseOptionSymbolsInner
+     */
+    contractType?: string;
+    /**
+     * Underlying type
+     * @type {string}
+     * @memberof ExchangeInformationResponseOptionSymbolsInner
+     */
+    underlyingType?: string;
+    /**
+     * Whether naked selling is allowed for this symbol
+     * @type {boolean}
+     * @memberof ExchangeInformationResponseOptionSymbolsInner
+     */
+    nakedSell?: boolean;
+    /**
+     * Trading Status
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */

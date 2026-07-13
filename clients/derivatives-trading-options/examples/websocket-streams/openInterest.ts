@@ -15,6 +15,7 @@ async function openInterest() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.openInterest({
+            underlying: 'btcusdt',
             expirationDate: '220930',
         });
 

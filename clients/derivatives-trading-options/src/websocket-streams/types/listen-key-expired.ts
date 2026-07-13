@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,19 +16,19 @@
 /**
  *
  * @export
- * @interface Listenkeyexpired
+ * @interface ListenKeyExpired
  */
-export interface Listenkeyexpired {
+export interface ListenKeyExpired {
     /**
-     *
+     * Event Time
      * @type {string}
-     * @memberof Listenkeyexpired
+     * @memberof ListenKeyExpired
      */
     E?: string;
     /**
      *
      * @type {string}
-     * @memberof Listenkeyexpired
+     * @memberof ListenKeyExpired
      */
     listenKey?: string;
 }

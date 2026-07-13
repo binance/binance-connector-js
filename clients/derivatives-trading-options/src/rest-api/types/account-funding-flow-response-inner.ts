@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface AccountFundingFlowResponseInner {
     /**
-     *
+     * id
      * @type {number | bigint}
      * @memberof AccountFundingFlowResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * Asset type
      * @type {string}
      * @memberof AccountFundingFlowResponseInner
      */
     asset?: string;
     /**
-     *
+     * Amount (positive numbers represent inflow, negative numbers represent outflow)
      * @type {string}
      * @memberof AccountFundingFlowResponseInner
      */
     amount?: string;
     /**
-     *
+     * type (fees)
      * @type {string}
      * @memberof AccountFundingFlowResponseInner
      */
     type?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof AccountFundingFlowResponseInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface OptionMarginAccountInformationResponseAssetInner {
     /**
-     *
+     * asset
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */
     asset?: string;
     /**
-     *
+     * margin Balance
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */
     marginBalance?: string;
     /**
-     *
+     * equity
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */
     equity?: string;
     /**
-     *
+     * available
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */
     available?: string;
     /**
-     *
+     * initial Margin
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */
     initialMargin?: string;
     /**
-     *
+     * maint Margin
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */
     maintMargin?: string;
     /**
-     *
+     * unrealized PNL
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */
     unrealizedPNL?: string;
     /**
-     *
+     * adjusted Equity
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,97 +20,97 @@
  */
 export interface AccountTradeListResponseInner {
     /**
-     *
+     * unique id
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * trade id
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     tradeId?: number | bigint;
     /**
-     *
+     * order id
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * option symbol
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     symbol?: string;
     /**
-     *
+     * trade price
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     price?: string;
     /**
-     *
+     * trade quantity
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     quantity?: string;
     /**
-     *
+     * fee(negative is fee deduction)
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     fee?: string;
     /**
-     *
+     * realized profit/loss
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     realizedProfit?: string;
     /**
-     *
+     * order side
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     side?: string;
     /**
-     *
+     * order type
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     type?: string;
     /**
-     *
+     * TAKER or MAKER
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     liquidity?: string;
     /**
-     *
+     * trade time
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * price Scale
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity Scale
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * option Side
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     optionSide?: string;
     /**
-     *
+     * quote Asset
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */

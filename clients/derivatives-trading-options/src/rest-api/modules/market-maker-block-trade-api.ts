@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -23,6 +22,7 @@ import type {
     AcceptBlockTradeOrderResponse,
     AccountBlockTradeListResponse,
     ExtendBlockTradeOrderResponse,
+    NewBlockTradeOrderLegsParameterInner,
     NewBlockTradeOrderResponse,
     QueryBlockTradeDetailsResponse,
     QueryBlockTradeOrderResponse,
@@ -36,7 +36,9 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         /**
          * Accept a block trade order
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: TRADE
          *
          * @summary Accept Block Trade Order (TRADE)
          * @param {string} blockOrderMatchingKey
@@ -81,13 +83,15 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         /**
          * Gets block trades for a specific account.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary Account Block Trade List (USER_DATA)
          * @param {number | bigint} [endTime] End Time, e.g 1593512200000
          * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
-         * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [underlying] Underlying asset.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -129,11 +133,13 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         /**
          * Cancel a block trade order.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: TRADE
          *
          * @summary Cancel Block Trade Order (TRADE)
-         * @param {string} blockOrderMatchingKey
-         * @param {number | bigint} [recvWindow]
+         * @param {string} blockOrderMatchingKey Block trade matching key.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -174,7 +180,9 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         /**
          * Extends a block trade expire time by 30 mins from the current time.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: TRADE
          *
          * @summary Extend Block Trade Order (TRADE)
          * @param {string} blockOrderMatchingKey
@@ -219,18 +227,20 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         /**
          * Send in a new block trade order.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: TRADE
          *
          * @summary New Block Trade Order (TRADE)
-         * @param {string} liquidity Taker or Maker
-         * @param {Array<object>} legs Max 1 (only single leg supported), list of legs parameters in JSON; example: eapi/v1/block/order/create?orders=[{"symbol":"BTC-210115-35000-C", "price":"100","quantity":"0.0002","side":"BUY","type":"LIMIT"}]
+         * @param {NewBlockTradeOrderLiquidityEnum} liquidity
+         * @param {Array<NewBlockTradeOrderLegsParameterInner>} legs Max 1 (only single leg supported), list of legs parameters in JSON; example: eapi/v1/block/order/create?orders=[{"symbol":"BTC-210115-35000-C", "price":"100","quantity":"0.0002","side":"BUY","type":"LIMIT"}]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         newBlockTradeOrder: async (
-            liquidity: string,
-            legs: Array<object>,
+            liquidity: NewBlockTradeOrderLiquidityEnum,
+            legs: Array<NewBlockTradeOrderLegsParameterInner>,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'liquidity' is not null or undefined
@@ -267,11 +277,13 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         /**
          * Query block trade details; returns block trade details from counterparty's perspective.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Block Trade Details (USER_DATA)
-         * @param {string} blockOrderMatchingKey
-         * @param {number | bigint} [recvWindow]
+         * @param {string} blockOrderMatchingKey Block trade matching key.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -312,14 +324,16 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         /**
          * Check block trade order status.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: TRADE
          *
          * @summary Query Block Trade Order (TRADE)
          * @param {string} [blockOrderMatchingKey] If specified, returns the specific block trade associated with the blockOrderMatchingKey
          * @param {number | bigint} [endTime] End Time, e.g 1593512200000
          * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
-         * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [underlying] Underlying asset.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -373,7 +387,9 @@ export interface MarketMakerBlockTradeApiInterface {
     /**
      * Accept a block trade order
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Accept Block Trade Order (TRADE)
      * @param {AcceptBlockTradeOrderRequest} requestParameters Request parameters.
@@ -387,7 +403,9 @@ export interface MarketMakerBlockTradeApiInterface {
     /**
      * Gets block trades for a specific account.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account Block Trade List (USER_DATA)
      * @param {AccountBlockTradeListRequest} requestParameters Request parameters.
@@ -401,7 +419,9 @@ export interface MarketMakerBlockTradeApiInterface {
     /**
      * Cancel a block trade order.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel Block Trade Order (TRADE)
      * @param {CancelBlockTradeOrderRequest} requestParameters Request parameters.
@@ -415,7 +435,9 @@ export interface MarketMakerBlockTradeApiInterface {
     /**
      * Extends a block trade expire time by 30 mins from the current time.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Extend Block Trade Order (TRADE)
      * @param {ExtendBlockTradeOrderRequest} requestParameters Request parameters.
@@ -429,7 +451,9 @@ export interface MarketMakerBlockTradeApiInterface {
     /**
      * Send in a new block trade order.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary New Block Trade Order (TRADE)
      * @param {NewBlockTradeOrderRequest} requestParameters Request parameters.
@@ -443,7 +467,9 @@ export interface MarketMakerBlockTradeApiInterface {
     /**
      * Query block trade details; returns block trade details from counterparty's perspective.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Block Trade Details (USER_DATA)
      * @param {QueryBlockTradeDetailsRequest} requestParameters Request parameters.
@@ -457,7 +483,9 @@ export interface MarketMakerBlockTradeApiInterface {
     /**
      * Check block trade order status.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Query Block Trade Order (TRADE)
      * @param {QueryBlockTradeOrderRequest} requestParameters Request parameters.
@@ -510,14 +538,14 @@ export interface AccountBlockTradeListRequest {
     readonly startTime?: number | bigint;
 
     /**
-     * underlying, e.g BTCUSDT
+     * Underlying asset.
      * @type {string}
      * @memberof MarketMakerBlockTradeApiAccountBlockTradeList
      */
     readonly underlying?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiAccountBlockTradeList
      */
@@ -530,14 +558,14 @@ export interface AccountBlockTradeListRequest {
  */
 export interface CancelBlockTradeOrderRequest {
     /**
-     *
+     * Block trade matching key.
      * @type {string}
      * @memberof MarketMakerBlockTradeApiCancelBlockTradeOrder
      */
     readonly blockOrderMatchingKey: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiCancelBlockTradeOrder
      */
@@ -570,18 +598,18 @@ export interface ExtendBlockTradeOrderRequest {
  */
 export interface NewBlockTradeOrderRequest {
     /**
-     * Taker or Maker
-     * @type {string}
+     *
+     * @type {'MAKER' | 'TAKER'}
      * @memberof MarketMakerBlockTradeApiNewBlockTradeOrder
      */
-    readonly liquidity: string;
+    readonly liquidity: NewBlockTradeOrderLiquidityEnum;
 
     /**
      * Max 1 (only single leg supported), list of legs parameters in JSON; example: eapi/v1/block/order/create?orders=[{"symbol":"BTC-210115-35000-C", "price":"100","quantity":"0.0002","side":"BUY","type":"LIMIT"}]
-     * @type {Array<object>}
+     * @type {Array<NewBlockTradeOrderLegsParameterInner>}
      * @memberof MarketMakerBlockTradeApiNewBlockTradeOrder
      */
-    readonly legs: Array<object>;
+    readonly legs: Array<NewBlockTradeOrderLegsParameterInner>;
 
     /**
      *
@@ -597,14 +625,14 @@ export interface NewBlockTradeOrderRequest {
  */
 export interface QueryBlockTradeDetailsRequest {
     /**
-     *
+     * Block trade matching key.
      * @type {string}
      * @memberof MarketMakerBlockTradeApiQueryBlockTradeDetails
      */
     readonly blockOrderMatchingKey: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiQueryBlockTradeDetails
      */
@@ -638,14 +666,14 @@ export interface QueryBlockTradeOrderRequest {
     readonly startTime?: number | bigint;
 
     /**
-     * underlying, e.g BTCUSDT
+     * Underlying asset.
      * @type {string}
      * @memberof MarketMakerBlockTradeApiQueryBlockTradeOrder
      */
     readonly underlying?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiQueryBlockTradeOrder
      */
@@ -668,14 +696,16 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
     /**
      * Accept a block trade order
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Accept Block Trade Order (TRADE)
      * @param {AcceptBlockTradeOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AcceptBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Accept-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#accept-block-trade-order Binance API Documentation}
      */
     public async acceptBlockTradeOrder(
         requestParameters: AcceptBlockTradeOrderRequest
@@ -699,14 +729,16 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
     /**
      * Gets block trades for a specific account.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account Block Trade List (USER_DATA)
      * @param {AccountBlockTradeListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountBlockTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Account-Block-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#account-block-trade-list Binance API Documentation}
      */
     public async accountBlockTradeList(
         requestParameters: AccountBlockTradeListRequest = {}
@@ -732,14 +764,16 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
     /**
      * Cancel a block trade order.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel Block Trade Order (TRADE)
      * @param {CancelBlockTradeOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Cancel-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#cancel-block-trade-order Binance API Documentation}
      */
     public async cancelBlockTradeOrder(
         requestParameters: CancelBlockTradeOrderRequest
@@ -763,14 +797,16 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
     /**
      * Extends a block trade expire time by 30 mins from the current time.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Extend Block Trade Order (TRADE)
      * @param {ExtendBlockTradeOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ExtendBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Extend-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#extend-block-trade-order Binance API Documentation}
      */
     public async extendBlockTradeOrder(
         requestParameters: ExtendBlockTradeOrderRequest
@@ -794,14 +830,16 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
     /**
      * Send in a new block trade order.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary New Block Trade Order (TRADE)
      * @param {NewBlockTradeOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NewBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/New-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#new-block-trade-order Binance API Documentation}
      */
     public async newBlockTradeOrder(
         requestParameters: NewBlockTradeOrderRequest
@@ -826,14 +864,16 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
     /**
      * Query block trade details; returns block trade details from counterparty's perspective.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Block Trade Details (USER_DATA)
      * @param {QueryBlockTradeDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryBlockTradeDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Query-Block-Trade-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#query-block-trade-details Binance API Documentation}
      */
     public async queryBlockTradeDetails(
         requestParameters: QueryBlockTradeDetailsRequest
@@ -857,14 +897,16 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
     /**
      * Check block trade order status.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Query Block Trade Order (TRADE)
      * @param {QueryBlockTradeOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Query-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/market-maker-block-trade#query-block-trade-order Binance API Documentation}
      */
     public async queryBlockTradeOrder(
         requestParameters: QueryBlockTradeOrderRequest = {}
@@ -887,4 +929,9 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             { isSigned: true }
         );
     }
+}
+
+export enum NewBlockTradeOrderLiquidityEnum {
+    MAKER = 'MAKER',
+    TAKER = 'TAKER',
 }

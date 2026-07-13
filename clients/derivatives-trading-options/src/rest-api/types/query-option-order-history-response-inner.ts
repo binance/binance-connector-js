@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,115 +20,115 @@
  */
 export interface QueryOptionOrderHistoryResponseInner {
     /**
-     *
+     * order Id
      * @type {number | bigint}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     symbol?: string;
     /**
-     *
+     * price
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     price?: string;
     /**
-     *
+     * quantity
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     quantity?: string;
     /**
-     *
+     * executed Qty
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * side
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     side?: string;
     /**
-     *
+     * type
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     type?: string;
     /**
-     *
+     * time In Force
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * reduce Only
      * @type {boolean}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * create Time
      * @type {number | bigint}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     createTime?: number | bigint;
     /**
-     *
+     * update Time
      * @type {number | bigint}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * status
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     status?: string;
     /**
-     *
+     * avg Price
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * client Order Id
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * price Scale
      * @type {number | bigint}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     priceScale?: number | bigint;
     /**
-     *
+     * quantity Scale
      * @type {number | bigint}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     quantityScale?: number | bigint;
     /**
-     *
+     * option Side
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     optionSide?: string;
     /**
-     *
+     * quote Asset
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     quoteAsset?: string;
     /**
-     *
+     * mmp
      * @type {boolean}
      * @memberof QueryOptionOrderHistoryResponseInner
      */

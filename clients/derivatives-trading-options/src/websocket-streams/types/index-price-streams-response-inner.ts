@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,25 +20,25 @@
  */
 export interface IndexPriceStreamsResponseInner {
     /**
-     *
+     * event type
      * @type {string}
      * @memberof IndexPriceStreamsResponseInner
      */
     e?: string;
     /**
-     *
+     * time
      * @type {number | bigint}
      * @memberof IndexPriceStreamsResponseInner
      */
     E?: number | bigint;
     /**
-     *
+     * underlying symbol
      * @type {string}
      * @memberof IndexPriceStreamsResponseInner
      */
     s?: string;
     /**
-     *
+     * index price
      * @type {string}
      * @memberof IndexPriceStreamsResponseInner
      */

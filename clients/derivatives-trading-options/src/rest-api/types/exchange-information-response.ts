@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -34,37 +34,37 @@ import type { ExchangeInformationResponseRateLimitsInner } from './exchange-info
  */
 export interface ExchangeInformationResponse {
     /**
-     *
+     * Time zone used by the server
      * @type {string}
      * @memberof ExchangeInformationResponse
      */
     timezone?: string;
     /**
-     *
+     * Current system time
      * @type {number | bigint}
      * @memberof ExchangeInformationResponse
      */
     serverTime?: number | bigint;
     /**
-     *
+     * Option contract underlying asset info
      * @type {Array<ExchangeInformationResponseOptionContractsInner>}
      * @memberof ExchangeInformationResponse
      */
     optionContracts?: Array<ExchangeInformationResponseOptionContractsInner>;
     /**
-     *
+     * Option asset info
      * @type {Array<ExchangeInformationResponseOptionAssetsInner>}
      * @memberof ExchangeInformationResponse
      */
     optionAssets?: Array<ExchangeInformationResponseOptionAssetsInner>;
     /**
-     *
+     * Option trading pair info
      * @type {Array<ExchangeInformationResponseOptionSymbolsInner>}
      * @memberof ExchangeInformationResponse
      */
     optionSymbols?: Array<ExchangeInformationResponseOptionSymbolsInner>;
     /**
-     *
+     * rate Limits
      * @type {Array<ExchangeInformationResponseRateLimitsInner>}
      * @memberof ExchangeInformationResponse
      */

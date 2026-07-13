@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,6 +15,9 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AccountUpdate } from './account-update';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { BalancePositionUpdate } from './balance-position-update';
@@ -32,7 +35,7 @@ import type { GreekUpdate } from './greek-update';
 import type { GreekUpdateGInner } from './greek-update-ginner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Listenkeyexpired } from './listenkeyexpired';
+import type { ListenKeyExpired } from './listen-key-expired';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OrderTradeUpdate } from './order-trade-update';
@@ -45,11 +48,11 @@ import type { RiskLevelChange } from './risk-level-change';
 
 /**
  * @type UserDataStreamEventsResponse
- * @export
  */
 export type UserDataStreamEventsResponse =
+    | ({ e: 'ACCOUNT_UPDATE' } & AccountUpdate)
     | ({ e: 'BALANCE_POSITION_UPDATE' } & BalancePositionUpdate)
     | ({ e: 'GREEK_UPDATE' } & GreekUpdate)
     | ({ e: 'ORDER_TRADE_UPDATE' } & OrderTradeUpdate)
     | ({ e: 'RISK_LEVEL_CHANGE' } & RiskLevelChange)
-    | ({ e: 'listenKeyExpired' } & Listenkeyexpired);
+    | ({ e: 'listenKeyExpired' } & ListenKeyExpired);

@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,9 +20,9 @@ import {
 } from '@binance/common';
 import type {
     DiffBookDepthStreamsResponse,
+    Hour24TickerResponse,
     IndividualSymbolBookTickerStreamsResponse,
     PartialBookDepthStreamsResponse,
-    Ticker24HourResponse,
     TradeStreamsResponse,
 } from '../types';
 
@@ -35,20 +35,47 @@ const PublicApiParamCreator = function () {
          *
          * @summary Diff Book Depth Streams
          * @param {string} symbol The symbol parameter
+         * @param {DiffBookDepthStreamsUpdateSpeedEnum} updateSpeed WebSocket stream update speed
          * @param {number} [id] Unique WebSocket request ID.
-         * @param {string} [updateSpeed] WebSocket stream update speed
          *
          * @throws {RequiredError}
          */
-        diffBookDepthStreams: (symbol: string, id?: number, updateSpeed?: string): string => {
+        diffBookDepthStreams: (
+            symbol: string,
+            updateSpeed: DiffBookDepthStreamsUpdateSpeedEnum,
+            id?: number
+        ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('diffBookDepthStreams', 'symbol', symbol);
+            // verify required parameter 'updateSpeed' is not null or undefined
+            assertParamExists('diffBookDepthStreams', 'updateSpeed', updateSpeed);
 
             return replaceWebsocketStreamsPlaceholders('/<symbol>@depth@<updateSpeed>'.slice(1), {
                 symbol,
-                id,
                 updateSpeed,
+                id,
             });
+        },
+        /**
+         * 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
+         *
+         * Update Speed: 1000ms
+         *
+         * @summary 24-hour TICKER
+         * @param {string} symbol The symbol parameter
+         * @param {number} [id] Unique WebSocket request ID.
+         * @param {string} [expirationDate] The expiration date parameter
+         *
+         * @throws {RequiredError}
+         */
+        hour24Ticker: (symbol: string, id?: number, expirationDate?: string): string => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('hour24Ticker', 'symbol', symbol);
+
+            return replaceWebsocketStreamsPlaceholders(
+                '/<symbol>@optionTicker<expirationDate>'.slice(1),
+                { symbol, id, expirationDate }
+            );
         },
         /**
          * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
@@ -71,53 +98,35 @@ const PublicApiParamCreator = function () {
             });
         },
         /**
-         * Top **<levels\>** bids and asks, Valid levels are **<levels\>** are 5, 10, 20.
+         * Top <levels> bids and asks. Valid <levels> are 5, 10, 20.
          *
          * Update Speed: 100ms or 500ms
          *
          * @summary Partial Book Depth Streams
          * @param {string} symbol The symbol parameter
-         * @param {string} level The level parameter
+         * @param {PartialBookDepthStreamsLevelEnum} level The level parameter
+         * @param {PartialBookDepthStreamsUpdateSpeedEnum} updateSpeed WebSocket stream update speed
          * @param {number} [id] Unique WebSocket request ID.
-         * @param {string} [updateSpeed] WebSocket stream update speed
          *
          * @throws {RequiredError}
          */
         partialBookDepthStreams: (
             symbol: string,
-            level: string,
-            id?: number,
-            updateSpeed?: string
+            level: PartialBookDepthStreamsLevelEnum,
+            updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum,
+            id?: number
         ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('partialBookDepthStreams', 'symbol', symbol);
             // verify required parameter 'level' is not null or undefined
             assertParamExists('partialBookDepthStreams', 'level', level);
+            // verify required parameter 'updateSpeed' is not null or undefined
+            assertParamExists('partialBookDepthStreams', 'updateSpeed', updateSpeed);
 
             return replaceWebsocketStreamsPlaceholders(
                 '/<symbol>@depth<level>@<updateSpeed>'.slice(1),
-                { symbol, level, id, updateSpeed }
+                { symbol, level, updateSpeed, id }
             );
-        },
-        /**
-         * 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
-         *
-         * Update Speed: 1000ms
-         *
-         * @summary 24-hour TICKER
-         * @param {string} symbol The symbol parameter
-         * @param {number} [id] Unique WebSocket request ID.
-         *
-         * @throws {RequiredError}
-         */
-        ticker24Hour: (symbol: string, id?: number): string => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('ticker24Hour', 'symbol', symbol);
-
-            return replaceWebsocketStreamsPlaceholders('/<symbol>@optionTicker'.slice(1), {
-                symbol,
-                id,
-            });
         },
         /**
          * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[btcusdt@optionTrade](wss://fstream.binance.com/public/stream?streams=btcusdt@optionTrade)
@@ -164,6 +173,20 @@ export interface PublicApiInterface {
     ): WebsocketStream<DiffBookDepthStreamsResponse>;
 
     /**
+     * 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
+     *
+     * Update Speed: 1000ms
+     *
+     * @summary 24-hour TICKER
+     * @param {Hour24TickerRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<Hour24TickerResponse>}
+     * @throws {RequiredError}
+     * @memberof PublicApiInterface
+     */
+    hour24Ticker(requestParameters: Hour24TickerRequest): WebsocketStream<Hour24TickerResponse>;
+
+    /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
      *
      * Update Speed: Real-Time
@@ -180,7 +203,7 @@ export interface PublicApiInterface {
     ): WebsocketStream<IndividualSymbolBookTickerStreamsResponse>;
 
     /**
-     * Top **<levels\>** bids and asks, Valid levels are **<levels\>** are 5, 10, 20.
+     * Top <levels> bids and asks. Valid <levels> are 5, 10, 20.
      *
      * Update Speed: 100ms or 500ms
      *
@@ -194,20 +217,6 @@ export interface PublicApiInterface {
     partialBookDepthStreams(
         requestParameters: PartialBookDepthStreamsRequest
     ): WebsocketStream<PartialBookDepthStreamsResponse>;
-
-    /**
-     * 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
-     *
-     * Update Speed: 1000ms
-     *
-     * @summary 24-hour TICKER
-     * @param {Ticker24HourRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<Ticker24HourResponse>}
-     * @throws {RequiredError}
-     * @memberof PublicApiInterface
-     */
-    ticker24Hour(requestParameters: Ticker24HourRequest): WebsocketStream<Ticker24HourResponse>;
 
     /**
      * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[btcusdt@optionTrade](wss://fstream.binance.com/public/stream?streams=btcusdt@optionTrade)
@@ -237,18 +246,45 @@ export interface DiffBookDepthStreamsRequest {
     readonly symbol: string;
 
     /**
+     * WebSocket stream update speed
+     * @type {'100ms' | '500ms'}
+     * @memberof PublicApiDiffBookDepthStreams
+     */
+    readonly updateSpeed: DiffBookDepthStreamsUpdateSpeedEnum;
+
+    /**
      * Unique WebSocket request ID.
      * @type {number}
      * @memberof PublicApiDiffBookDepthStreams
      */
     readonly id?: number;
+}
+
+/**
+ * Request parameters for hour24Ticker operation in PublicApi.
+ * @interface Hour24TickerRequest
+ */
+export interface Hour24TickerRequest {
+    /**
+     * The symbol parameter
+     * @type {string}
+     * @memberof PublicApiHour24Ticker
+     */
+    readonly symbol: string;
 
     /**
-     * WebSocket stream update speed
-     * @type {string}
-     * @memberof PublicApiDiffBookDepthStreams
+     * Unique WebSocket request ID.
+     * @type {number}
+     * @memberof PublicApiHour24Ticker
      */
-    readonly updateSpeed?: string;
+    readonly id?: number;
+
+    /**
+     * The expiration date parameter
+     * @type {string}
+     * @memberof PublicApiHour24Ticker
+     */
+    readonly expirationDate?: string;
 }
 
 /**
@@ -285,42 +321,22 @@ export interface PartialBookDepthStreamsRequest {
 
     /**
      * The level parameter
-     * @type {string}
+     * @type {'5' | '10' | '20'}
      * @memberof PublicApiPartialBookDepthStreams
      */
-    readonly level: string;
-
-    /**
-     * Unique WebSocket request ID.
-     * @type {number}
-     * @memberof PublicApiPartialBookDepthStreams
-     */
-    readonly id?: number;
+    readonly level: PartialBookDepthStreamsLevelEnum;
 
     /**
      * WebSocket stream update speed
-     * @type {string}
+     * @type {'100ms' | '500ms'}
      * @memberof PublicApiPartialBookDepthStreams
      */
-    readonly updateSpeed?: string;
-}
-
-/**
- * Request parameters for ticker24Hour operation in PublicApi.
- * @interface Ticker24HourRequest
- */
-export interface Ticker24HourRequest {
-    /**
-     * The symbol parameter
-     * @type {string}
-     * @memberof PublicApiTicker24Hour
-     */
-    readonly symbol: string;
+    readonly updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum;
 
     /**
      * Unique WebSocket request ID.
      * @type {number}
-     * @memberof PublicApiTicker24Hour
+     * @memberof PublicApiPartialBookDepthStreams
      */
     readonly id?: number;
 }
@@ -369,18 +385,47 @@ export class PublicApi implements PublicApiInterface {
      * @returns {WebsocketStream<DiffBookDepthStreamsResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Diff-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#diff-book-depth-streams Binance API Documentation}
      */
     public diffBookDepthStreams(
         requestParameters: DiffBookDepthStreamsRequest
     ): WebsocketStream<DiffBookDepthStreamsResponse> {
         const stream = this.localVarParamCreator.diffBookDepthStreams(
             requestParameters?.symbol,
-            requestParameters?.id,
-            requestParameters?.updateSpeed
+            requestParameters?.updateSpeed,
+            requestParameters?.id
         );
 
         return createStreamHandler<DiffBookDepthStreamsResponse>(
+            this.websocketBase,
+            stream,
+            requestParameters?.id,
+            'public'
+        );
+    }
+
+    /**
+     * 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
+     *
+     * Update Speed: 1000ms
+     *
+     * @summary 24-hour TICKER
+     * @param {Hour24TickerRequest} requestParameters Request parameters.
+     * @returns {WebsocketStream<Hour24TickerResponse>}
+     * @throws {RequiredError}
+     * @memberof PublicApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#hour24-ticker Binance API Documentation}
+     */
+    public hour24Ticker(
+        requestParameters: Hour24TickerRequest
+    ): WebsocketStream<Hour24TickerResponse> {
+        const stream = this.localVarParamCreator.hour24Ticker(
+            requestParameters?.symbol,
+            requestParameters?.id,
+            requestParameters?.expirationDate
+        );
+
+        return createStreamHandler<Hour24TickerResponse>(
             this.websocketBase,
             stream,
             requestParameters?.id,
@@ -398,7 +443,7 @@ export class PublicApi implements PublicApiInterface {
      * @returns {WebsocketStream<IndividualSymbolBookTickerStreamsResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#individual-symbol-book-ticker-streams Binance API Documentation}
      */
     public individualSymbolBookTickerStreams(
         requestParameters: IndividualSymbolBookTickerStreamsRequest
@@ -417,7 +462,7 @@ export class PublicApi implements PublicApiInterface {
     }
 
     /**
-     * Top **<levels\>** bids and asks, Valid levels are **<levels\>** are 5, 10, 20.
+     * Top <levels> bids and asks. Valid <levels> are 5, 10, 20.
      *
      * Update Speed: 100ms or 500ms
      *
@@ -426,7 +471,7 @@ export class PublicApi implements PublicApiInterface {
      * @returns {WebsocketStream<PartialBookDepthStreamsResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Partial-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#partial-book-depth-streams Binance API Documentation}
      */
     public partialBookDepthStreams(
         requestParameters: PartialBookDepthStreamsRequest
@@ -434,39 +479,11 @@ export class PublicApi implements PublicApiInterface {
         const stream = this.localVarParamCreator.partialBookDepthStreams(
             requestParameters?.symbol,
             requestParameters?.level,
-            requestParameters?.id,
-            requestParameters?.updateSpeed
-        );
-
-        return createStreamHandler<PartialBookDepthStreamsResponse>(
-            this.websocketBase,
-            stream,
-            requestParameters?.id,
-            'public'
-        );
-    }
-
-    /**
-     * 24hr ticker info for all symbols. Only symbols whose ticker info changed will be sent.
-     *
-     * Update Speed: 1000ms
-     *
-     * @summary 24-hour TICKER
-     * @param {Ticker24HourRequest} requestParameters Request parameters.
-     * @returns {WebsocketStream<Ticker24HourResponse>}
-     * @throws {RequiredError}
-     * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/24-hour-TICKER Binance API Documentation}
-     */
-    public ticker24Hour(
-        requestParameters: Ticker24HourRequest
-    ): WebsocketStream<Ticker24HourResponse> {
-        const stream = this.localVarParamCreator.ticker24Hour(
-            requestParameters?.symbol,
+            requestParameters?.updateSpeed,
             requestParameters?.id
         );
 
-        return createStreamHandler<Ticker24HourResponse>(
+        return createStreamHandler<PartialBookDepthStreamsResponse>(
             this.websocketBase,
             stream,
             requestParameters?.id,
@@ -484,7 +501,7 @@ export class PublicApi implements PublicApiInterface {
      * @returns {WebsocketStream<TradeStreamsResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Trade-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/ws-streams/public#trade-streams Binance API Documentation}
      */
     public tradeStreams(
         requestParameters: TradeStreamsRequest
@@ -501,4 +518,20 @@ export class PublicApi implements PublicApiInterface {
             'public'
         );
     }
+}
+
+export enum DiffBookDepthStreamsUpdateSpeedEnum {
+    UPDATE_SPEED_100ms = '100ms',
+    UPDATE_SPEED_500ms = '500ms',
+}
+
+export enum PartialBookDepthStreamsLevelEnum {
+    LEVEL_5 = '5',
+    LEVEL_10 = '10',
+    LEVEL_20 = '20',
+}
+
+export enum PartialBookDepthStreamsUpdateSpeedEnum {
+    UPDATE_SPEED_100ms = '100ms',
+    UPDATE_SPEED_500ms = '500ms',
 }

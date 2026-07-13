@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,13 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DiffBookDepthStreamsResponseAItem } from './diff-book-depth-streams-response-aitem';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DiffBookDepthStreamsResponseBItem } from './diff-book-depth-streams-response-bitem';
-
 /**
  *
  * @export
@@ -28,57 +20,57 @@ import type { DiffBookDepthStreamsResponseBItem } from './diff-book-depth-stream
  */
 export interface DiffBookDepthStreamsResponse {
     /**
-     *
+     * event type
      * @type {string}
      * @memberof DiffBookDepthStreamsResponse
      */
     e?: string;
     /**
-     *
+     * event time
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * transaction time
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Option symbol
      * @type {string}
      * @memberof DiffBookDepthStreamsResponse
      */
     s?: string;
     /**
-     *
+     * First update ID in event
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     U?: number | bigint;
     /**
-     *
+     * Final update ID in event
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Final update Id in last stream(ie `u` in last stream)
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     pu?: number | bigint;
     /**
-     *
-     * @type {Array<DiffBookDepthStreamsResponseBItem>}
+     * Buy order
+     * @type {Array<Array<string>>}
      * @memberof DiffBookDepthStreamsResponse
      */
-    b?: Array<DiffBookDepthStreamsResponseBItem>;
+    b?: Array<Array<string>>;
     /**
-     *
-     * @type {Array<DiffBookDepthStreamsResponseAItem>}
+     * Sell order
+     * @type {Array<Array<string>>}
      * @memberof DiffBookDepthStreamsResponse
      */
-    a?: Array<DiffBookDepthStreamsResponseAItem>;
+    a?: Array<Array<string>>;
 }

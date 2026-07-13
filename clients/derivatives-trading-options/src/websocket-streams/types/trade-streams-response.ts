@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,61 +20,61 @@
  */
 export interface TradeStreamsResponse {
     /**
-     *
+     * event type
      * @type {string}
      * @memberof TradeStreamsResponse
      */
     e?: string;
     /**
-     *
+     * event time
      * @type {number | bigint}
      * @memberof TradeStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * trade completed time
      * @type {number | bigint}
      * @memberof TradeStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Option trading symbol
      * @type {string}
      * @memberof TradeStreamsResponse
      */
     s?: string;
     /**
-     *
+     * trade ID
      * @type {number | bigint}
      * @memberof TradeStreamsResponse
      */
     t?: number | bigint;
     /**
-     *
+     * price
      * @type {string}
      * @memberof TradeStreamsResponse
      */
     p?: string;
     /**
-     *
+     * quantity, always positive
      * @type {string}
      * @memberof TradeStreamsResponse
      */
     q?: string;
     /**
-     *
+     * trade type enum, \"MARKET\" for Orderbook trading, \"BLOCK\" for Block trade
      * @type {string}
      * @memberof TradeStreamsResponse
      */
     X?: string;
     /**
-     *
+     * direction
      * @type {string}
      * @memberof TradeStreamsResponse
      */
     S?: string;
     /**
-     *
+     * Is the buyer the market maker?
      * @type {boolean}
      * @memberof TradeStreamsResponse
      */

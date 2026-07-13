@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,7 +25,7 @@ import type { UserCommissionResponseCommissionsInner } from './user-commission-r
  */
 export interface UserCommissionResponse {
     /**
-     *
+     * commissions
      * @type {Array<UserCommissionResponseCommissionsInner>}
      * @memberof UserCommissionResponse
      */

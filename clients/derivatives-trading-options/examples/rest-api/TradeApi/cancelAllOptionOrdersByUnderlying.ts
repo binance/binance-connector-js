@@ -13,7 +13,7 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 async function cancelAllOptionOrdersByUnderlying() {
     try {
         const response = await client.restAPI.cancelAllOptionOrdersByUnderlying({
-            underlying: 'underlying_example',
+            underlying: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

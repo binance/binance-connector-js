@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -32,6 +31,7 @@ import type {
     QueryCurrentOpenOptionOrdersResponse,
     QueryOptionOrderHistoryResponse,
     QuerySingleOrderResponse,
+    TradfiOptionsContractResponse,
     UserCommissionResponse,
     UserExerciseRecordResponse,
 } from '../types';
@@ -44,28 +44,31 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get trades for a specific account and symbol.
          *
-         * Only support querying trades in the past 3 months
+         * Weight(IP): 5
          *
-         * Weight: 5
+         * Security Type: USER_DATA
          *
          * @summary Account Trade List (USER_DATA)
-         * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
+         * @param {string} symbol Option trading pair.
          * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades, e.g 4611875134427365376
          * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
          * @param {number | bigint} [endTime] End Time, e.g 1593512200000
-         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of result sets returned.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
         accountTradeList: async (
-            symbol?: string,
+            symbol: string,
             fromId?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint,
             limit?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('accountTradeList', 'symbol', symbol);
+
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
@@ -104,11 +107,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel all active orders on specified underlying.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: TRADE
          *
          * @summary Cancel All Option Orders By Underlying (TRADE)
-         * @param {string} underlying Option underlying, e.g BTCUSDT
-         * @param {number | bigint} [recvWindow]
+         * @param {string} underlying Underlying asset.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -145,11 +150,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel all active order on a symbol.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: TRADE
          *
          * @summary Cancel all Option orders on specific symbol (TRADE)
-         * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number | bigint} [recvWindow]
+         * @param {string} symbol Option trading pair.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -186,15 +193,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel multiple orders.
          *
-         * At least one instance of `orderId` and `clientOrderId` must be sent.
+         * Weight(IP): 5
          *
-         * Weight: 1
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - At least one instance of `orderId` and `clientOrderId` must be sent.
          *
          * @summary Cancel Multiple Option Orders (TRADE)
-         * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {Array<number>} [orderIds] Order ID, e.g [4611875134427365377,4611875134427365378]
-         * @param {Array<string>} [clientOrderIds] User-defined order ID, e.g ["my_id_1","my_id_2"]
-         * @param {number | bigint} [recvWindow]
+         * @param {string} symbol Option trading pair.
+         * @param {Array<number>} [orderIds] Order ID list.
+         * @param {Array<string>} [clientOrderIds] Client order ID list.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -239,15 +249,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel an active order.
          *
-         * At least one instance of `orderId` and `clientOrderId` must be sent.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - At least one instance of `orderId` and `clientOrderId` must be sent.
          *
          * @summary Cancel Option Order (TRADE)
-         * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number | bigint} [orderId] Order ID, e.g 4611875134427365377
-         * @param {string} [clientOrderId] User-defined order ID, e.g 10000
-         * @param {number | bigint} [recvWindow]
+         * @param {string} symbol Option trading pair.
+         * @param {number | bigint} [orderId] Order ID.
+         * @param {string} [clientOrderId] clientOrderId
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -292,21 +305,28 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Send a new order.
          *
-         * Weight: 0
+         * Security Type: TRADE
+         *
+         * Notes:
+         * Some parameters are mandatory depending on the order type as follows:
+         *
+         * Type | Mandatory parameters
+         * ------------ | ------------
+         * LIMIT | timeInForce, quantity, price
          *
          * @summary New Order (TRADE)
-         * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {NewOrderSideEnum} side Buy/sell direction: SELL, BUY
-         * @param {NewOrderTypeEnum} type Order Type: LIMIT(only support limit)
+         * @param {string} symbol
+         * @param {NewOrderSideEnum} side
+         * @param {NewOrderTypeEnum} type
          * @param {number} quantity Order Quantity
          * @param {number} [price] Order Price
-         * @param {NewOrderTimeInForceEnum} [timeInForce] Time in force method（Default GTC）
-         * @param {boolean} [reduceOnly] Reduce Only（Default false）
-         * @param {boolean} [postOnly] Post Only（Default false）
-         * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", Default "ACK"
-         * @param {string} [clientOrderId] User-defined order ID, e.g 10000
-         * @param {boolean} [isMmp] is market maker protection order, true/false
-         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire maker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; Default `EXPIRE_MAKER`
+         * @param {NewOrderTimeInForceEnum} [timeInForce]
+         * @param {boolean} [reduceOnly]
+         * @param {boolean} [postOnly]
+         * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType]
+         * @param {string} [clientOrderId] User-defined order ID cannot be repeated in pending orders
+         * @param {boolean} [isMmp] is market maker protection order
+         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] Self-trade prevention mode
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -394,11 +414,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get current position information.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary Option Position Information (USER_DATA)
-         * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [symbol] Option trading pair.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -432,12 +454,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Send multiple option orders.
          *
-         * Parameter rules are same with New Order
-         * Batch orders are processed concurrently, and the order of matching is not guaranteed.
+         * Weight(IP): 5
          *
-         * Weight: 5
+         * Security Type: TRADE
          *
-         * @summary Place Multiple Orders(TRADE)
+         * Notes:
+         * Some parameters are mandatory depending on the order type as follows:
+         *
+         * Type | Mandatory parameters
+         * ------------ | ------------
+         * LIMIT | timeInForce, quantity, price
+         *
+         * - Parameter rules are same with New Order
+         * - Batch orders are processed concurrently, and the order of matching is not guaranteed.
+         *
+         * @summary Place Multiple Orders (TRADE)
          * @param {Array<PlaceMultipleOrdersOrdersParameterInner>} orders order list. Max 10 orders
          * @param {number | bigint} [recvWindow]
          *
@@ -478,12 +509,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
          *
+         * Security Type: USER_DATA
+         *
          * @summary Query Current Open Option Orders (USER_DATA)
-         * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
-         * @param {number | bigint} [orderId] Order ID, e.g 4611875134427365377
+         * @param {string} [symbol] Option trading pair.
+         * @param {number | bigint} [orderId] Order ID.
          * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
          * @param {number | bigint} [endTime] End Time, e.g 1593512200000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -529,15 +562,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query all finished orders within 5 days, finished status: CANCELLED FILLED REJECTED.
          *
-         * Weight: 3
+         * Weight(IP): 3
+         *
+         * Security Type: TRADE
          *
          * @summary Query Option Order History (TRADE)
-         * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number | bigint} [orderId] Order ID, e.g 4611875134427365377
+         * @param {string} symbol Option trading pair.
+         * @param {number | bigint} [orderId] Order ID.
          * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
          * @param {number | bigint} [endTime] End Time, e.g 1593512200000
-         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of result sets returned
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -595,16 +630,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * order has NO filled trade, **AND**
          * created time + 3 days < current time
          *
+         * Weight(IP): 1
          *
-         * Either `orderId` or `clientOrderId ` must be sent.
+         * Security Type: TRADE
          *
-         * Weight: 1
+         * Notes:
+         * - Either `orderId` or `clientOrderId ` must be sent.
          *
          * @summary Query Single Order (TRADE)
-         * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number | bigint} [orderId] Order ID, e.g 4611875134427365377
-         * @param {string} [clientOrderId] User-defined order ID, e.g 10000
-         * @param {number | bigint} [recvWindow]
+         * @param {string} symbol Option trading pair.
+         * @param {number | bigint} [orderId] Order ID.
+         * @param {string} [clientOrderId] User-defined order ID; cannot be duplicated among open orders.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -647,12 +684,47 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Sign TradFi Options agreement contract
+         *
+         * Weight(IP): 50
+         *
+         * Security Type: USER_DATA
+         *
+         * @summary TradFi Options Contract (USER_DATA)
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        tradfiOptionsContract: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/eapi/v1/stock/contract',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Get account commission.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary User Commission (USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -680,14 +752,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get account exercise records.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary User Exercise Record (USER_DATA)
-         * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
+         * @param {string} [symbol] Option trading pair.
          * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
          * @param {number | bigint} [endTime] End Time, e.g 1593512200000
-         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of result sets returned.
+         * @param {number | bigint} [recvWindow] Recv Window.
          *
          * @throws {RequiredError}
          */
@@ -741,9 +815,9 @@ export interface TradeApiInterface {
     /**
      * Get trades for a specific account and symbol.
      *
-     * Only support querying trades in the past 3 months
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
@@ -752,12 +826,14 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     accountTradeList(
-        requestParameters?: AccountTradeListRequest
+        requestParameters: AccountTradeListRequest
     ): Promise<RestApiResponse<AccountTradeListResponse>>;
     /**
      * Cancel all active orders on specified underlying.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel All Option Orders By Underlying (TRADE)
      * @param {CancelAllOptionOrdersByUnderlyingRequest} requestParameters Request parameters.
@@ -771,7 +847,9 @@ export interface TradeApiInterface {
     /**
      * Cancel all active order on a symbol.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel all Option orders on specific symbol (TRADE)
      * @param {CancelAllOptionOrdersOnSpecificSymbolRequest} requestParameters Request parameters.
@@ -785,9 +863,12 @@ export interface TradeApiInterface {
     /**
      * Cancel multiple orders.
      *
-     * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Weight(IP): 5
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - At least one instance of `orderId` and `clientOrderId` must be sent.
      *
      * @summary Cancel Multiple Option Orders (TRADE)
      * @param {CancelMultipleOptionOrdersRequest} requestParameters Request parameters.
@@ -801,9 +882,12 @@ export interface TradeApiInterface {
     /**
      * Cancel an active order.
      *
-     * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - At least one instance of `orderId` and `clientOrderId` must be sent.
      *
      * @summary Cancel Option Order (TRADE)
      * @param {CancelOptionOrderRequest} requestParameters Request parameters.
@@ -817,7 +901,14 @@ export interface TradeApiInterface {
     /**
      * Send a new order.
      *
-     * Weight: 0
+     * Security Type: TRADE
+     *
+     * Notes:
+     * Some parameters are mandatory depending on the order type as follows:
+     *
+     * Type | Mandatory parameters
+     * ------------ | ------------
+     * LIMIT | timeInForce, quantity, price
      *
      * @summary New Order (TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
@@ -829,7 +920,9 @@ export interface TradeApiInterface {
     /**
      * Get current position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Option Position Information (USER_DATA)
      * @param {OptionPositionInformationRequest} requestParameters Request parameters.
@@ -843,12 +936,21 @@ export interface TradeApiInterface {
     /**
      * Send multiple option orders.
      *
-     * Parameter rules are same with New Order
-     * Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: TRADE
      *
-     * @summary Place Multiple Orders(TRADE)
+     * Notes:
+     * Some parameters are mandatory depending on the order type as follows:
+     *
+     * Type | Mandatory parameters
+     * ------------ | ------------
+     * LIMIT | timeInForce, quantity, price
+     *
+     * - Parameter rules are same with New Order
+     * - Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     *
+     * @summary Place Multiple Orders (TRADE)
      * @param {PlaceMultipleOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -862,6 +964,8 @@ export interface TradeApiInterface {
      *
      * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
      *
+     * Security Type: USER_DATA
+     *
      * @summary Query Current Open Option Orders (USER_DATA)
      * @param {QueryCurrentOpenOptionOrdersRequest} requestParameters Request parameters.
      *
@@ -874,7 +978,9 @@ export interface TradeApiInterface {
     /**
      * Query all finished orders within 5 days, finished status: CANCELLED FILLED REJECTED.
      *
-     * Weight: 3
+     * Weight(IP): 3
+     *
+     * Security Type: TRADE
      *
      * @summary Query Option Order History (TRADE)
      * @param {QueryOptionOrderHistoryRequest} requestParameters Request parameters.
@@ -893,10 +999,12 @@ export interface TradeApiInterface {
      * order has NO filled trade, **AND**
      * created time + 3 days < current time
      *
+     * Weight(IP): 1
      *
-     * Either `orderId` or `clientOrderId ` must be sent.
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - Either `orderId` or `clientOrderId ` must be sent.
      *
      * @summary Query Single Order (TRADE)
      * @param {QuerySingleOrderRequest} requestParameters Request parameters.
@@ -908,9 +1016,27 @@ export interface TradeApiInterface {
         requestParameters: QuerySingleOrderRequest
     ): Promise<RestApiResponse<QuerySingleOrderResponse>>;
     /**
+     * Sign TradFi Options agreement contract
+     *
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary TradFi Options Contract (USER_DATA)
+     * @param {TradfiOptionsContractRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    tradfiOptionsContract(
+        requestParameters?: TradfiOptionsContractRequest
+    ): Promise<RestApiResponse<TradfiOptionsContractResponse>>;
+    /**
      * Get account commission.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Commission (USER_DATA)
      * @param {UserCommissionRequest} requestParameters Request parameters.
@@ -924,7 +1050,9 @@ export interface TradeApiInterface {
     /**
      * Get account exercise records.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Exercise Record (USER_DATA)
      * @param {UserExerciseRecordRequest} requestParameters Request parameters.
@@ -943,11 +1071,11 @@ export interface TradeApiInterface {
  */
 export interface AccountTradeListRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiAccountTradeList
      */
-    readonly symbol?: string;
+    readonly symbol: string;
 
     /**
      * Trade id to fetch from. Default gets most recent trades, e.g 4611875134427365376
@@ -971,14 +1099,14 @@ export interface AccountTradeListRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Number of result sets returned Default:100 Max:1000
+     * Number of result sets returned.
      * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
@@ -991,14 +1119,14 @@ export interface AccountTradeListRequest {
  */
 export interface CancelAllOptionOrdersByUnderlyingRequest {
     /**
-     * Option underlying, e.g BTCUSDT
+     * Underlying asset.
      * @type {string}
      * @memberof TradeApiCancelAllOptionOrdersByUnderlying
      */
     readonly underlying: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiCancelAllOptionOrdersByUnderlying
      */
@@ -1011,14 +1139,14 @@ export interface CancelAllOptionOrdersByUnderlyingRequest {
  */
 export interface CancelAllOptionOrdersOnSpecificSymbolRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiCancelAllOptionOrdersOnSpecificSymbol
      */
     readonly symbol: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiCancelAllOptionOrdersOnSpecificSymbol
      */
@@ -1031,28 +1159,28 @@ export interface CancelAllOptionOrdersOnSpecificSymbolRequest {
  */
 export interface CancelMultipleOptionOrdersRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiCancelMultipleOptionOrders
      */
     readonly symbol: string;
 
     /**
-     * Order ID, e.g [4611875134427365377,4611875134427365378]
+     * Order ID list.
      * @type {Array<number>}
      * @memberof TradeApiCancelMultipleOptionOrders
      */
     readonly orderIds?: Array<number>;
 
     /**
-     * User-defined order ID, e.g ["my_id_1","my_id_2"]
+     * Client order ID list.
      * @type {Array<string>}
      * @memberof TradeApiCancelMultipleOptionOrders
      */
     readonly clientOrderIds?: Array<string>;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiCancelMultipleOptionOrders
      */
@@ -1065,28 +1193,28 @@ export interface CancelMultipleOptionOrdersRequest {
  */
 export interface CancelOptionOrderRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiCancelOptionOrder
      */
     readonly symbol: string;
 
     /**
-     * Order ID, e.g 4611875134427365377
+     * Order ID.
      * @type {number | bigint}
      * @memberof TradeApiCancelOptionOrder
      */
     readonly orderId?: number | bigint;
 
     /**
-     * User-defined order ID, e.g 10000
+     * clientOrderId
      * @type {string}
      * @memberof TradeApiCancelOptionOrder
      */
     readonly clientOrderId?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiCancelOptionOrder
      */
@@ -1099,21 +1227,21 @@ export interface CancelOptionOrderRequest {
  */
 export interface NewOrderRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     *
      * @type {string}
      * @memberof TradeApiNewOrder
      */
     readonly symbol: string;
 
     /**
-     * Buy/sell direction: SELL, BUY
+     *
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiNewOrder
      */
     readonly side: NewOrderSideEnum;
 
     /**
-     * Order Type: LIMIT(only support limit)
+     *
      * @type {'LIMIT'}
      * @memberof TradeApiNewOrder
      */
@@ -1134,50 +1262,50 @@ export interface NewOrderRequest {
     readonly price?: number;
 
     /**
-     * Time in force method（Default GTC）
+     *
      * @type {'GTC' | 'IOC' | 'FOK' | 'GTX'}
      * @memberof TradeApiNewOrder
      */
     readonly timeInForce?: NewOrderTimeInForceEnum;
 
     /**
-     * Reduce Only（Default false）
+     *
      * @type {boolean}
      * @memberof TradeApiNewOrder
      */
     readonly reduceOnly?: boolean;
 
     /**
-     * Post Only（Default false）
+     *
      * @type {boolean}
      * @memberof TradeApiNewOrder
      */
     readonly postOnly?: boolean;
 
     /**
-     * "ACK", "RESULT", Default "ACK"
+     *
      * @type {'ACK' | 'RESULT'}
      * @memberof TradeApiNewOrder
      */
     readonly newOrderRespType?: NewOrderNewOrderRespTypeEnum;
 
     /**
-     * User-defined order ID, e.g 10000
+     * User-defined order ID cannot be repeated in pending orders
      * @type {string}
      * @memberof TradeApiNewOrder
      */
     readonly clientOrderId?: string;
 
     /**
-     * is market maker protection order, true/false
+     * is market maker protection order
      * @type {boolean}
      * @memberof TradeApiNewOrder
      */
     readonly isMmp?: boolean;
 
     /**
-     * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire maker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; Default `EXPIRE_MAKER`
-     * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
+     * Self-trade prevention mode
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
      * @memberof TradeApiNewOrder
      */
     readonly selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum;
@@ -1196,14 +1324,14 @@ export interface NewOrderRequest {
  */
 export interface OptionPositionInformationRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiOptionPositionInformation
      */
     readonly symbol?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiOptionPositionInformation
      */
@@ -1236,14 +1364,14 @@ export interface PlaceMultipleOrdersRequest {
  */
 export interface QueryCurrentOpenOptionOrdersRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiQueryCurrentOpenOptionOrders
      */
     readonly symbol?: string;
 
     /**
-     * Order ID, e.g 4611875134427365377
+     * Order ID.
      * @type {number | bigint}
      * @memberof TradeApiQueryCurrentOpenOptionOrders
      */
@@ -1264,7 +1392,7 @@ export interface QueryCurrentOpenOptionOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiQueryCurrentOpenOptionOrders
      */
@@ -1277,14 +1405,14 @@ export interface QueryCurrentOpenOptionOrdersRequest {
  */
 export interface QueryOptionOrderHistoryRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiQueryOptionOrderHistory
      */
     readonly symbol: string;
 
     /**
-     * Order ID, e.g 4611875134427365377
+     * Order ID.
      * @type {number | bigint}
      * @memberof TradeApiQueryOptionOrderHistory
      */
@@ -1305,14 +1433,14 @@ export interface QueryOptionOrderHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Number of result sets returned Default:100 Max:1000
+     * Number of result sets returned
      * @type {number | bigint}
      * @memberof TradeApiQueryOptionOrderHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiQueryOptionOrderHistory
      */
@@ -1325,30 +1453,43 @@ export interface QueryOptionOrderHistoryRequest {
  */
 export interface QuerySingleOrderRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiQuerySingleOrder
      */
     readonly symbol: string;
 
     /**
-     * Order ID, e.g 4611875134427365377
+     * Order ID.
      * @type {number | bigint}
      * @memberof TradeApiQuerySingleOrder
      */
     readonly orderId?: number | bigint;
 
     /**
-     * User-defined order ID, e.g 10000
+     * User-defined order ID; cannot be duplicated among open orders.
      * @type {string}
      * @memberof TradeApiQuerySingleOrder
      */
     readonly clientOrderId?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiQuerySingleOrder
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for tradfiOptionsContract operation in TradeApi.
+ * @interface TradfiOptionsContractRequest
+ */
+export interface TradfiOptionsContractRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiTradfiOptionsContract
      */
     readonly recvWindow?: number | bigint;
 }
@@ -1359,7 +1500,7 @@ export interface QuerySingleOrderRequest {
  */
 export interface UserCommissionRequest {
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiUserCommission
      */
@@ -1372,7 +1513,7 @@ export interface UserCommissionRequest {
  */
 export interface UserExerciseRecordRequest {
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
+     * Option trading pair.
      * @type {string}
      * @memberof TradeApiUserExerciseRecord
      */
@@ -1393,14 +1534,14 @@ export interface UserExerciseRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Number of result sets returned Default:100 Max:1000
+     * Number of result sets returned.
      * @type {number | bigint}
      * @memberof TradeApiUserExerciseRecord
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiUserExerciseRecord
      */
@@ -1423,19 +1564,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get trades for a specific account and symbol.
      *
-     * Only support querying trades in the past 3 months
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Account-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#account-trade-list Binance API Documentation}
      */
     public async accountTradeList(
-        requestParameters: AccountTradeListRequest = {}
+        requestParameters: AccountTradeListRequest
     ): Promise<RestApiResponse<AccountTradeListResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.accountTradeList(
             requestParameters?.symbol,
@@ -1460,14 +1601,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel all active orders on specified underlying.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel All Option Orders By Underlying (TRADE)
      * @param {CancelAllOptionOrdersByUnderlyingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAllOptionOrdersByUnderlyingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-All-Option-Orders-By-Underlying Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#cancel-all-option-orders-by-underlying Binance API Documentation}
      */
     public async cancelAllOptionOrdersByUnderlying(
         requestParameters: CancelAllOptionOrdersByUnderlyingRequest
@@ -1492,14 +1635,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel all active order on a symbol.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel all Option orders on specific symbol (TRADE)
      * @param {CancelAllOptionOrdersOnSpecificSymbolRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAllOptionOrdersOnSpecificSymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-all-Option-orders-on-specific-symbol Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#cancel-all-option-orders-on-specific-symbol Binance API Documentation}
      */
     public async cancelAllOptionOrdersOnSpecificSymbol(
         requestParameters: CancelAllOptionOrdersOnSpecificSymbolRequest
@@ -1524,16 +1669,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel multiple orders.
      *
-     * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Weight(IP): 5
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - At least one instance of `orderId` and `clientOrderId` must be sent.
      *
      * @summary Cancel Multiple Option Orders (TRADE)
      * @param {CancelMultipleOptionOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelMultipleOptionOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-Multiple-Option-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#cancel-multiple-option-orders Binance API Documentation}
      */
     public async cancelMultipleOptionOrders(
         requestParameters: CancelMultipleOptionOrdersRequest
@@ -1559,16 +1707,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active order.
      *
-     * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - At least one instance of `orderId` and `clientOrderId` must be sent.
      *
      * @summary Cancel Option Order (TRADE)
      * @param {CancelOptionOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelOptionOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-Option-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#cancel-option-order Binance API Documentation}
      */
     public async cancelOptionOrder(
         requestParameters: CancelOptionOrderRequest
@@ -1594,14 +1745,21 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send a new order.
      *
-     * Weight: 0
+     * Security Type: TRADE
+     *
+     * Notes:
+     * Some parameters are mandatory depending on the order type as follows:
+     *
+     * Type | Mandatory parameters
+     * ------------ | ------------
+     * LIMIT | timeInForce, quantity, price
      *
      * @summary New Order (TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#new-order Binance API Documentation}
      */
     public async newOrder(
         requestParameters: NewOrderRequest
@@ -1636,14 +1794,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get current position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Option Position Information (USER_DATA)
      * @param {OptionPositionInformationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OptionPositionInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Option-Position-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#option-position-information Binance API Documentation}
      */
     public async optionPositionInformation(
         requestParameters: OptionPositionInformationRequest = {}
@@ -1667,17 +1827,26 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send multiple option orders.
      *
-     * Parameter rules are same with New Order
-     * Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: TRADE
      *
-     * @summary Place Multiple Orders(TRADE)
+     * Notes:
+     * Some parameters are mandatory depending on the order type as follows:
+     *
+     * Type | Mandatory parameters
+     * ------------ | ------------
+     * LIMIT | timeInForce, quantity, price
+     *
+     * - Parameter rules are same with New Order
+     * - Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     *
+     * @summary Place Multiple Orders (TRADE)
      * @param {PlaceMultipleOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<PlaceMultipleOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Place-Multiple-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#place-multiple-orders Binance API Documentation}
      */
     public async placeMultipleOrders(
         requestParameters: PlaceMultipleOrdersRequest
@@ -1703,12 +1872,14 @@ export class TradeApi implements TradeApiInterface {
      *
      * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
      *
+     * Security Type: USER_DATA
+     *
      * @summary Query Current Open Option Orders (USER_DATA)
      * @param {QueryCurrentOpenOptionOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentOpenOptionOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Current-Open-Option-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#query-current-open-option-orders Binance API Documentation}
      */
     public async queryCurrentOpenOptionOrders(
         requestParameters: QueryCurrentOpenOptionOrdersRequest = {}
@@ -1735,14 +1906,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query all finished orders within 5 days, finished status: CANCELLED FILLED REJECTED.
      *
-     * Weight: 3
+     * Weight(IP): 3
+     *
+     * Security Type: TRADE
      *
      * @summary Query Option Order History (TRADE)
      * @param {QueryOptionOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryOptionOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Option-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#query-option-order-history Binance API Documentation}
      */
     public async queryOptionOrderHistory(
         requestParameters: QueryOptionOrderHistoryRequest
@@ -1775,17 +1948,19 @@ export class TradeApi implements TradeApiInterface {
      * order has NO filled trade, **AND**
      * created time + 3 days < current time
      *
+     * Weight(IP): 1
      *
-     * Either `orderId` or `clientOrderId ` must be sent.
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - Either `orderId` or `clientOrderId ` must be sent.
      *
      * @summary Query Single Order (TRADE)
      * @param {QuerySingleOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySingleOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Single-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#query-single-order Binance API Documentation}
      */
     public async querySingleOrder(
         requestParameters: QuerySingleOrderRequest
@@ -1809,16 +1984,50 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * Sign TradFi Options agreement contract
+     *
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary TradFi Options Contract (USER_DATA)
+     * @param {TradfiOptionsContractRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<TradfiOptionsContractResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#tradfi-options-contract Binance API Documentation}
+     */
+    public async tradfiOptionsContract(
+        requestParameters: TradfiOptionsContractRequest = {}
+    ): Promise<RestApiResponse<TradfiOptionsContractResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.tradfiOptionsContract(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<TradfiOptionsContractResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Get account commission.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Commission (USER_DATA)
      * @param {UserCommissionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UserCommissionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/User-Commission Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#user-commission Binance API Documentation}
      */
     public async userCommission(
         requestParameters: UserCommissionRequest = {}
@@ -1841,14 +2050,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get account exercise records.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Exercise Record (USER_DATA)
      * @param {UserExerciseRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UserExerciseRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/User-Exercise-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-options/api/rest-api/trade#user-exercise-record Binance API Documentation}
      */
     public async userExerciseRecord(
         requestParameters: UserExerciseRecordRequest = {}
@@ -1895,7 +2106,8 @@ export enum NewOrderNewOrderRespTypeEnum {
 }
 
 export enum NewOrderSelfTradePreventionModeEnum {
+    NONE = 'NONE',
     EXPIRE_TAKER = 'EXPIRE_TAKER',
-    EXPIRE_BOTH = 'EXPIRE_BOTH',
     EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
 }

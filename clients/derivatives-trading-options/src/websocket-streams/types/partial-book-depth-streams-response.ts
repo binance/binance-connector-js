@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,13 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PartialBookDepthStreamsResponseAItem } from './partial-book-depth-streams-response-aitem';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PartialBookDepthStreamsResponseBItem } from './partial-book-depth-streams-response-bitem';
-
 /**
  *
  * @export
@@ -28,57 +20,57 @@ import type { PartialBookDepthStreamsResponseBItem } from './partial-book-depth-
  */
 export interface PartialBookDepthStreamsResponse {
     /**
-     *
+     * event type
      * @type {string}
      * @memberof PartialBookDepthStreamsResponse
      */
     e?: string;
     /**
-     *
+     * event time
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * transaction time
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Option symbol
      * @type {string}
      * @memberof PartialBookDepthStreamsResponse
      */
     s?: string;
     /**
-     *
+     * First update ID in event
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     U?: number | bigint;
     /**
-     *
+     * Final update ID in event
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Final update Id in last stream(ie `u` in last stream)
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     pu?: number | bigint;
     /**
-     *
-     * @type {Array<PartialBookDepthStreamsResponseBItem>}
+     * Buy order
+     * @type {Array<Array<string>>}
      * @memberof PartialBookDepthStreamsResponse
      */
-    b?: Array<PartialBookDepthStreamsResponseBItem>;
+    b?: Array<Array<string>>;
     /**
-     *
-     * @type {Array<PartialBookDepthStreamsResponseAItem>}
+     * Sell order
+     * @type {Array<Array<string>>}
      * @memberof PartialBookDepthStreamsResponse
      */
-    a?: Array<PartialBookDepthStreamsResponseAItem>;
+    a?: Array<Array<string>>;
 }

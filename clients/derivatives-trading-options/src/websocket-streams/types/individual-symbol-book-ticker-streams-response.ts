@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,55 +20,55 @@
  */
 export interface IndividualSymbolBookTickerStreamsResponse {
     /**
-     *
+     * event type
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     e?: string;
     /**
-     *
+     * order book updateId
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     u?: number | bigint;
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     s?: string;
     /**
-     *
+     * best bid price
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     b?: string;
     /**
-     *
+     * bid bid quantity
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     B?: string;
     /**
-     *
+     * best ask price
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     a?: string;
     /**
-     *
+     * best ask quantity
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     A?: string;
     /**
-     *
+     * transaction time
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * event time
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */

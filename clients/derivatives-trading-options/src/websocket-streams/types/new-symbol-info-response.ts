@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options WebSocket Market Streams
+ * Options WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options WebSocket Market Streams
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,67 +20,67 @@
  */
 export interface NewSymbolInfoResponse {
     /**
-     *
+     * Event Type
      * @type {string}
      * @memberof NewSymbolInfoResponse
      */
     e?: string;
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof NewSymbolInfoResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof NewSymbolInfoResponse
      */
     s?: string;
     /**
-     *
+     * Underlying index of the contract
      * @type {string}
      * @memberof NewSymbolInfoResponse
      */
     ps?: string;
     /**
-     *
+     * Quotation asset
      * @type {string}
      * @memberof NewSymbolInfoResponse
      */
     qa?: string;
     /**
-     *
+     * Option type
      * @type {string}
      * @memberof NewSymbolInfoResponse
      */
     d?: string;
     /**
-     *
+     * Strike price
      * @type {string}
      * @memberof NewSymbolInfoResponse
      */
     sp?: string;
     /**
-     *
+     * Delivery date time
      * @type {number | bigint}
      * @memberof NewSymbolInfoResponse
      */
     dt?: number | bigint;
     /**
-     *
+     * unit, the quantity of the underlying asset represented by a single contract.
      * @type {number | bigint}
      * @memberof NewSymbolInfoResponse
      */
     u?: number | bigint;
     /**
-     *
+     * onboard date time
      * @type {number | bigint}
      * @memberof NewSymbolInfoResponse
      */
     ot?: number | bigint;
     /**
-     *
+     * Contract status
      * @type {string}
      * @memberof NewSymbolInfoResponse
      */

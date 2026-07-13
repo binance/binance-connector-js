@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Options REST API
+ * Options REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Options REST API
+ * Access market data, manage accounts, and trade Binance Options.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,73 +20,73 @@
  */
 export interface OptionMarkPriceResponseInner {
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Mark price
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     markPrice?: string;
     /**
-     *
+     * Implied volatility Buy
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     bidIV?: string;
     /**
-     *
+     * Implied volatility Sell
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     askIV?: string;
     /**
-     *
+     * Implied volatility mark
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     markIV?: string;
     /**
-     *
+     * delta
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     delta?: string;
     /**
-     *
+     * theta
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     theta?: string;
     /**
-     *
+     * gamma
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     gamma?: string;
     /**
-     *
+     * vega
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     vega?: string;
     /**
-     *
+     * Current highest buy price
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     highPriceLimit?: string;
     /**
-     *
+     * Current lowest sell price
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */
     lowPriceLimit?: string;
     /**
-     *
+     * risk free rate
      * @type {string}
      * @memberof OptionMarkPriceResponseInner
      */

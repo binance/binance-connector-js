@@ -13,7 +13,7 @@ const client = new DerivativesTradingOptions({ configurationRestAPI });
 async function acceptBlockTradeOrder() {
     try {
         const response = await client.restAPI.acceptBlockTradeOrder({
-            blockOrderMatchingKey: 'blockOrderMatchingKey_example',
+            blockOrderMatchingKey: '7d046e6e-a429-4335-ab9d-6a681febcde5',
         });
 
         const rateLimits = response.rateLimits!;
