@@ -1,5 +1,4 @@
 export * from './check-collateral-repay-rate-response';
-export * from './check-collateral-repay-rate-stable-rate-response';
 export * from './flexible-loan-adjust-ltv-response';
 export * from './flexible-loan-borrow-response';
 export * from './flexible-loan-repay-response';

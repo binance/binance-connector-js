@@ -1,7 +1,7 @@
 /**
- * Binance Crypto Loan REST API
+ * Crypto Loan REST API
  *
- * OpenAPI Specification for the Binance Crypto Loan REST API
+ * Access Binance Crypto Loans to query assets, subscribe to loans, and manage loan positions.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,17 +10,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
     RestApiResponse,
-    assertParamExists,
     sendRequest,
     type RequestArgs,
 } from '@binance/common';
 import type {
-    CheckCollateralRepayRateStableRateResponse,
     GetCryptoLoansIncomeHistoryResponse,
     GetLoanBorrowHistoryResponse,
     GetLoanLtvAdjustmentHistoryResponse,
@@ -33,85 +30,29 @@ import type {
 const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
-         * Get the the rate of collateral coin / loan coin when using collateral repay, the rate will be valid within 8 second.
-         *
-         * Weight: 6000
-         *
-         * @summary Check Collateral Repay Rate(USER_DATA)
-         * @param {string} loanCoin
-         * @param {string} collateralCoin
-         * @param {number} repayAmount repay amount of loanCoin
-         * @param {number | bigint} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        checkCollateralRepayRateStableRate: async (
-            loanCoin: string,
-            collateralCoin: string,
-            repayAmount: number,
-            recvWindow?: number | bigint
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'loanCoin' is not null or undefined
-            assertParamExists('checkCollateralRepayRateStableRate', 'loanCoin', loanCoin);
-            // verify required parameter 'collateralCoin' is not null or undefined
-            assertParamExists(
-                'checkCollateralRepayRateStableRate',
-                'collateralCoin',
-                collateralCoin
-            );
-            // verify required parameter 'repayAmount' is not null or undefined
-            assertParamExists('checkCollateralRepayRateStableRate', 'repayAmount', repayAmount);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-            const localVarBodyParameter: Record<string, unknown> = {};
-            const localVarHeaderParameter: Record<string, unknown> = {};
-
-            if (loanCoin !== undefined && loanCoin !== null) {
-                localVarQueryParameter['loanCoin'] = loanCoin;
-            }
-            if (collateralCoin !== undefined && collateralCoin !== null) {
-                localVarQueryParameter['collateralCoin'] = collateralCoin;
-            }
-            if (repayAmount !== undefined && repayAmount !== null) {
-                localVarQueryParameter['repayAmount'] = repayAmount;
-            }
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/loan/repay/collateral/rate',
-                method: 'GET',
-                queryParams: localVarQueryParameter,
-                bodyParams: localVarBodyParameter,
-                headerParams: localVarHeaderParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Get Crypto Loans Income History
          *
-         * If startTime and endTime are not sent, the recent 7-day data will be returned.
-         * The max interval between startTime and endTime is 30 days.
+         * Weight(UID): 6000
          *
-         * Weight: 6000
+         * Security Type: USER_DATA
          *
-         * @summary Get Crypto Loans Income History(USER_DATA)
+         * Notes:
+         * - If `startTime` and `endTime` are both omitted, the most recent 7 days of data are returned.
+         * - The maximum interval between `startTime` and `endTime` is 30 days.
+         *
+         * @summary Get Crypto Loans Income History (USER_DATA)
          * @param {string} [asset]
-         * @param {string} [type] All types will be returned by default. Enum：`borrowIn` ,`collateralSpent`, `repayAmount`, `collateralReturn`(Collateral return after repayment), `addCollateral`, `removeCollateral`, `collateralReturnAfterLiquidation`
+         * @param {GetCryptoLoansIncomeHistoryTypeEnum} [type] All types will be returned by default.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         getCryptoLoansIncomeHistory: async (
             asset?: string,
-            type?: string,
+            type?: GetCryptoLoansIncomeHistoryTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             limit?: number | bigint,
@@ -155,20 +96,23 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Loan Borrow History
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned.
-         * The max interval between startTime and endTime is 180 days.
+         * Weight(IP): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
          *
-         * @summary Get Loan Borrow History(USER_DATA)
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+         * - The max interval between `startTime` and `endTime` is 180 days.
+         *
+         * @summary Get Loan Borrow History (USER_DATA)
          * @param {number | bigint} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -226,20 +170,23 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Loan LTV Adjustment History
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned.
-         * The max interval between startTime and endTime is 180 days.
+         * Weight(IP): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
          *
-         * @summary Get Loan LTV Adjustment History(USER_DATA)
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+         * - The max interval between `startTime` and `endTime` is 180 days.
+         *
+         * @summary Get Loan LTV Adjustment History (USER_DATA)
          * @param {number | bigint} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -297,20 +244,23 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Loan Repayment History
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned.
-         * The max interval between startTime and endTime is 180 days.
+         * Weight(IP): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
          *
-         * @summary Get Loan Repayment History(USER_DATA)
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+         * - The max interval between `startTime` and `endTime` is 180 days.
+         *
+         * @summary Get Loan Repayment History (USER_DATA)
          * @param {number | bigint} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -374,28 +324,17 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
  */
 export interface StableRateApiInterface {
     /**
-     * Get the the rate of collateral coin / loan coin when using collateral repay, the rate will be valid within 8 second.
-     *
-     * Weight: 6000
-     *
-     * @summary Check Collateral Repay Rate(USER_DATA)
-     * @param {CheckCollateralRepayRateStableRateRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApiInterface
-     */
-    checkCollateralRepayRateStableRate(
-        requestParameters: CheckCollateralRepayRateStableRateRequest
-    ): Promise<RestApiResponse<CheckCollateralRepayRateStableRateResponse>>;
-    /**
      * Get Crypto Loans Income History
      *
-     * If startTime and endTime are not sent, the recent 7-day data will be returned.
-     * The max interval between startTime and endTime is 30 days.
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: USER_DATA
      *
-     * @summary Get Crypto Loans Income History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are both omitted, the most recent 7 days of data are returned.
+     * - The maximum interval between `startTime` and `endTime` is 30 days.
+     *
+     * @summary Get Crypto Loans Income History (USER_DATA)
      * @param {GetCryptoLoansIncomeHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -407,12 +346,15 @@ export interface StableRateApiInterface {
     /**
      * Get Loan Borrow History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan Borrow History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan Borrow History (USER_DATA)
      * @param {GetLoanBorrowHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -424,12 +366,15 @@ export interface StableRateApiInterface {
     /**
      * Get Loan LTV Adjustment History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan LTV Adjustment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan LTV Adjustment History (USER_DATA)
      * @param {GetLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -441,12 +386,15 @@ export interface StableRateApiInterface {
     /**
      * Get Loan Repayment History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan Repayment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan Repayment History (USER_DATA)
      * @param {GetLoanRepaymentHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -455,40 +403,6 @@ export interface StableRateApiInterface {
     getLoanRepaymentHistory(
         requestParameters?: GetLoanRepaymentHistoryRequest
     ): Promise<RestApiResponse<GetLoanRepaymentHistoryResponse>>;
-}
-
-/**
- * Request parameters for checkCollateralRepayRateStableRate operation in StableRateApi.
- * @interface CheckCollateralRepayRateStableRateRequest
- */
-export interface CheckCollateralRepayRateStableRateRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof StableRateApiCheckCollateralRepayRateStableRate
-     */
-    readonly loanCoin: string;
-
-    /**
-     *
-     * @type {string}
-     * @memberof StableRateApiCheckCollateralRepayRateStableRate
-     */
-    readonly collateralCoin: string;
-
-    /**
-     * repay amount of loanCoin
-     * @type {number}
-     * @memberof StableRateApiCheckCollateralRepayRateStableRate
-     */
-    readonly repayAmount: number;
-
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof StableRateApiCheckCollateralRepayRateStableRate
-     */
-    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -504,11 +418,11 @@ export interface GetCryptoLoansIncomeHistoryRequest {
     readonly asset?: string;
 
     /**
-     * All types will be returned by default. Enum：`borrowIn` ,`collateralSpent`, `repayAmount`, `collateralReturn`(Collateral return after repayment), `addCollateral`, `removeCollateral`, `collateralReturnAfterLiquidation`
-     * @type {string}
+     * All types will be returned by default.
+     * @type {'borrowIn' | 'collateralSpent' | 'repayAmount' | 'collateralReturn' | 'addCollateral' | 'removeCollateral' | 'collateralReturnAfterLiquidation'}
      * @memberof StableRateApiGetCryptoLoansIncomeHistory
      */
-    readonly type?: string;
+    readonly type?: GetCryptoLoansIncomeHistoryTypeEnum;
 
     /**
      *
@@ -525,14 +439,14 @@ export interface GetCryptoLoansIncomeHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof StableRateApiGetCryptoLoansIncomeHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof StableRateApiGetCryptoLoansIncomeHistory
      */
@@ -580,21 +494,21 @@ export interface GetLoanBorrowHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
@@ -642,21 +556,21 @@ export interface GetLoanLtvAdjustmentHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
@@ -704,21 +618,21 @@ export interface GetLoanRepaymentHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
@@ -739,53 +653,22 @@ export class StableRateApi implements StableRateApiInterface {
     }
 
     /**
-     * Get the the rate of collateral coin / loan coin when using collateral repay, the rate will be valid within 8 second.
-     *
-     * Weight: 6000
-     *
-     * @summary Check Collateral Repay Rate(USER_DATA)
-     * @param {CheckCollateralRepayRateStableRateRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CheckCollateralRepayRateStableRateResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Check-Collateral-Repay-Rate Binance API Documentation}
-     */
-    public async checkCollateralRepayRateStableRate(
-        requestParameters: CheckCollateralRepayRateStableRateRequest
-    ): Promise<RestApiResponse<CheckCollateralRepayRateStableRateResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.checkCollateralRepayRateStableRate(
-                requestParameters?.loanCoin,
-                requestParameters?.collateralCoin,
-                requestParameters?.repayAmount,
-                requestParameters?.recvWindow
-            );
-        return sendRequest<CheckCollateralRepayRateStableRateResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.queryParams,
-            localVarAxiosArgs.bodyParams,
-            localVarAxiosArgs.headerParams,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
      * Get Crypto Loans Income History
      *
-     * If startTime and endTime are not sent, the recent 7-day data will be returned.
-     * The max interval between startTime and endTime is 30 days.
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: USER_DATA
      *
-     * @summary Get Crypto Loans Income History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are both omitted, the most recent 7 days of data are returned.
+     * - The maximum interval between `startTime` and `endTime` is 30 days.
+     *
+     * @summary Get Crypto Loans Income History (USER_DATA)
      * @param {GetCryptoLoansIncomeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCryptoLoansIncomeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Get-Crypto-Loans-Income-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-crypto-loans-income-history Binance API Documentation}
      */
     public async getCryptoLoansIncomeHistory(
         requestParameters: GetCryptoLoansIncomeHistoryRequest = {}
@@ -813,17 +696,20 @@ export class StableRateApi implements StableRateApiInterface {
     /**
      * Get Loan Borrow History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan Borrow History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan Borrow History (USER_DATA)
      * @param {GetLoanBorrowHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLoanBorrowHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Borrow-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-borrow-history Binance API Documentation}
      */
     public async getLoanBorrowHistory(
         requestParameters: GetLoanBorrowHistoryRequest = {}
@@ -853,17 +739,20 @@ export class StableRateApi implements StableRateApiInterface {
     /**
      * Get Loan LTV Adjustment History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan LTV Adjustment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan LTV Adjustment History (USER_DATA)
      * @param {GetLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLoanLtvAdjustmentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-LTV-Adjustment-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-ltv-adjustment-history Binance API Documentation}
      */
     public async getLoanLtvAdjustmentHistory(
         requestParameters: GetLoanLtvAdjustmentHistoryRequest = {}
@@ -893,17 +782,20 @@ export class StableRateApi implements StableRateApiInterface {
     /**
      * Get Loan Repayment History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan Repayment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan Repayment History (USER_DATA)
      * @param {GetLoanRepaymentHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLoanRepaymentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Repayment-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-repayment-history Binance API Documentation}
      */
     public async getLoanRepaymentHistory(
         requestParameters: GetLoanRepaymentHistoryRequest = {}
@@ -929,4 +821,14 @@ export class StableRateApi implements StableRateApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum GetCryptoLoansIncomeHistoryTypeEnum {
+    borrowIn = 'borrowIn',
+    collateralSpent = 'collateralSpent',
+    repayAmount = 'repayAmount',
+    collateralReturn = 'collateralReturn',
+    addCollateral = 'addCollateral',
+    removeCollateral = 'removeCollateral',
+    collateralReturnAfterLiquidation = 'collateralReturnAfterLiquidation',
 }

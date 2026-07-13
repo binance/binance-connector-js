@@ -1,7 +1,7 @@
 /**
- * Binance Crypto Loan REST API
+ * Crypto Loan REST API
  *
- * OpenAPI Specification for the Binance Crypto Loan REST API
+ * Access Binance Crypto Loans to query assets, subscribe to loans, and manage loan positions.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,16 +15,14 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { StableRateApi } from '../../../src/rest-api';
+import { StableRateApi, GetCryptoLoansIncomeHistoryTypeEnum } from '../../../src/rest-api';
 import {
-    CheckCollateralRepayRateStableRateRequest,
     GetCryptoLoansIncomeHistoryRequest,
     GetLoanBorrowHistoryRequest,
     GetLoanLtvAdjustmentHistoryRequest,
     GetLoanRepaymentHistoryRequest,
 } from '../../../src/rest-api';
 import type {
-    CheckCollateralRepayRateStableRateResponse,
     GetCryptoLoansIncomeHistoryResponse,
     GetLoanBorrowHistoryResponse,
     GetLoanLtvAdjustmentHistoryResponse,
@@ -45,136 +43,6 @@ describe('StableRateApi', () => {
         client = new StableRateApi(config);
     });
 
-    describe('checkCollateralRepayRateStableRate()', () => {
-        it('should execute checkCollateralRepayRateStableRate() successfully with required parameters only', async () => {
-            const params: CheckCollateralRepayRateStableRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    loanlCoin: 'BUSD',
-                    collateralCoin: 'BNB',
-                    repayAmount: '1000',
-                    rate: '300.36781234',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'checkCollateralRepayRateStableRate').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<CheckCollateralRepayRateStableRateResponse>)
-            );
-            const response = await client.checkCollateralRepayRateStableRate(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute checkCollateralRepayRateStableRate() successfully with optional parameters', async () => {
-            const params: CheckCollateralRepayRateStableRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    loanlCoin: 'BUSD',
-                    collateralCoin: 'BNB',
-                    repayAmount: '1000',
-                    rate: '300.36781234',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'checkCollateralRepayRateStableRate').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<CheckCollateralRepayRateStableRateResponse>)
-            );
-            const response = await client.checkCollateralRepayRateStableRate(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when loanCoin is missing', async () => {
-            const _params: CheckCollateralRepayRateStableRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.loanCoin;
-
-            await expect(client.checkCollateralRepayRateStableRate(params)).rejects.toThrow(
-                'Required parameter loanCoin was null or undefined when calling checkCollateralRepayRateStableRate.'
-            );
-        });
-
-        it('should throw RequiredError when collateralCoin is missing', async () => {
-            const _params: CheckCollateralRepayRateStableRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.collateralCoin;
-
-            await expect(client.checkCollateralRepayRateStableRate(params)).rejects.toThrow(
-                'Required parameter collateralCoin was null or undefined when calling checkCollateralRepayRateStableRate.'
-            );
-        });
-
-        it('should throw RequiredError when repayAmount is missing', async () => {
-            const _params: CheckCollateralRepayRateStableRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.repayAmount;
-
-            await expect(client.checkCollateralRepayRateStableRate(params)).rejects.toThrow(
-                'Required parameter repayAmount was null or undefined when calling checkCollateralRepayRateStableRate.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: CheckCollateralRepayRateStableRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'checkCollateralRepayRateStableRate')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.checkCollateralRepayRateStableRate(params)).rejects.toThrow(
-                'ResponseError'
-            );
-            spy.mockRestore();
-        });
-    });
-
     describe('getCryptoLoansIncomeHistory()', () => {
         it('should execute getCryptoLoansIncomeHistory() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
@@ -185,13 +53,6 @@ describe('StableRateApi', () => {
                         amount: '100',
                         timestamp: 1633771139847,
                         tranId: '80423589583',
-                    },
-                    {
-                        asset: 'BUSD',
-                        type: 'borrowIn',
-                        amount: '100',
-                        timestamp: 1634638371496,
-                        tranId: '81685123491',
                     },
                 ])
             );
@@ -212,8 +73,8 @@ describe('StableRateApi', () => {
 
         it('should execute getCryptoLoansIncomeHistory() successfully with optional parameters', async () => {
             const params: GetCryptoLoansIncomeHistoryRequest = {
-                asset: 'asset_example',
-                type: '0',
+                asset: 'BUSD',
+                type: GetCryptoLoansIncomeHistoryTypeEnum.borrowIn,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 limit: 10,
@@ -228,13 +89,6 @@ describe('StableRateApi', () => {
                         amount: '100',
                         timestamp: 1633771139847,
                         tranId: '80423589583',
-                    },
-                    {
-                        asset: 'BUSD',
-                        type: 'borrowIn',
-                        amount: '100',
-                        timestamp: 1634638371496,
-                        tranId: '81685123491',
                     },
                 ])
             );
@@ -309,8 +163,8 @@ describe('StableRateApi', () => {
         it('should execute getLoanBorrowHistory() successfully with optional parameters', async () => {
             const params: GetLoanBorrowHistoryRequest = {
                 orderId: 1,
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -404,8 +258,8 @@ describe('StableRateApi', () => {
         it('should execute getLoanLtvAdjustmentHistory() successfully with optional parameters', async () => {
             const params: GetLoanLtvAdjustmentHistoryRequest = {
                 orderId: 1,
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -501,8 +355,8 @@ describe('StableRateApi', () => {
         it('should execute getLoanRepaymentHistory() successfully with optional parameters', async () => {
             const params: GetLoanRepaymentHistoryRequest = {
                 orderId: 1,
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,

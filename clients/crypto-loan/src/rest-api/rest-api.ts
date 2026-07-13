@@ -1,7 +1,7 @@
 /**
- * Binance Crypto Loan REST API
+ * Crypto Loan REST API
  *
- * OpenAPI Specification for the Binance Crypto Loan REST API
+ * Access Binance Crypto Loans to query assets, subscribe to loans, and manage loan positions.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -30,7 +30,6 @@ import type {
     GetFlexibleLoanRepaymentHistoryRequest,
 } from './modules/flexible-rate-api';
 import type {
-    CheckCollateralRepayRateStableRateRequest,
     GetCryptoLoansIncomeHistoryRequest,
     GetLoanBorrowHistoryRequest,
     GetLoanLtvAdjustmentHistoryRequest,
@@ -52,7 +51,6 @@ import type {
     GetFlexibleLoanRepaymentHistoryResponse,
 } from './types';
 import type {
-    CheckCollateralRepayRateStableRateResponse,
     GetCryptoLoansIncomeHistoryResponse,
     GetLoanBorrowHistoryResponse,
     GetLoanLtvAdjustmentHistoryResponse,
@@ -124,15 +122,18 @@ export class RestAPI {
     }
 
     /**
+     * Get the latest rate of collateral coin/loan coin when using collateral repay.
      *
-     * Weight: 6000
+     * Weight(IP): 6000
      *
-     * @summary Check Collateral Repay Rate (USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Check Collateral Flexible Repay Rate (USER_DATA)
      * @param {CheckCollateralRepayRateRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CheckCollateralRepayRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Check-Collateral-Repay-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#check-collateral-repay-rate Binance API Documentation}
      */
     checkCollateralRepayRate(
         requestParameters: CheckCollateralRepayRateRequest
@@ -143,16 +144,19 @@ export class RestAPI {
     /**
      * Flexible Loan Adjust LTV
      *
-     * API Key needs Spot & Margin Trading permission for this endpoint
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: TRADE
      *
-     * @summary Flexible Loan Adjust LTV(TRADE)
+     * Notes:
+     * - API key needs Spot & Margin Trading permission for this endpoint.
+     *
+     * @summary Flexible Loan Adjust LTV (TRADE)
      * @param {FlexibleLoanAdjustLtvRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FlexibleLoanAdjustLtvResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Adjust-LTV Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#flexible-loan-adjust-ltv Binance API Documentation}
      */
     flexibleLoanAdjustLtv(
         requestParameters: FlexibleLoanAdjustLtvRequest
@@ -163,18 +167,20 @@ export class RestAPI {
     /**
      * Borrow Flexible Loan
      *
+     * Weight(IP): 6000
      *
-     * This API endpoint is available for both the master account and the sub-account.
-     * You can customize LTV by entering loanAmount and collateralAmount.
+     * Security Type: TRADE
      *
-     * Weight: 6000
+     * Notes:
+     * - This endpoint is available for both master and sub-accounts.
+     * - You can customize LTV by entering `loanAmount` and `collateralAmount`.
      *
-     * @summary Flexible Loan Borrow(TRADE)
+     * @summary Flexible Loan Borrow (TRADE)
      * @param {FlexibleLoanBorrowRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FlexibleLoanBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#flexible-loan-borrow Binance API Documentation}
      */
     flexibleLoanBorrow(
         requestParameters: FlexibleLoanBorrowRequest
@@ -185,17 +191,19 @@ export class RestAPI {
     /**
      * Flexible Loan Repay
      *
+     * Weight(IP): 6000
      *
-     * repayAmount is mandatory even fullRepayment = FALSE
+     * Security Type: TRADE
      *
-     * Weight: 6000
+     * Notes:
+     * - `repayAmount` is mandatory even when `fullRepayment = FALSE`.
      *
-     * @summary Flexible Loan Repay(TRADE)
+     * @summary Flexible Loan Repay (TRADE)
      * @param {FlexibleLoanRepayRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FlexibleLoanRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#flexible-loan-repay Binance API Documentation}
      */
     flexibleLoanRepay(
         requestParameters: FlexibleLoanRepayRequest
@@ -206,14 +214,16 @@ export class RestAPI {
     /**
      * Get interest rate and borrow limit of flexible loanable assets. The borrow limit is shown in USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Flexible Loan Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Assets Data (USER_DATA)
      * @param {GetFlexibleLoanAssetsDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanAssetsDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Assets-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-assets-data Binance API Documentation}
      */
     getFlexibleLoanAssetsData(
         requestParameters: GetFlexibleLoanAssetsDataRequest = {}
@@ -222,19 +232,22 @@ export class RestAPI {
     }
 
     /**
-     * Get Flexible Loan Borrow History
+     * Get Flexible Loan Borrow History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan Borrow History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan Borrow History (USER_DATA)
      * @param {GetFlexibleLoanBorrowHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanBorrowHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Borrow-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-borrow-history Binance API Documentation}
      */
     getFlexibleLoanBorrowHistory(
         requestParameters: GetFlexibleLoanBorrowHistoryRequest = {}
@@ -243,16 +256,19 @@ export class RestAPI {
     }
 
     /**
-     * Get LTV information and collateral limit of flexible loan's collateral assets. The collateral limit is shown in USD value.
+     * Get LTV information and collateral limit of flexible loan's collateral assets. The collateral limit is shown in
+     * USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Flexible Loan Collateral Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Collateral Assets Data (USER_DATA)
      * @param {GetFlexibleLoanCollateralAssetsDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanCollateralAssetsDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Collateral-Assets-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-collateral-assets-data Binance API Documentation}
      */
     getFlexibleLoanCollateralAssetsData(
         requestParameters: GetFlexibleLoanCollateralAssetsDataRequest = {}
@@ -263,18 +279,21 @@ export class RestAPI {
     /**
      * Check Flexible Loan interest rate history
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned
-     * The max interval between startTime and endTime is 90 days.
-     * Time based on UTC+0.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 90 days.
+     * - Time is based on UTC+0.
      *
      * @summary Get Flexible Loan Interest Rate History (USER_DATA)
      * @param {GetFlexibleLoanInterestRateHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Interest-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-interest-rate-history Binance API Documentation}
      */
     getFlexibleLoanInterestRateHistory(
         requestParameters: GetFlexibleLoanInterestRateHistoryRequest
@@ -283,15 +302,18 @@ export class RestAPI {
     }
 
     /**
+     * Get Flexible Loan Liquidation History
      *
-     * Weight: 400
+     * Weight(IP): 400
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Flexible Loan Liquidation History (USER_DATA)
      * @param {GetFlexibleLoanLiquidationHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanLiquidationHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Liquidation-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-liquidation-history Binance API Documentation}
      */
     getFlexibleLoanLiquidationHistory(
         requestParameters: GetFlexibleLoanLiquidationHistoryRequest = {}
@@ -300,19 +322,22 @@ export class RestAPI {
     }
 
     /**
-     * Get Flexible Loan LTV Adjustment History
+     * Get Flexible Loan LTV Adjustment History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(UID): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan LTV Adjustment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan LTV Adjustment History (USER_DATA)
      * @param {GetFlexibleLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanLtvAdjustmentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-LTV-Adjustment-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-ltv-adjustment-history Binance API Documentation}
      */
     getFlexibleLoanLtvAdjustmentHistory(
         requestParameters: GetFlexibleLoanLtvAdjustmentHistoryRequest = {}
@@ -323,14 +348,16 @@ export class RestAPI {
     /**
      * Get Flexible Loan Ongoing Orders
      *
-     * Weight: 300
+     * Weight(IP): 300
      *
-     * @summary Get Flexible Loan Ongoing Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Ongoing Orders (USER_DATA)
      * @param {GetFlexibleLoanOngoingOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanOngoingOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Ongoing-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-ongoing-orders Binance API Documentation}
      */
     getFlexibleLoanOngoingOrders(
         requestParameters: GetFlexibleLoanOngoingOrdersRequest = {}
@@ -339,19 +366,22 @@ export class RestAPI {
     }
 
     /**
-     * Get Flexible Loan Repayment History
+     * Get Flexible Loan Repayment History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan Repayment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan Repayment History (USER_DATA)
      * @param {GetFlexibleLoanRepaymentHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanRepaymentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Repayment-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-repayment-history Binance API Documentation}
      */
     getFlexibleLoanRepaymentHistory(
         requestParameters: GetFlexibleLoanRepaymentHistoryRequest = {}
@@ -360,37 +390,22 @@ export class RestAPI {
     }
 
     /**
-     * Get the the rate of collateral coin / loan coin when using collateral repay, the rate will be valid within 8 second.
-     *
-     * Weight: 6000
-     *
-     * @summary Check Collateral Repay Rate(USER_DATA)
-     * @param {CheckCollateralRepayRateStableRateRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<CheckCollateralRepayRateStableRateResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Check-Collateral-Repay-Rate Binance API Documentation}
-     */
-    checkCollateralRepayRateStableRate(
-        requestParameters: CheckCollateralRepayRateStableRateRequest
-    ): Promise<RestApiResponse<CheckCollateralRepayRateStableRateResponse>> {
-        return this.stableRateApi.checkCollateralRepayRateStableRate(requestParameters);
-    }
-
-    /**
      * Get Crypto Loans Income History
      *
-     * If startTime and endTime are not sent, the recent 7-day data will be returned.
-     * The max interval between startTime and endTime is 30 days.
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: USER_DATA
      *
-     * @summary Get Crypto Loans Income History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are both omitted, the most recent 7 days of data are returned.
+     * - The maximum interval between `startTime` and `endTime` is 30 days.
+     *
+     * @summary Get Crypto Loans Income History (USER_DATA)
      * @param {GetCryptoLoansIncomeHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetCryptoLoansIncomeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Get-Crypto-Loans-Income-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-crypto-loans-income-history Binance API Documentation}
      */
     getCryptoLoansIncomeHistory(
         requestParameters: GetCryptoLoansIncomeHistoryRequest = {}
@@ -401,17 +416,20 @@ export class RestAPI {
     /**
      * Get Loan Borrow History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan Borrow History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan Borrow History (USER_DATA)
      * @param {GetLoanBorrowHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLoanBorrowHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Borrow-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-borrow-history Binance API Documentation}
      */
     getLoanBorrowHistory(
         requestParameters: GetLoanBorrowHistoryRequest = {}
@@ -422,17 +440,20 @@ export class RestAPI {
     /**
      * Get Loan LTV Adjustment History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan LTV Adjustment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan LTV Adjustment History (USER_DATA)
      * @param {GetLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLoanLtvAdjustmentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-LTV-Adjustment-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-ltv-adjustment-history Binance API Documentation}
      */
     getLoanLtvAdjustmentHistory(
         requestParameters: GetLoanLtvAdjustmentHistoryRequest = {}
@@ -443,17 +464,20 @@ export class RestAPI {
     /**
      * Get Loan Repayment History
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Loan Repayment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Loan Repayment History (USER_DATA)
      * @param {GetLoanRepaymentHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLoanRepaymentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Repayment-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-repayment-history Binance API Documentation}
      */
     getLoanRepaymentHistory(
         requestParameters: GetLoanRepaymentHistoryRequest = {}

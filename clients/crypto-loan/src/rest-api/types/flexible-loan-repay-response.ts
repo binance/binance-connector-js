@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Crypto Loan REST API
+ * Crypto Loan REST API
  *
- * OpenAPI Specification for the Binance Crypto Loan REST API
+ * Access Binance Crypto Loans to query assets, subscribe to loans, and manage loan positions.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -56,7 +56,7 @@ export interface FlexibleLoanRepayResponse {
      */
     currentLTV?: string;
     /**
-     *
+     * REPAID, REPAYING, FAILED
      * @type {string}
      * @memberof FlexibleLoanRepayResponse
      */

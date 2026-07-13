@@ -10,9 +10,9 @@ const client = new CryptoLoan({ configurationRestAPI });
 async function flexibleLoanRepay() {
     try {
         const response = await client.restAPI.flexibleLoanRepay({
-            loanCoin: 'loanCoin_example',
-            collateralCoin: 'collateralCoin_example',
-            repayAmount: 1.0,
+            loanCoin: 'BUSD',
+            collateralCoin: 'BNB',
+            repayAmount: 1,
         });
 
         const rateLimits = response.rateLimits!;

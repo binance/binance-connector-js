@@ -1,7 +1,7 @@
 /**
- * Binance Crypto Loan REST API
+ * Crypto Loan REST API
  *
- * OpenAPI Specification for the Binance Crypto Loan REST API
+ * Access Binance Crypto Loans to query assets, subscribe to loans, and manage loan positions.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,11 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { FlexibleRateApi } from '../../../src/rest-api';
+import {
+    FlexibleRateApi,
+    FlexibleLoanAdjustLtvDirectionEnum,
+    FlexibleLoanRepayRepaymentTypeEnum,
+} from '../../../src/rest-api';
 import {
     CheckCollateralRepayRateRequest,
     FlexibleLoanAdjustLtvRequest,
@@ -62,8 +66,8 @@ describe('FlexibleRateApi', () => {
     describe('checkCollateralRepayRate()', () => {
         it('should execute checkCollateralRepayRate() successfully with required parameters only', async () => {
             const params: CheckCollateralRepayRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
             };
 
             mockResponse = JSONParse(
@@ -86,8 +90,8 @@ describe('FlexibleRateApi', () => {
 
         it('should execute checkCollateralRepayRate() successfully with optional parameters', async () => {
             const params: CheckCollateralRepayRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 recvWindow: 5000,
             };
 
@@ -111,8 +115,8 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when loanCoin is missing', async () => {
             const _params: CheckCollateralRepayRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
             };
             const params = Object.assign({ ..._params });
             delete params?.loanCoin;
@@ -124,8 +128,8 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when collateralCoin is missing', async () => {
             const _params: CheckCollateralRepayRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
             };
             const params = Object.assign({ ..._params });
             delete params?.collateralCoin;
@@ -137,8 +141,8 @@ describe('FlexibleRateApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CheckCollateralRepayRateRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
             };
 
             const errorResponse = {
@@ -161,10 +165,10 @@ describe('FlexibleRateApi', () => {
     describe('flexibleLoanAdjustLtv()', () => {
         it('should execute flexibleLoanAdjustLtv() successfully with required parameters only', async () => {
             const params: FlexibleLoanAdjustLtvRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                adjustmentAmount: 1.0,
-                direction: 'direction_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                adjustmentAmount: 1,
+                direction: FlexibleLoanAdjustLtvDirectionEnum.ADDITIONAL,
             };
 
             mockResponse = JSONParse(
@@ -194,10 +198,10 @@ describe('FlexibleRateApi', () => {
 
         it('should execute flexibleLoanAdjustLtv() successfully with optional parameters', async () => {
             const params: FlexibleLoanAdjustLtvRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                adjustmentAmount: 1.0,
-                direction: 'direction_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                adjustmentAmount: 1,
+                direction: FlexibleLoanAdjustLtvDirectionEnum.ADDITIONAL,
                 recvWindow: 5000,
             };
 
@@ -228,10 +232,10 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when loanCoin is missing', async () => {
             const _params: FlexibleLoanAdjustLtvRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                adjustmentAmount: 1.0,
-                direction: 'direction_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                adjustmentAmount: 1,
+                direction: FlexibleLoanAdjustLtvDirectionEnum.ADDITIONAL,
             };
             const params = Object.assign({ ..._params });
             delete params?.loanCoin;
@@ -243,10 +247,10 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when collateralCoin is missing', async () => {
             const _params: FlexibleLoanAdjustLtvRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                adjustmentAmount: 1.0,
-                direction: 'direction_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                adjustmentAmount: 1,
+                direction: FlexibleLoanAdjustLtvDirectionEnum.ADDITIONAL,
             };
             const params = Object.assign({ ..._params });
             delete params?.collateralCoin;
@@ -258,10 +262,10 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when adjustmentAmount is missing', async () => {
             const _params: FlexibleLoanAdjustLtvRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                adjustmentAmount: 1.0,
-                direction: 'direction_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                adjustmentAmount: 1,
+                direction: FlexibleLoanAdjustLtvDirectionEnum.ADDITIONAL,
             };
             const params = Object.assign({ ..._params });
             delete params?.adjustmentAmount;
@@ -273,10 +277,10 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when direction is missing', async () => {
             const _params: FlexibleLoanAdjustLtvRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                adjustmentAmount: 1.0,
-                direction: 'direction_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                adjustmentAmount: 1,
+                direction: FlexibleLoanAdjustLtvDirectionEnum.ADDITIONAL,
             };
             const params = Object.assign({ ..._params });
             delete params?.direction;
@@ -288,10 +292,10 @@ describe('FlexibleRateApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: FlexibleLoanAdjustLtvRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                adjustmentAmount: 1.0,
-                direction: 'direction_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                adjustmentAmount: 1,
+                direction: FlexibleLoanAdjustLtvDirectionEnum.ADDITIONAL,
             };
 
             const errorResponse = {
@@ -314,8 +318,8 @@ describe('FlexibleRateApi', () => {
     describe('flexibleLoanBorrow()', () => {
         it('should execute flexibleLoanBorrow() successfully with required parameters only', async () => {
             const params: FlexibleLoanBorrowRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
             };
 
             mockResponse = JSONParse(
@@ -344,10 +348,10 @@ describe('FlexibleRateApi', () => {
 
         it('should execute flexibleLoanBorrow() successfully with optional parameters', async () => {
             const params: FlexibleLoanBorrowRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                loanAmount: 1.0,
-                collateralAmount: 1.0,
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                loanAmount: 1,
+                collateralAmount: 1,
                 recvWindow: 5000,
             };
 
@@ -377,8 +381,8 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when loanCoin is missing', async () => {
             const _params: FlexibleLoanBorrowRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
             };
             const params = Object.assign({ ..._params });
             delete params?.loanCoin;
@@ -390,8 +394,8 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when collateralCoin is missing', async () => {
             const _params: FlexibleLoanBorrowRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
             };
             const params = Object.assign({ ..._params });
             delete params?.collateralCoin;
@@ -403,8 +407,8 @@ describe('FlexibleRateApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: FlexibleLoanBorrowRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
             };
 
             const errorResponse = {
@@ -425,9 +429,9 @@ describe('FlexibleRateApi', () => {
     describe('flexibleLoanRepay()', () => {
         it('should execute flexibleLoanRepay() successfully with required parameters only', async () => {
             const params: FlexibleLoanRepayRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                repayAmount: 1,
             };
 
             mockResponse = JSONParse(
@@ -458,12 +462,12 @@ describe('FlexibleRateApi', () => {
 
         it('should execute flexibleLoanRepay() successfully with optional parameters', async () => {
             const params: FlexibleLoanRepayRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                repayAmount: 1,
                 collateralReturn: true,
                 fullRepayment: false,
-                repaymentType: 1,
+                repaymentType: FlexibleLoanRepayRepaymentTypeEnum.REPAYMENT_TYPE_1,
                 recvWindow: 5000,
             };
 
@@ -495,9 +499,9 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when loanCoin is missing', async () => {
             const _params: FlexibleLoanRepayRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                repayAmount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.loanCoin;
@@ -509,9 +513,9 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when collateralCoin is missing', async () => {
             const _params: FlexibleLoanRepayRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                repayAmount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.collateralCoin;
@@ -523,9 +527,9 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when repayAmount is missing', async () => {
             const _params: FlexibleLoanRepayRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                repayAmount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.repayAmount;
@@ -537,9 +541,9 @@ describe('FlexibleRateApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: FlexibleLoanRepayRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1.0,
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
+                repayAmount: 1,
             };
 
             const errorResponse = {
@@ -589,7 +593,7 @@ describe('FlexibleRateApi', () => {
 
         it('should execute getFlexibleLoanAssetsData() successfully with optional parameters', async () => {
             const params: GetFlexibleLoanAssetsDataRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'BUSD',
                 recvWindow: 5000,
             };
 
@@ -673,8 +677,8 @@ describe('FlexibleRateApi', () => {
 
         it('should execute getFlexibleLoanBorrowHistory() successfully with optional parameters', async () => {
             const params: GetFlexibleLoanBorrowHistoryRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -763,7 +767,7 @@ describe('FlexibleRateApi', () => {
 
         it('should execute getFlexibleLoanCollateralAssetsData() successfully with optional parameters', async () => {
             const params: GetFlexibleLoanCollateralAssetsDataRequest = {
-                collateralCoin: 'collateralCoin_example',
+                collateralCoin: 'BNB',
                 recvWindow: 5000,
             };
 
@@ -819,16 +823,13 @@ describe('FlexibleRateApi', () => {
     describe('getFlexibleLoanInterestRateHistory()', () => {
         it('should execute getFlexibleLoanInterestRateHistory() successfully with required parameters only', async () => {
             const params: GetFlexibleLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    rows: [
-                        { coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 },
-                        { coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 },
-                    ],
+                    rows: [{ coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 }],
                     total: 2,
                 })
             );
@@ -849,7 +850,7 @@ describe('FlexibleRateApi', () => {
 
         it('should execute getFlexibleLoanInterestRateHistory() successfully with optional parameters', async () => {
             const params: GetFlexibleLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -859,10 +860,7 @@ describe('FlexibleRateApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    rows: [
-                        { coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 },
-                        { coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 },
-                    ],
+                    rows: [{ coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 }],
                     total: 2,
                 })
             );
@@ -883,7 +881,7 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: GetFlexibleLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -896,7 +894,7 @@ describe('FlexibleRateApi', () => {
 
         it('should throw RequiredError when recvWindow is missing', async () => {
             const _params: GetFlexibleLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -909,7 +907,7 @@ describe('FlexibleRateApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFlexibleLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
             };
 
@@ -969,8 +967,8 @@ describe('FlexibleRateApi', () => {
 
         it('should execute getFlexibleLoanLiquidationHistory() successfully with optional parameters', async () => {
             const params: GetFlexibleLoanLiquidationHistoryRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -1066,8 +1064,8 @@ describe('FlexibleRateApi', () => {
 
         it('should execute getFlexibleLoanLtvAdjustmentHistory() successfully with optional parameters', async () => {
             const params: GetFlexibleLoanLtvAdjustmentHistoryRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -1159,8 +1157,8 @@ describe('FlexibleRateApi', () => {
 
         it('should execute getFlexibleLoanOngoingOrders() successfully with optional parameters', async () => {
             const params: GetFlexibleLoanOngoingOrdersRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 current: 1,
                 limit: 10,
                 recvWindow: 5000,
@@ -1247,8 +1245,8 @@ describe('FlexibleRateApi', () => {
 
         it('should execute getFlexibleLoanRepaymentHistory() successfully with optional parameters', async () => {
             const params: GetFlexibleLoanRepaymentHistoryRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,

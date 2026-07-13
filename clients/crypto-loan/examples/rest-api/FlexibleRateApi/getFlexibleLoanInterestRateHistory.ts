@@ -10,7 +10,7 @@ const client = new CryptoLoan({ configurationRestAPI });
 async function getFlexibleLoanInterestRateHistory() {
     try {
         const response = await client.restAPI.getFlexibleLoanInterestRateHistory({
-            coin: 'coin_example',
+            coin: 'USDT',
             recvWindow: 5000,
         });
 

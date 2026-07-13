@@ -1,5 +1,26 @@
 # Changelog
 
+## 10.0.0 - 2026-07-13
+
+### Changed (3)
+
+- Modified parameter `direction`:
+  - enum added: `ADDITIONAL`, `REDUCED`
+  - affected methods:
+    - `flexibleLoanAdjustLtv()` (`POST /sapi/v2/loan/flexible/adjust/ltv`)
+- Modified parameter `repaymentType`:
+  - enum added: `1`, `2`
+  - affected methods:
+    - `flexibleLoanRepay()` (`POST /sapi/v2/loan/flexible/repay`)
+- Modified parameter `type`:
+  - enum added: `borrowIn`, `collateralSpent`, `repayAmount`, `collateralReturn`, `addCollateral`, `removeCollateral`, `collateralReturnAfterLiquidation`
+  - affected methods:
+    - `getCryptoLoansIncomeHistory()` (`GET /sapi/v1/loan/income`)
+
+### Removed (1)
+
+- `checkCollateralRepayRateStableRate()` (`GET /sapi/v1/loan/repay/collateral/rate`)
+
 ## 9.0.15 - 2026-06-18
 
 ### Changed (2)

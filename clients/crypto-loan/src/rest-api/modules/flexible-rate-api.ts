@@ -1,7 +1,7 @@
 /**
- * Binance Crypto Loan REST API
+ * Crypto Loan REST API
  *
- * OpenAPI Specification for the Binance Crypto Loan REST API
+ * Access Binance Crypto Loans to query assets, subscribe to loans, and manage loan positions.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -40,13 +39,16 @@ import type {
 const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
+         * Get the latest rate of collateral coin/loan coin when using collateral repay.
          *
-         * Weight: 6000
+         * Weight(IP): 6000
          *
-         * @summary Check Collateral Repay Rate (USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Check Collateral Flexible Repay Rate (USER_DATA)
          * @param {string} loanCoin
          * @param {string} collateralCoin
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -89,16 +91,19 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         /**
          * Flexible Loan Adjust LTV
          *
-         * API Key needs Spot & Margin Trading permission for this endpoint
+         * Weight(UID): 6000
          *
-         * Weight: 6000
+         * Security Type: TRADE
          *
-         * @summary Flexible Loan Adjust LTV(TRADE)
+         * Notes:
+         * - API key needs Spot & Margin Trading permission for this endpoint.
+         *
+         * @summary Flexible Loan Adjust LTV (TRADE)
          * @param {string} loanCoin
          * @param {string} collateralCoin
          * @param {number} adjustmentAmount
-         * @param {string} direction "ADDITIONAL", "REDUCED"
-         * @param {number | bigint} [recvWindow]
+         * @param {FlexibleLoanAdjustLtvDirectionEnum} direction
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -106,7 +111,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             loanCoin: string,
             collateralCoin: string,
             adjustmentAmount: number,
-            direction: string,
+            direction: FlexibleLoanAdjustLtvDirectionEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
@@ -153,18 +158,20 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         /**
          * Borrow Flexible Loan
          *
+         * Weight(IP): 6000
          *
-         * This API endpoint is available for both the master account and the sub-account.
-         * You can customize LTV by entering loanAmount and collateralAmount.
+         * Security Type: TRADE
          *
-         * Weight: 6000
+         * Notes:
+         * - This endpoint is available for both master and sub-accounts.
+         * - You can customize LTV by entering `loanAmount` and `collateralAmount`.
          *
-         * @summary Flexible Loan Borrow(TRADE)
+         * @summary Flexible Loan Borrow (TRADE)
          * @param {string} loanCoin
          * @param {string} collateralCoin
          * @param {number} [loanAmount] Mandatory when collateralAmount is empty
          * @param {number} [collateralAmount] Mandatory when loanAmount is empty
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -215,19 +222,22 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         /**
          * Flexible Loan Repay
          *
+         * Weight(IP): 6000
          *
-         * repayAmount is mandatory even fullRepayment = FALSE
+         * Security Type: TRADE
          *
-         * Weight: 6000
+         * Notes:
+         * - `repayAmount` is mandatory even when `fullRepayment = FALSE`.
          *
-         * @summary Flexible Loan Repay(TRADE)
+         * @summary Flexible Loan Repay (TRADE)
          * @param {string} loanCoin
          * @param {string} collateralCoin
-         * @param {number} repayAmount repay amount of loanCoin
-         * @param {boolean} [collateralReturn] Default: TRUE. TRUE: Return extra collateral to spot account; FALSE: Keep extra collateral in the order, and lower LTV.
-         * @param {boolean} [fullRepayment] Default: FALSE. TRUE: Full repayment; FALSE: Partial repayment, based on loanAmount
-         * @param {number | bigint} [repaymentType] Default: 1. 1: Repayment with loan asset; 2: Repayment with collateral
-         * @param {number | bigint} [recvWindow]
+         * @param {number} repayAmount
+         * @param {boolean} [collateralReturn] TRUE: Return extra collateral to spot account; FALSE: Keep extra collateral in the order and lower
+         * LTV.
+         * @param {boolean} [fullRepayment] TRUE: Full repayment; FALSE: Partial repayment based on loan amount
+         * @param {FlexibleLoanRepayRepaymentTypeEnum} [repaymentType] 1: Repayment with loan asset; 2: Repayment with collateral
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -237,7 +247,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             repayAmount: number,
             collateralReturn?: boolean,
             fullRepayment?: boolean,
-            repaymentType?: number | bigint,
+            repaymentType?: FlexibleLoanRepayRepaymentTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
@@ -288,11 +298,13 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         /**
          * Get interest rate and borrow limit of flexible loanable assets. The borrow limit is shown in USD value.
          *
-         * Weight: 400
+         * Weight(IP): 400
          *
-         * @summary Get Flexible Loan Assets Data(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Flexible Loan Assets Data (USER_DATA)
          * @param {string} [loanCoin]
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -324,21 +336,24 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
-         * Get Flexible Loan Borrow History
+         * Get Flexible Loan Borrow History. It can be used to check history before 2024-02-27 08:00.
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned.
-         * The max interval between startTime and endTime is 180 days.
+         * Weight(IP): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
          *
-         * @summary Get Flexible Loan Borrow History(USER_DATA)
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+         * - The max interval between `startTime` and `endTime` is 180 days.
+         *
+         * @summary Get Flexible Loan Borrow History (USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -390,13 +405,16 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
-         * Get LTV information and collateral limit of flexible loan's collateral assets. The collateral limit is shown in USD value.
+         * Get LTV information and collateral limit of flexible loan's collateral assets. The collateral limit is shown in
+         * USD value.
          *
-         * Weight: 400
+         * Weight(IP): 400
          *
-         * @summary Get Flexible Loan Collateral Assets Data(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Flexible Loan Collateral Assets Data (USER_DATA)
          * @param {string} [collateralCoin]
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -430,19 +448,22 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         /**
          * Check Flexible Loan interest rate history
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned
-         * The max interval between startTime and endTime is 90 days.
-         * Time based on UTC+0.
+         * Weight(IP): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+         * - The max interval between `startTime` and `endTime` is 90 days.
+         * - Time is based on UTC+0.
          *
          * @summary Get Flexible Loan Interest Rate History (USER_DATA)
          * @param {string} coin
-         * @param {number | bigint} recvWindow
+         * @param {number | bigint} recvWindow Request validity window in milliseconds
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
          *
          * @throws {RequiredError}
          */
@@ -495,17 +516,20 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
+         * Get Flexible Loan Liquidation History
          *
-         * Weight: 400
+         * Weight(IP): 400
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Flexible Loan Liquidation History (USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -557,21 +581,24 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
-         * Get Flexible Loan LTV Adjustment History
+         * Get Flexible Loan LTV Adjustment History. It can be used to check history before 2024-02-27 08:00.
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned.
-         * The max interval between startTime and endTime is 180 days.
+         * Weight(UID): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
          *
-         * @summary Get Flexible Loan LTV Adjustment History(USER_DATA)
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+         * - The max interval between `startTime` and `endTime` is 180 days.
+         *
+         * @summary Get Flexible Loan LTV Adjustment History (USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -625,14 +652,16 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         /**
          * Get Flexible Loan Ongoing Orders
          *
-         * Weight: 300
+         * Weight(IP): 300
          *
-         * @summary Get Flexible Loan Ongoing Orders(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Flexible Loan Ongoing Orders (USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -676,21 +705,24 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
-         * Get Flexible Loan Repayment History
+         * Get Flexible Loan Repayment History. It can be used to check history before 2024-02-27 08:00.
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned.
-         * The max interval between startTime and endTime is 180 days.
+         * Weight(IP): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
          *
-         * @summary Get Flexible Loan Repayment History(USER_DATA)
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+         * - The max interval between `startTime` and `endTime` is 180 days.
+         *
+         * @summary Get Flexible Loan Repayment History (USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number | bigint} [limit] Default: 10; max: 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current querying page
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -750,10 +782,13 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
  */
 export interface FlexibleRateApiInterface {
     /**
+     * Get the latest rate of collateral coin/loan coin when using collateral repay.
      *
-     * Weight: 6000
+     * Weight(IP): 6000
      *
-     * @summary Check Collateral Repay Rate (USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Check Collateral Flexible Repay Rate (USER_DATA)
      * @param {CheckCollateralRepayRateRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -765,11 +800,14 @@ export interface FlexibleRateApiInterface {
     /**
      * Flexible Loan Adjust LTV
      *
-     * API Key needs Spot & Margin Trading permission for this endpoint
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: TRADE
      *
-     * @summary Flexible Loan Adjust LTV(TRADE)
+     * Notes:
+     * - API key needs Spot & Margin Trading permission for this endpoint.
+     *
+     * @summary Flexible Loan Adjust LTV (TRADE)
      * @param {FlexibleLoanAdjustLtvRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -781,13 +819,15 @@ export interface FlexibleRateApiInterface {
     /**
      * Borrow Flexible Loan
      *
+     * Weight(IP): 6000
      *
-     * This API endpoint is available for both the master account and the sub-account.
-     * You can customize LTV by entering loanAmount and collateralAmount.
+     * Security Type: TRADE
      *
-     * Weight: 6000
+     * Notes:
+     * - This endpoint is available for both master and sub-accounts.
+     * - You can customize LTV by entering `loanAmount` and `collateralAmount`.
      *
-     * @summary Flexible Loan Borrow(TRADE)
+     * @summary Flexible Loan Borrow (TRADE)
      * @param {FlexibleLoanBorrowRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -799,12 +839,14 @@ export interface FlexibleRateApiInterface {
     /**
      * Flexible Loan Repay
      *
+     * Weight(IP): 6000
      *
-     * repayAmount is mandatory even fullRepayment = FALSE
+     * Security Type: TRADE
      *
-     * Weight: 6000
+     * Notes:
+     * - `repayAmount` is mandatory even when `fullRepayment = FALSE`.
      *
-     * @summary Flexible Loan Repay(TRADE)
+     * @summary Flexible Loan Repay (TRADE)
      * @param {FlexibleLoanRepayRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -816,9 +858,11 @@ export interface FlexibleRateApiInterface {
     /**
      * Get interest rate and borrow limit of flexible loanable assets. The borrow limit is shown in USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Flexible Loan Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Assets Data (USER_DATA)
      * @param {GetFlexibleLoanAssetsDataRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -828,14 +872,17 @@ export interface FlexibleRateApiInterface {
         requestParameters?: GetFlexibleLoanAssetsDataRequest
     ): Promise<RestApiResponse<GetFlexibleLoanAssetsDataResponse>>;
     /**
-     * Get Flexible Loan Borrow History
+     * Get Flexible Loan Borrow History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan Borrow History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan Borrow History (USER_DATA)
      * @param {GetFlexibleLoanBorrowHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -845,11 +892,14 @@ export interface FlexibleRateApiInterface {
         requestParameters?: GetFlexibleLoanBorrowHistoryRequest
     ): Promise<RestApiResponse<GetFlexibleLoanBorrowHistoryResponse>>;
     /**
-     * Get LTV information and collateral limit of flexible loan's collateral assets. The collateral limit is shown in USD value.
+     * Get LTV information and collateral limit of flexible loan's collateral assets. The collateral limit is shown in
+     * USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Flexible Loan Collateral Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Collateral Assets Data (USER_DATA)
      * @param {GetFlexibleLoanCollateralAssetsDataRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -861,11 +911,14 @@ export interface FlexibleRateApiInterface {
     /**
      * Check Flexible Loan interest rate history
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned
-     * The max interval between startTime and endTime is 90 days.
-     * Time based on UTC+0.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 90 days.
+     * - Time is based on UTC+0.
      *
      * @summary Get Flexible Loan Interest Rate History (USER_DATA)
      * @param {GetFlexibleLoanInterestRateHistoryRequest} requestParameters Request parameters.
@@ -877,8 +930,11 @@ export interface FlexibleRateApiInterface {
         requestParameters: GetFlexibleLoanInterestRateHistoryRequest
     ): Promise<RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>>;
     /**
+     * Get Flexible Loan Liquidation History
      *
-     * Weight: 400
+     * Weight(IP): 400
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Flexible Loan Liquidation History (USER_DATA)
      * @param {GetFlexibleLoanLiquidationHistoryRequest} requestParameters Request parameters.
@@ -890,14 +946,17 @@ export interface FlexibleRateApiInterface {
         requestParameters?: GetFlexibleLoanLiquidationHistoryRequest
     ): Promise<RestApiResponse<GetFlexibleLoanLiquidationHistoryResponse>>;
     /**
-     * Get Flexible Loan LTV Adjustment History
+     * Get Flexible Loan LTV Adjustment History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(UID): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan LTV Adjustment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan LTV Adjustment History (USER_DATA)
      * @param {GetFlexibleLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -909,9 +968,11 @@ export interface FlexibleRateApiInterface {
     /**
      * Get Flexible Loan Ongoing Orders
      *
-     * Weight: 300
+     * Weight(IP): 300
      *
-     * @summary Get Flexible Loan Ongoing Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Ongoing Orders (USER_DATA)
      * @param {GetFlexibleLoanOngoingOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -921,14 +982,17 @@ export interface FlexibleRateApiInterface {
         requestParameters?: GetFlexibleLoanOngoingOrdersRequest
     ): Promise<RestApiResponse<GetFlexibleLoanOngoingOrdersResponse>>;
     /**
-     * Get Flexible Loan Repayment History
+     * Get Flexible Loan Repayment History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan Repayment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan Repayment History (USER_DATA)
      * @param {GetFlexibleLoanRepaymentHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -959,7 +1023,7 @@ export interface CheckCollateralRepayRateRequest {
     readonly collateralCoin: string;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiCheckCollateralRepayRate
      */
@@ -993,14 +1057,14 @@ export interface FlexibleLoanAdjustLtvRequest {
     readonly adjustmentAmount: number;
 
     /**
-     * "ADDITIONAL", "REDUCED"
-     * @type {string}
+     *
+     * @type {'ADDITIONAL' | 'REDUCED'}
      * @memberof FlexibleRateApiFlexibleLoanAdjustLtv
      */
-    readonly direction: string;
+    readonly direction: FlexibleLoanAdjustLtvDirectionEnum;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiFlexibleLoanAdjustLtv
      */
@@ -1041,7 +1105,7 @@ export interface FlexibleLoanBorrowRequest {
     readonly collateralAmount?: number;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiFlexibleLoanBorrow
      */
@@ -1068,35 +1132,36 @@ export interface FlexibleLoanRepayRequest {
     readonly collateralCoin: string;
 
     /**
-     * repay amount of loanCoin
+     *
      * @type {number}
      * @memberof FlexibleRateApiFlexibleLoanRepay
      */
     readonly repayAmount: number;
 
     /**
-     * Default: TRUE. TRUE: Return extra collateral to spot account; FALSE: Keep extra collateral in the order, and lower LTV.
+     * TRUE: Return extra collateral to spot account; FALSE: Keep extra collateral in the order and lower
+     * LTV.
      * @type {boolean}
      * @memberof FlexibleRateApiFlexibleLoanRepay
      */
     readonly collateralReturn?: boolean;
 
     /**
-     * Default: FALSE. TRUE: Full repayment; FALSE: Partial repayment, based on loanAmount
+     * TRUE: Full repayment; FALSE: Partial repayment based on loan amount
      * @type {boolean}
      * @memberof FlexibleRateApiFlexibleLoanRepay
      */
     readonly fullRepayment?: boolean;
 
     /**
-     * Default: 1. 1: Repayment with loan asset; 2: Repayment with collateral
-     * @type {number | bigint}
+     * 1: Repayment with loan asset; 2: Repayment with collateral
+     * @type {1 | 2 | bigint}
      * @memberof FlexibleRateApiFlexibleLoanRepay
      */
-    readonly repaymentType?: number | bigint;
+    readonly repaymentType?: FlexibleLoanRepayRepaymentTypeEnum;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiFlexibleLoanRepay
      */
@@ -1116,7 +1181,7 @@ export interface GetFlexibleLoanAssetsDataRequest {
     readonly loanCoin?: string;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanAssetsData
      */
@@ -1157,21 +1222,21 @@ export interface GetFlexibleLoanBorrowHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanBorrowHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanBorrowHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanBorrowHistory
      */
@@ -1191,7 +1256,7 @@ export interface GetFlexibleLoanCollateralAssetsDataRequest {
     readonly collateralCoin?: string;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanCollateralAssetsData
      */
@@ -1211,7 +1276,7 @@ export interface GetFlexibleLoanInterestRateHistoryRequest {
     readonly coin: string;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
      */
@@ -1232,14 +1297,14 @@ export interface GetFlexibleLoanInterestRateHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
      */
@@ -1280,21 +1345,21 @@ export interface GetFlexibleLoanLiquidationHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLiquidationHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLiquidationHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLiquidationHistory
      */
@@ -1335,21 +1400,21 @@ export interface GetFlexibleLoanLtvAdjustmentHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLtvAdjustmentHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLtvAdjustmentHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLtvAdjustmentHistory
      */
@@ -1376,21 +1441,21 @@ export interface GetFlexibleLoanOngoingOrdersRequest {
     readonly collateralCoin?: string;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanOngoingOrders
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanOngoingOrders
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanOngoingOrders
      */
@@ -1431,21 +1496,21 @@ export interface GetFlexibleLoanRepaymentHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Current querying page
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanRepaymentHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records to return
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanRepaymentHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanRepaymentHistory
      */
@@ -1466,15 +1531,18 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
+     * Get the latest rate of collateral coin/loan coin when using collateral repay.
      *
-     * Weight: 6000
+     * Weight(IP): 6000
      *
-     * @summary Check Collateral Repay Rate (USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Check Collateral Flexible Repay Rate (USER_DATA)
      * @param {CheckCollateralRepayRateRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CheckCollateralRepayRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Check-Collateral-Repay-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#check-collateral-repay-rate Binance API Documentation}
      */
     public async checkCollateralRepayRate(
         requestParameters: CheckCollateralRepayRateRequest
@@ -1499,16 +1567,19 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     /**
      * Flexible Loan Adjust LTV
      *
-     * API Key needs Spot & Margin Trading permission for this endpoint
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: TRADE
      *
-     * @summary Flexible Loan Adjust LTV(TRADE)
+     * Notes:
+     * - API key needs Spot & Margin Trading permission for this endpoint.
+     *
+     * @summary Flexible Loan Adjust LTV (TRADE)
      * @param {FlexibleLoanAdjustLtvRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FlexibleLoanAdjustLtvResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Adjust-LTV Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#flexible-loan-adjust-ltv Binance API Documentation}
      */
     public async flexibleLoanAdjustLtv(
         requestParameters: FlexibleLoanAdjustLtvRequest
@@ -1535,18 +1606,20 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     /**
      * Borrow Flexible Loan
      *
+     * Weight(IP): 6000
      *
-     * This API endpoint is available for both the master account and the sub-account.
-     * You can customize LTV by entering loanAmount and collateralAmount.
+     * Security Type: TRADE
      *
-     * Weight: 6000
+     * Notes:
+     * - This endpoint is available for both master and sub-accounts.
+     * - You can customize LTV by entering `loanAmount` and `collateralAmount`.
      *
-     * @summary Flexible Loan Borrow(TRADE)
+     * @summary Flexible Loan Borrow (TRADE)
      * @param {FlexibleLoanBorrowRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FlexibleLoanBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#flexible-loan-borrow Binance API Documentation}
      */
     public async flexibleLoanBorrow(
         requestParameters: FlexibleLoanBorrowRequest
@@ -1573,17 +1646,19 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     /**
      * Flexible Loan Repay
      *
+     * Weight(IP): 6000
      *
-     * repayAmount is mandatory even fullRepayment = FALSE
+     * Security Type: TRADE
      *
-     * Weight: 6000
+     * Notes:
+     * - `repayAmount` is mandatory even when `fullRepayment = FALSE`.
      *
-     * @summary Flexible Loan Repay(TRADE)
+     * @summary Flexible Loan Repay (TRADE)
      * @param {FlexibleLoanRepayRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FlexibleLoanRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#flexible-loan-repay Binance API Documentation}
      */
     public async flexibleLoanRepay(
         requestParameters: FlexibleLoanRepayRequest
@@ -1612,14 +1687,16 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     /**
      * Get interest rate and borrow limit of flexible loanable assets. The borrow limit is shown in USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Flexible Loan Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Assets Data (USER_DATA)
      * @param {GetFlexibleLoanAssetsDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanAssetsDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Assets-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-assets-data Binance API Documentation}
      */
     public async getFlexibleLoanAssetsData(
         requestParameters: GetFlexibleLoanAssetsDataRequest = {}
@@ -1641,19 +1718,22 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
-     * Get Flexible Loan Borrow History
+     * Get Flexible Loan Borrow History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan Borrow History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan Borrow History (USER_DATA)
      * @param {GetFlexibleLoanBorrowHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanBorrowHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Borrow-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-borrow-history Binance API Documentation}
      */
     public async getFlexibleLoanBorrowHistory(
         requestParameters: GetFlexibleLoanBorrowHistoryRequest = {}
@@ -1680,16 +1760,19 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
-     * Get LTV information and collateral limit of flexible loan's collateral assets. The collateral limit is shown in USD value.
+     * Get LTV information and collateral limit of flexible loan's collateral assets. The collateral limit is shown in
+     * USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Flexible Loan Collateral Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Collateral Assets Data (USER_DATA)
      * @param {GetFlexibleLoanCollateralAssetsDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanCollateralAssetsDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Collateral-Assets-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-collateral-assets-data Binance API Documentation}
      */
     public async getFlexibleLoanCollateralAssetsData(
         requestParameters: GetFlexibleLoanCollateralAssetsDataRequest = {}
@@ -1714,18 +1797,21 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     /**
      * Check Flexible Loan interest rate history
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned
-     * The max interval between startTime and endTime is 90 days.
-     * Time based on UTC+0.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 90 days.
+     * - Time is based on UTC+0.
      *
      * @summary Get Flexible Loan Interest Rate History (USER_DATA)
      * @param {GetFlexibleLoanInterestRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Interest-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-interest-rate-history Binance API Documentation}
      */
     public async getFlexibleLoanInterestRateHistory(
         requestParameters: GetFlexibleLoanInterestRateHistoryRequest
@@ -1752,15 +1838,18 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
+     * Get Flexible Loan Liquidation History
      *
-     * Weight: 400
+     * Weight(IP): 400
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Flexible Loan Liquidation History (USER_DATA)
      * @param {GetFlexibleLoanLiquidationHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanLiquidationHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Liquidation-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-liquidation-history Binance API Documentation}
      */
     public async getFlexibleLoanLiquidationHistory(
         requestParameters: GetFlexibleLoanLiquidationHistoryRequest = {}
@@ -1788,19 +1877,22 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
-     * Get Flexible Loan LTV Adjustment History
+     * Get Flexible Loan LTV Adjustment History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(UID): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan LTV Adjustment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan LTV Adjustment History (USER_DATA)
      * @param {GetFlexibleLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanLtvAdjustmentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-LTV-Adjustment-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-ltv-adjustment-history Binance API Documentation}
      */
     public async getFlexibleLoanLtvAdjustmentHistory(
         requestParameters: GetFlexibleLoanLtvAdjustmentHistoryRequest = {}
@@ -1830,14 +1922,16 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     /**
      * Get Flexible Loan Ongoing Orders
      *
-     * Weight: 300
+     * Weight(IP): 300
      *
-     * @summary Get Flexible Loan Ongoing Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Loan Ongoing Orders (USER_DATA)
      * @param {GetFlexibleLoanOngoingOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanOngoingOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Ongoing-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-ongoing-orders Binance API Documentation}
      */
     public async getFlexibleLoanOngoingOrders(
         requestParameters: GetFlexibleLoanOngoingOrdersRequest = {}
@@ -1862,19 +1956,22 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
-     * Get Flexible Loan Repayment History
+     * Get Flexible Loan Repayment History. It can be used to check history before 2024-02-27 08:00.
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 180 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Loan Repayment History(USER_DATA)
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
+     * - The max interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get Flexible Loan Repayment History (USER_DATA)
      * @param {GetFlexibleLoanRepaymentHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanRepaymentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Repayment-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/flexible-rate#get-flexible-loan-repayment-history Binance API Documentation}
      */
     public async getFlexibleLoanRepaymentHistory(
         requestParameters: GetFlexibleLoanRepaymentHistoryRequest = {}
@@ -1900,4 +1997,14 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum FlexibleLoanAdjustLtvDirectionEnum {
+    ADDITIONAL = 'ADDITIONAL',
+    REDUCED = 'REDUCED',
+}
+
+export enum FlexibleLoanRepayRepaymentTypeEnum {
+    REPAYMENT_TYPE_1 = 1,
+    REPAYMENT_TYPE_2 = 2,
 }

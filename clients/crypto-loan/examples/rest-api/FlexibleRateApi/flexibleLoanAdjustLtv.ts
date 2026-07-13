@@ -1,4 +1,4 @@
-import { CryptoLoan, CRYPTO_LOAN_REST_API_PROD_URL } from '../../../src';
+import { CryptoLoan, CryptoLoanRestAPI, CRYPTO_LOAN_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,10 +10,10 @@ const client = new CryptoLoan({ configurationRestAPI });
 async function flexibleLoanAdjustLtv() {
     try {
         const response = await client.restAPI.flexibleLoanAdjustLtv({
-            loanCoin: 'loanCoin_example',
-            collateralCoin: 'collateralCoin_example',
-            adjustmentAmount: 1.0,
-            direction: 'direction_example',
+            loanCoin: 'BUSD',
+            collateralCoin: 'BNB',
+            adjustmentAmount: 1,
+            direction: CryptoLoanRestAPI.FlexibleLoanAdjustLtvDirectionEnum.ADDITIONAL,
         });
 
         const rateLimits = response.rateLimits!;

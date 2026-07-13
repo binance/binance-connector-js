@@ -10,8 +10,8 @@ const client = new CryptoLoan({ configurationRestAPI });
 async function checkCollateralRepayRate() {
     try {
         const response = await client.restAPI.checkCollateralRepayRate({
-            loanCoin: 'loanCoin_example',
-            collateralCoin: 'collateralCoin_example',
+            loanCoin: 'BUSD',
+            collateralCoin: 'BNB',
         });
 
         const rateLimits = response.rateLimits!;
