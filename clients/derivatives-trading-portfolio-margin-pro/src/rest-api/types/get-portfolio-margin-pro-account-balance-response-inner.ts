@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,91 +20,91 @@
  */
 export interface GetPortfolioMarginProAccountBalanceResponseInner {
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     asset?: string;
     /**
-     *
+     * total Wallet Balance.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     totalWalletBalance?: string;
     /**
-     *
+     * cross Margin Asset.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     crossMarginAsset?: string;
     /**
-     *
+     * cross Margin Borrowed.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     crossMarginBorrowed?: string;
     /**
-     *
+     * cross Margin Free.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     crossMarginFree?: string;
     /**
-     *
+     * cross Margin Interest.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     crossMarginInterest?: string;
     /**
-     *
+     * cross Margin Locked.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     crossMarginLocked?: string;
     /**
-     *
+     * um Wallet Balance.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     umWalletBalance?: string;
     /**
-     *
+     * um Unrealized PNL.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     umUnrealizedPNL?: string;
     /**
-     *
+     * cm Wallet Balance.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     cmWalletBalance?: string;
     /**
-     *
+     * cm Unrealized PNL.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     cmUnrealizedPNL?: string;
     /**
-     *
+     * update Time.
      * @type {number | bigint}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * negative Balance.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     negativeBalance?: string;
     /**
-     *
+     * option Wallet Balance.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
     optionWalletBalance?: string;
     /**
-     *
+     * option Equity.
      * @type {string}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */

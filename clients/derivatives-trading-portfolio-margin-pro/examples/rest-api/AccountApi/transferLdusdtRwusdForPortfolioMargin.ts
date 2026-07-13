@@ -1,5 +1,6 @@
 import {
     DerivativesTradingPortfolioMarginPro,
+    DerivativesTradingPortfolioMarginProRestAPI,
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -13,9 +14,12 @@ const client = new DerivativesTradingPortfolioMarginPro({ configurationRestAPI }
 async function transferLdusdtRwusdForPortfolioMargin() {
     try {
         const response = await client.restAPI.transferLdusdtRwusdForPortfolioMargin({
-            asset: 'asset_example',
-            transferType: 'transferType_example',
-            amount: 1.0,
+            asset: DerivativesTradingPortfolioMarginProRestAPI
+                .TransferLdusdtRwusdForPortfolioMarginAssetEnum.LDUSDT,
+            transferType:
+                DerivativesTradingPortfolioMarginProRestAPI
+                    .TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
+            amount: 1,
         });
 
         const rateLimits = response.rateLimits!;

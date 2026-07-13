@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,25 +20,25 @@
  */
 export interface PortfolioMarginProTieredCollateralRateResponseInnerCollateralInfoInner {
     /**
-     *
+     * tier Floor.
      * @type {string}
      * @memberof PortfolioMarginProTieredCollateralRateResponseInnerCollateralInfoInner
      */
     tierFloor?: string;
     /**
-     *
+     * tier Cap.
      * @type {string}
      * @memberof PortfolioMarginProTieredCollateralRateResponseInnerCollateralInfoInner
      */
     tierCap?: string;
     /**
-     *
+     * collateral Rate.
      * @type {string}
      * @memberof PortfolioMarginProTieredCollateralRateResponseInnerCollateralInfoInner
      */
     collateralRate?: string;
     /**
-     *
+     * account equity quick addition number
      * @type {string}
      * @memberof PortfolioMarginProTieredCollateralRateResponseInnerCollateralInfoInner
      */

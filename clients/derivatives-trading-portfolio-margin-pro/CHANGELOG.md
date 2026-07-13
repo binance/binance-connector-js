@@ -1,5 +1,38 @@
 # Changelog
 
+## 15.0.0 - 2026-07-13
+
+### Changed (6)
+
+#### REST API
+
+- Modified parameter `asset`:
+  - enum added: `LDUSDT`, `RWUSD`
+  - affected methods:
+    - `transferLdusdtRwusdForPortfolioMargin()` (`POST /sapi/v1/portfolio/earn-asset-transfer`)
+- Modified parameter `autoRepay`:
+  - enum added: `true`, `false`
+  - affected methods:
+    - `changeAutoRepayFuturesStatus()` (`POST /sapi/v1/portfolio/repay-futures-switch`)
+- Modified parameter `deltaEnabled`:
+  - enum added: `true`, `false`
+  - affected methods:
+    - `switchDeltaMode()` (`POST /sapi/v1/portfolio/delta-mode`)
+- Modified parameter `from`:
+  - enum added: `SPOT`, `MARGIN`
+  - affected methods:
+    - `portfolioMarginProBankruptcyLoanRepay()` (`POST /sapi/v1/portfolio/repay`)
+    - `repayFuturesNegativeBalance()` (`POST /sapi/v1/portfolio/repay-futures-negative-balance`)
+- Modified parameter `transferSide`:
+  - enum added: `TO_UM`, `FROM_UM`
+  - affected methods:
+    - `bnbTransfer()` (`POST /sapi/v1/portfolio/bnb-transfer`)
+- Modified parameter `transferType`:
+  - enum added: `EARN_TO_FUTURE`, `FUTURE_TO_EARN`
+  - affected methods:
+    - `getTransferableEarnAssetBalanceForPortfolioMargin()` (`GET /sapi/v1/portfolio/earn-asset-balance`)
+    - `transferLdusdtRwusdForPortfolioMargin()` (`POST /sapi/v1/portfolio/earn-asset-transfer`)
+
 ## 14.0.4 - 2026-06-18
 
 ### Changed (2)

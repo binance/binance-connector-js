@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMarginPro({ configurationRestAPI }
 async function setMarginCallLevel() {
     try {
         const response = await client.restAPI.setMarginCallLevel({
-            marginCallLevel: 5000.0,
+            marginCallLevel: 1.5,
         });
 
         const rateLimits = response.rateLimits!;

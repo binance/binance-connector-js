@@ -1,5 +1,6 @@
 import {
     DerivativesTradingPortfolioMarginPro,
+    DerivativesTradingPortfolioMarginProRestAPI,
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -13,7 +14,8 @@ const client = new DerivativesTradingPortfolioMarginPro({ configurationRestAPI }
 async function switchDeltaMode() {
     try {
         const response = await client.restAPI.switchDeltaMode({
-            deltaEnabled: 'deltaEnabled_example',
+            deltaEnabled:
+                DerivativesTradingPortfolioMarginProRestAPI.SwitchDeltaModeDeltaEnabledEnum.TRUE,
         });
 
         const rateLimits = response.rateLimits!;

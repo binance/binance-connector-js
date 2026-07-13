@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro WebSocket Market Streams
+ * Portfolio Margin Pro WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro WebSocket Market Streams
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,55 +14,55 @@
  */
 
 /**
- *
+ * Pushed every 5 seconds with account asset status.
  * @export
  * @interface PmProAccountUpdate
  */
 export interface PmProAccountUpdate {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof PmProAccountUpdate
      */
     E?: number | bigint;
     /**
-     *
+     * uniMMR level
      * @type {string}
      * @memberof PmProAccountUpdate
      */
     u?: string;
     /**
-     *
+     * Account equity in USD
      * @type {string}
      * @memberof PmProAccountUpdate
      */
     eq?: string;
     /**
-     *
+     * Actual equity without collateral rate in USD
      * @type {string}
      * @memberof PmProAccountUpdate
      */
     ae?: string;
     /**
-     *
+     * Total initial margin in USD
      * @type {string}
      * @memberof PmProAccountUpdate
      */
     im?: string;
     /**
-     *
+     * Total maintenance margin in USD
      * @type {string}
      * @memberof PmProAccountUpdate
      */
     mm?: string;
     /**
-     *
+     * Total available balance in USD
      * @type {string}
      * @memberof PmProAccountUpdate
      */
     avb?: string;
     /**
-     *
+     * Virtual maxWithdraw amount in USD
      * @type {string}
      * @memberof PmProAccountUpdate
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface GetPortfolioMarginProAccountInfoResponse {
     /**
-     *
+     * Classic Portfolio margin account maintenance margin rate
      * @type {string}
      * @memberof GetPortfolioMarginProAccountInfoResponse
      */
     uniMMR?: string;
     /**
-     *
+     * Account equity, unit：USD
      * @type {string}
      * @memberof GetPortfolioMarginProAccountInfoResponse
      */
     accountEquity?: string;
     /**
-     *
+     * Actual equity, unit：USD
      * @type {string}
      * @memberof GetPortfolioMarginProAccountInfoResponse
      */
     actualEquity?: string;
     /**
-     *
+     * Classic Portfolio margin account maintenance margin, unit：USD
      * @type {string}
      * @memberof GetPortfolioMarginProAccountInfoResponse
      */
     accountMaintMargin?: string;
     /**
-     *
+     * Ignored for PM PRO and PM PRO SPAN
      * @type {string}
      * @memberof GetPortfolioMarginProAccountInfoResponse
      */
     accountInitialMargin?: string;
     /**
-     *
+     * Ignored for PM PRO and PM PRO SPAN
      * @type {string}
      * @memberof GetPortfolioMarginProAccountInfoResponse
      */
     totalAvailableBalance?: string;
     /**
-     *
+     * Classic Portfolio margin account status:\"NORMAL\", \"MARGIN_CALL\", \"SUPPLY_MARGIN\", \"REDUCE_ONLY\", \"ACTIVE_LIQUIDATION\", \"FORCE_LIQUIDATION\", \"BANKRUPTED\"
      * @type {string}
      * @memberof GetPortfolioMarginProAccountInfoResponse
      */
     accountStatus?: string;
     /**
-     *
+     * PM_1 for PM PRO, PM_2 for PM, PM_3 for PM PRO SPAN
      * @type {string}
      * @memberof GetPortfolioMarginProAccountInfoResponse
      */

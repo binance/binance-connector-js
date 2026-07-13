@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro WebSocket Market Streams
+ * Portfolio Margin Pro WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro WebSocket Market Streams
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -23,7 +23,6 @@ import type { Risklevelchange } from './risklevelchange';
 
 /**
  * @type UserDataStreamEventsResponse
- * @export
  */
 export type UserDataStreamEventsResponse =
     | ({ e: 'PM_PRO_ACCOUNT_UPDATE' } & PmProAccountUpdate)

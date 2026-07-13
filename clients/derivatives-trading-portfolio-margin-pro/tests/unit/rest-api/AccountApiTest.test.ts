@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,17 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AccountApi } from '../../../src/rest-api';
+import {
+    AccountApi,
+    BnbTransferTransferSideEnum,
+    ChangeAutoRepayFuturesStatusAutoRepayEnum,
+    GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum,
+    PortfolioMarginProBankruptcyLoanRepayFromEnum,
+    RepayFuturesNegativeBalanceFromEnum,
+    SwitchDeltaModeDeltaEnabledEnum,
+    TransferLdusdtRwusdForPortfolioMarginAssetEnum,
+    TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum,
+} from '../../../src/rest-api';
 import {
     BnbTransferRequest,
     ChangeAutoRepayFuturesStatusRequest,
@@ -79,7 +89,7 @@ describe('AccountApi', () => {
         it('should execute bnbTransfer() successfully with required parameters only', async () => {
             const params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
             };
 
             mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
@@ -101,7 +111,7 @@ describe('AccountApi', () => {
         it('should execute bnbTransfer() successfully with optional parameters', async () => {
             const params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
                 recvWindow: 5000,
             };
 
@@ -124,7 +134,7 @@ describe('AccountApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -137,7 +147,7 @@ describe('AccountApi', () => {
         it('should throw RequiredError when transferSide is missing', async () => {
             const _params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
             };
             const params = Object.assign({ ..._params });
             delete params?.transferSide;
@@ -150,7 +160,7 @@ describe('AccountApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
             };
 
             const errorResponse = {
@@ -171,7 +181,7 @@ describe('AccountApi', () => {
     describe('changeAutoRepayFuturesStatus()', () => {
         it('should execute changeAutoRepayFuturesStatus() successfully with required parameters only', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: 'true',
+                autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
             };
 
             mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
@@ -192,7 +202,7 @@ describe('AccountApi', () => {
 
         it('should execute changeAutoRepayFuturesStatus() successfully with optional parameters', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: 'true',
+                autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -214,7 +224,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when autoRepay is missing', async () => {
             const _params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: 'true',
+                autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
             };
             const params = Object.assign({ ..._params });
             delete params?.autoRepay;
@@ -226,7 +236,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: 'true',
+                autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
             };
 
             const errorResponse = {
@@ -363,7 +373,7 @@ describe('AccountApi', () => {
     describe('fundCollectionByAsset()', () => {
         it('should execute fundCollectionByAsset() successfully with required parameters only', async () => {
             const params: FundCollectionByAssetRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
@@ -384,7 +394,7 @@ describe('AccountApi', () => {
 
         it('should execute fundCollectionByAsset() successfully with optional parameters', async () => {
             const params: FundCollectionByAssetRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 recvWindow: 5000,
             };
 
@@ -406,7 +416,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: FundCollectionByAssetRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -418,7 +428,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: FundCollectionByAssetRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             const errorResponse = {
@@ -610,18 +620,18 @@ describe('AccountApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        asset: 'BTC',
-                        totalWalletBalance: '100',
-                        crossMarginAsset: '100',
-                        crossMarginBorrowed: '0',
-                        crossMarginFree: '100',
-                        crossMarginInterest: '0',
-                        crossMarginLocked: '0',
-                        umWalletBalance: '0',
-                        umUnrealizedPNL: '0',
-                        cmWalletBalance: '0',
-                        cmUnrealizedPNL: '0',
-                        updateTime: 0,
+                        asset: 'USDT',
+                        totalWalletBalance: '122607.35137903',
+                        crossMarginAsset: '92.27530794',
+                        crossMarginBorrowed: '10.00000000',
+                        crossMarginFree: '100.00000000',
+                        crossMarginInterest: '0.72469206',
+                        crossMarginLocked: '3.00000000',
+                        umWalletBalance: '0.00000000',
+                        umUnrealizedPNL: '23.72469206',
+                        cmWalletBalance: '23.72469206',
+                        cmUnrealizedPNL: '',
+                        updateTime: 1617939110373,
                         negativeBalance: '0',
                         optionWalletBalance: '0',
                         optionEquity: '0',
@@ -645,25 +655,25 @@ describe('AccountApi', () => {
 
         it('should execute getPortfolioMarginProAccountBalance() successfully with optional parameters', async () => {
             const params: GetPortfolioMarginProAccountBalanceRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        asset: 'BTC',
-                        totalWalletBalance: '100',
-                        crossMarginAsset: '100',
-                        crossMarginBorrowed: '0',
-                        crossMarginFree: '100',
-                        crossMarginInterest: '0',
-                        crossMarginLocked: '0',
-                        umWalletBalance: '0',
-                        umUnrealizedPNL: '0',
-                        cmWalletBalance: '0',
-                        cmUnrealizedPNL: '0',
-                        updateTime: 0,
+                        asset: 'USDT',
+                        totalWalletBalance: '122607.35137903',
+                        crossMarginAsset: '92.27530794',
+                        crossMarginBorrowed: '10.00000000',
+                        crossMarginFree: '100.00000000',
+                        crossMarginInterest: '0.72469206',
+                        crossMarginLocked: '3.00000000',
+                        umWalletBalance: '0.00000000',
+                        umUnrealizedPNL: '23.72469206',
+                        cmWalletBalance: '23.72469206',
+                        cmUnrealizedPNL: '',
+                        updateTime: 1617939110373,
                         negativeBalance: '0',
                         optionWalletBalance: '0',
                         optionEquity: '0',
@@ -872,8 +882,9 @@ describe('AccountApi', () => {
     describe('getTransferableEarnAssetBalanceForPortfolioMargin()', () => {
         it('should execute getTransferableEarnAssetBalanceForPortfolioMargin() successfully with required parameters only', async () => {
             const params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
+                asset: 'LDUSDT',
+                transferType:
+                    GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
             };
 
             mockResponse = JSONParse(JSONStringify({ asset: 'LDUSDT', amount: '0.55' }));
@@ -896,8 +907,9 @@ describe('AccountApi', () => {
 
         it('should execute getTransferableEarnAssetBalanceForPortfolioMargin() successfully with optional parameters', async () => {
             const params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
+                asset: 'LDUSDT',
+                transferType:
+                    GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
                 recvWindow: 5000,
             };
 
@@ -921,8 +933,9 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
+                asset: 'LDUSDT',
+                transferType:
+                    GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -936,8 +949,9 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when transferType is missing', async () => {
             const _params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
+                asset: 'LDUSDT',
+                transferType:
+                    GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
             };
             const params = Object.assign({ ..._params });
             delete params?.transferType;
@@ -951,8 +965,9 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
+                asset: 'LDUSDT',
+                transferType:
+                    GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
             };
 
             const errorResponse = {
@@ -994,7 +1009,7 @@ describe('AccountApi', () => {
 
         it('should execute portfolioMarginProBankruptcyLoanRepay() successfully with optional parameters', async () => {
             const params: PortfolioMarginProBankruptcyLoanRepayRequest = {
-                from: 'SPOT',
+                from: PortfolioMarginProBankruptcyLoanRepayFromEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -1102,10 +1117,7 @@ describe('AccountApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     total: 3,
-                    rows: [
-                        { asset: 'USDT', amount: '404.80294503', repayTime: 1731336427804 },
-                        { asset: 'USDT', amount: '4620.41204574', repayTime: 1726125090016 },
-                    ],
+                    rows: [{ asset: 'USDT', amount: '404.80294503', repayTime: 1731336427804 }],
                 })
             );
 
@@ -1129,18 +1141,15 @@ describe('AccountApi', () => {
             const params: QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                current: 1,
                 size: 10,
+                current: 1,
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     total: 3,
-                    rows: [
-                        { asset: 'USDT', amount: '404.80294503', repayTime: 1731336427804 },
-                        { asset: 'USDT', amount: '4620.41204574', repayTime: 1726125090016 },
-                    ],
+                    rows: [{ asset: 'USDT', amount: '404.80294503', repayTime: 1731336427804 }],
                 })
             );
 
@@ -1212,7 +1221,7 @@ describe('AccountApi', () => {
 
         it('should execute queryPortfolioMarginProNegativeBalanceInterestHistory() successfully with optional parameters', async () => {
             const params: QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 size: 10,
@@ -1288,7 +1297,7 @@ describe('AccountApi', () => {
 
         it('should execute repayFuturesNegativeBalance() successfully with optional parameters', async () => {
             const params: RepayFuturesNegativeBalanceRequest = {
-                from: 'SPOT',
+                from: RepayFuturesNegativeBalanceFromEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -1329,7 +1338,7 @@ describe('AccountApi', () => {
     describe('setMarginCallLevel()', () => {
         it('should execute setMarginCallLevel() successfully with required parameters only', async () => {
             const params: SetMarginCallLevelRequest = {
-                marginCallLevel: 5000.0,
+                marginCallLevel: 1.5,
             };
 
             mockResponse = JSONParse(JSONStringify({ marginCallLevel: '1.67354637' }));
@@ -1350,7 +1359,7 @@ describe('AccountApi', () => {
 
         it('should execute setMarginCallLevel() successfully with optional parameters', async () => {
             const params: SetMarginCallLevelRequest = {
-                marginCallLevel: 5000.0,
+                marginCallLevel: 1.5,
                 recvWindow: 5000,
             };
 
@@ -1372,7 +1381,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when marginCallLevel is missing', async () => {
             const _params: SetMarginCallLevelRequest = {
-                marginCallLevel: 5000.0,
+                marginCallLevel: 1.5,
             };
             const params = Object.assign({ ..._params });
             delete params?.marginCallLevel;
@@ -1384,7 +1393,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SetMarginCallLevelRequest = {
-                marginCallLevel: 5000.0,
+                marginCallLevel: 1.5,
             };
 
             const errorResponse = {
@@ -1405,7 +1414,7 @@ describe('AccountApi', () => {
     describe('switchDeltaMode()', () => {
         it('should execute switchDeltaMode() successfully with required parameters only', async () => {
             const params: SwitchDeltaModeRequest = {
-                deltaEnabled: 'deltaEnabled_example',
+                deltaEnabled: SwitchDeltaModeDeltaEnabledEnum.TRUE,
             };
 
             mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
@@ -1426,7 +1435,7 @@ describe('AccountApi', () => {
 
         it('should execute switchDeltaMode() successfully with optional parameters', async () => {
             const params: SwitchDeltaModeRequest = {
-                deltaEnabled: 'deltaEnabled_example',
+                deltaEnabled: SwitchDeltaModeDeltaEnabledEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -1448,7 +1457,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when deltaEnabled is missing', async () => {
             const _params: SwitchDeltaModeRequest = {
-                deltaEnabled: 'deltaEnabled_example',
+                deltaEnabled: SwitchDeltaModeDeltaEnabledEnum.TRUE,
             };
             const params = Object.assign({ ..._params });
             delete params?.deltaEnabled;
@@ -1460,7 +1469,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SwitchDeltaModeRequest = {
-                deltaEnabled: 'deltaEnabled_example',
+                deltaEnabled: SwitchDeltaModeDeltaEnabledEnum.TRUE,
             };
 
             const errorResponse = {
@@ -1481,9 +1490,9 @@ describe('AccountApi', () => {
     describe('transferLdusdtRwusdForPortfolioMargin()', () => {
         it('should execute transferLdusdtRwusdForPortfolioMargin() successfully with required parameters only', async () => {
             const params: TransferLdusdtRwusdForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
-                amount: 1.0,
+                asset: TransferLdusdtRwusdForPortfolioMarginAssetEnum.LDUSDT,
+                transferType: TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
+                amount: 1,
             };
 
             mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
@@ -1504,9 +1513,9 @@ describe('AccountApi', () => {
 
         it('should execute transferLdusdtRwusdForPortfolioMargin() successfully with optional parameters', async () => {
             const params: TransferLdusdtRwusdForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
-                amount: 1.0,
+                asset: TransferLdusdtRwusdForPortfolioMarginAssetEnum.LDUSDT,
+                transferType: TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
+                amount: 1,
                 recvWindow: 5000,
             };
 
@@ -1528,9 +1537,9 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: TransferLdusdtRwusdForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
-                amount: 1.0,
+                asset: TransferLdusdtRwusdForPortfolioMarginAssetEnum.LDUSDT,
+                transferType: TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
+                amount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -1542,9 +1551,9 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when transferType is missing', async () => {
             const _params: TransferLdusdtRwusdForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
-                amount: 1.0,
+                asset: TransferLdusdtRwusdForPortfolioMarginAssetEnum.LDUSDT,
+                transferType: TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
+                amount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.transferType;
@@ -1556,9 +1565,9 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: TransferLdusdtRwusdForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
-                amount: 1.0,
+                asset: TransferLdusdtRwusdForPortfolioMarginAssetEnum.LDUSDT,
+                transferType: TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
+                amount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -1570,9 +1579,9 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: TransferLdusdtRwusdForPortfolioMarginRequest = {
-                asset: 'asset_example',
-                transferType: 'transferType_example',
-                amount: 1.0,
+                asset: TransferLdusdtRwusdForPortfolioMarginAssetEnum.LDUSDT,
+                transferType: TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum.EARN_TO_FUTURE,
+                amount: 1,
             };
 
             const errorResponse = {

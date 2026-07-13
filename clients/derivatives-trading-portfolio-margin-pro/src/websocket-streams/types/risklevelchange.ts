@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro WebSocket Market Streams
+ * Portfolio Margin Pro WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro WebSocket Market Streams
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,37 +20,37 @@
  */
 export interface Risklevelchange {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof Risklevelchange
      */
     E?: number | bigint;
     /**
-     *
+     * uniMMR level
      * @type {string}
      * @memberof Risklevelchange
      */
     u?: string;
     /**
-     *
+     * Risk level: MARGIN_CALL, REDUCE_ONLY, FORCE_LIQUIDATION
      * @type {string}
      * @memberof Risklevelchange
      */
     s?: string;
     /**
-     *
+     * Account equity in USD value
      * @type {string}
      * @memberof Risklevelchange
      */
     eq?: string;
     /**
-     *
+     * Actual equity without collateral rate in USD value
      * @type {string}
      * @memberof Risklevelchange
      */
     ae?: string;
     /**
-     *
+     * Total maintenance margin in USD value
      * @type {string}
      * @memberof Risklevelchange
      */

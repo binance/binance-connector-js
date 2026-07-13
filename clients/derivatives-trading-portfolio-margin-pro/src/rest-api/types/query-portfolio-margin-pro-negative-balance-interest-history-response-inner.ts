@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface QueryPortfolioMarginProNegativeBalanceInterestHistoryResponseInner {
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof QueryPortfolioMarginProNegativeBalanceInterestHistoryResponseInner
      */
     asset?: string;
     /**
-     *
+     * interest amount
      * @type {string}
      * @memberof QueryPortfolioMarginProNegativeBalanceInterestHistoryResponseInner
      */
     interest?: string;
     /**
-     *
+     * interest Accrued Time.
      * @type {number | bigint}
      * @memberof QueryPortfolioMarginProNegativeBalanceInterestHistoryResponseInner
      */
     interestAccruedTime?: number | bigint;
     /**
-     *
+     * daily interest rate
      * @type {string}
      * @memberof QueryPortfolioMarginProNegativeBalanceInterestHistoryResponseInner
      */
     interestRate?: string;
     /**
-     *
+     * principal.
      * @type {string}
      * @memberof QueryPortfolioMarginProNegativeBalanceInterestHistoryResponseInner
      */

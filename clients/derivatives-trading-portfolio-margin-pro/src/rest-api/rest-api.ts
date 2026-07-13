@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -138,17 +138,19 @@ export class RestAPI {
     /**
      * BNB transfer can be between Margin Account and USDM Account
      *
+     * Weight(IP): 1500
      *
-     * You can only use this function 2 times per 10 minutes in a rolling manner
+     * Security Type: USER_DATA
      *
-     * Weight: 1500
+     * Notes:
+     * - You can only use this function 2 times per 10 minutes in a rolling manner
      *
-     * @summary BNB transfer(USER_DATA)
+     * @summary BNB transfer (USER_DATA)
      * @param {BnbTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<BnbTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/BNB-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#bnb-transfer Binance API Documentation}
      */
     bnbTransfer(
         requestParameters: BnbTransferRequest
@@ -159,14 +161,16 @@ export class RestAPI {
     /**
      * Change Auto-repay-futures Status
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Change Auto-repay-futures Status(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change Auto-repay-futures Status (TRADE)
      * @param {ChangeAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ChangeAutoRepayFuturesStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Change-Auto-repay-futures-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#change-auto-repay-futures-status Binance API Documentation}
      */
     changeAutoRepayFuturesStatus(
         requestParameters: ChangeAutoRepayFuturesStatusRequest
@@ -177,14 +181,16 @@ export class RestAPI {
     /**
      * Delete the margin call level for a Portfolio Margin account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Delete Margin Call Level (USER_DATA)
      * @param {DeleteMarginCallLevelRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DeleteMarginCallLevelResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Delete-Margin-Call-Level Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#delete-margin-call-level Binance API Documentation}
      */
     deleteMarginCallLevel(
         requestParameters: DeleteMarginCallLevelRequest = {}
@@ -195,17 +201,20 @@ export class RestAPI {
     /**
      * Transfers all assets from Futures Account to Margin account
      *
-     * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
-     * You can only use this function 500 times per hour in a rolling manner.
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
      *
-     * @summary Fund Auto-collection(USER_DATA)
+     * Notes:
+     * - The BNB would not be collected from UM-PM account to the Portfolio Margin account.
+     * - You can only use this function 500 times per hour in a rolling manner.
+     *
+     * @summary Fund Auto-collection (USER_DATA)
      * @param {FundAutoCollectionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FundAutoCollectionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Fund-Auto-collection Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#fund-auto-collection Binance API Documentation}
      */
     fundAutoCollection(
         requestParameters: FundAutoCollectionRequest = {}
@@ -216,16 +225,19 @@ export class RestAPI {
     /**
      * Transfers specific asset from Futures Account to Margin account
      *
-     * The BNB transfer is not be supported
+     * Weight(IP): 60
      *
-     * Weight: 60
+     * Security Type: USER_DATA
      *
-     * @summary Fund Collection by Asset(USER_DATA)
+     * Notes:
+     * - The BNB transfer is not be supported
+     *
+     * @summary Fund Collection by Asset (USER_DATA)
      * @param {FundCollectionByAssetRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FundCollectionByAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Fund-Collection-by-Asset Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#fund-collection-by-asset Binance API Documentation}
      */
     fundCollectionByAsset(
         requestParameters: FundCollectionByAssetRequest
@@ -236,14 +248,16 @@ export class RestAPI {
     /**
      * Query Auto-repay-futures Status
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get Auto-repay-futures Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Auto-repay-futures Status (USER_DATA)
      * @param {GetAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetAutoRepayFuturesStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Auto-repay-futures-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-auto-repay-futures-status Binance API Documentation}
      */
     getAutoRepayFuturesStatus(
         requestParameters: GetAutoRepayFuturesStatusRequest = {}
@@ -254,14 +268,16 @@ export class RestAPI {
     /**
      * Query the Delta mode status of current account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Get Delta Mode Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Delta Mode Status (USER_DATA)
      * @param {GetDeltaModeStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDeltaModeStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Delta-Mode-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-delta-mode-status Binance API Documentation}
      */
     getDeltaModeStatus(
         requestParameters: GetDeltaModeStatusRequest = {}
@@ -272,14 +288,16 @@ export class RestAPI {
     /**
      * Get the margin call level for a Portfolio Margin account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Margin Call Level (USER_DATA)
      * @param {GetMarginCallLevelRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetMarginCallLevelResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Margin-Call-Level Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-margin-call-level Binance API Documentation}
      */
     getMarginCallLevel(
         requestParameters: GetMarginCallLevelRequest = {}
@@ -290,14 +308,16 @@ export class RestAPI {
     /**
      * Query Portfolio Margin Pro account balance
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Get Portfolio Margin Pro Account Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro Account Balance (USER_DATA)
      * @param {GetPortfolioMarginProAccountBalanceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProAccountBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Balance-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-portfolio-margin-pro-account-balance Binance API Documentation}
      */
     getPortfolioMarginProAccountBalance(
         requestParameters: GetPortfolioMarginProAccountBalanceRequest = {}
@@ -308,14 +328,16 @@ export class RestAPI {
     /**
      * Get Portfolio Margin Pro Account Info
      *
-     * Weight: 5
+     * Weight(UID): 5
      *
-     * @summary Get Portfolio Margin Pro Account Info(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro Account Info (USER_DATA)
      * @param {GetPortfolioMarginProAccountInfoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProAccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Account-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-portfolio-margin-pro-account-info Binance API Documentation}
      */
     getPortfolioMarginProAccountInfo(
         requestParameters: GetPortfolioMarginProAccountInfoRequest = {}
@@ -326,14 +348,16 @@ export class RestAPI {
     /**
      * Get Portfolio Margin Pro SPAN Account Info (For Portfolio Margin Pro SPAN users only)
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get Portfolio Margin Pro SPAN Account Info(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro SPAN Account Info (USER_DATA)
      * @param {GetPortfolioMarginProSpanAccountInfoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProSpanAccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Account-Info-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-portfolio-margin-pro-span-account-info Binance API Documentation}
      */
     getPortfolioMarginProSpanAccountInfo(
         requestParameters: GetPortfolioMarginProSpanAccountInfoRequest = {}
@@ -344,14 +368,16 @@ export class RestAPI {
     /**
      * Get transferable earn asset balance for all types of Portfolio Margin account
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
      * @param {GetTransferableEarnAssetBalanceForPortfolioMarginRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Transferable-Earn-Asset-Balance-for-Portfolio-Margin Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-transferable-earn-asset-balance-for-portfolio-margin Binance API Documentation}
      */
     getTransferableEarnAssetBalanceForPortfolioMargin(
         requestParameters: GetTransferableEarnAssetBalanceForPortfolioMarginRequest
@@ -362,16 +388,19 @@ export class RestAPI {
     /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
      *
-     * Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Portfolio Margin Pro Bankruptcy Loan Repay
+     * Notes:
+     * - Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     *
+     * @summary Portfolio Margin Pro Bankruptcy Loan Repay (TRADE)
      * @param {PortfolioMarginProBankruptcyLoanRepayRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PortfolioMarginProBankruptcyLoanRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Classic-Portfolio-Margin-Bankruptcy-Loan-Repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#portfolio-margin-pro-bankruptcy-loan-repay Binance API Documentation}
      */
     portfolioMarginProBankruptcyLoanRepay(
         requestParameters: PortfolioMarginProBankruptcyLoanRepayRequest = {}
@@ -382,16 +411,19 @@ export class RestAPI {
     /**
      * Query Portfolio Margin Pro Bankruptcy Loan Amount
      *
-     * If there’s no classic portfolio margin bankruptcy loan, the amount would be 0
+     * Weight(UID): 500
      *
-     * Weight: 500
+     * Security Type: USER_DATA
      *
-     * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount(USER_DATA)
+     * Notes:
+     * - If there’s no classic portfolio margin bankruptcy loan, the amount would be 0
+     *
+     * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount (USER_DATA)
      * @param {QueryPortfolioMarginProBankruptcyLoanAmountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProBankruptcyLoanAmountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Classic-Portfolio-Margin-Bankruptcy-Loan-Amount Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#query-portfolio-margin-pro-bankruptcy-loan-amount Binance API Documentation}
      */
     queryPortfolioMarginProBankruptcyLoanAmount(
         requestParameters: QueryPortfolioMarginProBankruptcyLoanAmountRequest = {}
@@ -402,19 +434,22 @@ export class RestAPI {
     /**
      * Query repay history of pmloan for portfolio margin pro.
      *
-     * `startTime` and `endTime` cannot be longer than 360 days
-     * If `startTime` and `endTime` not sent, return records of the last 30 days by default.
-     * If `startTime`is sent and `endTime` is not sent, return records of [startTime, startTime+30d].
-     * If `startTime` is not sent and `endTime` is sent, return records of [endTime-30d, endTime].
+     * Weight(IP): 500
      *
-     * Weight: 500
+     * Security Type: USER_DATA
      *
-     * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History(USER_DATA)
+     * Notes:
+     * - `startTime` and `endTime` cannot be longer than 360 days
+     * - If `startTime` and `endTime` not sent, return records of the last 30 days by default.
+     * - If `startTime`is sent and `endTime` is not sent, return records of [startTime, startTime+30d].
+     * - If `startTime` is not sent and `endTime` is sent, return records of [endTime-30d, endTime].
+     *
+     * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History (USER_DATA)
      * @param {QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Portfolio-Margin-Pro-Bankruptcy-Loan-Repay-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#query-portfolio-margin-pro-bankruptcy-loan-repay-history Binance API Documentation}
      */
     queryPortfolioMarginProBankruptcyLoanRepayHistory(
         requestParameters: QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest = {}
@@ -425,14 +460,16 @@ export class RestAPI {
     /**
      * Query interest history of negative balance for portfolio margin.
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Query Portfolio Margin Pro Negative Balance Interest History(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Portfolio Margin Pro Negative Balance Interest History (USER_DATA)
      * @param {QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Classic-Portfolio-Margin-Negative-Balance-Interest-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#query-portfolio-margin-pro-negative-balance-interest-history Binance API Documentation}
      */
     queryPortfolioMarginProNegativeBalanceInterestHistory(
         requestParameters: QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest = {}
@@ -445,14 +482,16 @@ export class RestAPI {
     /**
      * Repay futures Negative Balance
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Repay futures Negative Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Repay futures Negative Balance (USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Repay-futures-Negative-Balance Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#repay-futures-negative-balance Binance API Documentation}
      */
     repayFuturesNegativeBalance(
         requestParameters: RepayFuturesNegativeBalanceRequest = {}
@@ -463,14 +502,16 @@ export class RestAPI {
     /**
      * Set the margin call level for a Portfolio Margin account. When the account's uniMMR drops to the specified level, a notification will be sent via email and SMS.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Set Margin Call Level (USER_DATA)
      * @param {SetMarginCallLevelRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetMarginCallLevelResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Set-Margin-Call-Level Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#set-margin-call-level Binance API Documentation}
      */
     setMarginCallLevel(
         requestParameters: SetMarginCallLevelRequest
@@ -481,14 +522,16 @@ export class RestAPI {
     /**
      * Switch the Delta mode for existing PM PRO / PM RETAIL accounts.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Switch Delta Mode(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Switch Delta Mode (TRADE)
      * @param {SwitchDeltaModeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SwitchDeltaModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Switch-Delta-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#switch-delta-mode Binance API Documentation}
      */
     switchDeltaMode(
         requestParameters: SwitchDeltaModeRequest
@@ -499,14 +542,16 @@ export class RestAPI {
     /**
      * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
      *
-     * Weight: 1500
+     * Weight(UID): 1500
      *
-     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin (TRADE)
      * @param {TransferLdusdtRwusdForPortfolioMarginRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-Portfolio-Margin Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#transfer-ldusdt-rwusd-for-portfolio-margin Binance API Documentation}
      */
     transferLdusdtRwusdForPortfolioMargin(
         requestParameters: TransferLdusdtRwusdForPortfolioMarginRequest
@@ -517,13 +562,15 @@ export class RestAPI {
     /**
      * Get Portfolio Margin Asset Leverage
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Get Portfolio Margin Asset Leverage(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Asset Leverage (USER_DATA)
      *
      * @returns {Promise<RestApiResponse<GetPortfolioMarginAssetLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Get-Portfolio-Margin-Asset-Leverage Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#get-portfolio-margin-asset-leverage Binance API Documentation}
      */
     getPortfolioMarginAssetLeverage(): Promise<
         RestApiResponse<GetPortfolioMarginAssetLeverageResponse>
@@ -534,13 +581,15 @@ export class RestAPI {
     /**
      * Portfolio Margin Collateral Rate
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Portfolio Margin Collateral Rate(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Portfolio Margin Collateral Rate (MARKET_DATA)
      *
      * @returns {Promise<RestApiResponse<PortfolioMarginCollateralRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Classic-Portfolio-Margin-Collateral-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#portfolio-margin-collateral-rate Binance API Documentation}
      */
     portfolioMarginCollateralRate(): Promise<
         RestApiResponse<PortfolioMarginCollateralRateResponse>
@@ -551,14 +600,16 @@ export class RestAPI {
     /**
      * Portfolio Margin PRO Tiered Collateral Rate
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Portfolio Margin Pro Tiered Collateral Rate(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Portfolio Margin Pro Tiered Collateral Rate (USER_DATA)
      * @param {PortfolioMarginProTieredCollateralRateRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PortfolioMarginProTieredCollateralRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Portfolio-Margin-Pro-Tiered-Collateral-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#portfolio-margin-pro-tiered-collateral-rate Binance API Documentation}
      */
     portfolioMarginProTieredCollateralRate(
         requestParameters: PortfolioMarginProTieredCollateralRateRequest = {}
@@ -569,14 +620,17 @@ export class RestAPI {
     /**
      * Query Portfolio Margin Asset Index Price
      *
-     * Weight: 1 if send asset or 50 if not send asset
+     * Weight: - 1 if `asset` is sent
+     * - 50 if `asset` is not sent
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Query Portfolio Margin Asset Index Price (MARKET_DATA)
      * @param {QueryPortfolioMarginAssetIndexPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginAssetIndexPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Query-Portfolio-Margin-Asset-Index-Price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#query-portfolio-margin-asset-index-price Binance API Documentation}
      */
     queryPortfolioMarginAssetIndexPrice(
         requestParameters: QueryPortfolioMarginAssetIndexPriceRequest = {}

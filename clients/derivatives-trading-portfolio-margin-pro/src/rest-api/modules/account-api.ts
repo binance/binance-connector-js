@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -50,21 +49,23 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * BNB transfer can be between Margin Account and USDM Account
          *
+         * Weight(IP): 1500
          *
-         * You can only use this function 2 times per 10 minutes in a rolling manner
+         * Security Type: USER_DATA
          *
-         * Weight: 1500
+         * Notes:
+         * - You can only use this function 2 times per 10 minutes in a rolling manner
          *
-         * @summary BNB transfer(USER_DATA)
+         * @summary BNB transfer (USER_DATA)
          * @param {number} amount
-         * @param {string} transferSide "TO_UM","FROM_UM"
+         * @param {BnbTransferTransferSideEnum} transferSide
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         bnbTransfer: async (
             amount: number,
-            transferSide: string,
+            transferSide: BnbTransferTransferSideEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
@@ -101,16 +102,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Change Auto-repay-futures Status
          *
-         * Weight: 1500
+         * Weight(IP): 1500
          *
-         * @summary Change Auto-repay-futures Status(TRADE)
-         * @param {string} autoRepay Default: `true`; `false` for turn off the auto-repay futures negative balance function
+         * Security Type: TRADE
+         *
+         * @summary Change Auto-repay-futures Status (TRADE)
+         * @param {ChangeAutoRepayFuturesStatusAutoRepayEnum} autoRepay `false` for turn off the auto-repay futures negative balance function
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeAutoRepayFuturesStatus: async (
-            autoRepay: string,
+            autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'autoRepay' is not null or undefined
@@ -142,10 +145,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Delete the margin call level for a Portfolio Margin account.
          *
-         * Weight: 1500
+         * Weight(IP): 1500
+         *
+         * Security Type: USER_DATA
          *
          * @summary Delete Margin Call Level (USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -173,12 +178,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Transfers all assets from Futures Account to Margin account
          *
-         * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
-         * You can only use this function 500 times per hour in a rolling manner.
+         * Weight(IP): 1500
          *
-         * Weight: 1500
+         * Security Type: USER_DATA
          *
-         * @summary Fund Auto-collection(USER_DATA)
+         * Notes:
+         * - The BNB would not be collected from UM-PM account to the Portfolio Margin account.
+         * - You can only use this function 500 times per hour in a rolling manner.
+         *
+         * @summary Fund Auto-collection (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -207,12 +215,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Transfers specific asset from Futures Account to Margin account
          *
-         * The BNB transfer is not be supported
+         * Weight(IP): 60
          *
-         * Weight: 60
+         * Security Type: USER_DATA
          *
-         * @summary Fund Collection by Asset(USER_DATA)
-         * @param {string} asset `LDUSDT` and `RWUSD`
+         * Notes:
+         * - The BNB transfer is not be supported
+         *
+         * @summary Fund Collection by Asset (USER_DATA)
+         * @param {string} asset
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -250,9 +261,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query Auto-repay-futures Status
          *
-         * Weight: 30
+         * Weight(IP): 30
          *
-         * @summary Get Auto-repay-futures Status(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Auto-repay-futures Status (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -281,9 +294,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query the Delta mode status of current account.
          *
-         * Weight: 1500
+         * Weight(IP): 1500
          *
-         * @summary Get Delta Mode Status(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Delta Mode Status (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -312,10 +327,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get the margin call level for a Portfolio Margin account.
          *
-         * Weight: 1500
+         * Weight(IP): 1500
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Margin Call Level (USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -343,9 +360,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query Portfolio Margin Pro account balance
          *
-         * Weight: 20
+         * Weight(IP): 20
          *
-         * @summary Get Portfolio Margin Pro Account Balance(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Portfolio Margin Pro Account Balance (USER_DATA)
          * @param {string} [asset]
          * @param {number | bigint} [recvWindow]
          *
@@ -381,9 +400,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get Portfolio Margin Pro Account Info
          *
-         * Weight: 5
+         * Weight(UID): 5
          *
-         * @summary Get Portfolio Margin Pro Account Info(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Portfolio Margin Pro Account Info (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -414,9 +435,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get Portfolio Margin Pro SPAN Account Info (For Portfolio Margin Pro SPAN users only)
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Get Portfolio Margin Pro SPAN Account Info(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Portfolio Margin Pro SPAN Account Info (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -447,18 +470,20 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get transferable earn asset balance for all types of Portfolio Margin account
          *
-         * Weight: 1500
+         * Weight(IP): 1500
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
-         * @param {string} asset `LDUSDT` and `RWUSD`
-         * @param {string} transferType `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
+         * @param {string} asset `LDUSDT` only
+         * @param {GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum} transferType
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getTransferableEarnAssetBalanceForPortfolioMargin: async (
             asset: string,
-            transferType: string,
+            transferType: GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -499,18 +524,21 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Repay Portfolio Margin Pro Bankruptcy Loan
          *
-         * Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+         * Weight(UID): 3000
          *
-         * Weight: 3000
+         * Security Type: TRADE
          *
-         * @summary Portfolio Margin Pro Bankruptcy Loan Repay
-         * @param {string} [from] SPOT or MARGIN，default SPOT
+         * Notes:
+         * - Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+         *
+         * @summary Portfolio Margin Pro Bankruptcy Loan Repay (TRADE)
+         * @param {PortfolioMarginProBankruptcyLoanRepayFromEnum} [from]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         portfolioMarginProBankruptcyLoanRepay: async (
-            from?: string,
+            from?: PortfolioMarginProBankruptcyLoanRepayFromEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -539,11 +567,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query Portfolio Margin Pro Bankruptcy Loan Amount
          *
-         * If there’s no classic portfolio margin bankruptcy loan, the amount would be 0
+         * Weight(UID): 500
          *
-         * Weight: 500
+         * Security Type: USER_DATA
          *
-         * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount(USER_DATA)
+         * Notes:
+         * - If there’s no classic portfolio margin bankruptcy loan, the amount would be 0
+         *
+         * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -574,18 +605,21 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query repay history of pmloan for portfolio margin pro.
          *
-         * `startTime` and `endTime` cannot be longer than 360 days
-         * If `startTime` and `endTime` not sent, return records of the last 30 days by default.
-         * If `startTime`is sent and `endTime` is not sent, return records of [startTime, startTime+30d].
-         * If `startTime` is not sent and `endTime` is sent, return records of [endTime-30d, endTime].
+         * Weight(IP): 500
          *
-         * Weight: 500
+         * Security Type: USER_DATA
          *
-         * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History(USER_DATA)
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
+         * Notes:
+         * - `startTime` and `endTime` cannot be longer than 360 days
+         * - If `startTime` and `endTime` not sent, return records of the last 30 days by default.
+         * - If `startTime`is sent and `endTime` is not sent, return records of [startTime, startTime+30d].
+         * - If `startTime` is not sent and `endTime` is sent, return records of [endTime-30d, endTime].
+         *
+         * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History (USER_DATA)
+         * @param {number | bigint} [startTime] Start time
+         * @param {number | bigint} [endTime] End time
+         * @param {number | bigint} [size] Number of results returned.
+         * @param {number | bigint} [current] Currently querying page. Start from 1.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -593,8 +627,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         queryPortfolioMarginProBankruptcyLoanRepayHistory: async (
             startTime?: number | bigint,
             endTime?: number | bigint,
-            current?: number | bigint,
             size?: number | bigint,
+            current?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -607,11 +641,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-            if (current !== undefined && current !== null) {
-                localVarQueryParameter['current'] = current;
-            }
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
+            }
+            if (current !== undefined && current !== null) {
+                localVarQueryParameter['current'] = current;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -632,13 +666,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query interest history of negative balance for portfolio margin.
          *
-         * Weight: 50
+         * Weight(IP): 50
          *
-         * @summary Query Portfolio Margin Pro Negative Balance Interest History(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Query Portfolio Margin Pro Negative Balance Interest History (USER_DATA)
          * @param {string} [asset]
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [startTime] Start time
+         * @param {number | bigint} [endTime] End time
+         * @param {number | bigint} [size] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -685,16 +721,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Repay futures Negative Balance
          *
-         * Weight: 1500
+         * Weight(IP): 1500
          *
-         * @summary Repay futures Negative Balance(USER_DATA)
-         * @param {string} [from] SPOT or MARGIN，default SPOT
+         * Security Type: USER_DATA
+         *
+         * @summary Repay futures Negative Balance (USER_DATA)
+         * @param {RepayFuturesNegativeBalanceFromEnum} [from]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         repayFuturesNegativeBalance: async (
-            from?: string,
+            from?: RepayFuturesNegativeBalanceFromEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -723,11 +761,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Set the margin call level for a Portfolio Margin account. When the account's uniMMR drops to the specified level, a notification will be sent via email and SMS.
          *
-         * Weight: 1500
+         * Weight(IP): 1500
+         *
+         * Security Type: USER_DATA
          *
          * @summary Set Margin Call Level (USER_DATA)
-         * @param {number} marginCallLevel The value of marginCallLevel must be within the range [1.1, 2.0].
-         * @param {number | bigint} [recvWindow]
+         * @param {number} marginCallLevel The value must be within the range [1.1, 2.0].
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -764,16 +804,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Switch the Delta mode for existing PM PRO / PM RETAIL accounts.
          *
-         * Weight: 1500
+         * Weight(IP): 1500
          *
-         * @summary Switch Delta Mode(TRADE)
-         * @param {string} deltaEnabled `true` to enable Delta mode; `false` to disable Delta mode
+         * Security Type: TRADE
+         *
+         * @summary Switch Delta Mode (TRADE)
+         * @param {SwitchDeltaModeDeltaEnabledEnum} deltaEnabled `true` to enable Delta mode; `false` to disable Delta mode
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         switchDeltaMode: async (
-            deltaEnabled: string,
+            deltaEnabled: SwitchDeltaModeDeltaEnabledEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'deltaEnabled' is not null or undefined
@@ -805,19 +847,21 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
          *
-         * Weight: 1500
+         * Weight(UID): 1500
          *
-         * @summary Transfer LDUSDT/RWUSD for Portfolio Margin(TRADE)
-         * @param {string} asset `LDUSDT` and `RWUSD`
-         * @param {string} transferType `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
+         * Security Type: TRADE
+         *
+         * @summary Transfer LDUSDT/RWUSD for Portfolio Margin (TRADE)
+         * @param {TransferLdusdtRwusdForPortfolioMarginAssetEnum} asset
+         * @param {TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum} transferType
          * @param {number} amount
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         transferLdusdtRwusdForPortfolioMargin: async (
-            asset: string,
-            transferType: string,
+            asset: TransferLdusdtRwusdForPortfolioMarginAssetEnum,
+            transferType: TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum,
             amount: number,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -872,12 +916,14 @@ export interface AccountApiInterface {
     /**
      * BNB transfer can be between Margin Account and USDM Account
      *
+     * Weight(IP): 1500
      *
-     * You can only use this function 2 times per 10 minutes in a rolling manner
+     * Security Type: USER_DATA
      *
-     * Weight: 1500
+     * Notes:
+     * - You can only use this function 2 times per 10 minutes in a rolling manner
      *
-     * @summary BNB transfer(USER_DATA)
+     * @summary BNB transfer (USER_DATA)
      * @param {BnbTransferRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -889,9 +935,11 @@ export interface AccountApiInterface {
     /**
      * Change Auto-repay-futures Status
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Change Auto-repay-futures Status(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change Auto-repay-futures Status (TRADE)
      * @param {ChangeAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -903,7 +951,9 @@ export interface AccountApiInterface {
     /**
      * Delete the margin call level for a Portfolio Margin account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Delete Margin Call Level (USER_DATA)
      * @param {DeleteMarginCallLevelRequest} requestParameters Request parameters.
@@ -917,12 +967,15 @@ export interface AccountApiInterface {
     /**
      * Transfers all assets from Futures Account to Margin account
      *
-     * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
-     * You can only use this function 500 times per hour in a rolling manner.
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
      *
-     * @summary Fund Auto-collection(USER_DATA)
+     * Notes:
+     * - The BNB would not be collected from UM-PM account to the Portfolio Margin account.
+     * - You can only use this function 500 times per hour in a rolling manner.
+     *
+     * @summary Fund Auto-collection (USER_DATA)
      * @param {FundAutoCollectionRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -934,11 +987,14 @@ export interface AccountApiInterface {
     /**
      * Transfers specific asset from Futures Account to Margin account
      *
-     * The BNB transfer is not be supported
+     * Weight(IP): 60
      *
-     * Weight: 60
+     * Security Type: USER_DATA
      *
-     * @summary Fund Collection by Asset(USER_DATA)
+     * Notes:
+     * - The BNB transfer is not be supported
+     *
+     * @summary Fund Collection by Asset (USER_DATA)
      * @param {FundCollectionByAssetRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -950,9 +1006,11 @@ export interface AccountApiInterface {
     /**
      * Query Auto-repay-futures Status
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get Auto-repay-futures Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Auto-repay-futures Status (USER_DATA)
      * @param {GetAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -964,9 +1022,11 @@ export interface AccountApiInterface {
     /**
      * Query the Delta mode status of current account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Get Delta Mode Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Delta Mode Status (USER_DATA)
      * @param {GetDeltaModeStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -978,7 +1038,9 @@ export interface AccountApiInterface {
     /**
      * Get the margin call level for a Portfolio Margin account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Margin Call Level (USER_DATA)
      * @param {GetMarginCallLevelRequest} requestParameters Request parameters.
@@ -992,9 +1054,11 @@ export interface AccountApiInterface {
     /**
      * Query Portfolio Margin Pro account balance
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Get Portfolio Margin Pro Account Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro Account Balance (USER_DATA)
      * @param {GetPortfolioMarginProAccountBalanceRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1006,9 +1070,11 @@ export interface AccountApiInterface {
     /**
      * Get Portfolio Margin Pro Account Info
      *
-     * Weight: 5
+     * Weight(UID): 5
      *
-     * @summary Get Portfolio Margin Pro Account Info(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro Account Info (USER_DATA)
      * @param {GetPortfolioMarginProAccountInfoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1020,9 +1086,11 @@ export interface AccountApiInterface {
     /**
      * Get Portfolio Margin Pro SPAN Account Info (For Portfolio Margin Pro SPAN users only)
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get Portfolio Margin Pro SPAN Account Info(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro SPAN Account Info (USER_DATA)
      * @param {GetPortfolioMarginProSpanAccountInfoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1034,7 +1102,9 @@ export interface AccountApiInterface {
     /**
      * Get transferable earn asset balance for all types of Portfolio Margin account
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
      * @param {GetTransferableEarnAssetBalanceForPortfolioMarginRequest} requestParameters Request parameters.
@@ -1048,11 +1118,14 @@ export interface AccountApiInterface {
     /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
      *
-     * Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Portfolio Margin Pro Bankruptcy Loan Repay
+     * Notes:
+     * - Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     *
+     * @summary Portfolio Margin Pro Bankruptcy Loan Repay (TRADE)
      * @param {PortfolioMarginProBankruptcyLoanRepayRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1064,11 +1137,14 @@ export interface AccountApiInterface {
     /**
      * Query Portfolio Margin Pro Bankruptcy Loan Amount
      *
-     * If there’s no classic portfolio margin bankruptcy loan, the amount would be 0
+     * Weight(UID): 500
      *
-     * Weight: 500
+     * Security Type: USER_DATA
      *
-     * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount(USER_DATA)
+     * Notes:
+     * - If there’s no classic portfolio margin bankruptcy loan, the amount would be 0
+     *
+     * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount (USER_DATA)
      * @param {QueryPortfolioMarginProBankruptcyLoanAmountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1080,14 +1156,17 @@ export interface AccountApiInterface {
     /**
      * Query repay history of pmloan for portfolio margin pro.
      *
-     * `startTime` and `endTime` cannot be longer than 360 days
-     * If `startTime` and `endTime` not sent, return records of the last 30 days by default.
-     * If `startTime`is sent and `endTime` is not sent, return records of [startTime, startTime+30d].
-     * If `startTime` is not sent and `endTime` is sent, return records of [endTime-30d, endTime].
+     * Weight(IP): 500
      *
-     * Weight: 500
+     * Security Type: USER_DATA
      *
-     * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History(USER_DATA)
+     * Notes:
+     * - `startTime` and `endTime` cannot be longer than 360 days
+     * - If `startTime` and `endTime` not sent, return records of the last 30 days by default.
+     * - If `startTime`is sent and `endTime` is not sent, return records of [startTime, startTime+30d].
+     * - If `startTime` is not sent and `endTime` is sent, return records of [endTime-30d, endTime].
+     *
+     * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History (USER_DATA)
      * @param {QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1099,9 +1178,11 @@ export interface AccountApiInterface {
     /**
      * Query interest history of negative balance for portfolio margin.
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Query Portfolio Margin Pro Negative Balance Interest History(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Portfolio Margin Pro Negative Balance Interest History (USER_DATA)
      * @param {QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1113,9 +1194,11 @@ export interface AccountApiInterface {
     /**
      * Repay futures Negative Balance
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Repay futures Negative Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Repay futures Negative Balance (USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1127,7 +1210,9 @@ export interface AccountApiInterface {
     /**
      * Set the margin call level for a Portfolio Margin account. When the account's uniMMR drops to the specified level, a notification will be sent via email and SMS.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Set Margin Call Level (USER_DATA)
      * @param {SetMarginCallLevelRequest} requestParameters Request parameters.
@@ -1141,9 +1226,11 @@ export interface AccountApiInterface {
     /**
      * Switch the Delta mode for existing PM PRO / PM RETAIL accounts.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Switch Delta Mode(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Switch Delta Mode (TRADE)
      * @param {SwitchDeltaModeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1155,9 +1242,11 @@ export interface AccountApiInterface {
     /**
      * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
      *
-     * Weight: 1500
+     * Weight(UID): 1500
      *
-     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin (TRADE)
      * @param {TransferLdusdtRwusdForPortfolioMarginRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1181,11 +1270,11 @@ export interface BnbTransferRequest {
     readonly amount: number;
 
     /**
-     * "TO_UM","FROM_UM"
-     * @type {string}
+     *
+     * @type {'TO_UM' | 'FROM_UM'}
      * @memberof AccountApiBnbTransfer
      */
-    readonly transferSide: string;
+    readonly transferSide: BnbTransferTransferSideEnum;
 
     /**
      *
@@ -1201,11 +1290,11 @@ export interface BnbTransferRequest {
  */
 export interface ChangeAutoRepayFuturesStatusRequest {
     /**
-     * Default: `true`; `false` for turn off the auto-repay futures negative balance function
-     * @type {string}
+     * `false` for turn off the auto-repay futures negative balance function
+     * @type {'true' | 'false'}
      * @memberof AccountApiChangeAutoRepayFuturesStatus
      */
-    readonly autoRepay: string;
+    readonly autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum;
 
     /**
      *
@@ -1221,7 +1310,7 @@ export interface ChangeAutoRepayFuturesStatusRequest {
  */
 export interface DeleteMarginCallLevelRequest {
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof AccountApiDeleteMarginCallLevel
      */
@@ -1247,7 +1336,7 @@ export interface FundAutoCollectionRequest {
  */
 export interface FundCollectionByAssetRequest {
     /**
-     * `LDUSDT` and `RWUSD`
+     *
      * @type {string}
      * @memberof AccountApiFundCollectionByAsset
      */
@@ -1293,7 +1382,7 @@ export interface GetDeltaModeStatusRequest {
  */
 export interface GetMarginCallLevelRequest {
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof AccountApiGetMarginCallLevel
      */
@@ -1352,18 +1441,18 @@ export interface GetPortfolioMarginProSpanAccountInfoRequest {
  */
 export interface GetTransferableEarnAssetBalanceForPortfolioMarginRequest {
     /**
-     * `LDUSDT` and `RWUSD`
+     * `LDUSDT` only
      * @type {string}
      * @memberof AccountApiGetTransferableEarnAssetBalanceForPortfolioMargin
      */
     readonly asset: string;
 
     /**
-     * `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
-     * @type {string}
+     *
+     * @type {'EARN_TO_FUTURE' | 'FUTURE_TO_EARN'}
      * @memberof AccountApiGetTransferableEarnAssetBalanceForPortfolioMargin
      */
-    readonly transferType: string;
+    readonly transferType: GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum;
 
     /**
      *
@@ -1379,11 +1468,11 @@ export interface GetTransferableEarnAssetBalanceForPortfolioMarginRequest {
  */
 export interface PortfolioMarginProBankruptcyLoanRepayRequest {
     /**
-     * SPOT or MARGIN，default SPOT
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN'}
      * @memberof AccountApiPortfolioMarginProBankruptcyLoanRepay
      */
-    readonly from?: string;
+    readonly from?: PortfolioMarginProBankruptcyLoanRepayFromEnum;
 
     /**
      *
@@ -1412,32 +1501,32 @@ export interface QueryPortfolioMarginProBankruptcyLoanAmountRequest {
  */
 export interface QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest {
     /**
-     *
+     * Start time
      * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * End time
      * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
-     * @type {number | bigint}
-     * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
-     */
-    readonly current?: number | bigint;
-
-    /**
-     * Default:10 Max:100
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
      */
     readonly size?: number | bigint;
+
+    /**
+     * Currently querying page. Start from 1.
+     * @type {number | bigint}
+     * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
+     */
+    readonly current?: number | bigint;
 
     /**
      *
@@ -1460,21 +1549,21 @@ export interface QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest {
     readonly asset?: string;
 
     /**
-     *
+     * Start time
      * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProNegativeBalanceInterestHistory
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * End time
      * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProNegativeBalanceInterestHistory
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProNegativeBalanceInterestHistory
      */
@@ -1494,11 +1583,11 @@ export interface QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest {
  */
 export interface RepayFuturesNegativeBalanceRequest {
     /**
-     * SPOT or MARGIN，default SPOT
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN'}
      * @memberof AccountApiRepayFuturesNegativeBalance
      */
-    readonly from?: string;
+    readonly from?: RepayFuturesNegativeBalanceFromEnum;
 
     /**
      *
@@ -1514,14 +1603,14 @@ export interface RepayFuturesNegativeBalanceRequest {
  */
 export interface SetMarginCallLevelRequest {
     /**
-     * The value of marginCallLevel must be within the range [1.1, 2.0].
+     * The value must be within the range [1.1, 2.0].
      * @type {number}
      * @memberof AccountApiSetMarginCallLevel
      */
     readonly marginCallLevel: number;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof AccountApiSetMarginCallLevel
      */
@@ -1535,10 +1624,10 @@ export interface SetMarginCallLevelRequest {
 export interface SwitchDeltaModeRequest {
     /**
      * `true` to enable Delta mode; `false` to disable Delta mode
-     * @type {string}
+     * @type {'true' | 'false'}
      * @memberof AccountApiSwitchDeltaMode
      */
-    readonly deltaEnabled: string;
+    readonly deltaEnabled: SwitchDeltaModeDeltaEnabledEnum;
 
     /**
      *
@@ -1554,18 +1643,18 @@ export interface SwitchDeltaModeRequest {
  */
 export interface TransferLdusdtRwusdForPortfolioMarginRequest {
     /**
-     * `LDUSDT` and `RWUSD`
-     * @type {string}
+     *
+     * @type {'LDUSDT' | 'RWUSD'}
      * @memberof AccountApiTransferLdusdtRwusdForPortfolioMargin
      */
-    readonly asset: string;
+    readonly asset: TransferLdusdtRwusdForPortfolioMarginAssetEnum;
 
     /**
-     * `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
-     * @type {string}
+     *
+     * @type {'EARN_TO_FUTURE' | 'FUTURE_TO_EARN'}
      * @memberof AccountApiTransferLdusdtRwusdForPortfolioMargin
      */
-    readonly transferType: string;
+    readonly transferType: TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum;
 
     /**
      *
@@ -1598,17 +1687,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * BNB transfer can be between Margin Account and USDM Account
      *
+     * Weight(IP): 1500
      *
-     * You can only use this function 2 times per 10 minutes in a rolling manner
+     * Security Type: USER_DATA
      *
-     * Weight: 1500
+     * Notes:
+     * - You can only use this function 2 times per 10 minutes in a rolling manner
      *
-     * @summary BNB transfer(USER_DATA)
+     * @summary BNB transfer (USER_DATA)
      * @param {BnbTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BnbTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/BNB-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#bnb-transfer Binance API Documentation}
      */
     public async bnbTransfer(
         requestParameters: BnbTransferRequest
@@ -1633,14 +1724,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Change Auto-repay-futures Status
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Change Auto-repay-futures Status(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change Auto-repay-futures Status (TRADE)
      * @param {ChangeAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ChangeAutoRepayFuturesStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Change-Auto-repay-futures-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#change-auto-repay-futures-status Binance API Documentation}
      */
     public async changeAutoRepayFuturesStatus(
         requestParameters: ChangeAutoRepayFuturesStatusRequest
@@ -1664,14 +1757,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Delete the margin call level for a Portfolio Margin account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Delete Margin Call Level (USER_DATA)
      * @param {DeleteMarginCallLevelRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DeleteMarginCallLevelResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Delete-Margin-Call-Level Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#delete-margin-call-level Binance API Documentation}
      */
     public async deleteMarginCallLevel(
         requestParameters: DeleteMarginCallLevelRequest = {}
@@ -1694,17 +1789,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Transfers all assets from Futures Account to Margin account
      *
-     * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
-     * You can only use this function 500 times per hour in a rolling manner.
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
      *
-     * @summary Fund Auto-collection(USER_DATA)
+     * Notes:
+     * - The BNB would not be collected from UM-PM account to the Portfolio Margin account.
+     * - You can only use this function 500 times per hour in a rolling manner.
+     *
+     * @summary Fund Auto-collection (USER_DATA)
      * @param {FundAutoCollectionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FundAutoCollectionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Fund-Auto-collection Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#fund-auto-collection Binance API Documentation}
      */
     public async fundAutoCollection(
         requestParameters: FundAutoCollectionRequest = {}
@@ -1727,16 +1825,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Transfers specific asset from Futures Account to Margin account
      *
-     * The BNB transfer is not be supported
+     * Weight(IP): 60
      *
-     * Weight: 60
+     * Security Type: USER_DATA
      *
-     * @summary Fund Collection by Asset(USER_DATA)
+     * Notes:
+     * - The BNB transfer is not be supported
+     *
+     * @summary Fund Collection by Asset (USER_DATA)
      * @param {FundCollectionByAssetRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FundCollectionByAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Fund-Collection-by-Asset Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#fund-collection-by-asset Binance API Documentation}
      */
     public async fundCollectionByAsset(
         requestParameters: FundCollectionByAssetRequest
@@ -1760,14 +1861,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query Auto-repay-futures Status
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get Auto-repay-futures Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Auto-repay-futures Status (USER_DATA)
      * @param {GetAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetAutoRepayFuturesStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Auto-repay-futures-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-auto-repay-futures-status Binance API Documentation}
      */
     public async getAutoRepayFuturesStatus(
         requestParameters: GetAutoRepayFuturesStatusRequest = {}
@@ -1790,14 +1893,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query the Delta mode status of current account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Get Delta Mode Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Delta Mode Status (USER_DATA)
      * @param {GetDeltaModeStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDeltaModeStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Delta-Mode-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-delta-mode-status Binance API Documentation}
      */
     public async getDeltaModeStatus(
         requestParameters: GetDeltaModeStatusRequest = {}
@@ -1820,14 +1925,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get the margin call level for a Portfolio Margin account.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Margin Call Level (USER_DATA)
      * @param {GetMarginCallLevelRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetMarginCallLevelResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Margin-Call-Level Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-margin-call-level Binance API Documentation}
      */
     public async getMarginCallLevel(
         requestParameters: GetMarginCallLevelRequest = {}
@@ -1850,14 +1957,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query Portfolio Margin Pro account balance
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Get Portfolio Margin Pro Account Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro Account Balance (USER_DATA)
      * @param {GetPortfolioMarginProAccountBalanceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProAccountBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Balance-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-portfolio-margin-pro-account-balance Binance API Documentation}
      */
     public async getPortfolioMarginProAccountBalance(
         requestParameters: GetPortfolioMarginProAccountBalanceRequest = {}
@@ -1882,14 +1991,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get Portfolio Margin Pro Account Info
      *
-     * Weight: 5
+     * Weight(UID): 5
      *
-     * @summary Get Portfolio Margin Pro Account Info(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro Account Info (USER_DATA)
      * @param {GetPortfolioMarginProAccountInfoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProAccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Account-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-portfolio-margin-pro-account-info Binance API Documentation}
      */
     public async getPortfolioMarginProAccountInfo(
         requestParameters: GetPortfolioMarginProAccountInfoRequest = {}
@@ -1913,14 +2024,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get Portfolio Margin Pro SPAN Account Info (For Portfolio Margin Pro SPAN users only)
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get Portfolio Margin Pro SPAN Account Info(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Pro SPAN Account Info (USER_DATA)
      * @param {GetPortfolioMarginProSpanAccountInfoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProSpanAccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Account-Info-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-portfolio-margin-pro-span-account-info Binance API Documentation}
      */
     public async getPortfolioMarginProSpanAccountInfo(
         requestParameters: GetPortfolioMarginProSpanAccountInfoRequest = {}
@@ -1944,14 +2057,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get transferable earn asset balance for all types of Portfolio Margin account
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
      * @param {GetTransferableEarnAssetBalanceForPortfolioMarginRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Transferable-Earn-Asset-Balance-for-Portfolio-Margin Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#get-transferable-earn-asset-balance-for-portfolio-margin Binance API Documentation}
      */
     public async getTransferableEarnAssetBalanceForPortfolioMargin(
         requestParameters: GetTransferableEarnAssetBalanceForPortfolioMarginRequest
@@ -1977,16 +2092,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
      *
-     * Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Portfolio Margin Pro Bankruptcy Loan Repay
+     * Notes:
+     * - Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     *
+     * @summary Portfolio Margin Pro Bankruptcy Loan Repay (TRADE)
      * @param {PortfolioMarginProBankruptcyLoanRepayRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<PortfolioMarginProBankruptcyLoanRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Classic-Portfolio-Margin-Bankruptcy-Loan-Repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#portfolio-margin-pro-bankruptcy-loan-repay Binance API Documentation}
      */
     public async portfolioMarginProBankruptcyLoanRepay(
         requestParameters: PortfolioMarginProBankruptcyLoanRepayRequest = {}
@@ -2011,16 +2129,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query Portfolio Margin Pro Bankruptcy Loan Amount
      *
-     * If there’s no classic portfolio margin bankruptcy loan, the amount would be 0
+     * Weight(UID): 500
      *
-     * Weight: 500
+     * Security Type: USER_DATA
      *
-     * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount(USER_DATA)
+     * Notes:
+     * - If there’s no classic portfolio margin bankruptcy loan, the amount would be 0
+     *
+     * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount (USER_DATA)
      * @param {QueryPortfolioMarginProBankruptcyLoanAmountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProBankruptcyLoanAmountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Classic-Portfolio-Margin-Bankruptcy-Loan-Amount Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#query-portfolio-margin-pro-bankruptcy-loan-amount Binance API Documentation}
      */
     public async queryPortfolioMarginProBankruptcyLoanAmount(
         requestParameters: QueryPortfolioMarginProBankruptcyLoanAmountRequest = {}
@@ -2044,19 +2165,22 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query repay history of pmloan for portfolio margin pro.
      *
-     * `startTime` and `endTime` cannot be longer than 360 days
-     * If `startTime` and `endTime` not sent, return records of the last 30 days by default.
-     * If `startTime`is sent and `endTime` is not sent, return records of [startTime, startTime+30d].
-     * If `startTime` is not sent and `endTime` is sent, return records of [endTime-30d, endTime].
+     * Weight(IP): 500
      *
-     * Weight: 500
+     * Security Type: USER_DATA
      *
-     * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History(USER_DATA)
+     * Notes:
+     * - `startTime` and `endTime` cannot be longer than 360 days
+     * - If `startTime` and `endTime` not sent, return records of the last 30 days by default.
+     * - If `startTime`is sent and `endTime` is not sent, return records of [startTime, startTime+30d].
+     * - If `startTime` is not sent and `endTime` is sent, return records of [endTime-30d, endTime].
+     *
+     * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History (USER_DATA)
      * @param {QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Portfolio-Margin-Pro-Bankruptcy-Loan-Repay-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#query-portfolio-margin-pro-bankruptcy-loan-repay-history Binance API Documentation}
      */
     public async queryPortfolioMarginProBankruptcyLoanRepayHistory(
         requestParameters: QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest = {}
@@ -2065,8 +2189,8 @@ export class AccountApi implements AccountApiInterface {
             await this.localVarAxiosParamCreator.queryPortfolioMarginProBankruptcyLoanRepayHistory(
                 requestParameters?.startTime,
                 requestParameters?.endTime,
-                requestParameters?.current,
                 requestParameters?.size,
+                requestParameters?.current,
                 requestParameters?.recvWindow
             );
         return sendRequest<QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse>(
@@ -2084,14 +2208,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query interest history of negative balance for portfolio margin.
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Query Portfolio Margin Pro Negative Balance Interest History(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Portfolio Margin Pro Negative Balance Interest History (USER_DATA)
      * @param {QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Classic-Portfolio-Margin-Negative-Balance-Interest-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#query-portfolio-margin-pro-negative-balance-interest-history Binance API Documentation}
      */
     public async queryPortfolioMarginProNegativeBalanceInterestHistory(
         requestParameters: QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest = {}
@@ -2119,14 +2245,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Repay futures Negative Balance
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Repay futures Negative Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Repay futures Negative Balance (USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Repay-futures-Negative-Balance Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#repay-futures-negative-balance Binance API Documentation}
      */
     public async repayFuturesNegativeBalance(
         requestParameters: RepayFuturesNegativeBalanceRequest = {}
@@ -2150,14 +2278,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Set the margin call level for a Portfolio Margin account. When the account's uniMMR drops to the specified level, a notification will be sent via email and SMS.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
      *
      * @summary Set Margin Call Level (USER_DATA)
      * @param {SetMarginCallLevelRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetMarginCallLevelResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Set-Margin-Call-Level Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#set-margin-call-level Binance API Documentation}
      */
     public async setMarginCallLevel(
         requestParameters: SetMarginCallLevelRequest
@@ -2181,14 +2311,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Switch the Delta mode for existing PM PRO / PM RETAIL accounts.
      *
-     * Weight: 1500
+     * Weight(IP): 1500
      *
-     * @summary Switch Delta Mode(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Switch Delta Mode (TRADE)
      * @param {SwitchDeltaModeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SwitchDeltaModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Switch-Delta-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#switch-delta-mode Binance API Documentation}
      */
     public async switchDeltaMode(
         requestParameters: SwitchDeltaModeRequest
@@ -2212,14 +2344,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
      *
-     * Weight: 1500
+     * Weight(UID): 1500
      *
-     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin (TRADE)
      * @param {TransferLdusdtRwusdForPortfolioMarginRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-Portfolio-Margin Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/account#transfer-ldusdt-rwusd-for-portfolio-margin Binance API Documentation}
      */
     public async transferLdusdtRwusdForPortfolioMargin(
         requestParameters: TransferLdusdtRwusdForPortfolioMarginRequest
@@ -2242,4 +2376,44 @@ export class AccountApi implements AccountApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum BnbTransferTransferSideEnum {
+    TO_UM = 'TO_UM',
+    FROM_UM = 'FROM_UM',
+}
+
+export enum ChangeAutoRepayFuturesStatusAutoRepayEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum {
+    EARN_TO_FUTURE = 'EARN_TO_FUTURE',
+    FUTURE_TO_EARN = 'FUTURE_TO_EARN',
+}
+
+export enum PortfolioMarginProBankruptcyLoanRepayFromEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+}
+
+export enum RepayFuturesNegativeBalanceFromEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+}
+
+export enum SwitchDeltaModeDeltaEnabledEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum TransferLdusdtRwusdForPortfolioMarginAssetEnum {
+    LDUSDT = 'LDUSDT',
+    RWUSD = 'RWUSD',
+}
+
+export enum TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum {
+    EARN_TO_FUTURE = 'EARN_TO_FUTURE',
+    FUTURE_TO_EARN = 'FUTURE_TO_EARN',
 }

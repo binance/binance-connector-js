@@ -1,5 +1,6 @@
 import {
     DerivativesTradingPortfolioMarginPro,
+    DerivativesTradingPortfolioMarginProRestAPI,
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -13,7 +14,9 @@ const client = new DerivativesTradingPortfolioMarginPro({ configurationRestAPI }
 async function changeAutoRepayFuturesStatus() {
     try {
         const response = await client.restAPI.changeAutoRepayFuturesStatus({
-            autoRepay: 'true',
+            autoRepay:
+                DerivativesTradingPortfolioMarginProRestAPI
+                    .ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
         });
 
         const rateLimits = response.rateLimits!;

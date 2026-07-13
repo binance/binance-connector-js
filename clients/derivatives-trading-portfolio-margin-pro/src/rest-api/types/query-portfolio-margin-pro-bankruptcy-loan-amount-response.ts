@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,13 +20,13 @@
  */
 export interface QueryPortfolioMarginProBankruptcyLoanAmountResponse {
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof QueryPortfolioMarginProBankruptcyLoanAmountResponse
      */
     asset?: string;
     /**
-     *
+     * portfolio margin bankruptcy loan amount in BUSD
      * @type {string}
      * @memberof QueryPortfolioMarginProBankruptcyLoanAmountResponse
      */

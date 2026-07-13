@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,25 +25,25 @@ import type { GetPortfolioMarginProSpanAccountInfoResponseRiskUnitMMListInner } 
  */
 export interface GetPortfolioMarginProSpanAccountInfoResponse {
     /**
-     *
+     * uni MMR.
      * @type {string}
      * @memberof GetPortfolioMarginProSpanAccountInfoResponse
      */
     uniMMR?: string;
     /**
-     *
+     * Account equity, unit：USD
      * @type {string}
      * @memberof GetPortfolioMarginProSpanAccountInfoResponse
      */
     accountEquity?: string;
     /**
-     *
+     * Actual equity, unit：USD
      * @type {string}
      * @memberof GetPortfolioMarginProSpanAccountInfoResponse
      */
     actualEquity?: string;
     /**
-     *
+     * Account maintenance margin, unit：USD
      * @type {string}
      * @memberof GetPortfolioMarginProSpanAccountInfoResponse
      */
@@ -55,25 +55,25 @@ export interface GetPortfolioMarginProSpanAccountInfoResponse {
      */
     riskUnitMMList?: Array<GetPortfolioMarginProSpanAccountInfoResponseRiskUnitMMListInner>;
     /**
-     *
+     * margin MM.
      * @type {string}
      * @memberof GetPortfolioMarginProSpanAccountInfoResponse
      */
     marginMM?: string;
     /**
-     *
+     * other MM.
      * @type {string}
      * @memberof GetPortfolioMarginProSpanAccountInfoResponse
      */
     otherMM?: string;
     /**
-     *
+     * Classic Portfolio margin account status:\"NORMAL\", \"MARGIN_CALL\", \"SUPPLY_MARGIN\", \"REDUCE_ONLY\", \"ACTIVE_LIQUIDATION\", \"FORCE_LIQUIDATION\", \"BANKRUPTED\"
      * @type {string}
      * @memberof GetPortfolioMarginProSpanAccountInfoResponse
      */
     accountStatus?: string;
     /**
-     *
+     * PM_1 for classic PM, PM_2 for PM, PM_3 for PM Pro(SPAN)
      * @type {string}
      * @memberof GetPortfolioMarginProSpanAccountInfoResponse
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -43,12 +43,7 @@ describe('MarketDataApi', () => {
 
     describe('getPortfolioMarginAssetLeverage()', () => {
         it('should execute getPortfolioMarginAssetLeverage() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify([
-                    { asset: 'USDC', leverage: 10 },
-                    { asset: 'USDT', leverage: 10 },
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([{ asset: 'USDC', leverage: 10 }]));
 
             const spy = jest.spyOn(client, 'getPortfolioMarginAssetLeverage').mockReturnValue(
                 Promise.resolve({
@@ -84,12 +79,7 @@ describe('MarketDataApi', () => {
 
     describe('portfolioMarginCollateralRate()', () => {
         it('should execute portfolioMarginCollateralRate() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify([
-                    { asset: 'USDC', collateralRate: '1.0000' },
-                    { asset: 'BUSD', collateralRate: '1.0000' },
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([{ asset: 'USDC', collateralRate: '1.0000' }]));
 
             const spy = jest.spyOn(client, 'portfolioMarginCollateralRate').mockReturnValue(
                 Promise.resolve({
@@ -136,29 +126,6 @@ describe('MarketDataApi', () => {
                                 collateralRate: '1.0000',
                                 cum: '0.0000',
                             },
-                            {
-                                tierFloor: '1000.0000',
-                                tierCap: '2000.0000',
-                                collateralRate: '0.9000',
-                                cum: '0.0000',
-                            },
-                        ],
-                    },
-                    {
-                        asset: 'USDT',
-                        collateralInfo: [
-                            {
-                                tierFloor: '0.0000',
-                                tierCap: '1000.0000',
-                                collateralRate: '1.0000',
-                                cum: '0.0000',
-                            },
-                            {
-                                tierFloor: '1000.0000',
-                                tierCap: '2000.0000',
-                                collateralRate: '0.9999',
-                                cum: '0.0000',
-                            },
                         ],
                     },
                 ])
@@ -194,29 +161,6 @@ describe('MarketDataApi', () => {
                                 tierFloor: '0.0000',
                                 tierCap: '1000.0000',
                                 collateralRate: '1.0000',
-                                cum: '0.0000',
-                            },
-                            {
-                                tierFloor: '1000.0000',
-                                tierCap: '2000.0000',
-                                collateralRate: '0.9000',
-                                cum: '0.0000',
-                            },
-                        ],
-                    },
-                    {
-                        asset: 'USDT',
-                        collateralInfo: [
-                            {
-                                tierFloor: '0.0000',
-                                tierCap: '1000.0000',
-                                collateralRate: '1.0000',
-                                cum: '0.0000',
-                            },
-                            {
-                                tierFloor: '1000.0000',
-                                tierCap: '2000.0000',
-                                collateralRate: '0.9999',
                                 cum: '0.0000',
                             },
                         ],
@@ -284,7 +228,7 @@ describe('MarketDataApi', () => {
 
         it('should execute queryPortfolioMarginAssetIndexPrice() successfully with optional parameters', async () => {
             const params: QueryPortfolioMarginAssetIndexPriceRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             mockResponse = JSONParse(

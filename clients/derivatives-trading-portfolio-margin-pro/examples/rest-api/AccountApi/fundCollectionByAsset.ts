@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMarginPro({ configurationRestAPI }
 async function fundCollectionByAsset() {
     try {
         const response = await client.restAPI.fundCollectionByAsset({
-            asset: 'asset_example',
+            asset: 'USDT',
         });
 
         const rateLimits = response.rateLimits!;

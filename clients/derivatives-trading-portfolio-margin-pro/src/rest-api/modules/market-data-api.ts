@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
+ * Access advanced account management and high-frequency trading with Binance Portfolio Margin Pro.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -33,9 +32,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Portfolio Margin Asset Leverage
          *
-         * Weight: 50
+         * Weight(IP): 50
          *
-         * @summary Get Portfolio Margin Asset Leverage(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Portfolio Margin Asset Leverage (USER_DATA)
          *
          * @throws {RequiredError}
          */
@@ -59,9 +60,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Portfolio Margin Collateral Rate
          *
-         * Weight: 50
+         * Weight(IP): 50
          *
-         * @summary Portfolio Margin Collateral Rate(MARKET_DATA)
+         * Security Type: MARKET_DATA
+         *
+         * @summary Portfolio Margin Collateral Rate (MARKET_DATA)
          *
          * @throws {RequiredError}
          */
@@ -85,9 +88,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Portfolio Margin PRO Tiered Collateral Rate
          *
-         * Weight: 50
+         * Weight(IP): 50
          *
-         * @summary Portfolio Margin Pro Tiered Collateral Rate(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Portfolio Margin Pro Tiered Collateral Rate (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -118,7 +123,10 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query Portfolio Margin Asset Index Price
          *
-         * Weight: 1 if send asset or 50 if not send asset
+         * Weight: - 1 if `asset` is sent
+         * - 50 if `asset` is not sent
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Query Portfolio Margin Asset Index Price (MARKET_DATA)
          * @param {string} [asset]
@@ -157,9 +165,11 @@ export interface MarketDataApiInterface {
     /**
      * Get Portfolio Margin Asset Leverage
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Get Portfolio Margin Asset Leverage(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Asset Leverage (USER_DATA)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApiInterface
@@ -170,9 +180,11 @@ export interface MarketDataApiInterface {
     /**
      * Portfolio Margin Collateral Rate
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Portfolio Margin Collateral Rate(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Portfolio Margin Collateral Rate (MARKET_DATA)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApiInterface
@@ -183,9 +195,11 @@ export interface MarketDataApiInterface {
     /**
      * Portfolio Margin PRO Tiered Collateral Rate
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Portfolio Margin Pro Tiered Collateral Rate(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Portfolio Margin Pro Tiered Collateral Rate (USER_DATA)
      * @param {PortfolioMarginProTieredCollateralRateRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -197,7 +211,10 @@ export interface MarketDataApiInterface {
     /**
      * Query Portfolio Margin Asset Index Price
      *
-     * Weight: 1 if send asset or 50 if not send asset
+     * Weight: - 1 if `asset` is sent
+     * - 50 if `asset` is not sent
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Query Portfolio Margin Asset Index Price (MARKET_DATA)
      * @param {QueryPortfolioMarginAssetIndexPriceRequest} requestParameters Request parameters.
@@ -252,13 +269,15 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get Portfolio Margin Asset Leverage
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Get Portfolio Margin Asset Leverage(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Portfolio Margin Asset Leverage (USER_DATA)
      * @returns {Promise<RestApiResponse<GetPortfolioMarginAssetLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Get-Portfolio-Margin-Asset-Leverage Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#get-portfolio-margin-asset-leverage Binance API Documentation}
      */
     public async getPortfolioMarginAssetLeverage(): Promise<
         RestApiResponse<GetPortfolioMarginAssetLeverageResponse>
@@ -280,13 +299,15 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Portfolio Margin Collateral Rate
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Portfolio Margin Collateral Rate(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Portfolio Margin Collateral Rate (MARKET_DATA)
      * @returns {Promise<RestApiResponse<PortfolioMarginCollateralRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Classic-Portfolio-Margin-Collateral-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#portfolio-margin-collateral-rate Binance API Documentation}
      */
     public async portfolioMarginCollateralRate(): Promise<
         RestApiResponse<PortfolioMarginCollateralRateResponse>
@@ -308,14 +329,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Portfolio Margin PRO Tiered Collateral Rate
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Portfolio Margin Pro Tiered Collateral Rate(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Portfolio Margin Pro Tiered Collateral Rate (USER_DATA)
      * @param {PortfolioMarginProTieredCollateralRateRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<PortfolioMarginProTieredCollateralRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Portfolio-Margin-Pro-Tiered-Collateral-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#portfolio-margin-pro-tiered-collateral-rate Binance API Documentation}
      */
     public async portfolioMarginProTieredCollateralRate(
         requestParameters: PortfolioMarginProTieredCollateralRateRequest = {}
@@ -339,14 +362,17 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query Portfolio Margin Asset Index Price
      *
-     * Weight: 1 if send asset or 50 if not send asset
+     * Weight: - 1 if `asset` is sent
+     * - 50 if `asset` is not sent
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Query Portfolio Margin Asset Index Price (MARKET_DATA)
      * @param {QueryPortfolioMarginAssetIndexPriceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginAssetIndexPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Query-Portfolio-Margin-Asset-Index-Price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#query-portfolio-margin-asset-index-price Binance API Documentation}
      */
     public async queryPortfolioMarginAssetIndexPrice(
         requestParameters: QueryPortfolioMarginAssetIndexPriceRequest = {}
