@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface TakerBuySellVolumeResponseInner {
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof TakerBuySellVolumeResponseInner
      */
     pair?: string;
     /**
-     *
+     * Contract type.
      * @type {string}
      * @memberof TakerBuySellVolumeResponseInner
      */
     contractType?: string;
     /**
-     *
+     * unit: cont
      * @type {string}
      * @memberof TakerBuySellVolumeResponseInner
      */
     takerBuyVol?: string;
     /**
-     *
+     * unit: cont
      * @type {string}
      * @memberof TakerBuySellVolumeResponseInner
      */
     takerSellVol?: string;
     /**
-     *
+     * unit: base asset
      * @type {string}
      * @memberof TakerBuySellVolumeResponseInner
      */
     takerBuyVolValue?: string;
     /**
-     *
+     * unit: base asset
      * @type {string}
      * @memberof TakerBuySellVolumeResponseInner
      */
     takerSellVolValue?: string;
     /**
-     *
+     * Timestamp in milliseconds.
      * @type {number | bigint}
      * @memberof TakerBuySellVolumeResponseInner
      */

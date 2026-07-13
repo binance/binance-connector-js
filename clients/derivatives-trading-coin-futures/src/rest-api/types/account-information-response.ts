@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,43 +28,43 @@ import type { AccountInformationResponsePositionsInner } from './account-informa
  */
 export interface AccountInformationResponse {
     /**
-     *
+     * Supported assets.
      * @type {Array<AccountInformationResponseAssetsInner>}
      * @memberof AccountInformationResponse
      */
     assets?: Array<AccountInformationResponseAssetsInner>;
     /**
-     *
+     * Position list.
      * @type {Array<AccountInformationResponsePositionsInner>}
      * @memberof AccountInformationResponse
      */
     positions?: Array<AccountInformationResponsePositionsInner>;
     /**
-     *
+     * Whether deposits are enabled.
      * @type {boolean}
      * @memberof AccountInformationResponse
      */
     canDeposit?: boolean;
     /**
-     *
+     * Whether trading is enabled.
      * @type {boolean}
      * @memberof AccountInformationResponse
      */
     canTrade?: boolean;
     /**
-     *
+     * Whether withdrawals are enabled.
      * @type {boolean}
      * @memberof AccountInformationResponse
      */
     canWithdraw?: boolean;
     /**
-     *
+     * Fee tier level.
      * @type {number | bigint}
      * @memberof AccountInformationResponse
      */
     feeTier?: number | bigint;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof AccountInformationResponse
      */

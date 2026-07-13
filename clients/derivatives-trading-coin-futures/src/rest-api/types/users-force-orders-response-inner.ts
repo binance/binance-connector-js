@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,133 +20,133 @@
  */
 export interface UsersForceOrdersResponseInner {
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof UsersForceOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     pair?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Average execution price
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Cumulative base asset amount.
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     cumBase?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof UsersForceOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof UsersForceOrdersResponseInner
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof UsersForceOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof UsersForceOrdersResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof UsersForceOrdersResponseInner
      */

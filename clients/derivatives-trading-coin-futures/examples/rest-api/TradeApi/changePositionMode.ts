@@ -13,7 +13,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function changePositionMode() {
     try {
         const response = await client.restAPI.changePositionMode({
-            dualSidePosition: 'dualSidePosition_example',
+            dualSidePosition: 'true',
         });
 
         const rateLimits = response.rateLimits!;

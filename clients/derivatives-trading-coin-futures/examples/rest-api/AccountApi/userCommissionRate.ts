@@ -13,7 +13,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function userCommissionRate() {
     try {
         const response = await client.restAPI.userCommissionRate({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_PERP',
         });
 
         const rateLimits = response.rateLimits!;

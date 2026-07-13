@@ -1,5 +1,6 @@
 import {
     DerivativesTradingCoinFutures,
+    DerivativesTradingCoinFuturesWebsocketStreams,
     DERIVATIVES_TRADING_COIN_FUTURES_WS_STREAMS_PROD_URL,
 } from '../../src';
 
@@ -16,7 +17,8 @@ async function partialBookDepthStreams() {
 
         const stream = connection.partialBookDepthStreams({
             symbol: 'btcusdt',
-            levels: 10,
+            levels: DerivativesTradingCoinFuturesWebsocketStreams.PartialBookDepthStreamsLevelsEnum
+                .LEVELS_5,
         });
 
         stream.on('message', (data) => {

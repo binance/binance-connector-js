@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,69 +20,69 @@
  */
 export interface AllBookTickersStreamResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     e?: string;
     /**
-     *
+     * Order book update Id
      * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     s?: string;
     /**
-     *
+     * Best bid price
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     b?: string;
     /**
-     *
+     * Best bid qty
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     B?: string;
     /**
-     *
+     * Best ask price
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     a?: string;
     /**
-     *
+     * Best ask qty
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     A?: string;
     /**
-     *
+     * Transaction time
      * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     ps?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof AllBookTickersStreamResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

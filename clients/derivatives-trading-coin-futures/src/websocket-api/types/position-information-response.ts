@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,25 +28,25 @@ import type { PositionInformationResponseResultInner } from './position-informat
  */
 export interface PositionInformationResponse {
     /**
-     *
+     * positionId
      * @type {string}
      * @memberof PositionInformationResponse
      */
     id?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {number | bigint}
      * @memberof PositionInformationResponse
      */
     status?: number | bigint;
     /**
-     *
+     * Indicates that combined is set to true.
      * @type {Array<PositionInformationResponseResultInner>}
      * @memberof PositionInformationResponse
      */
     result?: Array<PositionInformationResponseResultInner>;
     /**
-     *
+     * Rate limit definitions.
      * @type {Array<AccountInformationResponseRateLimitsInner>}
      * @memberof PositionInformationResponse
      */

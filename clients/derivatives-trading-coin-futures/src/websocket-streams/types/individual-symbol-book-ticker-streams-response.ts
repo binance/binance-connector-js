@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,69 +20,69 @@
  */
 export interface IndividualSymbolBookTickerStreamsResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     e?: string;
     /**
-     *
+     * Order book update Id
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     s?: string;
     /**
-     *
-     * @type {string}
-     * @memberof IndividualSymbolBookTickerStreamsResponse
-     */
-    ps?: string;
-    /**
-     *
+     * Best bid price
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     b?: string;
     /**
-     *
+     * Best bid qty
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     B?: string;
     /**
-     *
+     * Best ask price
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     a?: string;
     /**
-     *
+     * Best ask qty
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     A?: string;
     /**
-     *
+     * Transaction time
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
-     * @type {number | bigint}
+     * Pair
+     * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    st?: number | bigint;
+    ps?: string;
+    /**
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
+     * @memberof IndividualSymbolBookTickerStreamsResponse
+     */
+    st?: number;
 }

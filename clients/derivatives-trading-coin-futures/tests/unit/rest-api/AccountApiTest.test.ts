@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AccountApi } from '../../../src/rest-api';
+import { AccountApi, GetIncomeHistoryIncomeTypeEnum } from '../../../src/rest-api';
 import {
     AccountInformationRequest,
     FuturesAccountBalanceRequest,
@@ -98,39 +98,7 @@ describe('AccountApi', () => {
                             breakEvenPrice: '0.0',
                             maxQty: '50',
                             updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSD_201225',
-                            positionAmt: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '125',
-                            isolated: false,
-                            positionSide: 'LONG',
-                            entryPrice: '0.0',
-                            breakEvenPrice: '0.0',
-                            maxQty: '50',
-                            updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSD_201225',
-                            positionAmt: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '125',
-                            isolated: false,
-                            positionSide: 'SHORT',
-                            entryPrice: '0.0',
-                            breakEvenPrice: '0.0',
-                            maxQty: '50',
                             notionalValue: '0',
-                            updateTime: 1627026881327,
                         },
                     ],
                     canDeposit: true,
@@ -195,39 +163,7 @@ describe('AccountApi', () => {
                             breakEvenPrice: '0.0',
                             maxQty: '50',
                             updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSD_201225',
-                            positionAmt: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '125',
-                            isolated: false,
-                            positionSide: 'LONG',
-                            entryPrice: '0.0',
-                            breakEvenPrice: '0.0',
-                            maxQty: '50',
-                            updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSD_201225',
-                            positionAmt: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '125',
-                            isolated: false,
-                            positionSide: 'SHORT',
-                            entryPrice: '0.0',
-                            breakEvenPrice: '0.0',
-                            maxQty: '50',
                             notionalValue: '0',
-                            updateTime: 1627026881327,
                         },
                     ],
                     canDeposit: true,
@@ -736,7 +672,7 @@ describe('AccountApi', () => {
     describe('getFuturesOrderHistoryDownloadLinkById()', () => {
         it('should execute getFuturesOrderHistoryDownloadLinkById() successfully with required parameters only', async () => {
             const params: GetFuturesOrderHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             mockResponse = JSONParse(
@@ -746,7 +682,7 @@ describe('AccountApi', () => {
                     url: '',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -768,7 +704,7 @@ describe('AccountApi', () => {
 
         it('should execute getFuturesOrderHistoryDownloadLinkById() successfully with optional parameters', async () => {
             const params: GetFuturesOrderHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
                 recvWindow: 5000,
             };
 
@@ -779,7 +715,7 @@ describe('AccountApi', () => {
                     url: '',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -801,7 +737,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when downloadId is missing', async () => {
             const _params: GetFuturesOrderHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
             const params = Object.assign({ ..._params });
             delete params?.downloadId;
@@ -813,7 +749,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFuturesOrderHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             const errorResponse = {
@@ -838,7 +774,7 @@ describe('AccountApi', () => {
     describe('getFuturesTradeDownloadLinkById()', () => {
         it('should execute getFuturesTradeDownloadLinkById() successfully with required parameters only', async () => {
             const params: GetFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             mockResponse = JSONParse(
@@ -848,7 +784,7 @@ describe('AccountApi', () => {
                     url: '',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -868,7 +804,7 @@ describe('AccountApi', () => {
 
         it('should execute getFuturesTradeDownloadLinkById() successfully with optional parameters', async () => {
             const params: GetFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
                 recvWindow: 5000,
             };
 
@@ -879,7 +815,7 @@ describe('AccountApi', () => {
                     url: '',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -899,7 +835,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when downloadId is missing', async () => {
             const _params: GetFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
             const params = Object.assign({ ..._params });
             delete params?.downloadId;
@@ -911,7 +847,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             const errorResponse = {
@@ -936,7 +872,7 @@ describe('AccountApi', () => {
     describe('getFuturesTransactionHistoryDownloadLinkById()', () => {
         it('should execute getFuturesTransactionHistoryDownloadLinkById() successfully with required parameters only', async () => {
             const params: GetFuturesTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             mockResponse = JSONParse(
@@ -946,7 +882,7 @@ describe('AccountApi', () => {
                     url: '',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -968,7 +904,7 @@ describe('AccountApi', () => {
 
         it('should execute getFuturesTransactionHistoryDownloadLinkById() successfully with optional parameters', async () => {
             const params: GetFuturesTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
                 recvWindow: 5000,
             };
 
@@ -979,7 +915,7 @@ describe('AccountApi', () => {
                     url: '',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -1001,7 +937,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when downloadId is missing', async () => {
             const _params: GetFuturesTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
             const params = Object.assign({ ..._params });
             delete params?.downloadId;
@@ -1015,7 +951,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFuturesTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             const errorResponse = {
@@ -1051,16 +987,6 @@ describe('AccountApi', () => {
                         tranId: '9689322392',
                         tradeId: '',
                     },
-                    {
-                        symbol: 'BTCUSD_200925',
-                        incomeType: 'COMMISSION',
-                        income: '-0.01000000',
-                        asset: 'BTC',
-                        info: '',
-                        time: 1570636800000,
-                        tranId: '9689322392',
-                        tradeId: '2059192',
-                    },
                 ])
             );
 
@@ -1080,12 +1006,12 @@ describe('AccountApi', () => {
 
         it('should execute getIncomeHistory() successfully with optional parameters', async () => {
             const params: GetIncomeHistoryRequest = {
-                symbol: 'symbol_example',
-                incomeType: 'incomeType_example',
+                symbol: 'BTCUSDT',
+                incomeType: GetIncomeHistoryIncomeTypeEnum.TRANSFER,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 100,
+                page: 1,
+                limit: 30,
                 recvWindow: 5000,
             };
 
@@ -1100,16 +1026,6 @@ describe('AccountApi', () => {
                         time: 1570608000000,
                         tranId: '9689322392',
                         tradeId: '',
-                    },
-                    {
-                        symbol: 'BTCUSD_200925',
-                        incomeType: 'COMMISSION',
-                        income: '-0.01000000',
-                        asset: 'BTC',
-                        info: '',
-                        time: 1570636800000,
-                        tranId: '9689322392',
-                        tradeId: '2059192',
                     },
                 ])
             );
@@ -1180,7 +1096,7 @@ describe('AccountApi', () => {
 
         it('should execute notionalBracketForPair() successfully with optional parameters', async () => {
             const params: NotionalBracketForPairRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSD',
                 recvWindow: 5000,
             };
 
@@ -1271,7 +1187,7 @@ describe('AccountApi', () => {
 
         it('should execute notionalBracketForSymbol() successfully with optional parameters', async () => {
             const params: NotionalBracketForSymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 recvWindow: 5000,
             };
 
@@ -1329,7 +1245,7 @@ describe('AccountApi', () => {
     describe('userCommissionRate()', () => {
         it('should execute userCommissionRate() successfully with required parameters only', async () => {
             const params: UserCommissionRateRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             mockResponse = JSONParse(
@@ -1356,7 +1272,7 @@ describe('AccountApi', () => {
 
         it('should execute userCommissionRate() successfully with optional parameters', async () => {
             const params: UserCommissionRateRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 recvWindow: 5000,
             };
 
@@ -1384,7 +1300,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: UserCommissionRateRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1396,7 +1312,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: UserCommissionRateRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             const errorResponse = {

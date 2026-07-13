@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,19 +25,19 @@ import type { NotionalBracketForPairResponseInnerBracketsInner } from './notiona
  */
 export interface NotionalBracketForSymbolResponseInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof NotionalBracketForSymbolResponseInner
      */
     symbol?: string;
     /**
-     *
+     * user symbol bracket multiplier, only appears when user\'s symbol bracket is adjusted
      * @type {number}
      * @memberof NotionalBracketForSymbolResponseInner
      */
     notionalCoef?: number;
     /**
-     *
+     * Leverage bracket details.
      * @type {Array<NotionalBracketForPairResponseInnerBracketsInner>}
      * @memberof NotionalBracketForSymbolResponseInner
      */

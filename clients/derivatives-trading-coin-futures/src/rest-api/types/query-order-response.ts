@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,157 +20,157 @@
  */
 export interface QueryOrderResponse {
     /**
-     *
+     * Average execution price
      * @type {string}
      * @memberof QueryOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Cumulative base asset amount.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     cumBase?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof QueryOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof QueryOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     origType?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     price?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof QueryOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof QueryOrderResponse
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof QueryOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof QueryOrderResponse
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof QueryOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof QueryOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof QueryOrderResponse
      */
     pair?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
     time?: number | bigint;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof QueryOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof QueryOrderResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof QueryOrderResponse
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof QueryOrderResponse
      */

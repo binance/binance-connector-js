@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,37 +20,37 @@
  */
 export interface NotionalBracketForPairResponseInnerBracketsInner {
     /**
-     *
+     * bracket level
      * @type {number | bigint}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
     bracket?: number | bigint;
     /**
-     *
+     * the maximum leverage
      * @type {number | bigint}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
     initialLeverage?: number | bigint;
     /**
-     *
+     * upper edge of base asset quantity
      * @type {number | bigint}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
     qtyCap?: number | bigint;
     /**
-     *
+     * lower edge of base asset quantity
      * @type {number | bigint}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
     qtylFloor?: number | bigint;
     /**
-     *
+     * Maintenance margin ratio.
      * @type {number}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
     maintMarginRatio?: number;
     /**
-     *
+     * Cumulative value.
      * @type {number}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */

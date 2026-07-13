@@ -14,7 +14,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function takerBuySellVolume() {
     try {
         const response = await client.restAPI.takerBuySellVolume({
-            pair: 'pair_example',
+            pair: 'BTCUSD',
             contractType:
                 DerivativesTradingCoinFuturesRestAPI.TakerBuySellVolumeContractTypeEnum.PERPETUAL,
             period: DerivativesTradingCoinFuturesRestAPI.TakerBuySellVolumePeriodEnum.PERIOD_5m,

@@ -14,7 +14,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function changeMarginType() {
     try {
         const response = await client.restAPI.changeMarginType({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_200925',
             marginType:
                 DerivativesTradingCoinFuturesRestAPI.ChangeMarginTypeMarginTypeEnum.ISOLATED,
         });

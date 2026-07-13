@@ -17,7 +17,7 @@ async function cancelOrder() {
         connection = await client.websocketAPI.connect();
 
         const response = await connection.cancelOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_PERP',
         });
 
         const rateLimits = response.rateLimits!;

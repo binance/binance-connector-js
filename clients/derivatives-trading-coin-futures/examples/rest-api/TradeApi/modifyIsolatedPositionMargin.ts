@@ -1,6 +1,5 @@
 import {
     DerivativesTradingCoinFutures,
-    DerivativesTradingCoinFuturesRestAPI,
     DERIVATIVES_TRADING_COIN_FUTURES_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -14,9 +13,9 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function modifyIsolatedPositionMargin() {
     try {
         const response = await client.restAPI.modifyIsolatedPositionMargin({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             amount: 1.0,
-            type: DerivativesTradingCoinFuturesRestAPI.ModifyIsolatedPositionMarginTypeEnum.LIMIT,
+            type: 1,
         });
 
         const rateLimits = response.rateLimits!;

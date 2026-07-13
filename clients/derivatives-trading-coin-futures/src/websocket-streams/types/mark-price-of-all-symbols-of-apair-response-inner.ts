@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,57 +20,57 @@
  */
 export interface MarkPriceOfAllSymbolsOfAPairResponseInner {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     s?: string;
     /**
-     *
+     * Mark Price
      * @type {string}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     p?: string;
     /**
-     *
+     * Estimated Settle Price, only useful in the last hour before the settlement starts.
      * @type {string}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     P?: string;
     /**
-     *
+     * Index Price
      * @type {string}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     i?: string;
     /**
-     *
+     * funding rate for perpetual symbol, \"\" will be shown for delivery symbol
      * @type {string}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     r?: string;
     /**
-     *
+     * next funding time for perpetual symbol, 0 will be shown for delivery symbol
      * @type {number | bigint}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     T?: number | bigint;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
-    st?: number | bigint;
+    st?: number;
 }

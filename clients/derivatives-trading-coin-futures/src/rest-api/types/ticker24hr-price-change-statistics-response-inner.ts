@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,103 +20,103 @@
  */
 export interface Ticker24hrPriceChangeStatisticsResponseInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     pair?: string;
     /**
-     *
+     * Absolute price change in the 24h window.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     priceChange?: string;
     /**
-     *
+     * Percentage price change in the 24h window.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     priceChangePercent?: string;
     /**
-     *
+     * Weighted average price in the 24h window.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     weightedAvgPrice?: string;
     /**
-     *
+     * Latest traded price.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     lastPrice?: string;
     /**
-     *
+     * Quantity of the latest trade.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     lastQty?: string;
     /**
-     *
+     * Opening price of the 24h window.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     openPrice?: string;
     /**
-     *
+     * Highest price in the 24h window.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     highPrice?: string;
     /**
-     *
+     * Lowest price in the 24h window.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     lowPrice?: string;
     /**
-     *
+     * Base asset volume in the 24h window.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     volume?: string;
     /**
-     *
+     * Base asset volume.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     baseVolume?: string;
     /**
-     *
+     * Start time of the 24h window (milliseconds).
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     openTime?: number | bigint;
     /**
-     *
+     * End time of the 24h window (milliseconds).
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     closeTime?: number | bigint;
     /**
-     *
+     * First tradeId
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     firstId?: number | bigint;
     /**
-     *
+     * Last tradeId
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
     lastId?: number | bigint;
     /**
-     *
+     * Total number of trades in the 24h window.
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */

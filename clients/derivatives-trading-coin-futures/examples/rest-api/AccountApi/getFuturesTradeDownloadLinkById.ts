@@ -13,7 +13,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function getFuturesTradeDownloadLinkById() {
     try {
         const response = await client.restAPI.getFuturesTradeDownloadLinkById({
-            downloadId: '1',
+            downloadId: '545923594199212032',
         });
 
         const rateLimits = response.rateLimits!;

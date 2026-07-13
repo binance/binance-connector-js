@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface CompressedAggregateTradesListResponseInner {
     /**
-     *
+     * Aggregate tradeId
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     a?: number | bigint;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     p?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     q?: string;
     /**
-     *
+     * First tradeId
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     f?: number | bigint;
     /**
-     *
+     * Last tradeId
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     l?: number | bigint;
     /**
-     *
+     * Timestamp
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     T?: number | bigint;
     /**
-     *
+     * Was the buyer the maker?
      * @type {boolean}
      * @memberof CompressedAggregateTradesListResponseInner
      */

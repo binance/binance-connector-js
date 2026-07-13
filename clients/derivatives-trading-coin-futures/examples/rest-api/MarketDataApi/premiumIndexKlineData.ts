@@ -14,7 +14,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function premiumIndexKlineData() {
     try {
         const response = await client.restAPI.premiumIndexKlineData({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD',
             interval:
                 DerivativesTradingCoinFuturesRestAPI.PremiumIndexKlineDataIntervalEnum.INTERVAL_1m,
         });

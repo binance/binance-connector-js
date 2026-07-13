@@ -14,7 +14,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function topTraderLongShortRatioPositions() {
     try {
         const response = await client.restAPI.topTraderLongShortRatioPositions({
-            pair: 'pair_example',
+            pair: 'BTCUSD',
             period: DerivativesTradingCoinFuturesRestAPI.TopTraderLongShortRatioPositionsPeriodEnum
                 .PERIOD_5m,
         });

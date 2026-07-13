@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -132,7 +132,7 @@ describe('TradeApi', () => {
             mockResponse.id = randomString();
 
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -189,7 +189,7 @@ describe('TradeApi', () => {
             };
 
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -223,7 +223,7 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -322,20 +322,13 @@ describe('TradeApi', () => {
                             limit: 2400,
                             count: 6,
                         },
-                        {
-                            rateLimitType: 'ORDERS',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 1200,
-                            count: 1,
-                        },
                     ],
                 })
             );
             mockResponse.id = randomString();
 
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -395,7 +388,7 @@ describe('TradeApi', () => {
             };
 
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -432,7 +425,7 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -534,20 +527,13 @@ describe('TradeApi', () => {
                             limit: 2400,
                             count: 6,
                         },
-                        {
-                            rateLimitType: 'ORDERS',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 1200,
-                            count: 1,
-                        },
                     ],
                 })
             );
             mockResponse.id = randomString();
 
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
             };
@@ -606,7 +592,7 @@ describe('TradeApi', () => {
             };
 
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
             };
@@ -642,7 +628,7 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
             };
@@ -900,6 +886,7 @@ describe('TradeApi', () => {
                         avgPrice: '0.00',
                         origQty: '1',
                         executedQty: '0',
+                        cumQty: '0',
                         cumBase: '0',
                         timeInForce: 'GTC',
                         type: 'LIMIT',
@@ -930,7 +917,7 @@ describe('TradeApi', () => {
             mockResponse.id = randomString();
 
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -987,7 +974,7 @@ describe('TradeApi', () => {
             };
 
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1021,7 +1008,7 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             let resolveTest: (value: unknown) => void;

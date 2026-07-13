@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface GetIncomeHistoryResponseInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof GetIncomeHistoryResponseInner
      */
     symbol?: string;
     /**
-     *
+     * income type
      * @type {string}
      * @memberof GetIncomeHistoryResponseInner
      */
     incomeType?: string;
     /**
-     *
+     * income amount
      * @type {string}
      * @memberof GetIncomeHistoryResponseInner
      */
     income?: string;
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof GetIncomeHistoryResponseInner
      */
     asset?: string;
     /**
-     *
+     * extra information
      * @type {string}
      * @memberof GetIncomeHistoryResponseInner
      */
     info?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof GetIncomeHistoryResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * transaction id
      * @type {string}
      * @memberof GetIncomeHistoryResponseInner
      */
     tranId?: string;
     /**
-     *
+     * Trade ID.
      * @type {string}
      * @memberof GetIncomeHistoryResponseInner
      */

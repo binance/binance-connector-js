@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,97 +20,97 @@
  */
 export interface PositionInformationResponseResultInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     symbol?: string;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     positionAmt?: string;
     /**
-     *
+     * Position entry price.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     entryPrice?: string;
     /**
-     *
+     * mark price
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     markPrice?: string;
     /**
-     *
+     * Unrealized profit.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     unRealizedProfit?: string;
     /**
-     *
+     * Liquidation price.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     liquidationPrice?: string;
     /**
-     *
+     * Leverage value.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     leverage?: string;
     /**
-     *
+     * maximum quantity of base asset
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     maxQty?: string;
     /**
-     *
+     * Margin type.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     marginType?: string;
     /**
-     *
+     * Isolated margin amount.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     isolatedMargin?: string;
     /**
-     *
+     * Whether auto-add margin is enabled.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     isAutoAddMargin?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     positionSide?: string;
     /**
-     *
+     * Notional value.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     notionalValue?: string;
     /**
-     *
+     * Isolated wallet balance.
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */
     isolatedWallet?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof PositionInformationResponseResultInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * break-even price
      * @type {string}
      * @memberof PositionInformationResponseResultInner
      */

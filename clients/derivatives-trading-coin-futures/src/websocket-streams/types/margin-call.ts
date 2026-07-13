@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,25 +25,25 @@ import type { MarginCallPInner } from './margin-call-pinner';
  */
 export interface MarginCall {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof MarginCall
      */
     E?: number | bigint;
     /**
-     *
+     * Account Alias
      * @type {string}
      * @memberof MarginCall
      */
     i?: string;
     /**
-     *
+     * Cross Wallet Balance. Only pushed with crossed position margin call
      * @type {string}
      * @memberof MarginCall
      */
     cw?: string;
     /**
-     *
+     * Position(s) of Margin Call
      * @type {Array<MarginCallPInner>}
      * @memberof MarginCall
      */

@@ -18,7 +18,7 @@ async function newOrder() {
         connection = await client.websocketAPI.connect();
 
         const response = await connection.newOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_PERP',
             side: DerivativesTradingCoinFuturesWebsocketAPI.NewOrderSideEnum.BUY,
             type: DerivativesTradingCoinFuturesWebsocketAPI.NewOrderTypeEnum.LIMIT,
         });

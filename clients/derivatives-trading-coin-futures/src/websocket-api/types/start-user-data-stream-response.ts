@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { StartUserDataStreamResponseRateLimitsInner } from './start-user-data-stream-response-rate-limits-inner';
+import type { CloseUserDataStreamResponseRateLimitsInner } from './close-user-data-stream-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { StartUserDataStreamResponseResult } from './start-user-data-stream-response-result';
@@ -28,13 +28,13 @@ import type { StartUserDataStreamResponseResult } from './start-user-data-stream
  */
 export interface StartUserDataStreamResponse {
     /**
-     *
+     * positionId
      * @type {string}
      * @memberof StartUserDataStreamResponse
      */
     id?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {number | bigint}
      * @memberof StartUserDataStreamResponse
      */
@@ -46,9 +46,9 @@ export interface StartUserDataStreamResponse {
      */
     result?: StartUserDataStreamResponseResult;
     /**
-     *
-     * @type {Array<StartUserDataStreamResponseRateLimitsInner>}
+     * Rate limit definitions.
+     * @type {Array<CloseUserDataStreamResponseRateLimitsInner>}
      * @memberof StartUserDataStreamResponse
      */
-    rateLimits?: Array<StartUserDataStreamResponseRateLimitsInner>;
+    rateLimits?: Array<CloseUserDataStreamResponseRateLimitsInner>;
 }

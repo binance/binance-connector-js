@@ -13,7 +13,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function getPositionMarginChangeHistory() {
     try {
         const response = await client.restAPI.getPositionMarginChangeHistory({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD',
         });
 
         const rateLimits = response.rateLimits!;

@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,7 +25,7 @@ import type { PositionAdlQuantileEstimationResponseInnerAdlQuantile } from './po
  */
 export interface PositionAdlQuantileEstimationResponseInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof PositionAdlQuantileEstimationResponseInner
      */

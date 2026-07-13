@@ -8,13 +8,13 @@ const configurationWebsocketStreams = {
 };
 const client = new DerivativesTradingCoinFutures({ configurationWebsocketStreams });
 
-async function liquidationOrderStreams() {
+async function marketLiquidationOrderStreams() {
     let connection;
 
     try {
         connection = await client.websocketStreams.connect();
 
-        const stream = connection.liquidationOrderStreams({
+        const stream = connection.marketLiquidationOrderStreams({
             symbol: 'btcusdt',
         });
 
@@ -29,4 +29,4 @@ async function liquidationOrderStreams() {
     }
 }
 
-liquidationOrderStreams();
+marketLiquidationOrderStreams();

@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,13 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderBookResponseAsksItem } from './order-book-response-asks-item';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderBookResponseBidsItem } from './order-book-response-bids-item';
-
 /**
  *
  * @export
@@ -28,45 +20,45 @@ import type { OrderBookResponseBidsItem } from './order-book-response-bids-item'
  */
 export interface OrderBookResponse {
     /**
-     *
+     * Last update ID.
      * @type {number | bigint}
      * @memberof OrderBookResponse
      */
     lastUpdateId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof OrderBookResponse
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof OrderBookResponse
      */
     pair?: string;
     /**
-     *
+     * Message output time
      * @type {number | bigint}
      * @memberof OrderBookResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Transaction time
      * @type {number | bigint}
      * @memberof OrderBookResponse
      */
     T?: number | bigint;
     /**
-     *
-     * @type {Array<OrderBookResponseBidsItem>}
+     * Bid orders. Each entry is [price, quantity].
+     * @type {Array<Array<string>>}
      * @memberof OrderBookResponse
      */
-    bids?: Array<OrderBookResponseBidsItem>;
+    bids?: Array<Array<string>>;
     /**
-     *
-     * @type {Array<OrderBookResponseAsksItem>}
+     * Ask orders. Each entry is [price, quantity].
+     * @type {Array<Array<string>>}
      * @memberof OrderBookResponse
      */
-    asks?: Array<OrderBookResponseAsksItem>;
+    asks?: Array<Array<string>>;
 }

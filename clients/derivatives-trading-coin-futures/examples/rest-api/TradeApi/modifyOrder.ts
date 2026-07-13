@@ -14,7 +14,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function modifyOrder() {
     try {
         const response = await client.restAPI.modifyOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_PERP',
             side: DerivativesTradingCoinFuturesRestAPI.ModifyOrderSideEnum.BUY,
         });
 

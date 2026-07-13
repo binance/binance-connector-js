@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,63 +25,63 @@ import type { ContractInfoStreamResponseBksInner } from './contract-info-stream-
  */
 export interface ContractInfoStreamResponse {
     /**
-     *
+     * Event Type
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     e?: string;
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     s?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     ps?: string;
     /**
-     *
+     * Contract type
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     ct?: string;
     /**
-     *
+     * Delivery date time
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
     dt?: number | bigint;
     /**
-     *
+     * onboard date time
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
     ot?: number | bigint;
     /**
-     *
+     * Contract status
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     cs?: string;
     /**
-     *
+     * Bracket list.
      * @type {Array<ContractInfoStreamResponseBksInner>}
      * @memberof ContractInfoStreamResponse
      */
     bks?: Array<ContractInfoStreamResponseBksInner>;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof ContractInfoStreamResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

@@ -13,7 +13,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function orderBook() {
     try {
         const response = await client.restAPI.orderBook({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_PERP',
         });
 
         const rateLimits = response.rateLimits!;

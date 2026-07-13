@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,157 +20,157 @@
  */
 export interface AllOrdersResponseInner {
     /**
-     *
+     * Average execution price
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Cumulative base asset amount.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     cumBase?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof AllOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof AllOrdersResponseInner
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     pair?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     priceRate?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof AllOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof AllOrdersResponseInner
      */

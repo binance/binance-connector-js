@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,47 +20,53 @@
  */
 export interface ModifyMultipleOrdersBatchOrdersParameterInner {
     /**
-     *
-     * @type {string}
+     * Sub-order ID, required when clientOrderId is not sent.
+     * @type {number | bigint}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    orderId?: string;
+    orderId?: number | bigint;
     /**
-     *
+     * Client order ID, required when orderId is not sent. Only support letters, numbers and underscores, and must be unique within 24 hours.
      * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
     origClientOrderId?: string;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    symbol?: string;
+    symbol: string;
+    /**
+     * Trading side
+     * @type {string}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
+    side: ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum;
+    /**
+     * Order quantity, cannot be sent with closePosition=true. **After CM migration, this parameter becomes mandatory** (each batch element must send both `price` and `quantity`).
+     * @type {number}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
+    quantity?: number;
+    /**
+     * Latest token price. **After CM migration, this parameter becomes mandatory** (each batch element must send both `price` and `quantity`).
+     * @type {number}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
+    price?: number;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    side?: ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum;
+    recvWindow?: number | bigint;
     /**
-     *
-     * @type {string}
+     * Unix timestamp in milliseconds used to sign the request. The value must reflect the current client time and is validated by the server for signed endpoints.
+     * @type {number | bigint}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    quantity?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    price?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    recvWindow?: string;
+    timestamp: number | bigint;
 }
 
 export const ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum = {

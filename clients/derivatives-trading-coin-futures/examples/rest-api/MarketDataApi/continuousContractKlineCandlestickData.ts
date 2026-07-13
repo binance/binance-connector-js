@@ -14,7 +14,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function continuousContractKlineCandlestickData() {
     try {
         const response = await client.restAPI.continuousContractKlineCandlestickData({
-            pair: 'pair_example',
+            pair: 'BTCUSD',
             contractType:
                 DerivativesTradingCoinFuturesRestAPI
                     .ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,

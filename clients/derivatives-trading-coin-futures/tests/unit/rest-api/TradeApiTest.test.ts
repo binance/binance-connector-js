@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -18,15 +18,16 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 import {
     TradeApi,
     ChangeMarginTypeMarginTypeEnum,
-    ModifyIsolatedPositionMarginTypeEnum,
     ModifyIsolatedPositionMarginPositionSideEnum,
     ModifyOrderSideEnum,
     ModifyOrderPriceMatchEnum,
     NewOrderSideEnum,
     NewOrderTypeEnum,
     NewOrderPositionSideEnum,
+    NewOrderReduceOnlyEnum,
     NewOrderTimeInForceEnum,
     NewOrderWorkingTypeEnum,
+    NewOrderPriceProtectEnum,
     NewOrderNewOrderRespTypeEnum,
     NewOrderPriceMatchEnum,
     NewOrderSelfTradePreventionModeEnum,
@@ -136,13 +137,13 @@ describe('TradeApi', () => {
 
         it('should execute accountTradeList() successfully with optional parameters', async () => {
             const params: AccountTradeListRequest = {
-                symbol: 'symbol_example',
-                pair: 'pair_example',
+                symbol: 'BTCUSD_200626',
+                pair: 'BTCUSD',
                 orderId: '1',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                fromId: 1,
-                limit: 100,
+                fromId: 6,
+                limit: 30,
                 recvWindow: 5000,
             };
 
@@ -250,12 +251,12 @@ describe('TradeApi', () => {
 
         it('should execute allOrders() successfully with optional parameters', async () => {
             const params: AllOrdersRequest = {
-                symbol: 'symbol_example',
-                pair: 'pair_example',
-                orderId: 1,
+                symbol: 'BTCUSD_200925',
+                pair: 'BTCUSD',
+                orderId: 1917641,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 30,
                 recvWindow: 5000,
             };
 
@@ -325,8 +326,8 @@ describe('TradeApi', () => {
     describe('autoCancelAllOpenOrders()', () => {
         it('should execute autoCancelAllOpenOrders() successfully with required parameters only', async () => {
             const params: AutoCancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
-                countdownTime: 789,
+                symbol: 'BTCUSD_200925',
+                countdownTime: 1000,
             };
 
             mockResponse = JSONParse(
@@ -349,8 +350,8 @@ describe('TradeApi', () => {
 
         it('should execute autoCancelAllOpenOrders() successfully with optional parameters', async () => {
             const params: AutoCancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
-                countdownTime: 789,
+                symbol: 'BTCUSD_200925',
+                countdownTime: 1000,
                 recvWindow: 5000,
             };
 
@@ -374,8 +375,8 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: AutoCancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
-                countdownTime: 789,
+                symbol: 'BTCUSD_200925',
+                countdownTime: 1000,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -387,8 +388,8 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when countdownTime is missing', async () => {
             const _params: AutoCancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
-                countdownTime: 789,
+                symbol: 'BTCUSD_200925',
+                countdownTime: 1000,
             };
             const params = Object.assign({ ..._params });
             delete params?.countdownTime;
@@ -400,8 +401,8 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AutoCancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
-                countdownTime: 789,
+                symbol: 'BTCUSD_200925',
+                countdownTime: 1000,
             };
 
             const errorResponse = {
@@ -424,7 +425,7 @@ describe('TradeApi', () => {
     describe('cancelAllOpenOrders()', () => {
         it('should execute cancelAllOpenOrders() successfully with required parameters only', async () => {
             const params: CancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             mockResponse = JSONParse(
@@ -447,7 +448,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelAllOpenOrders() successfully with optional parameters', async () => {
             const params: CancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 recvWindow: 5000,
             };
 
@@ -471,7 +472,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -483,7 +484,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             const errorResponse = {
@@ -504,7 +505,7 @@ describe('TradeApi', () => {
     describe('cancelMultipleOrders()', () => {
         it('should execute cancelMultipleOrders() successfully with required parameters only', async () => {
             const params: CancelMultipleOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             mockResponse = JSONParse(
@@ -517,7 +518,6 @@ describe('TradeApi', () => {
                         executedQty: '0',
                         orderId: 283194212,
                         origQty: '11',
-                        origType: 'TRAILING_STOP_MARKET',
                         price: '0',
                         reduceOnly: false,
                         side: 'BUY',
@@ -528,6 +528,7 @@ describe('TradeApi', () => {
                         symbol: 'BTCUSD_200925',
                         pair: 'BTCUSD',
                         timeInForce: 'GTC',
+                        origType: 'TRAILING_STOP_MARKET',
                         type: 'TRAILING_STOP_MARKET',
                         activatePrice: '9020',
                         priceRate: '0.3',
@@ -536,8 +537,9 @@ describe('TradeApi', () => {
                         priceMatch: 'NONE',
                         selfTradePreventionMode: 'NONE',
                         updateTime: 1571110484038,
+                        code: -2011,
+                        msg: 'Unknown order sent.',
                     },
-                    { code: -2011, msg: 'Unknown order sent.' },
                 ])
             );
 
@@ -557,7 +559,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelMultipleOrders() successfully with optional parameters', async () => {
             const params: CancelMultipleOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 orderIdList: [1234567],
                 origClientOrderIdList: ['my_id_1'],
                 recvWindow: 5000,
@@ -573,7 +575,6 @@ describe('TradeApi', () => {
                         executedQty: '0',
                         orderId: 283194212,
                         origQty: '11',
-                        origType: 'TRAILING_STOP_MARKET',
                         price: '0',
                         reduceOnly: false,
                         side: 'BUY',
@@ -584,6 +585,7 @@ describe('TradeApi', () => {
                         symbol: 'BTCUSD_200925',
                         pair: 'BTCUSD',
                         timeInForce: 'GTC',
+                        origType: 'TRAILING_STOP_MARKET',
                         type: 'TRAILING_STOP_MARKET',
                         activatePrice: '9020',
                         priceRate: '0.3',
@@ -592,8 +594,9 @@ describe('TradeApi', () => {
                         priceMatch: 'NONE',
                         selfTradePreventionMode: 'NONE',
                         updateTime: 1571110484038,
+                        code: -2011,
+                        msg: 'Unknown order sent.',
                     },
-                    { code: -2011, msg: 'Unknown order sent.' },
                 ])
             );
 
@@ -613,7 +616,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelMultipleOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -625,7 +628,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelMultipleOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             const errorResponse = {
@@ -646,7 +649,7 @@ describe('TradeApi', () => {
     describe('cancelOrder()', () => {
         it('should execute cancelOrder() successfully with required parameters only', async () => {
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             mockResponse = JSONParse(
@@ -658,7 +661,6 @@ describe('TradeApi', () => {
                     executedQty: '0',
                     orderId: 283194212,
                     origQty: '11',
-                    origType: 'TRAILING_STOP_MARKET',
                     price: '0',
                     reduceOnly: false,
                     side: 'BUY',
@@ -669,6 +671,7 @@ describe('TradeApi', () => {
                     symbol: 'BTCUSD_200925',
                     pair: 'BTCUSD',
                     timeInForce: 'GTC',
+                    origType: 'TRAILING_STOP_MARKET',
                     type: 'TRAILING_STOP_MARKET',
                     activatePrice: '9020',
                     priceRate: '0.3',
@@ -696,9 +699,9 @@ describe('TradeApi', () => {
 
         it('should execute cancelOrder() successfully with optional parameters', async () => {
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
-                orderId: 1,
-                origClientOrderId: '1',
+                symbol: 'BTCUSD_200925',
+                orderId: 283194212,
+                origClientOrderId: 'myOrder1',
                 recvWindow: 5000,
             };
 
@@ -711,7 +714,6 @@ describe('TradeApi', () => {
                     executedQty: '0',
                     orderId: 283194212,
                     origQty: '11',
-                    origType: 'TRAILING_STOP_MARKET',
                     price: '0',
                     reduceOnly: false,
                     side: 'BUY',
@@ -722,6 +724,7 @@ describe('TradeApi', () => {
                     symbol: 'BTCUSD_200925',
                     pair: 'BTCUSD',
                     timeInForce: 'GTC',
+                    origType: 'TRAILING_STOP_MARKET',
                     type: 'TRAILING_STOP_MARKET',
                     activatePrice: '9020',
                     priceRate: '0.3',
@@ -749,7 +752,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -761,7 +764,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             const errorResponse = {
@@ -782,8 +785,8 @@ describe('TradeApi', () => {
     describe('changeInitialLeverage()', () => {
         it('should execute changeInitialLeverage() successfully with required parameters only', async () => {
             const params: ChangeInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 1,
             };
 
             mockResponse = JSONParse(
@@ -806,8 +809,8 @@ describe('TradeApi', () => {
 
         it('should execute changeInitialLeverage() successfully with optional parameters', async () => {
             const params: ChangeInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 1,
                 recvWindow: 5000,
             };
 
@@ -831,8 +834,8 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ChangeInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -844,8 +847,8 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when leverage is missing', async () => {
             const _params: ChangeInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.leverage;
@@ -857,8 +860,8 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 1,
             };
 
             const errorResponse = {
@@ -881,7 +884,7 @@ describe('TradeApi', () => {
     describe('changeMarginType()', () => {
         it('should execute changeMarginType() successfully with required parameters only', async () => {
             const params: ChangeMarginTypeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 marginType: ChangeMarginTypeMarginTypeEnum.ISOLATED,
             };
 
@@ -903,7 +906,7 @@ describe('TradeApi', () => {
 
         it('should execute changeMarginType() successfully with optional parameters', async () => {
             const params: ChangeMarginTypeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 marginType: ChangeMarginTypeMarginTypeEnum.ISOLATED,
                 recvWindow: 5000,
             };
@@ -926,7 +929,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ChangeMarginTypeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 marginType: ChangeMarginTypeMarginTypeEnum.ISOLATED,
             };
             const params = Object.assign({ ..._params });
@@ -939,7 +942,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when marginType is missing', async () => {
             const _params: ChangeMarginTypeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 marginType: ChangeMarginTypeMarginTypeEnum.ISOLATED,
             };
             const params = Object.assign({ ..._params });
@@ -952,7 +955,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeMarginTypeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 marginType: ChangeMarginTypeMarginTypeEnum.ISOLATED,
             };
 
@@ -974,7 +977,7 @@ describe('TradeApi', () => {
     describe('changePositionMode()', () => {
         it('should execute changePositionMode() successfully with required parameters only', async () => {
             const params: ChangePositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: 'true',
             };
 
             mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
@@ -995,7 +998,7 @@ describe('TradeApi', () => {
 
         it('should execute changePositionMode() successfully with optional parameters', async () => {
             const params: ChangePositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: 'true',
                 recvWindow: 5000,
             };
 
@@ -1017,7 +1020,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when dualSidePosition is missing', async () => {
             const _params: ChangePositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: 'true',
             };
             const params = Object.assign({ ..._params });
             delete params?.dualSidePosition;
@@ -1029,7 +1032,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangePositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: 'true',
             };
 
             const errorResponse = {
@@ -1098,8 +1101,8 @@ describe('TradeApi', () => {
 
         it('should execute currentAllOpenOrders() successfully with optional parameters', async () => {
             const params: CurrentAllOpenOrdersRequest = {
-                symbol: 'symbol_example',
-                pair: 'pair_example',
+                symbol: 'BTCUSD_200925',
+                pair: 'BTCUSD',
                 recvWindow: 5000,
             };
 
@@ -1169,7 +1172,7 @@ describe('TradeApi', () => {
     describe('getOrderModifyHistory()', () => {
         it('should execute getOrderModifyHistory() successfully with required parameters only', async () => {
             const params: GetOrderModifyHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             mockResponse = JSONParse(
@@ -1185,32 +1188,6 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
-                        },
-                    },
-                    {
-                        amendmentId: 5361,
-                        symbol: 'BTCUSD_PERP',
-                        pair: 'BTCUSD',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629184533946,
-                        amendment: {
-                            price: { before: '30005', after: '30004' },
-                            origQty: { before: '1', after: '1' },
-                            count: 2,
-                        },
-                    },
-                    {
-                        amendmentId: 5325,
-                        symbol: 'BTCUSD_PERP',
-                        pair: 'BTCUSD',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629182711787,
-                        amendment: {
-                            price: { before: '30002', after: '30005' },
-                            origQty: { before: '1', after: '1' },
-                            count: 1,
                         },
                     },
                 ])
@@ -1232,12 +1209,12 @@ describe('TradeApi', () => {
 
         it('should execute getOrderModifyHistory() successfully with optional parameters', async () => {
             const params: GetOrderModifyHistoryRequest = {
-                symbol: 'symbol_example',
-                orderId: 1,
-                origClientOrderId: '1',
+                symbol: 'BTCUSD_PERP',
+                orderId: 20072994037,
+                origClientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 30,
                 recvWindow: 5000,
             };
 
@@ -1254,32 +1231,6 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
-                        },
-                    },
-                    {
-                        amendmentId: 5361,
-                        symbol: 'BTCUSD_PERP',
-                        pair: 'BTCUSD',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629184533946,
-                        amendment: {
-                            price: { before: '30005', after: '30004' },
-                            origQty: { before: '1', after: '1' },
-                            count: 2,
-                        },
-                    },
-                    {
-                        amendmentId: 5325,
-                        symbol: 'BTCUSD_PERP',
-                        pair: 'BTCUSD',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629182711787,
-                        amendment: {
-                            price: { before: '30002', after: '30005' },
-                            origQty: { before: '1', after: '1' },
-                            count: 1,
                         },
                     },
                 ])
@@ -1301,7 +1252,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: GetOrderModifyHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1313,7 +1264,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetOrderModifyHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             const errorResponse = {
@@ -1336,7 +1287,7 @@ describe('TradeApi', () => {
     describe('getPositionMarginChangeHistory()', () => {
         it('should execute getPositionMarginChangeHistory() successfully with required parameters only', async () => {
             const params: GetPositionMarginChangeHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD',
             };
 
             mockResponse = JSONParse(
@@ -1348,14 +1299,6 @@ describe('TradeApi', () => {
                         time: 1578047897183,
                         type: 1,
                         positionSide: 'BOTH',
-                    },
-                    {
-                        amount: '100',
-                        asset: 'BTC',
-                        symbol: 'BTCUSD_200925',
-                        time: 1578047900425,
-                        type: 1,
-                        positionSide: 'LONG',
                     },
                 ])
             );
@@ -1376,11 +1319,11 @@ describe('TradeApi', () => {
 
         it('should execute getPositionMarginChangeHistory() successfully with optional parameters', async () => {
             const params: GetPositionMarginChangeHistoryRequest = {
-                symbol: 'symbol_example',
-                type: 789,
+                symbol: 'BTCUSD',
+                type: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 30,
                 recvWindow: 5000,
             };
 
@@ -1393,14 +1336,6 @@ describe('TradeApi', () => {
                         time: 1578047897183,
                         type: 1,
                         positionSide: 'BOTH',
-                    },
-                    {
-                        amount: '100',
-                        asset: 'BTC',
-                        symbol: 'BTCUSD_200925',
-                        time: 1578047900425,
-                        type: 1,
-                        positionSide: 'LONG',
                     },
                 ])
             );
@@ -1421,7 +1356,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: GetPositionMarginChangeHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1433,7 +1368,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetPositionMarginChangeHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD',
             };
 
             const errorResponse = {
@@ -1458,9 +1393,9 @@ describe('TradeApi', () => {
     describe('modifyIsolatedPositionMargin()', () => {
         it('should execute modifyIsolatedPositionMargin() successfully with required parameters only', async () => {
             const params: ModifyIsolatedPositionMarginRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 amount: 1.0,
-                type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
+                type: 1,
             };
 
             mockResponse = JSONParse(
@@ -1488,9 +1423,9 @@ describe('TradeApi', () => {
 
         it('should execute modifyIsolatedPositionMargin() successfully with optional parameters', async () => {
             const params: ModifyIsolatedPositionMarginRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 amount: 1.0,
-                type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
+                type: 1,
                 positionSide: ModifyIsolatedPositionMarginPositionSideEnum.BOTH,
                 recvWindow: 5000,
             };
@@ -1520,9 +1455,9 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ModifyIsolatedPositionMarginRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 amount: 1.0,
-                type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1534,9 +1469,9 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: ModifyIsolatedPositionMarginRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 amount: 1.0,
-                type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -1548,9 +1483,9 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: ModifyIsolatedPositionMarginRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 amount: 1.0,
-                type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -1562,9 +1497,9 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ModifyIsolatedPositionMarginRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 amount: 1.0,
-                type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
+                type: 1,
             };
 
             const errorResponse = {
@@ -1619,8 +1554,9 @@ describe('TradeApi', () => {
                         priceMatch: 'NONE',
                         selfTradePreventionMode: 'NONE',
                         updateTime: 1629182711600,
+                        code: -2022,
+                        msg: 'ReduceOnly Order is rejected.',
                     },
-                    { code: -2022, msg: 'ReduceOnly Order is rejected.' },
                 ])
             );
 
@@ -1671,8 +1607,9 @@ describe('TradeApi', () => {
                         priceMatch: 'NONE',
                         selfTradePreventionMode: 'NONE',
                         updateTime: 1629182711600,
+                        code: -2022,
+                        msg: 'ReduceOnly Order is rejected.',
                     },
-                    { code: -2022, msg: 'ReduceOnly Order is rejected.' },
                 ])
             );
 
@@ -1725,7 +1662,7 @@ describe('TradeApi', () => {
     describe('modifyOrder()', () => {
         it('should execute modifyOrder() successfully with required parameters only', async () => {
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyOrderSideEnum.BUY,
             };
 
@@ -1774,13 +1711,13 @@ describe('TradeApi', () => {
 
         it('should execute modifyOrder() successfully with optional parameters', async () => {
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyOrderSideEnum.BUY,
                 orderId: 1,
                 origClientOrderId: '1',
                 quantity: 1.0,
                 price: 1.0,
-                priceMatch: ModifyOrderPriceMatchEnum.NONE,
+                priceMatch: ModifyOrderPriceMatchEnum.OPPONENT,
                 recvWindow: 5000,
             };
 
@@ -1829,7 +1766,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyOrderSideEnum.BUY,
             };
             const params = Object.assign({ ..._params });
@@ -1842,7 +1779,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyOrderSideEnum.BUY,
             };
             const params = Object.assign({ ..._params });
@@ -1855,7 +1792,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyOrderSideEnum.BUY,
             };
 
@@ -1877,7 +1814,7 @@ describe('TradeApi', () => {
     describe('newOrder()', () => {
         it('should execute newOrder() successfully with required parameters only', async () => {
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
             };
@@ -1893,11 +1830,11 @@ describe('TradeApi', () => {
                     origQty: '10',
                     price: '0',
                     reduceOnly: false,
-                    side: 'BUY',
+                    closePosition: false,
+                    side: 'SELL',
                     positionSide: 'SHORT',
                     status: 'NEW',
-                    stopPrice: '9300',
-                    closePosition: false,
+                    stopPrice: '0',
                     symbol: 'BTCUSD_200925',
                     pair: 'BTCUSD',
                     timeInForce: 'GTC',
@@ -1929,23 +1866,23 @@ describe('TradeApi', () => {
 
         it('should execute newOrder() successfully with optional parameters', async () => {
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
                 positionSide: NewOrderPositionSideEnum.BOTH,
-                timeInForce: NewOrderTimeInForceEnum.GTC,
+                reduceOnly: NewOrderReduceOnlyEnum.TRUE,
                 quantity: 1.0,
-                reduceOnly: 'false',
                 price: 1.0,
                 newClientOrderId: '1',
                 stopPrice: 1.0,
-                closePosition: 'closePosition_example',
+                closePosition: 'true',
                 activationPrice: 1.0,
-                callbackRate: 1.0,
+                callbackRate: 5000.0,
+                timeInForce: NewOrderTimeInForceEnum.GTC,
                 workingType: NewOrderWorkingTypeEnum.MARK_PRICE,
-                priceProtect: 'false',
+                priceProtect: NewOrderPriceProtectEnum.TRUE,
                 newOrderRespType: NewOrderNewOrderRespTypeEnum.ACK,
-                priceMatch: NewOrderPriceMatchEnum.NONE,
+                priceMatch: NewOrderPriceMatchEnum.OPPONENT,
                 selfTradePreventionMode: NewOrderSelfTradePreventionModeEnum.NONE,
                 recvWindow: 5000,
             };
@@ -1961,11 +1898,11 @@ describe('TradeApi', () => {
                     origQty: '10',
                     price: '0',
                     reduceOnly: false,
-                    side: 'BUY',
+                    closePosition: false,
+                    side: 'SELL',
                     positionSide: 'SHORT',
                     status: 'NEW',
-                    stopPrice: '9300',
-                    closePosition: false,
+                    stopPrice: '0',
                     symbol: 'BTCUSD_200925',
                     pair: 'BTCUSD',
                     timeInForce: 'GTC',
@@ -1997,7 +1934,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
             };
@@ -2011,7 +1948,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
             };
@@ -2025,7 +1962,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
             };
@@ -2039,7 +1976,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
             };
@@ -2077,10 +2014,11 @@ describe('TradeApi', () => {
                         origQty: '10',
                         price: '0',
                         reduceOnly: false,
-                        side: 'BUY',
+                        side: 'SELL',
                         positionSide: 'SHORT',
                         status: 'NEW',
-                        stopPrice: '9300',
+                        stopPrice: '0',
+                        closePosition: false,
                         symbol: 'BTCUSD_200925',
                         pair: 'BTCUSD',
                         timeInForce: 'GTC',
@@ -2093,8 +2031,9 @@ describe('TradeApi', () => {
                         priceProtect: false,
                         priceMatch: 'NONE',
                         selfTradePreventionMode: 'NONE',
+                        code: -2022,
+                        msg: 'ReduceOnly Order is rejected.',
                     },
-                    { code: -2022, msg: 'ReduceOnly Order is rejected.' },
                 ])
             );
 
@@ -2130,10 +2069,11 @@ describe('TradeApi', () => {
                         origQty: '10',
                         price: '0',
                         reduceOnly: false,
-                        side: 'BUY',
+                        side: 'SELL',
                         positionSide: 'SHORT',
                         status: 'NEW',
-                        stopPrice: '9300',
+                        stopPrice: '0',
+                        closePosition: false,
                         symbol: 'BTCUSD_200925',
                         pair: 'BTCUSD',
                         timeInForce: 'GTC',
@@ -2146,8 +2086,9 @@ describe('TradeApi', () => {
                         priceProtect: false,
                         priceMatch: 'NONE',
                         selfTradePreventionMode: 'NONE',
+                        code: -2022,
+                        msg: 'ReduceOnly Order is rejected.',
                     },
-                    { code: -2022, msg: 'ReduceOnly Order is rejected.' },
                 ])
             );
 
@@ -2201,8 +2142,10 @@ describe('TradeApi', () => {
         it('should execute positionAdlQuantileEstimation() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify([
-                    { symbol: 'BTCUSD_200925', adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0 } },
-                    { symbol: 'BTCUSD_201225', adlQuantile: { LONG: 1, SHORT: 2, BOTH: 0 } },
+                    {
+                        symbol: 'BTCUSD_200925',
+                        adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0, BOTH: 0 },
+                    },
                 ])
             );
 
@@ -2222,14 +2165,16 @@ describe('TradeApi', () => {
 
         it('should execute positionAdlQuantileEstimation() successfully with optional parameters', async () => {
             const params: PositionAdlQuantileEstimationRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify([
-                    { symbol: 'BTCUSD_200925', adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0 } },
-                    { symbol: 'BTCUSD_201225', adlQuantile: { LONG: 1, SHORT: 2, BOTH: 0 } },
+                    {
+                        symbol: 'BTCUSD_200925',
+                        adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0, BOTH: 0 },
+                    },
                 ])
             );
 
@@ -2285,38 +2230,6 @@ describe('TradeApi', () => {
                         positionSide: 'BOTH',
                         updateTime: 0,
                     },
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '1',
-                        entryPrice: '11707.70000003',
-                        breakEvenPrice: '11707.80000005',
-                        markPrice: '11788.66626667',
-                        unRealizedProfit: '0.00005866',
-                        liquidationPrice: '11667.63509587',
-                        leverage: '125',
-                        maxQty: '50',
-                        marginType: 'cross',
-                        isolatedMargin: '0.00000000',
-                        isAutoAddMargin: 'false',
-                        positionSide: 'LONG',
-                        updateTime: 1627026881327,
-                    },
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '0',
-                        entryPrice: '0.0',
-                        breakEvenPrice: '0.0',
-                        markPrice: '0.00000000',
-                        unRealizedProfit: '0.00000000',
-                        liquidationPrice: '0',
-                        leverage: '125',
-                        maxQty: '50',
-                        marginType: 'cross',
-                        isolatedMargin: '0.00000000',
-                        isAutoAddMargin: 'false',
-                        positionSide: 'SHORT',
-                        updateTime: 1627026881327,
-                    },
                 ])
             );
 
@@ -2336,8 +2249,8 @@ describe('TradeApi', () => {
 
         it('should execute positionInformation() successfully with optional parameters', async () => {
             const params: PositionInformationRequest = {
-                marginAsset: 'marginAsset_example',
-                pair: 'pair_example',
+                marginAsset: 'USDT',
+                pair: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -2358,38 +2271,6 @@ describe('TradeApi', () => {
                         isAutoAddMargin: 'false',
                         positionSide: 'BOTH',
                         updateTime: 0,
-                    },
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '1',
-                        entryPrice: '11707.70000003',
-                        breakEvenPrice: '11707.80000005',
-                        markPrice: '11788.66626667',
-                        unRealizedProfit: '0.00005866',
-                        liquidationPrice: '11667.63509587',
-                        leverage: '125',
-                        maxQty: '50',
-                        marginType: 'cross',
-                        isolatedMargin: '0.00000000',
-                        isAutoAddMargin: 'false',
-                        positionSide: 'LONG',
-                        updateTime: 1627026881327,
-                    },
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '0',
-                        entryPrice: '0.0',
-                        breakEvenPrice: '0.0',
-                        markPrice: '0.00000000',
-                        unRealizedProfit: '0.00000000',
-                        liquidationPrice: '0',
-                        leverage: '125',
-                        maxQty: '50',
-                        marginType: 'cross',
-                        isolatedMargin: '0.00000000',
-                        isAutoAddMargin: 'false',
-                        positionSide: 'SHORT',
-                        updateTime: 1627026881327,
                     },
                 ])
             );
@@ -2427,7 +2308,7 @@ describe('TradeApi', () => {
     describe('queryCurrentOpenOrder()', () => {
         it('should execute queryCurrentOpenOrder() successfully with required parameters only', async () => {
             const params: QueryCurrentOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             mockResponse = JSONParse(
@@ -2477,7 +2358,7 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentOpenOrder() successfully with optional parameters', async () => {
             const params: QueryCurrentOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -2530,7 +2411,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCurrentOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2542,7 +2423,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCurrentOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             const errorResponse = {
@@ -2565,7 +2446,7 @@ describe('TradeApi', () => {
     describe('queryOrder()', () => {
         it('should execute queryOrder() successfully with required parameters only', async () => {
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             mockResponse = JSONParse(
@@ -2574,7 +2455,7 @@ describe('TradeApi', () => {
                     clientOrderId: 'abc',
                     cumBase: '0',
                     executedQty: '0',
-                    orderId: 1917641,
+                    orderId: 1573346959,
                     origQty: '0.40',
                     origType: 'TRAILING_STOP_MARKET',
                     price: '0',
@@ -2615,7 +2496,7 @@ describe('TradeApi', () => {
 
         it('should execute queryOrder() successfully with optional parameters', async () => {
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -2627,7 +2508,7 @@ describe('TradeApi', () => {
                     clientOrderId: 'abc',
                     cumBase: '0',
                     executedQty: '0',
-                    orderId: 1917641,
+                    orderId: 1573346959,
                     origQty: '0.40',
                     origType: 'TRAILING_STOP_MARKET',
                     price: '0',
@@ -2668,7 +2549,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2680,7 +2561,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             const errorResponse = {
@@ -2726,30 +2607,6 @@ describe('TradeApi', () => {
                         time: 1596542005019,
                         updateTime: 1596542005050,
                     },
-                    {
-                        orderId: 207251986,
-                        symbol: 'BTCUSD_200925',
-                        pair: 'BTCUSD',
-                        status: 'FILLED',
-                        clientOrderId: 'autoclose-1597307316020000006',
-                        price: '11619.4',
-                        avgPrice: '11661.2',
-                        origQty: '1',
-                        executedQty: '1',
-                        cumBase: '0.00857544',
-                        timeInForce: 'IOC',
-                        type: 'LIMIT',
-                        reduceOnly: false,
-                        closePosition: false,
-                        side: 'SELL',
-                        positionSide: 'LONG',
-                        stopPrice: '0',
-                        workingType: 'CONTRACT_PRICE',
-                        priceProtect: false,
-                        origType: 'LIMIT',
-                        time: 1597307316022,
-                        updateTime: 1597307316035,
-                    },
                 ])
             );
 
@@ -2769,11 +2626,11 @@ describe('TradeApi', () => {
 
         it('should execute usersForceOrders() successfully with optional parameters', async () => {
             const params: UsersForceOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 autoCloseType: UsersForceOrdersAutoCloseTypeEnum.LIQUIDATION,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 30,
                 recvWindow: 5000,
             };
 
@@ -2802,30 +2659,6 @@ describe('TradeApi', () => {
                         origType: 'LIMIT',
                         time: 1596542005019,
                         updateTime: 1596542005050,
-                    },
-                    {
-                        orderId: 207251986,
-                        symbol: 'BTCUSD_200925',
-                        pair: 'BTCUSD',
-                        status: 'FILLED',
-                        clientOrderId: 'autoclose-1597307316020000006',
-                        price: '11619.4',
-                        avgPrice: '11661.2',
-                        origQty: '1',
-                        executedQty: '1',
-                        cumBase: '0.00857544',
-                        timeInForce: 'IOC',
-                        type: 'LIMIT',
-                        reduceOnly: false,
-                        closePosition: false,
-                        side: 'SELL',
-                        positionSide: 'LONG',
-                        stopPrice: '0',
-                        workingType: 'CONTRACT_PRICE',
-                        priceProtect: false,
-                        origType: 'LIMIT',
-                        time: 1597307316022,
-                        updateTime: 1597307316035,
                     },
                 ])
             );

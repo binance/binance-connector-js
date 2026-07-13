@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,123 +20,123 @@
  */
 export interface IndividualSymbolTickerStreamsResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     s?: string;
     /**
-     *
+     * Price change
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     p?: string;
     /**
-     *
+     * Price change percent
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     P?: string;
     /**
-     *
+     * Weighted average price
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     w?: string;
     /**
-     *
+     * Last price
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     c?: string;
     /**
-     *
+     * Last quantity
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     Q?: string;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     o?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     l?: string;
     /**
-     *
+     * Total traded volume
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     v?: string;
     /**
-     *
+     * Total traded base asset volume
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     q?: string;
     /**
-     *
+     * Statistics open time
      * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     O?: number | bigint;
     /**
-     *
+     * Statistics close time
      * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     C?: number | bigint;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     F?: number | bigint;
     /**
-     *
+     * Last trade Id
      * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     L?: number | bigint;
     /**
-     *
+     * Total number of trades
      * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     n?: number | bigint;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     ps?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

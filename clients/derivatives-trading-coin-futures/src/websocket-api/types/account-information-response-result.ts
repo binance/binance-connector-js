@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -22,49 +22,49 @@ import type { AccountInformationResponseResultAssetsInner } from './account-info
 import type { AccountInformationResponseResultPositionsInner } from './account-information-response-result-positions-inner';
 
 /**
- *
+ * Indicates that combined is set to true.
  * @export
  * @interface AccountInformationResponseResult
  */
 export interface AccountInformationResponseResult {
     /**
-     *
+     * Fee tier level.
      * @type {number | bigint}
      * @memberof AccountInformationResponseResult
      */
     feeTier?: number | bigint;
     /**
-     *
+     * Whether trading is enabled.
      * @type {boolean}
      * @memberof AccountInformationResponseResult
      */
     canTrade?: boolean;
     /**
-     *
+     * Whether deposits are enabled.
      * @type {boolean}
      * @memberof AccountInformationResponseResult
      */
     canDeposit?: boolean;
     /**
-     *
+     * Whether withdrawals are enabled.
      * @type {boolean}
      * @memberof AccountInformationResponseResult
      */
     canWithdraw?: boolean;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof AccountInformationResponseResult
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Supported assets.
      * @type {Array<AccountInformationResponseResultAssetsInner>}
      * @memberof AccountInformationResponseResult
      */
     assets?: Array<AccountInformationResponseResultAssetsInner>;
     /**
-     *
+     * Position list.
      * @type {Array<AccountInformationResponseResultPositionsInner>}
      * @memberof AccountInformationResponseResult
      */

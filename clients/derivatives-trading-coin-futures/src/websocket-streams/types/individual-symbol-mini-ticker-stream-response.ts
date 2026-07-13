@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,69 +20,69 @@
  */
 export interface IndividualSymbolMiniTickerStreamResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     s?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     ps?: string;
     /**
-     *
+     * Close price
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     c?: string;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     o?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     l?: string;
     /**
-     *
+     * Total traded volume
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     v?: string;
     /**
-     *
+     * Total traded base asset volume
      * @type {string}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     q?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

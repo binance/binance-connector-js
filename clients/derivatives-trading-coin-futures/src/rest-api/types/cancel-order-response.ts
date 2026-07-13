@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,157 +20,157 @@
  */
 export interface CancelOrderResponse {
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Cumulative filled quantity.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     cumQty?: string;
     /**
-     *
+     * Cumulative base asset amount. Will be removed after CM migration.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     cumBase?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof CancelOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof CancelOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof CancelOrderResponse
      */
     origQty?: string;
     /**
-     *
-     * @type {string}
-     * @memberof CancelOrderResponse
-     */
-    origType?: string;
-    /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     price?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof CancelOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof CancelOrderResponse
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof CancelOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof CancelOrderResponse
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof CancelOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof CancelOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof CancelOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof CancelOrderResponse
      */
     pair?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof CancelOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Original order type.
+     * @type {string}
+     * @memberof CancelOrderResponse
+     */
+    origType?: string;
+    /**
+     * Order type.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof CancelOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof CancelOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof CancelOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof CancelOrderResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof CancelOrderResponse
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof CancelOrderResponse
      */

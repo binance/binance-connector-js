@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,37 +25,37 @@ import type { GetOrderModifyHistoryResponseInnerAmendment } from './get-order-mo
  */
 export interface GetOrderModifyHistoryResponseInner {
     /**
-     *
+     * Order modification ID
      * @type {number | bigint}
      * @memberof GetOrderModifyHistoryResponseInner
      */
     amendmentId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof GetOrderModifyHistoryResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof GetOrderModifyHistoryResponseInner
      */
     pair?: string;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof GetOrderModifyHistoryResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof GetOrderModifyHistoryResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof GetOrderModifyHistoryResponseInner
      */

@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,19 +25,19 @@ import type { AccountUpdateA } from './account-update-a';
  */
 export interface AccountUpdate {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof AccountUpdate
      */
     E?: number | bigint;
     /**
-     *
+     * Transaction
      * @type {number | bigint}
      * @memberof AccountUpdate
      */
     T?: number | bigint;
     /**
-     *
+     * Account Alias
      * @type {string}
      * @memberof AccountUpdate
      */

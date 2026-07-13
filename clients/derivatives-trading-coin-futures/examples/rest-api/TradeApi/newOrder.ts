@@ -14,7 +14,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function newOrder() {
     try {
         const response = await client.restAPI.newOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_200925',
             side: DerivativesTradingCoinFuturesRestAPI.NewOrderSideEnum.BUY,
             type: DerivativesTradingCoinFuturesRestAPI.NewOrderTypeEnum.LIMIT,
         });

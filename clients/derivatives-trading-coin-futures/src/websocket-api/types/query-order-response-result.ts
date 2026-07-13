@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,151 +14,157 @@
  */
 
 /**
- *
+ * Indicates that combined is set to true.
  * @export
  * @interface QueryOrderResponseResult
  */
 export interface QueryOrderResponseResult {
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof QueryOrderResponseResult
      */
     orderId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     pair?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     status?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     clientOrderId?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     price?: string;
     /**
-     *
+     * Average execution price
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     avgPrice?: string;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     origQty?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     executedQty?: string;
     /**
-     *
+     * Cumulative filled quantity.
+     * @type {string}
+     * @memberof QueryOrderResponseResult
+     */
+    cumQty?: string;
+    /**
+     * Cumulative base asset amount.
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     cumBase?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     type?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof QueryOrderResponseResult
      */
     reduceOnly?: boolean;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof QueryOrderResponseResult
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     stopPrice?: string;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof QueryOrderResponseResult
      */
     priceProtect?: boolean;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     origType?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof QueryOrderResponseResult
      */
     time?: number | bigint;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof QueryOrderResponseResult
      */
     updateTime?: number | bigint;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof QueryOrderResponseResult
      */

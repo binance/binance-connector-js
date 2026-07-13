@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,85 +20,85 @@
  */
 export interface PositionInformationResponseInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     symbol?: string;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     positionAmt?: string;
     /**
-     *
+     * Position entry price.
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     entryPrice?: string;
     /**
-     *
+     * break-even price
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     breakEvenPrice?: string;
     /**
-     *
+     * mark price
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     markPrice?: string;
     /**
-     *
+     * Unrealized profit.
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     unRealizedProfit?: string;
     /**
-     *
+     * Liquidation price.
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     liquidationPrice?: string;
     /**
-     *
+     * Leverage value.
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     leverage?: string;
     /**
-     *
+     * maximum quantity of base asset
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     maxQty?: string;
     /**
-     *
+     * Margin type.
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     marginType?: string;
     /**
-     *
+     * Isolated margin amount.
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     isolatedMargin?: string;
     /**
-     *
+     * Whether auto-add margin is enabled.
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     isAutoAddMargin?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof PositionInformationResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof PositionInformationResponseInner
      */

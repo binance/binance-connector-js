@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,211 +20,211 @@
  */
 export interface OrderTradeUpdateO {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     s?: string;
     /**
-     *
+     * Client Order Id
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     c?: string;
     /**
-     *
+     * Side
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     S?: string;
     /**
-     *
+     * Order Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     o?: string;
     /**
-     *
+     * Time in Force
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     f?: string;
     /**
-     *
+     * Original Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     q?: string;
     /**
-     *
+     * Original Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     p?: string;
     /**
-     *
+     * Average Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     ap?: string;
     /**
-     *
+     * Stop Price. Please ignore with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     sp?: string;
     /**
-     *
+     * Execution Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     x?: string;
     /**
-     *
+     * Order Status
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     X?: string;
     /**
-     *
+     * Order Id
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     i?: number | bigint;
     /**
-     *
+     * Order Last Filled Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     l?: string;
     /**
-     *
+     * Order Filled Accumulated Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     z?: string;
     /**
-     *
+     * Last Filled Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     L?: string;
     /**
-     *
+     * Margin Asset
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     ma?: string;
     /**
-     *
+     * Commission Asset
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     N?: string;
     /**
-     *
+     * Commission
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     n?: string;
     /**
-     *
+     * Order Trade Time
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     T?: number | bigint;
     /**
-     *
+     * Trade Id
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     t?: number | bigint;
     /**
-     *
+     * Realized Profit of the trade
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     rp?: string;
     /**
-     *
+     * Bid quantity of base asset
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     b?: string;
     /**
-     *
+     * Ask quantity of base asset
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     a?: string;
     /**
-     *
+     * Is this trade the maker side?
      * @type {boolean}
      * @memberof OrderTradeUpdateO
      */
     m?: boolean;
     /**
-     *
+     * Is this reduce only
      * @type {boolean}
      * @memberof OrderTradeUpdateO
      */
     R?: boolean;
     /**
-     *
+     * Stop Price Working Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     wt?: string;
     /**
-     *
+     * Original Order Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     ot?: string;
     /**
-     *
+     * Position Side
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     ps?: string;
     /**
-     *
+     * If Close-All, pushed with conditional order
      * @type {boolean}
      * @memberof OrderTradeUpdateO
      */
     cp?: boolean;
     /**
-     *
+     * Activation Price, only pushed with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     AP?: string;
     /**
-     *
+     * Callback Rate, only pushed with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     cr?: string;
     /**
-     *
+     * If conditional order trigger is protected
      * @type {boolean}
      * @memberof OrderTradeUpdateO
      */
     pP?: boolean;
     /**
-     *
+     * STP mode
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     V?: string;
     /**
-     *
+     * Price match mode
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     pm?: string;
     /**
-     *
+     * Expiry Reason
      * @type {string}
      * @memberof OrderTradeUpdateO
      */

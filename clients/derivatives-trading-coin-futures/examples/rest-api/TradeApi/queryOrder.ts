@@ -13,7 +13,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function queryOrder() {
     try {
         const response = await client.restAPI.queryOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_200925',
         });
 
         const rateLimits = response.rateLimits!;

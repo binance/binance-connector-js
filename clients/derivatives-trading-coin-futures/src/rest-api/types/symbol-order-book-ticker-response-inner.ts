@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface SymbolOrderBookTickerResponseInner {
     /**
-     *
+     * Last update ID.
      * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponseInner
      */
     lastUpdateId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof SymbolOrderBookTickerResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof SymbolOrderBookTickerResponseInner
      */
     pair?: string;
     /**
-     *
+     * Best bid price.
      * @type {string}
      * @memberof SymbolOrderBookTickerResponseInner
      */
     bidPrice?: string;
     /**
-     *
+     * Best bid quantity.
      * @type {string}
      * @memberof SymbolOrderBookTickerResponseInner
      */
     bidQty?: string;
     /**
-     *
+     * Best ask price.
      * @type {string}
      * @memberof SymbolOrderBookTickerResponseInner
      */
     askPrice?: string;
     /**
-     *
+     * Best ask quantity.
      * @type {string}
      * @memberof SymbolOrderBookTickerResponseInner
      */
     askQty?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponseInner
      */

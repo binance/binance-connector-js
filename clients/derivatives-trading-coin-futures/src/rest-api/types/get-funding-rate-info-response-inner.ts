@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface GetFundingRateInfoResponseInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof GetFundingRateInfoResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Adjusted funding rate cap.
      * @type {string}
      * @memberof GetFundingRateInfoResponseInner
      */
     adjustedFundingRateCap?: string;
     /**
-     *
+     * Adjusted funding rate floor.
      * @type {string}
      * @memberof GetFundingRateInfoResponseInner
      */
     adjustedFundingRateFloor?: string;
     /**
-     *
+     * Funding interval in hours.
      * @type {number | bigint}
      * @memberof GetFundingRateInfoResponseInner
      */
     fundingIntervalHours?: number | bigint;
     /**
-     *
+     * Disclaimer text.
      * @type {boolean}
      * @memberof GetFundingRateInfoResponseInner
      */

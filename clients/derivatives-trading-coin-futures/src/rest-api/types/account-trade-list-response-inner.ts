@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,97 +20,97 @@
  */
 export interface AccountTradeListResponseInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     symbol?: string;
     /**
-     *
+     * positionId
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     pair?: string;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     side?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     price?: string;
     /**
-     *
+     * Quantity.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     qty?: string;
     /**
-     *
+     * Realized PnL.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     realizedPnl?: string;
     /**
-     *
+     * Margin asset.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     marginAsset?: string;
     /**
-     *
+     * Base asset quantity.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     baseQty?: string;
     /**
-     *
+     * Transaction Fee (in Crypto)
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     commission?: string;
     /**
-     *
+     * Commission asset.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     commissionAsset?: string;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Whether the trade is a buy side for the account.
      * @type {boolean}
      * @memberof AccountTradeListResponseInner
      */
     buyer?: boolean;
     /**
-     *
+     * Whether the account is maker in this trade.
      * @type {boolean}
      * @memberof AccountTradeListResponseInner
      */

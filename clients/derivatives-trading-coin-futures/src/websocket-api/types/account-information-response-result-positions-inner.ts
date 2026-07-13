@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,97 +20,97 @@
  */
 export interface AccountInformationResponseResultPositionsInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     symbol?: string;
     /**
-     *
+     * total intial margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     initialMargin?: string;
     /**
-     *
+     * maintenance margin
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     maintMargin?: string;
     /**
-     *
+     * unrealized profit or loss
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * positions margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * open orders intial margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * Leverage value.
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     leverage?: string;
     /**
-     *
+     * Whether isolated margin mode is enabled.
      * @type {boolean}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     isolated?: boolean;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     positionSide?: string;
     /**
-     *
+     * Position entry price.
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     entryPrice?: string;
     /**
-     *
+     * maximum quantity of base asset
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     maxQty?: string;
     /**
-     *
+     * Notional value.
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     notionalValue?: string;
     /**
-     *
+     * Isolated wallet balance.
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     isolatedWallet?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */
     positionAmt?: string;
     /**
-     *
+     * break-even price
      * @type {string}
      * @memberof AccountInformationResponseResultPositionsInner
      */

@@ -21,5 +21,4 @@ export * from './position-information-response-result-inner';
 export * from './query-order-response';
 export * from './query-order-response-result';
 export * from './start-user-data-stream-response';
-export * from './start-user-data-stream-response-rate-limits-inner';
 export * from './start-user-data-stream-response-result';

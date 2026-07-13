@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,145 +20,145 @@
  */
 export interface ModifyOrderResponse {
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof ModifyOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     pair?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     status?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     price?: string;
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Cumulative filled quantity.
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     cumQty?: string;
     /**
-     *
+     * Cumulative base asset amount. Will be removed after CM migration.
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     cumBase?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     type?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof ModifyOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof ModifyOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof ModifyOrderResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     origType?: string;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof ModifyOrderResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof ModifyOrderResponse
      */

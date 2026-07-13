@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,69 +20,69 @@
  */
 export interface AggregateTradeStreamsResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof AggregateTradeStreamsResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Aggregate trade ID
      * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
     a?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AggregateTradeStreamsResponse
      */
     s?: string;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof AggregateTradeStreamsResponse
      */
     p?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof AggregateTradeStreamsResponse
      */
     q?: string;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
     f?: number | bigint;
     /**
-     *
+     * Last trade ID
      * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
     l?: number | bigint;
     /**
-     *
+     * Trade time
      * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Is the buyer the market maker?
      * @type {boolean}
      * @memberof AggregateTradeStreamsResponse
      */
     m?: boolean;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof AggregateTradeStreamsResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

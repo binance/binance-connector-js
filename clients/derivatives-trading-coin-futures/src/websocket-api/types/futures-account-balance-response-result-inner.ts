@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface FuturesAccountBalanceResponseResultInner {
     /**
-     *
+     * unique account code
      * @type {string}
      * @memberof FuturesAccountBalanceResponseResultInner
      */
     accountAlias?: string;
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof FuturesAccountBalanceResponseResultInner
      */
     asset?: string;
     /**
-     *
+     * Account balance.
      * @type {string}
      * @memberof FuturesAccountBalanceResponseResultInner
      */
     balance?: string;
     /**
-     *
+     * Available amount for withdrawal.
      * @type {string}
      * @memberof FuturesAccountBalanceResponseResultInner
      */
     withdrawAvailable?: string;
     /**
-     *
+     * wallet balance for crossed margin
      * @type {string}
      * @memberof FuturesAccountBalanceResponseResultInner
      */
     crossWalletBalance?: string;
     /**
-     *
+     * total unrealized profit or loss of crossed positions
      * @type {string}
      * @memberof FuturesAccountBalanceResponseResultInner
      */
     crossUnPnl?: string;
     /**
-     *
+     * available margin balance
      * @type {string}
      * @memberof FuturesAccountBalanceResponseResultInner
      */
     availableBalance?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof FuturesAccountBalanceResponseResultInner
      */

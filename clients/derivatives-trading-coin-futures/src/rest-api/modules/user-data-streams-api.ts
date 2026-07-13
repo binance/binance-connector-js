@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -28,9 +27,11 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Close out a user data stream.
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Close User Data Stream(USER_STREAM)
+         * Security Type: USER_STREAM
+         *
+         * @summary Close User Data Stream (USER_STREAM)
          *
          * @throws {RequiredError}
          */
@@ -52,9 +53,12 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
             };
         },
         /**
-         * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes.
+         * Keepalive a user data stream to prevent a time out. User data streams
+         * will close after 60 minutes.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_STREAM
          *
          * @summary Keepalive User Data Stream (USER_STREAM)
          *
@@ -78,9 +82,14 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
             };
         },
         /**
-         * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
+         * Start a new user data stream. The stream will close after 60 minutes
+         * unless a keepalive is sent. If the account has an active `listenKey`,
+         * that `listenKey` will be returned and its validity will be extended for
+         * 60 minutes.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_STREAM
          *
          * @summary Start User Data Stream (USER_STREAM)
          *
@@ -114,18 +123,23 @@ export interface UserDataStreamsApiInterface {
     /**
      * Close out a user data stream.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Close User Data Stream(USER_STREAM)
+     * Security Type: USER_STREAM
+     *
+     * @summary Close User Data Stream (USER_STREAM)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApiInterface
      */
     closeUserDataStream(): Promise<RestApiResponse<void>>;
     /**
-     * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes.
+     * Keepalive a user data stream to prevent a time out. User data streams
+     * will close after 60 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      *
@@ -134,9 +148,14 @@ export interface UserDataStreamsApiInterface {
      */
     keepaliveUserDataStream(): Promise<RestApiResponse<KeepaliveUserDataStreamResponse>>;
     /**
-     * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
+     * Start a new user data stream. The stream will close after 60 minutes
+     * unless a keepalive is sent. If the account has an active `listenKey`,
+     * that `listenKey` will be returned and its validity will be extended for
+     * 60 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Start User Data Stream (USER_STREAM)
      *
@@ -162,13 +181,15 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
     /**
      * Close out a user data stream.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Close User Data Stream(USER_STREAM)
+     * Security Type: USER_STREAM
+     *
+     * @summary Close User Data Stream (USER_STREAM)
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/user-data-streams#close-user-data-stream Binance API Documentation}
      */
     public async closeUserDataStream(): Promise<RestApiResponse<void>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.closeUserDataStream();
@@ -185,15 +206,18 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
     }
 
     /**
-     * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes.
+     * Keepalive a user data stream to prevent a time out. User data streams
+     * will close after 60 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      * @returns {Promise<RestApiResponse<KeepaliveUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/user-data-streams#keepalive-user-data-stream Binance API Documentation}
      */
     public async keepaliveUserDataStream(): Promise<
         RestApiResponse<KeepaliveUserDataStreamResponse>
@@ -212,15 +236,20 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
     }
 
     /**
-     * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
+     * Start a new user data stream. The stream will close after 60 minutes
+     * unless a keepalive is sent. If the account has an active `listenKey`,
+     * that `listenKey` will be returned and its validity will be extended for
+     * 60 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Start User Data Stream (USER_STREAM)
      * @returns {Promise<RestApiResponse<StartUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/user-data-streams#start-user-data-stream Binance API Documentation}
      */
     public async startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.startUserDataStream();

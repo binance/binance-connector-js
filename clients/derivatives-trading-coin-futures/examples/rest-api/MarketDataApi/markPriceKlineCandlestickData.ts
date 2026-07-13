@@ -14,7 +14,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function markPriceKlineCandlestickData() {
     try {
         const response = await client.restAPI.markPriceKlineCandlestickData({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD',
             interval:
                 DerivativesTradingCoinFuturesRestAPI.MarkPriceKlineCandlestickDataIntervalEnum
                     .INTERVAL_1m,

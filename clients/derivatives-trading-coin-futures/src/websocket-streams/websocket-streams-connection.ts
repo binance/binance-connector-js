@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -12,7 +12,7 @@
  */
 
 import { WebsocketStreamsBase, WebsocketStream, createStreamHandler } from '@binance/common';
-import { WebsocketMarketStreamsApi } from './modules/websocket-market-streams-api';
+import { Api } from './modules/api';
 
 import type { UserDataStreamEventsResponse } from './types';
 
@@ -31,12 +31,12 @@ import type {
     IndividualSymbolMiniTickerStreamRequest,
     IndividualSymbolTickerStreamsRequest,
     KlineCandlestickStreamsRequest,
-    LiquidationOrderStreamsRequest,
     MarkPriceKlineCandlestickStreamsRequest,
     MarkPriceOfAllSymbolsOfAPairRequest,
     MarkPriceStreamRequest,
+    MarketLiquidationOrderStreamsRequest,
     PartialBookDepthStreamsRequest,
-} from './modules/websocket-market-streams-api';
+} from './modules/api';
 
 import type {
     AggregateTradeStreamsResponse,
@@ -53,20 +53,20 @@ import type {
     IndividualSymbolMiniTickerStreamResponse,
     IndividualSymbolTickerStreamsResponse,
     KlineCandlestickStreamsResponse,
-    LiquidationOrderStreamsResponse,
     MarkPriceKlineCandlestickStreamsResponse,
     MarkPriceOfAllSymbolsOfAPairResponse,
     MarkPriceStreamResponse,
+    MarketLiquidationOrderStreamsResponse,
     PartialBookDepthStreamsResponse,
 } from './types';
 
 export class WebsocketStreamsConnection {
     private websocketBase: WebsocketStreamsBase;
-    private websocketMarketStreamsApi: WebsocketMarketStreamsApi;
+    private api: Api;
 
     constructor(websocketBase: WebsocketStreamsBase) {
         this.websocketBase = websocketBase;
-        this.websocketMarketStreamsApi = new WebsocketMarketStreamsApi(websocketBase);
+        this.api = new Api(websocketBase);
     }
 
     /**
@@ -169,6 +169,8 @@ export class WebsocketStreamsConnection {
     /**
      * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds.
      *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
+     *
      * Update Speed: 100ms
      *
      * @summary Aggregate Trade Streams
@@ -176,16 +178,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<AggregateTradeStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Aggregate-Trade-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#aggregate-trade-streams Binance API Documentation}
      */
     aggregateTradeStreams(
         requestParameters: AggregateTradeStreamsRequest
     ): WebsocketStream<AggregateTradeStreamsResponse> {
-        return this.websocketMarketStreamsApi.aggregateTradeStreams(requestParameters);
+        return this.api.aggregateTradeStreams(requestParameters);
     }
 
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: Real-time
      *
@@ -194,17 +198,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<AllBookTickersStreamResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Book-Tickers-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#all-book-tickers-stream Binance API Documentation}
      */
     allBookTickersStream(
         requestParameters: AllBookTickersStreamRequest = {}
     ): WebsocketStream<AllBookTickersStreamResponse> {
-        return this.websocketMarketStreamsApi.allBookTickersStream(requestParameters);
+        return this.api.allBookTickersStream(requestParameters);
     }
 
     /**
-     * The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market.
-     * For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     * The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 1000ms
      *
@@ -213,16 +218,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<AllMarketLiquidationOrderStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#all-market-liquidation-order-streams Binance API Documentation}
      */
     allMarketLiquidationOrderStreams(
         requestParameters: AllMarketLiquidationOrderStreamsRequest = {}
     ): WebsocketStream<AllMarketLiquidationOrderStreamsResponse> {
-        return this.websocketMarketStreamsApi.allMarketLiquidationOrderStreams(requestParameters);
+        return this.api.allMarketLiquidationOrderStreams(requestParameters);
     }
 
     /**
      * 24hr rolling window mini-ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 1000ms
      *
@@ -231,16 +238,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<AllMarketMiniTickersStreamResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#all-market-mini-tickers-stream Binance API Documentation}
      */
     allMarketMiniTickersStream(
         requestParameters: AllMarketMiniTickersStreamRequest = {}
     ): WebsocketStream<AllMarketMiniTickersStreamResponse> {
-        return this.websocketMarketStreamsApi.allMarketMiniTickersStream(requestParameters);
+        return this.api.allMarketMiniTickersStream(requestParameters);
     }
 
     /**
      * 24hr rolling window ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 1000ms
      *
@@ -249,16 +258,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<AllMarketTickersStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Tickers-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#all-market-tickers-streams Binance API Documentation}
      */
     allMarketTickersStreams(
         requestParameters: AllMarketTickersStreamsRequest = {}
     ): WebsocketStream<AllMarketTickersStreamsResponse> {
-        return this.websocketMarketStreamsApi.allMarketTickersStreams(requestParameters);
+        return this.api.allMarketTickersStreams(requestParameters);
     }
 
     /**
      * Kline update every second
+     *
+     * > **After CM migration**, both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * Update Speed: 250ms
      *
@@ -267,18 +278,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<ContinuousContractKlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#continuous-contract-kline-candlestick-streams Binance API Documentation}
      */
     continuousContractKlineCandlestickStreams(
         requestParameters: ContinuousContractKlineCandlestickStreamsRequest
     ): WebsocketStream<ContinuousContractKlineCandlestickStreamsResponse> {
-        return this.websocketMarketStreamsApi.continuousContractKlineCandlestickStreams(
-            requestParameters
-        );
+        return this.api.continuousContractKlineCandlestickStreams(requestParameters);
     }
 
     /**
-     * ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). `bks` field only shows up when bracket gets updated.
+     * ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). bks field only shows up when bracket gets updated.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: Real-time
      *
@@ -287,16 +298,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<ContractInfoStreamResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Contract-Info-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#contract-info-stream Binance API Documentation}
      */
     contractInfoStream(
         requestParameters: ContractInfoStreamRequest = {}
     ): WebsocketStream<ContractInfoStreamResponse> {
-        return this.websocketMarketStreamsApi.contractInfoStream(requestParameters);
+        return this.api.contractInfoStream(requestParameters);
     }
 
     /**
      * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, or 100 milliseconds
+     *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 250ms or 500ms or 100ms
      *
@@ -305,16 +318,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<DiffBookDepthStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#diff-book-depth-streams Binance API Documentation}
      */
     diffBookDepthStreams(
         requestParameters: DiffBookDepthStreamsRequest
     ): WebsocketStream<DiffBookDepthStreamsResponse> {
-        return this.websocketMarketStreamsApi.diffBookDepthStreams(requestParameters);
+        return this.api.diffBookDepthStreams(requestParameters);
     }
 
     /**
      * Index Kline/Candlestick Streams
+     *
+     * > **After CM migration**, both `fstream` and `dstream` may subscribe to CM symbols on this stream.
      *
      * Update Speed: 250ms
      *
@@ -323,34 +338,36 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<IndexKlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#index-kline-candlestick-streams Binance API Documentation}
      */
     indexKlineCandlestickStreams(
         requestParameters: IndexKlineCandlestickStreamsRequest
     ): WebsocketStream<IndexKlineCandlestickStreamsResponse> {
-        return this.websocketMarketStreamsApi.indexKlineCandlestickStreams(requestParameters);
+        return this.api.indexKlineCandlestickStreams(requestParameters);
     }
 
     /**
      * Index Price Stream
      *
-     * Update Speed: 1000ms
+     * Update Speed: 3000ms OR 1000ms
      *
      * @summary Index Price Stream
      * @param {IndexPriceStreamRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<IndexPriceStreamResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Price-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#index-price-stream Binance API Documentation}
      */
     indexPriceStream(
         requestParameters: IndexPriceStreamRequest
     ): WebsocketStream<IndexPriceStreamResponse> {
-        return this.websocketMarketStreamsApi.indexPriceStream(requestParameters);
+        return this.api.indexPriceStream(requestParameters);
     }
 
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
+     *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: Real-time
      *
@@ -359,16 +376,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<IndividualSymbolBookTickerStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#individual-symbol-book-ticker-streams Binance API Documentation}
      */
     individualSymbolBookTickerStreams(
         requestParameters: IndividualSymbolBookTickerStreamsRequest
     ): WebsocketStream<IndividualSymbolBookTickerStreamsResponse> {
-        return this.websocketMarketStreamsApi.individualSymbolBookTickerStreams(requestParameters);
+        return this.api.individualSymbolBookTickerStreams(requestParameters);
     }
 
     /**
      * 24hr rolling window mini-ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
+     *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 500ms
      *
@@ -377,16 +396,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<IndividualSymbolMiniTickerStreamResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#individual-symbol-mini-ticker-stream Binance API Documentation}
      */
     individualSymbolMiniTickerStream(
         requestParameters: IndividualSymbolMiniTickerStreamRequest
     ): WebsocketStream<IndividualSymbolMiniTickerStreamResponse> {
-        return this.websocketMarketStreamsApi.individualSymbolMiniTickerStream(requestParameters);
+        return this.api.individualSymbolMiniTickerStream(requestParameters);
     }
 
     /**
      * 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
+     *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 500ms
      *
@@ -395,16 +416,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<IndividualSymbolTickerStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#individual-symbol-ticker-streams Binance API Documentation}
      */
     individualSymbolTickerStreams(
         requestParameters: IndividualSymbolTickerStreamsRequest
     ): WebsocketStream<IndividualSymbolTickerStreamsResponse> {
-        return this.websocketMarketStreamsApi.individualSymbolTickerStreams(requestParameters);
+        return this.api.individualSymbolTickerStreams(requestParameters);
     }
 
     /**
      * The Kline/Candlestick Stream push updates to the current klines/candlestick every 250 milliseconds (if existing).
+     *
+     * > **After CM migration**, both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * Update Speed: 250ms
      *
@@ -413,36 +436,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<KlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#kline-candlestick-streams Binance API Documentation}
      */
     klineCandlestickStreams(
         requestParameters: KlineCandlestickStreamsRequest
     ): WebsocketStream<KlineCandlestickStreamsResponse> {
-        return this.websocketMarketStreamsApi.klineCandlestickStreams(requestParameters);
-    }
-
-    /**
-     * The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol.
-     *
-     * For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
-     *
-     * Update Speed: 1000ms
-     *
-     * @summary Liquidation Order Streams
-     * @param {LiquidationOrderStreamsRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<LiquidationOrderStreamsResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Liquidation-Order-Streams Binance API Documentation}
-     */
-    liquidationOrderStreams(
-        requestParameters: LiquidationOrderStreamsRequest
-    ): WebsocketStream<LiquidationOrderStreamsResponse> {
-        return this.websocketMarketStreamsApi.liquidationOrderStreams(requestParameters);
+        return this.api.klineCandlestickStreams(requestParameters);
     }
 
     /**
      * Mark Price Kline/Candlestick Streams
+     *
+     * > **After CM migration**, both `fstream` and `dstream` may subscribe to CM symbols on this stream.
      *
      * Update Speed: 250ms
      *
@@ -451,16 +456,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<MarkPriceKlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#mark-price-kline-candlestick-streams Binance API Documentation}
      */
     markPriceKlineCandlestickStreams(
         requestParameters: MarkPriceKlineCandlestickStreamsRequest
     ): WebsocketStream<MarkPriceKlineCandlestickStreamsResponse> {
-        return this.websocketMarketStreamsApi.markPriceKlineCandlestickStreams(requestParameters);
+        return this.api.markPriceKlineCandlestickStreams(requestParameters);
     }
 
     /**
      * Mark Price of All Symbols of a Pair
+     *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * Update Speed: 3000ms OR 1000ms
      *
@@ -469,16 +476,18 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<MarkPriceOfAllSymbolsOfAPairResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-of-All-Symbols-of-a-Pair Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#mark-price-of-all-symbols-of-apair Binance API Documentation}
      */
     markPriceOfAllSymbolsOfAPair(
         requestParameters: MarkPriceOfAllSymbolsOfAPairRequest
     ): WebsocketStream<MarkPriceOfAllSymbolsOfAPairResponse> {
-        return this.websocketMarketStreamsApi.markPriceOfAllSymbolsOfAPair(requestParameters);
+        return this.api.markPriceOfAllSymbolsOfAPair(requestParameters);
     }
 
     /**
      * Mark price update stream
+     *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * Update Speed: 3000ms OR 1000ms
      *
@@ -487,16 +496,36 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<MarkPriceStreamResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#mark-price-stream Binance API Documentation}
      */
     markPriceStream(
         requestParameters: MarkPriceStreamRequest
     ): WebsocketStream<MarkPriceStreamResponse> {
-        return this.websocketMarketStreamsApi.markPriceStream(requestParameters);
+        return this.api.markPriceStream(requestParameters);
     }
 
     /**
-     * Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
+     * The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     *
+     * Update Speed: 1000ms
+     *
+     * @summary Market Liquidation Order Streams
+     * @param {MarketLiquidationOrderStreamsRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<MarketLiquidationOrderStreamsResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#market-liquidation-order-streams Binance API Documentation}
+     */
+    marketLiquidationOrderStreams(
+        requestParameters: MarketLiquidationOrderStreamsRequest
+    ): WebsocketStream<MarketLiquidationOrderStreamsResponse> {
+        return this.api.marketLiquidationOrderStreams(requestParameters);
+    }
+
+    /**
+     * Top levels bids and asks.
+     *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 250ms, 500ms or 100ms
      *
@@ -505,11 +534,11 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<PartialBookDepthStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/ws-streams/~#partial-book-depth-streams Binance API Documentation}
      */
     partialBookDepthStreams(
         requestParameters: PartialBookDepthStreamsRequest
     ): WebsocketStream<PartialBookDepthStreamsResponse> {
-        return this.websocketMarketStreamsApi.partialBookDepthStreams(requestParameters);
+        return this.api.partialBookDepthStreams(requestParameters);
     }
 }

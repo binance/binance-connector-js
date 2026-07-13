@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,19 +14,19 @@
  */
 
 /**
- *
+ * Original order quantity
  * @export
  * @interface GetOrderModifyHistoryResponseInnerAmendmentOrigQty
  */
 export interface GetOrderModifyHistoryResponseInnerAmendmentOrigQty {
     /**
-     *
+     * Before value.
      * @type {string}
      * @memberof GetOrderModifyHistoryResponseInnerAmendmentOrigQty
      */
     before?: string;
     /**
-     *
+     * After value.
      * @type {string}
      * @memberof GetOrderModifyHistoryResponseInnerAmendmentOrigQty
      */

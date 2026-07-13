@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,157 +20,157 @@
  */
 export interface ModifyMultipleOrdersResponseInner {
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     pair?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Cumulative filled quantity.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     cumQty?: string;
     /**
-     *
+     * Cumulative base asset amount. Will be removed after CM migration.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     cumBase?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {number | bigint}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     code?: number | bigint;
     /**
-     *
+     * Message details.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */

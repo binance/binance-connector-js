@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface CancelOrderResponseRateLimitsInner {
     /**
-     *
+     * Rate limit type.
      * @type {string}
      * @memberof CancelOrderResponseRateLimitsInner
      */
     rateLimitType?: string;
     /**
-     *
+     * Rate limit interval.
      * @type {string}
      * @memberof CancelOrderResponseRateLimitsInner
      */
     interval?: string;
     /**
-     *
+     * Rate limit interval multiplier.
      * @type {number | bigint}
      * @memberof CancelOrderResponseRateLimitsInner
      */
     intervalNum?: number | bigint;
     /**
-     *
+     * Maximum allowed orders for this rule.
      * @type {number | bigint}
      * @memberof CancelOrderResponseRateLimitsInner
      */
     limit?: number | bigint;
     /**
-     *
+     * Total number of trades in the 24h window.
      * @type {number | bigint}
      * @memberof CancelOrderResponseRateLimitsInner
      */

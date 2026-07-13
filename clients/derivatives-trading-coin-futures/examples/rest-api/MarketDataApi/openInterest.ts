@@ -13,7 +13,7 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function openInterest() {
     try {
         const response = await client.restAPI.openInterest({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_200626',
         });
 
         const rateLimits = response.rateLimits!;

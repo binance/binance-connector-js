@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,163 +20,169 @@
  */
 export interface PlaceMultipleOrdersResponseInner {
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Cumulative filled quantity.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     cumQty?: string;
     /**
-     *
+     * Cumulative base asset amount. Will be removed after CM migration.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     cumBase?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
+     * @type {boolean}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    closePosition?: boolean;
+    /**
+     * Trading symbol
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     pair?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     priceRate?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     code?: number | bigint;
     /**
-     *
+     * Message details.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */

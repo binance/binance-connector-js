@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,67 +20,67 @@
  */
 export interface ExchangeInformationResponseSymbolsInnerFiltersInner {
     /**
-     *
+     * Filter type.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     filterType?: string;
     /**
-     *
+     * Maximum price.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     maxPrice?: string;
     /**
-     *
+     * Minimum price.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     minPrice?: string;
     /**
-     *
+     * Tick size.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     tickSize?: string;
     /**
-     *
+     * maximum quantity of base asset
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     maxQty?: string;
     /**
-     *
+     * Minimum quantity.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     minQty?: string;
     /**
-     *
+     * Step size.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     stepSize?: string;
     /**
-     *
+     * Maximum allowed orders for this rule.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     limit?: number | bigint;
     /**
-     *
+     * Upper multiplier bound.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     multiplierUp?: string;
     /**
-     *
+     * Lower multiplier bound.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     multiplierDown?: string;
     /**
-     *
+     * Multiplier decimal precision.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */

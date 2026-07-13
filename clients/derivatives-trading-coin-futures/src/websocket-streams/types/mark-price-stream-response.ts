@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,57 +20,57 @@
  */
 export interface MarkPriceStreamResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof MarkPriceStreamResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     s?: string;
     /**
-     *
+     * Mark Price
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     p?: string;
     /**
-     *
+     * Estimated Settle Price, only useful in the last hour before the settlement starts.
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     P?: string;
     /**
-     *
+     * Index Price
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     i?: string;
     /**
-     *
+     * funding rate for perpetual symbol, \"\" will be shown for delivery symbol
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     r?: string;
     /**
-     *
+     * next funding time for perpetual symbol, 0 will be shown for delivery symbol
      * @type {number | bigint}
      * @memberof MarkPriceStreamResponse
      */
     T?: number | bigint;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof MarkPriceStreamResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

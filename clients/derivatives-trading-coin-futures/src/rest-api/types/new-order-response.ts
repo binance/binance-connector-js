@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,157 +20,157 @@
  */
 export interface NewOrderResponse {
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof NewOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Cumulative filled quantity.
      * @type {string}
      * @memberof NewOrderResponse
      */
     cumQty?: string;
     /**
-     *
+     * Cumulative base asset amount. Will be removed after CM migration.
      * @type {string}
      * @memberof NewOrderResponse
      */
     cumBase?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof NewOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof NewOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof NewOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof NewOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof NewOrderResponse
      */
     price?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof NewOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    side?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    positionSide?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    status?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    stopPrice?: string;
-    /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof NewOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading side
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    side?: string;
+    /**
+     * Position side
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    positionSide?: string;
+    /**
+     * Enum：completed，processing
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    status?: string;
+    /**
+     * please ignore when order type is TRAILING_STOP_MARKET
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    stopPrice?: string;
+    /**
+     * Trading symbol
      * @type {string}
      * @memberof NewOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof NewOrderResponse
      */
     pair?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof NewOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof NewOrderResponse
      */
     type?: string;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof NewOrderResponse
      */
     origType?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof NewOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof NewOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof NewOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof NewOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof NewOrderResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof NewOrderResponse
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof NewOrderResponse
      */

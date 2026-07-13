@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,169 +20,169 @@
  */
 export interface CancelMultipleOrdersResponseInner {
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Cumulative filled quantity.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     cumQty?: string;
     /**
-     *
+     * Cumulative base asset amount. Will be removed after CM migration.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     cumBase?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof CancelMultipleOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
-     * @type {string}
-     * @memberof CancelMultipleOrdersResponseInner
-     */
-    origType?: string;
-    /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof CancelMultipleOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof CancelMultipleOrdersResponseInner
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     pair?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Original order type.
+     * @type {string}
+     * @memberof CancelMultipleOrdersResponseInner
+     */
+    origType?: string;
+    /**
+     * Order type.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     priceRate?: string;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof CancelMultipleOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof CancelMultipleOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {number | bigint}
      * @memberof CancelMultipleOrdersResponseInner
      */
     code?: number | bigint;
     /**
-     *
+     * Message details.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface FuturesAccountBalanceResponseInner {
     /**
-     *
+     * unique account code
      * @type {string}
      * @memberof FuturesAccountBalanceResponseInner
      */
     accountAlias?: string;
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof FuturesAccountBalanceResponseInner
      */
     asset?: string;
     /**
-     *
+     * Account balance.
      * @type {string}
      * @memberof FuturesAccountBalanceResponseInner
      */
     balance?: string;
     /**
-     *
+     * Available amount for withdrawal.
      * @type {string}
      * @memberof FuturesAccountBalanceResponseInner
      */
     withdrawAvailable?: string;
     /**
-     *
+     * wallet balance for crossed margin
      * @type {string}
      * @memberof FuturesAccountBalanceResponseInner
      */
     crossWalletBalance?: string;
     /**
-     *
+     * total unrealized profit or loss of crossed positions
      * @type {string}
      * @memberof FuturesAccountBalanceResponseInner
      */
     crossUnPnl?: string;
     /**
-     *
+     * available margin balance
      * @type {string}
      * @memberof FuturesAccountBalanceResponseInner
      */
     availableBalance?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof FuturesAccountBalanceResponseInner
      */

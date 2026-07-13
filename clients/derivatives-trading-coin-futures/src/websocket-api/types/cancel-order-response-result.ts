@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,139 +14,139 @@
  */
 
 /**
- *
+ * Indicates that combined is set to true.
  * @export
  * @interface CancelOrderResponseResult
  */
 export interface CancelOrderResponseResult {
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof CancelOrderResponseResult
      */
     orderId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     pair?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     status?: string;
     /**
-     *
+     * Client order ID.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     clientOrderId?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     price?: string;
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     avgPrice?: string;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     origQty?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     executedQty?: string;
     /**
-     *
+     * Cumulative filled quantity.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     cumQty?: string;
     /**
-     *
+     * Cumulative base asset amount. Will be removed after CM migration.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     cumBase?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     timeInForce?: string;
     /**
-     *
+     * Order type.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     type?: string;
     /**
-     *
+     * Whether the order is reduce-only.
      * @type {boolean}
      * @memberof CancelOrderResponseResult
      */
     reduceOnly?: boolean;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof CancelOrderResponseResult
      */
     closePosition?: boolean;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     side?: string;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     stopPrice?: string;
     /**
-     *
+     * Stop trigger price type.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof CancelOrderResponseResult
      */
     priceProtect?: boolean;
     /**
-     *
+     * Original order type.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */
     origType?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof CancelOrderResponseResult
      */

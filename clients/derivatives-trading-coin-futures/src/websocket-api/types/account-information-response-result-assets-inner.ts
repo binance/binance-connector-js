@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket API
+ * Futures (COIN-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,79 +20,79 @@
  */
 export interface AccountInformationResponseResultAssetsInner {
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     asset?: string;
     /**
-     *
+     * total wallet balance
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     walletBalance?: string;
     /**
-     *
+     * unrealized profit or loss
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * margin balance
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     marginBalance?: string;
     /**
-     *
+     * maintenance margin
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     maintMargin?: string;
     /**
-     *
+     * total intial margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     initialMargin?: string;
     /**
-     *
+     * positions margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * open orders intial margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * maximum amount for transfer out
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     maxWithdrawAmount?: string;
     /**
-     *
+     * wallet balance for crossed margin
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     crossWalletBalance?: string;
     /**
-     *
+     * total unrealized profit or loss of crossed positions
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     crossUnPnl?: string;
     /**
-     *
+     * available margin balance
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     availableBalance?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof AccountInformationResponseResultAssetsInner
      */

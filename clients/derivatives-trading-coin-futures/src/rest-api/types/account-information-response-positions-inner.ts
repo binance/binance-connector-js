@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,91 +20,91 @@
  */
 export interface AccountInformationResponsePositionsInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     symbol?: string;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     positionAmt?: string;
     /**
-     *
+     * total intial margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     initialMargin?: string;
     /**
-     *
+     * maintenance margin
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     maintMargin?: string;
     /**
-     *
+     * unrealized profit or loss
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * positions margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * open orders intial margin required with the latest mark price
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * Leverage value.
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     leverage?: string;
     /**
-     *
+     * Whether isolated margin mode is enabled.
      * @type {boolean}
      * @memberof AccountInformationResponsePositionsInner
      */
     isolated?: boolean;
     /**
-     *
+     * Position side
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     positionSide?: string;
     /**
-     *
+     * Position entry price.
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     entryPrice?: string;
     /**
-     *
+     * break-even price
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     breakEvenPrice?: string;
     /**
-     *
+     * maximum quantity of base asset
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */
     maxQty?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof AccountInformationResponsePositionsInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Notional value.
      * @type {string}
      * @memberof AccountInformationResponsePositionsInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,37 +20,37 @@
  */
 export interface StrategyUpdateSu {
     /**
-     *
+     * Strategy ID
      * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */
     si?: number | bigint;
     /**
-     *
+     * Strategy Type
      * @type {string}
      * @memberof StrategyUpdateSu
      */
     st?: string;
     /**
-     *
+     * Strategy Status
      * @type {string}
      * @memberof StrategyUpdateSu
      */
     ss?: string;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof StrategyUpdateSu
      */
     s?: string;
     /**
-     *
+     * Update Time
      * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */
     ut?: number | bigint;
     /**
-     *
+     * opCode
      * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */

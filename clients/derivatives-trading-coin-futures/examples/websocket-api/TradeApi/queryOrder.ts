@@ -17,7 +17,7 @@ async function queryOrder() {
         connection = await client.websocketAPI.connect();
 
         const response = await connection.queryOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_PERP',
         });
 
         const rateLimits = response.rateLimits!;

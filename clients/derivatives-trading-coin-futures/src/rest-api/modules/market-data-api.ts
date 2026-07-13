@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -55,16 +54,17 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query basis
          *
-         * If startTime and endTime are not sent, the most recent data is returned.
-         * Only the data of the latest 30 days is available.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Notes:
+         * - If startTime and endTime are not sent, the most recent data is returned.
+         * - Only the data of the latest 30 days is available.
          *
          * @summary Basis
-         * @param {string} pair BTCUSD
-         * @param {BasisContractTypeEnum} contractType ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL
-         * @param {BasisPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} pair Pair.
+         * @param {BasisContractTypeEnum} contractType Contract type.
+         * @param {BasisPeriodEnum} period Period interval.
+         * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          *
@@ -123,7 +123,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Test connectivity to the Rest API and get the current server time.
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
          * @summary Check Server time
          *
@@ -147,22 +147,25 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Get compressed, aggregate trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
+         * Get compressed, aggregate trades. Market trades that fill in 100ms with
+         * the same price and the same taking side will have the quantity
+         * aggregated.
          *
-         * support querying futures trade histories that are not older than 24 hours
-         * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
-         * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
-         * Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
-         * Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
+         * Weight(IP): 20
          *
-         * Weight: 20
+         * Notes:
+         * - support querying futures trade histories that are not older than 24 hours
+         * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
+         * - If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
+         * - Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
+         * - Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
          *
          * @summary Compressed/Aggregate Trades List
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [limit] Maximum number of records to return.
          *
          * @throws {RequiredError}
          */
@@ -209,36 +212,31 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Kline/candlestick bars for a specific contract type.
-         * Klines are uniquely identified by their open time.
+         * Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.
          *
-         * Contract type:
-         * PERPETUAL
-         * CURRENT_QUARTER
-         * NEXT_QUARTER
+         * Weight: based on parameter `LIMIT`
          *
-         * 1000 | 10
-         * The difference between `startTime` and `endTime` can only be up to 200 days
-         * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-         * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-         * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-         * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+         * | LIMIT | weight |
+         * | --- | --- |
+         * | [1,100) | 1 |
+         * | [100, 500) | 2 |
+         * | [500, 1000] | 5 |
+         * | > 1000 | 10 |
          *
-         * Weight: based on parameter LIMIT
-         * LIMIT | weight
-         * ---|---
-         * [1,100) | 1
-         * [100, 500) | 2
-         * [500, 1000] | 5
-         * > 1000 | 10
+         * Notes:
+         * - The difference between `startTime` and `endTime` can only be up to 200 days
+         * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+         * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+         * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+         * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
          *
          * @summary Continuous Contract Kline/Candlestick Data
-         * @param {string} pair BTCUSD
-         * @param {ContinuousContractKlineCandlestickDataContractTypeEnum} contractType ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL
-         * @param {ContinuousContractKlineCandlestickDataIntervalEnum} interval
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} pair After CM migration, accepts both CM and UM pair values.
+         * @param {ContinuousContractKlineCandlestickDataContractTypeEnum} contractType
+         * @param {ContinuousContractKlineCandlestickDataIntervalEnum} interval Interval
+         * @param {number | bigint} [startTime] Start time
+         * @param {number | bigint} [endTime] End time
+         * @param {number | bigint} [limit] Maximum number of records to return.
          *
          * @throws {RequiredError}
          */
@@ -299,7 +297,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Current exchange trading rules and symbol information
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
          * @summary Exchange Information
          *
@@ -325,15 +323,16 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Funding Rate History of Perpetual Futures
          *
-         * empty array will be returned for delivery symbols.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Notes:
+         * - empty array will be returned for delivery symbols.
          *
          * @summary Get Funding Rate History of Perpetual Futures
-         * @param {string} symbol
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} symbol Symbol
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding rate from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding rate until INCLUSIVE.
+         * @param {number | bigint} [limit] Maximum number of records to return.
          *
          * @throws {RequiredError}
          */
@@ -376,9 +375,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
-         *
-         * Weight: 0
+         * Query funding rate info for symbols that had FundingRateCap/FundingRateFloor/fundingIntervalHours adjustment
          *
          * @summary Get Funding Rate Info
          *
@@ -404,7 +401,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query index price and mark price
          *
-         * Weight: 10
+         * Weight(IP): 10
          *
          * @summary Index Price and Mark Price
          * @param {string} [symbol]
@@ -439,27 +436,28 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Kline/candlestick bars for the index price of a pair. Klines are uniquely identified by their open time.
          *
-         * 1000 | 10
-         * The difference between `startTime` and `endTime` can only be up to 200 days
-         * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-         * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-         * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-         * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+         * Weight: Based on parameter `LIMIT`
          *
-         * Weight: based on parameter LIMIT
-         * LIMIT | weight
-         * ---|---
-         * [1,100) | 1
-         * [100, 500) | 2
-         * [500, 1000] | 5
-         * > 1000 | 10
+         * | LIMIT | weight |
+         * | --- | --- |
+         * | [1,100) | 1 |
+         * | [100, 500) | 2 |
+         * | [500, 1000] | 5 |
+         * | > 1000 | 10 |
+         *
+         * Notes:
+         * - The difference between `startTime` and `endTime` can only be up to 200 days
+         * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+         * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+         * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+         * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
          *
          * @summary Index Price Kline/Candlestick Data
-         * @param {string} pair BTCUSD
-         * @param {IndexPriceKlineCandlestickDataIntervalEnum} interval
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} pair After CM migration, accepts both CM and UM pair values.
+         * @param {IndexPriceKlineCandlestickDataIntervalEnum} interval Interval
+         * @param {number | bigint} [startTime] Start time
+         * @param {number | bigint} [endTime] End time
+         * @param {number | bigint} [limit] Maximum number of records to return.
          *
          * @throws {RequiredError}
          */
@@ -508,30 +506,30 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Kline/candlestick bars for a symbol.
-         * Klines are uniquely identified by their open time.
+         * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
          *
-         * 1000 | 10
-         * The difference between `startTime` and `endTime` can only be up to 200 days
-         * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-         * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-         * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-         * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+         * Weight: Based on parameter `LIMIT`
          *
-         * Weight: based on parameter LIMIT
-         * LIMIT | weight
-         * ---|---
-         * [1,100) | 1
-         * [100, 500) | 2
-         * [500, 1000] | 5
-         * > 1000 | 10
+         * | LIMIT | weight |
+         * | --- | --- |
+         * | [1,100) | 1 |
+         * | [100, 500) | 2 |
+         * | [500, 1000] | 5 |
+         * | > 1000 | 10 |
+         *
+         * Notes:
+         * - The difference between `startTime` and `endTime` can only be up to 200 days
+         * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+         * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+         * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+         * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
          *
          * @summary Kline/Candlestick Data
-         * @param {string} symbol
-         * @param {KlineCandlestickDataIntervalEnum} interval
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} symbol After CM migration, accepts both CM and UM symbols.
+         * @param {KlineCandlestickDataIntervalEnum} interval Interval
+         * @param {number | bigint} [startTime] Start time
+         * @param {number | bigint} [endTime] End time
+         * @param {number | bigint} [limit] Maximum number of records to return.
          *
          * @throws {RequiredError}
          */
@@ -582,15 +580,16 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query symbol Long/Short Ratio
          *
-         * If startTime and endTime are not sent, the most recent data is returned.
-         * Only the data of the latest 30 days is available.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Notes:
+         * - If startTime and endTime are not sent, the most recent data is returned.
+         * - Only the data of the latest 30 days is available.
          *
          * @summary Long/Short Ratio
          * @param {string} pair BTCUSD
-         * @param {LongShortRatioPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {LongShortRatioPeriodEnum} period
+         * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          *
@@ -641,30 +640,30 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Kline/candlestick bars for the mark price of a symbol.
-         * Klines are uniquely identified by their open time.
+         * Kline/candlestick bars for the mark price of a symbol. Klines are uniquely identified by their open time.
          *
-         * 1000 | 10
-         * The difference between `startTime` and `endTime` can only be up to 200 days
-         * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-         * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-         * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-         * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+         * Weight: Based on parameter `LIMIT`
          *
-         * Weight: based on parameter LIMIT
-         * LIMIT | weight
-         * ---|---
-         * [1,100) | 1
-         * [100, 500) | 2
-         * [500, 1000] | 5
-         * > 1000 | 10
+         * | LIMIT | weight |
+         * | --- | --- |
+         * | [1,100) | 1 |
+         * | [100, 500) | 2 |
+         * | [500, 1000] | 5 |
+         * | > 1000 | 10 |
+         *
+         * Notes:
+         * - The difference between `startTime` and `endTime` can only be up to 200 days
+         * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+         * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+         * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+         * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
          *
          * @summary Mark Price Kline/Candlestick Data
-         * @param {string} symbol
-         * @param {MarkPriceKlineCandlestickDataIntervalEnum} interval
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} symbol After CM migration, accepts both CM and UM symbols.
+         * @param {MarkPriceKlineCandlestickDataIntervalEnum} interval Interval
+         * @param {number | bigint} [startTime] Start time
+         * @param {number | bigint} [endTime] End time
+         * @param {number | bigint} [limit] Maximum number of records to return.
          *
          * @throws {RequiredError}
          */
@@ -715,15 +714,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get older market historical trades.
          *
-         * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
-         * Only supports data from within the last one month
+         * Weight(IP): 20
          *
-         * Weight: 20
+         * Security Type: MARKET_DATA
          *
-         * @summary Old Trades Lookup(MARKET_DATA)
-         * @param {string} symbol
-         * @param {number | bigint} [limit] Default 100; max 1000
-         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * Notes:
+         * - Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+         * - Only supports data from within the last one month
+         *
+         * @summary Old Trades Lookup (MARKET_DATA)
+         * @param {string} symbol Symbol
+         * @param {number | bigint} [limit] Maximum number of records to return.
+         * @param {number | bigint} [fromId] TradeId to fetch from. Default gets most recent trades.
          *
          * @throws {RequiredError}
          */
@@ -764,10 +766,10 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get present open interest of a specific symbol.
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
          * @summary Open Interest
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          *
          * @throws {RequiredError}
          */
@@ -798,17 +800,17 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query open interest stats
          *
+         * Weight(IP): 1
          *
-         * If startTime and endTime are not sent, the most recent data is returned.
-         * Only the data of the latest 30 days is available.
-         *
-         * Weight: 1
+         * Notes:
+         * - If startTime and endTime are not sent, the most recent data is returned.
+         * - Only the data of the latest 30 days is available.
          *
          * @summary Open Interest Statistics
-         * @param {string} pair BTCUSD
-         * @param {OpenInterestStatisticsContractTypeEnum} contractType ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL
-         * @param {OpenInterestStatisticsPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} pair
+         * @param {OpenInterestStatisticsContractTypeEnum} contractType
+         * @param {OpenInterestStatisticsPeriodEnum} period
+         * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          *
@@ -868,16 +870,17 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Query orderbook on specific symbol
          *
          * Weight: Adjusted based on the limit:
-         * Limit | Weight
-         * ------------ | ------------
-         * 5, 10, 20, 50 | 2
-         * 100 | 5
-         * 500 | 10
-         * 1000 | 20
+         *
+         * | Limit | Weight |
+         * | ------------ | ------------ |
+         * | 5, 10, 20, 50 | 2 |
+         * | 100 | 5 |
+         * | 500 | 10 |
+         * | 1000 | 20 |
          *
          * @summary Order Book
-         * @param {string} symbol
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} symbol Symbol
+         * @param {number | bigint} [limit] Valid limits:[5, 10, 20, 50, 100, 500, 1000].
          *
          * @throws {RequiredError}
          */
@@ -911,10 +914,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Premium index kline bars of a symbol. Klines are uniquely identified by their open time.
          *
+         * Weight: Based on parameter `LIMIT`
          *
-         * If startTime and endTime are not sent, the most recent klines are returned.
-         *
-         * Weight: based on parameter LIMIT
          * | LIMIT       | weight |
          * | ----------- | ------ |
          * | [1,100)     | 1      |
@@ -922,12 +923,15 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * | [500, 1000] | 5      |
          * | > 1000      | 10     |
          *
+         * Notes:
+         * - If startTime and endTime are not sent, the most recent klines are returned.
+         *
          * @summary Premium index Kline Data
-         * @param {string} symbol
-         * @param {PremiumIndexKlineDataIntervalEnum} interval
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} symbol After CM migration, accepts both CM and UM symbols.
+         * @param {PremiumIndexKlineDataIntervalEnum} interval Interval
+         * @param {number | bigint} [startTime] Start time
+         * @param {number | bigint} [endTime] End time
+         * @param {number | bigint} [limit] Maximum number of records to return.
          *
          * @throws {RequiredError}
          */
@@ -978,10 +982,10 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query index price constituents
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
          * @summary Query Index Price Constituents
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          *
          * @throws {RequiredError}
          */
@@ -1012,13 +1016,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get recent market trades
          *
-         * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+         * Weight(IP): 5
          *
-         * Weight: 5
+         * Notes:
+         * - Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
          *
          * @summary Recent Trades List
-         * @param {string} symbol
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} symbol Symbol
+         * @param {number | bigint} [limit] Maximum number of records to return.
          *
          * @throws {RequiredError}
          */
@@ -1052,15 +1057,16 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Best price/qty on the order book for a symbol or symbols.
          *
-         * Symbol and pair cannot be sent together
-         * If a pair is sent,tickers for all symbols of the pair will be returned
-         * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+         * Weight: **2** for a single symbol, **5** when the symbol parameter is omitted
          *
-         * Weight: 2 for a single symbol, 5 when the symbol parameter is omitted
+         * Notes:
+         * - Symbol and pair cannot be sent together
+         * - If a pair is sent,tickers for all symbols of the pair will be returned
+         * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
          *
          * @summary Symbol Order Book Ticker
-         * @param {string} [symbol]
-         * @param {string} [pair]
+         * @param {string} [symbol] Symbol
+         * @param {string} [pair] Symbol
          *
          * @throws {RequiredError}
          */
@@ -1091,15 +1097,16 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Latest price for a symbol or symbols.
          *
-         * Symbol and pair cannot be sent together
-         * If a pair is sent,tickers for all symbols of the pair will be returned
-         * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+         * Weight: **1** for a single symbol, **2** when the symbol parameter is omitted
          *
-         * Weight: 1 for a single symbol, 2 when the symbol parameter is omitted
+         * Notes:
+         * - Symbol and pair cannot be sent together
+         * - If a pair is sent,tickers for all symbols of the pair will be returned
+         * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
          *
          * @summary Symbol Price Ticker
-         * @param {string} [symbol]
-         * @param {string} [pair]
+         * @param {string} [symbol] Symbol
+         * @param {string} [pair] Pair
          *
          * @throws {RequiredError}
          */
@@ -1128,19 +1135,23 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Taker Buy Volume: the total volume of buy orders filled by takers within the period.
-         * Taker Sell Volume: the total volume of sell orders filled by takers within the period.
+         * Taker Buy Volume: the total volume of buy orders filled by takers within
+         * the period.
          *
-         * If startTime and endTime are not sent, the most recent data is returned.
-         * Only the data of the latest 30 days is available.
+         * Taker Sell Volume: the total volume of sell orders filled by takers
+         * within the period.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Notes:
+         * - If startTime and endTime are not sent, the most recent data is returned.
+         * - Only the data of the latest 30 days is available.
          *
          * @summary Taker Buy/Sell Volume
-         * @param {string} pair BTCUSD
-         * @param {TakerBuySellVolumeContractTypeEnum} contractType ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL
-         * @param {TakerBuySellVolumePeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} pair
+         * @param {TakerBuySellVolumeContractTypeEnum} contractType
+         * @param {TakerBuySellVolumePeriodEnum} period
+         * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          *
@@ -1199,7 +1210,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Test connectivity to the Rest API.
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
          * @summary Test Connectivity
          *
@@ -1225,16 +1236,17 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * 24 hour rolling window price change statistics.
          *
-         * Symbol and pair cannot be sent together
-         * If a pair is sent,tickers for all symbols of the pair will be returned
-         * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+         * Weight: **1** for a single symbol, **40** when the symbol parameter is omitted
+         **Careful** when accessing this with no symbol.
          *
-         * Weight: 1 for a single symbol, 40 when the symbol parameter is omitted
-         * Careful when accessing this with no symbol.
+         * Notes:
+         * - Symbol and pair cannot be sent together
+         * - If a pair is sent,tickers for all symbols of the pair will be returned
+         * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
          *
          * @summary 24hr Ticker Price Change Statistics
-         * @param {string} [symbol]
-         * @param {string} [pair]
+         * @param {string} [symbol] Symbol
+         * @param {string} [pair] Pair
          *
          * @throws {RequiredError}
          */
@@ -1266,20 +1278,30 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * The proportion of net long and net short accounts to total accounts of the top 20% users with the highest margin balance. Each account is counted once only.
-         * Long Account % = Accounts of top traders with net long positions / Total accounts of top traders with open positions
-         * Short Account % = Accounts of top traders with net short positions / Total accounts of top traders with open positions
+         * The proportion of net long and net short accounts to total accounts of
+         * the top 20% users with the highest margin balance. Each account is
+         * counted once only.
+         *
+         * Long Account % = Accounts of top traders with net long positions / Total
+         * accounts of top traders with open positions
+         *
+         * Short Account % = Accounts of top traders with net short positions /
+         * Total accounts of top traders with open positions
+         *
          * Long/Short Ratio (Accounts) = Long Account % / Short Account %
          *
-         * If startTime and endTime are not sent, the most recent data is returned.
-         * Only the data of the latest 30 days is available.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: Accounts
          *
-         * @summary Top Trader Long/Short Ratio (Accounts)
-         * @param {string} symbol
-         * @param {TopTraderLongShortRatioAccountsPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * Notes:
+         * - If startTime and endTime are not sent, the most recent data is returned.
+         * - Only the data of the latest 30 days is available.
+         *
+         * @summary Top Trader Long/Short Account Ratio
+         * @param {string} symbol Symbol
+         * @param {TopTraderLongShortRatioAccountsPeriodEnum} period
+         * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          *
@@ -1330,20 +1352,29 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * The proportion of net long and net short positions to total open positions of the top 20% users with the highest margin balance.
-         * Long Position % = Long positions of top traders / Total open positions of top traders
-         * Short Position % = Short positions of top traders / Total open positions of top traders
+         * The proportion of net long and net short positions to total open
+         * positions of the top 20% users with the highest margin balance.
+         *
+         * Long Position % = Long positions of top traders / Total open positions
+         * of top traders
+         *
+         * Short Position % = Short positions of top traders / Total open positions
+         * of top traders
+         *
          * Long/Short Ratio (Positions) = Long Position % / Short Position %
          *
-         * If startTime and endTime are not sent, the most recent data is returned.
-         * Only the data of the latest 30 days is available.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: Positions
          *
-         * @summary Top Trader Long/Short Ratio (Positions)
-         * @param {string} pair BTCUSD
-         * @param {TopTraderLongShortRatioPositionsPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * Notes:
+         * - If startTime and endTime are not sent, the most recent data is returned.
+         * - Only the data of the latest 30 days is available.
+         *
+         * @summary Top Trader Long/Short Position Ratio
+         * @param {string} pair
+         * @param {TopTraderLongShortRatioPositionsPeriodEnum} period
+         * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          *
@@ -1404,10 +1435,11 @@ export interface MarketDataApiInterface {
     /**
      * Query basis
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Basis
      * @param {BasisRequest} requestParameters Request parameters.
@@ -1419,7 +1451,7 @@ export interface MarketDataApiInterface {
     /**
      * Test connectivity to the Rest API and get the current server time.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Check Server time
      *
@@ -1428,15 +1460,18 @@ export interface MarketDataApiInterface {
      */
     checkServerTime(): Promise<RestApiResponse<CheckServerTimeResponse>>;
     /**
-     * Get compressed, aggregate trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
+     * Get compressed, aggregate trades. Market trades that fill in 100ms with
+     * the same price and the same taking side will have the quantity
+     * aggregated.
      *
-     * support querying futures trade histories that are not older than 24 hours
-     * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
-     * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
-     * Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
-     * Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
+     * Weight(IP): 20
      *
-     * Weight: 20
+     * Notes:
+     * - support querying futures trade histories that are not older than 24 hours
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
+     * - If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
+     * - Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
+     * - Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
      *
      * @summary Compressed/Aggregate Trades List
      * @param {CompressedAggregateTradesListRequest} requestParameters Request parameters.
@@ -1448,28 +1483,23 @@ export interface MarketDataApiInterface {
         requestParameters: CompressedAggregateTradesListRequest
     ): Promise<RestApiResponse<CompressedAggregateTradesListResponse>>;
     /**
-     * Kline/candlestick bars for a specific contract type.
-     * Klines are uniquely identified by their open time.
+     * Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.
      *
-     * Contract type:
-     * PERPETUAL
-     * CURRENT_QUARTER
-     * NEXT_QUARTER
+     * Weight: based on parameter `LIMIT`
      *
-     * 1000 | 10
-     * The difference between `startTime` and `endTime` can only be up to 200 days
-     * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-     * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-     * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-     * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+     * | LIMIT | weight |
+     * | --- | --- |
+     * | [1,100) | 1 |
+     * | [100, 500) | 2 |
+     * | [500, 1000] | 5 |
+     * | > 1000 | 10 |
      *
-     * Weight: based on parameter LIMIT
-     * LIMIT | weight
-     * ---|---
-     * [1,100) | 1
-     * [100, 500) | 2
-     * [500, 1000] | 5
-     * > 1000 | 10
+     * Notes:
+     * - The difference between `startTime` and `endTime` can only be up to 200 days
+     * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+     * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+     * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+     * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
      *
      * @summary Continuous Contract Kline/Candlestick Data
      * @param {ContinuousContractKlineCandlestickDataRequest} requestParameters Request parameters.
@@ -1483,7 +1513,7 @@ export interface MarketDataApiInterface {
     /**
      * Current exchange trading rules and symbol information
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Exchange Information
      *
@@ -1494,9 +1524,10 @@ export interface MarketDataApiInterface {
     /**
      * Get Funding Rate History of Perpetual Futures
      *
-     * empty array will be returned for delivery symbols.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Notes:
+     * - empty array will be returned for delivery symbols.
      *
      * @summary Get Funding Rate History of Perpetual Futures
      * @param {GetFundingRateHistoryOfPerpetualFuturesRequest} requestParameters Request parameters.
@@ -1508,9 +1539,7 @@ export interface MarketDataApiInterface {
         requestParameters: GetFundingRateHistoryOfPerpetualFuturesRequest
     ): Promise<RestApiResponse<GetFundingRateHistoryOfPerpetualFuturesResponse>>;
     /**
-     * Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
-     *
-     * Weight: 0
+     * Query funding rate info for symbols that had FundingRateCap/FundingRateFloor/fundingIntervalHours adjustment
      *
      * @summary Get Funding Rate Info
      *
@@ -1521,7 +1550,7 @@ export interface MarketDataApiInterface {
     /**
      * Query index price and mark price
      *
-     * Weight: 10
+     * Weight(IP): 10
      *
      * @summary Index Price and Mark Price
      * @param {IndexPriceAndMarkPriceRequest} requestParameters Request parameters.
@@ -1535,20 +1564,21 @@ export interface MarketDataApiInterface {
     /**
      * Kline/candlestick bars for the index price of a pair. Klines are uniquely identified by their open time.
      *
-     * 1000 | 10
-     * The difference between `startTime` and `endTime` can only be up to 200 days
-     * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-     * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-     * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-     * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+     * Weight: Based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
-     * LIMIT | weight
-     * ---|---
-     * [1,100) | 1
-     * [100, 500) | 2
-     * [500, 1000] | 5
-     * > 1000 | 10
+     * | LIMIT | weight |
+     * | --- | --- |
+     * | [1,100) | 1 |
+     * | [100, 500) | 2 |
+     * | [500, 1000] | 5 |
+     * | > 1000 | 10 |
+     *
+     * Notes:
+     * - The difference between `startTime` and `endTime` can only be up to 200 days
+     * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+     * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+     * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+     * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
      *
      * @summary Index Price Kline/Candlestick Data
      * @param {IndexPriceKlineCandlestickDataRequest} requestParameters Request parameters.
@@ -1560,23 +1590,23 @@ export interface MarketDataApiInterface {
         requestParameters: IndexPriceKlineCandlestickDataRequest
     ): Promise<RestApiResponse<IndexPriceKlineCandlestickDataResponse>>;
     /**
-     * Kline/candlestick bars for a symbol.
-     * Klines are uniquely identified by their open time.
+     * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
      *
-     * 1000 | 10
-     * The difference between `startTime` and `endTime` can only be up to 200 days
-     * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-     * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-     * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-     * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+     * Weight: Based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
-     * LIMIT | weight
-     * ---|---
-     * [1,100) | 1
-     * [100, 500) | 2
-     * [500, 1000] | 5
-     * > 1000 | 10
+     * | LIMIT | weight |
+     * | --- | --- |
+     * | [1,100) | 1 |
+     * | [100, 500) | 2 |
+     * | [500, 1000] | 5 |
+     * | > 1000 | 10 |
+     *
+     * Notes:
+     * - The difference between `startTime` and `endTime` can only be up to 200 days
+     * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+     * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+     * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+     * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
      *
      * @summary Kline/Candlestick Data
      * @param {KlineCandlestickDataRequest} requestParameters Request parameters.
@@ -1590,10 +1620,11 @@ export interface MarketDataApiInterface {
     /**
      * Query symbol Long/Short Ratio
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Long/Short Ratio
      * @param {LongShortRatioRequest} requestParameters Request parameters.
@@ -1605,23 +1636,23 @@ export interface MarketDataApiInterface {
         requestParameters: LongShortRatioRequest
     ): Promise<RestApiResponse<LongShortRatioResponse>>;
     /**
-     * Kline/candlestick bars for the mark price of a symbol.
-     * Klines are uniquely identified by their open time.
+     * Kline/candlestick bars for the mark price of a symbol. Klines are uniquely identified by their open time.
      *
-     * 1000 | 10
-     * The difference between `startTime` and `endTime` can only be up to 200 days
-     * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-     * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-     * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-     * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+     * Weight: Based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
-     * LIMIT | weight
-     * ---|---
-     * [1,100) | 1
-     * [100, 500) | 2
-     * [500, 1000] | 5
-     * > 1000 | 10
+     * | LIMIT | weight |
+     * | --- | --- |
+     * | [1,100) | 1 |
+     * | [100, 500) | 2 |
+     * | [500, 1000] | 5 |
+     * | > 1000 | 10 |
+     *
+     * Notes:
+     * - The difference between `startTime` and `endTime` can only be up to 200 days
+     * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+     * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+     * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+     * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
      *
      * @summary Mark Price Kline/Candlestick Data
      * @param {MarkPriceKlineCandlestickDataRequest} requestParameters Request parameters.
@@ -1635,12 +1666,15 @@ export interface MarketDataApiInterface {
     /**
      * Get older market historical trades.
      *
-     * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
-     * Only supports data from within the last one month
+     * Weight(IP): 20
      *
-     * Weight: 20
+     * Security Type: MARKET_DATA
      *
-     * @summary Old Trades Lookup(MARKET_DATA)
+     * Notes:
+     * - Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+     * - Only supports data from within the last one month
+     *
+     * @summary Old Trades Lookup (MARKET_DATA)
      * @param {OldTradesLookupRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1652,7 +1686,7 @@ export interface MarketDataApiInterface {
     /**
      * Get present open interest of a specific symbol.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Open Interest
      * @param {OpenInterestRequest} requestParameters Request parameters.
@@ -1666,11 +1700,11 @@ export interface MarketDataApiInterface {
     /**
      * Query open interest stats
      *
+     * Weight(IP): 1
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
-     *
-     * Weight: 1
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Open Interest Statistics
      * @param {OpenInterestStatisticsRequest} requestParameters Request parameters.
@@ -1685,12 +1719,13 @@ export interface MarketDataApiInterface {
      * Query orderbook on specific symbol
      *
      * Weight: Adjusted based on the limit:
-     * Limit | Weight
-     * ------------ | ------------
-     * 5, 10, 20, 50 | 2
-     * 100 | 5
-     * 500 | 10
-     * 1000 | 20
+     *
+     * | Limit | Weight |
+     * | ------------ | ------------ |
+     * | 5, 10, 20, 50 | 2 |
+     * | 100 | 5 |
+     * | 500 | 10 |
+     * | 1000 | 20 |
      *
      * @summary Order Book
      * @param {OrderBookRequest} requestParameters Request parameters.
@@ -1702,16 +1737,17 @@ export interface MarketDataApiInterface {
     /**
      * Premium index kline bars of a symbol. Klines are uniquely identified by their open time.
      *
+     * Weight: Based on parameter `LIMIT`
      *
-     * If startTime and endTime are not sent, the most recent klines are returned.
-     *
-     * Weight: based on parameter LIMIT
      * | LIMIT       | weight |
      * | ----------- | ------ |
      * | [1,100)     | 1      |
      * | [100, 500)  | 2      |
      * | [500, 1000] | 5      |
      * | > 1000      | 10     |
+     *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent klines are returned.
      *
      * @summary Premium index Kline Data
      * @param {PremiumIndexKlineDataRequest} requestParameters Request parameters.
@@ -1725,7 +1761,7 @@ export interface MarketDataApiInterface {
     /**
      * Query index price constituents
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Query Index Price Constituents
      * @param {QueryIndexPriceConstituentsRequest} requestParameters Request parameters.
@@ -1739,9 +1775,10 @@ export interface MarketDataApiInterface {
     /**
      * Get recent market trades
      *
-     * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Notes:
+     * - Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
      *
      * @summary Recent Trades List
      * @param {RecentTradesListRequest} requestParameters Request parameters.
@@ -1755,11 +1792,12 @@ export interface MarketDataApiInterface {
     /**
      * Best price/qty on the order book for a symbol or symbols.
      *
-     * Symbol and pair cannot be sent together
-     * If a pair is sent,tickers for all symbols of the pair will be returned
-     * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+     * Weight: **2** for a single symbol, **5** when the symbol parameter is omitted
      *
-     * Weight: 2 for a single symbol, 5 when the symbol parameter is omitted
+     * Notes:
+     * - Symbol and pair cannot be sent together
+     * - If a pair is sent,tickers for all symbols of the pair will be returned
+     * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
      *
      * @summary Symbol Order Book Ticker
      * @param {SymbolOrderBookTickerRequest} requestParameters Request parameters.
@@ -1773,11 +1811,12 @@ export interface MarketDataApiInterface {
     /**
      * Latest price for a symbol or symbols.
      *
-     * Symbol and pair cannot be sent together
-     * If a pair is sent,tickers for all symbols of the pair will be returned
-     * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+     * Weight: **1** for a single symbol, **2** when the symbol parameter is omitted
      *
-     * Weight: 1 for a single symbol, 2 when the symbol parameter is omitted
+     * Notes:
+     * - Symbol and pair cannot be sent together
+     * - If a pair is sent,tickers for all symbols of the pair will be returned
+     * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
      *
      * @summary Symbol Price Ticker
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
@@ -1789,13 +1828,17 @@ export interface MarketDataApiInterface {
         requestParameters?: SymbolPriceTickerRequest
     ): Promise<RestApiResponse<SymbolPriceTickerResponse>>;
     /**
-     * Taker Buy Volume: the total volume of buy orders filled by takers within the period.
-     * Taker Sell Volume: the total volume of sell orders filled by takers within the period.
+     * Taker Buy Volume: the total volume of buy orders filled by takers within
+     * the period.
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Taker Sell Volume: the total volume of sell orders filled by takers
+     * within the period.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Taker Buy/Sell Volume
      * @param {TakerBuySellVolumeRequest} requestParameters Request parameters.
@@ -1809,7 +1852,7 @@ export interface MarketDataApiInterface {
     /**
      * Test connectivity to the Rest API.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Test Connectivity
      *
@@ -1820,12 +1863,13 @@ export interface MarketDataApiInterface {
     /**
      * 24 hour rolling window price change statistics.
      *
-     * Symbol and pair cannot be sent together
-     * If a pair is sent,tickers for all symbols of the pair will be returned
-     * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+     * Weight: **1** for a single symbol, **40** when the symbol parameter is omitted
+     **Careful** when accessing this with no symbol.
      *
-     * Weight: 1 for a single symbol, 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     * Notes:
+     * - Symbol and pair cannot be sent together
+     * - If a pair is sent,tickers for all symbols of the pair will be returned
+     * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
      *
      * @summary 24hr Ticker Price Change Statistics
      * @param {Ticker24hrPriceChangeStatisticsRequest} requestParameters Request parameters.
@@ -1837,17 +1881,27 @@ export interface MarketDataApiInterface {
         requestParameters?: Ticker24hrPriceChangeStatisticsRequest
     ): Promise<RestApiResponse<Ticker24hrPriceChangeStatisticsResponse>>;
     /**
-     * The proportion of net long and net short accounts to total accounts of the top 20% users with the highest margin balance. Each account is counted once only.
-     * Long Account % = Accounts of top traders with net long positions / Total accounts of top traders with open positions
-     * Short Account % = Accounts of top traders with net short positions / Total accounts of top traders with open positions
+     * The proportion of net long and net short accounts to total accounts of
+     * the top 20% users with the highest margin balance. Each account is
+     * counted once only.
+     *
+     * Long Account % = Accounts of top traders with net long positions / Total
+     * accounts of top traders with open positions
+     *
+     * Short Account % = Accounts of top traders with net short positions /
+     * Total accounts of top traders with open positions
+     *
      * Long/Short Ratio (Accounts) = Long Account % / Short Account %
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: Accounts
      *
-     * @summary Top Trader Long/Short Ratio (Accounts)
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
+     *
+     * @summary Top Trader Long/Short Account Ratio
      * @param {TopTraderLongShortRatioAccountsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1857,17 +1911,26 @@ export interface MarketDataApiInterface {
         requestParameters: TopTraderLongShortRatioAccountsRequest
     ): Promise<RestApiResponse<TopTraderLongShortRatioAccountsResponse>>;
     /**
-     * The proportion of net long and net short positions to total open positions of the top 20% users with the highest margin balance.
-     * Long Position % = Long positions of top traders / Total open positions of top traders
-     * Short Position % = Short positions of top traders / Total open positions of top traders
+     * The proportion of net long and net short positions to total open
+     * positions of the top 20% users with the highest margin balance.
+     *
+     * Long Position % = Long positions of top traders / Total open positions
+     * of top traders
+     *
+     * Short Position % = Short positions of top traders / Total open positions
+     * of top traders
+     *
      * Long/Short Ratio (Positions) = Long Position % / Short Position %
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: Positions
      *
-     * @summary Top Trader Long/Short Ratio (Positions)
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
+     *
+     * @summary Top Trader Long/Short Position Ratio
      * @param {TopTraderLongShortRatioPositionsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1884,28 +1947,28 @@ export interface MarketDataApiInterface {
  */
 export interface BasisRequest {
     /**
-     * BTCUSD
+     * Pair.
      * @type {string}
      * @memberof MarketDataApiBasis
      */
     readonly pair: string;
 
     /**
-     * ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL
-     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER' | 'CURRENT_QUARTER_DELIVERING' | 'NEXT_QUARTER_DELIVERING' | 'PERPETUAL_DELIVERING'}
+     * Contract type.
+     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
      * @memberof MarketDataApiBasis
      */
     readonly contractType: BasisContractTypeEnum;
 
     /**
-     * "5m","15m","30m","1h","2h","4h","6h","12h","1d"
+     * Period interval.
      * @type {'5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '12h' | '1d'}
      * @memberof MarketDataApiBasis
      */
     readonly period: BasisPeriodEnum;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiBasis
      */
@@ -1932,7 +1995,7 @@ export interface BasisRequest {
  */
 export interface CompressedAggregateTradesListRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiCompressedAggregateTradesList
      */
@@ -1946,21 +2009,21 @@ export interface CompressedAggregateTradesListRequest {
     readonly fromId?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number | bigint}
      * @memberof MarketDataApiCompressedAggregateTradesList
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number | bigint}
      * @memberof MarketDataApiCompressedAggregateTradesList
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiCompressedAggregateTradesList
      */
@@ -1973,42 +2036,42 @@ export interface CompressedAggregateTradesListRequest {
  */
 export interface ContinuousContractKlineCandlestickDataRequest {
     /**
-     * BTCUSD
+     * After CM migration, accepts both CM and UM pair values.
      * @type {string}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
     readonly pair: string;
 
     /**
-     * ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL
-     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER' | 'CURRENT_QUARTER_DELIVERING' | 'NEXT_QUARTER_DELIVERING' | 'PERPETUAL_DELIVERING'}
+     *
+     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
     readonly contractType: ContinuousContractKlineCandlestickDataContractTypeEnum;
 
     /**
-     *
+     * Interval
      * @type {'1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
     readonly interval: ContinuousContractKlineCandlestickDataIntervalEnum;
 
     /**
-     *
+     * Start time
      * @type {number | bigint}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * End time
      * @type {number | bigint}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
@@ -2021,28 +2084,28 @@ export interface ContinuousContractKlineCandlestickDataRequest {
  */
 export interface GetFundingRateHistoryOfPerpetualFuturesRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiGetFundingRateHistoryOfPerpetualFutures
      */
     readonly symbol: string;
 
     /**
-     *
+     * Timestamp in ms to get funding rate from INCLUSIVE.
      * @type {number | bigint}
      * @memberof MarketDataApiGetFundingRateHistoryOfPerpetualFutures
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms to get funding rate until INCLUSIVE.
      * @type {number | bigint}
      * @memberof MarketDataApiGetFundingRateHistoryOfPerpetualFutures
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiGetFundingRateHistoryOfPerpetualFutures
      */
@@ -2075,35 +2138,35 @@ export interface IndexPriceAndMarkPriceRequest {
  */
 export interface IndexPriceKlineCandlestickDataRequest {
     /**
-     * BTCUSD
+     * After CM migration, accepts both CM and UM pair values.
      * @type {string}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
     readonly pair: string;
 
     /**
-     *
+     * Interval
      * @type {'1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
     readonly interval: IndexPriceKlineCandlestickDataIntervalEnum;
 
     /**
-     *
+     * Start time
      * @type {number | bigint}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * End time
      * @type {number | bigint}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
@@ -2116,35 +2179,35 @@ export interface IndexPriceKlineCandlestickDataRequest {
  */
 export interface KlineCandlestickDataRequest {
     /**
-     *
+     * After CM migration, accepts both CM and UM symbols.
      * @type {string}
      * @memberof MarketDataApiKlineCandlestickData
      */
     readonly symbol: string;
 
     /**
-     *
+     * Interval
      * @type {'1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketDataApiKlineCandlestickData
      */
     readonly interval: KlineCandlestickDataIntervalEnum;
 
     /**
-     *
+     * Start time
      * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * End time
      * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
@@ -2164,14 +2227,14 @@ export interface LongShortRatioRequest {
     readonly pair: string;
 
     /**
-     * "5m","15m","30m","1h","2h","4h","6h","12h","1d"
+     *
      * @type {'5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '12h' | '1d'}
      * @memberof MarketDataApiLongShortRatio
      */
     readonly period: LongShortRatioPeriodEnum;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiLongShortRatio
      */
@@ -2198,35 +2261,35 @@ export interface LongShortRatioRequest {
  */
 export interface MarkPriceKlineCandlestickDataRequest {
     /**
-     *
+     * After CM migration, accepts both CM and UM symbols.
      * @type {string}
      * @memberof MarketDataApiMarkPriceKlineCandlestickData
      */
     readonly symbol: string;
 
     /**
-     *
+     * Interval
      * @type {'1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketDataApiMarkPriceKlineCandlestickData
      */
     readonly interval: MarkPriceKlineCandlestickDataIntervalEnum;
 
     /**
-     *
+     * Start time
      * @type {number | bigint}
      * @memberof MarketDataApiMarkPriceKlineCandlestickData
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * End time
      * @type {number | bigint}
      * @memberof MarketDataApiMarkPriceKlineCandlestickData
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiMarkPriceKlineCandlestickData
      */
@@ -2239,21 +2302,21 @@ export interface MarkPriceKlineCandlestickDataRequest {
  */
 export interface OldTradesLookupRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiOldTradesLookup
      */
     readonly symbol: string;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiOldTradesLookup
      */
     readonly limit?: number | bigint;
 
     /**
-     * ID to get aggregate trades from INCLUSIVE.
+     * TradeId to fetch from. Default gets most recent trades.
      * @type {number | bigint}
      * @memberof MarketDataApiOldTradesLookup
      */
@@ -2266,7 +2329,7 @@ export interface OldTradesLookupRequest {
  */
 export interface OpenInterestRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiOpenInterest
      */
@@ -2279,28 +2342,28 @@ export interface OpenInterestRequest {
  */
 export interface OpenInterestStatisticsRequest {
     /**
-     * BTCUSD
+     *
      * @type {string}
      * @memberof MarketDataApiOpenInterestStatistics
      */
     readonly pair: string;
 
     /**
-     * ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL
-     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER' | 'CURRENT_QUARTER_DELIVERING' | 'NEXT_QUARTER_DELIVERING' | 'PERPETUAL_DELIVERING'}
+     *
+     * @type {'ALL' | 'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
      * @memberof MarketDataApiOpenInterestStatistics
      */
     readonly contractType: OpenInterestStatisticsContractTypeEnum;
 
     /**
-     * "5m","15m","30m","1h","2h","4h","6h","12h","1d"
+     *
      * @type {'5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '12h' | '1d'}
      * @memberof MarketDataApiOpenInterestStatistics
      */
     readonly period: OpenInterestStatisticsPeriodEnum;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiOpenInterestStatistics
      */
@@ -2327,14 +2390,14 @@ export interface OpenInterestStatisticsRequest {
  */
 export interface OrderBookRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiOrderBook
      */
     readonly symbol: string;
 
     /**
-     * Default 100; max 1000
+     * Valid limits:[5, 10, 20, 50, 100, 500, 1000].
      * @type {number | bigint}
      * @memberof MarketDataApiOrderBook
      */
@@ -2347,35 +2410,35 @@ export interface OrderBookRequest {
  */
 export interface PremiumIndexKlineDataRequest {
     /**
-     *
+     * After CM migration, accepts both CM and UM symbols.
      * @type {string}
      * @memberof MarketDataApiPremiumIndexKlineData
      */
     readonly symbol: string;
 
     /**
-     *
+     * Interval
      * @type {'1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketDataApiPremiumIndexKlineData
      */
     readonly interval: PremiumIndexKlineDataIntervalEnum;
 
     /**
-     *
+     * Start time
      * @type {number | bigint}
      * @memberof MarketDataApiPremiumIndexKlineData
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * End time
      * @type {number | bigint}
      * @memberof MarketDataApiPremiumIndexKlineData
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiPremiumIndexKlineData
      */
@@ -2388,7 +2451,7 @@ export interface PremiumIndexKlineDataRequest {
  */
 export interface QueryIndexPriceConstituentsRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiQueryIndexPriceConstituents
      */
@@ -2401,14 +2464,14 @@ export interface QueryIndexPriceConstituentsRequest {
  */
 export interface RecentTradesListRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiRecentTradesList
      */
     readonly symbol: string;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiRecentTradesList
      */
@@ -2421,14 +2484,14 @@ export interface RecentTradesListRequest {
  */
 export interface SymbolOrderBookTickerRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiSymbolOrderBookTicker
      */
     readonly symbol?: string;
 
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiSymbolOrderBookTicker
      */
@@ -2441,14 +2504,14 @@ export interface SymbolOrderBookTickerRequest {
  */
 export interface SymbolPriceTickerRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiSymbolPriceTicker
      */
     readonly symbol?: string;
 
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof MarketDataApiSymbolPriceTicker
      */
@@ -2461,28 +2524,28 @@ export interface SymbolPriceTickerRequest {
  */
 export interface TakerBuySellVolumeRequest {
     /**
-     * BTCUSD
+     *
      * @type {string}
      * @memberof MarketDataApiTakerBuySellVolume
      */
     readonly pair: string;
 
     /**
-     * ALL, CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL
-     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER' | 'CURRENT_QUARTER_DELIVERING' | 'NEXT_QUARTER_DELIVERING' | 'PERPETUAL_DELIVERING'}
+     *
+     * @type {'ALL' | 'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
      * @memberof MarketDataApiTakerBuySellVolume
      */
     readonly contractType: TakerBuySellVolumeContractTypeEnum;
 
     /**
-     * "5m","15m","30m","1h","2h","4h","6h","12h","1d"
+     *
      * @type {'5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '12h' | '1d'}
      * @memberof MarketDataApiTakerBuySellVolume
      */
     readonly period: TakerBuySellVolumePeriodEnum;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiTakerBuySellVolume
      */
@@ -2509,14 +2572,14 @@ export interface TakerBuySellVolumeRequest {
  */
 export interface Ticker24hrPriceChangeStatisticsRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiTicker24hrPriceChangeStatistics
      */
     readonly symbol?: string;
 
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof MarketDataApiTicker24hrPriceChangeStatistics
      */
@@ -2529,21 +2592,21 @@ export interface Ticker24hrPriceChangeStatisticsRequest {
  */
 export interface TopTraderLongShortRatioAccountsRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarketDataApiTopTraderLongShortRatioAccounts
      */
     readonly symbol: string;
 
     /**
-     * "5m","15m","30m","1h","2h","4h","6h","12h","1d"
+     *
      * @type {'5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '12h' | '1d'}
      * @memberof MarketDataApiTopTraderLongShortRatioAccounts
      */
     readonly period: TopTraderLongShortRatioAccountsPeriodEnum;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiTopTraderLongShortRatioAccounts
      */
@@ -2570,21 +2633,21 @@ export interface TopTraderLongShortRatioAccountsRequest {
  */
 export interface TopTraderLongShortRatioPositionsRequest {
     /**
-     * BTCUSD
+     *
      * @type {string}
      * @memberof MarketDataApiTopTraderLongShortRatioPositions
      */
     readonly pair: string;
 
     /**
-     * "5m","15m","30m","1h","2h","4h","6h","12h","1d"
+     *
      * @type {'5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '12h' | '1d'}
      * @memberof MarketDataApiTopTraderLongShortRatioPositions
      */
     readonly period: TopTraderLongShortRatioPositionsPeriodEnum;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiTopTraderLongShortRatioPositions
      */
@@ -2621,17 +2684,18 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query basis
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Basis
      * @param {BasisRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BasisResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Basis Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#basis Binance API Documentation}
      */
     public async basis(requestParameters: BasisRequest): Promise<RestApiResponse<BasisResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.basis(
@@ -2657,13 +2721,13 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Test connectivity to the Rest API and get the current server time.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Check Server time
      * @returns {Promise<RestApiResponse<CheckServerTimeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#check-server-time Binance API Documentation}
      */
     public async checkServerTime(): Promise<RestApiResponse<CheckServerTimeResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.checkServerTime();
@@ -2680,22 +2744,25 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Get compressed, aggregate trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
+     * Get compressed, aggregate trades. Market trades that fill in 100ms with
+     * the same price and the same taking side will have the quantity
+     * aggregated.
      *
-     * support querying futures trade histories that are not older than 24 hours
-     * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
-     * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
-     * Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
-     * Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
+     * Weight(IP): 20
      *
-     * Weight: 20
+     * Notes:
+     * - support querying futures trade histories that are not older than 24 hours
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
+     * - If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
+     * - Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
+     * - Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
      *
      * @summary Compressed/Aggregate Trades List
      * @param {CompressedAggregateTradesListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CompressedAggregateTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#compressed-aggregate-trades-list Binance API Documentation}
      */
     public async compressedAggregateTradesList(
         requestParameters: CompressedAggregateTradesListRequest
@@ -2721,35 +2788,30 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Kline/candlestick bars for a specific contract type.
-     * Klines are uniquely identified by their open time.
+     * Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.
      *
-     * Contract type:
-     * PERPETUAL
-     * CURRENT_QUARTER
-     * NEXT_QUARTER
+     * Weight: based on parameter `LIMIT`
      *
-     * 1000 | 10
-     * The difference between `startTime` and `endTime` can only be up to 200 days
-     * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-     * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-     * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-     * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+     * | LIMIT | weight |
+     * | --- | --- |
+     * | [1,100) | 1 |
+     * | [100, 500) | 2 |
+     * | [500, 1000] | 5 |
+     * | > 1000 | 10 |
      *
-     * Weight: based on parameter LIMIT
-     * LIMIT | weight
-     * ---|---
-     * [1,100) | 1
-     * [100, 500) | 2
-     * [500, 1000] | 5
-     * > 1000 | 10
+     * Notes:
+     * - The difference between `startTime` and `endTime` can only be up to 200 days
+     * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+     * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+     * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+     * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
      *
      * @summary Continuous Contract Kline/Candlestick Data
      * @param {ContinuousContractKlineCandlestickDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ContinuousContractKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#continuous-contract-kline-candlestick-data Binance API Documentation}
      */
     public async continuousContractKlineCandlestickData(
         requestParameters: ContinuousContractKlineCandlestickDataRequest
@@ -2778,13 +2840,13 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Current exchange trading rules and symbol information
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Exchange Information
      * @returns {Promise<RestApiResponse<ExchangeInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Exchange-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#exchange-information Binance API Documentation}
      */
     public async exchangeInformation(): Promise<RestApiResponse<ExchangeInformationResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.exchangeInformation();
@@ -2803,16 +2865,17 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get Funding Rate History of Perpetual Futures
      *
-     * empty array will be returned for delivery symbols.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Notes:
+     * - empty array will be returned for delivery symbols.
      *
      * @summary Get Funding Rate History of Perpetual Futures
      * @param {GetFundingRateHistoryOfPerpetualFuturesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFundingRateHistoryOfPerpetualFuturesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#get-funding-rate-history-of-perpetual-futures Binance API Documentation}
      */
     public async getFundingRateHistoryOfPerpetualFutures(
         requestParameters: GetFundingRateHistoryOfPerpetualFuturesRequest
@@ -2837,15 +2900,13 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
-     *
-     * Weight: 0
+     * Query funding rate info for symbols that had FundingRateCap/FundingRateFloor/fundingIntervalHours adjustment
      *
      * @summary Get Funding Rate Info
      * @returns {Promise<RestApiResponse<GetFundingRateInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#get-funding-rate-info Binance API Documentation}
      */
     public async getFundingRateInfo(): Promise<RestApiResponse<GetFundingRateInfoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getFundingRateInfo();
@@ -2864,14 +2925,14 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query index price and mark price
      *
-     * Weight: 10
+     * Weight(IP): 10
      *
      * @summary Index Price and Mark Price
      * @param {IndexPriceAndMarkPriceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<IndexPriceAndMarkPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#index-price-and-mark-price Binance API Documentation}
      */
     public async indexPriceAndMarkPrice(
         requestParameters: IndexPriceAndMarkPriceRequest = {}
@@ -2895,27 +2956,28 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Kline/candlestick bars for the index price of a pair. Klines are uniquely identified by their open time.
      *
-     * 1000 | 10
-     * The difference between `startTime` and `endTime` can only be up to 200 days
-     * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-     * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-     * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-     * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+     * Weight: Based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
-     * LIMIT | weight
-     * ---|---
-     * [1,100) | 1
-     * [100, 500) | 2
-     * [500, 1000] | 5
-     * > 1000 | 10
+     * | LIMIT | weight |
+     * | --- | --- |
+     * | [1,100) | 1 |
+     * | [100, 500) | 2 |
+     * | [500, 1000] | 5 |
+     * | > 1000 | 10 |
+     *
+     * Notes:
+     * - The difference between `startTime` and `endTime` can only be up to 200 days
+     * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+     * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+     * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+     * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
      *
      * @summary Index Price Kline/Candlestick Data
      * @param {IndexPriceKlineCandlestickDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<IndexPriceKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#index-price-kline-candlestick-data Binance API Documentation}
      */
     public async indexPriceKlineCandlestickData(
         requestParameters: IndexPriceKlineCandlestickDataRequest
@@ -2941,30 +3003,30 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Kline/candlestick bars for a symbol.
-     * Klines are uniquely identified by their open time.
+     * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
      *
-     * 1000 | 10
-     * The difference between `startTime` and `endTime` can only be up to 200 days
-     * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-     * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-     * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-     * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+     * Weight: Based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
-     * LIMIT | weight
-     * ---|---
-     * [1,100) | 1
-     * [100, 500) | 2
-     * [500, 1000] | 5
-     * > 1000 | 10
+     * | LIMIT | weight |
+     * | --- | --- |
+     * | [1,100) | 1 |
+     * | [100, 500) | 2 |
+     * | [500, 1000] | 5 |
+     * | > 1000 | 10 |
+     *
+     * Notes:
+     * - The difference between `startTime` and `endTime` can only be up to 200 days
+     * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+     * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+     * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+     * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
      *
      * @summary Kline/Candlestick Data
      * @param {KlineCandlestickDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<KlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#kline-candlestick-data Binance API Documentation}
      */
     public async klineCandlestickData(
         requestParameters: KlineCandlestickDataRequest
@@ -2991,17 +3053,18 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query symbol Long/Short Ratio
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Long/Short Ratio
      * @param {LongShortRatioRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<LongShortRatioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Long-Short-Ratio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#long-short-ratio Binance API Documentation}
      */
     public async longShortRatio(
         requestParameters: LongShortRatioRequest
@@ -3026,30 +3089,30 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Kline/candlestick bars for the mark price of a symbol.
-     * Klines are uniquely identified by their open time.
+     * Kline/candlestick bars for the mark price of a symbol. Klines are uniquely identified by their open time.
      *
-     * 1000 | 10
-     * The difference between `startTime` and `endTime` can only be up to 200 days
-     * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
-     * If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
-     * If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
-     * If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+     * Weight: Based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
-     * LIMIT | weight
-     * ---|---
-     * [1,100) | 1
-     * [100, 500) | 2
-     * [500, 1000] | 5
-     * > 1000 | 10
+     * | LIMIT | weight |
+     * | --- | --- |
+     * | [1,100) | 1 |
+     * | [100, 500) | 2 |
+     * | [500, 1000] | 5 |
+     * | > 1000 | 10 |
+     *
+     * Notes:
+     * - The difference between `startTime` and `endTime` can only be up to 200 days
+     * - Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
+     * - If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
+     * - If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
+     * - If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
      *
      * @summary Mark Price Kline/Candlestick Data
      * @param {MarkPriceKlineCandlestickDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarkPriceKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#mark-price-kline-candlestick-data Binance API Documentation}
      */
     public async markPriceKlineCandlestickData(
         requestParameters: MarkPriceKlineCandlestickDataRequest
@@ -3077,17 +3140,20 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get older market historical trades.
      *
-     * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
-     * Only supports data from within the last one month
+     * Weight(IP): 20
      *
-     * Weight: 20
+     * Security Type: MARKET_DATA
      *
-     * @summary Old Trades Lookup(MARKET_DATA)
+     * Notes:
+     * - Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+     * - Only supports data from within the last one month
+     *
+     * @summary Old Trades Lookup (MARKET_DATA)
      * @param {OldTradesLookupRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OldTradesLookupResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Old-Trades-Lookup Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#old-trades-lookup Binance API Documentation}
      */
     public async oldTradesLookup(
         requestParameters: OldTradesLookupRequest
@@ -3112,14 +3178,14 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get present open interest of a specific symbol.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Open Interest
      * @param {OpenInterestRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OpenInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#open-interest Binance API Documentation}
      */
     public async openInterest(
         requestParameters: OpenInterestRequest
@@ -3142,18 +3208,18 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query open interest stats
      *
+     * Weight(IP): 1
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
-     *
-     * Weight: 1
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Open Interest Statistics
      * @param {OpenInterestStatisticsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OpenInterestStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest-Statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#open-interest-statistics Binance API Documentation}
      */
     public async openInterestStatistics(
         requestParameters: OpenInterestStatisticsRequest
@@ -3182,19 +3248,20 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Query orderbook on specific symbol
      *
      * Weight: Adjusted based on the limit:
-     * Limit | Weight
-     * ------------ | ------------
-     * 5, 10, 20, 50 | 2
-     * 100 | 5
-     * 500 | 10
-     * 1000 | 20
+     *
+     * | Limit | Weight |
+     * | ------------ | ------------ |
+     * | 5, 10, 20, 50 | 2 |
+     * | 100 | 5 |
+     * | 500 | 10 |
+     * | 1000 | 20 |
      *
      * @summary Order Book
      * @param {OrderBookRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OrderBookResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Order-Book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#order-book Binance API Documentation}
      */
     public async orderBook(
         requestParameters: OrderBookRequest
@@ -3218,10 +3285,8 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Premium index kline bars of a symbol. Klines are uniquely identified by their open time.
      *
+     * Weight: Based on parameter `LIMIT`
      *
-     * If startTime and endTime are not sent, the most recent klines are returned.
-     *
-     * Weight: based on parameter LIMIT
      * | LIMIT       | weight |
      * | ----------- | ------ |
      * | [1,100)     | 1      |
@@ -3229,12 +3294,15 @@ export class MarketDataApi implements MarketDataApiInterface {
      * | [500, 1000] | 5      |
      * | > 1000      | 10     |
      *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent klines are returned.
+     *
      * @summary Premium index Kline Data
      * @param {PremiumIndexKlineDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<PremiumIndexKlineDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Premium-index-Kline-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#premium-index-kline-data Binance API Documentation}
      */
     public async premiumIndexKlineData(
         requestParameters: PremiumIndexKlineDataRequest
@@ -3261,14 +3329,14 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query index price constituents
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Query Index Price Constituents
      * @param {QueryIndexPriceConstituentsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryIndexPriceConstituentsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Constituents Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#query-index-price-constituents Binance API Documentation}
      */
     public async queryIndexPriceConstituents(
         requestParameters: QueryIndexPriceConstituentsRequest
@@ -3291,16 +3359,17 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get recent market trades
      *
-     * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Notes:
+     * - Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
      *
      * @summary Recent Trades List
      * @param {RecentTradesListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RecentTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Recent-Trades-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#recent-trades-list Binance API Documentation}
      */
     public async recentTradesList(
         requestParameters: RecentTradesListRequest
@@ -3324,18 +3393,19 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Best price/qty on the order book for a symbol or symbols.
      *
-     * Symbol and pair cannot be sent together
-     * If a pair is sent,tickers for all symbols of the pair will be returned
-     * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+     * Weight: **2** for a single symbol, **5** when the symbol parameter is omitted
      *
-     * Weight: 2 for a single symbol, 5 when the symbol parameter is omitted
+     * Notes:
+     * - Symbol and pair cannot be sent together
+     * - If a pair is sent,tickers for all symbols of the pair will be returned
+     * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
      *
      * @summary Symbol Order Book Ticker
      * @param {SymbolOrderBookTickerRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SymbolOrderBookTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#symbol-order-book-ticker Binance API Documentation}
      */
     public async symbolOrderBookTicker(
         requestParameters: SymbolOrderBookTickerRequest = {}
@@ -3359,18 +3429,19 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Latest price for a symbol or symbols.
      *
-     * Symbol and pair cannot be sent together
-     * If a pair is sent,tickers for all symbols of the pair will be returned
-     * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+     * Weight: **1** for a single symbol, **2** when the symbol parameter is omitted
      *
-     * Weight: 1 for a single symbol, 2 when the symbol parameter is omitted
+     * Notes:
+     * - Symbol and pair cannot be sent together
+     * - If a pair is sent,tickers for all symbols of the pair will be returned
+     * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
      *
      * @summary Symbol Price Ticker
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SymbolPriceTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Price-Ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#symbol-price-ticker Binance API Documentation}
      */
     public async symbolPriceTicker(
         requestParameters: SymbolPriceTickerRequest = {}
@@ -3392,20 +3463,24 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Taker Buy Volume: the total volume of buy orders filled by takers within the period.
-     * Taker Sell Volume: the total volume of sell orders filled by takers within the period.
+     * Taker Buy Volume: the total volume of buy orders filled by takers within
+     * the period.
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Taker Sell Volume: the total volume of sell orders filled by takers
+     * within the period.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Taker Buy/Sell Volume
      * @param {TakerBuySellVolumeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TakerBuySellVolumeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#taker-buy-sell-volume Binance API Documentation}
      */
     public async takerBuySellVolume(
         requestParameters: TakerBuySellVolumeRequest
@@ -3433,13 +3508,13 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Test connectivity to the Rest API.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Test Connectivity
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Test-Connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#test-connectivity Binance API Documentation}
      */
     public async testConnectivity(): Promise<RestApiResponse<void>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.testConnectivity();
@@ -3458,19 +3533,20 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * 24 hour rolling window price change statistics.
      *
-     * Symbol and pair cannot be sent together
-     * If a pair is sent,tickers for all symbols of the pair will be returned
-     * If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+     * Weight: **1** for a single symbol, **40** when the symbol parameter is omitted
+     **Careful** when accessing this with no symbol.
      *
-     * Weight: 1 for a single symbol, 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     * Notes:
+     * - Symbol and pair cannot be sent together
+     * - If a pair is sent,tickers for all symbols of the pair will be returned
+     * - If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
      *
      * @summary 24hr Ticker Price Change Statistics
      * @param {Ticker24hrPriceChangeStatisticsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<Ticker24hrPriceChangeStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#ticker24hr-price-change-statistics Binance API Documentation}
      */
     public async ticker24hrPriceChangeStatistics(
         requestParameters: Ticker24hrPriceChangeStatisticsRequest = {}
@@ -3493,22 +3569,32 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * The proportion of net long and net short accounts to total accounts of the top 20% users with the highest margin balance. Each account is counted once only.
-     * Long Account % = Accounts of top traders with net long positions / Total accounts of top traders with open positions
-     * Short Account % = Accounts of top traders with net short positions / Total accounts of top traders with open positions
+     * The proportion of net long and net short accounts to total accounts of
+     * the top 20% users with the highest margin balance. Each account is
+     * counted once only.
+     *
+     * Long Account % = Accounts of top traders with net long positions / Total
+     * accounts of top traders with open positions
+     *
+     * Short Account % = Accounts of top traders with net short positions /
+     * Total accounts of top traders with open positions
+     *
      * Long/Short Ratio (Accounts) = Long Account % / Short Account %
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: Accounts
      *
-     * @summary Top Trader Long/Short Ratio (Accounts)
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
+     *
+     * @summary Top Trader Long/Short Account Ratio
      * @param {TopTraderLongShortRatioAccountsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TopTraderLongShortRatioAccountsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#top-trader-long-short-ratio-accounts Binance API Documentation}
      */
     public async topTraderLongShortRatioAccounts(
         requestParameters: TopTraderLongShortRatioAccountsRequest
@@ -3534,22 +3620,31 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * The proportion of net long and net short positions to total open positions of the top 20% users with the highest margin balance.
-     * Long Position % = Long positions of top traders / Total open positions of top traders
-     * Short Position % = Short positions of top traders / Total open positions of top traders
+     * The proportion of net long and net short positions to total open
+     * positions of the top 20% users with the highest margin balance.
+     *
+     * Long Position % = Long positions of top traders / Total open positions
+     * of top traders
+     *
+     * Short Position % = Short positions of top traders / Total open positions
+     * of top traders
+     *
      * Long/Short Ratio (Positions) = Long Position % / Short Position %
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: Positions
      *
-     * @summary Top Trader Long/Short Ratio (Positions)
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
+     *
+     * @summary Top Trader Long/Short Position Ratio
      * @param {TopTraderLongShortRatioPositionsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TopTraderLongShortRatioPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-coin-m-futures/api/rest-api/market-data#top-trader-long-short-ratio-positions Binance API Documentation}
      */
     public async topTraderLongShortRatioPositions(
         requestParameters: TopTraderLongShortRatioPositionsRequest
@@ -3579,9 +3674,6 @@ export enum BasisContractTypeEnum {
     PERPETUAL = 'PERPETUAL',
     CURRENT_QUARTER = 'CURRENT_QUARTER',
     NEXT_QUARTER = 'NEXT_QUARTER',
-    CURRENT_QUARTER_DELIVERING = 'CURRENT_QUARTER_DELIVERING',
-    NEXT_QUARTER_DELIVERING = 'NEXT_QUARTER_DELIVERING',
-    PERPETUAL_DELIVERING = 'PERPETUAL_DELIVERING',
 }
 
 export enum BasisPeriodEnum {
@@ -3600,9 +3692,6 @@ export enum ContinuousContractKlineCandlestickDataContractTypeEnum {
     PERPETUAL = 'PERPETUAL',
     CURRENT_QUARTER = 'CURRENT_QUARTER',
     NEXT_QUARTER = 'NEXT_QUARTER',
-    CURRENT_QUARTER_DELIVERING = 'CURRENT_QUARTER_DELIVERING',
-    NEXT_QUARTER_DELIVERING = 'NEXT_QUARTER_DELIVERING',
-    PERPETUAL_DELIVERING = 'PERPETUAL_DELIVERING',
 }
 
 export enum ContinuousContractKlineCandlestickDataIntervalEnum {
@@ -3690,12 +3779,10 @@ export enum MarkPriceKlineCandlestickDataIntervalEnum {
 }
 
 export enum OpenInterestStatisticsContractTypeEnum {
+    ALL = 'ALL',
     PERPETUAL = 'PERPETUAL',
     CURRENT_QUARTER = 'CURRENT_QUARTER',
     NEXT_QUARTER = 'NEXT_QUARTER',
-    CURRENT_QUARTER_DELIVERING = 'CURRENT_QUARTER_DELIVERING',
-    NEXT_QUARTER_DELIVERING = 'NEXT_QUARTER_DELIVERING',
-    PERPETUAL_DELIVERING = 'PERPETUAL_DELIVERING',
 }
 
 export enum OpenInterestStatisticsPeriodEnum {
@@ -3729,12 +3816,10 @@ export enum PremiumIndexKlineDataIntervalEnum {
 }
 
 export enum TakerBuySellVolumeContractTypeEnum {
+    ALL = 'ALL',
     PERPETUAL = 'PERPETUAL',
     CURRENT_QUARTER = 'CURRENT_QUARTER',
     NEXT_QUARTER = 'NEXT_QUARTER',
-    CURRENT_QUARTER_DELIVERING = 'CURRENT_QUARTER_DELIVERING',
-    NEXT_QUARTER_DELIVERING = 'NEXT_QUARTER_DELIVERING',
-    PERPETUAL_DELIVERING = 'PERPETUAL_DELIVERING',
 }
 
 export enum TakerBuySellVolumePeriodEnum {

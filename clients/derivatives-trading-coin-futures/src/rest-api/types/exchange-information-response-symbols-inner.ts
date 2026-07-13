@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,151 +25,151 @@ import type { ExchangeInformationResponseSymbolsInnerFiltersInner } from './exch
  */
 export interface ExchangeInformationResponseSymbolsInner {
     /**
-     *
+     * Trading filters and constraints.
      * @type {Array<ExchangeInformationResponseSymbolsInnerFiltersInner>}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     filters?: Array<ExchangeInformationResponseSymbolsInnerFiltersInner>;
     /**
-     *
+     * Supported order types.
      * @type {Array<string>}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     orderTypes?: Array<string>;
     /**
-     *
+     * Time in force
      * @type {Array<string>}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     timeInForce?: Array<string>;
     /**
-     *
+     * liquidation fee rate
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     liquidationFee?: string;
     /**
-     *
+     * the max price difference rate( from mark price) a market order can make
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     marketTakeBound?: string;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     pair?: string;
     /**
-     *
+     * Contract type.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     contractType?: string;
     /**
-     *
+     * Delivery timestamp.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     deliveryDate?: number | bigint;
     /**
-     *
+     * Onboard timestamp.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     onboardDate?: number | bigint;
     /**
-     *
+     * Contract status.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     contractStatus?: string;
     /**
-     *
+     * Contract size.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     contractSize?: number | bigint;
     /**
-     *
+     * Quote asset symbol.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     quoteAsset?: string;
     /**
-     *
+     * Base asset symbol.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     baseAsset?: string;
     /**
-     *
+     * Margin asset.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     marginAsset?: string;
     /**
-     *
+     * please do not use it as tickSize
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     pricePrecision?: number | bigint;
     /**
-     *
+     * please do not use it as stepSize
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     quantityPrecision?: number | bigint;
     /**
-     *
+     * Base asset precision.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     baseAssetPrecision?: number | bigint;
     /**
-     *
+     * Quote asset precision.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     quotePrecision?: number | bigint;
     /**
-     *
+     * ignore
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     equalQtyPrecision?: number | bigint;
     /**
-     *
+     * threshold for algo order with \"priceProtect\"
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     triggerProtect?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     maintMarginPercent?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     requiredMarginPercent?: string;
     /**
-     *
+     * Underlying asset type.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     underlyingType?: string;
     /**
-     *
+     * Underlying asset sub-type.
      * @type {Array<string>}
      * @memberof ExchangeInformationResponseSymbolsInner
      */

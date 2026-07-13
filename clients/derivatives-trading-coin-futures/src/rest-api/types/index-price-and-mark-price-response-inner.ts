@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,55 +20,55 @@
  */
 export interface IndexPriceAndMarkPriceResponseInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
     pair?: string;
     /**
-     *
+     * mark price
      * @type {string}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
     markPrice?: string;
     /**
-     *
+     * index price
      * @type {string}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
     indexPrice?: string;
     /**
-     *
+     * Estimated Settle Price, only useful in the last hour before the settlement starts.
      * @type {string}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
     estimatedSettlePrice?: string;
     /**
-     *
+     * the lasted funding rate, for perpetual contract symbols only. For delivery symbols, \"\" will be shown.
      * @type {string}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
     lastFundingRate?: string;
     /**
-     *
+     * the base asset interest rate, for perpetual contract symbols only. For delivery symbols, \"\" will be shown.
      * @type {string}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
     interestRate?: string;
     /**
-     *
+     * For perpetual contract symbols only. For delivery symbols, 0 will be shown
      * @type {number | bigint}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
     nextFundingTime?: number | bigint;
     /**
-     *
+     * Time
      * @type {number | bigint}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */

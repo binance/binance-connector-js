@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,109 +14,109 @@
  */
 
 /**
- *
+ * Kline payload
  * @export
  * @interface IndexKlineCandlestickStreamsResponseK
  */
 export interface IndexKlineCandlestickStreamsResponseK {
     /**
-     *
+     * Kline start time
      * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     t?: number | bigint;
     /**
-     *
+     * transactionTime
      * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     T?: number | bigint;
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     s?: string;
     /**
-     *
+     * interval
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     i?: string;
     /**
-     *
+     * Ignore
      * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     f?: number | bigint;
     /**
-     *
+     * Ignore
      * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     L?: number | bigint;
     /**
-     *
+     * openPrice
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     o?: string;
     /**
-     *
+     * closePrice
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     c?: string;
     /**
-     *
+     * highPrice
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     h?: string;
     /**
-     *
+     * lowPrice
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     l?: string;
     /**
-     *
+     * volume
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     v?: string;
     /**
-     *
+     * tradeNum
      * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     n?: number | bigint;
     /**
-     *
+     * Is this kline closed?
      * @type {boolean}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     x?: boolean;
     /**
-     *
+     * quoteVolume
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     q?: string;
     /**
-     *
+     * Taker buy volume
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     V?: string;
     /**
-     *
+     * lastTradeVolume
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
     Q?: string;
     /**
-     *
+     * Best bid qty
      * @type {string}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */

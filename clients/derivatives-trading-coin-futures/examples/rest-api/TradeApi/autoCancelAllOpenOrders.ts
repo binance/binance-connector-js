@@ -13,8 +13,8 @@ const client = new DerivativesTradingCoinFutures({ configurationRestAPI });
 async function autoCancelAllOpenOrders() {
     try {
         const response = await client.restAPI.autoCancelAllOpenOrders({
-            symbol: 'symbol_example',
-            countdownTime: 789,
+            symbol: 'BTCUSD_200925',
+            countdownTime: 1000,
         });
 
         const rateLimits = response.rateLimits!;

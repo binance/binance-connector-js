@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures REST API
+ * Futures (COIN-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures REST API
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface TopTraderLongShortRatioAccountsResponseInner {
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof TopTraderLongShortRatioAccountsResponseInner
      */
     pair?: string;
     /**
-     *
+     * Long/short ratio.
      * @type {string}
      * @memberof TopTraderLongShortRatioAccountsResponseInner
      */
     longShortRatio?: string;
     /**
-     *
+     * 64.42%
      * @type {string}
      * @memberof TopTraderLongShortRatioAccountsResponseInner
      */
     longAccount?: string;
     /**
-     *
+     * 35.58%
      * @type {string}
      * @memberof TopTraderLongShortRatioAccountsResponseInner
      */
     shortAccount?: string;
     /**
-     *
+     * Timestamp in milliseconds.
      * @type {number | bigint}
      * @memberof TopTraderLongShortRatioAccountsResponseInner
      */

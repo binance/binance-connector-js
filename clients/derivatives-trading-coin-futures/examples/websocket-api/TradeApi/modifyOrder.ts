@@ -18,7 +18,7 @@ async function modifyOrder() {
         connection = await client.websocketAPI.connect();
 
         const response = await connection.modifyOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_PERP',
             side: DerivativesTradingCoinFuturesWebsocketAPI.ModifyOrderSideEnum.BUY,
             quantity: 1.0,
             price: 1.0,

@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,13 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PartialBookDepthStreamsResponseAItem } from './partial-book-depth-streams-response-aitem';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PartialBookDepthStreamsResponseBItem } from './partial-book-depth-streams-response-bitem';
-
 /**
  *
  * @export
@@ -28,69 +20,69 @@ import type { PartialBookDepthStreamsResponseBItem } from './partial-book-depth-
  */
 export interface PartialBookDepthStreamsResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof PartialBookDepthStreamsResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Transaction time
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof PartialBookDepthStreamsResponse
      */
     s?: string;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof PartialBookDepthStreamsResponse
      */
     ps?: string;
     /**
-     *
+     * First update ID in event
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     U?: number | bigint;
     /**
-     *
+     * updateId
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Final update Id in last stream(ie `u` in last stream)
      * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
     pu?: number | bigint;
     /**
-     *
-     * @type {Array<PartialBookDepthStreamsResponseBItem>}
+     * Bids to be updated
+     * @type {Array<Array<string>>}
      * @memberof PartialBookDepthStreamsResponse
      */
-    b?: Array<PartialBookDepthStreamsResponseBItem>;
+    b?: Array<Array<string>>;
     /**
-     *
-     * @type {Array<PartialBookDepthStreamsResponseAItem>}
+     * Asks to be updated
+     * @type {Array<Array<string>>}
      * @memberof PartialBookDepthStreamsResponse
      */
-    a?: Array<PartialBookDepthStreamsResponseAItem>;
+    a?: Array<Array<string>>;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof PartialBookDepthStreamsResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

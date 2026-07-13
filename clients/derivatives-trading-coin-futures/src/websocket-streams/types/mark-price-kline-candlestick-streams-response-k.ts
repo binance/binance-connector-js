@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Futures (COIN-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade COIN-M perpetual and delivery futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,109 +14,109 @@
  */
 
 /**
- *
+ * Kline payload
  * @export
  * @interface MarkPriceKlineCandlestickStreamsResponseK
  */
 export interface MarkPriceKlineCandlestickStreamsResponseK {
     /**
-     *
+     * Kline start time
      * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     t?: number | bigint;
     /**
-     *
+     * Kline close time
      * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     T?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     s?: string;
     /**
-     *
+     * Interval
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     i?: string;
     /**
-     *
+     * ignore
      * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     f?: number | bigint;
     /**
-     *
+     * ignore
      * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     L?: number | bigint;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     o?: string;
     /**
-     *
+     * Close price
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     c?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     l?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     v?: string;
     /**
-     *
+     * Number of basic data
      * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     n?: number | bigint;
     /**
-     *
+     * Is this kline closed?
      * @type {boolean}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     x?: boolean;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     q?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     V?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
     Q?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
