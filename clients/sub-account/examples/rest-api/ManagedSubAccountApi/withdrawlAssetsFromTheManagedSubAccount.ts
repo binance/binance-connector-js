@@ -10,8 +10,8 @@ const client = new SubAccount({ configurationRestAPI });
 async function withdrawlAssetsFromTheManagedSubAccount() {
     try {
         const response = await client.restAPI.withdrawlAssetsFromTheManagedSubAccount({
-            fromEmail: 'fromEmail_example',
-            asset: 'asset_example',
+            fromEmail: 'from@test.com',
+            asset: 'BTC',
             amount: 1.0,
         });
 

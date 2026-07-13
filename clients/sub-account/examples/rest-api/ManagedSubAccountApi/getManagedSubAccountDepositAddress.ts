@@ -10,8 +10,8 @@ const client = new SubAccount({ configurationRestAPI });
 async function getManagedSubAccountDepositAddress() {
     try {
         const response = await client.restAPI.getManagedSubAccountDepositAddress({
-            email: 'sub-account-email@email.com',
-            coin: 'coin_example',
+            email: 'abc@test.com',
+            coin: 'USDT',
         });
 
         const rateLimits = response.rateLimits!;

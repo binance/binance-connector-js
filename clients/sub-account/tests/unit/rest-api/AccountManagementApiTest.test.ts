@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -54,7 +54,7 @@ describe('AccountManagementApi', () => {
     describe('createAVirtualSubAccount()', () => {
         it('should execute createAVirtualSubAccount() successfully with required parameters only', async () => {
             const params: CreateAVirtualSubAccountRequest = {
-                subAccountString: 'subAccountString_example',
+                subAccountString: 'testSubAccount',
             };
 
             mockResponse = JSONParse(
@@ -77,7 +77,7 @@ describe('AccountManagementApi', () => {
 
         it('should execute createAVirtualSubAccount() successfully with optional parameters', async () => {
             const params: CreateAVirtualSubAccountRequest = {
-                subAccountString: 'subAccountString_example',
+                subAccountString: 'testSubAccount',
                 recvWindow: 5000,
             };
 
@@ -101,7 +101,7 @@ describe('AccountManagementApi', () => {
 
         it('should throw RequiredError when subAccountString is missing', async () => {
             const _params: CreateAVirtualSubAccountRequest = {
-                subAccountString: 'subAccountString_example',
+                subAccountString: 'testSubAccount',
             };
             const params = Object.assign({ ..._params });
             delete params?.subAccountString;
@@ -113,7 +113,7 @@ describe('AccountManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CreateAVirtualSubAccountRequest = {
-                subAccountString: 'subAccountString_example',
+                subAccountString: 'testSubAccount',
             };
 
             const errorResponse = {
@@ -136,7 +136,7 @@ describe('AccountManagementApi', () => {
     describe('enableFuturesForSubAccount()', () => {
         it('should execute enableFuturesForSubAccount() successfully with required parameters only', async () => {
             const params: EnableFuturesForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             mockResponse = JSONParse(
@@ -159,7 +159,7 @@ describe('AccountManagementApi', () => {
 
         it('should execute enableFuturesForSubAccount() successfully with optional parameters', async () => {
             const params: EnableFuturesForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
                 recvWindow: 5000,
             };
 
@@ -183,7 +183,7 @@ describe('AccountManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: EnableFuturesForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -195,7 +195,7 @@ describe('AccountManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: EnableFuturesForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             const errorResponse = {
@@ -220,7 +220,7 @@ describe('AccountManagementApi', () => {
     describe('enableOptionsForSubAccount()', () => {
         it('should execute enableOptionsForSubAccount() successfully with required parameters only', async () => {
             const params: EnableOptionsForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             mockResponse = JSONParse(
@@ -243,7 +243,7 @@ describe('AccountManagementApi', () => {
 
         it('should execute enableOptionsForSubAccount() successfully with optional parameters', async () => {
             const params: EnableOptionsForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
                 recvWindow: 5000,
             };
 
@@ -267,7 +267,7 @@ describe('AccountManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: EnableOptionsForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -279,7 +279,7 @@ describe('AccountManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: EnableOptionsForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             const errorResponse = {
@@ -304,7 +304,7 @@ describe('AccountManagementApi', () => {
     describe('getFuturesPositionRiskOfSubAccount()', () => {
         it('should execute getFuturesPositionRiskOfSubAccount() successfully with required parameters only', async () => {
             const params: GetFuturesPositionRiskOfSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             mockResponse = JSONParse(
@@ -338,7 +338,7 @@ describe('AccountManagementApi', () => {
 
         it('should execute getFuturesPositionRiskOfSubAccount() successfully with optional parameters', async () => {
             const params: GetFuturesPositionRiskOfSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
                 recvWindow: 5000,
             };
 
@@ -373,7 +373,7 @@ describe('AccountManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetFuturesPositionRiskOfSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -385,7 +385,7 @@ describe('AccountManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFuturesPositionRiskOfSubAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             const errorResponse = {
@@ -410,8 +410,8 @@ describe('AccountManagementApi', () => {
     describe('getFuturesPositionRiskOfSubAccountV2()', () => {
         it('should execute getFuturesPositionRiskOfSubAccountV2() successfully with required parameters only', async () => {
             const params: GetFuturesPositionRiskOfSubAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
 
             mockResponse = JSONParse(
@@ -462,8 +462,8 @@ describe('AccountManagementApi', () => {
 
         it('should execute getFuturesPositionRiskOfSubAccountV2() successfully with optional parameters', async () => {
             const params: GetFuturesPositionRiskOfSubAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
                 recvWindow: 5000,
             };
 
@@ -515,8 +515,8 @@ describe('AccountManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetFuturesPositionRiskOfSubAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -528,8 +528,8 @@ describe('AccountManagementApi', () => {
 
         it('should throw RequiredError when futuresType is missing', async () => {
             const _params: GetFuturesPositionRiskOfSubAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.futuresType;
@@ -541,8 +541,8 @@ describe('AccountManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFuturesPositionRiskOfSubAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
 
             const errorResponse = {
@@ -596,7 +596,7 @@ describe('AccountManagementApi', () => {
 
         it('should execute getSubAccountsStatusOnMarginOrFutures() successfully with optional parameters', async () => {
             const params: GetSubAccountsStatusOnMarginOrFuturesRequest = {
-                email: 'email_example',
+                email: '123@test.com',
                 recvWindow: 5000,
             };
 
@@ -662,15 +662,6 @@ describe('AccountManagementApi', () => {
                             isManagedSubAccount: false,
                             isAssetManagementSubAccount: false,
                         },
-                        {
-                            subUserId: 1234567,
-                            email: 'virtual@oxebmvfonoemail.com',
-                            remark: 'remarks',
-                            isFreeze: false,
-                            createTime: 1544433328000,
-                            isManagedSubAccount: false,
-                            isAssetManagementSubAccount: false,
-                        },
                     ],
                 })
             );
@@ -691,10 +682,10 @@ describe('AccountManagementApi', () => {
 
         it('should execute querySubAccountList() successfully with optional parameters', async () => {
             const params: QuerySubAccountListRequest = {
-                email: 'email_example',
-                isFreeze: 'isFreeze_example',
+                email: '123@test.com',
+                isFreeze: 'true',
                 page: 1,
-                limit: 1,
+                limit: 10,
                 recvWindow: 5000,
             };
 
@@ -705,15 +696,6 @@ describe('AccountManagementApi', () => {
                             subUserId: 123456,
                             email: 'testsub@gmail.com',
                             remark: 'remark',
-                            isFreeze: false,
-                            createTime: 1544433328000,
-                            isManagedSubAccount: false,
-                            isAssetManagementSubAccount: false,
-                        },
-                        {
-                            subUserId: 1234567,
-                            email: 'virtual@oxebmvfonoemail.com',
-                            remark: 'remarks',
                             isFreeze: false,
                             createTime: 1544433328000,
                             isManagedSubAccount: false,
@@ -774,26 +756,6 @@ describe('AccountManagementApi', () => {
                             busdMargin: 0,
                             date: 1676851200000,
                         },
-                        {
-                            userId: 1000138138384,
-                            btc: 0,
-                            btcFutures: 0,
-                            btcMargin: 0,
-                            busd: 0,
-                            busdFutures: 0,
-                            busdMargin: 0,
-                            date: 1677110400000,
-                        },
-                        {
-                            userId: 1000138138384,
-                            btc: 0,
-                            btcFutures: 0,
-                            btcMargin: 0,
-                            busd: 0,
-                            busdFutures: 0,
-                            busdMargin: 0,
-                            date: 1677369600000,
-                        },
                     ],
                 })
             );
@@ -814,7 +776,7 @@ describe('AccountManagementApi', () => {
 
         it('should execute querySubAccountTransactionStatistics() successfully with optional parameters', async () => {
             const params: QuerySubAccountTransactionStatisticsRequest = {
-                email: 'email_example',
+                email: 'abc@test.com',
                 recvWindow: 5000,
             };
 
@@ -836,26 +798,6 @@ describe('AccountManagementApi', () => {
                             busdFutures: 0,
                             busdMargin: 0,
                             date: 1676851200000,
-                        },
-                        {
-                            userId: 1000138138384,
-                            btc: 0,
-                            btcFutures: 0,
-                            btcMargin: 0,
-                            busd: 0,
-                            busdFutures: 0,
-                            busdMargin: 0,
-                            date: 1677110400000,
-                        },
-                        {
-                            userId: 1000138138384,
-                            btc: 0,
-                            btcFutures: 0,
-                            btcMargin: 0,
-                            busd: 0,
-                            busdFutures: 0,
-                            busdMargin: 0,
-                            date: 1677369600000,
                         },
                     ],
                 })

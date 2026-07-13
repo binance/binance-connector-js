@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -18,13 +18,20 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 import { ApiManagementApi } from '../../../src/rest-api';
 import {
     AddIpRestrictionForSubAccountApiKeyRequest,
+    CreateSubAccountApiKeyRequest,
     DeleteIpListForASubAccountApiKeyRequest,
+    DeleteSubAccountApiKeyRequest,
     GetIpRestrictionForASubAccountApiKeyRequest,
+    ModifySubAccountApiKeyPermissionRequest,
+    QuerySubAccountApiKeyRequest,
 } from '../../../src/rest-api';
 import type {
     AddIpRestrictionForSubAccountApiKeyResponse,
+    CreateSubAccountApiKeyResponse,
     DeleteIpListForASubAccountApiKeyResponse,
     GetIpRestrictionForASubAccountApiKeyResponse,
+    ModifySubAccountApiKeyPermissionResponse,
+    QuerySubAccountApiKeyResponse,
 } from '../../../src/rest-api/types';
 
 describe('ApiManagementApi', () => {
@@ -44,15 +51,15 @@ describe('ApiManagementApi', () => {
     describe('addIpRestrictionForSubAccountApiKey()', () => {
         it('should execute addIpRestrictionForSubAccountApiKey() successfully with required parameters only', async () => {
             const params: AddIpRestrictionForSubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                status: 'status_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                status: 1,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     status: '2',
-                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    ipList: ['69.210.67.14'],
                     updateTime: 1636371437000,
                     apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
                 })
@@ -74,17 +81,17 @@ describe('ApiManagementApi', () => {
 
         it('should execute addIpRestrictionForSubAccountApiKey() successfully with optional parameters', async () => {
             const params: AddIpRestrictionForSubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                status: 'status_example',
-                ipAddress: 'ipAddress_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                status: 1,
+                ipAddress: '69.210.67.14',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     status: '2',
-                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    ipList: ['69.210.67.14'],
                     updateTime: 1636371437000,
                     apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
                 })
@@ -106,9 +113,9 @@ describe('ApiManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: AddIpRestrictionForSubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                status: 'status_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                status: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -120,9 +127,9 @@ describe('ApiManagementApi', () => {
 
         it('should throw RequiredError when subAccountApiKey is missing', async () => {
             const _params: AddIpRestrictionForSubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                status: 'status_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                status: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.subAccountApiKey;
@@ -134,9 +141,9 @@ describe('ApiManagementApi', () => {
 
         it('should throw RequiredError when status is missing', async () => {
             const _params: AddIpRestrictionForSubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                status: 'status_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                status: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.status;
@@ -148,9 +155,9 @@ describe('ApiManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AddIpRestrictionForSubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                status: 'status_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                status: 1,
             };
 
             const errorResponse = {
@@ -172,18 +179,166 @@ describe('ApiManagementApi', () => {
         });
     });
 
+    describe('createSubAccountApiKey()', () => {
+        it('should execute createSubAccountApiKey() successfully with required parameters only', async () => {
+            const params: CreateSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                apiName: 'myKey',
+                status: 2,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    apiName: 'myKey',
+                    apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
+                    secretKey: 'NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j',
+                    canTrade: true,
+                    canMarginLoanRepay: false,
+                    canFuturesTrade: false,
+                    canUniversalTransfer: false,
+                    canVanillaOptions: false,
+                    status: 2,
+                    ipList: ['69.210.67.14'],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'createSubAccountApiKey').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<CreateSubAccountApiKeyResponse>)
+            );
+            const response = await client.createSubAccountApiKey(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute createSubAccountApiKey() successfully with optional parameters', async () => {
+            const params: CreateSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                apiName: 'myKey',
+                status: 2,
+                canTrade: true,
+                canMarginLoanRepay: false,
+                canFuturesTrade: false,
+                canUniversalTransfer: false,
+                canVanillaOptions: false,
+                ipAddress: '69.210.67.14',
+                thirdPartyName: 'thirdParty',
+                publicKey: '',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    apiName: 'myKey',
+                    apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
+                    secretKey: 'NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j',
+                    canTrade: true,
+                    canMarginLoanRepay: false,
+                    canFuturesTrade: false,
+                    canUniversalTransfer: false,
+                    canVanillaOptions: false,
+                    status: 2,
+                    ipList: ['69.210.67.14'],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'createSubAccountApiKey').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<CreateSubAccountApiKeyResponse>)
+            );
+            const response = await client.createSubAccountApiKey(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when email is missing', async () => {
+            const _params: CreateSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                apiName: 'myKey',
+                status: 2,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.email;
+
+            await expect(client.createSubAccountApiKey(params)).rejects.toThrow(
+                'Required parameter email was null or undefined when calling createSubAccountApiKey.'
+            );
+        });
+
+        it('should throw RequiredError when apiName is missing', async () => {
+            const _params: CreateSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                apiName: 'myKey',
+                status: 2,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.apiName;
+
+            await expect(client.createSubAccountApiKey(params)).rejects.toThrow(
+                'Required parameter apiName was null or undefined when calling createSubAccountApiKey.'
+            );
+        });
+
+        it('should throw RequiredError when status is missing', async () => {
+            const _params: CreateSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                apiName: 'myKey',
+                status: 2,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.status;
+
+            await expect(client.createSubAccountApiKey(params)).rejects.toThrow(
+                'Required parameter status was null or undefined when calling createSubAccountApiKey.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: CreateSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                apiName: 'myKey',
+                status: 2,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'createSubAccountApiKey')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.createSubAccountApiKey(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('deleteIpListForASubAccountApiKey()', () => {
         it('should execute deleteIpListForASubAccountApiKey() successfully with required parameters only', async () => {
             const params: DeleteIpListForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                ipAddress: 'ipAddress_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                ipAddress: '69.210.67.14',
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     ipRestrict: 'true',
-                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    ipList: ['69.210.67.14'],
                     updateTime: 1636371437000,
                     apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
                 })
@@ -205,16 +360,16 @@ describe('ApiManagementApi', () => {
 
         it('should execute deleteIpListForASubAccountApiKey() successfully with optional parameters', async () => {
             const params: DeleteIpListForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                ipAddress: 'ipAddress_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                ipAddress: '69.210.67.14',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     ipRestrict: 'true',
-                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    ipList: ['69.210.67.14'],
                     updateTime: 1636371437000,
                     apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
                 })
@@ -236,9 +391,9 @@ describe('ApiManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: DeleteIpListForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                ipAddress: 'ipAddress_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                ipAddress: '69.210.67.14',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -250,9 +405,9 @@ describe('ApiManagementApi', () => {
 
         it('should throw RequiredError when subAccountApiKey is missing', async () => {
             const _params: DeleteIpListForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                ipAddress: 'ipAddress_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                ipAddress: '69.210.67.14',
             };
             const params = Object.assign({ ..._params });
             delete params?.subAccountApiKey;
@@ -264,9 +419,9 @@ describe('ApiManagementApi', () => {
 
         it('should throw RequiredError when ipAddress is missing', async () => {
             const _params: DeleteIpListForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                ipAddress: 'ipAddress_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                ipAddress: '69.210.67.14',
             };
             const params = Object.assign({ ..._params });
             delete params?.ipAddress;
@@ -278,9 +433,9 @@ describe('ApiManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: DeleteIpListForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
-                ipAddress: 'ipAddress_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                ipAddress: '69.210.67.14',
             };
 
             const errorResponse = {
@@ -302,17 +457,108 @@ describe('ApiManagementApi', () => {
         });
     });
 
+    describe('deleteSubAccountApiKey()', () => {
+        it('should execute deleteSubAccountApiKey() successfully with required parameters only', async () => {
+            const params: DeleteSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            };
+
+            const spy = jest.spyOn(client, 'deleteSubAccountApiKey').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<object>)
+            );
+            const response = await client.deleteSubAccountApiKey(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute deleteSubAccountApiKey() successfully with optional parameters', async () => {
+            const params: DeleteSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                recvWindow: 5000,
+            };
+
+            const spy = jest.spyOn(client, 'deleteSubAccountApiKey').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<object>)
+            );
+            const response = await client.deleteSubAccountApiKey(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when email is missing', async () => {
+            const _params: DeleteSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.email;
+
+            await expect(client.deleteSubAccountApiKey(params)).rejects.toThrow(
+                'Required parameter email was null or undefined when calling deleteSubAccountApiKey.'
+            );
+        });
+
+        it('should throw RequiredError when subAccountApiKey is missing', async () => {
+            const _params: DeleteSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.subAccountApiKey;
+
+            await expect(client.deleteSubAccountApiKey(params)).rejects.toThrow(
+                'Required parameter subAccountApiKey was null or undefined when calling deleteSubAccountApiKey.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: DeleteSubAccountApiKeyRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'deleteSubAccountApiKey')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.deleteSubAccountApiKey(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('getIpRestrictionForASubAccountApiKey()', () => {
         it('should execute getIpRestrictionForASubAccountApiKey() successfully with required parameters only', async () => {
             const params: GetIpRestrictionForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     ipRestrict: 'true',
-                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    ipList: ['69.210.67.14'],
                     updateTime: 1636371437000,
                     apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
                 })
@@ -334,15 +580,15 @@ describe('ApiManagementApi', () => {
 
         it('should execute getIpRestrictionForASubAccountApiKey() successfully with optional parameters', async () => {
             const params: GetIpRestrictionForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     ipRestrict: 'true',
-                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    ipList: ['69.210.67.14'],
                     updateTime: 1636371437000,
                     apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
                 })
@@ -364,8 +610,8 @@ describe('ApiManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetIpRestrictionForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -377,8 +623,8 @@ describe('ApiManagementApi', () => {
 
         it('should throw RequiredError when subAccountApiKey is missing', async () => {
             const _params: GetIpRestrictionForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
             };
             const params = Object.assign({ ..._params });
             delete params?.subAccountApiKey;
@@ -390,8 +636,8 @@ describe('ApiManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetIpRestrictionForASubAccountApiKeyRequest = {
-                email: 'sub-account-email@email.com',
-                subAccountApiKey: 'subAccountApiKey_example',
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
             };
 
             const errorResponse = {
@@ -409,6 +655,245 @@ describe('ApiManagementApi', () => {
             await expect(client.getIpRestrictionForASubAccountApiKey(params)).rejects.toThrow(
                 'ResponseError'
             );
+            spy.mockRestore();
+        });
+    });
+
+    describe('modifySubAccountApiKeyPermission()', () => {
+        it('should execute modifySubAccountApiKeyPermission() successfully with required parameters only', async () => {
+            const params: ModifySubAccountApiKeyPermissionRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    apiName: 'myKey',
+                    apikey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                    canTrade: true,
+                    canMarginLoanRepay: false,
+                    canFuturesTrade: true,
+                    canUniversalTransfer: false,
+                    canVanillaOptions: false,
+                    timestamp: 1640000000000,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'modifySubAccountApiKeyPermission').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ModifySubAccountApiKeyPermissionResponse>)
+            );
+            const response = await client.modifySubAccountApiKeyPermission(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute modifySubAccountApiKeyPermission() successfully with optional parameters', async () => {
+            const params: ModifySubAccountApiKeyPermissionRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                canTrade: true,
+                canMarginLoanRepay: false,
+                canFuturesTrade: true,
+                canUniversalTransfer: false,
+                canVanillaOptions: false,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    apiName: 'myKey',
+                    apikey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                    canTrade: true,
+                    canMarginLoanRepay: false,
+                    canFuturesTrade: true,
+                    canUniversalTransfer: false,
+                    canVanillaOptions: false,
+                    timestamp: 1640000000000,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'modifySubAccountApiKeyPermission').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ModifySubAccountApiKeyPermissionResponse>)
+            );
+            const response = await client.modifySubAccountApiKeyPermission(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when email is missing', async () => {
+            const _params: ModifySubAccountApiKeyPermissionRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.email;
+
+            await expect(client.modifySubAccountApiKeyPermission(params)).rejects.toThrow(
+                'Required parameter email was null or undefined when calling modifySubAccountApiKeyPermission.'
+            );
+        });
+
+        it('should throw RequiredError when subAccountApiKey is missing', async () => {
+            const _params: ModifySubAccountApiKeyPermissionRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.subAccountApiKey;
+
+            await expect(client.modifySubAccountApiKeyPermission(params)).rejects.toThrow(
+                'Required parameter subAccountApiKey was null or undefined when calling modifySubAccountApiKeyPermission.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: ModifySubAccountApiKeyPermissionRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'modifySubAccountApiKeyPermission')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.modifySubAccountApiKeyPermission(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('querySubAccountApiKey()', () => {
+        it('should execute querySubAccountApiKey() successfully with required parameters only', async () => {
+            const params: QuerySubAccountApiKeyRequest = {
+                email: '123@test.com',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    list: [
+                        {
+                            email: '123@test.com',
+                            apiName: 'myKey',
+                            apikey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                            canTrade: true,
+                            canMarginLoanRepay: false,
+                            canFuturesTrade: false,
+                            canUniversalTransfer: false,
+                            canVanillaOptions: false,
+                            timestamp: 1640000000000,
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'querySubAccountApiKey').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QuerySubAccountApiKeyResponse>)
+            );
+            const response = await client.querySubAccountApiKey(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute querySubAccountApiKey() successfully with optional parameters', async () => {
+            const params: QuerySubAccountApiKeyRequest = {
+                email: '123@test.com',
+                subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                page: 1,
+                size: 30,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    list: [
+                        {
+                            email: '123@test.com',
+                            apiName: 'myKey',
+                            apikey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                            canTrade: true,
+                            canMarginLoanRepay: false,
+                            canFuturesTrade: false,
+                            canUniversalTransfer: false,
+                            canVanillaOptions: false,
+                            timestamp: 1640000000000,
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'querySubAccountApiKey').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QuerySubAccountApiKeyResponse>)
+            );
+            const response = await client.querySubAccountApiKey(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when email is missing', async () => {
+            const _params: QuerySubAccountApiKeyRequest = {
+                email: '123@test.com',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.email;
+
+            await expect(client.querySubAccountApiKey(params)).rejects.toThrow(
+                'Required parameter email was null or undefined when calling querySubAccountApiKey.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: QuerySubAccountApiKeyRequest = {
+                email: '123@test.com',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'querySubAccountApiKey')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.querySubAccountApiKey(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

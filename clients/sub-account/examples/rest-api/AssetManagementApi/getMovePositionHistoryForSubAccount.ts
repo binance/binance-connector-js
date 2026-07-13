@@ -10,9 +10,9 @@ const client = new SubAccount({ configurationRestAPI });
 async function getMovePositionHistoryForSubAccount() {
     try {
         const response = await client.restAPI.getMovePositionHistoryForSubAccount({
-            symbol: 'symbol_example',
-            page: 789,
-            rows: 789,
+            symbol: 'BTCUSDT',
+            page: 1,
+            rows: 1,
         });
 
         const rateLimits = response.rateLimits!;

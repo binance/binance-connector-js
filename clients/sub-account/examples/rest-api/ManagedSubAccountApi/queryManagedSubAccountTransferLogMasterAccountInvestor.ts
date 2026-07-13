@@ -11,11 +11,11 @@ async function queryManagedSubAccountTransferLogMasterAccountInvestor() {
     try {
         const response =
             await client.restAPI.queryManagedSubAccountTransferLogMasterAccountInvestor({
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             });
 
         const rateLimits = response.rateLimits!;

@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AssetManagementApi } from '../../../src/rest-api';
+import {
+    AssetManagementApi,
+    MovePositionForSubAccountProductTypeEnum,
+    UniversalTransferFromAccountTypeEnum,
+    UniversalTransferToAccountTypeEnum,
+} from '../../../src/rest-api';
 import {
     FuturesTransferForSubAccountRequest,
     GetDetailOnSubAccountsFuturesAccountRequest,
@@ -84,10 +89,10 @@ describe('AssetManagementApi', () => {
     describe('futuresTransferForSubAccount()', () => {
         it('should execute futuresTransferForSubAccount() successfully with required parameters only', async () => {
             const params: FuturesTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'USDT',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
 
             mockResponse = JSONParse(JSONStringify({ txnId: '2966662589' }));
@@ -108,10 +113,10 @@ describe('AssetManagementApi', () => {
 
         it('should execute futuresTransferForSubAccount() successfully with optional parameters', async () => {
             const params: FuturesTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'USDT',
                 amount: 1.0,
-                type: 789,
+                type: 1,
                 recvWindow: 5000,
             };
 
@@ -133,10 +138,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: FuturesTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'USDT',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -148,10 +153,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: FuturesTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'USDT',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -163,10 +168,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: FuturesTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'USDT',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -178,10 +183,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: FuturesTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'USDT',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -193,10 +198,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: FuturesTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'USDT',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
 
             const errorResponse = {
@@ -221,7 +226,7 @@ describe('AssetManagementApi', () => {
     describe('getDetailOnSubAccountsFuturesAccount()', () => {
         it('should execute getDetailOnSubAccountsFuturesAccount() successfully with required parameters only', async () => {
             const params: GetDetailOnSubAccountsFuturesAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             mockResponse = JSONParse(
@@ -273,7 +278,7 @@ describe('AssetManagementApi', () => {
 
         it('should execute getDetailOnSubAccountsFuturesAccount() successfully with optional parameters', async () => {
             const params: GetDetailOnSubAccountsFuturesAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
                 recvWindow: 5000,
             };
 
@@ -326,7 +331,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetDetailOnSubAccountsFuturesAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -338,7 +343,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetDetailOnSubAccountsFuturesAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             const errorResponse = {
@@ -363,8 +368,8 @@ describe('AssetManagementApi', () => {
     describe('getDetailOnSubAccountsFuturesAccountV2()', () => {
         it('should execute getDetailOnSubAccountsFuturesAccountV2() successfully with required parameters only', async () => {
             const params: GetDetailOnSubAccountsFuturesAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
 
             mockResponse = JSONParse(
@@ -440,8 +445,8 @@ describe('AssetManagementApi', () => {
 
         it('should execute getDetailOnSubAccountsFuturesAccountV2() successfully with optional parameters', async () => {
             const params: GetDetailOnSubAccountsFuturesAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
                 recvWindow: 5000,
             };
 
@@ -518,8 +523,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetDetailOnSubAccountsFuturesAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -531,8 +536,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when futuresType is missing', async () => {
             const _params: GetDetailOnSubAccountsFuturesAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.futuresType;
@@ -544,8 +549,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetDetailOnSubAccountsFuturesAccountV2Request = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
 
             const errorResponse = {
@@ -570,7 +575,7 @@ describe('AssetManagementApi', () => {
     describe('getDetailOnSubAccountsMarginAccount()', () => {
         it('should execute getDetailOnSubAccountsMarginAccount() successfully with required parameters only', async () => {
             const params: GetDetailOnSubAccountsMarginAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             mockResponse = JSONParse(
@@ -594,30 +599,6 @@ describe('AssetManagementApi', () => {
                             locked: '0.00000000',
                             netAsset: '0.00499500',
                         },
-                        {
-                            asset: 'BNB',
-                            borrowed: '201.66666672',
-                            free: '2346.50000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '2144.83333328',
-                        },
-                        {
-                            asset: 'ETH',
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                        },
-                        {
-                            asset: 'USDT',
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                        },
                     ],
                 })
             );
@@ -638,7 +619,7 @@ describe('AssetManagementApi', () => {
 
         it('should execute getDetailOnSubAccountsMarginAccount() successfully with optional parameters', async () => {
             const params: GetDetailOnSubAccountsMarginAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
                 recvWindow: 5000,
             };
 
@@ -663,30 +644,6 @@ describe('AssetManagementApi', () => {
                             locked: '0.00000000',
                             netAsset: '0.00499500',
                         },
-                        {
-                            asset: 'BNB',
-                            borrowed: '201.66666672',
-                            free: '2346.50000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '2144.83333328',
-                        },
-                        {
-                            asset: 'ETH',
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                        },
-                        {
-                            asset: 'USDT',
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                        },
                     ],
                 })
             );
@@ -707,7 +664,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetDetailOnSubAccountsMarginAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -719,7 +676,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetDetailOnSubAccountsMarginAccountRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             const errorResponse = {
@@ -744,9 +701,9 @@ describe('AssetManagementApi', () => {
     describe('getMovePositionHistoryForSubAccount()', () => {
         it('should execute getMovePositionHistoryForSubAccount() successfully with required parameters only', async () => {
             const params: GetMovePositionHistoryForSubAccountRequest = {
-                symbol: 'symbol_example',
-                page: 789,
-                rows: 789,
+                symbol: 'BTCUSDT',
+                page: 1,
+                rows: 1,
             };
 
             mockResponse = JSONParse(
@@ -763,28 +720,6 @@ describe('AssetManagementApi', () => {
                             positionSide: 'BOTH',
                             side: 'SELL',
                             timeStamp: 1737544712000,
-                        },
-                        {
-                            fromUserEmail: 'testFrom1@google.com',
-                            toUserEmail: 'testTo1@google.com',
-                            productType: 'UM',
-                            symbol: 'BTCUSDT',
-                            price: '97100.00000000',
-                            quantity: '0.00100000',
-                            positionSide: 'BOTH',
-                            side: 'SELL',
-                            timeStamp: 1740041627000,
-                        },
-                        {
-                            fromUserEmail: 'testFrom2@google.com',
-                            toUserEmail: 'testTo2@google.com',
-                            productType: 'UM',
-                            symbol: 'BTCUSDT',
-                            price: '97108.62068889',
-                            quantity: '0.00100000',
-                            positionSide: 'BOTH',
-                            side: 'SELL',
-                            timeStamp: 1740041959000,
                         },
                     ],
                 })
@@ -806,9 +741,9 @@ describe('AssetManagementApi', () => {
 
         it('should execute getMovePositionHistoryForSubAccount() successfully with optional parameters', async () => {
             const params: GetMovePositionHistoryForSubAccountRequest = {
-                symbol: 'symbol_example',
-                page: 789,
-                rows: 789,
+                symbol: 'BTCUSDT',
+                page: 1,
+                rows: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 recvWindow: 5000,
@@ -828,28 +763,6 @@ describe('AssetManagementApi', () => {
                             positionSide: 'BOTH',
                             side: 'SELL',
                             timeStamp: 1737544712000,
-                        },
-                        {
-                            fromUserEmail: 'testFrom1@google.com',
-                            toUserEmail: 'testTo1@google.com',
-                            productType: 'UM',
-                            symbol: 'BTCUSDT',
-                            price: '97100.00000000',
-                            quantity: '0.00100000',
-                            positionSide: 'BOTH',
-                            side: 'SELL',
-                            timeStamp: 1740041627000,
-                        },
-                        {
-                            fromUserEmail: 'testFrom2@google.com',
-                            toUserEmail: 'testTo2@google.com',
-                            productType: 'UM',
-                            symbol: 'BTCUSDT',
-                            price: '97108.62068889',
-                            quantity: '0.00100000',
-                            positionSide: 'BOTH',
-                            side: 'SELL',
-                            timeStamp: 1740041959000,
                         },
                     ],
                 })
@@ -871,9 +784,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: GetMovePositionHistoryForSubAccountRequest = {
-                symbol: 'symbol_example',
-                page: 789,
-                rows: 789,
+                symbol: 'BTCUSDT',
+                page: 1,
+                rows: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -885,9 +798,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when page is missing', async () => {
             const _params: GetMovePositionHistoryForSubAccountRequest = {
-                symbol: 'symbol_example',
-                page: 789,
-                rows: 789,
+                symbol: 'BTCUSDT',
+                page: 1,
+                rows: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.page;
@@ -899,9 +812,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when rows is missing', async () => {
             const _params: GetMovePositionHistoryForSubAccountRequest = {
-                symbol: 'symbol_example',
-                page: 789,
-                rows: 789,
+                symbol: 'BTCUSDT',
+                page: 1,
+                rows: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.rows;
@@ -913,9 +826,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetMovePositionHistoryForSubAccountRequest = {
-                symbol: 'symbol_example',
-                page: 789,
-                rows: 789,
+                symbol: 'BTCUSDT',
+                page: 1,
+                rows: 1,
             };
 
             const errorResponse = {
@@ -940,8 +853,8 @@ describe('AssetManagementApi', () => {
     describe('getSubAccountDepositAddress()', () => {
         it('should execute getSubAccountDepositAddress() successfully with required parameters only', async () => {
             const params: GetSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: '123@test.com',
+                coin: 'BTC',
             };
 
             mockResponse = JSONParse(
@@ -969,8 +882,8 @@ describe('AssetManagementApi', () => {
 
         it('should execute getSubAccountDepositAddress() successfully with optional parameters', async () => {
             const params: GetSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: '123@test.com',
+                coin: 'BTC',
                 network: 'network_example',
                 amount: 1.0,
                 recvWindow: 5000,
@@ -1001,8 +914,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: '123@test.com',
+                coin: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -1014,8 +927,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: GetSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: '123@test.com',
+                coin: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.coin;
@@ -1027,8 +940,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: '123@test.com',
+                coin: 'BTC',
             };
 
             const errorResponse = {
@@ -1053,7 +966,7 @@ describe('AssetManagementApi', () => {
     describe('getSubAccountDepositHistory()', () => {
         it('should execute getSubAccountDepositHistory() successfully with required parameters only', async () => {
             const params: GetSubAccountDepositHistoryRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             mockResponse = JSONParse(
@@ -1068,22 +981,6 @@ describe('AssetManagementApi', () => {
                         addressTag: '101764890',
                         txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
                         insertTime: 1661493146000,
-                        transferType: 0,
-                        confirmTimes: '1/1',
-                        unlockConfirm: 0,
-                        walletType: 0,
-                    },
-                    {
-                        id: '769754833590042625',
-                        amount: '0.50000000',
-                        coin: 'IOTA',
-                        network: 'IOTA',
-                        status: 1,
-                        address:
-                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                        addressTag: '',
-                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                        insertTime: 1599620082000,
                         transferType: 0,
                         confirmTimes: '1/1',
                         unlockConfirm: 0,
@@ -1108,10 +1005,10 @@ describe('AssetManagementApi', () => {
 
         it('should execute getSubAccountDepositHistory() successfully with optional parameters', async () => {
             const params: GetSubAccountDepositHistoryRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
                 includeSource: false,
-                coin: 'coin_example',
-                status: 789,
+                coin: 'BTC',
+                status: 0,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 limit: 1,
@@ -1137,22 +1034,6 @@ describe('AssetManagementApi', () => {
                         unlockConfirm: 0,
                         walletType: 0,
                     },
-                    {
-                        id: '769754833590042625',
-                        amount: '0.50000000',
-                        coin: 'IOTA',
-                        network: 'IOTA',
-                        status: 1,
-                        address:
-                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                        addressTag: '',
-                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                        insertTime: 1599620082000,
-                        transferType: 0,
-                        confirmTimes: '1/1',
-                        unlockConfirm: 0,
-                        walletType: 0,
-                    },
                 ])
             );
 
@@ -1172,7 +1053,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetSubAccountDepositHistoryRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -1184,7 +1065,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetSubAccountDepositHistoryRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             const errorResponse = {
@@ -1209,8 +1090,8 @@ describe('AssetManagementApi', () => {
     describe('getSummaryOfSubAccountsFuturesAccount()', () => {
         it('should execute getSummaryOfSubAccountsFuturesAccount() successfully with required parameters only', async () => {
             const params: GetSummaryOfSubAccountsFuturesAccountRequest = {
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
 
             mockResponse = JSONParse(
@@ -1235,17 +1116,6 @@ describe('AssetManagementApi', () => {
                             totalWalletBalance: '22.12659734',
                             asset: 'USD',
                         },
-                        {
-                            email: '345@test.com',
-                            totalInitialMargin: '0.83137400',
-                            totalMaintenanceMargin: '0.41568700',
-                            totalMarginBalance: '0.90575887',
-                            totalOpenOrderInitialMargin: '0.00000000',
-                            totalPositionInitialMargin: '0.83137400',
-                            totalUnrealizedProfit: '0.03219710',
-                            totalWalletBalance: '0.87356177',
-                            asset: 'USD',
-                        },
                     ],
                 })
             );
@@ -1266,8 +1136,8 @@ describe('AssetManagementApi', () => {
 
         it('should execute getSummaryOfSubAccountsFuturesAccount() successfully with optional parameters', async () => {
             const params: GetSummaryOfSubAccountsFuturesAccountRequest = {
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
                 recvWindow: 5000,
             };
 
@@ -1293,17 +1163,6 @@ describe('AssetManagementApi', () => {
                             totalWalletBalance: '22.12659734',
                             asset: 'USD',
                         },
-                        {
-                            email: '345@test.com',
-                            totalInitialMargin: '0.83137400',
-                            totalMaintenanceMargin: '0.41568700',
-                            totalMarginBalance: '0.90575887',
-                            totalOpenOrderInitialMargin: '0.00000000',
-                            totalPositionInitialMargin: '0.83137400',
-                            totalUnrealizedProfit: '0.03219710',
-                            totalWalletBalance: '0.87356177',
-                            asset: 'USD',
-                        },
                     ],
                 })
             );
@@ -1324,8 +1183,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when page is missing', async () => {
             const _params: GetSummaryOfSubAccountsFuturesAccountRequest = {
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.page;
@@ -1337,8 +1196,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when limit is missing', async () => {
             const _params: GetSummaryOfSubAccountsFuturesAccountRequest = {
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.limit;
@@ -1350,8 +1209,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetSummaryOfSubAccountsFuturesAccountRequest = {
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
 
             const errorResponse = {
@@ -1376,7 +1235,7 @@ describe('AssetManagementApi', () => {
     describe('getSummaryOfSubAccountsFuturesAccountV2()', () => {
         it('should execute getSummaryOfSubAccountsFuturesAccountV2() successfully with required parameters only', async () => {
             const params: GetSummaryOfSubAccountsFuturesAccountV2Request = {
-                futuresType: 789,
+                futuresType: 1,
             };
 
             mockResponse = JSONParse(
@@ -1402,17 +1261,6 @@ describe('AssetManagementApi', () => {
                                 totalWalletBalance: '22.12659734',
                                 asset: 'USD',
                             },
-                            {
-                                email: '345@test.com',
-                                totalInitialMargin: '0.83137400',
-                                totalMaintenanceMargin: '0.41568700',
-                                totalMarginBalance: '0.90575887',
-                                totalOpenOrderInitialMargin: '0.00000000',
-                                totalPositionInitialMargin: '0.83137400',
-                                totalUnrealizedProfit: '0.03219710',
-                                totalWalletBalance: '0.87356177',
-                                asset: 'USD',
-                            },
                         ],
                     },
                     deliveryAccountSummaryResp: {
@@ -1426,13 +1274,6 @@ describe('AssetManagementApi', () => {
                                 totalMarginBalance: '22.12659734',
                                 totalUnrealizedProfit: '0.00000000',
                                 totalWalletBalance: '22.12659734',
-                                asset: 'BTC',
-                            },
-                            {
-                                email: '345@test.com',
-                                totalMarginBalance: '0.90575887',
-                                totalUnrealizedProfit: '0.03219710',
-                                totalWalletBalance: '0.87356177',
                                 asset: 'BTC',
                             },
                         ],
@@ -1458,9 +1299,9 @@ describe('AssetManagementApi', () => {
 
         it('should execute getSummaryOfSubAccountsFuturesAccountV2() successfully with optional parameters', async () => {
             const params: GetSummaryOfSubAccountsFuturesAccountV2Request = {
-                futuresType: 789,
+                futuresType: 1,
                 page: 1,
-                limit: 1,
+                limit: 10,
                 recvWindow: 5000,
             };
 
@@ -1487,17 +1328,6 @@ describe('AssetManagementApi', () => {
                                 totalWalletBalance: '22.12659734',
                                 asset: 'USD',
                             },
-                            {
-                                email: '345@test.com',
-                                totalInitialMargin: '0.83137400',
-                                totalMaintenanceMargin: '0.41568700',
-                                totalMarginBalance: '0.90575887',
-                                totalOpenOrderInitialMargin: '0.00000000',
-                                totalPositionInitialMargin: '0.83137400',
-                                totalUnrealizedProfit: '0.03219710',
-                                totalWalletBalance: '0.87356177',
-                                asset: 'USD',
-                            },
                         ],
                     },
                     deliveryAccountSummaryResp: {
@@ -1511,13 +1341,6 @@ describe('AssetManagementApi', () => {
                                 totalMarginBalance: '22.12659734',
                                 totalUnrealizedProfit: '0.00000000',
                                 totalWalletBalance: '22.12659734',
-                                asset: 'BTC',
-                            },
-                            {
-                                email: '345@test.com',
-                                totalMarginBalance: '0.90575887',
-                                totalUnrealizedProfit: '0.03219710',
-                                totalWalletBalance: '0.87356177',
                                 asset: 'BTC',
                             },
                         ],
@@ -1543,7 +1366,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when futuresType is missing', async () => {
             const _params: GetSummaryOfSubAccountsFuturesAccountV2Request = {
-                futuresType: 789,
+                futuresType: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.futuresType;
@@ -1555,7 +1378,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetSummaryOfSubAccountsFuturesAccountV2Request = {
-                futuresType: 789,
+                futuresType: 1,
             };
 
             const errorResponse = {
@@ -1591,12 +1414,6 @@ describe('AssetManagementApi', () => {
                             totalLiabilityOfBtc: '1.11111111',
                             totalNetAssetOfBtc: '1.00000000',
                         },
-                        {
-                            email: '345@test.com',
-                            totalAssetOfBtc: '2.22222222',
-                            totalLiabilityOfBtc: '1.00000001',
-                            totalNetAssetOfBtc: '1.22222221',
-                        },
                     ],
                 })
             );
@@ -1631,12 +1448,6 @@ describe('AssetManagementApi', () => {
                             totalAssetOfBtc: '2.11111111',
                             totalLiabilityOfBtc: '1.11111111',
                             totalNetAssetOfBtc: '1.00000000',
-                        },
-                        {
-                            email: '345@test.com',
-                            totalAssetOfBtc: '2.22222222',
-                            totalLiabilityOfBtc: '1.00000001',
-                            totalNetAssetOfBtc: '1.22222221',
                         },
                     ],
                 })
@@ -1679,10 +1490,10 @@ describe('AssetManagementApi', () => {
     describe('marginTransferForSubAccount()', () => {
         it('should execute marginTransferForSubAccount() successfully with required parameters only', async () => {
             const params: MarginTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'BTC',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
 
             mockResponse = JSONParse(JSONStringify({ txnId: '2966662589' }));
@@ -1703,10 +1514,10 @@ describe('AssetManagementApi', () => {
 
         it('should execute marginTransferForSubAccount() successfully with optional parameters', async () => {
             const params: MarginTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'BTC',
                 amount: 1.0,
-                type: 789,
+                type: 1,
                 recvWindow: 5000,
             };
 
@@ -1728,10 +1539,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: MarginTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'BTC',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -1743,10 +1554,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: MarginTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'BTC',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -1758,10 +1569,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: MarginTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'BTC',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -1773,10 +1584,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: MarginTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'BTC',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -1788,10 +1599,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginTransferForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                asset: 'asset_example',
+                email: '123@test.com',
+                asset: 'BTC',
                 amount: 1.0,
-                type: 789,
+                type: 1,
             };
 
             const errorResponse = {
@@ -1816,9 +1627,9 @@ describe('AssetManagementApi', () => {
     describe('movePositionForSubAccount()', () => {
         it('should execute movePositionForSubAccount() successfully with required parameters only', async () => {
             const params: MovePositionForSubAccountRequest = {
-                fromUserEmail: 'fromUserEmail_example',
-                toUserEmail: 'toUserEmail_example',
-                productType: 'productType_example',
+                fromUserEmail: 'testFrom@google.com',
+                toUserEmail: 'testTo@google.com',
+                productType: MovePositionForSubAccountProductTypeEnum.UM,
                 orderArgs: [],
             };
 
@@ -1833,18 +1644,6 @@ describe('AssetManagementApi', () => {
                             priceType: 'MARK_PRICE',
                             price: '97139.00000000',
                             quantity: '0.001',
-                            positionSide: 'BOTH',
-                            side: 'BUY',
-                            success: true,
-                        },
-                        {
-                            fromUserEmail: 'testFrom1@google.com',
-                            toUserEmail: '1testTo@google.com',
-                            productType: 'UM',
-                            symbol: 'BTCUSDT',
-                            priceType: 'MARK_PRICE',
-                            price: '97139.00000000',
-                            quantity: '0.0011',
                             positionSide: 'BOTH',
                             side: 'BUY',
                             success: true,
@@ -1869,9 +1668,9 @@ describe('AssetManagementApi', () => {
 
         it('should execute movePositionForSubAccount() successfully with optional parameters', async () => {
             const params: MovePositionForSubAccountRequest = {
-                fromUserEmail: 'fromUserEmail_example',
-                toUserEmail: 'toUserEmail_example',
-                productType: 'productType_example',
+                fromUserEmail: 'testFrom@google.com',
+                toUserEmail: 'testTo@google.com',
+                productType: MovePositionForSubAccountProductTypeEnum.UM,
                 orderArgs: [],
                 recvWindow: 5000,
             };
@@ -1887,18 +1686,6 @@ describe('AssetManagementApi', () => {
                             priceType: 'MARK_PRICE',
                             price: '97139.00000000',
                             quantity: '0.001',
-                            positionSide: 'BOTH',
-                            side: 'BUY',
-                            success: true,
-                        },
-                        {
-                            fromUserEmail: 'testFrom1@google.com',
-                            toUserEmail: '1testTo@google.com',
-                            productType: 'UM',
-                            symbol: 'BTCUSDT',
-                            priceType: 'MARK_PRICE',
-                            price: '97139.00000000',
-                            quantity: '0.0011',
                             positionSide: 'BOTH',
                             side: 'BUY',
                             success: true,
@@ -1923,9 +1710,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when fromUserEmail is missing', async () => {
             const _params: MovePositionForSubAccountRequest = {
-                fromUserEmail: 'fromUserEmail_example',
-                toUserEmail: 'toUserEmail_example',
-                productType: 'productType_example',
+                fromUserEmail: 'testFrom@google.com',
+                toUserEmail: 'testTo@google.com',
+                productType: MovePositionForSubAccountProductTypeEnum.UM,
                 orderArgs: [],
             };
             const params = Object.assign({ ..._params });
@@ -1938,9 +1725,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when toUserEmail is missing', async () => {
             const _params: MovePositionForSubAccountRequest = {
-                fromUserEmail: 'fromUserEmail_example',
-                toUserEmail: 'toUserEmail_example',
-                productType: 'productType_example',
+                fromUserEmail: 'testFrom@google.com',
+                toUserEmail: 'testTo@google.com',
+                productType: MovePositionForSubAccountProductTypeEnum.UM,
                 orderArgs: [],
             };
             const params = Object.assign({ ..._params });
@@ -1953,9 +1740,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when productType is missing', async () => {
             const _params: MovePositionForSubAccountRequest = {
-                fromUserEmail: 'fromUserEmail_example',
-                toUserEmail: 'toUserEmail_example',
-                productType: 'productType_example',
+                fromUserEmail: 'testFrom@google.com',
+                toUserEmail: 'testTo@google.com',
+                productType: MovePositionForSubAccountProductTypeEnum.UM,
                 orderArgs: [],
             };
             const params = Object.assign({ ..._params });
@@ -1968,9 +1755,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when orderArgs is missing', async () => {
             const _params: MovePositionForSubAccountRequest = {
-                fromUserEmail: 'fromUserEmail_example',
-                toUserEmail: 'toUserEmail_example',
-                productType: 'productType_example',
+                fromUserEmail: 'testFrom@google.com',
+                toUserEmail: 'testTo@google.com',
+                productType: MovePositionForSubAccountProductTypeEnum.UM,
                 orderArgs: [],
             };
             const params = Object.assign({ ..._params });
@@ -1983,9 +1770,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MovePositionForSubAccountRequest = {
-                fromUserEmail: 'fromUserEmail_example',
-                toUserEmail: 'toUserEmail_example',
-                productType: 'productType_example',
+                fromUserEmail: 'testFrom@google.com',
+                toUserEmail: 'testTo@google.com',
+                productType: MovePositionForSubAccountProductTypeEnum.UM,
                 orderArgs: [],
             };
 
@@ -2009,17 +1796,13 @@ describe('AssetManagementApi', () => {
     describe('querySubAccountAssets()', () => {
         it('should execute querySubAccountAssets() successfully with required parameters only', async () => {
             const params: QuerySubAccountAssetsRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     balances: [
-                        { freeze: 0, withdrawing: 0, asset: 'ADA', free: 10000, locked: 0 },
-                        { freeze: 0, withdrawing: 0, asset: 'BNB', free: 10003, locked: 0 },
-                        { freeze: 0, withdrawing: 0, asset: 'BTC', free: 11467.6399, locked: 0 },
-                        { freeze: 0, withdrawing: 0, asset: 'ETH', free: 10004.995, locked: 0 },
-                        { freeze: 0, withdrawing: 0, asset: 'USDT', free: 11652.14213, locked: 0 },
+                        { freeze: 0, withdrawing: 0, asset: 'ADA', free: 11467.6399, locked: 0 },
                     ],
                 })
             );
@@ -2040,18 +1823,14 @@ describe('AssetManagementApi', () => {
 
         it('should execute querySubAccountAssets() successfully with optional parameters', async () => {
             const params: QuerySubAccountAssetsRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     balances: [
-                        { freeze: 0, withdrawing: 0, asset: 'ADA', free: 10000, locked: 0 },
-                        { freeze: 0, withdrawing: 0, asset: 'BNB', free: 10003, locked: 0 },
-                        { freeze: 0, withdrawing: 0, asset: 'BTC', free: 11467.6399, locked: 0 },
-                        { freeze: 0, withdrawing: 0, asset: 'ETH', free: 10004.995, locked: 0 },
-                        { freeze: 0, withdrawing: 0, asset: 'USDT', free: 11652.14213, locked: 0 },
+                        { freeze: 0, withdrawing: 0, asset: 'ADA', free: 11467.6399, locked: 0 },
                     ],
                 })
             );
@@ -2072,7 +1851,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QuerySubAccountAssetsRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -2084,7 +1863,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QuerySubAccountAssetsRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             const errorResponse = {
@@ -2107,21 +1886,13 @@ describe('AssetManagementApi', () => {
     describe('querySubAccountAssetsAssetManagement()', () => {
         it('should execute querySubAccountAssetsAssetManagement() successfully with required parameters only', async () => {
             const params: QuerySubAccountAssetsAssetManagementRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     balances: [
                         { freeze: '0', withdrawing: '0', asset: 'ADA', free: '10000', locked: '0' },
-                        { freeze: '0', withdrawing: '0', asset: 'BNB', free: '10003', locked: '0' },
-                        {
-                            freeze: '0',
-                            withdrawing: '0',
-                            asset: 'BTC',
-                            free: '11467.6399',
-                            locked: '0',
-                        },
                     ],
                 })
             );
@@ -2142,7 +1913,7 @@ describe('AssetManagementApi', () => {
 
         it('should execute querySubAccountAssetsAssetManagement() successfully with optional parameters', async () => {
             const params: QuerySubAccountAssetsAssetManagementRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
                 recvWindow: 5000,
             };
 
@@ -2150,14 +1921,6 @@ describe('AssetManagementApi', () => {
                 JSONStringify({
                     balances: [
                         { freeze: '0', withdrawing: '0', asset: 'ADA', free: '10000', locked: '0' },
-                        { freeze: '0', withdrawing: '0', asset: 'BNB', free: '10003', locked: '0' },
-                        {
-                            freeze: '0',
-                            withdrawing: '0',
-                            asset: 'BTC',
-                            free: '11467.6399',
-                            locked: '0',
-                        },
                     ],
                 })
             );
@@ -2178,7 +1941,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QuerySubAccountAssetsAssetManagementRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -2190,7 +1953,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QuerySubAccountAssetsAssetManagementRequest = {
-                email: 'sub-account-email@email.com',
+                email: '123@test.com',
             };
 
             const errorResponse = {
@@ -2215,8 +1978,8 @@ describe('AssetManagementApi', () => {
     describe('querySubAccountFuturesAssetTransferHistory()', () => {
         it('should execute querySubAccountFuturesAssetTransferHistory() successfully with required parameters only', async () => {
             const params: QuerySubAccountFuturesAssetTransferHistoryRequest = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
 
             mockResponse = JSONParse(
@@ -2230,14 +1993,6 @@ describe('AssetManagementApi', () => {
                             asset: 'BTC',
                             qty: '1',
                             tranId: 11897001102,
-                            time: 1544433328000,
-                        },
-                        {
-                            from: 'bbb@test.com',
-                            to: 'ccc@test.com',
-                            asset: 'ETH',
-                            qty: '2',
-                            tranId: 11631474902,
                             time: 1544433328000,
                         },
                     ],
@@ -2262,12 +2017,12 @@ describe('AssetManagementApi', () => {
 
         it('should execute querySubAccountFuturesAssetTransferHistory() successfully with optional parameters', async () => {
             const params: QuerySubAccountFuturesAssetTransferHistoryRequest = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 page: 1,
-                limit: 1,
+                limit: 10,
                 recvWindow: 5000,
             };
 
@@ -2282,14 +2037,6 @@ describe('AssetManagementApi', () => {
                             asset: 'BTC',
                             qty: '1',
                             tranId: 11897001102,
-                            time: 1544433328000,
-                        },
-                        {
-                            from: 'bbb@test.com',
-                            to: 'ccc@test.com',
-                            asset: 'ETH',
-                            qty: '2',
-                            tranId: 11631474902,
                             time: 1544433328000,
                         },
                     ],
@@ -2314,8 +2061,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QuerySubAccountFuturesAssetTransferHistoryRequest = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -2327,8 +2074,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when futuresType is missing', async () => {
             const _params: QuerySubAccountFuturesAssetTransferHistoryRequest = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.futuresType;
@@ -2340,8 +2087,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QuerySubAccountFuturesAssetTransferHistoryRequest = {
-                email: 'sub-account-email@email.com',
-                futuresType: 789,
+                email: '123@test.com',
+                futuresType: 1,
             };
 
             const errorResponse = {
@@ -2376,15 +2123,6 @@ describe('AssetManagementApi', () => {
                         tranId: 6489943656,
                         time: 1544433328000,
                     },
-                    {
-                        from: 'bbb@test.com',
-                        to: 'ccc@test.com',
-                        asset: 'ETH',
-                        qty: '2',
-                        status: 'SUCCESS',
-                        tranId: 6489938713,
-                        time: 1544433328000,
-                    },
                 ])
             );
 
@@ -2406,12 +2144,12 @@ describe('AssetManagementApi', () => {
 
         it('should execute querySubAccountSpotAssetTransferHistory() successfully with optional parameters', async () => {
             const params: QuerySubAccountSpotAssetTransferHistoryRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
+                fromEmail: 'aaa@test.com',
+                toEmail: 'bbb@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 page: 1,
-                limit: 1,
+                limit: 10,
                 recvWindow: 5000,
             };
 
@@ -2424,15 +2162,6 @@ describe('AssetManagementApi', () => {
                         qty: '10',
                         status: 'SUCCESS',
                         tranId: 6489943656,
-                        time: 1544433328000,
-                    },
-                    {
-                        from: 'bbb@test.com',
-                        to: 'ccc@test.com',
-                        asset: 'ETH',
-                        qty: '2',
-                        status: 'SUCCESS',
-                        tranId: 6489938713,
                         time: 1544433328000,
                     },
                 ])
@@ -2482,7 +2211,6 @@ describe('AssetManagementApi', () => {
                     masterAccountTotalAsset: '0.23231201',
                     spotSubUserAssetBtcVoList: [
                         { email: 'sub123@test.com', totalAsset: '9999.00000000' },
-                        { email: 'test456@test.com', totalAsset: '0.00000000' },
                     ],
                 })
             );
@@ -2503,7 +2231,7 @@ describe('AssetManagementApi', () => {
 
         it('should execute querySubAccountSpotAssetsSummary() successfully with optional parameters', async () => {
             const params: QuerySubAccountSpotAssetsSummaryRequest = {
-                email: 'email_example',
+                email: '123@test.com',
                 page: 1,
                 size: 10,
                 recvWindow: 5000,
@@ -2515,7 +2243,6 @@ describe('AssetManagementApi', () => {
                     masterAccountTotalAsset: '0.23231201',
                     spotSubUserAssetBtcVoList: [
                         { email: 'sub123@test.com', totalAsset: '9999.00000000' },
-                        { email: 'test456@test.com', totalAsset: '0.00000000' },
                     ],
                 })
             );
@@ -2592,13 +2319,13 @@ describe('AssetManagementApi', () => {
 
         it('should execute queryUniversalTransferHistory() successfully with optional parameters', async () => {
             const params: QueryUniversalTransferHistoryRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
+                fromEmail: 'abctest@gmail.com',
+                toEmail: 'deftest@gmail.com',
                 clientTranId: '1',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 page: 1,
-                limit: 1,
+                limit: 10,
                 recvWindow: 5000,
             };
 
@@ -2657,10 +2384,10 @@ describe('AssetManagementApi', () => {
     describe('subAccountFuturesAssetTransfer()', () => {
         it('should execute subAccountFuturesAssetTransfer() successfully with required parameters only', async () => {
             const params: SubAccountFuturesAssetTransferRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
-                futuresType: 789,
-                asset: 'asset_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
+                futuresType: 1,
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -2682,10 +2409,10 @@ describe('AssetManagementApi', () => {
 
         it('should execute subAccountFuturesAssetTransfer() successfully with optional parameters', async () => {
             const params: SubAccountFuturesAssetTransferRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
-                futuresType: 789,
-                asset: 'asset_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
+                futuresType: 1,
+                asset: 'BTC',
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -2708,10 +2435,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when fromEmail is missing', async () => {
             const _params: SubAccountFuturesAssetTransferRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
-                futuresType: 789,
-                asset: 'asset_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
+                futuresType: 1,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2724,10 +2451,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when toEmail is missing', async () => {
             const _params: SubAccountFuturesAssetTransferRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
-                futuresType: 789,
-                asset: 'asset_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
+                futuresType: 1,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2740,10 +2467,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when futuresType is missing', async () => {
             const _params: SubAccountFuturesAssetTransferRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
-                futuresType: 789,
-                asset: 'asset_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
+                futuresType: 1,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2756,10 +2483,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: SubAccountFuturesAssetTransferRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
-                futuresType: 789,
-                asset: 'asset_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
+                futuresType: 1,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2772,10 +2499,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: SubAccountFuturesAssetTransferRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
-                futuresType: 789,
-                asset: 'asset_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
+                futuresType: 1,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2788,10 +2515,10 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SubAccountFuturesAssetTransferRequest = {
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
-                futuresType: 789,
-                asset: 'asset_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
+                futuresType: 1,
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -2830,18 +2557,6 @@ describe('AssetManagementApi', () => {
                         tranId: 11798835829,
                         time: 1544433325000,
                     },
-                    {
-                        counterParty: 'subAccount',
-                        email: 'sub2@test.com',
-                        type: 1,
-                        asset: 'ETH',
-                        qty: '2',
-                        fromAccountType: 'SPOT',
-                        toAccountType: 'COIN_FUTURE',
-                        status: 'SUCCESS',
-                        tranId: 11798829519,
-                        time: 1544433326000,
-                    },
                 ])
             );
 
@@ -2861,11 +2576,11 @@ describe('AssetManagementApi', () => {
 
         it('should execute subAccountTransferHistory() successfully with optional parameters', async () => {
             const params: SubAccountTransferHistoryRequest = {
-                asset: 'asset_example',
-                type: 789,
+                asset: 'BTC',
+                type: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 1,
+                limit: 10,
                 returnFailHistory: false,
                 recvWindow: 5000,
             };
@@ -2883,18 +2598,6 @@ describe('AssetManagementApi', () => {
                         status: 'SUCCESS',
                         tranId: 11798835829,
                         time: 1544433325000,
-                    },
-                    {
-                        counterParty: 'subAccount',
-                        email: 'sub2@test.com',
-                        type: 1,
-                        asset: 'ETH',
-                        qty: '2',
-                        fromAccountType: 'SPOT',
-                        toAccountType: 'COIN_FUTURE',
-                        status: 'SUCCESS',
-                        tranId: 11798829519,
-                        time: 1544433326000,
                     },
                 ])
             );
@@ -2934,7 +2637,7 @@ describe('AssetManagementApi', () => {
     describe('transferToMaster()', () => {
         it('should execute transferToMaster() successfully with required parameters only', async () => {
             const params: TransferToMasterRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -2956,7 +2659,7 @@ describe('AssetManagementApi', () => {
 
         it('should execute transferToMaster() successfully with optional parameters', async () => {
             const params: TransferToMasterRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -2979,7 +2682,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: TransferToMasterRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2992,7 +2695,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: TransferToMasterRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3005,7 +2708,7 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: TransferToMasterRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -3027,8 +2730,8 @@ describe('AssetManagementApi', () => {
     describe('transferToSubAccountOfSameMaster()', () => {
         it('should execute transferToSubAccountOfSameMaster() successfully with required parameters only', async () => {
             const params: TransferToSubAccountOfSameMasterRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -3050,8 +2753,8 @@ describe('AssetManagementApi', () => {
 
         it('should execute transferToSubAccountOfSameMaster() successfully with optional parameters', async () => {
             const params: TransferToSubAccountOfSameMasterRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -3074,8 +2777,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when toEmail is missing', async () => {
             const _params: TransferToSubAccountOfSameMasterRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3088,8 +2791,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: TransferToSubAccountOfSameMasterRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3102,8 +2805,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: TransferToSubAccountOfSameMasterRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3116,8 +2819,8 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: TransferToSubAccountOfSameMasterRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -3143,9 +2846,9 @@ describe('AssetManagementApi', () => {
     describe('universalTransfer()', () => {
         it('should execute universalTransfer() successfully with required parameters only', async () => {
             const params: UniversalTransferRequest = {
-                fromAccountType: 'fromAccountType_example',
-                toAccountType: 'toAccountType_example',
-                asset: 'asset_example',
+                fromAccountType: UniversalTransferFromAccountTypeEnum.SPOT,
+                toAccountType: UniversalTransferToAccountTypeEnum.SPOT,
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -3167,14 +2870,14 @@ describe('AssetManagementApi', () => {
 
         it('should execute universalTransfer() successfully with optional parameters', async () => {
             const params: UniversalTransferRequest = {
-                fromAccountType: 'fromAccountType_example',
-                toAccountType: 'toAccountType_example',
-                asset: 'asset_example',
+                fromAccountType: UniversalTransferFromAccountTypeEnum.SPOT,
+                toAccountType: UniversalTransferToAccountTypeEnum.SPOT,
+                asset: 'BTC',
                 amount: 1.0,
-                fromEmail: 'fromEmail_example',
-                toEmail: 'toEmail_example',
+                fromEmail: 'abc@test.com',
+                toEmail: 'def@test.com',
                 clientTranId: '1',
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -3196,9 +2899,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when fromAccountType is missing', async () => {
             const _params: UniversalTransferRequest = {
-                fromAccountType: 'fromAccountType_example',
-                toAccountType: 'toAccountType_example',
-                asset: 'asset_example',
+                fromAccountType: UniversalTransferFromAccountTypeEnum.SPOT,
+                toAccountType: UniversalTransferToAccountTypeEnum.SPOT,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3211,9 +2914,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when toAccountType is missing', async () => {
             const _params: UniversalTransferRequest = {
-                fromAccountType: 'fromAccountType_example',
-                toAccountType: 'toAccountType_example',
-                asset: 'asset_example',
+                fromAccountType: UniversalTransferFromAccountTypeEnum.SPOT,
+                toAccountType: UniversalTransferToAccountTypeEnum.SPOT,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3226,9 +2929,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: UniversalTransferRequest = {
-                fromAccountType: 'fromAccountType_example',
-                toAccountType: 'toAccountType_example',
-                asset: 'asset_example',
+                fromAccountType: UniversalTransferFromAccountTypeEnum.SPOT,
+                toAccountType: UniversalTransferToAccountTypeEnum.SPOT,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3241,9 +2944,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: UniversalTransferRequest = {
-                fromAccountType: 'fromAccountType_example',
-                toAccountType: 'toAccountType_example',
-                asset: 'asset_example',
+                fromAccountType: UniversalTransferFromAccountTypeEnum.SPOT,
+                toAccountType: UniversalTransferToAccountTypeEnum.SPOT,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3256,9 +2959,9 @@ describe('AssetManagementApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: UniversalTransferRequest = {
-                fromAccountType: 'fromAccountType_example',
-                toAccountType: 'toAccountType_example',
-                asset: 'asset_example',
+                fromAccountType: UniversalTransferFromAccountTypeEnum.SPOT,
+                toAccountType: UniversalTransferToAccountTypeEnum.SPOT,
+                asset: 'BTC',
                 amount: 1.0,
             };
 

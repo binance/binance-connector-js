@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -21,8 +20,11 @@ import {
 } from '@binance/common';
 import type {
     AddIpRestrictionForSubAccountApiKeyResponse,
+    CreateSubAccountApiKeyResponse,
     DeleteIpListForASubAccountApiKeyResponse,
     GetIpRestrictionForASubAccountApiKeyResponse,
+    ModifySubAccountApiKeyPermissionResponse,
+    QuerySubAccountApiKeyResponse,
 } from '../types';
 
 /**
@@ -33,14 +35,17 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Add IP Restriction for Sub-Account API key
          *
-         * You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
+         * Weight(UID): 3000
          *
-         * Weight: 3000
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
          *
          * @summary Add IP Restriction for Sub-Account API key (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {string} subAccountApiKey
-         * @param {string} status IP Restriction status. 1 = IP Unrestricted. 2 = Restrict access to trusted IPs only.
+         * @param {number | bigint} status IP Restriction status. 1 = IP Unrestricted. 2 = Restrict access to trusted IPs only.
          * @param {string} [ipAddress] Insert static IP in batch, separated by commas.
          * @param {number | bigint} [recvWindow]
          *
@@ -49,7 +54,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
         addIpRestrictionForSubAccountApiKey: async (
             email: string,
             subAccountApiKey: string,
-            status: string,
+            status: number | bigint,
             ipAddress?: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -97,14 +102,120 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             };
         },
         /**
+         * Create a new API Key for a sub-account.
+         *
+         * Weight(UID): 3000
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - `status=2` requires `ipAddress`
+         * - `status=3` requires `thirdPartyName`
+         * - Asset Sub Account is not supported
+         * - The caller must pass the KYC IP restriction check
+         *
+         * @summary Create Sub-account API Key (For Master Account) (USER_DATA)
+         * @param {string} email Sub-account email
+         * @param {string} apiName API Key name
+         * @param {number | bigint} status IP restriction status. 1 = unrestricted, 2 = restricted to trusted IPs, 3 = third-party IP restriction
+         * @param {boolean} [canTrade] Spot & Margin trading permission, default false
+         * @param {boolean} [canMarginLoanRepay] Margin borrow/repay permission, default false
+         * @param {boolean} [canFuturesTrade] Futures trading permission, default false
+         * @param {boolean} [canUniversalTransfer] Universal transfer permission, default false
+         * @param {boolean} [canVanillaOptions] Vanilla options permission, default false
+         * @param {string} [ipAddress] Required when status=2. IP address list, max 500 chars
+         * @param {string} [thirdPartyName] Required when status=3. Third-party name
+         * @param {string} [publicKey] Ed25519 public key (optional, for Ed25519 type API Key)
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        createSubAccountApiKey: async (
+            email: string,
+            apiName: string,
+            status: number | bigint,
+            canTrade?: boolean,
+            canMarginLoanRepay?: boolean,
+            canFuturesTrade?: boolean,
+            canUniversalTransfer?: boolean,
+            canVanillaOptions?: boolean,
+            ipAddress?: string,
+            thirdPartyName?: string,
+            publicKey?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('createSubAccountApiKey', 'email', email);
+            // verify required parameter 'apiName' is not null or undefined
+            assertParamExists('createSubAccountApiKey', 'apiName', apiName);
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('createSubAccountApiKey', 'status', status);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (email !== undefined && email !== null) {
+                localVarQueryParameter['email'] = email;
+            }
+            if (apiName !== undefined && apiName !== null) {
+                localVarQueryParameter['apiName'] = apiName;
+            }
+            if (status !== undefined && status !== null) {
+                localVarQueryParameter['status'] = status;
+            }
+            if (canTrade !== undefined && canTrade !== null) {
+                localVarQueryParameter['canTrade'] = canTrade;
+            }
+            if (canMarginLoanRepay !== undefined && canMarginLoanRepay !== null) {
+                localVarQueryParameter['canMarginLoanRepay'] = canMarginLoanRepay;
+            }
+            if (canFuturesTrade !== undefined && canFuturesTrade !== null) {
+                localVarQueryParameter['canFuturesTrade'] = canFuturesTrade;
+            }
+            if (canUniversalTransfer !== undefined && canUniversalTransfer !== null) {
+                localVarQueryParameter['canUniversalTransfer'] = canUniversalTransfer;
+            }
+            if (canVanillaOptions !== undefined && canVanillaOptions !== null) {
+                localVarQueryParameter['canVanillaOptions'] = canVanillaOptions;
+            }
+            if (ipAddress !== undefined && ipAddress !== null) {
+                localVarQueryParameter['ipAddress'] = ipAddress;
+            }
+            if (thirdPartyName !== undefined && thirdPartyName !== null) {
+                localVarQueryParameter['thirdPartyName'] = thirdPartyName;
+            }
+            if (publicKey !== undefined && publicKey !== null) {
+                localVarQueryParameter['publicKey'] = publicKey;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/sub-account/subAccountApi',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Delete IP List For a Sub-account API Key
          *
-         * You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
+         * Weight(UID): 3000
          *
-         * Weight: 3000
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
          *
          * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {string} subAccountApiKey
          * @param {string} ipAddress IPs to be deleted. Can be added in batches, separated by commas
          * @param {number | bigint} [recvWindow]
@@ -158,12 +269,68 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             };
         },
         /**
+         * Delete an API Key of a sub-account.
+         *
+         * Weight(UID): 3000
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Asset Sub Account is not supported
+         * - The caller must pass the KYC IP restriction check
+         *
+         * @summary Delete Sub-account API Key (For Master Account) (USER_DATA)
+         * @param {string} email Sub-account email
+         * @param {string} subAccountApiKey The sub-account API Key to be deleted
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        deleteSubAccountApiKey: async (
+            email: string,
+            subAccountApiKey: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('deleteSubAccountApiKey', 'email', email);
+            // verify required parameter 'subAccountApiKey' is not null or undefined
+            assertParamExists('deleteSubAccountApiKey', 'subAccountApiKey', subAccountApiKey);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (email !== undefined && email !== null) {
+                localVarQueryParameter['email'] = email;
+            }
+            if (subAccountApiKey !== undefined && subAccountApiKey !== null) {
+                localVarQueryParameter['subAccountApiKey'] = subAccountApiKey;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/sub-account/subAccountApi',
+                method: 'DELETE',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Get IP Restriction for a Sub-account API Key
          *
-         * Weight: 3000
+         * Weight(UID): 3000
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {string} subAccountApiKey
          * @param {number | bigint} [recvWindow]
          *
@@ -209,6 +376,148 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
                 timeUnit: _timeUnit,
             };
         },
+        /**
+         * Modify the trading permissions of a sub-account API Key.
+         *
+         * Weight(UID): 3000
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Portfolio Margin Retail User is not supported
+         * - Asset Sub Account is not supported
+         * - The caller must pass the KYC IP restriction check
+         *
+         * @summary Modify Sub-account API Key Permission (For Master Account) (USER_DATA)
+         * @param {string} email Sub-account email
+         * @param {string} subAccountApiKey Sub-account API Key
+         * @param {boolean} [canTrade] Spot & Margin trading permission
+         * @param {boolean} [canMarginLoanRepay] Margin borrow/repay permission
+         * @param {boolean} [canFuturesTrade] Futures trading permission
+         * @param {boolean} [canUniversalTransfer] Universal transfer permission
+         * @param {boolean} [canVanillaOptions] Vanilla options permission
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        modifySubAccountApiKeyPermission: async (
+            email: string,
+            subAccountApiKey: string,
+            canTrade?: boolean,
+            canMarginLoanRepay?: boolean,
+            canFuturesTrade?: boolean,
+            canUniversalTransfer?: boolean,
+            canVanillaOptions?: boolean,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('modifySubAccountApiKeyPermission', 'email', email);
+            // verify required parameter 'subAccountApiKey' is not null or undefined
+            assertParamExists(
+                'modifySubAccountApiKeyPermission',
+                'subAccountApiKey',
+                subAccountApiKey
+            );
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (email !== undefined && email !== null) {
+                localVarQueryParameter['email'] = email;
+            }
+            if (subAccountApiKey !== undefined && subAccountApiKey !== null) {
+                localVarQueryParameter['subAccountApiKey'] = subAccountApiKey;
+            }
+            if (canTrade !== undefined && canTrade !== null) {
+                localVarQueryParameter['canTrade'] = canTrade;
+            }
+            if (canMarginLoanRepay !== undefined && canMarginLoanRepay !== null) {
+                localVarQueryParameter['canMarginLoanRepay'] = canMarginLoanRepay;
+            }
+            if (canFuturesTrade !== undefined && canFuturesTrade !== null) {
+                localVarQueryParameter['canFuturesTrade'] = canFuturesTrade;
+            }
+            if (canUniversalTransfer !== undefined && canUniversalTransfer !== null) {
+                localVarQueryParameter['canUniversalTransfer'] = canUniversalTransfer;
+            }
+            if (canVanillaOptions !== undefined && canVanillaOptions !== null) {
+                localVarQueryParameter['canVanillaOptions'] = canVanillaOptions;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/sub-account/subAccountApiPermission',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query the API Key list of a sub-account.
+         *
+         * Weight(UID): 3000
+         *
+         * Security Type: USER_DATA
+         *
+         * @summary Query Sub-account API Key (For Master Account) (USER_DATA)
+         * @param {string} email Sub-account email
+         * @param {string} [subAccountApiKey] Specify an API Key for exact match
+         * @param {number | bigint} [page] Page number, default 1, minimum 1
+         * @param {number | bigint} [size] Page size, default 30, maximum 100
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        querySubAccountApiKey: async (
+            email: string,
+            subAccountApiKey?: string,
+            page?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('querySubAccountApiKey', 'email', email);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (email !== undefined && email !== null) {
+                localVarQueryParameter['email'] = email;
+            }
+            if (subAccountApiKey !== undefined && subAccountApiKey !== null) {
+                localVarQueryParameter['subAccountApiKey'] = subAccountApiKey;
+            }
+            if (page !== undefined && page !== null) {
+                localVarQueryParameter['page'] = page;
+            }
+            if (size !== undefined && size !== null) {
+                localVarQueryParameter['size'] = size;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/sub-account/subAccountApi',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
     };
 };
 
@@ -220,9 +529,12 @@ export interface ApiManagementApiInterface {
     /**
      * Add IP Restriction for Sub-Account API key
      *
-     * You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
      *
      * @summary Add IP Restriction for Sub-Account API key (For Master Account) (USER_DATA)
      * @param {AddIpRestrictionForSubAccountApiKeyRequest} requestParameters Request parameters.
@@ -234,11 +546,36 @@ export interface ApiManagementApiInterface {
         requestParameters: AddIpRestrictionForSubAccountApiKeyRequest
     ): Promise<RestApiResponse<AddIpRestrictionForSubAccountApiKeyResponse>>;
     /**
+     * Create a new API Key for a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `status=2` requires `ipAddress`
+     * - `status=3` requires `thirdPartyName`
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Create Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {CreateSubAccountApiKeyRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApiInterface
+     */
+    createSubAccountApiKey(
+        requestParameters: CreateSubAccountApiKeyRequest
+    ): Promise<RestApiResponse<CreateSubAccountApiKeyResponse>>;
+    /**
      * Delete IP List For a Sub-account API Key
      *
-     * You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
      *
      * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {DeleteIpListForASubAccountApiKeyRequest} requestParameters Request parameters.
@@ -250,9 +587,31 @@ export interface ApiManagementApiInterface {
         requestParameters: DeleteIpListForASubAccountApiKeyRequest
     ): Promise<RestApiResponse<DeleteIpListForASubAccountApiKeyResponse>>;
     /**
+     * Delete an API Key of a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Delete Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {DeleteSubAccountApiKeyRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApiInterface
+     */
+    deleteSubAccountApiKey(
+        requestParameters: DeleteSubAccountApiKeyRequest
+    ): Promise<RestApiResponse<object>>;
+    /**
      * Get IP Restriction for a Sub-account API Key
      *
-     * Weight: 3000
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {GetIpRestrictionForASubAccountApiKeyRequest} requestParameters Request parameters.
@@ -263,6 +622,43 @@ export interface ApiManagementApiInterface {
     getIpRestrictionForASubAccountApiKey(
         requestParameters: GetIpRestrictionForASubAccountApiKeyRequest
     ): Promise<RestApiResponse<GetIpRestrictionForASubAccountApiKeyResponse>>;
+    /**
+     * Modify the trading permissions of a sub-account API Key.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Portfolio Margin Retail User is not supported
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Modify Sub-account API Key Permission (For Master Account) (USER_DATA)
+     * @param {ModifySubAccountApiKeyPermissionRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApiInterface
+     */
+    modifySubAccountApiKeyPermission(
+        requestParameters: ModifySubAccountApiKeyPermissionRequest
+    ): Promise<RestApiResponse<ModifySubAccountApiKeyPermissionResponse>>;
+    /**
+     * Query the API Key list of a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {QuerySubAccountApiKeyRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApiInterface
+     */
+    querySubAccountApiKey(
+        requestParameters: QuerySubAccountApiKeyRequest
+    ): Promise<RestApiResponse<QuerySubAccountApiKeyResponse>>;
 }
 
 /**
@@ -271,7 +667,7 @@ export interface ApiManagementApiInterface {
  */
 export interface AddIpRestrictionForSubAccountApiKeyRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ApiManagementApiAddIpRestrictionForSubAccountApiKey
      */
@@ -286,10 +682,10 @@ export interface AddIpRestrictionForSubAccountApiKeyRequest {
 
     /**
      * IP Restriction status. 1 = IP Unrestricted. 2 = Restrict access to trusted IPs only.
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ApiManagementApiAddIpRestrictionForSubAccountApiKey
      */
-    readonly status: string;
+    readonly status: number | bigint;
 
     /**
      * Insert static IP in batch, separated by commas.
@@ -307,12 +703,102 @@ export interface AddIpRestrictionForSubAccountApiKeyRequest {
 }
 
 /**
+ * Request parameters for createSubAccountApiKey operation in ApiManagementApi.
+ * @interface CreateSubAccountApiKeyRequest
+ */
+export interface CreateSubAccountApiKeyRequest {
+    /**
+     * Sub-account email
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly email: string;
+
+    /**
+     * API Key name
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly apiName: string;
+
+    /**
+     * IP restriction status. 1 = unrestricted, 2 = restricted to trusted IPs, 3 = third-party IP restriction
+     * @type {number | bigint}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly status: number | bigint;
+
+    /**
+     * Spot & Margin trading permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly canTrade?: boolean;
+
+    /**
+     * Margin borrow/repay permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly canMarginLoanRepay?: boolean;
+
+    /**
+     * Futures trading permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly canFuturesTrade?: boolean;
+
+    /**
+     * Universal transfer permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly canUniversalTransfer?: boolean;
+
+    /**
+     * Vanilla options permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly canVanillaOptions?: boolean;
+
+    /**
+     * Required when status=2. IP address list, max 500 chars
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly ipAddress?: string;
+
+    /**
+     * Required when status=3. Third-party name
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly thirdPartyName?: string;
+
+    /**
+     * Ed25519 public key (optional, for Ed25519 type API Key)
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly publicKey?: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for deleteIpListForASubAccountApiKey operation in ApiManagementApi.
  * @interface DeleteIpListForASubAccountApiKeyRequest
  */
 export interface DeleteIpListForASubAccountApiKeyRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ApiManagementApiDeleteIpListForASubAccountApiKey
      */
@@ -341,12 +827,39 @@ export interface DeleteIpListForASubAccountApiKeyRequest {
 }
 
 /**
+ * Request parameters for deleteSubAccountApiKey operation in ApiManagementApi.
+ * @interface DeleteSubAccountApiKeyRequest
+ */
+export interface DeleteSubAccountApiKeyRequest {
+    /**
+     * Sub-account email
+     * @type {string}
+     * @memberof ApiManagementApiDeleteSubAccountApiKey
+     */
+    readonly email: string;
+
+    /**
+     * The sub-account API Key to be deleted
+     * @type {string}
+     * @memberof ApiManagementApiDeleteSubAccountApiKey
+     */
+    readonly subAccountApiKey: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof ApiManagementApiDeleteSubAccountApiKey
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for getIpRestrictionForASubAccountApiKey operation in ApiManagementApi.
  * @interface GetIpRestrictionForASubAccountApiKeyRequest
  */
 export interface GetIpRestrictionForASubAccountApiKeyRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ApiManagementApiGetIpRestrictionForASubAccountApiKey
      */
@@ -368,6 +881,109 @@ export interface GetIpRestrictionForASubAccountApiKeyRequest {
 }
 
 /**
+ * Request parameters for modifySubAccountApiKeyPermission operation in ApiManagementApi.
+ * @interface ModifySubAccountApiKeyPermissionRequest
+ */
+export interface ModifySubAccountApiKeyPermissionRequest {
+    /**
+     * Sub-account email
+     * @type {string}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly email: string;
+
+    /**
+     * Sub-account API Key
+     * @type {string}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly subAccountApiKey: string;
+
+    /**
+     * Spot & Margin trading permission
+     * @type {boolean}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly canTrade?: boolean;
+
+    /**
+     * Margin borrow/repay permission
+     * @type {boolean}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly canMarginLoanRepay?: boolean;
+
+    /**
+     * Futures trading permission
+     * @type {boolean}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly canFuturesTrade?: boolean;
+
+    /**
+     * Universal transfer permission
+     * @type {boolean}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly canUniversalTransfer?: boolean;
+
+    /**
+     * Vanilla options permission
+     * @type {boolean}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly canVanillaOptions?: boolean;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for querySubAccountApiKey operation in ApiManagementApi.
+ * @interface QuerySubAccountApiKeyRequest
+ */
+export interface QuerySubAccountApiKeyRequest {
+    /**
+     * Sub-account email
+     * @type {string}
+     * @memberof ApiManagementApiQuerySubAccountApiKey
+     */
+    readonly email: string;
+
+    /**
+     * Specify an API Key for exact match
+     * @type {string}
+     * @memberof ApiManagementApiQuerySubAccountApiKey
+     */
+    readonly subAccountApiKey?: string;
+
+    /**
+     * Page number, default 1, minimum 1
+     * @type {number | bigint}
+     * @memberof ApiManagementApiQuerySubAccountApiKey
+     */
+    readonly page?: number | bigint;
+
+    /**
+     * Page size, default 30, maximum 100
+     * @type {number | bigint}
+     * @memberof ApiManagementApiQuerySubAccountApiKey
+     */
+    readonly size?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof ApiManagementApiQuerySubAccountApiKey
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * ApiManagementApi - object-oriented interface
  * @class ApiManagementApi
  */
@@ -383,16 +999,19 @@ export class ApiManagementApi implements ApiManagementApiInterface {
     /**
      * Add IP Restriction for Sub-Account API key
      *
-     * You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
      *
      * @summary Add IP Restriction for Sub-Account API key (For Master Account) (USER_DATA)
      * @param {AddIpRestrictionForSubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AddIpRestrictionForSubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ApiManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/api-management/Add-IP-Restriction-for-Sub-Account-API-key Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#add-ip-restriction-for-sub-account-api-key Binance API Documentation}
      */
     public async addIpRestrictionForSubAccountApiKey(
         requestParameters: AddIpRestrictionForSubAccountApiKeyRequest
@@ -418,18 +1037,70 @@ export class ApiManagementApi implements ApiManagementApiInterface {
     }
 
     /**
+     * Create a new API Key for a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `status=2` requires `ipAddress`
+     * - `status=3` requires `thirdPartyName`
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Create Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {CreateSubAccountApiKeyRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<CreateSubAccountApiKeyResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#create-sub-account-api-key Binance API Documentation}
+     */
+    public async createSubAccountApiKey(
+        requestParameters: CreateSubAccountApiKeyRequest
+    ): Promise<RestApiResponse<CreateSubAccountApiKeyResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.createSubAccountApiKey(
+            requestParameters?.email,
+            requestParameters?.apiName,
+            requestParameters?.status,
+            requestParameters?.canTrade,
+            requestParameters?.canMarginLoanRepay,
+            requestParameters?.canFuturesTrade,
+            requestParameters?.canUniversalTransfer,
+            requestParameters?.canVanillaOptions,
+            requestParameters?.ipAddress,
+            requestParameters?.thirdPartyName,
+            requestParameters?.publicKey,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<CreateSubAccountApiKeyResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Delete IP List For a Sub-account API Key
      *
-     * You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
      *
      * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {DeleteIpListForASubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DeleteIpListForASubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ApiManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/api-management/Delete-IP-List-For-a-Sub-account-API-Key Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#delete-ip-list-for-asub-account-api-key Binance API Documentation}
      */
     public async deleteIpListForASubAccountApiKey(
         requestParameters: DeleteIpListForASubAccountApiKeyRequest
@@ -454,16 +1125,56 @@ export class ApiManagementApi implements ApiManagementApiInterface {
     }
 
     /**
+     * Delete an API Key of a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Delete Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {DeleteSubAccountApiKeyRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<object>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#delete-sub-account-api-key Binance API Documentation}
+     */
+    public async deleteSubAccountApiKey(
+        requestParameters: DeleteSubAccountApiKeyRequest
+    ): Promise<RestApiResponse<object>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.deleteSubAccountApiKey(
+            requestParameters?.email,
+            requestParameters?.subAccountApiKey,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<object>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Get IP Restriction for a Sub-account API Key
      *
-     * Weight: 3000
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {GetIpRestrictionForASubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetIpRestrictionForASubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ApiManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/api-management/Get-IP-Restriction-for-a-Sub-account-API-Key Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#get-ip-restriction-for-asub-account-api-key Binance API Documentation}
      */
     public async getIpRestrictionForASubAccountApiKey(
         requestParameters: GetIpRestrictionForASubAccountApiKeyRequest
@@ -475,6 +1186,87 @@ export class ApiManagementApi implements ApiManagementApiInterface {
                 requestParameters?.recvWindow
             );
         return sendRequest<GetIpRestrictionForASubAccountApiKeyResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Modify the trading permissions of a sub-account API Key.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Portfolio Margin Retail User is not supported
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Modify Sub-account API Key Permission (For Master Account) (USER_DATA)
+     * @param {ModifySubAccountApiKeyPermissionRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<ModifySubAccountApiKeyPermissionResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#modify-sub-account-api-key-permission Binance API Documentation}
+     */
+    public async modifySubAccountApiKeyPermission(
+        requestParameters: ModifySubAccountApiKeyPermissionRequest
+    ): Promise<RestApiResponse<ModifySubAccountApiKeyPermissionResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.modifySubAccountApiKeyPermission(
+                requestParameters?.email,
+                requestParameters?.subAccountApiKey,
+                requestParameters?.canTrade,
+                requestParameters?.canMarginLoanRepay,
+                requestParameters?.canFuturesTrade,
+                requestParameters?.canUniversalTransfer,
+                requestParameters?.canVanillaOptions,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<ModifySubAccountApiKeyPermissionResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Query the API Key list of a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {QuerySubAccountApiKeyRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QuerySubAccountApiKeyResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#query-sub-account-api-key Binance API Documentation}
+     */
+    public async querySubAccountApiKey(
+        requestParameters: QuerySubAccountApiKeyRequest
+    ): Promise<RestApiResponse<QuerySubAccountApiKeyResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.querySubAccountApiKey(
+            requestParameters?.email,
+            requestParameters?.subAccountApiKey,
+            requestParameters?.page,
+            requestParameters?.size,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<QuerySubAccountApiKeyResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

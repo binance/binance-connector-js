@@ -10,10 +10,10 @@ const client = new SubAccount({ configurationRestAPI });
 async function subAccountFuturesAssetTransfer() {
     try {
         const response = await client.restAPI.subAccountFuturesAssetTransfer({
-            fromEmail: 'fromEmail_example',
-            toEmail: 'toEmail_example',
-            futuresType: 789,
-            asset: 'asset_example',
+            fromEmail: 'abc@test.com',
+            toEmail: 'def@test.com',
+            futuresType: 1,
+            asset: 'BTC',
             amount: 1.0,
         });
 

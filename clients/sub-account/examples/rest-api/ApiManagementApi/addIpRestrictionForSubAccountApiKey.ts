@@ -10,9 +10,9 @@ const client = new SubAccount({ configurationRestAPI });
 async function addIpRestrictionForSubAccountApiKey() {
     try {
         const response = await client.restAPI.addIpRestrictionForSubAccountApiKey({
-            email: 'sub-account-email@email.com',
-            subAccountApiKey: 'subAccountApiKey_example',
-            status: 'status_example',
+            email: '123@test.com',
+            subAccountApiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+            status: 1,
         });
 
         const rateLimits = response.rateLimits!;

@@ -10,8 +10,8 @@ const client = new SubAccount({ configurationRestAPI });
 async function depositAssetsIntoTheManagedSubAccount() {
     try {
         const response = await client.restAPI.depositAssetsIntoTheManagedSubAccount({
-            toEmail: 'toEmail_example',
-            asset: 'asset_example',
+            toEmail: 'abc@test.com',
+            asset: 'BTC',
             amount: 1.0,
         });
 

@@ -10,7 +10,7 @@ const client = new SubAccount({ configurationRestAPI });
 async function createAVirtualSubAccount() {
     try {
         const response = await client.restAPI.createAVirtualSubAccount({
-            subAccountString: 'subAccountString_example',
+            subAccountString: 'testSubAccount',
         });
 
         const rateLimits = response.rateLimits!;

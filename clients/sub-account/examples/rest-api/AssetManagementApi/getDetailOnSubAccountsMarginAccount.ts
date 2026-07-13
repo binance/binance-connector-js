@@ -10,7 +10,7 @@ const client = new SubAccount({ configurationRestAPI });
 async function getDetailOnSubAccountsMarginAccount() {
     try {
         const response = await client.restAPI.getDetailOnSubAccountsMarginAccount({
-            email: 'sub-account-email@email.com',
+            email: '123@test.com',
         });
 
         const rateLimits = response.rateLimits!;

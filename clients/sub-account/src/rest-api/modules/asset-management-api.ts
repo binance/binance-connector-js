@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -54,15 +53,21 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Futures Transfer for Sub-account
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
          *
          * @summary Futures Transfer for Sub-account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
-         * @param {string} asset
-         * @param {number} amount
-         * @param {number | bigint} type 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
+         * @param {string} email
+         * @param {string} asset The asset being transferred
+         * @param {number} amount The amount to be transferred
+         * @param {number | bigint} type 1: transfer from subaccount's spot account to its USDT-margined futures account 2: transfer from
+         * subaccount's USDT-margined futures account to its spot account 3: transfer from subaccount's spot
+         * account to its COIN-margined futures account 4:transfer from subaccount's COIN-margined futures
+         * account to its spot account
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -118,10 +123,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Get Detail on Sub-account's Futures Account
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -159,10 +166,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Get Detail on Sub-account's Futures Account
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
          * @param {number | bigint} [recvWindow]
          *
@@ -207,10 +216,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Get Detail on Sub-account's Margin Account
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -248,15 +259,18 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Query move position history
          *
-         * If `startTime` and `endTime` not sent, return records of the last 90 days by default with 1000 maximum limits
-         * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
-         * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 1000 records).
+         * - If `startTime` is sent and `endTime` is omitted, records in `[max(startTime, now-90d), now]` are returned.
+         * - If `startTime` is omitted and `endTime` is sent, records in `[max(now, endTime-90d), endTime]` are returned.
          *
          * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
          * @param {string} symbol
-         * @param {number | bigint} page Page
+         * @param {number | bigint} page
          * @param {number | bigint} rows
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
@@ -317,12 +331,15 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Fetch sub-account deposit address
          *
-         * `amount` needs to be sent if using LIGHTNING network
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - `amount` needs to be sent if using LIGHTNING network
          *
          * @summary Get Sub-account Deposit Address (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {string} coin
          * @param {string} [network] networks can be found in `GET /sapi/v1/capital/deposit/address`
          * @param {number} [amount]
@@ -377,17 +394,19 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Fetch sub-account deposit history
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
-         * @param {boolean} [includeSource] Default: `false`, return `sourceAddress`field when set to `true`
+         * @param {string} email
+         * @param {boolean} [includeSource] Default `false`, return `sourceAddress` field when set to `true`
          * @param {string} [coin]
-         * @param {number | bigint} [status] 0(0:pending,6: credited but cannot withdraw,7:Wrong Deposit,8:Waiting User confirm,1:success)
+         * @param {number | bigint} [status] Deposit status: 0=pending, 6=credited but cannot withdraw, 7=wrong deposit, 8=waiting user confirmation, 1=success.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
-         * @param {number | bigint} [offset] default:0
+         * @param {number | bigint} [limit]
+         * @param {number | bigint} [offset]
          * @param {number | bigint} [recvWindow]
          * @param {string} [txId]
          *
@@ -458,11 +477,13 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Get Summary of Sub-account's Futures Account
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
-         * @param {number | bigint} page Page
-         * @param {number | bigint} limit Limit (Max: 500)
+         * @param {number | bigint} page
+         * @param {number | bigint} limit
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -506,12 +527,14 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Get Summary of Sub-account's Futures Account
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
          * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
-         * @param {number | bigint} [page] Default value: 1
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -561,7 +584,9 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Get Summary of Sub-account's Margin Account
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -594,15 +619,19 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Margin Transfer for Sub-account
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
          *
          * @summary Margin Transfer for Sub-account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
-         * @param {string} asset
-         * @param {number} amount
-         * @param {number | bigint} type 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
+         * @param {string} email
+         * @param {string} asset The asset being transferred
+         * @param {number} amount The amount to be transferred
+         * @param {number | bigint} type 1: transfer from subaccount's spot account to margin account 2: transfer from subaccount's margin
+         * account to its spot account
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -658,25 +687,34 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Move position between sub-master, master-sub, or sub-sub accounts when necessary
          *
-         * You need to Enable Trading permission for the API Key which requests this endpoint.
-         * This function only support VIP level 7-9.
-         * Only master account can use the function
-         * Quantity should be positive number only
-         * The function support normal account, PM PRO, PM PRO SPAN and PM Retail.
-         * Only support for from account has positions
-         * For all orders in the same orderArgs request, if any symbol’s total close position quantity is bigger than the symbol’s current position quantity, all batch orders in the same list will fail simultaneously.
-         * Only support cross margin mode
-         * The price for move position is MarkPrice only.
-         * Not support for MSA.
-         * Not support for the symbol under Reduce-Only.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to enable the `Trading` permission for the API key used to call this endpoint.
+         * - This function is only available for VIP levels 7-9.
+         * - Only master accounts can call this endpoint.
+         * - `quantity` must be a positive number.
+         * - Supported account types: normal account, PM PRO, PM PRO SPAN, and PM Retail.
+         * - The source account must have positions.
+         * - For orders in the same `orderArgs` request, if any symbol's total close position quantity exceeds current position quantity, all orders in that batch fail.
+         * - Only cross margin mode is supported.
+         * - The move position price supports `MARK_PRICE` only.
+         * - MSA is not supported.
+         * - Symbols configured with `Reduce-Only` are not supported.
          *
          * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
          * @param {string} fromUserEmail
          * @param {string} toUserEmail
-         * @param {string} productType Only support UM
-         * @param {Array<MovePositionForSubAccountOrderArgsParameterInner>} orderArgs Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING, orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide support BOTH,LONG and SHORT. Each entry should be like orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001 orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01 orderArgs[1].positionSide=BOTH
+         * @param {MovePositionForSubAccountProductTypeEnum} productType
+         * @param {Array<MovePositionForSubAccountOrderArgsParameterInner>} orderArgs Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING,
+         * orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide
+         * support BOTH,LONG and SHORT. Each entry should be like
+         * orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of
+         * the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001
+         * orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01
+         * orderArgs[1].positionSide=BOTH
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -684,7 +722,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         movePositionForSubAccount: async (
             fromUserEmail: string,
             toUserEmail: string,
-            productType: string,
+            productType: MovePositionForSubAccountProductTypeEnum,
             orderArgs: Array<MovePositionForSubAccountOrderArgsParameterInner>,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -732,10 +770,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Fetch sub-account assets
          *
-         * Weight: 60
+         * Weight(UID): 60
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -773,10 +813,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Fetch sub-account assets
          *
-         * Weight: 60
+         * Weight(UID): 60
          *
-         * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * Security Type: USER_DATA
+         *
+         * @summary Query Sub-account Assets V4 (For Master Account) (USER_DATA)
+         * @param {string} email
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -814,15 +856,17 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Query Sub-account Futures Asset Transfer History
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
-         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [startTime] Cannot be earlier than 1 month ago
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [page] Default value: 1
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -886,18 +930,21 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Query Sub-account Spot Asset Transfer History
          *
-         * fromEmail and toEmail cannot be sent at the same time.
-         * Return fromEmail equal master account email by default.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - `fromEmail` and `toEmail` cannot be sent at the same time.
+         * - If both `fromEmail` and `toEmail` are omitted, records with `fromEmail` equal to the master account are returned by default.
          *
          * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
          * @param {string} [fromEmail]
          * @param {string} [toEmail]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [page] Default value: 1
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -952,12 +999,14 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Get BTC valued asset summary of subaccounts.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
-         * @param {number | bigint} [page] Default value: 1
-         * @param {number | bigint} [size] default 10, max 20
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [size]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1000,12 +1049,15 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Query Universal Transfer History
          *
-         * fromEmail and toEmail cannot be sent at the same time.
-         * Return fromEmail equal master account email by default.
-         * The query time period must be less than 7 days.
-         * If startTime and endTime not sent, return records of the last 7 days by default.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - `fromEmail` and `toEmail` cannot be sent at the same time.
+         * - If both `fromEmail` and `toEmail` are omitted, records with `fromEmail` equal to the master account are returned by default.
+         * - The query time range must be less than 7 days.
+         * - If `startTime` and `endTime` are omitted, records from the last 7 days are returned by default.
          *
          * @summary Query Universal Transfer History (For Master Account) (USER_DATA)
          * @param {string} [fromEmail]
@@ -1013,8 +1065,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} [clientTranId]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [page] Default value: 1
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1073,15 +1125,17 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Sub-account Futures Asset Transfer
          *
+         * Weight(IP): 1
          *
-         * Master account can transfer max 2000 times a minute
-         * There must be sufficient margin balance in futures wallet to execute transferring.
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - A master account can transfer at most 2000 times per minute.
+         * - The futures wallet must have sufficient margin balance to execute the transfer.
          *
          * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
-         * @param {string} fromEmail
-         * @param {string} toEmail
+         * @param {string} fromEmail Sender email
+         * @param {string} toEmail Recipient email
          * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
          * @param {string} asset
          * @param {number} amount
@@ -1146,18 +1200,22 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Sub-account Transfer History
          *
-         * If type is not sent, the records of type 2: transfer out will be returned by default.
-         * If startTime and endTime are not sent, the recent 30-day data will be returned.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `type` is not sent, records of type `2` (transfer out) are returned by default.
+         * - If `startTime` and `endTime` are not sent, data from the most recent 30 days is returned.
          *
          * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
          * @param {string} [asset] If not sent, result of all assets will be returned
          * @param {number | bigint} [type] 1: transfer in, 2: transfer out
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
-         * @param {boolean} [returnFailHistory] Default `False`, return PROCESS and SUCCESS status history; If `True`,return PROCESS and SUCCESS and FAILURE status history
+         * @param {number | bigint} [limit]
+         * @param {boolean} [returnFailHistory] Default `False`, return PROCESS and SUCCESS status history; If `True`,return PROCESS and SUCCESS and FAILURE
+         * status history
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1212,9 +1270,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Transfer to Master
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
          *
          * @summary Transfer to Master (For Sub-account) (USER_DATA)
          * @param {string} asset
@@ -1262,9 +1323,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Transfer to Sub-account of Same Master
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
          *
          * @summary Transfer to Sub-account of Same Master (For Sub-account) (USER_DATA)
          * @param {string} toEmail
@@ -1319,36 +1383,41 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Universal Transfer
          *
-         * You need to enable "internal transfer" option for the api key which requests this endpoint.
-         * Transfer from master account by default if fromEmail is not sent.
-         * Transfer to master account by default if toEmail is not sent.
-         * At least either fromEmail or toEmail need to be sent when the fromAccountType and the toAccountType are the same.
-         * Supported transfer scenarios:
-         * `SPOT` transfer to `SPOT`, `USDT_FUTURE`, `COIN_FUTURE` (regardless of master or sub)
-         * `SPOT`, `USDT_FUTURE`, `COIN_FUTURE` transfer to `SPOT`  (regardless of master or sub)
-         * Master account `SPOT` transfer to sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN`
-         * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
-         * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
-         * `ALPHA` to `ALPHA`  (regardless of master or sub)
+         * Weight(IP): 1
          *
-         * Weight: 360
+         * Weight(UID): 360
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to enable the `internal transfer` option for the API key used to call this endpoint.
+         * - If `fromEmail` is not sent, transfer out from the master account by default.
+         * - If `toEmail` is not sent, transfer into the master account by default.
+         * - When `fromAccountType` and `toAccountType` are the same, at least one of `fromEmail` or `toEmail` must be sent.
+         * - Supported transfer scenarios:
+         * - `SPOT` -> `SPOT` / `USDT_FUTURE` / `COIN_FUTURE` (master or sub-account).
+         * - `SPOT` / `USDT_FUTURE` / `COIN_FUTURE` -> `SPOT` (master or sub-account).
+         * - Master account `SPOT` -> sub-account `MARGIN(Cross)` / `ISOLATED_MARGIN`.
+         * - Sub-account `MARGIN(Cross)` / `ISOLATED_MARGIN` -> master account `SPOT`.
+         * - Sub-account `MARGIN(Cross)` -> sub-account `MARGIN(Cross)`.
+         * - `ALPHA` -> `ALPHA` (master or sub-account).
          *
          * @summary Universal Transfer (For Master Account) (USER_DATA)
-         * @param {string} fromAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
-         * @param {string} toAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
+         * @param {UniversalTransferFromAccountTypeEnum} fromAccountType
+         * @param {UniversalTransferToAccountTypeEnum} toAccountType
          * @param {string} asset
          * @param {number} amount
          * @param {string} [fromEmail]
          * @param {string} [toEmail]
-         * @param {string} [clientTranId]
+         * @param {string} [clientTranId] Must be unique
          * @param {string} [symbol] Only supported under ISOLATED_MARGIN type
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         universalTransfer: async (
-            fromAccountType: string,
-            toAccountType: string,
+            fromAccountType: UniversalTransferFromAccountTypeEnum,
+            toAccountType: UniversalTransferToAccountTypeEnum,
             asset: string,
             amount: number,
             fromEmail?: string,
@@ -1421,9 +1490,12 @@ export interface AssetManagementApiInterface {
     /**
      * Futures Transfer for Sub-account
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Futures Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {FuturesTransferForSubAccountRequest} requestParameters Request parameters.
@@ -1437,7 +1509,9 @@ export interface AssetManagementApiInterface {
     /**
      * Get Detail on Sub-account's Futures Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountRequest} requestParameters Request parameters.
@@ -1451,7 +1525,9 @@ export interface AssetManagementApiInterface {
     /**
      * Get Detail on Sub-account's Futures Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
@@ -1465,7 +1541,9 @@ export interface AssetManagementApiInterface {
     /**
      * Get Detail on Sub-account's Margin Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsMarginAccountRequest} requestParameters Request parameters.
@@ -1479,11 +1557,14 @@ export interface AssetManagementApiInterface {
     /**
      * Query move position history
      *
-     * If `startTime` and `endTime` not sent, return records of the last 90 days by default with 1000 maximum limits
-     * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
-     * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 1000 records).
+     * - If `startTime` is sent and `endTime` is omitted, records in `[max(startTime, now-90d), now]` are returned.
+     * - If `startTime` is omitted and `endTime` is sent, records in `[max(now, endTime-90d), endTime]` are returned.
      *
      * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
      * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
@@ -1497,9 +1578,12 @@ export interface AssetManagementApiInterface {
     /**
      * Fetch sub-account deposit address
      *
-     * `amount` needs to be sent if using LIGHTNING network
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `amount` needs to be sent if using LIGHTNING network
      *
      * @summary Get Sub-account Deposit Address (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositAddressRequest} requestParameters Request parameters.
@@ -1513,7 +1597,9 @@ export interface AssetManagementApiInterface {
     /**
      * Fetch sub-account deposit history
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositHistoryRequest} requestParameters Request parameters.
@@ -1527,7 +1613,9 @@ export interface AssetManagementApiInterface {
     /**
      * Get Summary of Sub-account's Futures Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountRequest} requestParameters Request parameters.
@@ -1541,7 +1629,9 @@ export interface AssetManagementApiInterface {
     /**
      * Get Summary of Sub-account's Futures Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
@@ -1555,7 +1645,9 @@ export interface AssetManagementApiInterface {
     /**
      * Get Summary of Sub-account's Margin Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsMarginAccountRequest} requestParameters Request parameters.
@@ -1569,9 +1661,12 @@ export interface AssetManagementApiInterface {
     /**
      * Margin Transfer for Sub-account
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Margin Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {MarginTransferForSubAccountRequest} requestParameters Request parameters.
@@ -1585,19 +1680,22 @@ export interface AssetManagementApiInterface {
     /**
      * Move position between sub-master, master-sub, or sub-sub accounts when necessary
      *
-     * You need to Enable Trading permission for the API Key which requests this endpoint.
-     * This function only support VIP level 7-9.
-     * Only master account can use the function
-     * Quantity should be positive number only
-     * The function support normal account, PM PRO, PM PRO SPAN and PM Retail.
-     * Only support for from account has positions
-     * For all orders in the same orderArgs request, if any symbol’s total close position quantity is bigger than the symbol’s current position quantity, all batch orders in the same list will fail simultaneously.
-     * Only support cross margin mode
-     * The price for move position is MarkPrice only.
-     * Not support for MSA.
-     * Not support for the symbol under Reduce-Only.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable the `Trading` permission for the API key used to call this endpoint.
+     * - This function is only available for VIP levels 7-9.
+     * - Only master accounts can call this endpoint.
+     * - `quantity` must be a positive number.
+     * - Supported account types: normal account, PM PRO, PM PRO SPAN, and PM Retail.
+     * - The source account must have positions.
+     * - For orders in the same `orderArgs` request, if any symbol's total close position quantity exceeds current position quantity, all orders in that batch fail.
+     * - Only cross margin mode is supported.
+     * - The move position price supports `MARK_PRICE` only.
+     * - MSA is not supported.
+     * - Symbols configured with `Reduce-Only` are not supported.
      *
      * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
      * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
@@ -1611,7 +1709,9 @@ export interface AssetManagementApiInterface {
     /**
      * Fetch sub-account assets
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsRequest} requestParameters Request parameters.
@@ -1625,9 +1725,11 @@ export interface AssetManagementApiInterface {
     /**
      * Fetch sub-account assets
      *
-     * Weight: 60
+     * Weight(UID): 60
      *
-     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Sub-account Assets V4 (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsAssetManagementRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1639,7 +1741,9 @@ export interface AssetManagementApiInterface {
     /**
      * Query Sub-account Futures Asset Transfer History
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountFuturesAssetTransferHistoryRequest} requestParameters Request parameters.
@@ -1653,10 +1757,13 @@ export interface AssetManagementApiInterface {
     /**
      * Query Sub-account Spot Asset Transfer History
      *
-     * fromEmail and toEmail cannot be sent at the same time.
-     * Return fromEmail equal master account email by default.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `fromEmail` and `toEmail` cannot be sent at the same time.
+     * - If both `fromEmail` and `toEmail` are omitted, records with `fromEmail` equal to the master account are returned by default.
      *
      * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetTransferHistoryRequest} requestParameters Request parameters.
@@ -1670,7 +1777,9 @@ export interface AssetManagementApiInterface {
     /**
      * Get BTC valued asset summary of subaccounts.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetsSummaryRequest} requestParameters Request parameters.
@@ -1684,12 +1793,15 @@ export interface AssetManagementApiInterface {
     /**
      * Query Universal Transfer History
      *
-     * fromEmail and toEmail cannot be sent at the same time.
-     * Return fromEmail equal master account email by default.
-     * The query time period must be less than 7 days.
-     * If startTime and endTime not sent, return records of the last 7 days by default.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `fromEmail` and `toEmail` cannot be sent at the same time.
+     * - If both `fromEmail` and `toEmail` are omitted, records with `fromEmail` equal to the master account are returned by default.
+     * - The query time range must be less than 7 days.
+     * - If `startTime` and `endTime` are omitted, records from the last 7 days are returned by default.
      *
      * @summary Query Universal Transfer History (For Master Account) (USER_DATA)
      * @param {QueryUniversalTransferHistoryRequest} requestParameters Request parameters.
@@ -1703,11 +1815,13 @@ export interface AssetManagementApiInterface {
     /**
      * Sub-account Futures Asset Transfer
      *
+     * Weight(IP): 1
      *
-     * Master account can transfer max 2000 times a minute
-     * There must be sufficient margin balance in futures wallet to execute transferring.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - A master account can transfer at most 2000 times per minute.
+     * - The futures wallet must have sufficient margin balance to execute the transfer.
      *
      * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
      * @param {SubAccountFuturesAssetTransferRequest} requestParameters Request parameters.
@@ -1721,10 +1835,13 @@ export interface AssetManagementApiInterface {
     /**
      * Sub-account Transfer History
      *
-     * If type is not sent, the records of type 2: transfer out will be returned by default.
-     * If startTime and endTime are not sent, the recent 30-day data will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `type` is not sent, records of type `2` (transfer out) are returned by default.
+     * - If `startTime` and `endTime` are not sent, data from the most recent 30 days is returned.
      *
      * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
      * @param {SubAccountTransferHistoryRequest} requestParameters Request parameters.
@@ -1738,9 +1855,12 @@ export interface AssetManagementApiInterface {
     /**
      * Transfer to Master
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Transfer to Master (For Sub-account) (USER_DATA)
      * @param {TransferToMasterRequest} requestParameters Request parameters.
@@ -1754,9 +1874,12 @@ export interface AssetManagementApiInterface {
     /**
      * Transfer to Sub-account of Same Master
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Transfer to Sub-account of Same Master (For Sub-account) (USER_DATA)
      * @param {TransferToSubAccountOfSameMasterRequest} requestParameters Request parameters.
@@ -1770,19 +1893,24 @@ export interface AssetManagementApiInterface {
     /**
      * Universal Transfer
      *
-     * You need to enable "internal transfer" option for the api key which requests this endpoint.
-     * Transfer from master account by default if fromEmail is not sent.
-     * Transfer to master account by default if toEmail is not sent.
-     * At least either fromEmail or toEmail need to be sent when the fromAccountType and the toAccountType are the same.
-     * Supported transfer scenarios:
-     * `SPOT` transfer to `SPOT`, `USDT_FUTURE`, `COIN_FUTURE` (regardless of master or sub)
-     * `SPOT`, `USDT_FUTURE`, `COIN_FUTURE` transfer to `SPOT`  (regardless of master or sub)
-     * Master account `SPOT` transfer to sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN`
-     * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
-     * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
-     * `ALPHA` to `ALPHA`  (regardless of master or sub)
+     * Weight(IP): 1
      *
-     * Weight: 360
+     * Weight(UID): 360
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable the `internal transfer` option for the API key used to call this endpoint.
+     * - If `fromEmail` is not sent, transfer out from the master account by default.
+     * - If `toEmail` is not sent, transfer into the master account by default.
+     * - When `fromAccountType` and `toAccountType` are the same, at least one of `fromEmail` or `toEmail` must be sent.
+     * - Supported transfer scenarios:
+     * - `SPOT` -> `SPOT` / `USDT_FUTURE` / `COIN_FUTURE` (master or sub-account).
+     * - `SPOT` / `USDT_FUTURE` / `COIN_FUTURE` -> `SPOT` (master or sub-account).
+     * - Master account `SPOT` -> sub-account `MARGIN(Cross)` / `ISOLATED_MARGIN`.
+     * - Sub-account `MARGIN(Cross)` / `ISOLATED_MARGIN` -> master account `SPOT`.
+     * - Sub-account `MARGIN(Cross)` -> sub-account `MARGIN(Cross)`.
+     * - `ALPHA` -> `ALPHA` (master or sub-account).
      *
      * @summary Universal Transfer (For Master Account) (USER_DATA)
      * @param {UniversalTransferRequest} requestParameters Request parameters.
@@ -1801,28 +1929,31 @@ export interface AssetManagementApiInterface {
  */
 export interface FuturesTransferForSubAccountRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiFuturesTransferForSubAccount
      */
     readonly email: string;
 
     /**
-     *
+     * The asset being transferred
      * @type {string}
      * @memberof AssetManagementApiFuturesTransferForSubAccount
      */
     readonly asset: string;
 
     /**
-     *
+     * The amount to be transferred
      * @type {number}
      * @memberof AssetManagementApiFuturesTransferForSubAccount
      */
     readonly amount: number;
 
     /**
-     * 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
+     * 1: transfer from subaccount's spot account to its USDT-margined futures account 2: transfer from
+     * subaccount's USDT-margined futures account to its spot account 3: transfer from subaccount's spot
+     * account to its COIN-margined futures account 4:transfer from subaccount's COIN-margined futures
+     * account to its spot account
      * @type {number | bigint}
      * @memberof AssetManagementApiFuturesTransferForSubAccount
      */
@@ -1842,7 +1973,7 @@ export interface FuturesTransferForSubAccountRequest {
  */
 export interface GetDetailOnSubAccountsFuturesAccountRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiGetDetailOnSubAccountsFuturesAccount
      */
@@ -1862,7 +1993,7 @@ export interface GetDetailOnSubAccountsFuturesAccountRequest {
  */
 export interface GetDetailOnSubAccountsFuturesAccountV2Request {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiGetDetailOnSubAccountsFuturesAccountV2
      */
@@ -1889,7 +2020,7 @@ export interface GetDetailOnSubAccountsFuturesAccountV2Request {
  */
 export interface GetDetailOnSubAccountsMarginAccountRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiGetDetailOnSubAccountsMarginAccount
      */
@@ -1916,7 +2047,7 @@ export interface GetMovePositionHistoryForSubAccountRequest {
     readonly symbol: string;
 
     /**
-     * Page
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
      */
@@ -1957,7 +2088,7 @@ export interface GetMovePositionHistoryForSubAccountRequest {
  */
 export interface GetSubAccountDepositAddressRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiGetSubAccountDepositAddress
      */
@@ -1998,14 +2129,14 @@ export interface GetSubAccountDepositAddressRequest {
  */
 export interface GetSubAccountDepositHistoryRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
     readonly email: string;
 
     /**
-     * Default: `false`, return `sourceAddress`field when set to `true`
+     * Default `false`, return `sourceAddress` field when set to `true`
      * @type {boolean}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
@@ -2019,7 +2150,7 @@ export interface GetSubAccountDepositHistoryRequest {
     readonly coin?: string;
 
     /**
-     * 0(0:pending,6: credited but cannot withdraw,7:Wrong Deposit,8:Waiting User confirm,1:success)
+     * Deposit status: 0=pending, 6=credited but cannot withdraw, 7=wrong deposit, 8=waiting user confirmation, 1=success.
      * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
@@ -2040,14 +2171,14 @@ export interface GetSubAccountDepositHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     * default:0
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
@@ -2074,14 +2205,14 @@ export interface GetSubAccountDepositHistoryRequest {
  */
 export interface GetSummaryOfSubAccountsFuturesAccountRequest {
     /**
-     * Page
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccount
      */
     readonly page: number | bigint;
 
     /**
-     * Limit (Max: 500)
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccount
      */
@@ -2108,14 +2239,14 @@ export interface GetSummaryOfSubAccountsFuturesAccountV2Request {
     readonly futuresType: number | bigint;
 
     /**
-     * Default value: 1
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccountV2
      */
     readonly page?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccountV2
      */
@@ -2148,28 +2279,29 @@ export interface GetSummaryOfSubAccountsMarginAccountRequest {
  */
 export interface MarginTransferForSubAccountRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiMarginTransferForSubAccount
      */
     readonly email: string;
 
     /**
-     *
+     * The asset being transferred
      * @type {string}
      * @memberof AssetManagementApiMarginTransferForSubAccount
      */
     readonly asset: string;
 
     /**
-     *
+     * The amount to be transferred
      * @type {number}
      * @memberof AssetManagementApiMarginTransferForSubAccount
      */
     readonly amount: number;
 
     /**
-     * 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
+     * 1: transfer from subaccount's spot account to margin account 2: transfer from subaccount's margin
+     * account to its spot account
      * @type {number | bigint}
      * @memberof AssetManagementApiMarginTransferForSubAccount
      */
@@ -2203,14 +2335,20 @@ export interface MovePositionForSubAccountRequest {
     readonly toUserEmail: string;
 
     /**
-     * Only support UM
-     * @type {string}
+     *
+     * @type {'UM'}
      * @memberof AssetManagementApiMovePositionForSubAccount
      */
-    readonly productType: string;
+    readonly productType: MovePositionForSubAccountProductTypeEnum;
 
     /**
-     * Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING, orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide support BOTH,LONG and SHORT. Each entry should be like orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001 orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01 orderArgs[1].positionSide=BOTH
+     * Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING,
+     * orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide
+     * support BOTH,LONG and SHORT. Each entry should be like
+     * orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of
+     * the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001
+     * orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01
+     * orderArgs[1].positionSide=BOTH
      * @type {Array<MovePositionForSubAccountOrderArgsParameterInner>}
      * @memberof AssetManagementApiMovePositionForSubAccount
      */
@@ -2230,7 +2368,7 @@ export interface MovePositionForSubAccountRequest {
  */
 export interface QuerySubAccountAssetsRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiQuerySubAccountAssets
      */
@@ -2250,7 +2388,7 @@ export interface QuerySubAccountAssetsRequest {
  */
 export interface QuerySubAccountAssetsAssetManagementRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiQuerySubAccountAssetsAssetManagement
      */
@@ -2270,7 +2408,7 @@ export interface QuerySubAccountAssetsAssetManagementRequest {
  */
 export interface QuerySubAccountFuturesAssetTransferHistoryRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
@@ -2284,7 +2422,7 @@ export interface QuerySubAccountFuturesAssetTransferHistoryRequest {
     readonly futuresType: number | bigint;
 
     /**
-     *
+     * Cannot be earlier than 1 month ago
      * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
@@ -2298,14 +2436,14 @@ export interface QuerySubAccountFuturesAssetTransferHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default value: 1
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
     readonly page?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
@@ -2353,14 +2491,14 @@ export interface QuerySubAccountSpotAssetTransferHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default value: 1
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetTransferHistory
      */
     readonly page?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetTransferHistory
      */
@@ -2387,14 +2525,14 @@ export interface QuerySubAccountSpotAssetsSummaryRequest {
     readonly email?: string;
 
     /**
-     * Default value: 1
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetsSummary
      */
     readonly page?: number | bigint;
 
     /**
-     * default 10, max 20
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetsSummary
      */
@@ -2449,14 +2587,14 @@ export interface QueryUniversalTransferHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default value: 1
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiQueryUniversalTransferHistory
      */
     readonly page?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiQueryUniversalTransferHistory
      */
@@ -2476,14 +2614,14 @@ export interface QueryUniversalTransferHistoryRequest {
  */
 export interface SubAccountFuturesAssetTransferRequest {
     /**
-     *
+     * Sender email
      * @type {string}
      * @memberof AssetManagementApiSubAccountFuturesAssetTransfer
      */
     readonly fromEmail: string;
 
     /**
-     *
+     * Recipient email
      * @type {string}
      * @memberof AssetManagementApiSubAccountFuturesAssetTransfer
      */
@@ -2552,14 +2690,15 @@ export interface SubAccountTransferHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountTransferHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     * Default `False`, return PROCESS and SUCCESS status history; If `True`,return PROCESS and SUCCESS and FAILURE status history
+     * Default `False`, return PROCESS and SUCCESS status history; If `True`,return PROCESS and SUCCESS and FAILURE
+     * status history
      * @type {boolean}
      * @memberof AssetManagementApiSubAccountTransferHistory
      */
@@ -2640,18 +2779,18 @@ export interface TransferToSubAccountOfSameMasterRequest {
  */
 export interface UniversalTransferRequest {
     /**
-     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
-     * @type {string}
+     *
+     * @type {'SPOT' | 'USDT_FUTURE' | 'COIN_FUTURE' | 'MARGIN' | 'ISOLATED_MARGIN'}
      * @memberof AssetManagementApiUniversalTransfer
      */
-    readonly fromAccountType: string;
+    readonly fromAccountType: UniversalTransferFromAccountTypeEnum;
 
     /**
-     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
-     * @type {string}
+     *
+     * @type {'SPOT' | 'USDT_FUTURE' | 'COIN_FUTURE' | 'MARGIN' | 'ISOLATED_MARGIN'}
      * @memberof AssetManagementApiUniversalTransfer
      */
-    readonly toAccountType: string;
+    readonly toAccountType: UniversalTransferToAccountTypeEnum;
 
     /**
      *
@@ -2682,7 +2821,7 @@ export interface UniversalTransferRequest {
     readonly toEmail?: string;
 
     /**
-     *
+     * Must be unique
      * @type {string}
      * @memberof AssetManagementApiUniversalTransfer
      */
@@ -2719,16 +2858,19 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Futures Transfer for Sub-account
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Futures Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {FuturesTransferForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FuturesTransferForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Futures-Transfer-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#futures-transfer-for-sub-account Binance API Documentation}
      */
     public async futuresTransferForSubAccount(
         requestParameters: FuturesTransferForSubAccountRequest
@@ -2755,14 +2897,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Get Detail on Sub-account's Futures Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsFuturesAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Detail-on-Sub-accounts-Futures-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-detail-on-sub-accounts-futures-account Binance API Documentation}
      */
     public async getDetailOnSubAccountsFuturesAccount(
         requestParameters: GetDetailOnSubAccountsFuturesAccountRequest
@@ -2787,14 +2931,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Get Detail on Sub-account's Futures Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsFuturesAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Detail-on-Sub-accounts-Futures-Account-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-detail-on-sub-accounts-futures-account-v2 Binance API Documentation}
      */
     public async getDetailOnSubAccountsFuturesAccountV2(
         requestParameters: GetDetailOnSubAccountsFuturesAccountV2Request
@@ -2820,14 +2966,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Get Detail on Sub-account's Margin Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Detail-on-Sub-accounts-Margin-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-detail-on-sub-accounts-margin-account Binance API Documentation}
      */
     public async getDetailOnSubAccountsMarginAccount(
         requestParameters: GetDetailOnSubAccountsMarginAccountRequest
@@ -2852,18 +3000,21 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Query move position history
      *
-     * If `startTime` and `endTime` not sent, return records of the last 90 days by default with 1000 maximum limits
-     * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
-     * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 1000 records).
+     * - If `startTime` is sent and `endTime` is omitted, records in `[max(startTime, now-90d), now]` are returned.
+     * - If `startTime` is omitted and `endTime` is sent, records in `[max(now, endTime-90d), endTime]` are returned.
      *
      * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
      * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Move-Position-History-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-move-position-history-for-sub-account Binance API Documentation}
      */
     public async getMovePositionHistoryForSubAccount(
         requestParameters: GetMovePositionHistoryForSubAccountRequest
@@ -2892,16 +3043,19 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Fetch sub-account deposit address
      *
-     * `amount` needs to be sent if using LIGHTNING network
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `amount` needs to be sent if using LIGHTNING network
      *
      * @summary Get Sub-account Deposit Address (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositAddressRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountDepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Sub-account-Deposit-Address Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-sub-account-deposit-address Binance API Documentation}
      */
     public async getSubAccountDepositAddress(
         requestParameters: GetSubAccountDepositAddressRequest
@@ -2928,14 +3082,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Fetch sub-account deposit history
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountDepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Sub-account-Deposit-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-sub-account-deposit-history Binance API Documentation}
      */
     public async getSubAccountDepositHistory(
         requestParameters: GetSubAccountDepositHistoryRequest
@@ -2967,14 +3123,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Get Summary of Sub-account's Futures Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Summary-of-Sub-accounts-Futures-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-summary-of-sub-accounts-futures-account Binance API Documentation}
      */
     public async getSummaryOfSubAccountsFuturesAccount(
         requestParameters: GetSummaryOfSubAccountsFuturesAccountRequest
@@ -3000,14 +3158,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Get Summary of Sub-account's Futures Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Summary-of-Sub-accounts-Futures-Account-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-summary-of-sub-accounts-futures-account-v2 Binance API Documentation}
      */
     public async getSummaryOfSubAccountsFuturesAccountV2(
         requestParameters: GetSummaryOfSubAccountsFuturesAccountV2Request
@@ -3034,14 +3194,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Get Summary of Sub-account's Margin Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Summary-of-Sub-accounts-Margin-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-summary-of-sub-accounts-margin-account Binance API Documentation}
      */
     public async getSummaryOfSubAccountsMarginAccount(
         requestParameters: GetSummaryOfSubAccountsMarginAccountRequest = {}
@@ -3065,16 +3227,19 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Margin Transfer for Sub-account
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Margin Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {MarginTransferForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginTransferForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Margin-Transfer-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#margin-transfer-for-sub-account Binance API Documentation}
      */
     public async marginTransferForSubAccount(
         requestParameters: MarginTransferForSubAccountRequest
@@ -3101,26 +3266,29 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Move position between sub-master, master-sub, or sub-sub accounts when necessary
      *
-     * You need to Enable Trading permission for the API Key which requests this endpoint.
-     * This function only support VIP level 7-9.
-     * Only master account can use the function
-     * Quantity should be positive number only
-     * The function support normal account, PM PRO, PM PRO SPAN and PM Retail.
-     * Only support for from account has positions
-     * For all orders in the same orderArgs request, if any symbol’s total close position quantity is bigger than the symbol’s current position quantity, all batch orders in the same list will fail simultaneously.
-     * Only support cross margin mode
-     * The price for move position is MarkPrice only.
-     * Not support for MSA.
-     * Not support for the symbol under Reduce-Only.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable the `Trading` permission for the API key used to call this endpoint.
+     * - This function is only available for VIP levels 7-9.
+     * - Only master accounts can call this endpoint.
+     * - `quantity` must be a positive number.
+     * - Supported account types: normal account, PM PRO, PM PRO SPAN, and PM Retail.
+     * - The source account must have positions.
+     * - For orders in the same `orderArgs` request, if any symbol's total close position quantity exceeds current position quantity, all orders in that batch fail.
+     * - Only cross margin mode is supported.
+     * - The move position price supports `MARK_PRICE` only.
+     * - MSA is not supported.
+     * - Symbols configured with `Reduce-Only` are not supported.
      *
      * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
      * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MovePositionForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Move-Position-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#move-position-for-sub-account Binance API Documentation}
      */
     public async movePositionForSubAccount(
         requestParameters: MovePositionForSubAccountRequest
@@ -3147,14 +3315,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Fetch sub-account assets
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Assets-V4 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-assets Binance API Documentation}
      */
     public async querySubAccountAssets(
         requestParameters: QuerySubAccountAssetsRequest
@@ -3178,14 +3348,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Fetch sub-account assets
      *
-     * Weight: 60
+     * Weight(UID): 60
      *
-     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Sub-account Assets V4 (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsAssetManagementRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountAssetsAssetManagementResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Assets-V4 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-assets-asset-management Binance API Documentation}
      */
     public async querySubAccountAssetsAssetManagement(
         requestParameters: QuerySubAccountAssetsAssetManagementRequest
@@ -3210,14 +3382,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Query Sub-account Futures Asset Transfer History
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountFuturesAssetTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountFuturesAssetTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Futures-Asset-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-futures-asset-transfer-history Binance API Documentation}
      */
     public async querySubAccountFuturesAssetTransferHistory(
         requestParameters: QuerySubAccountFuturesAssetTransferHistoryRequest
@@ -3247,17 +3421,20 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Query Sub-account Spot Asset Transfer History
      *
-     * fromEmail and toEmail cannot be sent at the same time.
-     * Return fromEmail equal master account email by default.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `fromEmail` and `toEmail` cannot be sent at the same time.
+     * - If both `fromEmail` and `toEmail` are omitted, records with `fromEmail` equal to the master account are returned by default.
      *
      * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountSpotAssetTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Spot-Asset-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-spot-asset-transfer-history Binance API Documentation}
      */
     public async querySubAccountSpotAssetTransferHistory(
         requestParameters: QuerySubAccountSpotAssetTransferHistoryRequest = {}
@@ -3287,14 +3464,16 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Get BTC valued asset summary of subaccounts.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetsSummaryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountSpotAssetsSummaryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Spot-Assets-Summary Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-spot-assets-summary Binance API Documentation}
      */
     public async querySubAccountSpotAssetsSummary(
         requestParameters: QuerySubAccountSpotAssetsSummaryRequest = {}
@@ -3321,19 +3500,22 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Query Universal Transfer History
      *
-     * fromEmail and toEmail cannot be sent at the same time.
-     * Return fromEmail equal master account email by default.
-     * The query time period must be less than 7 days.
-     * If startTime and endTime not sent, return records of the last 7 days by default.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `fromEmail` and `toEmail` cannot be sent at the same time.
+     * - If both `fromEmail` and `toEmail` are omitted, records with `fromEmail` equal to the master account are returned by default.
+     * - The query time range must be less than 7 days.
+     * - If `startTime` and `endTime` are omitted, records from the last 7 days are returned by default.
      *
      * @summary Query Universal Transfer History (For Master Account) (USER_DATA)
      * @param {QueryUniversalTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUniversalTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Universal-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-universal-transfer-history Binance API Documentation}
      */
     public async queryUniversalTransferHistory(
         requestParameters: QueryUniversalTransferHistoryRequest = {}
@@ -3364,18 +3546,20 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Sub-account Futures Asset Transfer
      *
+     * Weight(IP): 1
      *
-     * Master account can transfer max 2000 times a minute
-     * There must be sufficient margin balance in futures wallet to execute transferring.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - A master account can transfer at most 2000 times per minute.
+     * - The futures wallet must have sufficient margin balance to execute the transfer.
      *
      * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
      * @param {SubAccountFuturesAssetTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubAccountFuturesAssetTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Sub-account-Futures-Asset-Transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#sub-account-futures-asset-transfer Binance API Documentation}
      */
     public async subAccountFuturesAssetTransfer(
         requestParameters: SubAccountFuturesAssetTransferRequest
@@ -3404,17 +3588,20 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Sub-account Transfer History
      *
-     * If type is not sent, the records of type 2: transfer out will be returned by default.
-     * If startTime and endTime are not sent, the recent 30-day data will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `type` is not sent, records of type `2` (transfer out) are returned by default.
+     * - If `startTime` and `endTime` are not sent, data from the most recent 30 days is returned.
      *
      * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
      * @param {SubAccountTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubAccountTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Sub-account-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#sub-account-transfer-history Binance API Documentation}
      */
     public async subAccountTransferHistory(
         requestParameters: SubAccountTransferHistoryRequest = {}
@@ -3443,16 +3630,19 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Transfer to Master
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Transfer to Master (For Sub-account) (USER_DATA)
      * @param {TransferToMasterRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TransferToMasterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Transfer-to-Master Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#transfer-to-master Binance API Documentation}
      */
     public async transferToMaster(
         requestParameters: TransferToMasterRequest
@@ -3477,16 +3667,19 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Transfer to Sub-account of Same Master
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Transfer to Sub-account of Same Master (For Sub-account) (USER_DATA)
      * @param {TransferToSubAccountOfSameMasterRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TransferToSubAccountOfSameMasterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Transfer-to-Sub-account-of-Same-Master Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#transfer-to-sub-account-of-same-master Binance API Documentation}
      */
     public async transferToSubAccountOfSameMaster(
         requestParameters: TransferToSubAccountOfSameMasterRequest
@@ -3513,26 +3706,31 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     /**
      * Universal Transfer
      *
-     * You need to enable "internal transfer" option for the api key which requests this endpoint.
-     * Transfer from master account by default if fromEmail is not sent.
-     * Transfer to master account by default if toEmail is not sent.
-     * At least either fromEmail or toEmail need to be sent when the fromAccountType and the toAccountType are the same.
-     * Supported transfer scenarios:
-     * `SPOT` transfer to `SPOT`, `USDT_FUTURE`, `COIN_FUTURE` (regardless of master or sub)
-     * `SPOT`, `USDT_FUTURE`, `COIN_FUTURE` transfer to `SPOT`  (regardless of master or sub)
-     * Master account `SPOT` transfer to sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN`
-     * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
-     * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
-     * `ALPHA` to `ALPHA`  (regardless of master or sub)
+     * Weight(IP): 1
      *
-     * Weight: 360
+     * Weight(UID): 360
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable the `internal transfer` option for the API key used to call this endpoint.
+     * - If `fromEmail` is not sent, transfer out from the master account by default.
+     * - If `toEmail` is not sent, transfer into the master account by default.
+     * - When `fromAccountType` and `toAccountType` are the same, at least one of `fromEmail` or `toEmail` must be sent.
+     * - Supported transfer scenarios:
+     * - `SPOT` -> `SPOT` / `USDT_FUTURE` / `COIN_FUTURE` (master or sub-account).
+     * - `SPOT` / `USDT_FUTURE` / `COIN_FUTURE` -> `SPOT` (master or sub-account).
+     * - Master account `SPOT` -> sub-account `MARGIN(Cross)` / `ISOLATED_MARGIN`.
+     * - Sub-account `MARGIN(Cross)` / `ISOLATED_MARGIN` -> master account `SPOT`.
+     * - Sub-account `MARGIN(Cross)` -> sub-account `MARGIN(Cross)`.
+     * - `ALPHA` -> `ALPHA` (master or sub-account).
      *
      * @summary Universal Transfer (For Master Account) (USER_DATA)
      * @param {UniversalTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UniversalTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Universal-Transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#universal-transfer Binance API Documentation}
      */
     public async universalTransfer(
         requestParameters: UniversalTransferRequest
@@ -3559,4 +3757,24 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum MovePositionForSubAccountProductTypeEnum {
+    UM = 'UM',
+}
+
+export enum UniversalTransferFromAccountTypeEnum {
+    SPOT = 'SPOT',
+    USDT_FUTURE = 'USDT_FUTURE',
+    COIN_FUTURE = 'COIN_FUTURE',
+    MARGIN = 'MARGIN',
+    ISOLATED_MARGIN = 'ISOLATED_MARGIN',
+}
+
+export enum UniversalTransferToAccountTypeEnum {
+    SPOT = 'SPOT',
+    USDT_FUTURE = 'USDT_FUTURE',
+    COIN_FUTURE = 'COIN_FUTURE',
+    MARGIN = 'MARGIN',
+    ISOLATED_MARGIN = 'ISOLATED_MARGIN',
 }

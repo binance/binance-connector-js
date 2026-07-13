@@ -10,7 +10,7 @@ const client = new SubAccount({ configurationRestAPI });
 async function querySubAccountAssetsAssetManagement() {
     try {
         const response = await client.restAPI.querySubAccountAssetsAssetManagement({
-            email: 'sub-account-email@email.com',
+            email: '123@test.com',
         });
 
         const rateLimits = response.rateLimits!;

@@ -10,7 +10,7 @@ const client = new SubAccount({ configurationRestAPI });
 async function getFuturesPositionRiskOfSubAccount() {
     try {
         const response = await client.restAPI.getFuturesPositionRiskOfSubAccount({
-            email: 'sub-account-email@email.com',
+            email: '123@test.com',
         });
 
         const rateLimits = response.rateLimits!;

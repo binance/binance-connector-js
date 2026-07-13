@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryRespSubAccountListInner } from './get-summary-of-sub-accounts-futures-account-v2-response-future-account-summary-resp-sub-account-list-inner';
+import type { GetSummaryOfSubAccountsFuturesAccountResponseSubAccountListInner } from './get-summary-of-sub-accounts-futures-account-response-sub-account-list-inner';
 
 /**
  *
@@ -74,8 +74,8 @@ export interface GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSum
     asset?: string;
     /**
      *
-     * @type {Array<GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryRespSubAccountListInner>}
+     * @type {Array<GetSummaryOfSubAccountsFuturesAccountResponseSubAccountListInner>}
      * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
-    subAccountList?: Array<GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryRespSubAccountListInner>;
+    subAccountList?: Array<GetSummaryOfSubAccountsFuturesAccountResponseSubAccountListInner>;
 }

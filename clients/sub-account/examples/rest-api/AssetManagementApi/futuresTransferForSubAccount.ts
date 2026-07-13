@@ -10,10 +10,10 @@ const client = new SubAccount({ configurationRestAPI });
 async function futuresTransferForSubAccount() {
     try {
         const response = await client.restAPI.futuresTransferForSubAccount({
-            email: 'sub-account-email@email.com',
-            asset: 'asset_example',
+            email: '123@test.com',
+            asset: 'USDT',
             amount: 1.0,
-            type: 789,
+            type: 1,
         });
 
         const rateLimits = response.rateLimits!;

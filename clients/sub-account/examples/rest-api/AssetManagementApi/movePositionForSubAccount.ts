@@ -1,4 +1,4 @@
-import { SubAccount, SUB_ACCOUNT_REST_API_PROD_URL } from '../../../src';
+import { SubAccount, SubAccountRestAPI, SUB_ACCOUNT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,9 +10,9 @@ const client = new SubAccount({ configurationRestAPI });
 async function movePositionForSubAccount() {
     try {
         const response = await client.restAPI.movePositionForSubAccount({
-            fromUserEmail: 'fromUserEmail_example',
-            toUserEmail: 'toUserEmail_example',
-            productType: 'productType_example',
+            fromUserEmail: 'testFrom@google.com',
+            toUserEmail: 'testTo@google.com',
+            productType: SubAccountRestAPI.MovePositionForSubAccountProductTypeEnum.UM,
             orderArgs: [],
         });
 

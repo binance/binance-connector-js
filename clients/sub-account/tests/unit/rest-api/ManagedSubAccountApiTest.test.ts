@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,13 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { ManagedSubAccountApi } from '../../../src/rest-api';
+import {
+    ManagedSubAccountApi,
+    QueryManagedSubAccountSnapshotTypeEnum,
+    QueryManagedSubAccountTransferLogMasterAccountInvestorTransferFunctionAccountTypeEnum,
+    QueryManagedSubAccountTransferLogMasterAccountTradingTransferFunctionAccountTypeEnum,
+    QueryManagedSubAccountTransferLogSubAccountTradingTransferFunctionAccountTypeEnum,
+} from '../../../src/rest-api';
 import {
     DepositAssetsIntoTheManagedSubAccountRequest,
     GetManagedSubAccountDepositAddressRequest,
@@ -60,8 +66,8 @@ describe('ManagedSubAccountApi', () => {
     describe('depositAssetsIntoTheManagedSubAccount()', () => {
         it('should execute depositAssetsIntoTheManagedSubAccount() successfully with required parameters only', async () => {
             const params: DepositAssetsIntoTheManagedSubAccountRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -83,8 +89,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute depositAssetsIntoTheManagedSubAccount() successfully with optional parameters', async () => {
             const params: DepositAssetsIntoTheManagedSubAccountRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -107,8 +113,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when toEmail is missing', async () => {
             const _params: DepositAssetsIntoTheManagedSubAccountRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -121,8 +127,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: DepositAssetsIntoTheManagedSubAccountRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -135,8 +141,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: DepositAssetsIntoTheManagedSubAccountRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -149,8 +155,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: DepositAssetsIntoTheManagedSubAccountRequest = {
-                toEmail: 'toEmail_example',
-                asset: 'asset_example',
+                toEmail: 'abc@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -176,8 +182,8 @@ describe('ManagedSubAccountApi', () => {
     describe('getManagedSubAccountDepositAddress()', () => {
         it('should execute getManagedSubAccountDepositAddress() successfully with required parameters only', async () => {
             const params: GetManagedSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: 'abc@test.com',
+                coin: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -205,9 +211,9 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute getManagedSubAccountDepositAddress() successfully with optional parameters', async () => {
             const params: GetManagedSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
-                network: 'network_example',
+                email: 'abc@test.com',
+                coin: 'USDT',
+                network: 'LIGHTNING',
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -237,8 +243,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: GetManagedSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: 'abc@test.com',
+                coin: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -250,8 +256,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: GetManagedSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: 'abc@test.com',
+                coin: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.coin;
@@ -263,8 +269,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetManagedSubAccountDepositAddressRequest = {
-                email: 'sub-account-email@email.com',
-                coin: 'coin_example',
+                email: 'abc@test.com',
+                coin: 'USDT',
             };
 
             const errorResponse = {
@@ -289,7 +295,7 @@ describe('ManagedSubAccountApi', () => {
     describe('queryManagedSubAccountAssetDetails()', () => {
         it('should execute queryManagedSubAccountAssetDetails() successfully with required parameters only', async () => {
             const params: QueryManagedSubAccountAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
 
             mockResponse = JSONParse(
@@ -297,14 +303,6 @@ describe('ManagedSubAccountApi', () => {
                     {
                         coin: 'INJ',
                         name: 'Injective Protocol',
-                        totalBalance: '0',
-                        availableBalance: '0',
-                        inOrder: '0',
-                        btcValue: '0',
-                    },
-                    {
-                        coin: 'FILDOWN',
-                        name: 'FILDOWN',
                         totalBalance: '0',
                         availableBalance: '0',
                         inOrder: '0',
@@ -329,7 +327,7 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute queryManagedSubAccountAssetDetails() successfully with optional parameters', async () => {
             const params: QueryManagedSubAccountAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 recvWindow: 5000,
             };
 
@@ -338,14 +336,6 @@ describe('ManagedSubAccountApi', () => {
                     {
                         coin: 'INJ',
                         name: 'Injective Protocol',
-                        totalBalance: '0',
-                        availableBalance: '0',
-                        inOrder: '0',
-                        btcValue: '0',
-                    },
-                    {
-                        coin: 'FILDOWN',
-                        name: 'FILDOWN',
                         totalBalance: '0',
                         availableBalance: '0',
                         inOrder: '0',
@@ -370,7 +360,7 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QueryManagedSubAccountAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -382,7 +372,7 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryManagedSubAccountAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
 
             const errorResponse = {
@@ -407,7 +397,7 @@ describe('ManagedSubAccountApi', () => {
     describe('queryManagedSubAccountFuturesAssetDetails()', () => {
         it('should execute queryManagedSubAccountFuturesAssetDetails() successfully with required parameters only', async () => {
             const params: QueryManagedSubAccountFuturesAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
 
             mockResponse = JSONParse(
@@ -452,8 +442,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute queryManagedSubAccountFuturesAssetDetails() successfully with optional parameters', async () => {
             const params: QueryManagedSubAccountFuturesAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
-                accountType: 'accountType_example',
+                email: 'abc@test.com',
+                accountType: 'MARGIN',
             };
 
             mockResponse = JSONParse(
@@ -498,7 +488,7 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QueryManagedSubAccountFuturesAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -510,7 +500,7 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryManagedSubAccountFuturesAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
 
             const errorResponse = {
@@ -551,32 +541,6 @@ describe('ManagedSubAccountApi', () => {
                             isFutureEnabled: false,
                             isSignedLVTRiskAgreement: false,
                         },
-                        {
-                            rootUserId: 1000138475670,
-                            managersubUserId: 1000137842514,
-                            bindParentUserId: 1000138475669,
-                            email: 'test_1_virtual@4qd2u7zxmanagedsub.com',
-                            insertTimeStamp: 1678435152000,
-                            bindParentEmail: 'wdyw8xsh8pey@test.com',
-                            isSubUserEnabled: true,
-                            isUserActive: true,
-                            isMarginEnabled: false,
-                            isFutureEnabled: false,
-                            isSignedLVTRiskAgreement: false,
-                        },
-                        {
-                            rootUserId: 1000138475670,
-                            managersubUserId: 1000137842515,
-                            bindParentUserId: 1000138475669,
-                            email: 'test_2_virtual@akc05o8hmanagedsub.com',
-                            insertTimeStamp: 1678435153000,
-                            bindParentEmail: 'wdyw8xsh8pey@test.com',
-                            isSubUserEnabled: true,
-                            isUserActive: true,
-                            isMarginEnabled: false,
-                            isFutureEnabled: false,
-                            isSignedLVTRiskAgreement: false,
-                        },
                     ],
                 })
             );
@@ -597,9 +561,9 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute queryManagedSubAccountList() successfully with optional parameters', async () => {
             const params: QueryManagedSubAccountListRequest = {
-                email: 'email_example',
+                email: 'abc@test.com',
                 page: 1,
-                limit: 1,
+                limit: 10,
                 recvWindow: 5000,
             };
 
@@ -613,32 +577,6 @@ describe('ManagedSubAccountApi', () => {
                             bindParentUserId: 1000138475669,
                             email: 'test_0_virtual@kq3kno9imanagedsub.com',
                             insertTimeStamp: 1678435149000,
-                            bindParentEmail: 'wdyw8xsh8pey@test.com',
-                            isSubUserEnabled: true,
-                            isUserActive: true,
-                            isMarginEnabled: false,
-                            isFutureEnabled: false,
-                            isSignedLVTRiskAgreement: false,
-                        },
-                        {
-                            rootUserId: 1000138475670,
-                            managersubUserId: 1000137842514,
-                            bindParentUserId: 1000138475669,
-                            email: 'test_1_virtual@4qd2u7zxmanagedsub.com',
-                            insertTimeStamp: 1678435152000,
-                            bindParentEmail: 'wdyw8xsh8pey@test.com',
-                            isSubUserEnabled: true,
-                            isUserActive: true,
-                            isMarginEnabled: false,
-                            isFutureEnabled: false,
-                            isSignedLVTRiskAgreement: false,
-                        },
-                        {
-                            rootUserId: 1000138475670,
-                            managersubUserId: 1000137842515,
-                            bindParentUserId: 1000138475669,
-                            email: 'test_2_virtual@akc05o8hmanagedsub.com',
-                            insertTimeStamp: 1678435153000,
                             bindParentEmail: 'wdyw8xsh8pey@test.com',
                             isSubUserEnabled: true,
                             isUserActive: true,
@@ -685,7 +623,7 @@ describe('ManagedSubAccountApi', () => {
     describe('queryManagedSubAccountMarginAssetDetails()', () => {
         it('should execute queryManagedSubAccountMarginAssetDetails() successfully with required parameters only', async () => {
             const params: QueryManagedSubAccountMarginAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
 
             mockResponse = JSONParse(
@@ -697,22 +635,6 @@ describe('ManagedSubAccountApi', () => {
                     userAssets: [
                         {
                             asset: 'MATIC',
-                            borrowed: '0',
-                            free: '0',
-                            interest: '0',
-                            locked: '0',
-                            netAsset: '0',
-                        },
-                        {
-                            asset: 'VET',
-                            borrowed: '0',
-                            free: '0',
-                            interest: '0',
-                            locked: '0',
-                            netAsset: '0',
-                        },
-                        {
-                            asset: 'BAKE',
                             borrowed: '0',
                             free: '0',
                             interest: '0',
@@ -741,8 +663,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute queryManagedSubAccountMarginAssetDetails() successfully with optional parameters', async () => {
             const params: QueryManagedSubAccountMarginAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
-                accountType: 'accountType_example',
+                email: 'abc@test.com',
+                accountType: 'MARGIN',
             };
 
             mockResponse = JSONParse(
@@ -754,22 +676,6 @@ describe('ManagedSubAccountApi', () => {
                     userAssets: [
                         {
                             asset: 'MATIC',
-                            borrowed: '0',
-                            free: '0',
-                            interest: '0',
-                            locked: '0',
-                            netAsset: '0',
-                        },
-                        {
-                            asset: 'VET',
-                            borrowed: '0',
-                            free: '0',
-                            interest: '0',
-                            locked: '0',
-                            netAsset: '0',
-                        },
-                        {
-                            asset: 'BAKE',
                             borrowed: '0',
                             free: '0',
                             interest: '0',
@@ -798,7 +704,7 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QueryManagedSubAccountMarginAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -810,7 +716,7 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryManagedSubAccountMarginAssetDetailsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
             };
 
             const errorResponse = {
@@ -835,8 +741,8 @@ describe('ManagedSubAccountApi', () => {
     describe('queryManagedSubAccountSnapshot()', () => {
         it('should execute queryManagedSubAccountSnapshot() successfully with required parameters only', async () => {
             const params: QueryManagedSubAccountSnapshotRequest = {
-                email: 'sub-account-email@email.com',
-                type: 'type_example',
+                email: 'abc@test.com',
+                type: QueryManagedSubAccountSnapshotTypeEnum.SPOT,
             };
 
             mockResponse = JSONParse(
@@ -848,17 +754,9 @@ describe('ManagedSubAccountApi', () => {
                             data: {
                                 balances: [
                                     { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
-                                    { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
                                 ],
                                 totalAssetOfBtc: '0.09942700',
-                            },
-                            type: 'spot',
-                            updateTime: 1576281599000,
-                        },
-                        {
-                            data: {
                                 marginLevel: '2748.02909813',
-                                totalAssetOfBtc: '0.00274803',
                                 totalLiabilityOfBtc: '0.00000100',
                                 totalNetAssetOfBtc: '0.00274750',
                                 userAssets: [
@@ -871,12 +769,6 @@ describe('ManagedSubAccountApi', () => {
                                         netAsset: '1.00000000',
                                     },
                                 ],
-                            },
-                            type: 'margin',
-                            updateTime: 1576281599000,
-                        },
-                        {
-                            data: {
                                 assets: [
                                     {
                                         asset: 'USDT',
@@ -894,7 +786,7 @@ describe('ManagedSubAccountApi', () => {
                                     },
                                 ],
                             },
-                            type: 'futures',
+                            type: 'spot',
                             updateTime: 1576281599000,
                         },
                     ],
@@ -917,11 +809,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute queryManagedSubAccountSnapshot() successfully with optional parameters', async () => {
             const params: QueryManagedSubAccountSnapshotRequest = {
-                email: 'sub-account-email@email.com',
-                type: 'type_example',
+                email: 'abc@test.com',
+                type: QueryManagedSubAccountSnapshotTypeEnum.SPOT,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 1,
+                limit: 10,
                 recvWindow: 5000,
             };
 
@@ -934,17 +826,9 @@ describe('ManagedSubAccountApi', () => {
                             data: {
                                 balances: [
                                     { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
-                                    { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
                                 ],
                                 totalAssetOfBtc: '0.09942700',
-                            },
-                            type: 'spot',
-                            updateTime: 1576281599000,
-                        },
-                        {
-                            data: {
                                 marginLevel: '2748.02909813',
-                                totalAssetOfBtc: '0.00274803',
                                 totalLiabilityOfBtc: '0.00000100',
                                 totalNetAssetOfBtc: '0.00274750',
                                 userAssets: [
@@ -957,12 +841,6 @@ describe('ManagedSubAccountApi', () => {
                                         netAsset: '1.00000000',
                                     },
                                 ],
-                            },
-                            type: 'margin',
-                            updateTime: 1576281599000,
-                        },
-                        {
-                            data: {
                                 assets: [
                                     {
                                         asset: 'USDT',
@@ -980,7 +858,7 @@ describe('ManagedSubAccountApi', () => {
                                     },
                                 ],
                             },
-                            type: 'futures',
+                            type: 'spot',
                             updateTime: 1576281599000,
                         },
                     ],
@@ -1003,8 +881,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QueryManagedSubAccountSnapshotRequest = {
-                email: 'sub-account-email@email.com',
-                type: 'type_example',
+                email: 'abc@test.com',
+                type: QueryManagedSubAccountSnapshotTypeEnum.SPOT,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -1016,8 +894,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: QueryManagedSubAccountSnapshotRequest = {
-                email: 'sub-account-email@email.com',
-                type: 'type_example',
+                email: 'abc@test.com',
+                type: QueryManagedSubAccountSnapshotTypeEnum.SPOT,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -1029,8 +907,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryManagedSubAccountSnapshotRequest = {
-                email: 'sub-account-email@email.com',
-                type: 'type_example',
+                email: 'abc@test.com',
+                type: QueryManagedSubAccountSnapshotTypeEnum.SPOT,
             };
 
             const errorResponse = {
@@ -1055,11 +933,11 @@ describe('ManagedSubAccountApi', () => {
     describe('queryManagedSubAccountTransferLogMasterAccountInvestor()', () => {
         it('should execute queryManagedSubAccountTransferLogMasterAccountInvestor() successfully with required parameters only', async () => {
             const params: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
 
             mockResponse = JSONParse(
@@ -1076,18 +954,6 @@ describe('ManagedSubAccountApi', () => {
                             createTime: 1679416673000,
                             status: 'SUCCESS',
                             tranId: 91077779,
-                        },
-                        {
-                            fromEmail: 'wdywl0lddakh@test.com',
-                            fromAccountType: 'SPOT',
-                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                            toAccountType: 'SPOT',
-                            asset: 'BNB',
-                            amount: '1',
-                            scheduledData: 1679416616000,
-                            createTime: 1679416616000,
-                            status: 'SUCCESS',
-                            tranId: 91077676,
                         },
                     ],
                     count: 2,
@@ -1113,13 +979,14 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute queryManagedSubAccountTransferLogMasterAccountInvestor() successfully with optional parameters', async () => {
             const params: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
                 transfers: 'transfers_example',
-                transferFunctionAccountType: 'transferFunctionAccountType_example',
+                transferFunctionAccountType:
+                    QueryManagedSubAccountTransferLogMasterAccountInvestorTransferFunctionAccountTypeEnum.SPOT,
             };
 
             mockResponse = JSONParse(
@@ -1136,18 +1003,6 @@ describe('ManagedSubAccountApi', () => {
                             createTime: 1679416673000,
                             status: 'SUCCESS',
                             tranId: 91077779,
-                        },
-                        {
-                            fromEmail: 'wdywl0lddakh@test.com',
-                            fromAccountType: 'SPOT',
-                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                            toAccountType: 'SPOT',
-                            asset: 'BNB',
-                            amount: '1',
-                            scheduledData: 1679416616000,
-                            createTime: 1679416616000,
-                            status: 'SUCCESS',
-                            tranId: 91077676,
                         },
                     ],
                     count: 2,
@@ -1173,11 +1028,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -1191,11 +1046,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when startTime is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.startTime;
@@ -1209,11 +1064,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when endTime is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.endTime;
@@ -1227,11 +1082,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when page is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.page;
@@ -1245,11 +1100,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when limit is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.limit;
@@ -1263,11 +1118,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 1,
             };
 
             const errorResponse = {
@@ -1292,11 +1147,11 @@ describe('ManagedSubAccountApi', () => {
     describe('queryManagedSubAccountTransferLogMasterAccountTrading()', () => {
         it('should execute queryManagedSubAccountTransferLogMasterAccountTrading() successfully with required parameters only', async () => {
             const params: QueryManagedSubAccountTransferLogMasterAccountTradingRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
 
             mockResponse = JSONParse(
@@ -1313,18 +1168,6 @@ describe('ManagedSubAccountApi', () => {
                             createTime: 1679416673000,
                             status: 'SUCCESS',
                             tranId: 91077779,
-                        },
-                        {
-                            fromEmail: 'wdywl0lddakh@test.com',
-                            fromAccountType: 'SPOT',
-                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                            toAccountType: 'SPOT',
-                            asset: 'BNB',
-                            amount: '1',
-                            scheduledData: 1679416616000,
-                            createTime: 1679416616000,
-                            status: 'SUCCESS',
-                            tranId: 91077676,
                         },
                     ],
                     count: 2,
@@ -1350,13 +1193,14 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute queryManagedSubAccountTransferLogMasterAccountTrading() successfully with optional parameters', async () => {
             const params: QueryManagedSubAccountTransferLogMasterAccountTradingRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
                 transfers: 'transfers_example',
-                transferFunctionAccountType: 'transferFunctionAccountType_example',
+                transferFunctionAccountType:
+                    QueryManagedSubAccountTransferLogMasterAccountTradingTransferFunctionAccountTypeEnum.SPOT,
             };
 
             mockResponse = JSONParse(
@@ -1373,18 +1217,6 @@ describe('ManagedSubAccountApi', () => {
                             createTime: 1679416673000,
                             status: 'SUCCESS',
                             tranId: 91077779,
-                        },
-                        {
-                            fromEmail: 'wdywl0lddakh@test.com',
-                            fromAccountType: 'SPOT',
-                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                            toAccountType: 'SPOT',
-                            asset: 'BNB',
-                            amount: '1',
-                            scheduledData: 1679416616000,
-                            createTime: 1679416616000,
-                            status: 'SUCCESS',
-                            tranId: 91077676,
                         },
                     ],
                     count: 2,
@@ -1410,11 +1242,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountTradingRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -1428,11 +1260,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when startTime is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountTradingRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.startTime;
@@ -1446,11 +1278,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when endTime is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountTradingRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.endTime;
@@ -1464,11 +1296,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when page is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountTradingRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.page;
@@ -1482,11 +1314,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when limit is missing', async () => {
             const _params: QueryManagedSubAccountTransferLogMasterAccountTradingRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.limit;
@@ -1500,11 +1332,11 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryManagedSubAccountTransferLogMasterAccountTradingRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
 
             const errorResponse = {
@@ -1531,8 +1363,8 @@ describe('ManagedSubAccountApi', () => {
             const params: QueryManagedSubAccountTransferLogSubAccountTradingRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
 
             mockResponse = JSONParse(
@@ -1549,18 +1381,6 @@ describe('ManagedSubAccountApi', () => {
                             createTime: 1679416673000,
                             status: 'SUCCESS',
                             tranId: 91077779,
-                        },
-                        {
-                            fromEmail: 'wdywl0lddakh@test.com',
-                            fromAccountType: 'SPOT',
-                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                            toAccountType: 'SPOT',
-                            asset: 'BNB',
-                            amount: '1',
-                            scheduledData: 1679416616000,
-                            createTime: 1679416616000,
-                            status: 'SUCCESS',
-                            tranId: 91077676,
                         },
                     ],
                     count: 2,
@@ -1588,10 +1408,11 @@ describe('ManagedSubAccountApi', () => {
             const params: QueryManagedSubAccountTransferLogSubAccountTradingRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
                 transfers: 'transfers_example',
-                transferFunctionAccountType: 'transferFunctionAccountType_example',
+                transferFunctionAccountType:
+                    QueryManagedSubAccountTransferLogSubAccountTradingTransferFunctionAccountTypeEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -1609,18 +1430,6 @@ describe('ManagedSubAccountApi', () => {
                             createTime: 1679416673000,
                             status: 'SUCCESS',
                             tranId: 91077779,
-                        },
-                        {
-                            fromEmail: 'wdywl0lddakh@test.com',
-                            fromAccountType: 'SPOT',
-                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                            toAccountType: 'SPOT',
-                            asset: 'BNB',
-                            amount: '1',
-                            scheduledData: 1679416616000,
-                            createTime: 1679416616000,
-                            status: 'SUCCESS',
-                            tranId: 91077676,
                         },
                     ],
                     count: 2,
@@ -1648,8 +1457,8 @@ describe('ManagedSubAccountApi', () => {
             const _params: QueryManagedSubAccountTransferLogSubAccountTradingRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.startTime;
@@ -1665,8 +1474,8 @@ describe('ManagedSubAccountApi', () => {
             const _params: QueryManagedSubAccountTransferLogSubAccountTradingRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.endTime;
@@ -1682,8 +1491,8 @@ describe('ManagedSubAccountApi', () => {
             const _params: QueryManagedSubAccountTransferLogSubAccountTradingRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.page;
@@ -1699,8 +1508,8 @@ describe('ManagedSubAccountApi', () => {
             const _params: QueryManagedSubAccountTransferLogSubAccountTradingRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
             const params = Object.assign({ ..._params });
             delete params?.limit;
@@ -1716,8 +1525,8 @@ describe('ManagedSubAccountApi', () => {
             const params: QueryManagedSubAccountTransferLogSubAccountTradingRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 789,
+                page: 1,
+                limit: 10,
             };
 
             const errorResponse = {
@@ -1742,8 +1551,8 @@ describe('ManagedSubAccountApi', () => {
     describe('withdrawlAssetsFromTheManagedSubAccount()', () => {
         it('should execute withdrawlAssetsFromTheManagedSubAccount() successfully with required parameters only', async () => {
             const params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
-                fromEmail: 'fromEmail_example',
-                asset: 'asset_example',
+                fromEmail: 'from@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -1767,8 +1576,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should execute withdrawlAssetsFromTheManagedSubAccount() successfully with optional parameters', async () => {
             const params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
-                fromEmail: 'fromEmail_example',
-                asset: 'asset_example',
+                fromEmail: 'from@test.com',
+                asset: 'BTC',
                 amount: 1.0,
                 transferDate: 789,
                 recvWindow: 5000,
@@ -1794,8 +1603,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when fromEmail is missing', async () => {
             const _params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
-                fromEmail: 'fromEmail_example',
-                asset: 'asset_example',
+                fromEmail: 'from@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1808,8 +1617,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
-                fromEmail: 'fromEmail_example',
-                asset: 'asset_example',
+                fromEmail: 'from@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1822,8 +1631,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
-                fromEmail: 'fromEmail_example',
-                asset: 'asset_example',
+                fromEmail: 'from@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1836,8 +1645,8 @@ describe('ManagedSubAccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
-                fromEmail: 'fromEmail_example',
-                asset: 'asset_example',
+                fromEmail: 'from@test.com',
+                asset: 'BTC',
                 amount: 1.0,
             };
 

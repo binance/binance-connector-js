@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,10 +16,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetFuturesPositionRiskOfSubAccountV2ResponseDeliveryPositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response-delivery-position-risk-vos-inner';
+import type { GetFuturesPositionRiskOfSubAccountResponseInner } from './get-futures-position-risk-of-sub-account-response-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response-future-position-risk-vos-inner';
+import type { GetFuturesPositionRiskOfSubAccountV2ResponseDeliveryPositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response-delivery-position-risk-vos-inner';
 
 /**
  *
@@ -29,10 +29,10 @@ import type { GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosI
 export interface GetFuturesPositionRiskOfSubAccountV2Response {
     /**
      *
-     * @type {Array<GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner>}
+     * @type {Array<GetFuturesPositionRiskOfSubAccountResponseInner>}
      * @memberof GetFuturesPositionRiskOfSubAccountV2Response
      */
-    futurePositionRiskVos?: Array<GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner>;
+    futurePositionRiskVos?: Array<GetFuturesPositionRiskOfSubAccountResponseInner>;
     /**
      *
      * @type {Array<GetFuturesPositionRiskOfSubAccountV2ResponseDeliveryPositionRiskVosInner>}

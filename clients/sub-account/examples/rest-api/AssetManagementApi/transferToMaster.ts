@@ -10,7 +10,7 @@ const client = new SubAccount({ configurationRestAPI });
 async function transferToMaster() {
     try {
         const response = await client.restAPI.transferToMaster({
-            asset: 'asset_example',
+            asset: 'BTC',
             amount: 1.0,
         });
 

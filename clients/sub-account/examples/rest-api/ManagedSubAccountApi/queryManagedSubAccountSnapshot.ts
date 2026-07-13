@@ -1,4 +1,4 @@
-import { SubAccount, SUB_ACCOUNT_REST_API_PROD_URL } from '../../../src';
+import { SubAccount, SubAccountRestAPI, SUB_ACCOUNT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,8 +10,8 @@ const client = new SubAccount({ configurationRestAPI });
 async function queryManagedSubAccountSnapshot() {
     try {
         const response = await client.restAPI.queryManagedSubAccountSnapshot({
-            email: 'sub-account-email@email.com',
-            type: 'type_example',
+            email: 'abc@test.com',
+            type: SubAccountRestAPI.QueryManagedSubAccountSnapshotTypeEnum.SPOT,
         });
 
         const rateLimits = response.rateLimits!;

@@ -10,10 +10,10 @@ const client = new SubAccount({ configurationRestAPI });
 async function marginTransferForSubAccount() {
     try {
         const response = await client.restAPI.marginTransferForSubAccount({
-            email: 'sub-account-email@email.com',
-            asset: 'asset_example',
+            email: '123@test.com',
+            asset: 'BTC',
             amount: 1.0,
-            type: 789,
+            type: 1,
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,4 +1,4 @@
-import { SubAccount, SUB_ACCOUNT_REST_API_PROD_URL } from '../../../src';
+import { SubAccount, SubAccountRestAPI, SUB_ACCOUNT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,9 +10,9 @@ const client = new SubAccount({ configurationRestAPI });
 async function universalTransfer() {
     try {
         const response = await client.restAPI.universalTransfer({
-            fromAccountType: 'fromAccountType_example',
-            toAccountType: 'toAccountType_example',
-            asset: 'asset_example',
+            fromAccountType: SubAccountRestAPI.UniversalTransferFromAccountTypeEnum.SPOT,
+            toAccountType: SubAccountRestAPI.UniversalTransferToAccountTypeEnum.SPOT,
+            asset: 'BTC',
             amount: 1.0,
         });
 

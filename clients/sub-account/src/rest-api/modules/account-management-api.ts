@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -38,10 +37,13 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
         /**
          * Create a Virtual Sub-account
          *
-         * This request will generate a virtual sub account under your master account.
-         * You need to enable "trade" option for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - This request generates a virtual sub-account under your master account.
+         * - The API key used to call this endpoint must have the `trade` option enabled.
          *
          * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
          * @param {string} subAccountString Please input a string. We will create a virtual email using that string for you to register
@@ -82,10 +84,12 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
         /**
          * Enable Futures for Sub-account for Master Account
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -123,10 +127,12 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
         /**
          * Enable Options for Sub-account (For Master Account).
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -164,10 +170,12 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
         /**
          * Get Futures Position-Risk of Sub-account
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -205,10 +213,12 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
         /**
          * Get Futures Position-Risk of Sub-account V2
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
          * @param {number | bigint} [recvWindow]
          *
@@ -253,12 +263,15 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
         /**
          * Get Sub-account's Status on Margin Or Futures
          *
-         * If no email sent, all sub-accounts' information will be returned.
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If no email sent, all sub-accounts' information will be returned.
          *
          * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
-         * @param {string} [email] Managed sub-account email
+         * @param {string} [email]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -293,13 +306,15 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
         /**
          * Query Sub-account List
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Sub-account List (For Master Account) (USER_DATA)
-         * @param {string} [email] Managed sub-account email
-         * @param {string} [isFreeze] true or false
-         * @param {number | bigint} [page] Default value: 1
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {string} [email]
+         * @param {string} [isFreeze]
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -346,7 +361,9 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
         /**
          * Query Sub-account Transaction statistics (For Master Account).
          *
-         * Weight: 60
+         * Weight(IP): 60
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
@@ -392,10 +409,13 @@ export interface AccountManagementApiInterface {
     /**
      * Create a Virtual Sub-account
      *
-     * This request will generate a virtual sub account under your master account.
-     * You need to enable "trade" option for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request generates a virtual sub-account under your master account.
+     * - The API key used to call this endpoint must have the `trade` option enabled.
      *
      * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
      * @param {CreateAVirtualSubAccountRequest} requestParameters Request parameters.
@@ -409,7 +429,9 @@ export interface AccountManagementApiInterface {
     /**
      * Enable Futures for Sub-account for Master Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableFuturesForSubAccountRequest} requestParameters Request parameters.
@@ -423,7 +445,9 @@ export interface AccountManagementApiInterface {
     /**
      * Enable Options for Sub-account (For Master Account).
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableOptionsForSubAccountRequest} requestParameters Request parameters.
@@ -437,7 +461,9 @@ export interface AccountManagementApiInterface {
     /**
      * Get Futures Position-Risk of Sub-account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountRequest} requestParameters Request parameters.
@@ -451,7 +477,9 @@ export interface AccountManagementApiInterface {
     /**
      * Get Futures Position-Risk of Sub-account V2
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountV2Request} requestParameters Request parameters.
@@ -465,9 +493,12 @@ export interface AccountManagementApiInterface {
     /**
      * Get Sub-account's Status on Margin Or Futures
      *
-     * If no email sent, all sub-accounts' information will be returned.
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If no email sent, all sub-accounts' information will be returned.
      *
      * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
      * @param {GetSubAccountsStatusOnMarginOrFuturesRequest} requestParameters Request parameters.
@@ -481,7 +512,9 @@ export interface AccountManagementApiInterface {
     /**
      * Query Sub-account List
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account List (For Master Account) (USER_DATA)
      * @param {QuerySubAccountListRequest} requestParameters Request parameters.
@@ -495,7 +528,9 @@ export interface AccountManagementApiInterface {
     /**
      * Query Sub-account Transaction statistics (For Master Account).
      *
-     * Weight: 60
+     * Weight(IP): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
      * @param {QuerySubAccountTransactionStatisticsRequest} requestParameters Request parameters.
@@ -534,7 +569,7 @@ export interface CreateAVirtualSubAccountRequest {
  */
 export interface EnableFuturesForSubAccountRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AccountManagementApiEnableFuturesForSubAccount
      */
@@ -554,7 +589,7 @@ export interface EnableFuturesForSubAccountRequest {
  */
 export interface EnableOptionsForSubAccountRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AccountManagementApiEnableOptionsForSubAccount
      */
@@ -574,7 +609,7 @@ export interface EnableOptionsForSubAccountRequest {
  */
 export interface GetFuturesPositionRiskOfSubAccountRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AccountManagementApiGetFuturesPositionRiskOfSubAccount
      */
@@ -594,7 +629,7 @@ export interface GetFuturesPositionRiskOfSubAccountRequest {
  */
 export interface GetFuturesPositionRiskOfSubAccountV2Request {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof AccountManagementApiGetFuturesPositionRiskOfSubAccountV2
      */
@@ -621,7 +656,7 @@ export interface GetFuturesPositionRiskOfSubAccountV2Request {
  */
 export interface GetSubAccountsStatusOnMarginOrFuturesRequest {
     /**
-     * Managed sub-account email
+     *
      * @type {string}
      * @memberof AccountManagementApiGetSubAccountsStatusOnMarginOrFutures
      */
@@ -641,28 +676,28 @@ export interface GetSubAccountsStatusOnMarginOrFuturesRequest {
  */
 export interface QuerySubAccountListRequest {
     /**
-     * Managed sub-account email
+     *
      * @type {string}
      * @memberof AccountManagementApiQuerySubAccountList
      */
     readonly email?: string;
 
     /**
-     * true or false
+     *
      * @type {string}
      * @memberof AccountManagementApiQuerySubAccountList
      */
     readonly isFreeze?: string;
 
     /**
-     * Default value: 1
+     *
      * @type {number | bigint}
      * @memberof AccountManagementApiQuerySubAccountList
      */
     readonly page?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof AccountManagementApiQuerySubAccountList
      */
@@ -712,17 +747,20 @@ export class AccountManagementApi implements AccountManagementApiInterface {
     /**
      * Create a Virtual Sub-account
      *
-     * This request will generate a virtual sub account under your master account.
-     * You need to enable "trade" option for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request generates a virtual sub-account under your master account.
+     * - The API key used to call this endpoint must have the `trade` option enabled.
      *
      * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
      * @param {CreateAVirtualSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CreateAVirtualSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Create-a-Virtual-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#create-avirtual-sub-account Binance API Documentation}
      */
     public async createAVirtualSubAccount(
         requestParameters: CreateAVirtualSubAccountRequest
@@ -746,14 +784,16 @@ export class AccountManagementApi implements AccountManagementApiInterface {
     /**
      * Enable Futures for Sub-account for Master Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableFuturesForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableFuturesForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Enable-Futures-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#enable-futures-for-sub-account Binance API Documentation}
      */
     public async enableFuturesForSubAccount(
         requestParameters: EnableFuturesForSubAccountRequest
@@ -777,14 +817,16 @@ export class AccountManagementApi implements AccountManagementApiInterface {
     /**
      * Enable Options for Sub-account (For Master Account).
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableOptionsForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableOptionsForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Enable-Options-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#enable-options-for-sub-account Binance API Documentation}
      */
     public async enableOptionsForSubAccount(
         requestParameters: EnableOptionsForSubAccountRequest
@@ -808,14 +850,16 @@ export class AccountManagementApi implements AccountManagementApiInterface {
     /**
      * Get Futures Position-Risk of Sub-account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesPositionRiskOfSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Get-Futures-Position-Risk-of-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#get-futures-position-risk-of-sub-account Binance API Documentation}
      */
     public async getFuturesPositionRiskOfSubAccount(
         requestParameters: GetFuturesPositionRiskOfSubAccountRequest
@@ -840,14 +884,16 @@ export class AccountManagementApi implements AccountManagementApiInterface {
     /**
      * Get Futures Position-Risk of Sub-account V2
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesPositionRiskOfSubAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Get-Futures-Position-Risk-of-Sub-account-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#get-futures-position-risk-of-sub-account-v2 Binance API Documentation}
      */
     public async getFuturesPositionRiskOfSubAccountV2(
         requestParameters: GetFuturesPositionRiskOfSubAccountV2Request
@@ -873,16 +919,19 @@ export class AccountManagementApi implements AccountManagementApiInterface {
     /**
      * Get Sub-account's Status on Margin Or Futures
      *
-     * If no email sent, all sub-accounts' information will be returned.
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If no email sent, all sub-accounts' information will be returned.
      *
      * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
      * @param {GetSubAccountsStatusOnMarginOrFuturesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountsStatusOnMarginOrFuturesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Get-Sub-accounts-Status-on-Margin-Or-Futures Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#get-sub-accounts-status-on-margin-or-futures Binance API Documentation}
      */
     public async getSubAccountsStatusOnMarginOrFutures(
         requestParameters: GetSubAccountsStatusOnMarginOrFuturesRequest = {}
@@ -907,14 +956,16 @@ export class AccountManagementApi implements AccountManagementApiInterface {
     /**
      * Query Sub-account List
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account List (For Master Account) (USER_DATA)
      * @param {QuerySubAccountListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Query-Sub-account-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#query-sub-account-list Binance API Documentation}
      */
     public async querySubAccountList(
         requestParameters: QuerySubAccountListRequest = {}
@@ -941,14 +992,16 @@ export class AccountManagementApi implements AccountManagementApiInterface {
     /**
      * Query Sub-account Transaction statistics (For Master Account).
      *
-     * Weight: 60
+     * Weight(IP): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
      * @param {QuerySubAccountTransactionStatisticsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountTransactionStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Query-Sub-account-Transaction-Statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#query-sub-account-transaction-statistics Binance API Documentation}
      */
     public async querySubAccountTransactionStatistics(
         requestParameters: QuerySubAccountTransactionStatisticsRequest = {}

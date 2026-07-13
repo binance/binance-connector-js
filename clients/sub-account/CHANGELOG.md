@@ -1,5 +1,43 @@
 # Changelog
 
+## 14.0.0 - 2026-07-13
+
+### Added (4)
+
+- `createSubAccountApiKey()` (`POST /sapi/v1/sub-account/subAccountApi`)
+- `deleteSubAccountApiKey()` (`DELETE /sapi/v1/sub-account/subAccountApi`)
+- `modifySubAccountApiKeyPermission()` (`POST /sapi/v1/sub-account/subAccountApiPermission`)
+- `querySubAccountApiKey()` (`GET /sapi/v1/sub-account/subAccountApi`)
+
+### Changed (6)
+
+- Modified parameter `fromAccountType`:
+  - enum added: `SPOT`, `USDT_FUTURE`, `COIN_FUTURE`, `MARGIN`, `ISOLATED_MARGIN`
+  - affected methods:
+    - `universalTransfer()` (`POST /sapi/v1/sub-account/universalTransfer`)
+- Modified parameter `productType`:
+  - enum added: `UM`
+  - affected methods:
+    - `movePositionForSubAccount()` (`POST /sapi/v1/sub-account/futures/move-position`)
+- Modified parameter `status`:
+  - type `string` → `integer`
+  - affected methods:
+    - `addIpRestrictionForSubAccountApiKey()` (`POST /sapi/v2/sub-account/subAccountApi/ipRestriction`)
+- Modified parameter `toAccountType`:
+  - enum added: `SPOT`, `USDT_FUTURE`, `COIN_FUTURE`, `MARGIN`, `ISOLATED_MARGIN`
+  - affected methods:
+    - `universalTransfer()` (`POST /sapi/v1/sub-account/universalTransfer`)
+- Modified parameter `transferFunctionAccountType`:
+  - enum added: `SPOT`, `MARGIN`, `ISOLATED_MARGIN`, `USDT_FUTURE`, `COIN_FUTURE`
+  - affected methods:
+    - `queryManagedSubAccountTransferLogSubAccountTrading()` (`GET /sapi/v1/managed-subaccount/query-trans-log`)
+    - `queryManagedSubAccountTransferLogMasterAccountInvestor()` (`GET /sapi/v1/managed-subaccount/queryTransLogForInvestor`)
+    - `queryManagedSubAccountTransferLogMasterAccountTrading()` (`GET /sapi/v1/managed-subaccount/queryTransLogForTradeParent`)
+- Modified parameter `type`:
+  - enum added: `SPOT`, `MARGIN`, `FUTURES`
+  - affected methods:
+    - `queryManagedSubAccountSnapshot()` (`GET /sapi/v1/managed-subaccount/accountSnapshot`)
+
 ## 13.0.1 - 2026-06-18
 
 ### Changed (2)

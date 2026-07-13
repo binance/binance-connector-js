@@ -12,8 +12,8 @@ async function queryManagedSubAccountTransferLogSubAccountTrading() {
         const response = await client.restAPI.queryManagedSubAccountTransferLogSubAccountTrading({
             startTime: 1623319461670,
             endTime: 1641782889000,
-            page: 789,
-            limit: 789,
+            page: 1,
+            limit: 10,
         });
 
         const rateLimits = response.rateLimits!;

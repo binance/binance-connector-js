@@ -10,8 +10,8 @@ const client = new SubAccount({ configurationRestAPI });
 async function getSubAccountDepositAddress() {
     try {
         const response = await client.restAPI.getSubAccountDepositAddress({
-            email: 'sub-account-email@email.com',
-            coin: 'coin_example',
+            email: '123@test.com',
+            coin: 'BTC',
         });
 
         const rateLimits = response.rateLimits!;

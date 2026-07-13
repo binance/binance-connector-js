@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -41,9 +40,12 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Deposit Assets Into The Managed Sub-account
          *
-         * You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
          *
          * @summary Deposit Assets Into The Managed Sub-account (For Investor Master Account) (USER_DATA)
          * @param {string} toEmail
@@ -98,13 +100,16 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Get investor's managed sub-account deposit address.
          *
-         * If `network` is not send, return with default `network` of the `coin`.
-         * * `amount` needs to be sent if using LIGHTNING network
+         * Weight(UID): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `network` is not sent, the default `network` for the `coin` is returned.
+         * - When using `LIGHTNING`, `amount` must be provided.
          *
          * @summary Get Managed Sub-account Deposit Address (For Investor Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {string} coin
          * @param {string} [network] networks can be found in `GET /sapi/v1/capital/deposit/address`
          * @param {number} [amount]
@@ -159,10 +164,12 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Query Managed Sub-account Asset Details
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} email
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -200,11 +207,13 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Investor can use this api to query managed sub account futures asset details
          *
-         * Weight: 60
+         * Weight(UID): 60
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Managed Sub-account Futures Asset Details (For Investor Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
-         * @param {string} [accountType] No input or input "MARGIN" to get Cross Margin account details. Input "ISOLATED_MARGIN" to get Isolated Margin account details.
+         * @param {string} email
+         * @param {string} [accountType] No input or input "USDT_FUTURE" to get UM Futures account details. Input "COIN_FUTURE" to get CM Futures account details.
          *
          * @throws {RequiredError}
          */
@@ -241,12 +250,14 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Get investor's managed sub-account list.
          *
-         * Weight: 60
+         * Weight(UID): 60
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
-         * @param {string} [email] Managed sub-account email
-         * @param {number | bigint} [page] Default value: 1
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {string} [email]
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -289,11 +300,14 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Investor can use this api to query managed sub account margin asset details
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Managed Sub-account Margin Asset Details (For Investor Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
-         * @param {string} [accountType] No input or input "MARGIN" to get Cross Margin account details. Input "ISOLATED_MARGIN" to get Isolated Margin account details.
+         * @param {string} email
+         * @param {string} [accountType] No input or input "MARGIN" to get Cross Margin account details. Input "ISOLATED_MARGIN" to get Isolated
+         * Margin account details.
          *
          * @throws {RequiredError}
          */
@@ -330,25 +344,28 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Query Managed Sub-account Snapshot
          *
-         * The query time period must be less then 30 days
-         * Support query within the last one month only
-         * If startTimeand endTime not sent, return records of the last 7 days by default
+         * Weight(IP): 2400
          *
-         * Weight: 2400
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The query time range must be less than 30 days.
+         * - Only data from the most recent month is supported.
+         * - If `startTime` and `endTime` are omitted, records from the last 7 days are returned by default.
          *
          * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
-         * @param {string} type "SPOT", "MARGIN"（cross）, "FUTURES"（UM）
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {string} email
+         * @param {QueryManagedSubAccountSnapshotTypeEnum} type
+         * @param {number | bigint} [startTime] Query time range must be within 30 days and only supports data within the last month.
+         * @param {number | bigint} [endTime] If both startTime and endTime are omitted, records from the last 7 days are returned by default.
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryManagedSubAccountSnapshot: async (
             email: string,
-            type: string,
+            type: QueryManagedSubAccountSnapshotTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             limit?: number | bigint,
@@ -395,19 +412,27 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             };
         },
         /**
-         * Investor can use this api to query managed sub account transfer log. This endpoint is available for investor of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset allocation and account application, while delegating trades to a professional trading team.
-         * Please refer to [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+         * Query Managed Sub Account Transfer Log For Investor Master Account
          *
-         * Weight: 1
+         * Investor can use this api to query managed sub account transfer log. This endpoint is available for investor of
+         * Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset
+         * allocation and account application, while delegating trades to a professional trading team.
          *
-         * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * Please refer to
+         * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+         *
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
+         *
+         * @summary Query Managed Sub Account Transfer Log For Investor Master Account (USER_DATA)
+         * @param {string} email
          * @param {number | bigint} startTime Start Time
          * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
          * @param {number | bigint} page Page
-         * @param {number | bigint} limit Limit (Max: 500)
-         * @param {string} [transfers] Transfer Direction (from/to)
-         * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
+         * @param {number | bigint} limit
+         * @param {string} [transfers] Transfer Direction (FROM/TO)
+         * @param {QueryManagedSubAccountTransferLogMasterAccountInvestorTransferFunctionAccountTypeEnum} [transferFunctionAccountType]
          *
          * @throws {RequiredError}
          */
@@ -418,7 +443,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             page: number | bigint,
             limit: number | bigint,
             transfers?: string,
-            transferFunctionAccountType?: string
+            transferFunctionAccountType?: QueryManagedSubAccountTransferLogMasterAccountInvestorTransferFunctionAccountTypeEnum
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists(
@@ -490,19 +515,27 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             };
         },
         /**
-         * Trading team can use this api to query managed sub account transfer log. This endpoint is available for trading team of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset allocation and account application, while delegating trades to a professional trading team.
-         * Please refer to [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+         * Query Managed Sub Account Transfer Log For Trading Team Master Account
          *
-         * Weight: 60
+         * Trading team can use this api to query managed sub account transfer log. This endpoint is available for trading
+         * team of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in
+         * asset allocation and account application, while delegating trades to a professional trading team.
          *
-         * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * Please refer to
+         * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+         *
+         * Weight(UID): 60
+         *
+         * Security Type: USER_DATA
+         *
+         * @summary Query Managed Sub Account Transfer Log For Trading Team Master Account (USER_DATA)
+         * @param {string} email
          * @param {number | bigint} startTime Start Time
          * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
-         * @param {number | bigint} page Page
-         * @param {number | bigint} limit Limit (Max: 500)
-         * @param {string} [transfers] Transfer Direction (from/to)
-         * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
+         * @param {number | bigint} page
+         * @param {number | bigint} limit
+         * @param {string} [transfers] Transfer Direction (FROM/TO)
+         * @param {QueryManagedSubAccountTransferLogMasterAccountTradingTransferFunctionAccountTypeEnum} [transferFunctionAccountType]
          *
          * @throws {RequiredError}
          */
@@ -513,7 +546,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             page: number | bigint,
             limit: number | bigint,
             transfers?: string,
-            transferFunctionAccountType?: string
+            transferFunctionAccountType?: QueryManagedSubAccountTransferLogMasterAccountTradingTransferFunctionAccountTypeEnum
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists(
@@ -587,15 +620,17 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Query Managed Sub Account Transfer Log (For Trading Team Sub Account)
          *
-         * Weight: 60
+         * Weight(UID): 60
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
          * @param {number | bigint} startTime Start Time
          * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
-         * @param {number | bigint} page Page
-         * @param {number | bigint} limit Limit (Max: 500)
+         * @param {number | bigint} page
+         * @param {number | bigint} limit
          * @param {string} [transfers] Transfer Direction (from/to)
-         * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
+         * @param {QueryManagedSubAccountTransferLogSubAccountTradingTransferFunctionAccountTypeEnum} [transferFunctionAccountType]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -606,7 +641,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             page: number | bigint,
             limit: number | bigint,
             transfers?: string,
-            transferFunctionAccountType?: string,
+            transferFunctionAccountType?: QueryManagedSubAccountTransferLogSubAccountTradingTransferFunctionAccountTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
@@ -667,15 +702,19 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
         /**
          * Withdrawl Assets From The Managed Sub-account
          *
-         * You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Your API key must have the permission `Enable Spot & Margin Trading`.
          *
          * @summary Withdrawl Assets From The Managed Sub-account (For Investor Master Account) (USER_DATA)
          * @param {string} fromEmail
          * @param {string} asset
          * @param {number} amount
-         * @param {number | bigint} [transferDate] Withdrawals is automatically occur on the transfer date(UTC0). If a date is not selected, the withdrawal occurs right now
+         * @param {number | bigint} [transferDate] Withdrawal will happen automatically on the selected date (UTC 0). If no date is selected,
+         * withdrawal takes effect immediately.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -737,9 +776,12 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Deposit Assets Into The Managed Sub-account
      *
-     * You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
      *
      * @summary Deposit Assets Into The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {DepositAssetsIntoTheManagedSubAccountRequest} requestParameters Request parameters.
@@ -753,10 +795,13 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Get investor's managed sub-account deposit address.
      *
-     * If `network` is not send, return with default `network` of the `coin`.
-     * * `amount` needs to be sent if using LIGHTNING network
+     * Weight(UID): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` is not sent, the default `network` for the `coin` is returned.
+     * - When using `LIGHTNING`, `amount` must be provided.
      *
      * @summary Get Managed Sub-account Deposit Address (For Investor Master Account) (USER_DATA)
      * @param {GetManagedSubAccountDepositAddressRequest} requestParameters Request parameters.
@@ -770,7 +815,9 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Query Managed Sub-account Asset Details
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountAssetDetailsRequest} requestParameters Request parameters.
@@ -784,7 +831,9 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Investor can use this api to query managed sub account futures asset details
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Futures Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountFuturesAssetDetailsRequest} requestParameters Request parameters.
@@ -798,7 +847,9 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Get investor's managed sub-account list.
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
      * @param {QueryManagedSubAccountListRequest} requestParameters Request parameters.
@@ -812,7 +863,9 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Investor can use this api to query managed sub account margin asset details
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Margin Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountMarginAssetDetailsRequest} requestParameters Request parameters.
@@ -826,11 +879,14 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Query Managed Sub-account Snapshot
      *
-     * The query time period must be less then 30 days
-     * Support query within the last one month only
-     * If startTimeand endTime not sent, return records of the last 7 days by default
+     * Weight(IP): 2400
      *
-     * Weight: 2400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The query time range must be less than 30 days.
+     * - Only data from the most recent month is supported.
+     * - If `startTime` and `endTime` are omitted, records from the last 7 days are returned by default.
      *
      * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountSnapshotRequest} requestParameters Request parameters.
@@ -842,12 +898,20 @@ export interface ManagedSubAccountApiInterface {
         requestParameters: QueryManagedSubAccountSnapshotRequest
     ): Promise<RestApiResponse<QueryManagedSubAccountSnapshotResponse>>;
     /**
-     * Investor can use this api to query managed sub account transfer log. This endpoint is available for investor of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset allocation and account application, while delegating trades to a professional trading team.
-     * Please refer to [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * Query Managed Sub Account Transfer Log For Investor Master Account
      *
-     * Weight: 1
+     * Investor can use this api to query managed sub account transfer log. This endpoint is available for investor of
+     * Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset
+     * allocation and account application, while delegating trades to a professional trading team.
      *
-     * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
+     * Please refer to
+     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Managed Sub Account Transfer Log For Investor Master Account (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountInvestorRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -857,12 +921,20 @@ export interface ManagedSubAccountApiInterface {
         requestParameters: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest
     ): Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountInvestorResponse>>;
     /**
-     * Trading team can use this api to query managed sub account transfer log. This endpoint is available for trading team of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset allocation and account application, while delegating trades to a professional trading team.
-     * Please refer to [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * Query Managed Sub Account Transfer Log For Trading Team Master Account
      *
-     * Weight: 60
+     * Trading team can use this api to query managed sub account transfer log. This endpoint is available for trading
+     * team of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in
+     * asset allocation and account application, while delegating trades to a professional trading team.
      *
-     * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
+     * Please refer to
+     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     *
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Managed Sub Account Transfer Log For Trading Team Master Account (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountTradingRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -874,7 +946,9 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Query Managed Sub Account Transfer Log (For Trading Team Sub Account)
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogSubAccountTradingRequest} requestParameters Request parameters.
@@ -888,9 +962,12 @@ export interface ManagedSubAccountApiInterface {
     /**
      * Withdrawl Assets From The Managed Sub-account
      *
-     * You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Your API key must have the permission `Enable Spot & Margin Trading`.
      *
      * @summary Withdrawl Assets From The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {WithdrawlAssetsFromTheManagedSubAccountRequest} requestParameters Request parameters.
@@ -943,7 +1020,7 @@ export interface DepositAssetsIntoTheManagedSubAccountRequest {
  */
 export interface GetManagedSubAccountDepositAddressRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ManagedSubAccountApiGetManagedSubAccountDepositAddress
      */
@@ -984,7 +1061,7 @@ export interface GetManagedSubAccountDepositAddressRequest {
  */
 export interface QueryManagedSubAccountAssetDetailsRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountAssetDetails
      */
@@ -1004,14 +1081,14 @@ export interface QueryManagedSubAccountAssetDetailsRequest {
  */
 export interface QueryManagedSubAccountFuturesAssetDetailsRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountFuturesAssetDetails
      */
     readonly email: string;
 
     /**
-     * No input or input "MARGIN" to get Cross Margin account details. Input "ISOLATED_MARGIN" to get Isolated Margin account details.
+     * No input or input "USDT_FUTURE" to get UM Futures account details. Input "COIN_FUTURE" to get CM Futures account details.
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountFuturesAssetDetails
      */
@@ -1024,21 +1101,21 @@ export interface QueryManagedSubAccountFuturesAssetDetailsRequest {
  */
 export interface QueryManagedSubAccountListRequest {
     /**
-     * Managed sub-account email
+     *
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountList
      */
     readonly email?: string;
 
     /**
-     * Default value: 1
+     *
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountList
      */
     readonly page?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountList
      */
@@ -1058,14 +1135,15 @@ export interface QueryManagedSubAccountListRequest {
  */
 export interface QueryManagedSubAccountMarginAssetDetailsRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountMarginAssetDetails
      */
     readonly email: string;
 
     /**
-     * No input or input "MARGIN" to get Cross Margin account details. Input "ISOLATED_MARGIN" to get Isolated Margin account details.
+     * No input or input "MARGIN" to get Cross Margin account details. Input "ISOLATED_MARGIN" to get Isolated
+     * Margin account details.
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountMarginAssetDetails
      */
@@ -1078,35 +1156,35 @@ export interface QueryManagedSubAccountMarginAssetDetailsRequest {
  */
 export interface QueryManagedSubAccountSnapshotRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
     readonly email: string;
 
     /**
-     * "SPOT", "MARGIN"（cross）, "FUTURES"（UM）
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN' | 'FUTURES'}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
-    readonly type: string;
+    readonly type: QueryManagedSubAccountSnapshotTypeEnum;
 
     /**
-     *
+     * Query time range must be within 30 days and only supports data within the last month.
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * If both startTime and endTime are omitted, records from the last 7 days are returned by default.
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default value: 1, Max value: 200
+     *
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
@@ -1126,7 +1204,7 @@ export interface QueryManagedSubAccountSnapshotRequest {
  */
 export interface QueryManagedSubAccountTransferLogMasterAccountInvestorRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
@@ -1154,25 +1232,25 @@ export interface QueryManagedSubAccountTransferLogMasterAccountInvestorRequest {
     readonly page: number | bigint;
 
     /**
-     * Limit (Max: 500)
+     *
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
     readonly limit: number | bigint;
 
     /**
-     * Transfer Direction (from/to)
+     * Transfer Direction (FROM/TO)
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
     readonly transfers?: string;
 
     /**
-     * Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN' | 'ISOLATED_MARGIN' | 'USDT_FUTURE' | 'COIN_FUTURE'}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
-    readonly transferFunctionAccountType?: string;
+    readonly transferFunctionAccountType?: QueryManagedSubAccountTransferLogMasterAccountInvestorTransferFunctionAccountTypeEnum;
 }
 
 /**
@@ -1181,7 +1259,7 @@ export interface QueryManagedSubAccountTransferLogMasterAccountInvestorRequest {
  */
 export interface QueryManagedSubAccountTransferLogMasterAccountTradingRequest {
     /**
-     * [Sub-account email](#email-address)
+     *
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
@@ -1202,32 +1280,32 @@ export interface QueryManagedSubAccountTransferLogMasterAccountTradingRequest {
     readonly endTime: number | bigint;
 
     /**
-     * Page
+     *
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
     readonly page: number | bigint;
 
     /**
-     * Limit (Max: 500)
+     *
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
     readonly limit: number | bigint;
 
     /**
-     * Transfer Direction (from/to)
+     * Transfer Direction (FROM/TO)
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
     readonly transfers?: string;
 
     /**
-     * Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN' | 'ISOLATED_MARGIN' | 'USDT_FUTURE' | 'COIN_FUTURE'}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
-    readonly transferFunctionAccountType?: string;
+    readonly transferFunctionAccountType?: QueryManagedSubAccountTransferLogMasterAccountTradingTransferFunctionAccountTypeEnum;
 }
 
 /**
@@ -1250,14 +1328,14 @@ export interface QueryManagedSubAccountTransferLogSubAccountTradingRequest {
     readonly endTime: number | bigint;
 
     /**
-     * Page
+     *
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
     readonly page: number | bigint;
 
     /**
-     * Limit (Max: 500)
+     *
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
@@ -1271,11 +1349,11 @@ export interface QueryManagedSubAccountTransferLogSubAccountTradingRequest {
     readonly transfers?: string;
 
     /**
-     * Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN' | 'ISOLATED_MARGIN' | 'USDT_FUTURE' | 'COIN_FUTURE'}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
-    readonly transferFunctionAccountType?: string;
+    readonly transferFunctionAccountType?: QueryManagedSubAccountTransferLogSubAccountTradingTransferFunctionAccountTypeEnum;
 
     /**
      *
@@ -1312,7 +1390,8 @@ export interface WithdrawlAssetsFromTheManagedSubAccountRequest {
     readonly amount: number;
 
     /**
-     * Withdrawals is automatically occur on the transfer date(UTC0). If a date is not selected, the withdrawal occurs right now
+     * Withdrawal will happen automatically on the selected date (UTC 0). If no date is selected,
+     * withdrawal takes effect immediately.
      * @type {number | bigint}
      * @memberof ManagedSubAccountApiWithdrawlAssetsFromTheManagedSubAccount
      */
@@ -1342,16 +1421,19 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Deposit Assets Into The Managed Sub-account
      *
-     * You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
      *
      * @summary Deposit Assets Into The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {DepositAssetsIntoTheManagedSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepositAssetsIntoTheManagedSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Deposit-Assets-Into-The-Managed-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#deposit-assets-into-the-managed-sub-account Binance API Documentation}
      */
     public async depositAssetsIntoTheManagedSubAccount(
         requestParameters: DepositAssetsIntoTheManagedSubAccountRequest
@@ -1378,17 +1460,20 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Get investor's managed sub-account deposit address.
      *
-     * If `network` is not send, return with default `network` of the `coin`.
-     * * `amount` needs to be sent if using LIGHTNING network
+     * Weight(UID): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` is not sent, the default `network` for the `coin` is returned.
+     * - When using `LIGHTNING`, `amount` must be provided.
      *
      * @summary Get Managed Sub-account Deposit Address (For Investor Master Account) (USER_DATA)
      * @param {GetManagedSubAccountDepositAddressRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetManagedSubAccountDepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Get-Managed-Sub-account-Deposit-Address Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#get-managed-sub-account-deposit-address Binance API Documentation}
      */
     public async getManagedSubAccountDepositAddress(
         requestParameters: GetManagedSubAccountDepositAddressRequest
@@ -1416,14 +1501,16 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Query Managed Sub-account Asset Details
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-Asset-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-asset-details Binance API Documentation}
      */
     public async queryManagedSubAccountAssetDetails(
         requestParameters: QueryManagedSubAccountAssetDetailsRequest
@@ -1448,14 +1535,16 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Investor can use this api to query managed sub account futures asset details
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Futures Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountFuturesAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountFuturesAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-Futures-Asset-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-futures-asset-details Binance API Documentation}
      */
     public async queryManagedSubAccountFuturesAssetDetails(
         requestParameters: QueryManagedSubAccountFuturesAssetDetailsRequest
@@ -1480,14 +1569,16 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Get investor's managed sub-account list.
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
      * @param {QueryManagedSubAccountListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-list Binance API Documentation}
      */
     public async queryManagedSubAccountList(
         requestParameters: QueryManagedSubAccountListRequest = {}
@@ -1513,14 +1604,16 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Investor can use this api to query managed sub account margin asset details
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Margin Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountMarginAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountMarginAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-Margin-Asset-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-margin-asset-details Binance API Documentation}
      */
     public async queryManagedSubAccountMarginAssetDetails(
         requestParameters: QueryManagedSubAccountMarginAssetDetailsRequest
@@ -1545,18 +1638,21 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Query Managed Sub-account Snapshot
      *
-     * The query time period must be less then 30 days
-     * Support query within the last one month only
-     * If startTimeand endTime not sent, return records of the last 7 days by default
+     * Weight(IP): 2400
      *
-     * Weight: 2400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The query time range must be less than 30 days.
+     * - Only data from the most recent month is supported.
+     * - If `startTime` and `endTime` are omitted, records from the last 7 days are returned by default.
      *
      * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountSnapshotRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountSnapshotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-Snapshot Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-snapshot Binance API Documentation}
      */
     public async queryManagedSubAccountSnapshot(
         requestParameters: QueryManagedSubAccountSnapshotRequest
@@ -1583,17 +1679,25 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     }
 
     /**
-     * Investor can use this api to query managed sub account transfer log. This endpoint is available for investor of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset allocation and account application, while delegating trades to a professional trading team.
-     * Please refer to [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * Query Managed Sub Account Transfer Log For Investor Master Account
      *
-     * Weight: 1
+     * Investor can use this api to query managed sub account transfer log. This endpoint is available for investor of
+     * Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset
+     * allocation and account application, while delegating trades to a professional trading team.
      *
-     * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
+     * Please refer to
+     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Managed Sub Account Transfer Log For Investor Master Account (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountInvestorRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountInvestorResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-Account-Transfer-Log-Investor Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-transfer-log-master-account-investor Binance API Documentation}
      */
     public async queryManagedSubAccountTransferLogMasterAccountInvestor(
         requestParameters: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest
@@ -1621,17 +1725,25 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     }
 
     /**
-     * Trading team can use this api to query managed sub account transfer log. This endpoint is available for trading team of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset allocation and account application, while delegating trades to a professional trading team.
-     * Please refer to [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * Query Managed Sub Account Transfer Log For Trading Team Master Account
      *
-     * Weight: 60
+     * Trading team can use this api to query managed sub account transfer log. This endpoint is available for trading
+     * team of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in
+     * asset allocation and account application, while delegating trades to a professional trading team.
      *
-     * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
+     * Please refer to
+     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     *
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Managed Sub Account Transfer Log For Trading Team Master Account (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountTradingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountTradingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-Account-Transfer-Log-Trading-Team-Master Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-transfer-log-master-account-trading Binance API Documentation}
      */
     public async queryManagedSubAccountTransferLogMasterAccountTrading(
         requestParameters: QueryManagedSubAccountTransferLogMasterAccountTradingRequest
@@ -1661,14 +1773,16 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Query Managed Sub Account Transfer Log (For Trading Team Sub Account)
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogSubAccountTradingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogSubAccountTradingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-Account-Transfer-Log-Trading-Team-Sub Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-transfer-log-sub-account-trading Binance API Documentation}
      */
     public async queryManagedSubAccountTransferLogSubAccountTrading(
         requestParameters: QueryManagedSubAccountTransferLogSubAccountTradingRequest
@@ -1698,16 +1812,19 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
     /**
      * Withdrawl Assets From The Managed Sub-account
      *
-     * You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Your API key must have the permission `Enable Spot & Margin Trading`.
      *
      * @summary Withdrawl Assets From The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {WithdrawlAssetsFromTheManagedSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawlAssetsFromTheManagedSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ManagedSubAccountApi
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Withdrawl-Assets-From-The-Managed-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#withdrawl-assets-from-the-managed-sub-account Binance API Documentation}
      */
     public async withdrawlAssetsFromTheManagedSubAccount(
         requestParameters: WithdrawlAssetsFromTheManagedSubAccountRequest
@@ -1731,4 +1848,34 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum QueryManagedSubAccountSnapshotTypeEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+    FUTURES = 'FUTURES',
+}
+
+export enum QueryManagedSubAccountTransferLogMasterAccountInvestorTransferFunctionAccountTypeEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+    ISOLATED_MARGIN = 'ISOLATED_MARGIN',
+    USDT_FUTURE = 'USDT_FUTURE',
+    COIN_FUTURE = 'COIN_FUTURE',
+}
+
+export enum QueryManagedSubAccountTransferLogMasterAccountTradingTransferFunctionAccountTypeEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+    ISOLATED_MARGIN = 'ISOLATED_MARGIN',
+    USDT_FUTURE = 'USDT_FUTURE',
+    COIN_FUTURE = 'COIN_FUTURE',
+}
+
+export enum QueryManagedSubAccountTransferLogSubAccountTradingTransferFunctionAccountTypeEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+    ISOLATED_MARGIN = 'ISOLATED_MARGIN',
+    USDT_FUTURE = 'USDT_FUTURE',
+    COIN_FUTURE = 'COIN_FUTURE',
 }

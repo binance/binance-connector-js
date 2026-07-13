@@ -1,7 +1,7 @@
 /**
- * Binance Sub Account REST API
+ * Sub Account REST API
  *
- * OpenAPI Specification for the Binance Sub Account REST API
+ * Create and manage sub-accounts, control permissions, and transfer assets via the Sub Account API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -29,8 +29,12 @@ import type {
 } from './modules/account-management-api';
 import type {
     AddIpRestrictionForSubAccountApiKeyRequest,
+    CreateSubAccountApiKeyRequest,
     DeleteIpListForASubAccountApiKeyRequest,
+    DeleteSubAccountApiKeyRequest,
     GetIpRestrictionForASubAccountApiKeyRequest,
+    ModifySubAccountApiKeyPermissionRequest,
+    QuerySubAccountApiKeyRequest,
 } from './modules/api-management-api';
 import type {
     FuturesTransferForSubAccountRequest,
@@ -83,8 +87,11 @@ import type {
 } from './types';
 import type {
     AddIpRestrictionForSubAccountApiKeyResponse,
+    CreateSubAccountApiKeyResponse,
     DeleteIpListForASubAccountApiKeyResponse,
     GetIpRestrictionForASubAccountApiKeyResponse,
+    ModifySubAccountApiKeyPermissionResponse,
+    QuerySubAccountApiKeyResponse,
 } from './types';
 import type {
     FuturesTransferForSubAccountResponse,
@@ -196,17 +203,20 @@ export class RestAPI {
     /**
      * Create a Virtual Sub-account
      *
-     * This request will generate a virtual sub account under your master account.
-     * You need to enable "trade" option for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request generates a virtual sub-account under your master account.
+     * - The API key used to call this endpoint must have the `trade` option enabled.
      *
      * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
      * @param {CreateAVirtualSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CreateAVirtualSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Create-a-Virtual-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#create-avirtual-sub-account Binance API Documentation}
      */
     createAVirtualSubAccount(
         requestParameters: CreateAVirtualSubAccountRequest
@@ -217,14 +227,16 @@ export class RestAPI {
     /**
      * Enable Futures for Sub-account for Master Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableFuturesForSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<EnableFuturesForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Enable-Futures-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#enable-futures-for-sub-account Binance API Documentation}
      */
     enableFuturesForSubAccount(
         requestParameters: EnableFuturesForSubAccountRequest
@@ -235,14 +247,16 @@ export class RestAPI {
     /**
      * Enable Options for Sub-account (For Master Account).
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableOptionsForSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<EnableOptionsForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Enable-Options-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#enable-options-for-sub-account Binance API Documentation}
      */
     enableOptionsForSubAccount(
         requestParameters: EnableOptionsForSubAccountRequest
@@ -253,14 +267,16 @@ export class RestAPI {
     /**
      * Get Futures Position-Risk of Sub-account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFuturesPositionRiskOfSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Get-Futures-Position-Risk-of-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#get-futures-position-risk-of-sub-account Binance API Documentation}
      */
     getFuturesPositionRiskOfSubAccount(
         requestParameters: GetFuturesPositionRiskOfSubAccountRequest
@@ -271,14 +287,16 @@ export class RestAPI {
     /**
      * Get Futures Position-Risk of Sub-account V2
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFuturesPositionRiskOfSubAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Get-Futures-Position-Risk-of-Sub-account-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#get-futures-position-risk-of-sub-account-v2 Binance API Documentation}
      */
     getFuturesPositionRiskOfSubAccountV2(
         requestParameters: GetFuturesPositionRiskOfSubAccountV2Request
@@ -289,16 +307,19 @@ export class RestAPI {
     /**
      * Get Sub-account's Status on Margin Or Futures
      *
-     * If no email sent, all sub-accounts' information will be returned.
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If no email sent, all sub-accounts' information will be returned.
      *
      * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
      * @param {GetSubAccountsStatusOnMarginOrFuturesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSubAccountsStatusOnMarginOrFuturesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Get-Sub-accounts-Status-on-Margin-Or-Futures Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#get-sub-accounts-status-on-margin-or-futures Binance API Documentation}
      */
     getSubAccountsStatusOnMarginOrFutures(
         requestParameters: GetSubAccountsStatusOnMarginOrFuturesRequest = {}
@@ -309,14 +330,16 @@ export class RestAPI {
     /**
      * Query Sub-account List
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account List (For Master Account) (USER_DATA)
      * @param {QuerySubAccountListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubAccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Query-Sub-account-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#query-sub-account-list Binance API Documentation}
      */
     querySubAccountList(
         requestParameters: QuerySubAccountListRequest = {}
@@ -327,14 +350,16 @@ export class RestAPI {
     /**
      * Query Sub-account Transaction statistics (For Master Account).
      *
-     * Weight: 60
+     * Weight(IP): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
      * @param {QuerySubAccountTransactionStatisticsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubAccountTransactionStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Query-Sub-account-Transaction-Statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/account-management#query-sub-account-transaction-statistics Binance API Documentation}
      */
     querySubAccountTransactionStatistics(
         requestParameters: QuerySubAccountTransactionStatisticsRequest = {}
@@ -345,16 +370,19 @@ export class RestAPI {
     /**
      * Add IP Restriction for Sub-Account API key
      *
-     * You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
      *
      * @summary Add IP Restriction for Sub-Account API key (For Master Account) (USER_DATA)
      * @param {AddIpRestrictionForSubAccountApiKeyRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AddIpRestrictionForSubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/api-management/Add-IP-Restriction-for-Sub-Account-API-key Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#add-ip-restriction-for-sub-account-api-key Binance API Documentation}
      */
     addIpRestrictionForSubAccountApiKey(
         requestParameters: AddIpRestrictionForSubAccountApiKeyRequest
@@ -363,18 +391,47 @@ export class RestAPI {
     }
 
     /**
+     * Create a new API Key for a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `status=2` requires `ipAddress`
+     * - `status=3` requires `thirdPartyName`
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Create Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {CreateSubAccountApiKeyRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<CreateSubAccountApiKeyResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#create-sub-account-api-key Binance API Documentation}
+     */
+    createSubAccountApiKey(
+        requestParameters: CreateSubAccountApiKeyRequest
+    ): Promise<RestApiResponse<CreateSubAccountApiKeyResponse>> {
+        return this.apiManagementApi.createSubAccountApiKey(requestParameters);
+    }
+
+    /**
      * Delete IP List For a Sub-account API Key
      *
-     * You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Enable Spot & Margin Trading option for the api key which requests this endpoint
      *
      * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {DeleteIpListForASubAccountApiKeyRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DeleteIpListForASubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/api-management/Delete-IP-List-For-a-Sub-account-API-Key Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#delete-ip-list-for-asub-account-api-key Binance API Documentation}
      */
     deleteIpListForASubAccountApiKey(
         requestParameters: DeleteIpListForASubAccountApiKeyRequest
@@ -383,16 +440,42 @@ export class RestAPI {
     }
 
     /**
+     * Delete an API Key of a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Delete Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {DeleteSubAccountApiKeyRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<object>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#delete-sub-account-api-key Binance API Documentation}
+     */
+    deleteSubAccountApiKey(
+        requestParameters: DeleteSubAccountApiKeyRequest
+    ): Promise<RestApiResponse<object>> {
+        return this.apiManagementApi.deleteSubAccountApiKey(requestParameters);
+    }
+
+    /**
      * Get IP Restriction for a Sub-account API Key
      *
-     * Weight: 3000
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {GetIpRestrictionForASubAccountApiKeyRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetIpRestrictionForASubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/api-management/Get-IP-Restriction-for-a-Sub-account-API-Key Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#get-ip-restriction-for-asub-account-api-key Binance API Documentation}
      */
     getIpRestrictionForASubAccountApiKey(
         requestParameters: GetIpRestrictionForASubAccountApiKeyRequest
@@ -401,18 +484,66 @@ export class RestAPI {
     }
 
     /**
+     * Modify the trading permissions of a sub-account API Key.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Portfolio Margin Retail User is not supported
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     *
+     * @summary Modify Sub-account API Key Permission (For Master Account) (USER_DATA)
+     * @param {ModifySubAccountApiKeyPermissionRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<ModifySubAccountApiKeyPermissionResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#modify-sub-account-api-key-permission Binance API Documentation}
+     */
+    modifySubAccountApiKeyPermission(
+        requestParameters: ModifySubAccountApiKeyPermissionRequest
+    ): Promise<RestApiResponse<ModifySubAccountApiKeyPermissionResponse>> {
+        return this.apiManagementApi.modifySubAccountApiKeyPermission(requestParameters);
+    }
+
+    /**
+     * Query the API Key list of a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Sub-account API Key (For Master Account) (USER_DATA)
+     * @param {QuerySubAccountApiKeyRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<QuerySubAccountApiKeyResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#query-sub-account-api-key Binance API Documentation}
+     */
+    querySubAccountApiKey(
+        requestParameters: QuerySubAccountApiKeyRequest
+    ): Promise<RestApiResponse<QuerySubAccountApiKeyResponse>> {
+        return this.apiManagementApi.querySubAccountApiKey(requestParameters);
+    }
+
+    /**
      * Futures Transfer for Sub-account
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Futures Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {FuturesTransferForSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FuturesTransferForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Futures-Transfer-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#futures-transfer-for-sub-account Binance API Documentation}
      */
     futuresTransferForSubAccount(
         requestParameters: FuturesTransferForSubAccountRequest
@@ -423,14 +554,16 @@ export class RestAPI {
     /**
      * Get Detail on Sub-account's Futures Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsFuturesAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Detail-on-Sub-accounts-Futures-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-detail-on-sub-accounts-futures-account Binance API Documentation}
      */
     getDetailOnSubAccountsFuturesAccount(
         requestParameters: GetDetailOnSubAccountsFuturesAccountRequest
@@ -441,14 +574,16 @@ export class RestAPI {
     /**
      * Get Detail on Sub-account's Futures Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsFuturesAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Detail-on-Sub-accounts-Futures-Account-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-detail-on-sub-accounts-futures-account-v2 Binance API Documentation}
      */
     getDetailOnSubAccountsFuturesAccountV2(
         requestParameters: GetDetailOnSubAccountsFuturesAccountV2Request
@@ -459,14 +594,16 @@ export class RestAPI {
     /**
      * Get Detail on Sub-account's Margin Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsMarginAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Detail-on-Sub-accounts-Margin-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-detail-on-sub-accounts-margin-account Binance API Documentation}
      */
     getDetailOnSubAccountsMarginAccount(
         requestParameters: GetDetailOnSubAccountsMarginAccountRequest
@@ -477,18 +614,21 @@ export class RestAPI {
     /**
      * Query move position history
      *
-     * If `startTime` and `endTime` not sent, return records of the last 90 days by default with 1000 maximum limits
-     * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
-     * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 1000 records).
+     * - If `startTime` is sent and `endTime` is omitted, records in `[max(startTime, now-90d), now]` are returned.
+     * - If `startTime` is omitted and `endTime` is sent, records in `[max(now, endTime-90d), endTime]` are returned.
      *
      * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
      * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Move-Position-History-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-move-position-history-for-sub-account Binance API Documentation}
      */
     getMovePositionHistoryForSubAccount(
         requestParameters: GetMovePositionHistoryForSubAccountRequest
@@ -499,16 +639,19 @@ export class RestAPI {
     /**
      * Fetch sub-account deposit address
      *
-     * `amount` needs to be sent if using LIGHTNING network
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `amount` needs to be sent if using LIGHTNING network
      *
      * @summary Get Sub-account Deposit Address (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositAddressRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSubAccountDepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Sub-account-Deposit-Address Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-sub-account-deposit-address Binance API Documentation}
      */
     getSubAccountDepositAddress(
         requestParameters: GetSubAccountDepositAddressRequest
@@ -519,14 +662,16 @@ export class RestAPI {
     /**
      * Fetch sub-account deposit history
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSubAccountDepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Sub-account-Deposit-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-sub-account-deposit-history Binance API Documentation}
      */
     getSubAccountDepositHistory(
         requestParameters: GetSubAccountDepositHistoryRequest
@@ -537,14 +682,16 @@ export class RestAPI {
     /**
      * Get Summary of Sub-account's Futures Account
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Summary-of-Sub-accounts-Futures-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-summary-of-sub-accounts-futures-account Binance API Documentation}
      */
     getSummaryOfSubAccountsFuturesAccount(
         requestParameters: GetSummaryOfSubAccountsFuturesAccountRequest
@@ -555,14 +702,16 @@ export class RestAPI {
     /**
      * Get Summary of Sub-account's Futures Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Summary-of-Sub-accounts-Futures-Account-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-summary-of-sub-accounts-futures-account-v2 Binance API Documentation}
      */
     getSummaryOfSubAccountsFuturesAccountV2(
         requestParameters: GetSummaryOfSubAccountsFuturesAccountV2Request
@@ -573,14 +722,16 @@ export class RestAPI {
     /**
      * Get Summary of Sub-account's Margin Account
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsMarginAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Summary-of-Sub-accounts-Margin-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#get-summary-of-sub-accounts-margin-account Binance API Documentation}
      */
     getSummaryOfSubAccountsMarginAccount(
         requestParameters: GetSummaryOfSubAccountsMarginAccountRequest = {}
@@ -591,16 +742,19 @@ export class RestAPI {
     /**
      * Margin Transfer for Sub-account
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Margin Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {MarginTransferForSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MarginTransferForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Margin-Transfer-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#margin-transfer-for-sub-account Binance API Documentation}
      */
     marginTransferForSubAccount(
         requestParameters: MarginTransferForSubAccountRequest
@@ -611,26 +765,29 @@ export class RestAPI {
     /**
      * Move position between sub-master, master-sub, or sub-sub accounts when necessary
      *
-     * You need to Enable Trading permission for the API Key which requests this endpoint.
-     * This function only support VIP level 7-9.
-     * Only master account can use the function
-     * Quantity should be positive number only
-     * The function support normal account, PM PRO, PM PRO SPAN and PM Retail.
-     * Only support for from account has positions
-     * For all orders in the same orderArgs request, if any symbol’s total close position quantity is bigger than the symbol’s current position quantity, all batch orders in the same list will fail simultaneously.
-     * Only support cross margin mode
-     * The price for move position is MarkPrice only.
-     * Not support for MSA.
-     * Not support for the symbol under Reduce-Only.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable the `Trading` permission for the API key used to call this endpoint.
+     * - This function is only available for VIP levels 7-9.
+     * - Only master accounts can call this endpoint.
+     * - `quantity` must be a positive number.
+     * - Supported account types: normal account, PM PRO, PM PRO SPAN, and PM Retail.
+     * - The source account must have positions.
+     * - For orders in the same `orderArgs` request, if any symbol's total close position quantity exceeds current position quantity, all orders in that batch fail.
+     * - Only cross margin mode is supported.
+     * - The move position price supports `MARK_PRICE` only.
+     * - MSA is not supported.
+     * - Symbols configured with `Reduce-Only` are not supported.
      *
      * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
      * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MovePositionForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Move-Position-for-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#move-position-for-sub-account Binance API Documentation}
      */
     movePositionForSubAccount(
         requestParameters: MovePositionForSubAccountRequest
@@ -641,14 +798,16 @@ export class RestAPI {
     /**
      * Fetch sub-account assets
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubAccountAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Assets-V4 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-assets Binance API Documentation}
      */
     querySubAccountAssets(
         requestParameters: QuerySubAccountAssetsRequest
@@ -659,14 +818,16 @@ export class RestAPI {
     /**
      * Fetch sub-account assets
      *
-     * Weight: 60
+     * Weight(UID): 60
      *
-     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Sub-account Assets V4 (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsAssetManagementRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubAccountAssetsAssetManagementResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Assets-V4 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-assets-asset-management Binance API Documentation}
      */
     querySubAccountAssetsAssetManagement(
         requestParameters: QuerySubAccountAssetsAssetManagementRequest
@@ -677,14 +838,16 @@ export class RestAPI {
     /**
      * Query Sub-account Futures Asset Transfer History
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountFuturesAssetTransferHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubAccountFuturesAssetTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Futures-Asset-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-futures-asset-transfer-history Binance API Documentation}
      */
     querySubAccountFuturesAssetTransferHistory(
         requestParameters: QuerySubAccountFuturesAssetTransferHistoryRequest
@@ -697,17 +860,20 @@ export class RestAPI {
     /**
      * Query Sub-account Spot Asset Transfer History
      *
-     * fromEmail and toEmail cannot be sent at the same time.
-     * Return fromEmail equal master account email by default.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `fromEmail` and `toEmail` cannot be sent at the same time.
+     * - If both `fromEmail` and `toEmail` are omitted, records with `fromEmail` equal to the master account are returned by default.
      *
      * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetTransferHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubAccountSpotAssetTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Spot-Asset-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-spot-asset-transfer-history Binance API Documentation}
      */
     querySubAccountSpotAssetTransferHistory(
         requestParameters: QuerySubAccountSpotAssetTransferHistoryRequest = {}
@@ -718,14 +884,16 @@ export class RestAPI {
     /**
      * Get BTC valued asset summary of subaccounts.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetsSummaryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubAccountSpotAssetsSummaryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Spot-Assets-Summary Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-sub-account-spot-assets-summary Binance API Documentation}
      */
     querySubAccountSpotAssetsSummary(
         requestParameters: QuerySubAccountSpotAssetsSummaryRequest = {}
@@ -736,19 +904,22 @@ export class RestAPI {
     /**
      * Query Universal Transfer History
      *
-     * fromEmail and toEmail cannot be sent at the same time.
-     * Return fromEmail equal master account email by default.
-     * The query time period must be less than 7 days.
-     * If startTime and endTime not sent, return records of the last 7 days by default.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `fromEmail` and `toEmail` cannot be sent at the same time.
+     * - If both `fromEmail` and `toEmail` are omitted, records with `fromEmail` equal to the master account are returned by default.
+     * - The query time range must be less than 7 days.
+     * - If `startTime` and `endTime` are omitted, records from the last 7 days are returned by default.
      *
      * @summary Query Universal Transfer History (For Master Account) (USER_DATA)
      * @param {QueryUniversalTransferHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryUniversalTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Universal-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#query-universal-transfer-history Binance API Documentation}
      */
     queryUniversalTransferHistory(
         requestParameters: QueryUniversalTransferHistoryRequest = {}
@@ -759,18 +930,20 @@ export class RestAPI {
     /**
      * Sub-account Futures Asset Transfer
      *
+     * Weight(IP): 1
      *
-     * Master account can transfer max 2000 times a minute
-     * There must be sufficient margin balance in futures wallet to execute transferring.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - A master account can transfer at most 2000 times per minute.
+     * - The futures wallet must have sufficient margin balance to execute the transfer.
      *
      * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
      * @param {SubAccountFuturesAssetTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubAccountFuturesAssetTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Sub-account-Futures-Asset-Transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#sub-account-futures-asset-transfer Binance API Documentation}
      */
     subAccountFuturesAssetTransfer(
         requestParameters: SubAccountFuturesAssetTransferRequest
@@ -781,17 +954,20 @@ export class RestAPI {
     /**
      * Sub-account Transfer History
      *
-     * If type is not sent, the records of type 2: transfer out will be returned by default.
-     * If startTime and endTime are not sent, the recent 30-day data will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `type` is not sent, records of type `2` (transfer out) are returned by default.
+     * - If `startTime` and `endTime` are not sent, data from the most recent 30 days is returned.
      *
      * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
      * @param {SubAccountTransferHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubAccountTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Sub-account-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#sub-account-transfer-history Binance API Documentation}
      */
     subAccountTransferHistory(
         requestParameters: SubAccountTransferHistoryRequest = {}
@@ -802,16 +978,19 @@ export class RestAPI {
     /**
      * Transfer to Master
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Transfer to Master (For Sub-account) (USER_DATA)
      * @param {TransferToMasterRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TransferToMasterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Transfer-to-Master Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#transfer-to-master Binance API Documentation}
      */
     transferToMaster(
         requestParameters: TransferToMasterRequest
@@ -822,16 +1001,19 @@ export class RestAPI {
     /**
      * Transfer to Sub-account of Same Master
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * @summary Transfer to Sub-account of Same Master (For Sub-account) (USER_DATA)
      * @param {TransferToSubAccountOfSameMasterRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TransferToSubAccountOfSameMasterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Transfer-to-Sub-account-of-Same-Master Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#transfer-to-sub-account-of-same-master Binance API Documentation}
      */
     transferToSubAccountOfSameMaster(
         requestParameters: TransferToSubAccountOfSameMasterRequest
@@ -842,26 +1024,31 @@ export class RestAPI {
     /**
      * Universal Transfer
      *
-     * You need to enable "internal transfer" option for the api key which requests this endpoint.
-     * Transfer from master account by default if fromEmail is not sent.
-     * Transfer to master account by default if toEmail is not sent.
-     * At least either fromEmail or toEmail need to be sent when the fromAccountType and the toAccountType are the same.
-     * Supported transfer scenarios:
-     * `SPOT` transfer to `SPOT`, `USDT_FUTURE`, `COIN_FUTURE` (regardless of master or sub)
-     * `SPOT`, `USDT_FUTURE`, `COIN_FUTURE` transfer to `SPOT`  (regardless of master or sub)
-     * Master account `SPOT` transfer to sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN`
-     * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
-     * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
-     * `ALPHA` to `ALPHA`  (regardless of master or sub)
+     * Weight(IP): 1
      *
-     * Weight: 360
+     * Weight(UID): 360
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable the `internal transfer` option for the API key used to call this endpoint.
+     * - If `fromEmail` is not sent, transfer out from the master account by default.
+     * - If `toEmail` is not sent, transfer into the master account by default.
+     * - When `fromAccountType` and `toAccountType` are the same, at least one of `fromEmail` or `toEmail` must be sent.
+     * - Supported transfer scenarios:
+     * - `SPOT` -> `SPOT` / `USDT_FUTURE` / `COIN_FUTURE` (master or sub-account).
+     * - `SPOT` / `USDT_FUTURE` / `COIN_FUTURE` -> `SPOT` (master or sub-account).
+     * - Master account `SPOT` -> sub-account `MARGIN(Cross)` / `ISOLATED_MARGIN`.
+     * - Sub-account `MARGIN(Cross)` / `ISOLATED_MARGIN` -> master account `SPOT`.
+     * - Sub-account `MARGIN(Cross)` -> sub-account `MARGIN(Cross)`.
+     * - `ALPHA` -> `ALPHA` (master or sub-account).
      *
      * @summary Universal Transfer (For Master Account) (USER_DATA)
      * @param {UniversalTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<UniversalTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Universal-Transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/asset-management#universal-transfer Binance API Documentation}
      */
     universalTransfer(
         requestParameters: UniversalTransferRequest
@@ -872,16 +1059,19 @@ export class RestAPI {
     /**
      * Deposit Assets Into The Managed Sub-account
      *
-     * You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
      *
      * @summary Deposit Assets Into The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {DepositAssetsIntoTheManagedSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DepositAssetsIntoTheManagedSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Deposit-Assets-Into-The-Managed-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#deposit-assets-into-the-managed-sub-account Binance API Documentation}
      */
     depositAssetsIntoTheManagedSubAccount(
         requestParameters: DepositAssetsIntoTheManagedSubAccountRequest
@@ -892,17 +1082,20 @@ export class RestAPI {
     /**
      * Get investor's managed sub-account deposit address.
      *
-     * If `network` is not send, return with default `network` of the `coin`.
-     * * `amount` needs to be sent if using LIGHTNING network
+     * Weight(UID): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` is not sent, the default `network` for the `coin` is returned.
+     * - When using `LIGHTNING`, `amount` must be provided.
      *
      * @summary Get Managed Sub-account Deposit Address (For Investor Master Account) (USER_DATA)
      * @param {GetManagedSubAccountDepositAddressRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetManagedSubAccountDepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Get-Managed-Sub-account-Deposit-Address Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#get-managed-sub-account-deposit-address Binance API Documentation}
      */
     getManagedSubAccountDepositAddress(
         requestParameters: GetManagedSubAccountDepositAddressRequest
@@ -913,14 +1106,16 @@ export class RestAPI {
     /**
      * Query Managed Sub-account Asset Details
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountAssetDetailsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-Asset-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-asset-details Binance API Documentation}
      */
     queryManagedSubAccountAssetDetails(
         requestParameters: QueryManagedSubAccountAssetDetailsRequest
@@ -931,14 +1126,16 @@ export class RestAPI {
     /**
      * Investor can use this api to query managed sub account futures asset details
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Futures Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountFuturesAssetDetailsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountFuturesAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-Futures-Asset-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-futures-asset-details Binance API Documentation}
      */
     queryManagedSubAccountFuturesAssetDetails(
         requestParameters: QueryManagedSubAccountFuturesAssetDetailsRequest
@@ -951,14 +1148,16 @@ export class RestAPI {
     /**
      * Get investor's managed sub-account list.
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
      * @param {QueryManagedSubAccountListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-list Binance API Documentation}
      */
     queryManagedSubAccountList(
         requestParameters: QueryManagedSubAccountListRequest = {}
@@ -969,14 +1168,16 @@ export class RestAPI {
     /**
      * Investor can use this api to query managed sub account margin asset details
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub-account Margin Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountMarginAssetDetailsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountMarginAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-Margin-Asset-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-margin-asset-details Binance API Documentation}
      */
     queryManagedSubAccountMarginAssetDetails(
         requestParameters: QueryManagedSubAccountMarginAssetDetailsRequest
@@ -989,18 +1190,21 @@ export class RestAPI {
     /**
      * Query Managed Sub-account Snapshot
      *
-     * The query time period must be less then 30 days
-     * Support query within the last one month only
-     * If startTimeand endTime not sent, return records of the last 7 days by default
+     * Weight(IP): 2400
      *
-     * Weight: 2400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The query time range must be less than 30 days.
+     * - Only data from the most recent month is supported.
+     * - If `startTime` and `endTime` are omitted, records from the last 7 days are returned by default.
      *
      * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountSnapshotRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountSnapshotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-account-Snapshot Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-snapshot Binance API Documentation}
      */
     queryManagedSubAccountSnapshot(
         requestParameters: QueryManagedSubAccountSnapshotRequest
@@ -1009,17 +1213,25 @@ export class RestAPI {
     }
 
     /**
-     * Investor can use this api to query managed sub account transfer log. This endpoint is available for investor of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset allocation and account application, while delegating trades to a professional trading team.
-     * Please refer to [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * Query Managed Sub Account Transfer Log For Investor Master Account
      *
-     * Weight: 1
+     * Investor can use this api to query managed sub account transfer log. This endpoint is available for investor of
+     * Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset
+     * allocation and account application, while delegating trades to a professional trading team.
      *
-     * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
+     * Please refer to
+     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Managed Sub Account Transfer Log For Investor Master Account (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountInvestorRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountInvestorResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-Account-Transfer-Log-Investor Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-transfer-log-master-account-investor Binance API Documentation}
      */
     queryManagedSubAccountTransferLogMasterAccountInvestor(
         requestParameters: QueryManagedSubAccountTransferLogMasterAccountInvestorRequest
@@ -1030,17 +1242,25 @@ export class RestAPI {
     }
 
     /**
-     * Trading team can use this api to query managed sub account transfer log. This endpoint is available for trading team of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in asset allocation and account application, while delegating trades to a professional trading team.
-     * Please refer to [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * Query Managed Sub Account Transfer Log For Trading Team Master Account
      *
-     * Weight: 60
+     * Trading team can use this api to query managed sub account transfer log. This endpoint is available for trading
+     * team of Managed Sub-Account. A Managed Sub-Account is an account type for investors who value flexibility in
+     * asset allocation and account application, while delegating trades to a professional trading team.
      *
-     * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
+     * Please refer to
+     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     *
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Managed Sub Account Transfer Log For Trading Team Master Account (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountTradingRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountTradingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-Account-Transfer-Log-Trading-Team-Master Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-transfer-log-master-account-trading Binance API Documentation}
      */
     queryManagedSubAccountTransferLogMasterAccountTrading(
         requestParameters: QueryManagedSubAccountTransferLogMasterAccountTradingRequest
@@ -1053,14 +1273,16 @@ export class RestAPI {
     /**
      * Query Managed Sub Account Transfer Log (For Trading Team Sub Account)
      *
-     * Weight: 60
+     * Weight(UID): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogSubAccountTradingRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogSubAccountTradingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Query-Managed-Sub-Account-Transfer-Log-Trading-Team-Sub Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#query-managed-sub-account-transfer-log-sub-account-trading Binance API Documentation}
      */
     queryManagedSubAccountTransferLogSubAccountTrading(
         requestParameters: QueryManagedSubAccountTransferLogSubAccountTradingRequest
@@ -1073,16 +1295,19 @@ export class RestAPI {
     /**
      * Withdrawl Assets From The Managed Sub-account
      *
-     * You need to enable `Enable Spot & Margin Trading` option for the api key which requests this endpoint
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Your API key must have the permission `Enable Spot & Margin Trading`.
      *
      * @summary Withdrawl Assets From The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {WithdrawlAssetsFromTheManagedSubAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<WithdrawlAssetsFromTheManagedSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/managed-sub-account/Withdrawl-Assets-From-The-Managed-Sub-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/managed-sub-account#withdrawl-assets-from-the-managed-sub-account Binance API Documentation}
      */
     withdrawlAssetsFromTheManagedSubAccount(
         requestParameters: WithdrawlAssetsFromTheManagedSubAccountRequest

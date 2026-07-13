@@ -10,7 +10,7 @@ const client = new SubAccount({ configurationRestAPI });
 async function queryManagedSubAccountMarginAssetDetails() {
     try {
         const response = await client.restAPI.queryManagedSubAccountMarginAssetDetails({
-            email: 'sub-account-email@email.com',
+            email: 'abc@test.com',
         });
 
         const rateLimits = response.rateLimits!;

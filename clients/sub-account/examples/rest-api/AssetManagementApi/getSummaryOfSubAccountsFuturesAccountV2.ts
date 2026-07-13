@@ -10,7 +10,7 @@ const client = new SubAccount({ configurationRestAPI });
 async function getSummaryOfSubAccountsFuturesAccountV2() {
     try {
         const response = await client.restAPI.getSummaryOfSubAccountsFuturesAccountV2({
-            futuresType: 789,
+            futuresType: 1,
         });
 
         const rateLimits = response.rateLimits!;
