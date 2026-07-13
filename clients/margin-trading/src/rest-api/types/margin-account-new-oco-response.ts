@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,67 +28,67 @@ import type { MarginAccountNewOcoResponseOrdersInner } from './margin-account-ne
  */
 export interface MarginAccountNewOcoResponse {
     /**
-     *
+     * order List Id.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponse
      */
     orderListId?: number | bigint;
     /**
-     *
+     * contingency Type.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     contingencyType?: string;
     /**
-     *
+     * list Status Type.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     listStatusType?: string;
     /**
-     *
+     * list Order Status.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     listOrderStatus?: string;
     /**
-     *
+     * list Client Order Id.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     listClientOrderId?: string;
     /**
-     *
+     * transaction Time.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponse
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     symbol?: string;
     /**
-     *
+     * will not return if no margin trade happens
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     marginBuyBorrowAmount?: string;
     /**
-     *
+     * will not return if no margin trade happens
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     marginBuyBorrowAsset?: string;
     /**
-     *
+     * if isolated margin
      * @type {boolean}
      * @memberof MarginAccountNewOcoResponse
      */
     isIsolated?: boolean;
     /**
-     *
+     * orders list.
      * @type {Array<MarginAccountNewOcoResponseOrdersInner>}
      * @memberof MarginAccountNewOcoResponse
      */

@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function smallLiabilityExchange() {
     try {
         const response = await client.restAPI.smallLiabilityExchange({
-            assetNames: ['BTC'],
+            assetNames: 'BTC,ETH',
         });
 
         const rateLimits = response.rateLimits!;

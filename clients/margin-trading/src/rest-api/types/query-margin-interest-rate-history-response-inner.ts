@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,25 +20,25 @@
  */
 export interface QueryMarginInterestRateHistoryResponseInner {
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof QueryMarginInterestRateHistoryResponseInner
      */
     asset?: string;
     /**
-     *
+     * daily Interest Rate.
      * @type {string}
      * @memberof QueryMarginInterestRateHistoryResponseInner
      */
     dailyInterestRate?: string;
     /**
-     *
+     * timestamp.
      * @type {number | bigint}
      * @memberof QueryMarginInterestRateHistoryResponseInner
      */
     timestamp?: number | bigint;
     /**
-     *
+     * vip Level.
      * @type {number | bigint}
      * @memberof QueryMarginInterestRateHistoryResponseInner
      */

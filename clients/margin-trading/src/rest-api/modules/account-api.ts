@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -41,9 +40,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Adjust cross margin max leverage
          *
-         * The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25;  The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
+         * Weight(UID): 3000, 1 times/min per IP
          *
-         * Weight: 3000
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
          *
          * @summary Adjust cross margin max leverage (USER_DATA)
          * @param {number | bigint} maxLeverage Can only adjust 3 , 5 or 10，Example: maxLeverage = 5 or 3 for Cross Margin Classic; maxLeverage=10 for Cross Margin Pro 10x leverage or 20x if compliance allows.
@@ -77,14 +79,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Disable isolated margin account for a specific symbol. Each trading pair can only be deactivated once every 24
-         * hours.
+         * Disable isolated margin account for a specific symbol. Each trading pair can only be deactivated once every 24 hours.
          *
-         * Weight: 300(UID)
+         * Weight(UID): 300
+         *
+         * Security Type: TRADE
          *
          * @summary Disable Isolated Margin Account (TRADE)
          * @param {string} symbol
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -121,11 +124,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Enable isolated margin account for a specific symbol(Only supports activation of previously disabled accounts).
          *
-         * Weight: 300(UID)
+         * Weight(UID): 300
+         *
+         * Security Type: TRADE
          *
          * @summary Enable Isolated Margin Account (TRADE)
          * @param {string} symbol
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -162,10 +167,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get BNB Burn Status
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get BNB Burn Status (USER_DATA)
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -193,10 +200,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get personal margin level information
          *
-         * Weight: 10(IP)
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Summary of Margin account (USER_DATA)
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -224,24 +233,36 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query Cross Isolated Margin Capital Flow
          *
-         * Weight: 100(IP)
+         * Weight(IP): 100
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Only supports querying the data of the last 90 days
+         *
+         * - The time between startTime and endTime cannot be longer than 7 days.
+         *
+         * - If fromId is set, the data with id > fromId will be returned.
+         * Otherwise the latest data will be returned
+         *
+         * - To query isolated data, Symbol needs to be entered.
          *
          * @summary Query Cross Isolated Margin Capital Flow (USER_DATA)
          * @param {string} [asset]
-         * @param {string} [symbol] isolated margin pair
-         * @param {string} [type] Transfer Type: ROLL_IN, ROLL_OUT
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {string} [symbol] Mandatory for Isolated data
+         * @param {QueryCrossIsolatedMarginCapitalFlowTypeEnum} [type]
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [fromId] If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
-         * @param {number | bigint} [limit] Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [fromId]
+         * @param {number | bigint} [limit]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCrossIsolatedMarginCapitalFlow: async (
             asset?: string,
             symbol?: string,
-            type?: string,
+            type?: QueryCrossIsolatedMarginCapitalFlowTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             fromId?: number | bigint,
@@ -292,10 +313,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query Cross Margin Account Details
          *
-         * Weight: 10(IP)
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Cross Margin Account Details (USER_DATA)
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -325,12 +348,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get cross margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee
          *
-         * Weight: 1 when coin is specified;(IP)
+         * Weight: 1 when coin is specified;(IP) 5 when the coin parameter is omitted(IP)
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Cross Margin Fee Data (USER_DATA)
          * @param {number | bigint} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
          * @param {string} [coin]
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -368,10 +393,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query enabled isolated margin account limit.
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Enabled Isolated Margin Account Limit (USER_DATA)
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -401,14 +428,19 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query Isolated Margin Account Info
          *
-         * If "symbols" is not sent, all isolated assets will be returned.
-         * If "symbols" is sent, only the isolated assets of the sent symbols will be returned.
+         * Weight(IP): 10
          *
-         * Weight: 10(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If "symbols" is not sent, all isolated assets will be returned.
+         *
+         * - If "symbols" is sent, only the isolated assets of the sent symbols
+         * will be returned.
          *
          * @summary Query Isolated Margin Account Info (USER_DATA)
-         * @param {string} [symbols] Max 5 symbols can be sent; separated by ",". e.g. "BTCUSDT,BNBUSDT,ADAUSDT"
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {string} [symbols]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -442,12 +474,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get isolated margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee
          *
-         * Weight: 1 when a single is specified;(IP)
+         * Weight: 1 when a single is specified;(IP) 10 when the symbol parameter is omitted(IP)
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Isolated Margin Fee Data (USER_DATA)
-         * @param {number | bigint} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [vipLevel]
+         * @param {string} [symbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -493,9 +527,12 @@ export interface AccountApiInterface {
     /**
      * Adjust cross margin max leverage
      *
-     * The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25;  The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
+     * Weight(UID): 3000, 1 times/min per IP
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
      *
      * @summary Adjust cross margin max leverage (USER_DATA)
      * @param {AdjustCrossMarginMaxLeverageRequest} requestParameters Request parameters.
@@ -507,10 +544,11 @@ export interface AccountApiInterface {
         requestParameters: AdjustCrossMarginMaxLeverageRequest
     ): Promise<RestApiResponse<AdjustCrossMarginMaxLeverageResponse>>;
     /**
-     * Disable isolated margin account for a specific symbol. Each trading pair can only be deactivated once every 24
-     * hours.
+     * Disable isolated margin account for a specific symbol. Each trading pair can only be deactivated once every 24 hours.
      *
-     * Weight: 300(UID)
+     * Weight(UID): 300
+     *
+     * Security Type: TRADE
      *
      * @summary Disable Isolated Margin Account (TRADE)
      * @param {DisableIsolatedMarginAccountRequest} requestParameters Request parameters.
@@ -524,7 +562,9 @@ export interface AccountApiInterface {
     /**
      * Enable isolated margin account for a specific symbol(Only supports activation of previously disabled accounts).
      *
-     * Weight: 300(UID)
+     * Weight(UID): 300
+     *
+     * Security Type: TRADE
      *
      * @summary Enable Isolated Margin Account (TRADE)
      * @param {EnableIsolatedMarginAccountRequest} requestParameters Request parameters.
@@ -538,7 +578,9 @@ export interface AccountApiInterface {
     /**
      * Get BNB Burn Status
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BNB Burn Status (USER_DATA)
      * @param {GetBnbBurnStatusRequest} requestParameters Request parameters.
@@ -552,7 +594,9 @@ export interface AccountApiInterface {
     /**
      * Get personal margin level information
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Margin account (USER_DATA)
      * @param {GetSummaryOfMarginAccountRequest} requestParameters Request parameters.
@@ -566,7 +610,19 @@ export interface AccountApiInterface {
     /**
      * Query Cross Isolated Margin Capital Flow
      *
-     * Weight: 100(IP)
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Only supports querying the data of the last 90 days
+     *
+     * - The time between startTime and endTime cannot be longer than 7 days.
+     *
+     * - If fromId is set, the data with id > fromId will be returned.
+     * Otherwise the latest data will be returned
+     *
+     * - To query isolated data, Symbol needs to be entered.
      *
      * @summary Query Cross Isolated Margin Capital Flow (USER_DATA)
      * @param {QueryCrossIsolatedMarginCapitalFlowRequest} requestParameters Request parameters.
@@ -580,7 +636,9 @@ export interface AccountApiInterface {
     /**
      * Query Cross Margin Account Details
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Cross Margin Account Details (USER_DATA)
      * @param {QueryCrossMarginAccountDetailsRequest} requestParameters Request parameters.
@@ -594,7 +652,9 @@ export interface AccountApiInterface {
     /**
      * Get cross margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee
      *
-     * Weight: 1 when coin is specified;(IP)
+     * Weight: 1 when coin is specified;(IP) 5 when the coin parameter is omitted(IP)
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Cross Margin Fee Data (USER_DATA)
      * @param {QueryCrossMarginFeeDataRequest} requestParameters Request parameters.
@@ -608,7 +668,9 @@ export interface AccountApiInterface {
     /**
      * Query enabled isolated margin account limit.
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Enabled Isolated Margin Account Limit (USER_DATA)
      * @param {QueryEnabledIsolatedMarginAccountLimitRequest} requestParameters Request parameters.
@@ -622,10 +684,15 @@ export interface AccountApiInterface {
     /**
      * Query Isolated Margin Account Info
      *
-     * If "symbols" is not sent, all isolated assets will be returned.
-     * If "symbols" is sent, only the isolated assets of the sent symbols will be returned.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If "symbols" is not sent, all isolated assets will be returned.
+     *
+     * - If "symbols" is sent, only the isolated assets of the sent symbols
+     * will be returned.
      *
      * @summary Query Isolated Margin Account Info (USER_DATA)
      * @param {QueryIsolatedMarginAccountInfoRequest} requestParameters Request parameters.
@@ -639,7 +706,9 @@ export interface AccountApiInterface {
     /**
      * Get isolated margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee
      *
-     * Weight: 1 when a single is specified;(IP)
+     * Weight: 1 when a single is specified;(IP) 10 when the symbol parameter is omitted(IP)
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Isolated Margin Fee Data (USER_DATA)
      * @param {QueryIsolatedMarginFeeDataRequest} requestParameters Request parameters.
@@ -678,7 +747,7 @@ export interface DisableIsolatedMarginAccountRequest {
     readonly symbol: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiDisableIsolatedMarginAccount
      */
@@ -698,7 +767,7 @@ export interface EnableIsolatedMarginAccountRequest {
     readonly symbol: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiEnableIsolatedMarginAccount
      */
@@ -711,7 +780,7 @@ export interface EnableIsolatedMarginAccountRequest {
  */
 export interface GetBnbBurnStatusRequest {
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiGetBnbBurnStatus
      */
@@ -724,7 +793,7 @@ export interface GetBnbBurnStatusRequest {
  */
 export interface GetSummaryOfMarginAccountRequest {
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiGetSummaryOfMarginAccount
      */
@@ -744,21 +813,21 @@ export interface QueryCrossIsolatedMarginCapitalFlowRequest {
     readonly asset?: string;
 
     /**
-     * isolated margin pair
+     * Mandatory for Isolated data
      * @type {string}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
     readonly symbol?: string;
 
     /**
-     * Transfer Type: ROLL_IN, ROLL_OUT
-     * @type {string}
+     *
+     * @type {'TRANSFER' | 'BORROW' | 'REPAY' | 'BUY_INCOME' | 'BUY_EXPENSE' | 'SELL_INCOME' | 'SELL_EXPENSE' | 'TRADING_COMMISSION' | 'BUY_LIQUIDATION' | 'SELL_LIQUIDATION' | 'REPAY_LIQUIDATION' | 'OTHER_LIQUIDATION' | 'LIQUIDATION_FEE' | 'SMALL_BALANCE_CONVERT' | 'COMMISSION_RETURN' | 'SMALL_CONVERT'}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
-    readonly type?: string;
+    readonly type?: QueryCrossIsolatedMarginCapitalFlowTypeEnum;
 
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
@@ -772,21 +841,21 @@ export interface QueryCrossIsolatedMarginCapitalFlowRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
     readonly limit?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
@@ -799,7 +868,7 @@ export interface QueryCrossIsolatedMarginCapitalFlowRequest {
  */
 export interface QueryCrossMarginAccountDetailsRequest {
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryCrossMarginAccountDetails
      */
@@ -826,7 +895,7 @@ export interface QueryCrossMarginFeeDataRequest {
     readonly coin?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryCrossMarginFeeData
      */
@@ -839,7 +908,7 @@ export interface QueryCrossMarginFeeDataRequest {
  */
 export interface QueryEnabledIsolatedMarginAccountLimitRequest {
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryEnabledIsolatedMarginAccountLimit
      */
@@ -852,14 +921,14 @@ export interface QueryEnabledIsolatedMarginAccountLimitRequest {
  */
 export interface QueryIsolatedMarginAccountInfoRequest {
     /**
-     * Max 5 symbols can be sent; separated by ",". e.g. "BTCUSDT,BNBUSDT,ADAUSDT"
+     *
      * @type {string}
      * @memberof AccountApiQueryIsolatedMarginAccountInfo
      */
     readonly symbols?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryIsolatedMarginAccountInfo
      */
@@ -872,21 +941,21 @@ export interface QueryIsolatedMarginAccountInfoRequest {
  */
 export interface QueryIsolatedMarginFeeDataRequest {
     /**
-     * User's current specific margin data will be returned if vipLevel is omitted
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryIsolatedMarginFeeData
      */
     readonly vipLevel?: number | bigint;
 
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof AccountApiQueryIsolatedMarginFeeData
      */
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof AccountApiQueryIsolatedMarginFeeData
      */
@@ -909,16 +978,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Adjust cross margin max leverage
      *
-     * The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25;  The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
+     * Weight(UID): 3000, 1 times/min per IP
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
      *
      * @summary Adjust cross margin max leverage (USER_DATA)
      * @param {AdjustCrossMarginMaxLeverageRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AdjustCrossMarginMaxLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Adjust-cross-margin-max-leverage Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#adjust-cross-margin-max-leverage Binance API Documentation}
      */
     public async adjustCrossMarginMaxLeverage(
         requestParameters: AdjustCrossMarginMaxLeverageRequest
@@ -939,17 +1011,18 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Disable isolated margin account for a specific symbol. Each trading pair can only be deactivated once every 24
-     * hours.
+     * Disable isolated margin account for a specific symbol. Each trading pair can only be deactivated once every 24 hours.
      *
-     * Weight: 300(UID)
+     * Weight(UID): 300
+     *
+     * Security Type: TRADE
      *
      * @summary Disable Isolated Margin Account (TRADE)
      * @param {DisableIsolatedMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DisableIsolatedMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Disable-Isolated-Margin-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#disable-isolated-margin-account Binance API Documentation}
      */
     public async disableIsolatedMarginAccount(
         requestParameters: DisableIsolatedMarginAccountRequest
@@ -973,14 +1046,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Enable isolated margin account for a specific symbol(Only supports activation of previously disabled accounts).
      *
-     * Weight: 300(UID)
+     * Weight(UID): 300
+     *
+     * Security Type: TRADE
      *
      * @summary Enable Isolated Margin Account (TRADE)
      * @param {EnableIsolatedMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableIsolatedMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Enable-Isolated-Margin-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#enable-isolated-margin-account Binance API Documentation}
      */
     public async enableIsolatedMarginAccount(
         requestParameters: EnableIsolatedMarginAccountRequest
@@ -1004,14 +1079,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get BNB Burn Status
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BNB Burn Status (USER_DATA)
      * @param {GetBnbBurnStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBnbBurnStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Get-BNB-Burn-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#get-bnb-burn-status Binance API Documentation}
      */
     public async getBnbBurnStatus(
         requestParameters: GetBnbBurnStatusRequest = {}
@@ -1034,14 +1111,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get personal margin level information
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Summary of Margin account (USER_DATA)
      * @param {GetSummaryOfMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Get-Summary-of-Margin-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#get-summary-of-margin-account Binance API Documentation}
      */
     public async getSummaryOfMarginAccount(
         requestParameters: GetSummaryOfMarginAccountRequest = {}
@@ -1064,14 +1143,26 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query Cross Isolated Margin Capital Flow
      *
-     * Weight: 100(IP)
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Only supports querying the data of the last 90 days
+     *
+     * - The time between startTime and endTime cannot be longer than 7 days.
+     *
+     * - If fromId is set, the data with id > fromId will be returned.
+     * Otherwise the latest data will be returned
+     *
+     * - To query isolated data, Symbol needs to be entered.
      *
      * @summary Query Cross Isolated Margin Capital Flow (USER_DATA)
      * @param {QueryCrossIsolatedMarginCapitalFlowRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCrossIsolatedMarginCapitalFlowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Cross-Isolated-Margin-Capital-Flow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-isolated-margin-capital-flow Binance API Documentation}
      */
     public async queryCrossIsolatedMarginCapitalFlow(
         requestParameters: QueryCrossIsolatedMarginCapitalFlowRequest = {}
@@ -1102,14 +1193,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query Cross Margin Account Details
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Cross Margin Account Details (USER_DATA)
      * @param {QueryCrossMarginAccountDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCrossMarginAccountDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Cross-Margin-Account-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-margin-account-details Binance API Documentation}
      */
     public async queryCrossMarginAccountDetails(
         requestParameters: QueryCrossMarginAccountDetailsRequest = {}
@@ -1133,14 +1226,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get cross margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee
      *
-     * Weight: 1 when coin is specified;(IP)
+     * Weight: 1 when coin is specified;(IP) 5 when the coin parameter is omitted(IP)
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Cross Margin Fee Data (USER_DATA)
      * @param {QueryCrossMarginFeeDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCrossMarginFeeDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Cross-Margin-Fee-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-margin-fee-data Binance API Documentation}
      */
     public async queryCrossMarginFeeData(
         requestParameters: QueryCrossMarginFeeDataRequest = {}
@@ -1165,14 +1260,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query enabled isolated margin account limit.
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Enabled Isolated Margin Account Limit (USER_DATA)
      * @param {QueryEnabledIsolatedMarginAccountLimitRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryEnabledIsolatedMarginAccountLimitResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Enabled-Isolated-Margin-Account-Limit Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-enabled-isolated-margin-account-limit Binance API Documentation}
      */
     public async queryEnabledIsolatedMarginAccountLimit(
         requestParameters: QueryEnabledIsolatedMarginAccountLimitRequest = {}
@@ -1196,17 +1293,22 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query Isolated Margin Account Info
      *
-     * If "symbols" is not sent, all isolated assets will be returned.
-     * If "symbols" is sent, only the isolated assets of the sent symbols will be returned.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If "symbols" is not sent, all isolated assets will be returned.
+     *
+     * - If "symbols" is sent, only the isolated assets of the sent symbols
+     * will be returned.
      *
      * @summary Query Isolated Margin Account Info (USER_DATA)
      * @param {QueryIsolatedMarginAccountInfoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryIsolatedMarginAccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Isolated-Margin-Account-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-isolated-margin-account-info Binance API Documentation}
      */
     public async queryIsolatedMarginAccountInfo(
         requestParameters: QueryIsolatedMarginAccountInfoRequest = {}
@@ -1231,14 +1333,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get isolated margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee
      *
-     * Weight: 1 when a single is specified;(IP)
+     * Weight: 1 when a single is specified;(IP) 10 when the symbol parameter is omitted(IP)
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Isolated Margin Fee Data (USER_DATA)
      * @param {QueryIsolatedMarginFeeDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryIsolatedMarginFeeDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Isolated-Margin-Fee-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-isolated-margin-fee-data Binance API Documentation}
      */
     public async queryIsolatedMarginFeeData(
         requestParameters: QueryIsolatedMarginFeeDataRequest = {}
@@ -1259,4 +1363,23 @@ export class AccountApi implements AccountApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum QueryCrossIsolatedMarginCapitalFlowTypeEnum {
+    TRANSFER = 'TRANSFER',
+    BORROW = 'BORROW',
+    REPAY = 'REPAY',
+    BUY_INCOME = 'BUY_INCOME',
+    BUY_EXPENSE = 'BUY_EXPENSE',
+    SELL_INCOME = 'SELL_INCOME',
+    SELL_EXPENSE = 'SELL_EXPENSE',
+    TRADING_COMMISSION = 'TRADING_COMMISSION',
+    BUY_LIQUIDATION = 'BUY_LIQUIDATION',
+    SELL_LIQUIDATION = 'SELL_LIQUIDATION',
+    REPAY_LIQUIDATION = 'REPAY_LIQUIDATION',
+    OTHER_LIQUIDATION = 'OTHER_LIQUIDATION',
+    LIQUIDATION_FEE = 'LIQUIDATION_FEE',
+    SMALL_BALANCE_CONVERT = 'SMALL_BALANCE_CONVERT',
+    COMMISSION_RETURN = 'COMMISSION_RETURN',
+    SMALL_CONVERT = 'SMALL_CONVERT',
 }

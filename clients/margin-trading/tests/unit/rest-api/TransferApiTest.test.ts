@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { TransferApi } from '../../../src/rest-api';
+import { TransferApi, GetCrossMarginTransferHistoryTypeEnum } from '../../../src/rest-api';
 import {
     GetCrossMarginTransferHistoryRequest,
     QueryMaxTransferOutAmountRequest,
@@ -53,26 +53,8 @@ describe('TransferApi', () => {
                             type: 'ROLL_IN',
                             transFrom: 'SPOT',
                             transTo: 'ISOLATED_MARGIN',
-                        },
-                        {
-                            amount: '5.00000000',
-                            asset: 'USDT',
-                            status: 'CONFIRMED',
-                            timestamp: 1566888436,
-                            txId: 5239810406,
-                            type: 'ROLL_OUT',
-                            transFrom: 'ISOLATED_MARGIN',
-                            transTo: 'ISOLATED_MARGIN',
                             fromSymbol: 'BNBUSDT',
                             toSymbol: 'BTCUSDT',
-                        },
-                        {
-                            amount: '1.00000000',
-                            asset: 'EOS',
-                            status: 'CONFIRMED',
-                            timestamp: 1566888403,
-                            txId: 5239808703,
-                            type: 'ROLL_IN',
                         },
                     ],
                     total: 3,
@@ -95,13 +77,13 @@ describe('TransferApi', () => {
 
         it('should execute getCrossMarginTransferHistory() successfully with optional parameters', async () => {
             const params: GetCrossMarginTransferHistoryRequest = {
-                asset: 'asset_example',
-                type: 'type_example',
+                asset: 'BNB',
+                type: GetCrossMarginTransferHistoryTypeEnum.ROLL_IN,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
                 size: 10,
-                isolatedSymbol: 'isolatedSymbol_example',
+                isolatedSymbol: 'BNBUSDT',
                 recvWindow: 5000,
             };
 
@@ -117,26 +99,8 @@ describe('TransferApi', () => {
                             type: 'ROLL_IN',
                             transFrom: 'SPOT',
                             transTo: 'ISOLATED_MARGIN',
-                        },
-                        {
-                            amount: '5.00000000',
-                            asset: 'USDT',
-                            status: 'CONFIRMED',
-                            timestamp: 1566888436,
-                            txId: 5239810406,
-                            type: 'ROLL_OUT',
-                            transFrom: 'ISOLATED_MARGIN',
-                            transTo: 'ISOLATED_MARGIN',
                             fromSymbol: 'BNBUSDT',
                             toSymbol: 'BTCUSDT',
-                        },
-                        {
-                            amount: '1.00000000',
-                            asset: 'EOS',
-                            status: 'CONFIRMED',
-                            timestamp: 1566888403,
-                            txId: 5239808703,
-                            type: 'ROLL_IN',
                         },
                     ],
                     total: 3,
@@ -178,7 +142,7 @@ describe('TransferApi', () => {
     describe('queryMaxTransferOutAmount()', () => {
         it('should execute queryMaxTransferOutAmount() successfully with required parameters only', async () => {
             const params: QueryMaxTransferOutAmountRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             mockResponse = JSONParse(JSONStringify({ amount: '3.59498107' }));
@@ -199,8 +163,8 @@ describe('TransferApi', () => {
 
         it('should execute queryMaxTransferOutAmount() successfully with optional parameters', async () => {
             const params: QueryMaxTransferOutAmountRequest = {
-                asset: 'asset_example',
-                isolatedSymbol: 'isolatedSymbol_example',
+                asset: 'BTC',
+                isolatedSymbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -222,7 +186,7 @@ describe('TransferApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: QueryMaxTransferOutAmountRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -234,7 +198,7 @@ describe('TransferApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMaxTransferOutAmountRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             const errorResponse = {

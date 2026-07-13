@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,55 +20,55 @@
  */
 export interface GetInterestHistoryResponseRowsInner {
     /**
-     *
+     * tx Id.
      * @type {number | bigint}
      * @memberof GetInterestHistoryResponseRowsInner
      */
     txId?: number | bigint;
     /**
-     *
+     * interest Accured Time.
      * @type {number | bigint}
      * @memberof GetInterestHistoryResponseRowsInner
      */
     interestAccuredTime?: number | bigint;
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof GetInterestHistoryResponseRowsInner
      */
     asset?: string;
     /**
-     *
+     * will not be returned for isolated margin
      * @type {string}
      * @memberof GetInterestHistoryResponseRowsInner
      */
     rawAsset?: string;
     /**
-     *
+     * principal.
      * @type {string}
      * @memberof GetInterestHistoryResponseRowsInner
      */
     principal?: string;
     /**
-     *
+     * interest.
      * @type {string}
      * @memberof GetInterestHistoryResponseRowsInner
      */
     interest?: string;
     /**
-     *
+     * interest Rate.
      * @type {string}
      * @memberof GetInterestHistoryResponseRowsInner
      */
     interestRate?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof GetInterestHistoryResponseRowsInner
      */
     type?: string;
     /**
-     *
+     * isolated symbol, will not be returned for crossed margin
      * @type {string}
      * @memberof GetInterestHistoryResponseRowsInner
      */

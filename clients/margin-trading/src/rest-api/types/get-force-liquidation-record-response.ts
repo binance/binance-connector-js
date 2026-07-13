@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,13 +25,13 @@ import type { GetForceLiquidationRecordResponseRowsInner } from './get-force-liq
  */
 export interface GetForceLiquidationRecordResponse {
     /**
-     *
+     * rows list.
      * @type {Array<GetForceLiquidationRecordResponseRowsInner>}
      * @memberof GetForceLiquidationRecordResponse
      */
     rows?: Array<GetForceLiquidationRecordResponseRowsInner>;
     /**
-     *
+     * total.
      * @type {number | bigint}
      * @memberof GetForceLiquidationRecordResponse
      */

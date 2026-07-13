@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface MarginAccountNewOtocoResponseOrdersInner {
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountNewOtocoResponseOrdersInner
      */
     symbol?: string;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof MarginAccountNewOtocoResponseOrdersInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * client Order Id.
      * @type {string}
      * @memberof MarginAccountNewOtocoResponseOrdersInner
      */

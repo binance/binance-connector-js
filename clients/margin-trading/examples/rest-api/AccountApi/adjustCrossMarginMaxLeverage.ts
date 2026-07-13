@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function adjustCrossMarginMaxLeverage() {
     try {
         const response = await client.restAPI.adjustCrossMarginMaxLeverage({
-            maxLeverage: 789,
+            maxLeverage: 3,
         });
 
         const rateLimits = response.rateLimits!;

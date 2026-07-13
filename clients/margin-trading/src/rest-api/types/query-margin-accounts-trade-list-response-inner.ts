@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,73 +20,73 @@
  */
 export interface QueryMarginAccountsTradeListResponseInner {
     /**
-     *
+     * commission.
      * @type {string}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     commission?: string;
     /**
-     *
+     * commission Asset.
      * @type {string}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     commissionAsset?: string;
     /**
-     *
+     * id.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * is Best Match.
      * @type {boolean}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     isBestMatch?: boolean;
     /**
-     *
+     * is Buyer.
      * @type {boolean}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     isBuyer?: boolean;
     /**
-     *
+     * is Maker.
      * @type {boolean}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     isMaker?: boolean;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     price?: string;
     /**
-     *
+     * qty.
      * @type {string}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     qty?: string;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     symbol?: string;
     /**
-     *
+     * is Isolated.
      * @type {boolean}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
     isIsolated?: boolean;
     /**
-     *
+     * time.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */

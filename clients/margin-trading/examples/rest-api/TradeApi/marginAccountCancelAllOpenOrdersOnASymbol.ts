@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function marginAccountCancelAllOpenOrdersOnASymbol() {
     try {
         const response = await client.restAPI.marginAccountCancelAllOpenOrdersOnASymbol({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

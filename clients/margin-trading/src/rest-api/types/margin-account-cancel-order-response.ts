@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,81 +20,81 @@
  */
 export interface MarginAccountCancelOrderResponse {
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     symbol?: string;
     /**
-     *
-     * @type {boolean}
-     * @memberof MarginAccountCancelOrderResponse
-     */
-    isIsolated?: boolean;
-    /**
-     *
+     * order Id.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     orderId?: string;
     /**
-     *
+     * orig Client Order Id.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     origClientOrderId?: string;
     /**
-     *
+     * client Order Id.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     price?: string;
     /**
-     *
+     * orig Qty.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * executed Qty.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * cummulative Quote Qty.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * status.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     status?: string;
     /**
-     *
+     * time In Force.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     type?: string;
     /**
-     *
+     * side.
      * @type {string}
      * @memberof MarginAccountCancelOrderResponse
      */
     side?: string;
+    /**
+     * if isolated margin
+     * @type {boolean}
+     * @memberof MarginAccountCancelOrderResponse
+     */
+    isIsolated?: boolean;
 }

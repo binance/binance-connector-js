@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,91 +20,91 @@
  */
 export interface MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner {
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     symbol?: string;
     /**
-     *
+     * orig Client Order Id.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     origClientOrderId?: string;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * order List Id.
      * @type {number | bigint}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     orderListId?: number | bigint;
     /**
-     *
+     * client Order Id.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     clientOrderId?: string;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     price?: string;
     /**
-     *
+     * orig Qty.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     origQty?: string;
     /**
-     *
+     * executed Qty.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     executedQty?: string;
     /**
-     *
+     * cummulative Quote Qty.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * status.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     status?: string;
     /**
-     *
+     * time In Force.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     timeInForce?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     type?: string;
     /**
-     *
+     * side.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     side?: string;
     /**
-     *
+     * stop Price.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     stopPrice?: string;
     /**
-     *
+     * iceberg Qty.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */

@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function marginAccountCancelOrder() {
     try {
         const response = await client.restAPI.marginAccountCancelOrder({
-            symbol: 'symbol_example',
+            symbol: 'LTCBTC',
         });
 
         const rateLimits = response.rateLimits!;

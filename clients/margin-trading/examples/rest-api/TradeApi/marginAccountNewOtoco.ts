@@ -1,4 +1,8 @@
-import { MarginTrading, MARGIN_TRADING_REST_API_PROD_URL } from '../../../src';
+import {
+    MarginTrading,
+    MarginTradingRestAPI,
+    MARGIN_TRADING_REST_API_PROD_URL,
+} from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,14 +14,15 @@ const client = new MarginTrading({ configurationRestAPI });
 async function marginAccountNewOtoco() {
     try {
         const response = await client.restAPI.marginAccountNewOtoco({
-            symbol: 'symbol_example',
-            workingType: 'workingType_example',
-            workingSide: 'workingSide_example',
+            symbol: 'BTCUSDT',
+            workingType: MarginTradingRestAPI.MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+            workingSide: MarginTradingRestAPI.MarginAccountNewOtocoWorkingSideEnum.SELL,
             workingPrice: 1.0,
             workingQuantity: 1.0,
-            pendingSide: 'pendingSide_example',
+            pendingSide: MarginTradingRestAPI.MarginAccountNewOtocoPendingSideEnum.BUY,
             pendingQuantity: 1.0,
-            pendingAboveType: 'pendingAboveType_example',
+            pendingAboveType:
+                MarginTradingRestAPI.MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
         });
 
         const rateLimits = response.rateLimits!;

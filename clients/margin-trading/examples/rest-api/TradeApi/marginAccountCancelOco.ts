@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function marginAccountCancelOco() {
     try {
         const response = await client.restAPI.marginAccountCancelOco({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

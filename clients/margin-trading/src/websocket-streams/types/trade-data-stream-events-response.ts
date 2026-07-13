@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Margin Trading WebSocket Market Streams
+ * Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Margin Trading WebSocket Market Streams
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -17,30 +17,40 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Balanceupdate } from './balanceupdate';
+import type { BalanceUpdate } from './balance-update';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Executionreport } from './executionreport';
+import type { ExecutionReport } from './execution-report';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Listenkeyexpired } from './listenkeyexpired';
+import type { ListStatus } from './list-status';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Liststatus } from './liststatus';
+import type { ListStatusOInner } from './list-status-oinner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ListstatusOInner } from './liststatus-oinner';
+import type { ListenKeyExpired } from './listen-key-expired';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Outboundaccountposition } from './outboundaccountposition';
+import type { MarginLevelStatusChange } from './margin-level-status-change';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OutboundAccountPosition } from './outbound-account-position';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OutboundAccountPositionBInner } from './outbound-account-position-binner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UserLiabilityChange } from './user-liability-change';
 
 /**
  * @type TradeDataStreamEventsResponse
- * @export
  */
 export type TradeDataStreamEventsResponse =
-    | ({ e: 'balanceUpdate' } & Balanceupdate)
-    | ({ e: 'executionReport' } & Executionreport)
-    | ({ e: 'listStatus' } & Liststatus)
-    | ({ e: 'listenKeyExpired' } & Listenkeyexpired)
-    | ({ e: 'outboundAccountPosition' } & Outboundaccountposition);
+    | ({ e: 'MARGIN_LEVEL_STATUS_CHANGE' } & MarginLevelStatusChange)
+    | ({ e: 'USER_LIABILITY_CHANGE' } & UserLiabilityChange)
+    | ({ e: 'balanceUpdate' } & BalanceUpdate)
+    | ({ e: 'executionReport' } & ExecutionReport)
+    | ({ e: 'listStatus' } & ListStatus)
+    | ({ e: 'listenKeyExpired' } & ListenKeyExpired)
+    | ({ e: 'outboundAccountPosition' } & OutboundAccountPosition);

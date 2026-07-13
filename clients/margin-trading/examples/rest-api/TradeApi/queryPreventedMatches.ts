@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function queryPreventedMatches() {
     try {
         const response = await client.restAPI.queryPreventedMatches({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,13 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { BorrowRepayApi } from '../../../src/rest-api';
+import {
+    BorrowRepayApi,
+    GetFutureHourlyInterestRateIsIsolatedEnum,
+    MarginAccountBorrowRepayIsIsolatedEnum,
+    MarginAccountBorrowRepayTypeEnum,
+    QueryBorrowRepayRecordsInMarginAccountTypeEnum,
+} from '../../../src/rest-api';
 import {
     GetFutureHourlyInterestRateRequest,
     GetInterestHistoryRequest,
@@ -50,15 +56,12 @@ describe('BorrowRepayApi', () => {
     describe('getFutureHourlyInterestRate()', () => {
         it('should execute getFutureHourlyInterestRate() successfully with required parameters only', async () => {
             const params: GetFutureHourlyInterestRateRequest = {
-                assets: 'assets_example',
-                isIsolated: false,
+                assets: 'BTC,ETH',
+                isIsolated: GetFutureHourlyInterestRateIsIsolatedEnum.TRUE,
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { asset: 'BTC', nextHourlyInterestRate: '0.00000571' },
-                    { asset: 'ETH', nextHourlyInterestRate: '0.00000578' },
-                ])
+                JSONStringify([{ asset: 'BTC', nextHourlyInterestRate: '0.00000571' }])
             );
 
             const spy = jest.spyOn(client, 'getFutureHourlyInterestRate').mockReturnValue(
@@ -77,15 +80,12 @@ describe('BorrowRepayApi', () => {
 
         it('should execute getFutureHourlyInterestRate() successfully with optional parameters', async () => {
             const params: GetFutureHourlyInterestRateRequest = {
-                assets: 'assets_example',
-                isIsolated: false,
+                assets: 'BTC,ETH',
+                isIsolated: GetFutureHourlyInterestRateIsIsolatedEnum.TRUE,
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { asset: 'BTC', nextHourlyInterestRate: '0.00000571' },
-                    { asset: 'ETH', nextHourlyInterestRate: '0.00000578' },
-                ])
+                JSONStringify([{ asset: 'BTC', nextHourlyInterestRate: '0.00000571' }])
             );
 
             const spy = jest.spyOn(client, 'getFutureHourlyInterestRate').mockReturnValue(
@@ -104,8 +104,8 @@ describe('BorrowRepayApi', () => {
 
         it('should throw RequiredError when assets is missing', async () => {
             const _params: GetFutureHourlyInterestRateRequest = {
-                assets: 'assets_example',
-                isIsolated: false,
+                assets: 'BTC,ETH',
+                isIsolated: GetFutureHourlyInterestRateIsIsolatedEnum.TRUE,
             };
             const params = Object.assign({ ..._params });
             delete params?.assets;
@@ -117,8 +117,8 @@ describe('BorrowRepayApi', () => {
 
         it('should throw RequiredError when isIsolated is missing', async () => {
             const _params: GetFutureHourlyInterestRateRequest = {
-                assets: 'assets_example',
-                isIsolated: false,
+                assets: 'BTC,ETH',
+                isIsolated: GetFutureHourlyInterestRateIsIsolatedEnum.TRUE,
             };
             const params = Object.assign({ ..._params });
             delete params?.isIsolated;
@@ -130,8 +130,8 @@ describe('BorrowRepayApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFutureHourlyInterestRateRequest = {
-                assets: 'assets_example',
-                isIsolated: false,
+                assets: 'BTC,ETH',
+                isIsolated: GetFutureHourlyInterestRateIsIsolatedEnum.TRUE,
             };
 
             const errorResponse = {
@@ -190,8 +190,8 @@ describe('BorrowRepayApi', () => {
 
         it('should execute getInterestHistory() successfully with optional parameters', async () => {
             const params: GetInterestHistoryRequest = {
-                asset: 'asset_example',
-                isolatedSymbol: 'isolatedSymbol_example',
+                asset: 'USDT',
+                isolatedSymbol: 'BNBUSDT',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -251,11 +251,10 @@ describe('BorrowRepayApi', () => {
     describe('marginAccountBorrowRepay()', () => {
         it('should execute marginAccountBorrowRepay() successfully with required parameters only', async () => {
             const params: MarginAccountBorrowRepayRequest = {
-                asset: 'asset_example',
-                isIsolated: 'FALSE',
-                symbol: 'symbol_example',
-                amount: 'amount_example',
-                type: 'type_example',
+                asset: 'USDT',
+                isIsolated: MarginAccountBorrowRepayIsIsolatedEnum.TRUE,
+                amount: '1.0',
+                type: MarginAccountBorrowRepayTypeEnum.BORROW,
             };
 
             mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
@@ -276,11 +275,11 @@ describe('BorrowRepayApi', () => {
 
         it('should execute marginAccountBorrowRepay() successfully with optional parameters', async () => {
             const params: MarginAccountBorrowRepayRequest = {
-                asset: 'asset_example',
-                isIsolated: 'FALSE',
-                symbol: 'symbol_example',
-                amount: 'amount_example',
-                type: 'type_example',
+                asset: 'USDT',
+                isIsolated: MarginAccountBorrowRepayIsIsolatedEnum.TRUE,
+                amount: '1.0',
+                type: MarginAccountBorrowRepayTypeEnum.BORROW,
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -302,11 +301,10 @@ describe('BorrowRepayApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
-                asset: 'asset_example',
-                isIsolated: 'FALSE',
-                symbol: 'symbol_example',
-                amount: 'amount_example',
-                type: 'type_example',
+                asset: 'USDT',
+                isIsolated: MarginAccountBorrowRepayIsIsolatedEnum.TRUE,
+                amount: '1.0',
+                type: MarginAccountBorrowRepayTypeEnum.BORROW,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -318,11 +316,10 @@ describe('BorrowRepayApi', () => {
 
         it('should throw RequiredError when isIsolated is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
-                asset: 'asset_example',
-                isIsolated: 'FALSE',
-                symbol: 'symbol_example',
-                amount: 'amount_example',
-                type: 'type_example',
+                asset: 'USDT',
+                isIsolated: MarginAccountBorrowRepayIsIsolatedEnum.TRUE,
+                amount: '1.0',
+                type: MarginAccountBorrowRepayTypeEnum.BORROW,
             };
             const params = Object.assign({ ..._params });
             delete params?.isIsolated;
@@ -332,29 +329,12 @@ describe('BorrowRepayApi', () => {
             );
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: MarginAccountBorrowRepayRequest = {
-                asset: 'asset_example',
-                isIsolated: 'FALSE',
-                symbol: 'symbol_example',
-                amount: 'amount_example',
-                type: 'type_example',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.marginAccountBorrowRepay(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling marginAccountBorrowRepay.'
-            );
-        });
-
         it('should throw RequiredError when amount is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
-                asset: 'asset_example',
-                isIsolated: 'FALSE',
-                symbol: 'symbol_example',
-                amount: 'amount_example',
-                type: 'type_example',
+                asset: 'USDT',
+                isIsolated: MarginAccountBorrowRepayIsIsolatedEnum.TRUE,
+                amount: '1.0',
+                type: MarginAccountBorrowRepayTypeEnum.BORROW,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -366,11 +346,10 @@ describe('BorrowRepayApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
-                asset: 'asset_example',
-                isIsolated: 'FALSE',
-                symbol: 'symbol_example',
-                amount: 'amount_example',
-                type: 'type_example',
+                asset: 'USDT',
+                isIsolated: MarginAccountBorrowRepayIsIsolatedEnum.TRUE,
+                amount: '1.0',
+                type: MarginAccountBorrowRepayTypeEnum.BORROW,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -382,11 +361,10 @@ describe('BorrowRepayApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountBorrowRepayRequest = {
-                asset: 'asset_example',
-                isIsolated: 'FALSE',
-                symbol: 'symbol_example',
-                amount: 'amount_example',
-                type: 'type_example',
+                asset: 'USDT',
+                isIsolated: MarginAccountBorrowRepayIsIsolatedEnum.TRUE,
+                amount: '1.0',
+                type: MarginAccountBorrowRepayTypeEnum.BORROW,
             };
 
             const errorResponse = {
@@ -409,7 +387,7 @@ describe('BorrowRepayApi', () => {
     describe('queryBorrowRepayRecordsInMarginAccount()', () => {
         it('should execute queryBorrowRepayRecordsInMarginAccount() successfully with required parameters only', async () => {
             const params: QueryBorrowRepayRecordsInMarginAccountRequest = {
-                type: 'type_example',
+                type: QueryBorrowRepayRecordsInMarginAccountTypeEnum.BORROW,
             };
 
             mockResponse = JSONParse(
@@ -449,9 +427,9 @@ describe('BorrowRepayApi', () => {
 
         it('should execute queryBorrowRepayRecordsInMarginAccount() successfully with optional parameters', async () => {
             const params: QueryBorrowRepayRecordsInMarginAccountRequest = {
-                type: 'type_example',
-                asset: 'asset_example',
-                isolatedSymbol: 'isolatedSymbol_example',
+                type: QueryBorrowRepayRecordsInMarginAccountTypeEnum.BORROW,
+                asset: 'BNB',
+                isolatedSymbol: 'BNBUSDT',
                 txId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -497,7 +475,7 @@ describe('BorrowRepayApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: QueryBorrowRepayRecordsInMarginAccountRequest = {
-                type: 'type_example',
+                type: QueryBorrowRepayRecordsInMarginAccountTypeEnum.BORROW,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -509,7 +487,7 @@ describe('BorrowRepayApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryBorrowRepayRecordsInMarginAccountRequest = {
-                type: 'type_example',
+                type: QueryBorrowRepayRecordsInMarginAccountTypeEnum.BORROW,
             };
 
             const errorResponse = {
@@ -534,7 +512,7 @@ describe('BorrowRepayApi', () => {
     describe('queryMarginInterestRateHistory()', () => {
         it('should execute queryMarginInterestRateHistory() successfully with required parameters only', async () => {
             const params: QueryMarginInterestRateHistoryRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             mockResponse = JSONParse(
@@ -543,12 +521,6 @@ describe('BorrowRepayApi', () => {
                         asset: 'BTC',
                         dailyInterestRate: '0.00025000',
                         timestamp: 1611544731000,
-                        vipLevel: 1,
-                    },
-                    {
-                        asset: 'BTC',
-                        dailyInterestRate: '0.00035000',
-                        timestamp: 1610248118000,
                         vipLevel: 1,
                     },
                 ])
@@ -570,7 +542,7 @@ describe('BorrowRepayApi', () => {
 
         it('should execute queryMarginInterestRateHistory() successfully with optional parameters', async () => {
             const params: QueryMarginInterestRateHistoryRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 vipLevel: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -583,12 +555,6 @@ describe('BorrowRepayApi', () => {
                         asset: 'BTC',
                         dailyInterestRate: '0.00025000',
                         timestamp: 1611544731000,
-                        vipLevel: 1,
-                    },
-                    {
-                        asset: 'BTC',
-                        dailyInterestRate: '0.00035000',
-                        timestamp: 1610248118000,
                         vipLevel: 1,
                     },
                 ])
@@ -610,7 +576,7 @@ describe('BorrowRepayApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: QueryMarginInterestRateHistoryRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -622,7 +588,7 @@ describe('BorrowRepayApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginInterestRateHistoryRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             const errorResponse = {
@@ -647,7 +613,7 @@ describe('BorrowRepayApi', () => {
     describe('queryMaxBorrow()', () => {
         it('should execute queryMaxBorrow() successfully with required parameters only', async () => {
             const params: QueryMaxBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             mockResponse = JSONParse(JSONStringify({ amount: '1.69248805', borrowLimit: '60' }));
@@ -668,8 +634,8 @@ describe('BorrowRepayApi', () => {
 
         it('should execute queryMaxBorrow() successfully with optional parameters', async () => {
             const params: QueryMaxBorrowRequest = {
-                asset: 'asset_example',
-                isolatedSymbol: 'isolatedSymbol_example',
+                asset: 'BTC',
+                isolatedSymbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -691,7 +657,7 @@ describe('BorrowRepayApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: QueryMaxBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -703,7 +669,7 @@ describe('BorrowRepayApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMaxBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             const errorResponse = {

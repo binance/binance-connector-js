@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,109 +20,109 @@
  */
 export interface QueryMarginAccountsAllOrdersResponseInner {
     /**
-     *
+     * client Order Id.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * cummulative Quote Qty.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * executed Qty.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * iceberg Qty.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     icebergQty?: string;
     /**
-     *
+     * is Working.
      * @type {boolean}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     isWorking?: boolean;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * orig Qty.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * side.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * status.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * stop Price.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * is Isolated.
      * @type {boolean}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     isIsolated?: boolean;
     /**
-     *
+     * time.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * time In Force.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * self Trade Prevention Mode.
      * @type {string}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * update Time.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */

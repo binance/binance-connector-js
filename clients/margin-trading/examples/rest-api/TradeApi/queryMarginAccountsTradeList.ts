@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function queryMarginAccountsTradeList() {
     try {
         const response = await client.restAPI.queryMarginAccountsTradeList({
-            symbol: 'symbol_example',
+            symbol: 'BNBBTC',
         });
 
         const rateLimits = response.rateLimits!;

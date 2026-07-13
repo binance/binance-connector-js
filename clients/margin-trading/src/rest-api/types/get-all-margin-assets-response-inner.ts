@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface GetAllMarginAssetsResponseInner {
     /**
-     *
+     * asset Full Name.
      * @type {string}
      * @memberof GetAllMarginAssetsResponseInner
      */
     assetFullName?: string;
     /**
-     *
+     * asset Name.
      * @type {string}
      * @memberof GetAllMarginAssetsResponseInner
      */
     assetName?: string;
     /**
-     *
+     * is Borrowable.
      * @type {boolean}
      * @memberof GetAllMarginAssetsResponseInner
      */
     isBorrowable?: boolean;
     /**
-     *
+     * is Mortgageable.
      * @type {boolean}
      * @memberof GetAllMarginAssetsResponseInner
      */
     isMortgageable?: boolean;
     /**
-     *
+     * user Min Borrow.
      * @type {string}
      * @memberof GetAllMarginAssetsResponseInner
      */
     userMinBorrow?: string;
     /**
-     *
+     * user Min Repay.
      * @type {string}
      * @memberof GetAllMarginAssetsResponseInner
      */
     userMinRepay?: string;
     /**
-     *
+     * delist Time.
      * @type {number | bigint}
      * @memberof GetAllMarginAssetsResponseInner
      */

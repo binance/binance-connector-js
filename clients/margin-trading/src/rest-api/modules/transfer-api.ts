@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -32,27 +31,30 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Get Cross Margin Transfer History
          *
-         * Response in descending order
-         * The max interval between `startTime` and `endTime` is 30 days.
-         * Returns data for last 7 days by default
+         * Weight(IP): 1
          *
-         * Weight: 1(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Response in descending order
+         * - The max interval between `startTime` and `endTime` is 30 days.
+         * - Returns data for last 7 days by default
          *
          * @summary Get Cross Margin Transfer History (USER_DATA)
          * @param {string} [asset]
-         * @param {string} [type] Transfer Type: ROLL_IN, ROLL_OUT
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {GetCrossMarginTransferHistoryTypeEnum} [type]
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
-         * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [current]
+         * @param {number | bigint} [size]
+         * @param {string} [isolatedSymbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getCrossMarginTransferHistory: async (
             asset?: string,
-            type?: string,
+            type?: GetCrossMarginTransferHistoryTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             current?: number | bigint,
@@ -104,14 +106,17 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Query Max Transfer-Out Amount
          *
-         * If isolatedSymbol is not sent, crossed margin data will be sent.
+         * Weight(IP): 50
          *
-         * Weight: 50(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If isolatedSymbol is not sent, crossed margin data will be sent.
          *
          * @summary Query Max Transfer-Out Amount (USER_DATA)
          * @param {string} asset
-         * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {string} [isolatedSymbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -160,11 +165,14 @@ export interface TransferApiInterface {
     /**
      * Get Cross Margin Transfer History
      *
-     * Response in descending order
-     * The max interval between `startTime` and `endTime` is 30 days.
-     * Returns data for last 7 days by default
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Response in descending order
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - Returns data for last 7 days by default
      *
      * @summary Get Cross Margin Transfer History (USER_DATA)
      * @param {GetCrossMarginTransferHistoryRequest} requestParameters Request parameters.
@@ -178,9 +186,12 @@ export interface TransferApiInterface {
     /**
      * Query Max Transfer-Out Amount
      *
-     * If isolatedSymbol is not sent, crossed margin data will be sent.
+     * Weight(IP): 50
      *
-     * Weight: 50(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If isolatedSymbol is not sent, crossed margin data will be sent.
      *
      * @summary Query Max Transfer-Out Amount (USER_DATA)
      * @param {QueryMaxTransferOutAmountRequest} requestParameters Request parameters.
@@ -206,14 +217,14 @@ export interface GetCrossMarginTransferHistoryRequest {
     readonly asset?: string;
 
     /**
-     * Transfer Type: ROLL_IN, ROLL_OUT
-     * @type {string}
+     *
+     * @type {'ROLL_IN' | 'ROLL_OUT'}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
-    readonly type?: string;
+    readonly type?: GetCrossMarginTransferHistoryTypeEnum;
 
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
@@ -227,28 +238,28 @@ export interface GetCrossMarginTransferHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     *
      * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     *
      * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
     readonly size?: number | bigint;
 
     /**
-     * isolated symbol
+     *
      * @type {string}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
     readonly isolatedSymbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
@@ -268,14 +279,14 @@ export interface QueryMaxTransferOutAmountRequest {
     readonly asset: string;
 
     /**
-     * isolated symbol
+     *
      * @type {string}
      * @memberof TransferApiQueryMaxTransferOutAmount
      */
     readonly isolatedSymbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TransferApiQueryMaxTransferOutAmount
      */
@@ -298,18 +309,21 @@ export class TransferApi implements TransferApiInterface {
     /**
      * Get Cross Margin Transfer History
      *
-     * Response in descending order
-     * The max interval between `startTime` and `endTime` is 30 days.
-     * Returns data for last 7 days by default
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Response in descending order
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - Returns data for last 7 days by default
      *
      * @summary Get Cross Margin Transfer History (USER_DATA)
      * @param {GetCrossMarginTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCrossMarginTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TransferApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/transfer/Get-Cross-Margin-Transfer-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/transfer#get-cross-margin-transfer-history Binance API Documentation}
      */
     public async getCrossMarginTransferHistory(
         requestParameters: GetCrossMarginTransferHistoryRequest = {}
@@ -340,16 +354,19 @@ export class TransferApi implements TransferApiInterface {
     /**
      * Query Max Transfer-Out Amount
      *
-     * If isolatedSymbol is not sent, crossed margin data will be sent.
+     * Weight(IP): 50
      *
-     * Weight: 50(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If isolatedSymbol is not sent, crossed margin data will be sent.
      *
      * @summary Query Max Transfer-Out Amount (USER_DATA)
      * @param {QueryMaxTransferOutAmountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMaxTransferOutAmountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TransferApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/transfer/Query-Max-Transfer-Out-Amount Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/transfer#query-max-transfer-out-amount Binance API Documentation}
      */
     public async queryMaxTransferOutAmount(
         requestParameters: QueryMaxTransferOutAmountRequest
@@ -370,4 +387,9 @@ export class TransferApi implements TransferApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum GetCrossMarginTransferHistoryTypeEnum {
+    ROLL_IN = 'ROLL_IN',
+    ROLL_OUT = 'ROLL_OUT',
 }

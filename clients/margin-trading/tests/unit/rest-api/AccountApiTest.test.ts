@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AccountApi } from '../../../src/rest-api';
+import { AccountApi, QueryCrossIsolatedMarginCapitalFlowTypeEnum } from '../../../src/rest-api';
 import {
     AdjustCrossMarginMaxLeverageRequest,
     DisableIsolatedMarginAccountRequest,
@@ -60,7 +60,7 @@ describe('AccountApi', () => {
     describe('adjustCrossMarginMaxLeverage()', () => {
         it('should execute adjustCrossMarginMaxLeverage() successfully with required parameters only', async () => {
             const params: AdjustCrossMarginMaxLeverageRequest = {
-                maxLeverage: 789,
+                maxLeverage: 3,
             };
 
             mockResponse = JSONParse(JSONStringify({ success: true }));
@@ -81,7 +81,7 @@ describe('AccountApi', () => {
 
         it('should execute adjustCrossMarginMaxLeverage() successfully with optional parameters', async () => {
             const params: AdjustCrossMarginMaxLeverageRequest = {
-                maxLeverage: 789,
+                maxLeverage: 3,
             };
 
             mockResponse = JSONParse(JSONStringify({ success: true }));
@@ -102,7 +102,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when maxLeverage is missing', async () => {
             const _params: AdjustCrossMarginMaxLeverageRequest = {
-                maxLeverage: 789,
+                maxLeverage: 3,
             };
             const params = Object.assign({ ..._params });
             delete params?.maxLeverage;
@@ -114,7 +114,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AdjustCrossMarginMaxLeverageRequest = {
-                maxLeverage: 789,
+                maxLeverage: 3,
             };
 
             const errorResponse = {
@@ -139,7 +139,7 @@ describe('AccountApi', () => {
     describe('disableIsolatedMarginAccount()', () => {
         it('should execute disableIsolatedMarginAccount() successfully with required parameters only', async () => {
             const params: DisableIsolatedMarginAccountRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(JSONStringify({ success: true, symbol: 'BTCUSDT' }));
@@ -160,7 +160,7 @@ describe('AccountApi', () => {
 
         it('should execute disableIsolatedMarginAccount() successfully with optional parameters', async () => {
             const params: DisableIsolatedMarginAccountRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -182,7 +182,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: DisableIsolatedMarginAccountRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -194,7 +194,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: DisableIsolatedMarginAccountRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -219,7 +219,7 @@ describe('AccountApi', () => {
     describe('enableIsolatedMarginAccount()', () => {
         it('should execute enableIsolatedMarginAccount() successfully with required parameters only', async () => {
             const params: EnableIsolatedMarginAccountRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(JSONStringify({ success: true, symbol: 'BTCUSDT' }));
@@ -240,7 +240,7 @@ describe('AccountApi', () => {
 
         it('should execute enableIsolatedMarginAccount() successfully with optional parameters', async () => {
             const params: EnableIsolatedMarginAccountRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -262,7 +262,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: EnableIsolatedMarginAccountRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -274,7 +274,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: EnableIsolatedMarginAccountRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -432,15 +432,7 @@ describe('AccountApi', () => {
                         symbol: 'BTCUSDT',
                         type: 'BORROW',
                         amount: '101',
-                    },
-                    {
-                        id: 123457,
-                        tranId: 123124,
-                        timestamp: 1691116658000,
-                        asset: 'BTC',
-                        symbol: 'BTCUSDT',
-                        type: 'REPAY',
-                        amount: '10',
+                        note: 'INSTITUTIONAL_LOAN_TRANSFER',
                     },
                 ])
             );
@@ -461,9 +453,9 @@ describe('AccountApi', () => {
 
         it('should execute queryCrossIsolatedMarginCapitalFlow() successfully with optional parameters', async () => {
             const params: QueryCrossIsolatedMarginCapitalFlowRequest = {
-                asset: 'asset_example',
-                symbol: 'symbol_example',
-                type: 'type_example',
+                asset: 'USDT',
+                symbol: 'BTCUSDT',
+                type: QueryCrossIsolatedMarginCapitalFlowTypeEnum.TRANSFER,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 fromId: 1,
@@ -481,15 +473,7 @@ describe('AccountApi', () => {
                         symbol: 'BTCUSDT',
                         type: 'BORROW',
                         amount: '101',
-                    },
-                    {
-                        id: 123457,
-                        tranId: 123124,
-                        timestamp: 1691116658000,
-                        asset: 'BTC',
-                        symbol: 'BTCUSDT',
-                        type: 'REPAY',
-                        amount: '10',
+                        note: 'INSTITUTIONAL_LOAN_TRANSFER',
                     },
                 ])
             );
@@ -554,30 +538,6 @@ describe('AccountApi', () => {
                             locked: '0.00000000',
                             netAsset: '0.00499500',
                         },
-                        {
-                            asset: 'BNB',
-                            borrowed: '201.66666672',
-                            free: '2346.50000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '2144.83333328',
-                        },
-                        {
-                            asset: 'ETH',
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                        },
-                        {
-                            asset: 'USDT',
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                        },
                     ],
                 })
             );
@@ -624,30 +584,6 @@ describe('AccountApi', () => {
                             interest: '0.00000000',
                             locked: '0.00000000',
                             netAsset: '0.00499500',
-                        },
-                        {
-                            asset: 'BNB',
-                            borrowed: '201.66666672',
-                            free: '2346.50000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '2144.83333328',
-                        },
-                        {
-                            asset: 'ETH',
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                        },
-                        {
-                            asset: 'USDT',
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
                         },
                     ],
                 })
@@ -697,7 +633,7 @@ describe('AccountApi', () => {
                         dailyInterest: '0.00026125',
                         yearlyInterest: '0.0953',
                         borrowLimit: '180',
-                        marginablePairs: ['BNBBTC', 'TRXBTC', 'ETHBTC', 'BTCUSDT'],
+                        marginablePairs: ['BNBBTC'],
                     },
                 ])
             );
@@ -719,7 +655,7 @@ describe('AccountApi', () => {
         it('should execute queryCrossMarginFeeData() successfully with optional parameters', async () => {
             const params: QueryCrossMarginFeeDataRequest = {
                 vipLevel: 1,
-                coin: 'coin_example',
+                coin: 'BTC',
                 recvWindow: 5000,
             };
 
@@ -733,7 +669,7 @@ describe('AccountApi', () => {
                         dailyInterest: '0.00026125',
                         yearlyInterest: '0.0953',
                         borrowLimit: '180',
-                        marginablePairs: ['BNBBTC', 'TRXBTC', 'ETHBTC', 'BTCUSDT'],
+                        marginablePairs: ['BNBBTC'],
                     },
                 ])
             );
@@ -874,42 +810,6 @@ describe('AccountApi', () => {
                             liquidateRate: '1.00000000',
                             tradeEnabled: true,
                         },
-                        {
-                            baseAsset: {
-                                asset: 'BTC',
-                                borrowEnabled: true,
-                                borrowed: '0.00000000',
-                                free: '0.00000000',
-                                interest: '0.00000000',
-                                locked: '0.00000000',
-                                netAsset: '0.00000000',
-                                netAssetOfBtc: '0.00000000',
-                                repayEnabled: true,
-                                totalAsset: '0.00000000',
-                            },
-                            quoteAsset: {
-                                asset: 'USDT',
-                                borrowEnabled: true,
-                                borrowed: '0.00000000',
-                                free: '0.00000000',
-                                interest: '0.00000000',
-                                locked: '0.00000000',
-                                netAsset: '0.00000000',
-                                netAssetOfBtc: '0.00000000',
-                                repayEnabled: true,
-                                totalAsset: '0.00000000',
-                            },
-                            symbol: 'BTCUSDT',
-                            isolatedCreated: true,
-                            enabled: true,
-                            marginLevel: '0.00000000',
-                            marginLevelStatus: 'EXCESSIVE',
-                            marginRatio: '0.00000000',
-                            indexPrice: '10000.00000000',
-                            liquidatePrice: '1000.00000000',
-                            liquidateRate: '1.00000000',
-                            tradeEnabled: true,
-                        },
                     ],
                     totalAssetOfBtc: '0.00000000',
                     totalLiabilityOfBtc: '0.00000000',
@@ -933,49 +833,13 @@ describe('AccountApi', () => {
 
         it('should execute queryIsolatedMarginAccountInfo() successfully with optional parameters', async () => {
             const params: QueryIsolatedMarginAccountInfoRequest = {
-                symbols: 'symbols_example',
+                symbols: 'BTCUSDT,BNBUSDT,ADAUSDT',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     assets: [
-                        {
-                            baseAsset: {
-                                asset: 'BTC',
-                                borrowEnabled: true,
-                                borrowed: '0.00000000',
-                                free: '0.00000000',
-                                interest: '0.00000000',
-                                locked: '0.00000000',
-                                netAsset: '0.00000000',
-                                netAssetOfBtc: '0.00000000',
-                                repayEnabled: true,
-                                totalAsset: '0.00000000',
-                            },
-                            quoteAsset: {
-                                asset: 'USDT',
-                                borrowEnabled: true,
-                                borrowed: '0.00000000',
-                                free: '0.00000000',
-                                interest: '0.00000000',
-                                locked: '0.00000000',
-                                netAsset: '0.00000000',
-                                netAssetOfBtc: '0.00000000',
-                                repayEnabled: true,
-                                totalAsset: '0.00000000',
-                            },
-                            symbol: 'BTCUSDT',
-                            isolatedCreated: true,
-                            enabled: true,
-                            marginLevel: '0.00000000',
-                            marginLevelStatus: 'EXCESSIVE',
-                            marginRatio: '0.00000000',
-                            indexPrice: '10000.00000000',
-                            liquidatePrice: '1000.00000000',
-                            liquidateRate: '1.00000000',
-                            tradeEnabled: true,
-                        },
                         {
                             baseAsset: {
                                 asset: 'BTC',
@@ -1059,10 +923,7 @@ describe('AccountApi', () => {
                         vipLevel: 0,
                         symbol: 'BTCUSDT',
                         leverage: '10',
-                        data: [
-                            { coin: 'BTC', dailyInterest: '0.00026125', borrowLimit: '270' },
-                            { coin: 'USDT', dailyInterest: '0.000475', borrowLimit: '2100000' },
-                        ],
+                        data: [{ coin: 'BTC', dailyInterest: '0.00026125', borrowLimit: '270' }],
                     },
                 ])
             );
@@ -1084,7 +945,7 @@ describe('AccountApi', () => {
         it('should execute queryIsolatedMarginFeeData() successfully with optional parameters', async () => {
             const params: QueryIsolatedMarginFeeDataRequest = {
                 vipLevel: 1,
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -1094,10 +955,7 @@ describe('AccountApi', () => {
                         vipLevel: 0,
                         symbol: 'BTCUSDT',
                         leverage: '10',
-                        data: [
-                            { coin: 'BTC', dailyInterest: '0.00026125', borrowLimit: '270' },
-                            { coin: 'USDT', dailyInterest: '0.000475', borrowLimit: '2100000' },
-                        ],
+                        data: [{ coin: 'BTC', dailyInterest: '0.00026125', borrowLimit: '270' }],
                     },
                 ])
             );

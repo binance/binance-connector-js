@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,103 +25,103 @@ import type { MarginAccountNewOrderResponseFillsInner } from './margin-account-n
  */
 export interface MarginAccountNewOrderResponse {
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof MarginAccountNewOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * client Order Id.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * if isolated margin
      * @type {boolean}
      * @memberof MarginAccountNewOrderResponse
      */
     isIsolated?: boolean;
     /**
-     *
+     * transact Time.
      * @type {number | bigint}
      * @memberof MarginAccountNewOrderResponse
      */
     transactTime?: number | bigint;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     price?: string;
     /**
-     *
+     * orig Qty.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * executed Qty.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * cummulative Quote Qty.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * status.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     status?: string;
     /**
-     *
+     * time In Force.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     type?: string;
     /**
-     *
+     * side.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     side?: string;
     /**
-     *
+     * self Trade Prevention Mode.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * margin Buy Borrow Amount.
      * @type {number | bigint}
      * @memberof MarginAccountNewOrderResponse
      */
     marginBuyBorrowAmount?: number | bigint;
     /**
-     *
+     * margin Buy Borrow Asset.
      * @type {string}
      * @memberof MarginAccountNewOrderResponse
      */
     marginBuyBorrowAsset?: string;
     /**
-     *
+     * fills list.
      * @type {Array<MarginAccountNewOrderResponseFillsInner>}
      * @memberof MarginAccountNewOrderResponse
      */

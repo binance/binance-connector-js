@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,61 +20,61 @@
  */
 export interface GetCrossMarginTransferHistoryResponseRowsInner {
     /**
-     *
+     * amount.
      * @type {string}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     amount?: string;
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     asset?: string;
     /**
-     *
+     * status.
      * @type {string}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     status?: string;
     /**
-     *
+     * timestamp.
      * @type {number | bigint}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     timestamp?: number | bigint;
     /**
-     *
+     * tx Id.
      * @type {number | bigint}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     txId?: number | bigint;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     type?: string;
     /**
-     *
+     * SPOT,FUTURES,FIAT,DELIVERY,MINING,ISOLATED_MARGIN,FUNDING,MOTHER_SPOT,OPTION,SUB_SPOT,SUB_MARGIN,CROSS_MARGIN
      * @type {string}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     transFrom?: string;
     /**
-     *
+     * SPOT,FUTURES,FIAT,DELIVERY,MINING,ISOLATED_MARGIN,FUNDING,MOTHER_SPOT,OPTION,SUB_SPOT,SUB_MARGIN,CROSS_MARGIN
      * @type {string}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     transTo?: string;
     /**
-     *
+     * from Symbol.
      * @type {string}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
     fromSymbol?: string;
     /**
-     *
+     * to Symbol.
      * @type {string}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */

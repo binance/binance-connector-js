@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,91 +20,91 @@
  */
 export interface MarginAccountNewOcoResponseOrderReportsInner {
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     symbol?: string;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * order List Id.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     orderListId?: number | bigint;
     /**
-     *
+     * client Order Id.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     clientOrderId?: string;
     /**
-     *
+     * transact Time.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     transactTime?: number | bigint;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     price?: string;
     /**
-     *
+     * orig Qty.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     origQty?: string;
     /**
-     *
+     * executed Qty.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     executedQty?: string;
     /**
-     *
+     * cummulative Quote Qty.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * status.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     status?: string;
     /**
-     *
+     * time In Force.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     timeInForce?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     type?: string;
     /**
-     *
+     * side.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     side?: string;
     /**
-     *
+     * stop Price.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     stopPrice?: string;
     /**
-     *
+     * self Trade Prevention Mode.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,37 +20,37 @@
  */
 export interface GetSmallLiabilityExchangeHistoryResponseRowsInner {
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof GetSmallLiabilityExchangeHistoryResponseRowsInner
      */
     asset?: string;
     /**
-     *
+     * amount.
      * @type {string}
      * @memberof GetSmallLiabilityExchangeHistoryResponseRowsInner
      */
     amount?: string;
     /**
-     *
+     * target Asset.
      * @type {string}
      * @memberof GetSmallLiabilityExchangeHistoryResponseRowsInner
      */
     targetAsset?: string;
     /**
-     *
+     * target Amount.
      * @type {string}
      * @memberof GetSmallLiabilityExchangeHistoryResponseRowsInner
      */
     targetAmount?: string;
     /**
-     *
+     * biz Type.
      * @type {string}
      * @memberof GetSmallLiabilityExchangeHistoryResponseRowsInner
      */
     bizType?: string;
     /**
-     *
+     * timestamp.
      * @type {number | bigint}
      * @memberof GetSmallLiabilityExchangeHistoryResponseRowsInner
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { MarketDataApi } from '../../../src/rest-api';
+import { MarketDataApi, QueryMarginAvailableInventoryTypeEnum } from '../../../src/rest-api';
 import {
     GetAllCrossMarginPairsRequest,
     GetAllIsolatedMarginSymbolRequest,
@@ -63,18 +63,8 @@ describe('MarketDataApi', () => {
                     {
                         collaterals: [
                             { minUsdValue: '0', maxUsdValue: '13000000', discountRate: '1' },
-                            {
-                                minUsdValue: '13000000',
-                                maxUsdValue: '20000000',
-                                discountRate: '0.975',
-                            },
-                            { minUsdValue: '20000000', discountRate: '0' },
                         ],
                         assetNames: ['BNX'],
-                    },
-                    {
-                        collaterals: [{ minUsdValue: '0', discountRate: '1' }],
-                        assetNames: ['BTC', 'BUSD', 'ETH', 'USDT'],
                     },
                 ])
             );
@@ -123,34 +113,7 @@ describe('MarketDataApi', () => {
                         isSellAllowed: true,
                         quote: 'BTC',
                         symbol: 'BNBBTC',
-                    },
-                    {
-                        base: 'TRX',
-                        id: 351637923235429100,
-                        isBuyAllowed: true,
-                        isMarginTrade: true,
-                        isSellAllowed: true,
-                        quote: 'BTC',
-                        symbol: 'TRXBTC',
                         delistTime: 1704973040,
-                    },
-                    {
-                        base: 'XRP',
-                        id: 351638112213990140,
-                        isBuyAllowed: true,
-                        isMarginTrade: true,
-                        isSellAllowed: true,
-                        quote: 'BTC',
-                        symbol: 'XRPBTC',
-                    },
-                    {
-                        base: 'ETH',
-                        id: 351638524530850560,
-                        isBuyAllowed: true,
-                        isMarginTrade: true,
-                        isSellAllowed: true,
-                        quote: 'BTC',
-                        symbol: 'ETHBTC',
                     },
                 ])
             );
@@ -171,7 +134,7 @@ describe('MarketDataApi', () => {
 
         it('should execute getAllCrossMarginPairs() successfully with optional parameters', async () => {
             const params: GetAllCrossMarginPairsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             mockResponse = JSONParse(
@@ -184,34 +147,7 @@ describe('MarketDataApi', () => {
                         isSellAllowed: true,
                         quote: 'BTC',
                         symbol: 'BNBBTC',
-                    },
-                    {
-                        base: 'TRX',
-                        id: 351637923235429100,
-                        isBuyAllowed: true,
-                        isMarginTrade: true,
-                        isSellAllowed: true,
-                        quote: 'BTC',
-                        symbol: 'TRXBTC',
                         delistTime: 1704973040,
-                    },
-                    {
-                        base: 'XRP',
-                        id: 351638112213990140,
-                        isBuyAllowed: true,
-                        isMarginTrade: true,
-                        isSellAllowed: true,
-                        quote: 'BTC',
-                        symbol: 'XRPBTC',
-                    },
-                    {
-                        base: 'ETH',
-                        id: 351638524530850560,
-                        isBuyAllowed: true,
-                        isMarginTrade: true,
-                        isSellAllowed: true,
-                        quote: 'BTC',
-                        symbol: 'ETHBTC',
                     },
                 ])
             );
@@ -260,14 +196,6 @@ describe('MarketDataApi', () => {
                         quote: 'BTC',
                         symbol: 'BNBBTC',
                     },
-                    {
-                        base: 'TRX',
-                        isBuyAllowed: true,
-                        isMarginTrade: true,
-                        isSellAllowed: true,
-                        quote: 'BTC',
-                        symbol: 'TRXBTC',
-                    },
                 ])
             );
 
@@ -287,7 +215,7 @@ describe('MarketDataApi', () => {
 
         it('should execute getAllIsolatedMarginSymbol() successfully with optional parameters', async () => {
             const params: GetAllIsolatedMarginSymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
                 recvWindow: 5000,
             };
 
@@ -300,14 +228,6 @@ describe('MarketDataApi', () => {
                         isSellAllowed: true,
                         quote: 'BTC',
                         symbol: 'BNBBTC',
-                    },
-                    {
-                        base: 'TRX',
-                        isBuyAllowed: true,
-                        isMarginTrade: true,
-                        isSellAllowed: true,
-                        quote: 'BTC',
-                        symbol: 'TRXBTC',
                     },
                 ])
             );
@@ -376,7 +296,7 @@ describe('MarketDataApi', () => {
 
         it('should execute getAllMarginAssets() successfully with optional parameters', async () => {
             const params: GetAllMarginAssetsRequest = {
-                asset: 'asset_example',
+                asset: 'USDC',
             };
 
             mockResponse = JSONParse(
@@ -429,13 +349,8 @@ describe('MarketDataApi', () => {
                 JSONStringify([
                     {
                         delistTime: 1686161202000,
-                        crossMarginAssets: ['BTC', 'USDT'],
-                        isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
-                    },
-                    {
-                        delistTime: 1686222232000,
-                        crossMarginAssets: ['ADA'],
-                        isolatedMarginSymbols: [],
+                        crossMarginAssets: ['BTC'],
+                        isolatedMarginSymbols: ['ADAUSDT'],
                     },
                 ])
             );
@@ -463,13 +378,8 @@ describe('MarketDataApi', () => {
                 JSONStringify([
                     {
                         delistTime: 1686161202000,
-                        crossMarginAssets: ['BTC', 'USDT'],
-                        isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
-                    },
-                    {
-                        delistTime: 1686222232000,
-                        crossMarginAssets: ['ADA'],
-                        isolatedMarginSymbols: [],
+                        crossMarginAssets: ['BTC'],
+                        isolatedMarginSymbols: ['ADAUSDT'],
                     },
                 ])
             );
@@ -506,19 +416,7 @@ describe('MarketDataApi', () => {
 
     describe('getLimitPricePairs()', () => {
         it('should execute getLimitPricePairs() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify({
-                    crossMarginSymbols: [
-                        'BLURUSDC',
-                        'SANDBTC',
-                        'QKCBTC',
-                        'SEIFDUSD',
-                        'NEOUSDC',
-                        'ARBFDUSD',
-                        'ORDIUSDC',
-                    ],
-                })
-            );
+            mockResponse = JSONParse(JSONStringify({ crossMarginSymbols: ['BLURUSDC'] }));
 
             const spy = jest.spyOn(client, 'getLimitPricePairs').mockReturnValue(
                 Promise.resolve({
@@ -556,13 +454,8 @@ describe('MarketDataApi', () => {
                 JSONStringify([
                     {
                         listTime: 1686161202000,
-                        crossMarginAssets: ['BTC', 'USDT'],
-                        isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
-                    },
-                    {
-                        listTime: 1686222232000,
-                        crossMarginAssets: ['ADA'],
-                        isolatedMarginSymbols: [],
+                        crossMarginAssets: ['BTC'],
+                        isolatedMarginSymbols: ['ADAUSDT'],
                     },
                 ])
             );
@@ -590,13 +483,8 @@ describe('MarketDataApi', () => {
                 JSONStringify([
                     {
                         listTime: 1686161202000,
-                        crossMarginAssets: ['BTC', 'USDT'],
-                        isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
-                    },
-                    {
-                        listTime: 1686222232000,
-                        crossMarginAssets: ['ADA'],
-                        isolatedMarginSymbols: [],
+                        crossMarginAssets: ['BTC'],
+                        isolatedMarginSymbols: ['ADAUSDT'],
                     },
                 ])
             );
@@ -634,10 +522,7 @@ describe('MarketDataApi', () => {
     describe('getMarginAssetRiskBasedLiquidationRatio()', () => {
         it('should execute getMarginAssetRiskBasedLiquidationRatio() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([
-                    { asset: 'USDC', riskBasedLiquidationRatio: '0.01' },
-                    { asset: 'BUSD', riskBasedLiquidationRatio: '0.01' },
-                ])
+                JSONStringify([{ asset: 'USDC', riskBasedLiquidationRatio: '0.01' }])
             );
 
             const spy = jest
@@ -680,8 +565,8 @@ describe('MarketDataApi', () => {
         it('should execute getMarginRestrictedAssets() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
-                    openLongRestrictedAsset: ['ADA', 'CHZ', 'ETH', 'LTC', 'XRP', '币安人生'],
-                    maxCollateralExceededAsset: ['ACH', 'BNB', 'BTC', 'USDT'],
+                    openLongRestrictedAsset: ['ADA'],
+                    maxCollateralExceededAsset: ['ACH'],
                 })
             );
 
@@ -720,7 +605,7 @@ describe('MarketDataApi', () => {
     describe('queryIsolatedMarginTierData()', () => {
         it('should execute queryIsolatedMarginTierData() successfully with required parameters only', async () => {
             const params: QueryIsolatedMarginTierDataRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -753,8 +638,8 @@ describe('MarketDataApi', () => {
 
         it('should execute queryIsolatedMarginTierData() successfully with optional parameters', async () => {
             const params: QueryIsolatedMarginTierDataRequest = {
-                symbol: 'symbol_example',
-                tier: 789,
+                symbol: 'BTCUSDT',
+                tier: 1,
                 recvWindow: 5000,
             };
 
@@ -788,7 +673,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryIsolatedMarginTierDataRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -800,7 +685,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryIsolatedMarginTierDataRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -827,7 +712,7 @@ describe('MarketDataApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        assetNames: ['SHIB', 'FDUSD', 'BTC', 'ETH', 'USDC'],
+                        assetNames: ['SHIB'],
                         rank: 1,
                         brackets: [
                             {
@@ -835,13 +720,6 @@ describe('MarketDataApi', () => {
                                 maxDebt: 1000000,
                                 maintenanceMarginRate: 0.02,
                                 initialMarginRate: 0.1112,
-                                fastNum: 0,
-                            },
-                            {
-                                leverage: 3,
-                                maxDebt: 4000000,
-                                maintenanceMarginRate: 0.07,
-                                initialMarginRate: 0.5,
                                 fastNum: 60000,
                             },
                         ],
@@ -888,17 +766,12 @@ describe('MarketDataApi', () => {
     describe('queryMarginAvailableInventory()', () => {
         it('should execute queryMarginAvailableInventory() successfully with required parameters only', async () => {
             const params: QueryMarginAvailableInventoryRequest = {
-                type: 'type_example',
+                type: QueryMarginAvailableInventoryTypeEnum.MARGIN,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    assets: {
-                        MATIC: '100000000',
-                        STPT: '100000000',
-                        TVK: '100000000',
-                        SHIB: '97409653',
-                    },
+                    assets: { MATIC: '200', STPT: '30000', TVK: '10000', SHIB: '4000000' },
                     updateTime: 1699272487,
                 })
             );
@@ -919,17 +792,12 @@ describe('MarketDataApi', () => {
 
         it('should execute queryMarginAvailableInventory() successfully with optional parameters', async () => {
             const params: QueryMarginAvailableInventoryRequest = {
-                type: 'type_example',
+                type: QueryMarginAvailableInventoryTypeEnum.MARGIN,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    assets: {
-                        MATIC: '100000000',
-                        STPT: '100000000',
-                        TVK: '100000000',
-                        SHIB: '97409653',
-                    },
+                    assets: { MATIC: '200', STPT: '30000', TVK: '10000', SHIB: '4000000' },
                     updateTime: 1699272487,
                 })
             );
@@ -950,7 +818,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: QueryMarginAvailableInventoryRequest = {
-                type: 'type_example',
+                type: QueryMarginAvailableInventoryTypeEnum.MARGIN,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -962,7 +830,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginAvailableInventoryRequest = {
-                type: 'type_example',
+                type: QueryMarginAvailableInventoryTypeEnum.MARGIN,
             };
 
             const errorResponse = {
@@ -987,7 +855,7 @@ describe('MarketDataApi', () => {
     describe('queryMarginPriceindex()', () => {
         it('should execute queryMarginPriceindex() successfully with required parameters only', async () => {
             const params: QueryMarginPriceindexRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             mockResponse = JSONParse(
@@ -1010,7 +878,7 @@ describe('MarketDataApi', () => {
 
         it('should execute queryMarginPriceindex() successfully with optional parameters', async () => {
             const params: QueryMarginPriceindexRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             mockResponse = JSONParse(
@@ -1033,7 +901,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryMarginPriceindexRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1045,7 +913,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginPriceindexRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             const errorResponse = {

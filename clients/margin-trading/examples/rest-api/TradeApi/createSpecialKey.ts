@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function createSpecialKey() {
     try {
         const response = await client.restAPI.createSpecialKey({
-            apiName: 'apiName_example',
+            apiName: 'apiName',
         });
 
         const rateLimits = response.rateLimits!;

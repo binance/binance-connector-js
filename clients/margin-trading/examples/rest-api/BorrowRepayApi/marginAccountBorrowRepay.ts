@@ -1,4 +1,8 @@
-import { MarginTrading, MARGIN_TRADING_REST_API_PROD_URL } from '../../../src';
+import {
+    MarginTrading,
+    MarginTradingRestAPI,
+    MARGIN_TRADING_REST_API_PROD_URL,
+} from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,11 +14,10 @@ const client = new MarginTrading({ configurationRestAPI });
 async function marginAccountBorrowRepay() {
     try {
         const response = await client.restAPI.marginAccountBorrowRepay({
-            asset: 'asset_example',
-            isIsolated: 'FALSE',
-            symbol: 'symbol_example',
-            amount: 'amount_example',
-            type: 'type_example',
+            asset: 'USDT',
+            isIsolated: MarginTradingRestAPI.MarginAccountBorrowRepayIsIsolatedEnum.TRUE,
+            amount: '1.0',
+            type: MarginTradingRestAPI.MarginAccountBorrowRepayTypeEnum.BORROW,
         });
 
         const rateLimits = response.rateLimits!;

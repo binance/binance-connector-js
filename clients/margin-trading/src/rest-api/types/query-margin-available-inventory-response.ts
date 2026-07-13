@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,10 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QueryMarginAvailableInventoryResponseAssets } from './query-margin-available-inventory-response-assets';
-
 /**
  *
  * @export
@@ -25,13 +20,13 @@ import type { QueryMarginAvailableInventoryResponseAssets } from './query-margin
  */
 export interface QueryMarginAvailableInventoryResponse {
     /**
-     *
-     * @type {QueryMarginAvailableInventoryResponseAssets}
+     * Available inventory per asset. Keys are asset symbols, values are available amounts.
+     * @type {{ [key: string]: string | undefined; }}
      * @memberof QueryMarginAvailableInventoryResponse
      */
-    assets?: QueryMarginAvailableInventoryResponseAssets;
+    assets?: { [key: string]: string | undefined };
     /**
-     *
+     * update Time.
      * @type {number | bigint}
      * @memberof QueryMarginAvailableInventoryResponse
      */

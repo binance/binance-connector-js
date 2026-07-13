@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,85 +25,85 @@ import type { QueryCrossMarginAccountDetailsResponseUserAssetsInner } from './qu
  */
 export interface QueryCrossMarginAccountDetailsResponse {
     /**
-     *
+     * True means margin account created , false means margin account not created.
      * @type {boolean}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     created?: boolean;
     /**
-     *
+     * borrow Enabled.
      * @type {boolean}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     borrowEnabled?: boolean;
     /**
-     *
+     * margin Level.
      * @type {string}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     marginLevel?: string;
     /**
-     *
+     * collateral Margin Level.
      * @type {string}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     collateralMarginLevel?: string;
     /**
-     *
+     * total Asset Of Btc.
      * @type {string}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     totalAssetOfBtc?: string;
     /**
-     *
+     * total Liability Of Btc.
      * @type {string}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     totalLiabilityOfBtc?: string;
     /**
-     *
+     * total Net Asset Of Btc.
      * @type {string}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     totalNetAssetOfBtc?: string;
     /**
-     *
+     * Total Collateral Value In USDT.
      * @type {string}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     TotalCollateralValueInUSDT?: string;
     /**
-     *
+     * total Open Order Loss In USDT.
      * @type {string}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     totalOpenOrderLossInUSDT?: string;
     /**
-     *
+     * trade Enabled.
      * @type {boolean}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     tradeEnabled?: boolean;
     /**
-     *
+     * transfer In Enabled.
      * @type {boolean}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     transferInEnabled?: boolean;
     /**
-     *
+     * transfer Out Enabled.
      * @type {boolean}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     transferOutEnabled?: boolean;
     /**
-     *
+     * // MARGIN_1 for Cross Margin Classic, MARGIN_2 for Cross Margin Pro
      * @type {string}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */
     accountType?: string;
     /**
-     *
+     * user Assets list.
      * @type {Array<QueryCrossMarginAccountDetailsResponseUserAssetsInner>}
      * @memberof QueryCrossMarginAccountDetailsResponse
      */

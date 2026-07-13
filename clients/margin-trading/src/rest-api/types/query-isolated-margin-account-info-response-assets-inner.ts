@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -40,61 +40,61 @@ export interface QueryIsolatedMarginAccountInfoResponseAssetsInner {
      */
     quoteAsset?: QueryIsolatedMarginAccountInfoResponseAssetsInnerQuoteAsset;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     symbol?: string;
     /**
-     *
+     * isolated Created.
      * @type {boolean}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     isolatedCreated?: boolean;
     /**
-     *
+     * true-enabled, false-disabled
      * @type {boolean}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     enabled?: boolean;
     /**
-     *
+     * margin Level.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     marginLevel?: string;
     /**
-     *
+     * \"EXCESSIVE\", \"NORMAL\", \"MARGIN_CALL\", \"PRE_LIQUIDATION\", \"FORCE_LIQUIDATION\"
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     marginLevelStatus?: string;
     /**
-     *
+     * margin Ratio.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     marginRatio?: string;
     /**
-     *
+     * index Price.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     indexPrice?: string;
     /**
-     *
+     * liquidate Price.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     liquidatePrice?: string;
     /**
-     *
+     * liquidate Rate.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */
     liquidateRate?: string;
     /**
-     *
+     * trade Enabled.
      * @type {boolean}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInner
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -36,17 +35,19 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
         /**
          * Get future hourly interest rate
          *
-         * Weight: 100
+         * Weight(IP): 100
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get future hourly interest rate (USER_DATA)
-         * @param {string} assets List of assets, separated by commas, up to 20
-         * @param {boolean} isIsolated for isolated margin or not, "TRUE", "FALSE"
+         * @param {string} assets
+         * @param {GetFutureHourlyInterestRateIsIsolatedEnum} isIsolated
          *
          * @throws {RequiredError}
          */
         getFutureHourlyInterestRate: async (
             assets: string,
-            isIsolated: boolean
+            isIsolated: GetFutureHourlyInterestRateIsIsolatedEnum
         ): Promise<RequestArgs> => {
             // verify required parameter 'assets' is not null or undefined
             assertParamExists('getFutureHourlyInterestRate', 'assets', assets);
@@ -79,29 +80,49 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
         /**
          * Get Interest History
          *
-         * Response in descending order
-         * If isolatedSymbol is not sent, crossed margin data will be returned
-         * The max interval between `startTime` and `endTime` is 30 days.  It is a MUST to ensure data correctness.
-         * If `startTime`and `endTime` not sent, return records of the last 7 days by default.
-         * If `startTime` is sent and `endTime` is not sent, return records of [max(`startTime`, now-30d), now].
-         * If `startTime` is not sent and `endTime` is sent, return records of [`endTime`-7, `endTime`]
-         * `type` in response has 4 enums:
-         * `PERIODIC` interest charged per hour
-         * `ON_BORROW` first interest charged on borrow
-         * `PERIODIC_CONVERTED` interest charged per hour converted into BNB
-         * `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
-         * `PORTFOLIO` interest charged daily on the portfolio margin negative balance
+         * Weight(IP): 1
          *
-         * Weight: 1(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Response in descending order
+         *
+         * - If isolatedSymbol is not sent, crossed margin data will be returned
+         *
+         * - The max interval between `startTime` and `endTime` is 30 days. It is a
+         * MUST to ensure data correctness.
+         *
+         * - If `startTime`and `endTime` not sent, return records of the last 7
+         * days by default.
+         *
+         * - If `startTime` is sent and `endTime` is not sent, return records of
+         * [max(`startTime`, now-30d), now].
+         *
+         * - If `startTime` is not sent and `endTime` is sent, return records of
+         * [`endTime`-7, `endTime`]
+         *
+         * - `type` in response has 4 enums:
+         *
+         * - `PERIODIC` interest charged per hour
+         *
+         * - `ON_BORROW` first interest charged on borrow
+         *
+         * - `PERIODIC_CONVERTED` interest charged per hour converted into BNB
+         *
+         * - `ON_BORROW_CONVERTED` first interest charged on borrow converted into
+         * BNB
+         *
+         * - `PORTFOLIO` interest charged daily on the portfolio margin negative
+         * balance
          *
          * @summary Get Interest History (USER_DATA)
          * @param {string} [asset]
-         * @param {string} [isolatedSymbol] isolated symbol
+         * @param {string} [isolatedSymbol]
          * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [current]
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -153,34 +174,34 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             };
         },
         /**
-         * Margin account borrow/repay(MARGIN)
+         * Margin account borrow/repay
          *
-         * Weight: 1500
+         * Weight(UID): 1500
          *
-         * @summary Margin account borrow/repay(MARGIN)
+         * Security Type: USER_DATA
+         *
+         * @summary Margin account borrow/repay (USER_DATA)
          * @param {string} asset
-         * @param {string} isIsolated `TRUE` for Isolated Margin, `FALSE` for Cross Margin, Default `FALSE`
-         * @param {string} symbol
+         * @param {MarginAccountBorrowRepayIsIsolatedEnum} isIsolated `TRUE` for Isolated Margin, `FALSE` for Cross Margin
          * @param {string} amount
-         * @param {string} type `MARGIN`,`ISOLATED`
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {MarginAccountBorrowRepayTypeEnum} type
+         * @param {string} [symbol] Only for Isolated margin
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginAccountBorrowRepay: async (
             asset: string,
-            isIsolated: string,
-            symbol: string,
+            isIsolated: MarginAccountBorrowRepayIsIsolatedEnum,
             amount: string,
-            type: string,
+            type: MarginAccountBorrowRepayTypeEnum,
+            symbol?: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('marginAccountBorrowRepay', 'asset', asset);
             // verify required parameter 'isIsolated' is not null or undefined
             assertParamExists('marginAccountBorrowRepay', 'isIsolated', isIsolated);
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('marginAccountBorrowRepay', 'symbol', symbol);
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('marginAccountBorrowRepay', 'amount', amount);
             // verify required parameter 'type' is not null or undefined
@@ -224,28 +245,36 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
         /**
          * Query borrow/repay records in Margin account
          *
-         * `txId` or `startTime` must be sent. `txId` takes precedence.
-         * If an asset is sent, data within 30 days before `endTime`; If an asset is not sent, data within 7 days before `endTime`
-         * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-         * `startTime` set as `endTime` - 7days by default, `endTime` set as current time by default
+         * Weight(IP): 10
          *
-         * Weight: 10(IP)
+         * Security Type: USER_DATA
          *
-         * @summary Query borrow/repay records in Margin account(USER_DATA)
-         * @param {string} type `MARGIN`,`ISOLATED`
+         * Notes:
+         * - `txId` or `startTime` must be sent. `txId` takes precedence.
+         *
+         * - Response in descending order
+         *
+         * - If an asset is sent, data within 30 days before `endTime`; If an asset is not sent, data within 7 days before `endTime`
+         *
+         * - If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
+         *
+         * - `startTime` set as `endTime` - 7 days by default, `endTime` set as current time by default
+         *
+         * @summary Query borrow/repay records in Margin account (USER_DATA)
+         * @param {QueryBorrowRepayRecordsInMarginAccountTypeEnum} type
          * @param {string} [asset]
-         * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number | bigint} [txId] `tranId` in `POST /sapi/v1/margin/loan`
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {string} [isolatedSymbol]
+         * @param {number | bigint} [txId]
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [current]
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryBorrowRepayRecordsInMarginAccount: async (
-            type: string,
+            type: QueryBorrowRepayRecordsInMarginAccountTypeEnum,
             asset?: string,
             isolatedSymbol?: string,
             txId?: number | bigint,
@@ -305,14 +334,16 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
         /**
          * Query Margin Interest Rate History
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Margin Interest Rate History (USER_DATA)
          * @param {string} asset
-         * @param {number | bigint} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {number | bigint} [vipLevel]
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -361,15 +392,18 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
         /**
          * Query Max Borrow
          *
-         * If isolatedSymbol is not sent, crossed margin data will be sent.
-         * `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
+         * Weight(IP): 50
          *
-         * Weight: 50(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If isolatedSymbol is not sent, crossed margin data will be sent.
+         * - `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
          *
          * @summary Query Max Borrow (USER_DATA)
          * @param {string} asset
-         * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {string} [isolatedSymbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -418,7 +452,9 @@ export interface BorrowRepayApiInterface {
     /**
      * Get future hourly interest rate
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get future hourly interest rate (USER_DATA)
      * @param {GetFutureHourlyInterestRateRequest} requestParameters Request parameters.
@@ -432,20 +468,40 @@ export interface BorrowRepayApiInterface {
     /**
      * Get Interest History
      *
-     * Response in descending order
-     * If isolatedSymbol is not sent, crossed margin data will be returned
-     * The max interval between `startTime` and `endTime` is 30 days.  It is a MUST to ensure data correctness.
-     * If `startTime`and `endTime` not sent, return records of the last 7 days by default.
-     * If `startTime` is sent and `endTime` is not sent, return records of [max(`startTime`, now-30d), now].
-     * If `startTime` is not sent and `endTime` is sent, return records of [`endTime`-7, `endTime`]
-     * `type` in response has 4 enums:
-     * `PERIODIC` interest charged per hour
-     * `ON_BORROW` first interest charged on borrow
-     * `PERIODIC_CONVERTED` interest charged per hour converted into BNB
-     * `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
-     * `PORTFOLIO` interest charged daily on the portfolio margin negative balance
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Response in descending order
+     *
+     * - If isolatedSymbol is not sent, crossed margin data will be returned
+     *
+     * - The max interval between `startTime` and `endTime` is 30 days. It is a
+     * MUST to ensure data correctness.
+     *
+     * - If `startTime`and `endTime` not sent, return records of the last 7
+     * days by default.
+     *
+     * - If `startTime` is sent and `endTime` is not sent, return records of
+     * [max(`startTime`, now-30d), now].
+     *
+     * - If `startTime` is not sent and `endTime` is sent, return records of
+     * [`endTime`-7, `endTime`]
+     *
+     * - `type` in response has 4 enums:
+     *
+     * - `PERIODIC` interest charged per hour
+     *
+     * - `ON_BORROW` first interest charged on borrow
+     *
+     * - `PERIODIC_CONVERTED` interest charged per hour converted into BNB
+     *
+     * - `ON_BORROW_CONVERTED` first interest charged on borrow converted into
+     * BNB
+     *
+     * - `PORTFOLIO` interest charged daily on the portfolio margin negative
+     * balance
      *
      * @summary Get Interest History (USER_DATA)
      * @param {GetInterestHistoryRequest} requestParameters Request parameters.
@@ -457,11 +513,13 @@ export interface BorrowRepayApiInterface {
         requestParameters?: GetInterestHistoryRequest
     ): Promise<RestApiResponse<GetInterestHistoryResponse>>;
     /**
-     * Margin account borrow/repay(MARGIN)
+     * Margin account borrow/repay
      *
-     * Weight: 1500
+     * Weight(UID): 1500
      *
-     * @summary Margin account borrow/repay(MARGIN)
+     * Security Type: USER_DATA
+     *
+     * @summary Margin account borrow/repay (USER_DATA)
      * @param {MarginAccountBorrowRepayRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -473,14 +531,22 @@ export interface BorrowRepayApiInterface {
     /**
      * Query borrow/repay records in Margin account
      *
-     * `txId` or `startTime` must be sent. `txId` takes precedence.
-     * If an asset is sent, data within 30 days before `endTime`; If an asset is not sent, data within 7 days before `endTime`
-     * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-     * `startTime` set as `endTime` - 7days by default, `endTime` set as current time by default
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
      *
-     * @summary Query borrow/repay records in Margin account(USER_DATA)
+     * Notes:
+     * - `txId` or `startTime` must be sent. `txId` takes precedence.
+     *
+     * - Response in descending order
+     *
+     * - If an asset is sent, data within 30 days before `endTime`; If an asset is not sent, data within 7 days before `endTime`
+     *
+     * - If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
+     *
+     * - `startTime` set as `endTime` - 7 days by default, `endTime` set as current time by default
+     *
+     * @summary Query borrow/repay records in Margin account (USER_DATA)
      * @param {QueryBorrowRepayRecordsInMarginAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -492,7 +558,9 @@ export interface BorrowRepayApiInterface {
     /**
      * Query Margin Interest Rate History
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Interest Rate History (USER_DATA)
      * @param {QueryMarginInterestRateHistoryRequest} requestParameters Request parameters.
@@ -506,10 +574,13 @@ export interface BorrowRepayApiInterface {
     /**
      * Query Max Borrow
      *
-     * If isolatedSymbol is not sent, crossed margin data will be sent.
-     * `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
+     * Weight(IP): 50
      *
-     * Weight: 50(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If isolatedSymbol is not sent, crossed margin data will be sent.
+     * - `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
      *
      * @summary Query Max Borrow (USER_DATA)
      * @param {QueryMaxBorrowRequest} requestParameters Request parameters.
@@ -528,18 +599,18 @@ export interface BorrowRepayApiInterface {
  */
 export interface GetFutureHourlyInterestRateRequest {
     /**
-     * List of assets, separated by commas, up to 20
+     *
      * @type {string}
      * @memberof BorrowRepayApiGetFutureHourlyInterestRate
      */
     readonly assets: string;
 
     /**
-     * for isolated margin or not, "TRUE", "FALSE"
-     * @type {boolean}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof BorrowRepayApiGetFutureHourlyInterestRate
      */
-    readonly isIsolated: boolean;
+    readonly isIsolated: GetFutureHourlyInterestRateIsIsolatedEnum;
 }
 
 /**
@@ -555,7 +626,7 @@ export interface GetInterestHistoryRequest {
     readonly asset?: string;
 
     /**
-     * isolated symbol
+     *
      * @type {string}
      * @memberof BorrowRepayApiGetInterestHistory
      */
@@ -576,21 +647,21 @@ export interface GetInterestHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
     readonly size?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
@@ -610,18 +681,11 @@ export interface MarginAccountBorrowRepayRequest {
     readonly asset: string;
 
     /**
-     * `TRUE` for Isolated Margin, `FALSE` for Cross Margin, Default `FALSE`
-     * @type {string}
+     * `TRUE` for Isolated Margin, `FALSE` for Cross Margin
+     * @type {'TRUE' | 'FALSE'}
      * @memberof BorrowRepayApiMarginAccountBorrowRepay
      */
-    readonly isIsolated: string;
-
-    /**
-     *
-     * @type {string}
-     * @memberof BorrowRepayApiMarginAccountBorrowRepay
-     */
-    readonly symbol: string;
+    readonly isIsolated: MarginAccountBorrowRepayIsIsolatedEnum;
 
     /**
      *
@@ -631,14 +695,21 @@ export interface MarginAccountBorrowRepayRequest {
     readonly amount: string;
 
     /**
-     * `MARGIN`,`ISOLATED`
+     *
+     * @type {'BORROW' | 'REPAY'}
+     * @memberof BorrowRepayApiMarginAccountBorrowRepay
+     */
+    readonly type: MarginAccountBorrowRepayTypeEnum;
+
+    /**
+     * Only for Isolated margin
      * @type {string}
      * @memberof BorrowRepayApiMarginAccountBorrowRepay
      */
-    readonly type: string;
+    readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiMarginAccountBorrowRepay
      */
@@ -651,11 +722,11 @@ export interface MarginAccountBorrowRepayRequest {
  */
 export interface QueryBorrowRepayRecordsInMarginAccountRequest {
     /**
-     * `MARGIN`,`ISOLATED`
-     * @type {string}
+     *
+     * @type {'BORROW' | 'REPAY'}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
-    readonly type: string;
+    readonly type: QueryBorrowRepayRecordsInMarginAccountTypeEnum;
 
     /**
      *
@@ -665,21 +736,21 @@ export interface QueryBorrowRepayRecordsInMarginAccountRequest {
     readonly asset?: string;
 
     /**
-     * isolated symbol
+     *
      * @type {string}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
     readonly isolatedSymbol?: string;
 
     /**
-     * `tranId` in `POST /sapi/v1/margin/loan`
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
     readonly txId?: number | bigint;
 
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
@@ -693,21 +764,21 @@ export interface QueryBorrowRepayRecordsInMarginAccountRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
     readonly size?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
@@ -727,14 +798,14 @@ export interface QueryMarginInterestRateHistoryRequest {
     readonly asset: string;
 
     /**
-     * User's current specific margin data will be returned if vipLevel is omitted
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMarginInterestRateHistory
      */
     readonly vipLevel?: number | bigint;
 
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMarginInterestRateHistory
      */
@@ -748,7 +819,7 @@ export interface QueryMarginInterestRateHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMarginInterestRateHistory
      */
@@ -768,14 +839,14 @@ export interface QueryMaxBorrowRequest {
     readonly asset: string;
 
     /**
-     * isolated symbol
+     *
      * @type {string}
      * @memberof BorrowRepayApiQueryMaxBorrow
      */
     readonly isolatedSymbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMaxBorrow
      */
@@ -798,14 +869,16 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
     /**
      * Get future hourly interest rate
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get future hourly interest rate (USER_DATA)
      * @param {GetFutureHourlyInterestRateRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFutureHourlyInterestRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BorrowRepayApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Get-a-future-hourly-interest-rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/borrow-repay#get-future-hourly-interest-rate Binance API Documentation}
      */
     public async getFutureHourlyInterestRate(
         requestParameters: GetFutureHourlyInterestRateRequest
@@ -829,27 +902,47 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
     /**
      * Get Interest History
      *
-     * Response in descending order
-     * If isolatedSymbol is not sent, crossed margin data will be returned
-     * The max interval between `startTime` and `endTime` is 30 days.  It is a MUST to ensure data correctness.
-     * If `startTime`and `endTime` not sent, return records of the last 7 days by default.
-     * If `startTime` is sent and `endTime` is not sent, return records of [max(`startTime`, now-30d), now].
-     * If `startTime` is not sent and `endTime` is sent, return records of [`endTime`-7, `endTime`]
-     * `type` in response has 4 enums:
-     * `PERIODIC` interest charged per hour
-     * `ON_BORROW` first interest charged on borrow
-     * `PERIODIC_CONVERTED` interest charged per hour converted into BNB
-     * `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
-     * `PORTFOLIO` interest charged daily on the portfolio margin negative balance
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Response in descending order
+     *
+     * - If isolatedSymbol is not sent, crossed margin data will be returned
+     *
+     * - The max interval between `startTime` and `endTime` is 30 days. It is a
+     * MUST to ensure data correctness.
+     *
+     * - If `startTime`and `endTime` not sent, return records of the last 7
+     * days by default.
+     *
+     * - If `startTime` is sent and `endTime` is not sent, return records of
+     * [max(`startTime`, now-30d), now].
+     *
+     * - If `startTime` is not sent and `endTime` is sent, return records of
+     * [`endTime`-7, `endTime`]
+     *
+     * - `type` in response has 4 enums:
+     *
+     * - `PERIODIC` interest charged per hour
+     *
+     * - `ON_BORROW` first interest charged on borrow
+     *
+     * - `PERIODIC_CONVERTED` interest charged per hour converted into BNB
+     *
+     * - `ON_BORROW_CONVERTED` first interest charged on borrow converted into
+     * BNB
+     *
+     * - `PORTFOLIO` interest charged daily on the portfolio margin negative
+     * balance
      *
      * @summary Get Interest History (USER_DATA)
      * @param {GetInterestHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetInterestHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BorrowRepayApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Get-Interest-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/borrow-repay#get-interest-history Binance API Documentation}
      */
     public async getInterestHistory(
         requestParameters: GetInterestHistoryRequest = {}
@@ -876,16 +969,18 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
     }
 
     /**
-     * Margin account borrow/repay(MARGIN)
+     * Margin account borrow/repay
      *
-     * Weight: 1500
+     * Weight(UID): 1500
      *
-     * @summary Margin account borrow/repay(MARGIN)
+     * Security Type: USER_DATA
+     *
+     * @summary Margin account borrow/repay (USER_DATA)
      * @param {MarginAccountBorrowRepayRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountBorrowRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BorrowRepayApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Margin-account-borrow-repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/borrow-repay#margin-account-borrow-repay Binance API Documentation}
      */
     public async marginAccountBorrowRepay(
         requestParameters: MarginAccountBorrowRepayRequest
@@ -893,9 +988,9 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.marginAccountBorrowRepay(
             requestParameters?.asset,
             requestParameters?.isIsolated,
-            requestParameters?.symbol,
             requestParameters?.amount,
             requestParameters?.type,
+            requestParameters?.symbol,
             requestParameters?.recvWindow
         );
         return sendRequest<MarginAccountBorrowRepayResponse>(
@@ -913,19 +1008,27 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
     /**
      * Query borrow/repay records in Margin account
      *
-     * `txId` or `startTime` must be sent. `txId` takes precedence.
-     * If an asset is sent, data within 30 days before `endTime`; If an asset is not sent, data within 7 days before `endTime`
-     * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-     * `startTime` set as `endTime` - 7days by default, `endTime` set as current time by default
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
      *
-     * @summary Query borrow/repay records in Margin account(USER_DATA)
+     * Notes:
+     * - `txId` or `startTime` must be sent. `txId` takes precedence.
+     *
+     * - Response in descending order
+     *
+     * - If an asset is sent, data within 30 days before `endTime`; If an asset is not sent, data within 7 days before `endTime`
+     *
+     * - If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
+     *
+     * - `startTime` set as `endTime` - 7 days by default, `endTime` set as current time by default
+     *
+     * @summary Query borrow/repay records in Margin account (USER_DATA)
      * @param {QueryBorrowRepayRecordsInMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryBorrowRepayRecordsInMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BorrowRepayApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Query-Borrow-Repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/borrow-repay#query-borrow-repay-records-in-margin-account Binance API Documentation}
      */
     public async queryBorrowRepayRecordsInMarginAccount(
         requestParameters: QueryBorrowRepayRecordsInMarginAccountRequest
@@ -957,14 +1060,16 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
     /**
      * Query Margin Interest Rate History
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Interest Rate History (USER_DATA)
      * @param {QueryMarginInterestRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginInterestRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BorrowRepayApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Query-Margin-Interest-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/borrow-repay#query-margin-interest-rate-history Binance API Documentation}
      */
     public async queryMarginInterestRateHistory(
         requestParameters: QueryMarginInterestRateHistoryRequest
@@ -992,17 +1097,20 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
     /**
      * Query Max Borrow
      *
-     * If isolatedSymbol is not sent, crossed margin data will be sent.
-     * `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
+     * Weight(IP): 50
      *
-     * Weight: 50(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If isolatedSymbol is not sent, crossed margin data will be sent.
+     * - `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
      *
      * @summary Query Max Borrow (USER_DATA)
      * @param {QueryMaxBorrowRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMaxBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BorrowRepayApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Query-Max-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/borrow-repay#query-max-borrow Binance API Documentation}
      */
     public async queryMaxBorrow(
         requestParameters: QueryMaxBorrowRequest
@@ -1023,4 +1131,24 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum GetFutureHourlyInterestRateIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum MarginAccountBorrowRepayIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum MarginAccountBorrowRepayTypeEnum {
+    BORROW = 'BORROW',
+    REPAY = 'REPAY',
+}
+
+export enum QueryBorrowRepayRecordsInMarginAccountTypeEnum {
+    BORROW = 'BORROW',
+    REPAY = 'REPAY',
 }

@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -17,21 +17,65 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import {
     TradeApi,
+    CreateSpecialKeyPermissionModeEnum,
+    MarginAccountCancelAllOpenOrdersOnASymbolIsIsolatedEnum,
+    MarginAccountCancelOcoIsIsolatedEnum,
+    MarginAccountCancelOrderIsIsolatedEnum,
     MarginAccountNewOcoSideEnum,
+    MarginAccountNewOcoIsIsolatedEnum,
+    MarginAccountNewOcoStopLimitTimeInForceEnum,
     MarginAccountNewOcoNewOrderRespTypeEnum,
+    MarginAccountNewOcoSideEffectTypeEnum,
+    MarginAccountNewOcoSelfTradePreventionModeEnum,
     MarginAccountNewOrderSideEnum,
+    MarginAccountNewOrderTypeEnum,
+    MarginAccountNewOrderIsIsolatedEnum,
     MarginAccountNewOrderNewOrderRespTypeEnum,
+    MarginAccountNewOrderSideEffectTypeEnum,
     MarginAccountNewOrderTimeInForceEnum,
+    MarginAccountNewOrderSelfTradePreventionModeEnum,
+    MarginAccountNewOtoWorkingTypeEnum,
+    MarginAccountNewOtoWorkingSideEnum,
+    MarginAccountNewOtoPendingTypeEnum,
+    MarginAccountNewOtoPendingSideEnum,
+    MarginAccountNewOtoIsIsolatedEnum,
     MarginAccountNewOtoNewOrderRespTypeEnum,
+    MarginAccountNewOtoSideEffectTypeEnum,
+    MarginAccountNewOtoSelfTradePreventionModeEnum,
+    MarginAccountNewOtoWorkingTimeInForceEnum,
+    MarginAccountNewOtoPendingTimeInForceEnum,
+    MarginAccountNewOtocoWorkingTypeEnum,
+    MarginAccountNewOtocoWorkingSideEnum,
+    MarginAccountNewOtocoPendingSideEnum,
+    MarginAccountNewOtocoPendingAboveTypeEnum,
+    MarginAccountNewOtocoIsIsolatedEnum,
+    MarginAccountNewOtocoSideEffectTypeEnum,
     MarginAccountNewOtocoNewOrderRespTypeEnum,
+    MarginAccountNewOtocoSelfTradePreventionModeEnum,
+    MarginAccountNewOtocoWorkingTimeInForceEnum,
+    MarginAccountNewOtocoPendingAboveTimeInForceEnum,
+    MarginAccountNewOtocoPendingBelowTypeEnum,
+    MarginAccountNewOtocoPendingBelowTimeInForceEnum,
+    MarginManualLiquidationTypeEnum,
+    QueryCurrentMarginOrderCountUsageIsIsolatedEnum,
+    QueryMarginAccountsAllOcoIsIsolatedEnum,
+    QueryMarginAccountsAllOrdersIsIsolatedEnum,
+    QueryMarginAccountsOcoIsIsolatedEnum,
+    QueryMarginAccountsOpenOcoIsIsolatedEnum,
+    QueryMarginAccountsOpenOrdersIsIsolatedEnum,
+    QueryMarginAccountsOrderIsIsolatedEnum,
+    QueryMarginAccountsTradeListIsIsolatedEnum,
+    QueryPreventedMatchesIsIsolatedEnum,
 } from '../../../src/rest-api';
 import {
     CreateSpecialKeyRequest,
     DeleteSpecialKeyRequest,
     EditIpForSpecialKeyRequest,
+    ExitSpecialKeyModeRequest,
     GetForceLiquidationRecordRequest,
     GetSmallLiabilityExchangeCoinListRequest,
     GetSmallLiabilityExchangeHistoryRequest,
+    LiquidationLoanRepayRequest,
     MarginAccountCancelAllOpenOrdersOnASymbolRequest,
     MarginAccountCancelOcoRequest,
     MarginAccountCancelOrderRequest,
@@ -41,6 +85,8 @@ import {
     MarginAccountNewOtocoRequest,
     MarginManualLiquidationRequest,
     QueryCurrentMarginOrderCountUsageRequest,
+    QueryLiquidationLoanRequest,
+    QueryLiquidationLoanRepayHistoryRequest,
     QueryMarginAccountsAllOcoRequest,
     QueryMarginAccountsAllOrdersRequest,
     QueryMarginAccountsOcoRequest,
@@ -58,6 +104,7 @@ import type {
     GetForceLiquidationRecordResponse,
     GetSmallLiabilityExchangeCoinListResponse,
     GetSmallLiabilityExchangeHistoryResponse,
+    LiquidationLoanRepayResponse,
     MarginAccountCancelAllOpenOrdersOnASymbolResponse,
     MarginAccountCancelOcoResponse,
     MarginAccountCancelOrderResponse,
@@ -67,6 +114,8 @@ import type {
     MarginAccountNewOtocoResponse,
     MarginManualLiquidationResponse,
     QueryCurrentMarginOrderCountUsageResponse,
+    QueryLiquidationLoanRepayHistoryResponse,
+    QueryLiquidationLoanResponse,
     QueryMarginAccountsAllOcoResponse,
     QueryMarginAccountsAllOrdersResponse,
     QueryMarginAccountsOcoResponse,
@@ -96,7 +145,7 @@ describe('TradeApi', () => {
     describe('createSpecialKey()', () => {
         it('should execute createSpecialKey() successfully with required parameters only', async () => {
             const params: CreateSpecialKeyRequest = {
-                apiName: 'apiName_example',
+                apiName: 'apiName',
             };
 
             mockResponse = JSONParse(
@@ -123,11 +172,11 @@ describe('TradeApi', () => {
 
         it('should execute createSpecialKey() successfully with optional parameters', async () => {
             const params: CreateSpecialKeyRequest = {
-                apiName: 'apiName_example',
-                symbol: 'symbol_example',
-                ip: 'ip_example',
-                publicKey: 'publicKey_example',
-                permissionMode: 'value',
+                apiName: 'apiName',
+                symbol: 'BTCUSDT',
+                ip: '69.210.67.14,69.210.67.15',
+                publicKey: 'publicKey',
+                permissionMode: CreateSpecialKeyPermissionModeEnum.TRADE,
                 recvWindow: 5000,
             };
 
@@ -155,7 +204,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when apiName is missing', async () => {
             const _params: CreateSpecialKeyRequest = {
-                apiName: 'apiName_example',
+                apiName: 'apiName',
             };
             const params = Object.assign({ ..._params });
             delete params?.apiName;
@@ -167,7 +216,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CreateSpecialKeyRequest = {
-                apiName: 'apiName_example',
+                apiName: 'apiName',
             };
 
             const errorResponse = {
@@ -203,8 +252,8 @@ describe('TradeApi', () => {
 
         it('should execute deleteSpecialKey() successfully with optional parameters', async () => {
             const params: DeleteSpecialKeyRequest = {
-                apiName: 'apiName_example',
-                symbol: 'symbol_example',
+                apiName: 'apiName',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -241,7 +290,7 @@ describe('TradeApi', () => {
     describe('editIpForSpecialKey()', () => {
         it('should execute editIpForSpecialKey() successfully with required parameters only', async () => {
             const params: EditIpForSpecialKeyRequest = {
-                ip: 'ip_example',
+                ip: '24.156.99.202',
             };
 
             const spy = jest.spyOn(client, 'editIpForSpecialKey').mockReturnValue(
@@ -260,8 +309,8 @@ describe('TradeApi', () => {
 
         it('should execute editIpForSpecialKey() successfully with optional parameters', async () => {
             const params: EditIpForSpecialKeyRequest = {
-                ip: 'ip_example',
-                symbol: 'symbol_example',
+                ip: '24.156.99.202',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -281,7 +330,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when ip is missing', async () => {
             const _params: EditIpForSpecialKeyRequest = {
-                ip: 'ip_example',
+                ip: '24.156.99.202',
             };
             const params = Object.assign({ ..._params });
             delete params?.ip;
@@ -293,7 +342,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: EditIpForSpecialKeyRequest = {
-                ip: 'ip_example',
+                ip: '24.156.99.202',
             };
 
             const errorResponse = {
@@ -307,6 +356,57 @@ describe('TradeApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'editIpForSpecialKey').mockRejectedValueOnce(mockError);
             await expect(client.editIpForSpecialKey(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('exitSpecialKeyMode()', () => {
+        it('should execute exitSpecialKeyMode() successfully with required parameters only', async () => {
+            const spy = jest.spyOn(client, 'exitSpecialKeyMode').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<object>)
+            );
+            const response = await client.exitSpecialKeyMode();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute exitSpecialKeyMode() successfully with optional parameters', async () => {
+            const params: ExitSpecialKeyModeRequest = {
+                recvWindow: 5000,
+            };
+
+            const spy = jest.spyOn(client, 'exitSpecialKeyMode').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<object>)
+            );
+            const response = await client.exitSpecialKeyMode(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'exitSpecialKeyMode').mockRejectedValueOnce(mockError);
+            await expect(client.exitSpecialKeyMode()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -351,7 +451,7 @@ describe('TradeApi', () => {
             const params: GetForceLiquidationRecordRequest = {
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                isolatedSymbol: 'isolatedSymbol_example',
+                isolatedSymbol: 'BTCUSDT',
                 current: 1,
                 size: 10,
                 recvWindow: 5000,
@@ -615,10 +715,119 @@ describe('TradeApi', () => {
         });
     });
 
+    describe('liquidationLoanRepay()', () => {
+        it('should execute liquidationLoanRepay() successfully with required parameters only', async () => {
+            const params: LiquidationLoanRepayRequest = {
+                asset: 'USDT',
+                amount: 300.0,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    repayId: 12345678,
+                    asset: 'USDT',
+                    amount: '300.00000000',
+                    status: 'SUCCESS',
+                    createTime: 1714492800000,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'liquidationLoanRepay').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<LiquidationLoanRepayResponse>)
+            );
+            const response = await client.liquidationLoanRepay(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute liquidationLoanRepay() successfully with optional parameters', async () => {
+            const params: LiquidationLoanRepayRequest = {
+                asset: 'USDT',
+                amount: 300.0,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    repayId: 12345678,
+                    asset: 'USDT',
+                    amount: '300.00000000',
+                    status: 'SUCCESS',
+                    createTime: 1714492800000,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'liquidationLoanRepay').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<LiquidationLoanRepayResponse>)
+            );
+            const response = await client.liquidationLoanRepay(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when asset is missing', async () => {
+            const _params: LiquidationLoanRepayRequest = {
+                asset: 'USDT',
+                amount: 300.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.asset;
+
+            await expect(client.liquidationLoanRepay(params)).rejects.toThrow(
+                'Required parameter asset was null or undefined when calling liquidationLoanRepay.'
+            );
+        });
+
+        it('should throw RequiredError when amount is missing', async () => {
+            const _params: LiquidationLoanRepayRequest = {
+                asset: 'USDT',
+                amount: 300.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.amount;
+
+            await expect(client.liquidationLoanRepay(params)).rejects.toThrow(
+                'Required parameter amount was null or undefined when calling liquidationLoanRepay.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: LiquidationLoanRepayRequest = {
+                asset: 'USDT',
+                amount: 300.0,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'liquidationLoanRepay').mockRejectedValueOnce(mockError);
+            await expect(client.liquidationLoanRepay(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('marginAccountCancelAllOpenOrdersOnASymbol()', () => {
         it('should execute marginAccountCancelAllOpenOrdersOnASymbol() successfully with required parameters only', async () => {
             const params: MarginAccountCancelAllOpenOrdersOnASymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -639,43 +848,16 @@ describe('TradeApi', () => {
                         type: 'LIMIT',
                         side: 'BUY',
                         selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        isIsolated: false,
-                        origClientOrderId: 'A3EF2HCwxgZPFMrfwbgrhv',
-                        orderId: 13,
-                        orderListId: -1,
-                        clientOrderId: 'pXLV6Hz6mprAcVYpVMTGgx',
-                        price: '0.090430',
-                        origQty: '0.178622',
-                        executedQty: '0.000000',
-                        cummulativeQuoteQty: '0.000000',
-                        status: 'CANCELED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'BUY',
-                        selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        orderListId: 1929,
                         contingencyType: 'OCO',
                         listStatusType: 'ALL_DONE',
                         listOrderStatus: 'ALL_DONE',
                         listClientOrderId: '2inzWQdDvZLHbbAmAozX2N',
                         transactionTime: 1585230948299,
-                        symbol: 'BTCUSDT',
-                        isIsolated: true,
                         orders: [
                             {
                                 symbol: 'BTCUSDT',
                                 orderId: 20,
                                 clientOrderId: 'CwOOIPHSmYywx6jZX77TdL',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 21,
-                                clientOrderId: '461cPg51vQjV3zIMOXNz39',
                             },
                         ],
                         orderReports: [
@@ -695,22 +877,6 @@ describe('TradeApi', () => {
                                 side: 'BUY',
                                 stopPrice: '0.378131',
                                 icebergQty: '0.017083',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                origClientOrderId: '461cPg51vQjV3zIMOXNz39',
-                                orderId: 21,
-                                orderListId: 1929,
-                                clientOrderId: 'pXLV6Hz6mprAcVYpVMTGgx',
-                                price: '0.008791',
-                                origQty: '0.690354',
-                                executedQty: '0.000000',
-                                cummulativeQuoteQty: '0.000000',
-                                status: 'CANCELED',
-                                timeInForce: 'GTC',
-                                type: 'LIMIT_MAKER',
-                                side: 'BUY',
-                                icebergQty: '0.639962',
                             },
                         ],
                     },
@@ -735,8 +901,8 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountCancelAllOpenOrdersOnASymbol() successfully with optional parameters', async () => {
             const params: MarginAccountCancelAllOpenOrdersOnASymbolRequest = {
-                symbol: 'symbol_example',
-                isIsolated: 'false',
+                symbol: 'BTCUSDT',
+                isIsolated: MarginAccountCancelAllOpenOrdersOnASymbolIsIsolatedEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -758,43 +924,16 @@ describe('TradeApi', () => {
                         type: 'LIMIT',
                         side: 'BUY',
                         selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        isIsolated: false,
-                        origClientOrderId: 'A3EF2HCwxgZPFMrfwbgrhv',
-                        orderId: 13,
-                        orderListId: -1,
-                        clientOrderId: 'pXLV6Hz6mprAcVYpVMTGgx',
-                        price: '0.090430',
-                        origQty: '0.178622',
-                        executedQty: '0.000000',
-                        cummulativeQuoteQty: '0.000000',
-                        status: 'CANCELED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'BUY',
-                        selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        orderListId: 1929,
                         contingencyType: 'OCO',
                         listStatusType: 'ALL_DONE',
                         listOrderStatus: 'ALL_DONE',
                         listClientOrderId: '2inzWQdDvZLHbbAmAozX2N',
                         transactionTime: 1585230948299,
-                        symbol: 'BTCUSDT',
-                        isIsolated: true,
                         orders: [
                             {
                                 symbol: 'BTCUSDT',
                                 orderId: 20,
                                 clientOrderId: 'CwOOIPHSmYywx6jZX77TdL',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 21,
-                                clientOrderId: '461cPg51vQjV3zIMOXNz39',
                             },
                         ],
                         orderReports: [
@@ -814,22 +953,6 @@ describe('TradeApi', () => {
                                 side: 'BUY',
                                 stopPrice: '0.378131',
                                 icebergQty: '0.017083',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                origClientOrderId: '461cPg51vQjV3zIMOXNz39',
-                                orderId: 21,
-                                orderListId: 1929,
-                                clientOrderId: 'pXLV6Hz6mprAcVYpVMTGgx',
-                                price: '0.008791',
-                                origQty: '0.690354',
-                                executedQty: '0.000000',
-                                cummulativeQuoteQty: '0.000000',
-                                status: 'CANCELED',
-                                timeInForce: 'GTC',
-                                type: 'LIMIT_MAKER',
-                                side: 'BUY',
-                                icebergQty: '0.639962',
                             },
                         ],
                     },
@@ -854,7 +977,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountCancelAllOpenOrdersOnASymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -866,7 +989,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountCancelAllOpenOrdersOnASymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -891,7 +1014,7 @@ describe('TradeApi', () => {
     describe('marginAccountCancelOco()', () => {
         it('should execute marginAccountCancelOco() successfully with required parameters only', async () => {
             const params: MarginAccountCancelOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -906,7 +1029,6 @@ describe('TradeApi', () => {
                     isIsolated: false,
                     orders: [
                         { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'TXOvglzXuaubXAaENpaRCB' },
                     ],
                     orderReports: [
                         {
@@ -924,22 +1046,6 @@ describe('TradeApi', () => {
                             type: 'STOP_LOSS_LIMIT',
                             side: 'SELL',
                             stopPrice: '1.00000000',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'LTCBTC',
-                            origClientOrderId: 'TXOvglzXuaubXAaENpaRCB',
-                            orderId: 3,
-                            orderListId: 0,
-                            clientOrderId: 'unfWT8ig8i0uj6lPuYLez6',
-                            price: '3.00000000',
-                            origQty: '10.00000000',
-                            executedQty: '0.00000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
                             selfTradePreventionMode: 'NONE',
                         },
                     ],
@@ -962,8 +1068,8 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountCancelOco() successfully with optional parameters', async () => {
             const params: MarginAccountCancelOcoRequest = {
-                symbol: 'symbol_example',
-                isIsolated: 'false',
+                symbol: 'BTCUSDT',
+                isIsolated: MarginAccountCancelOcoIsIsolatedEnum.TRUE,
                 orderListId: 1,
                 listClientOrderId: '1',
                 newClientOrderId: '1',
@@ -982,7 +1088,6 @@ describe('TradeApi', () => {
                     isIsolated: false,
                     orders: [
                         { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'TXOvglzXuaubXAaENpaRCB' },
                     ],
                     orderReports: [
                         {
@@ -1000,22 +1105,6 @@ describe('TradeApi', () => {
                             type: 'STOP_LOSS_LIMIT',
                             side: 'SELL',
                             stopPrice: '1.00000000',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'LTCBTC',
-                            origClientOrderId: 'TXOvglzXuaubXAaENpaRCB',
-                            orderId: 3,
-                            orderListId: 0,
-                            clientOrderId: 'unfWT8ig8i0uj6lPuYLez6',
-                            price: '3.00000000',
-                            origQty: '10.00000000',
-                            executedQty: '0.00000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
                             selfTradePreventionMode: 'NONE',
                         },
                     ],
@@ -1038,7 +1127,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountCancelOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1050,7 +1139,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountCancelOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -1073,13 +1162,12 @@ describe('TradeApi', () => {
     describe('marginAccountCancelOrder()', () => {
         it('should execute marginAccountCancelOrder() successfully with required parameters only', async () => {
             const params: MarginAccountCancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'LTCBTC',
-                    isIsolated: true,
                     orderId: '28',
                     origClientOrderId: 'myOrder1',
                     clientOrderId: 'cancelMyOrder1',
@@ -1091,6 +1179,7 @@ describe('TradeApi', () => {
                     timeInForce: 'GTC',
                     type: 'LIMIT',
                     side: 'SELL',
+                    isIsolated: true,
                 })
             );
 
@@ -1110,8 +1199,8 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountCancelOrder() successfully with optional parameters', async () => {
             const params: MarginAccountCancelOrderRequest = {
-                symbol: 'symbol_example',
-                isIsolated: 'false',
+                symbol: 'LTCBTC',
+                isIsolated: MarginAccountCancelOrderIsIsolatedEnum.TRUE,
                 orderId: 1,
                 origClientOrderId: '1',
                 newClientOrderId: '1',
@@ -1121,7 +1210,6 @@ describe('TradeApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'LTCBTC',
-                    isIsolated: true,
                     orderId: '28',
                     origClientOrderId: 'myOrder1',
                     clientOrderId: 'cancelMyOrder1',
@@ -1133,6 +1221,7 @@ describe('TradeApi', () => {
                     timeInForce: 'GTC',
                     type: 'LIMIT',
                     side: 'SELL',
+                    isIsolated: true,
                 })
             );
 
@@ -1152,7 +1241,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountCancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1164,7 +1253,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountCancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
 
             const errorResponse = {
@@ -1187,7 +1276,7 @@ describe('TradeApi', () => {
     describe('marginAccountNewOco()', () => {
         it('should execute marginAccountNewOco() successfully with required parameters only', async () => {
             const params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -1208,7 +1297,6 @@ describe('TradeApi', () => {
                     isIsolated: false,
                     orders: [
                         { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'Kk7sqHb9J6mJWTMDVW7Vos' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'xTXKaGYd4bluPVp78IVRvl' },
                     ],
                     orderReports: [
                         {
@@ -1226,22 +1314,6 @@ describe('TradeApi', () => {
                             type: 'STOP_LOSS',
                             side: 'BUY',
                             stopPrice: '0.960664',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'LTCBTC',
-                            orderId: 3,
-                            orderListId: 0,
-                            clientOrderId: 'xTXKaGYd4bluPVp78IVRvl',
-                            transactTime: 1563417480525,
-                            price: '0.036435',
-                            origQty: '0.624363',
-                            executedQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'BUY',
                             selfTradePreventionMode: 'NONE',
                         },
                     ],
@@ -1264,23 +1336,24 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountNewOco() successfully with optional parameters', async () => {
             const params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 stopPrice: 1.0,
-                isIsolated: 'false',
+                isIsolated: MarginAccountNewOcoIsIsolatedEnum.TRUE,
                 listClientOrderId: '1',
                 limitClientOrderId: '1',
                 limitIcebergQty: 1.0,
                 stopClientOrderId: '1',
                 stopLimitPrice: 1.0,
                 stopIcebergQty: 1.0,
-                stopLimitTimeInForce: 'stopLimitTimeInForce_example',
+                stopLimitTimeInForce: MarginAccountNewOcoStopLimitTimeInForceEnum.GTC,
                 newOrderRespType: MarginAccountNewOcoNewOrderRespTypeEnum.ACK,
-                sideEffectType: 'NO_SIDE_EFFECT',
-                selfTradePreventionMode: 'NONE',
-                autoRepayAtCancel: true,
+                sideEffectType: MarginAccountNewOcoSideEffectTypeEnum.NO_SIDE_EFFECT,
+                selfTradePreventionMode:
+                    MarginAccountNewOcoSelfTradePreventionModeEnum.EXPIRE_TAKER,
+                autoRepayAtCancel: false,
                 recvWindow: 5000,
             };
 
@@ -1298,7 +1371,6 @@ describe('TradeApi', () => {
                     isIsolated: false,
                     orders: [
                         { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'Kk7sqHb9J6mJWTMDVW7Vos' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'xTXKaGYd4bluPVp78IVRvl' },
                     ],
                     orderReports: [
                         {
@@ -1316,22 +1388,6 @@ describe('TradeApi', () => {
                             type: 'STOP_LOSS',
                             side: 'BUY',
                             stopPrice: '0.960664',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'LTCBTC',
-                            orderId: 3,
-                            orderListId: 0,
-                            clientOrderId: 'xTXKaGYd4bluPVp78IVRvl',
-                            transactTime: 1563417480525,
-                            price: '0.036435',
-                            origQty: '0.624363',
-                            executedQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'BUY',
                             selfTradePreventionMode: 'NONE',
                         },
                     ],
@@ -1354,7 +1410,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -1370,7 +1426,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -1386,7 +1442,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -1402,7 +1458,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when price is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -1418,7 +1474,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when stopPrice is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -1434,7 +1490,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -1459,9 +1515,9 @@ describe('TradeApi', () => {
     describe('marginAccountNewOrder()', () => {
         it('should execute marginAccountNewOrder() successfully with required parameters only', async () => {
             const params: MarginAccountNewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: MarginAccountNewOrderSideEnum.BUY,
-                type: 'type_example',
+                type: MarginAccountNewOrderTypeEnum.LIMIT,
             };
 
             mockResponse = JSONParse(
@@ -1510,10 +1566,10 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountNewOrder() successfully with optional parameters', async () => {
             const params: MarginAccountNewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: MarginAccountNewOrderSideEnum.BUY,
-                type: 'type_example',
-                isIsolated: 'false',
+                type: MarginAccountNewOrderTypeEnum.LIMIT,
+                isIsolated: MarginAccountNewOrderIsIsolatedEnum.TRUE,
                 quantity: 1.0,
                 quoteOrderQty: 1.0,
                 price: 1.0,
@@ -1521,9 +1577,11 @@ describe('TradeApi', () => {
                 newClientOrderId: '1',
                 icebergQty: 1.0,
                 newOrderRespType: MarginAccountNewOrderNewOrderRespTypeEnum.ACK,
-                sideEffectType: 'NO_SIDE_EFFECT',
+                sideEffectType: MarginAccountNewOrderSideEffectTypeEnum.NO_SIDE_EFFECT,
                 timeInForce: MarginAccountNewOrderTimeInForceEnum.GTC,
-                selfTradePreventionMode: 'NONE',
+                selfTradePreventionMode:
+                    MarginAccountNewOrderSelfTradePreventionModeEnum.EXPIRE_TAKER,
+                trailingDelta: 100,
                 autoRepayAtCancel: true,
                 recvWindow: 5000,
             };
@@ -1574,9 +1632,9 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountNewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: MarginAccountNewOrderSideEnum.BUY,
-                type: 'type_example',
+                type: MarginAccountNewOrderTypeEnum.LIMIT,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1588,9 +1646,9 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: MarginAccountNewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: MarginAccountNewOrderSideEnum.BUY,
-                type: 'type_example',
+                type: MarginAccountNewOrderTypeEnum.LIMIT,
             };
             const params = Object.assign({ ..._params });
             delete params?.side;
@@ -1602,9 +1660,9 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: MarginAccountNewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: MarginAccountNewOrderSideEnum.BUY,
-                type: 'type_example',
+                type: MarginAccountNewOrderTypeEnum.LIMIT,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -1616,9 +1674,9 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountNewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: MarginAccountNewOrderSideEnum.BUY,
-                type: 'type_example',
+                type: MarginAccountNewOrderTypeEnum.LIMIT,
             };
 
             const errorResponse = {
@@ -1641,14 +1699,14 @@ describe('TradeApi', () => {
     describe('marginAccountNewOto()', () => {
         it('should execute marginAccountNewOto() successfully with required parameters only', async () => {
             const params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
 
@@ -1668,11 +1726,6 @@ describe('TradeApi', () => {
                             orderId: 29896699,
                             clientOrderId: 'y8RB6tQEMuHUXybqbtzTxk',
                         },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 29896700,
-                            clientOrderId: 'dKQEdh5HhXb7Lpp85jz1dQ',
-                        },
                     ],
                     orderReports: [
                         {
@@ -1689,22 +1742,6 @@ describe('TradeApi', () => {
                             timeInForce: 'GTC',
                             type: 'LIMIT',
                             side: 'SELL',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 29896700,
-                            orderListId: 13551,
-                            clientOrderId: 'dKQEdh5HhXb7Lpp85jz1dQ',
-                            transactTime: 1725521998054,
-                            price: '50000.00000000',
-                            origQty: '0.02000000',
-                            executedQty: '0',
-                            cummulativeQuoteQty: '0',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT',
-                            side: 'BUY',
                             selfTradePreventionMode: 'NONE',
                         },
                     ],
@@ -1727,29 +1764,30 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountNewOto() successfully with optional parameters', async () => {
             const params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                isIsolated: 'false',
+                isIsolated: MarginAccountNewOtoIsIsolatedEnum.TRUE,
                 listClientOrderId: '1',
                 newOrderRespType: MarginAccountNewOtoNewOrderRespTypeEnum.ACK,
-                sideEffectType: 'NO_SIDE_EFFECT',
-                selfTradePreventionMode: 'NONE',
+                sideEffectType: MarginAccountNewOtoSideEffectTypeEnum.NO_SIDE_EFFECT,
+                selfTradePreventionMode:
+                    MarginAccountNewOtoSelfTradePreventionModeEnum.EXPIRE_TAKER,
                 autoRepayAtCancel: true,
                 workingClientOrderId: '1',
-                workingTimeInForce: 'workingTimeInForce_example',
+                workingTimeInForce: MarginAccountNewOtoWorkingTimeInForceEnum.GTC,
                 pendingClientOrderId: '1',
                 pendingPrice: 1.0,
                 pendingStopPrice: 1.0,
                 pendingTrailingDelta: 1.0,
                 pendingIcebergQty: 1.0,
-                pendingTimeInForce: 'pendingTimeInForce_example',
+                pendingTimeInForce: MarginAccountNewOtoPendingTimeInForceEnum.GTC,
             };
 
             mockResponse = JSONParse(
@@ -1768,11 +1806,6 @@ describe('TradeApi', () => {
                             orderId: 29896699,
                             clientOrderId: 'y8RB6tQEMuHUXybqbtzTxk',
                         },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 29896700,
-                            clientOrderId: 'dKQEdh5HhXb7Lpp85jz1dQ',
-                        },
                     ],
                     orderReports: [
                         {
@@ -1789,22 +1822,6 @@ describe('TradeApi', () => {
                             timeInForce: 'GTC',
                             type: 'LIMIT',
                             side: 'SELL',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 29896700,
-                            orderListId: 13551,
-                            clientOrderId: 'dKQEdh5HhXb7Lpp85jz1dQ',
-                            transactTime: 1725521998054,
-                            price: '50000.00000000',
-                            origQty: '0.02000000',
-                            executedQty: '0',
-                            cummulativeQuoteQty: '0',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT',
-                            side: 'BUY',
                             selfTradePreventionMode: 'NONE',
                         },
                     ],
@@ -1827,14 +1844,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1847,14 +1864,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingType is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1867,14 +1884,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingSide is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1887,14 +1904,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingPrice is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1907,14 +1924,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingQuantity is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1927,14 +1944,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingIcebergQty is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1947,14 +1964,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when pendingType is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1967,14 +1984,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when pendingSide is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1987,14 +2004,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when pendingQuantity is missing', async () => {
             const _params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2007,14 +2024,14 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountNewOtoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
                 workingIcebergQty: 1.0,
-                pendingType: 'Order Types',
-                pendingSide: 'pendingSide_example',
+                pendingType: MarginAccountNewOtoPendingTypeEnum.LIMIT,
+                pendingSide: MarginAccountNewOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
 
@@ -2036,14 +2053,14 @@ describe('TradeApi', () => {
     describe('marginAccountNewOtoco()', () => {
         it('should execute marginAccountNewOtoco() successfully with required parameters only', async () => {
             const params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
 
             mockResponse = JSONParse(
@@ -2062,16 +2079,6 @@ describe('TradeApi', () => {
                             orderId: 28282534,
                             clientOrderId: 'IfYDxvrZI4kiyqYpRH13iI',
                         },
-                        {
-                            symbol: 'BNBUSDT',
-                            orderId: 28282535,
-                            clientOrderId: '0HCSsPRxVfW8BkTUy9z4np',
-                        },
-                        {
-                            symbol: 'BNBUSDT',
-                            orderId: 28282536,
-                            clientOrderId: 'dypsgdxWnLY75kwT930cbD',
-                        },
                     ],
                     orderReports: [
                         {
@@ -2089,39 +2096,7 @@ describe('TradeApi', () => {
                             type: 'LIMIT',
                             side: 'BUY',
                             selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BNBUSDT',
-                            orderId: 28282535,
-                            orderListId: 13509,
-                            clientOrderId: '0HCSsPRxVfW8BkTUy9z4np',
-                            transactTime: 1725521881300,
-                            price: '0E-8',
-                            origQty: '1.00000000',
-                            executedQty: '0',
-                            cummulativeQuoteQty: '0',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'STOP_LOSS',
-                            side: 'SELL',
                             stopPrice: '299.00000000',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BNBUSDT',
-                            orderId: 28282536,
-                            orderListId: 13509,
-                            clientOrderId: 'dypsgdxWnLY75kwT930cbD',
-                            transactTime: 1725521881300,
-                            price: '301.00000000',
-                            origQty: '1.00000000',
-                            executedQty: '0',
-                            cummulativeQuoteQty: '0',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
-                            selfTradePreventionMode: 'NONE',
                         },
                     ],
                 })
@@ -2143,36 +2118,37 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountNewOtoco() successfully with optional parameters', async () => {
             const params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
-                isIsolated: 'false',
-                sideEffectType: 'NO_SIDE_EFFECT',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
+                isIsolated: MarginAccountNewOtocoIsIsolatedEnum.TRUE,
+                sideEffectType: MarginAccountNewOtocoSideEffectTypeEnum.NO_SIDE_EFFECT,
                 autoRepayAtCancel: true,
                 listClientOrderId: '1',
                 newOrderRespType: MarginAccountNewOtocoNewOrderRespTypeEnum.ACK,
-                selfTradePreventionMode: 'NONE',
+                selfTradePreventionMode:
+                    MarginAccountNewOtocoSelfTradePreventionModeEnum.EXPIRE_TAKER,
                 workingClientOrderId: '1',
                 workingIcebergQty: 1.0,
-                workingTimeInForce: 'workingTimeInForce_example',
+                workingTimeInForce: MarginAccountNewOtocoWorkingTimeInForceEnum.GTC,
                 pendingAboveClientOrderId: '1',
                 pendingAbovePrice: 1.0,
                 pendingAboveStopPrice: 1.0,
                 pendingAboveTrailingDelta: 1.0,
                 pendingAboveIcebergQty: 1.0,
-                pendingAboveTimeInForce: 'pendingAboveTimeInForce_example',
-                pendingBelowType: 'pendingBelowType_example',
+                pendingAboveTimeInForce: MarginAccountNewOtocoPendingAboveTimeInForceEnum.GTC,
+                pendingBelowType: MarginAccountNewOtocoPendingBelowTypeEnum.LIMIT_MAKER,
                 pendingBelowClientOrderId: '1',
                 pendingBelowPrice: 1.0,
                 pendingBelowStopPrice: 1.0,
                 pendingBelowTrailingDelta: 1.0,
                 pendingBelowIcebergQty: 1.0,
-                pendingBelowTimeInForce: 'pendingBelowTimeInForce_example',
+                pendingBelowTimeInForce: MarginAccountNewOtocoPendingBelowTimeInForceEnum.GTC,
             };
 
             mockResponse = JSONParse(
@@ -2191,16 +2167,6 @@ describe('TradeApi', () => {
                             orderId: 28282534,
                             clientOrderId: 'IfYDxvrZI4kiyqYpRH13iI',
                         },
-                        {
-                            symbol: 'BNBUSDT',
-                            orderId: 28282535,
-                            clientOrderId: '0HCSsPRxVfW8BkTUy9z4np',
-                        },
-                        {
-                            symbol: 'BNBUSDT',
-                            orderId: 28282536,
-                            clientOrderId: 'dypsgdxWnLY75kwT930cbD',
-                        },
                     ],
                     orderReports: [
                         {
@@ -2218,39 +2184,7 @@ describe('TradeApi', () => {
                             type: 'LIMIT',
                             side: 'BUY',
                             selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BNBUSDT',
-                            orderId: 28282535,
-                            orderListId: 13509,
-                            clientOrderId: '0HCSsPRxVfW8BkTUy9z4np',
-                            transactTime: 1725521881300,
-                            price: '0E-8',
-                            origQty: '1.00000000',
-                            executedQty: '0',
-                            cummulativeQuoteQty: '0',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'STOP_LOSS',
-                            side: 'SELL',
                             stopPrice: '299.00000000',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BNBUSDT',
-                            orderId: 28282536,
-                            orderListId: 13509,
-                            clientOrderId: 'dypsgdxWnLY75kwT930cbD',
-                            transactTime: 1725521881300,
-                            price: '301.00000000',
-                            origQty: '1.00000000',
-                            executedQty: '0',
-                            cummulativeQuoteQty: '0',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
-                            selfTradePreventionMode: 'NONE',
                         },
                     ],
                 })
@@ -2272,14 +2206,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2291,14 +2225,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingType is missing', async () => {
             const _params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingType;
@@ -2310,14 +2244,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingSide is missing', async () => {
             const _params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingSide;
@@ -2329,14 +2263,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingPrice is missing', async () => {
             const _params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingPrice;
@@ -2348,14 +2282,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when workingQuantity is missing', async () => {
             const _params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingQuantity;
@@ -2367,14 +2301,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when pendingSide is missing', async () => {
             const _params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingSide;
@@ -2386,14 +2320,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when pendingQuantity is missing', async () => {
             const _params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingQuantity;
@@ -2405,14 +2339,14 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when pendingAboveType is missing', async () => {
             const _params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingAboveType;
@@ -2424,14 +2358,14 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountNewOtocoRequest = {
-                symbol: 'symbol_example',
-                workingType: 'workingType_example',
-                workingSide: 'workingSide_example',
+                symbol: 'BTCUSDT',
+                workingType: MarginAccountNewOtocoWorkingTypeEnum.LIMIT,
+                workingSide: MarginAccountNewOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
-                pendingSide: 'pendingSide_example',
+                pendingSide: MarginAccountNewOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
-                pendingAboveType: 'pendingAboveType_example',
+                pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum.LIMIT_MAKER,
             };
 
             const errorResponse = {
@@ -2454,7 +2388,7 @@ describe('TradeApi', () => {
     describe('marginManualLiquidation()', () => {
         it('should execute marginManualLiquidation() successfully with required parameters only', async () => {
             const params: MarginManualLiquidationRequest = {
-                type: 'type_example',
+                type: MarginManualLiquidationTypeEnum.MARGIN,
             };
 
             mockResponse = JSONParse(
@@ -2483,8 +2417,8 @@ describe('TradeApi', () => {
 
         it('should execute marginManualLiquidation() successfully with optional parameters', async () => {
             const params: MarginManualLiquidationRequest = {
-                type: 'type_example',
-                symbol: 'symbol_example',
+                type: MarginManualLiquidationTypeEnum.MARGIN,
+                symbol: 'ETHUSDT',
                 recvWindow: 5000,
             };
 
@@ -2514,7 +2448,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: MarginManualLiquidationRequest = {
-                type: 'type_example',
+                type: MarginManualLiquidationTypeEnum.MARGIN,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -2526,7 +2460,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginManualLiquidationRequest = {
-                type: 'type_example',
+                type: MarginManualLiquidationTypeEnum.MARGIN,
             };
 
             const errorResponse = {
@@ -2557,13 +2491,6 @@ describe('TradeApi', () => {
                         limit: 10000,
                         count: 0,
                     },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 20000,
-                        count: 0,
-                    },
                 ])
             );
 
@@ -2583,8 +2510,8 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentMarginOrderCountUsage() successfully with optional parameters', async () => {
             const params: QueryCurrentMarginOrderCountUsageRequest = {
-                isIsolated: 'false',
-                symbol: 'symbol_example',
+                isIsolated: QueryCurrentMarginOrderCountUsageIsIsolatedEnum.TRUE,
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -2595,13 +2522,6 @@ describe('TradeApi', () => {
                         interval: 'SECOND',
                         intervalNum: 10,
                         limit: 10000,
-                        count: 0,
-                    },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 20000,
                         count: 0,
                     },
                 ])
@@ -2641,6 +2561,164 @@ describe('TradeApi', () => {
         });
     });
 
+    describe('queryLiquidationLoan()', () => {
+        it('should execute queryLiquidationLoan() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    asset: 'USDC',
+                    amount: '1000.00000000',
+                    repaidAmount: '300.00000000',
+                    remainingAmount: '700.00000000',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'queryLiquidationLoan').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryLiquidationLoanResponse>)
+            );
+            const response = await client.queryLiquidationLoan();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute queryLiquidationLoan() successfully with optional parameters', async () => {
+            const params: QueryLiquidationLoanRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    asset: 'USDC',
+                    amount: '1000.00000000',
+                    repaidAmount: '300.00000000',
+                    remainingAmount: '700.00000000',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'queryLiquidationLoan').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryLiquidationLoanResponse>)
+            );
+            const response = await client.queryLiquidationLoan(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'queryLiquidationLoan').mockRejectedValueOnce(mockError);
+            await expect(client.queryLiquidationLoan()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('queryLiquidationLoanRepayHistory()', () => {
+        it('should execute queryLiquidationLoanRepayHistory() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    rows: [
+                        {
+                            repayId: 12345678,
+                            asset: 'USDC',
+                            amount: '300.00000000',
+                            status: 'SUCCESS',
+                            createTime: 1714492800000,
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'queryLiquidationLoanRepayHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryLiquidationLoanRepayHistoryResponse>)
+            );
+            const response = await client.queryLiquidationLoanRepayHistory();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute queryLiquidationLoanRepayHistory() successfully with optional parameters', async () => {
+            const params: QueryLiquidationLoanRepayHistoryRequest = {
+                startTime: 1714492800000,
+                endTime: 1714579200000,
+                current: 1,
+                size: 50,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    rows: [
+                        {
+                            repayId: 12345678,
+                            asset: 'USDC',
+                            amount: '300.00000000',
+                            status: 'SUCCESS',
+                            createTime: 1714492800000,
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'queryLiquidationLoanRepayHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryLiquidationLoanRepayHistoryResponse>)
+            );
+            const response = await client.queryLiquidationLoanRepayHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'queryLiquidationLoanRepayHistory')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.queryLiquidationLoanRepayHistory()).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
     describe('queryMarginAccountsAllOco()', () => {
         it('should execute queryMarginAccountsAllOco() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
@@ -2659,32 +2737,6 @@ describe('TradeApi', () => {
                                 symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3',
-                            },
-                        ],
-                    },
-                    {
-                        orderListId: 28,
-                        contingencyType: 'OCO',
-                        listStatusType: 'EXEC_STARTED',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                        transactionTime: 1565245913407,
-                        symbol: 'LTCBTC',
-                        orders: [
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 2,
-                                clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 3,
-                                clientOrderId: 'z0KCjOdditiLS5ekAFtK81',
                             },
                         ],
                     },
@@ -2707,12 +2759,12 @@ describe('TradeApi', () => {
 
         it('should execute queryMarginAccountsAllOco() successfully with optional parameters', async () => {
             const params: QueryMarginAccountsAllOcoRequest = {
-                isIsolated: 'false',
-                symbol: 'symbol_example',
+                isIsolated: QueryMarginAccountsAllOcoIsIsolatedEnum.TRUE,
+                symbol: 'LTCBTC',
                 fromId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 500,
+                limit: 100,
                 recvWindow: 5000,
             };
 
@@ -2732,32 +2784,6 @@ describe('TradeApi', () => {
                                 symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3',
-                            },
-                        ],
-                    },
-                    {
-                        orderListId: 28,
-                        contingencyType: 'OCO',
-                        listStatusType: 'EXEC_STARTED',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                        transactionTime: 1565245913407,
-                        symbol: 'LTCBTC',
-                        orders: [
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 2,
-                                clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 3,
-                                clientOrderId: 'z0KCjOdditiLS5ekAFtK81',
                             },
                         ],
                     },
@@ -2799,7 +2825,7 @@ describe('TradeApi', () => {
     describe('queryMarginAccountsAllOrders()', () => {
         it('should execute queryMarginAccountsAllOrders() successfully with required parameters only', async () => {
             const params: QueryMarginAccountsAllOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             mockResponse = JSONParse(
@@ -2824,26 +2850,6 @@ describe('TradeApi', () => {
                         selfTradePreventionMode: 'NONE',
                         updateTime: 1565769342148,
                     },
-                    {
-                        clientOrderId: 'gXYtqhcEAs2Rn9SUD9nRKx',
-                        cummulativeQuoteQty: '0.00000000',
-                        executedQty: '0.00000000',
-                        icebergQty: '1.00000000',
-                        isWorking: true,
-                        orderId: 41296,
-                        origQty: '6.65000000',
-                        price: '0.18000000',
-                        side: 'SELL',
-                        status: 'CANCELED',
-                        stopPrice: '0.00000000',
-                        symbol: 'BNBBTC',
-                        isIsolated: false,
-                        time: 1565769348687,
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        selfTradePreventionMode: 'NONE',
-                        updateTime: 1565769352226,
-                    },
                 ])
             );
 
@@ -2863,12 +2869,12 @@ describe('TradeApi', () => {
 
         it('should execute queryMarginAccountsAllOrders() successfully with optional parameters', async () => {
             const params: QueryMarginAccountsAllOrdersRequest = {
-                symbol: 'symbol_example',
-                isIsolated: 'false',
+                symbol: 'BNBBTC',
+                isIsolated: QueryMarginAccountsAllOrdersIsIsolatedEnum.TRUE,
                 orderId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 500,
+                limit: 100,
                 recvWindow: 5000,
             };
 
@@ -2894,26 +2900,6 @@ describe('TradeApi', () => {
                         selfTradePreventionMode: 'NONE',
                         updateTime: 1565769342148,
                     },
-                    {
-                        clientOrderId: 'gXYtqhcEAs2Rn9SUD9nRKx',
-                        cummulativeQuoteQty: '0.00000000',
-                        executedQty: '0.00000000',
-                        icebergQty: '1.00000000',
-                        isWorking: true,
-                        orderId: 41296,
-                        origQty: '6.65000000',
-                        price: '0.18000000',
-                        side: 'SELL',
-                        status: 'CANCELED',
-                        stopPrice: '0.00000000',
-                        symbol: 'BNBBTC',
-                        isIsolated: false,
-                        time: 1565769348687,
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        selfTradePreventionMode: 'NONE',
-                        updateTime: 1565769352226,
-                    },
                 ])
             );
 
@@ -2933,7 +2919,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryMarginAccountsAllOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2945,7 +2931,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginAccountsAllOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             const errorResponse = {
@@ -2978,10 +2964,9 @@ describe('TradeApi', () => {
                     listClientOrderId: 'h2USkA5YQpaXHPIrkd96xE',
                     transactionTime: 1565245656253,
                     symbol: 'LTCBTC',
-                    isIsolated: false,
+                    isIsolated: true,
                     orders: [
                         { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
                     ],
                 })
             );
@@ -3002,8 +2987,8 @@ describe('TradeApi', () => {
 
         it('should execute queryMarginAccountsOco() successfully with optional parameters', async () => {
             const params: QueryMarginAccountsOcoRequest = {
-                isIsolated: 'false',
-                symbol: 'symbol_example',
+                isIsolated: QueryMarginAccountsOcoIsIsolatedEnum.TRUE,
+                symbol: 'LTCBTC',
                 orderListId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -3018,10 +3003,9 @@ describe('TradeApi', () => {
                     listClientOrderId: 'h2USkA5YQpaXHPIrkd96xE',
                     transactionTime: 1565245656253,
                     symbol: 'LTCBTC',
-                    isIsolated: false,
+                    isIsolated: true,
                     orders: [
                         { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
                     ],
                 })
             );
@@ -3070,17 +3054,12 @@ describe('TradeApi', () => {
                         listClientOrderId: 'wuB13fmulKj3YjdqWEcsnp',
                         transactionTime: 1565246080644,
                         symbol: 'LTCBTC',
-                        isIsolated: false,
+                        isIsolated: true,
                         orders: [
                             {
                                 symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
                             },
                         ],
                     },
@@ -3103,8 +3082,8 @@ describe('TradeApi', () => {
 
         it('should execute queryMarginAccountsOpenOco() successfully with optional parameters', async () => {
             const params: QueryMarginAccountsOpenOcoRequest = {
-                isIsolated: 'false',
-                symbol: 'symbol_example',
+                isIsolated: QueryMarginAccountsOpenOcoIsIsolatedEnum.TRUE,
+                symbol: 'LTCBTC',
                 recvWindow: 5000,
             };
 
@@ -3118,17 +3097,12 @@ describe('TradeApi', () => {
                         listClientOrderId: 'wuB13fmulKj3YjdqWEcsnp',
                         transactionTime: 1565246080644,
                         symbol: 'LTCBTC',
-                        isIsolated: false,
+                        isIsolated: true,
                         orders: [
                             {
                                 symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
                             },
                         ],
                     },
@@ -3210,8 +3184,8 @@ describe('TradeApi', () => {
 
         it('should execute queryMarginAccountsOpenOrders() successfully with optional parameters', async () => {
             const params: QueryMarginAccountsOpenOrdersRequest = {
-                symbol: 'symbol_example',
-                isIsolated: 'false',
+                symbol: 'BNBBTC',
+                isIsolated: QueryMarginAccountsOpenOrdersIsIsolatedEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -3275,7 +3249,7 @@ describe('TradeApi', () => {
     describe('queryMarginAccountsOrder()', () => {
         it('should execute queryMarginAccountsOrder() successfully with required parameters only', async () => {
             const params: QueryMarginAccountsOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             mockResponse = JSONParse(
@@ -3317,8 +3291,8 @@ describe('TradeApi', () => {
 
         it('should execute queryMarginAccountsOrder() successfully with optional parameters', async () => {
             const params: QueryMarginAccountsOrderRequest = {
-                symbol: 'symbol_example',
-                isIsolated: 'false',
+                symbol: 'BNBBTC',
+                isIsolated: QueryMarginAccountsOrderIsIsolatedEnum.TRUE,
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -3363,7 +3337,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryMarginAccountsOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -3375,7 +3349,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginAccountsOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             const errorResponse = {
@@ -3398,7 +3372,7 @@ describe('TradeApi', () => {
     describe('queryMarginAccountsTradeList()', () => {
         it('should execute queryMarginAccountsTradeList() successfully with required parameters only', async () => {
             const params: QueryMarginAccountsTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             mockResponse = JSONParse(
@@ -3436,8 +3410,8 @@ describe('TradeApi', () => {
 
         it('should execute queryMarginAccountsTradeList() successfully with optional parameters', async () => {
             const params: QueryMarginAccountsTradeListRequest = {
-                symbol: 'symbol_example',
-                isIsolated: 'false',
+                symbol: 'BNBBTC',
+                isIsolated: QueryMarginAccountsTradeListIsIsolatedEnum.TRUE,
                 orderId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -3481,7 +3455,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryMarginAccountsTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -3493,7 +3467,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginAccountsTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBBTC',
             };
 
             const errorResponse = {
@@ -3518,7 +3492,7 @@ describe('TradeApi', () => {
     describe('queryPreventedMatches()', () => {
         it('should execute queryPreventedMatches() successfully with required parameters only', async () => {
             const params: QueryPreventedMatchesRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -3554,12 +3528,12 @@ describe('TradeApi', () => {
 
         it('should execute queryPreventedMatches() successfully with optional parameters', async () => {
             const params: QueryPreventedMatchesRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 preventedMatchId: 1,
                 orderId: 1,
                 fromPreventedMatchId: 1,
+                isIsolated: QueryPreventedMatchesIsIsolatedEnum.TRUE,
                 recvWindow: 5000,
-                isIsolated: 'false',
             };
 
             mockResponse = JSONParse(
@@ -3595,7 +3569,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryPreventedMatchesRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -3607,7 +3581,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryPreventedMatchesRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -3655,7 +3629,7 @@ describe('TradeApi', () => {
 
         it('should execute querySpecialKey() successfully with optional parameters', async () => {
             const params: QuerySpecialKeyRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -3710,13 +3684,6 @@ describe('TradeApi', () => {
                         type: 'RSA',
                         permissionMode: 'TRADE',
                     },
-                    {
-                        apiName: 'testName2',
-                        apiKey: 'znpOzOAeLVgr2TuxWfNo43AaPWpBbJEoKezh1o8mSQb6ryE2odE11A4AoVlJbQoG',
-                        ip: '192.168.0.1,192.168.0.2',
-                        type: 'Ed25519',
-                        permissionMode: 'READ',
-                    },
                 ])
             );
 
@@ -3736,7 +3703,7 @@ describe('TradeApi', () => {
 
         it('should execute querySpecialKeyList() successfully with optional parameters', async () => {
             const params: QuerySpecialKeyListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -3748,13 +3715,6 @@ describe('TradeApi', () => {
                         ip: '192.168.0.1,192.168.0.2',
                         type: 'RSA',
                         permissionMode: 'TRADE',
-                    },
-                    {
-                        apiName: 'testName2',
-                        apiKey: 'znpOzOAeLVgr2TuxWfNo43AaPWpBbJEoKezh1o8mSQb6ryE2odE11A4AoVlJbQoG',
-                        ip: '192.168.0.1,192.168.0.2',
-                        type: 'Ed25519',
-                        permissionMode: 'READ',
                     },
                 ])
             );
@@ -3792,7 +3752,7 @@ describe('TradeApi', () => {
     describe('smallLiabilityExchange()', () => {
         it('should execute smallLiabilityExchange() successfully with required parameters only', async () => {
             const params: SmallLiabilityExchangeRequest = {
-                assetNames: ['BTC'],
+                assetNames: 'BTC,ETH',
             };
 
             const spy = jest.spyOn(client, 'smallLiabilityExchange').mockReturnValue(
@@ -3811,7 +3771,7 @@ describe('TradeApi', () => {
 
         it('should execute smallLiabilityExchange() successfully with optional parameters', async () => {
             const params: SmallLiabilityExchangeRequest = {
-                assetNames: ['BTC'],
+                assetNames: 'BTC,ETH',
                 recvWindow: 5000,
             };
 
@@ -3831,7 +3791,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when assetNames is missing', async () => {
             const _params: SmallLiabilityExchangeRequest = {
-                assetNames: ['BTC'],
+                assetNames: 'BTC,ETH',
             };
             const params = Object.assign({ ..._params });
             delete params?.assetNames;
@@ -3843,7 +3803,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SmallLiabilityExchangeRequest = {
-                assetNames: ['BTC'],
+                assetNames: 'BTC,ETH',
             };
 
             const errorResponse = {

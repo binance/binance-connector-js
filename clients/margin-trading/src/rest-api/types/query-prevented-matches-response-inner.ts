@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,61 +20,61 @@
  */
 export interface QueryPreventedMatchesResponseInner {
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof QueryPreventedMatchesResponseInner
      */
     symbol?: string;
     /**
-     *
+     * prevented Match Id.
      * @type {number | bigint}
      * @memberof QueryPreventedMatchesResponseInner
      */
     preventedMatchId?: number | bigint;
     /**
-     *
+     * taker Order Id.
      * @type {number | bigint}
      * @memberof QueryPreventedMatchesResponseInner
      */
     takerOrderId?: number | bigint;
     /**
-     *
+     * maker Symbol.
      * @type {string}
      * @memberof QueryPreventedMatchesResponseInner
      */
     makerSymbol?: string;
     /**
-     *
+     * maker Order Id.
      * @type {number | bigint}
      * @memberof QueryPreventedMatchesResponseInner
      */
     makerOrderId?: number | bigint;
     /**
-     *
+     * trade Group Id.
      * @type {number | bigint}
      * @memberof QueryPreventedMatchesResponseInner
      */
     tradeGroupId?: number | bigint;
     /**
-     *
+     * self Trade Prevention Mode.
      * @type {string}
      * @memberof QueryPreventedMatchesResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof QueryPreventedMatchesResponseInner
      */
     price?: string;
     /**
-     *
+     * maker Prevented Quantity.
      * @type {string}
      * @memberof QueryPreventedMatchesResponseInner
      */
     makerPreventedQuantity?: string;
     /**
-     *
+     * transact Time.
      * @type {number | bigint}
      * @memberof QueryPreventedMatchesResponseInner
      */

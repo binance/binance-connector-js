@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,55 +20,55 @@
  */
 export interface QueryBorrowRepayRecordsInMarginAccountResponseRowsInner {
     /**
-     *
+     * AUTO,MANUAL for Cross Margin Borrow; MANUAL，AUTO，BNB_AUTO_REPAY，POINT_AUTO_REPAY for Cross Margin Repay; AUTO，MANUAL for Isolated Margin Borrow/Repay;
      * @type {string}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
     type?: string;
     /**
-     *
+     * isolated symbol, will not be returned for crossed margin
      * @type {string}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
     isolatedSymbol?: string;
     /**
-     *
+     * Total amount borrowed/repaid
      * @type {string}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
     amount?: string;
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
     asset?: string;
     /**
-     *
+     * Interest repaid
      * @type {string}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
     interest?: string;
     /**
-     *
+     * Principal repaid
      * @type {string}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
     principal?: string;
     /**
-     *
+     * one of PENDING (pending execution), CONFIRMED (successfully execution), FAILED (execution failed, nothing happened to your account);
      * @type {string}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
     status?: string;
     /**
-     *
+     * timestamp.
      * @type {number | bigint}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
     timestamp?: number | bigint;
     /**
-     *
+     * tx Id.
      * @type {number | bigint}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */

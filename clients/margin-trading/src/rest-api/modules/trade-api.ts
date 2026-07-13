@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -24,6 +23,7 @@ import type {
     GetForceLiquidationRecordResponse,
     GetSmallLiabilityExchangeCoinListResponse,
     GetSmallLiabilityExchangeHistoryResponse,
+    LiquidationLoanRepayResponse,
     MarginAccountCancelAllOpenOrdersOnASymbolResponse,
     MarginAccountCancelOcoResponse,
     MarginAccountCancelOrderResponse,
@@ -33,6 +33,8 @@ import type {
     MarginAccountNewOtocoResponse,
     MarginManualLiquidationResponse,
     QueryCurrentMarginOrderCountUsageResponse,
+    QueryLiquidationLoanRepayHistoryResponse,
+    QueryLiquidationLoanResponse,
     QueryMarginAccountsAllOcoResponse,
     QueryMarginAccountsAllOrdersResponse,
     QueryMarginAccountsOcoResponse,
@@ -51,8 +53,14 @@ import type {
 const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
+         * **Eligibility**
+         *
          * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 7 or higher.
          * - If you are VIP level 6 or below, please contact your VIP manager for eligibility criterias.
+         * - All new Margin Special Key users are required to read, understand, and agree to the Margin Special Key Supplemental Product Terms at the master account level before creating a Margin Special Key.
+         * - Once signed at the master account level, the agreement applies to all sub-accounts. The master account and all sub-accounts (Cross Margin Classic and Portfolio Margin Pro) are authorized to create a Margin Special Key and are subject to the LiquidationLoan policy.
+         *
+         * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
          *
          **Supported Products:**
          *
@@ -72,15 +80,39 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
          *
-         * Weight: 1(UID)
+         **How to use the Margin Special Key**
+         * - Use the below `sapi` endpoint to create your margin special API Key.
+         * - For accessing the Cross Margin account, do not send the `symbol` parameter.
+         * - For accessing the Isolated Margin account(s), pass the relevant `symbol` parameter in the API Key creation request.
+         * - Use the generated API Key (and Secret key, if applicable) to perform margin trading and listenKey generation via **Spot** REST API (`https://api.binance.com/api/v3/*`) endpoints.
          *
-         * @summary Create Special Key(Low-Latency Trading)(TRADE)
+         * Read [REST API](/products/spot/rest-api#signed-trade-and-user_data-endpoint-security) or [WebSocket API](/products/spot/web-socket-api#request-security) documentation to learn how to use different API keys
+         *
+         * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+         *
+         * Weight(UID): 1
+         *
+         * Security Type: TRADE
+         *
+         * Response Notes:
+         * - Error Code Description
+         *
+         * - **UNSUPPORTED_OPERATION** : Portfolio Margin is an unsupported
+         * product, please change the account type to a supported margin product.
+         *
+         * - **Forbidden**:  Cross Margin Pro accounts require additional
+         * agreements, please contact your relationship manager.
+         *
+         * @summary Create Special Key(Low-Latency Trading) (TRADE)
          * @param {string} apiName
-         * @param {string} [symbol] isolated margin pair
+         * @param {string} [symbol]
          * @param {string} [ip] Can be added in batches, separated by commas. Max 30 for an API key
-         * @param {string} [publicKey] 1. If publicKey is inputted it will create an RSA or Ed25519 key. <br />2. Need to be encoded to URL-encoded format
-         * @param {string} [permissionMode] This parameter is only for the Ed25519 API key, and does not effact for other encryption methods. The value can be TRADE (TRADE for all permissions) or READ (READ for USER_DATA, FIX_API_READ_ONLY). The default value is TRADE.
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {string} [publicKey] 1. If publicKey is inputted it will create an RSA or Ed25519
+         * key.
+         *
+         * 2. Need to be encoded to URL-encoded format
+         * @param {CreateSpecialKeyPermissionModeEnum} [permissionMode] This parameter is only for the Ed25519 API key, and does not effact for other encryption methods. The value can be TRADE (TRADE for all permissions) or READ (READ for USER_DATA, FIX_API_READ_ONLY). The default value is TRADE.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -89,7 +121,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             symbol?: string,
             ip?: string,
             publicKey?: string,
-            permissionMode?: string,
+            permissionMode?: CreateSpecialKeyPermissionModeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'apiName' is not null or undefined
@@ -131,18 +163,29 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * This only applies to Special Key for Low Latency Trading.
+         * Deleting your Margin Special Key alone does not exit you from the Margin Special Key framework or discharge your obligations under the Margin Special Key Supplemental Product Terms. To fully exit, you must:
          *
-         * If apiKey is given, apiName will be ignored. If apiName is given with no apiKey, all apikeys with given apiName will be deleted.
+         * 1. Delete your Margin Special Key.
+         * 2. Ensure there are no outstanding liabilities on the account.
+         * 3. Call the Exit Margin Special Key API endpoint.
+         * 4. Confirm the exit status via the API response.
          *
-         * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+         * Only after step 4 is completed and the exit status is confirmed by Binance will your account revert to standard liquidation logic and no longer be subject to the Margin Special Key Supplemental Product Terms.
          *
-         * Weight: 1(UID)
+         * If apiKey is given, apiName will be ignored. If apiName is given with no
+         * apiKey, all apikeys with given apiName will be deleted.
          *
-         * @summary Delete Special Key(Low-Latency Trading)(TRADE)
+         * You need to enable Permits “Enable Spot & Margin” option for the API Key
+         * which requests this endpoint.
+         *
+         * Weight(UID): 1
+         *
+         * Security Type: TRADE
+         *
+         * @summary Delete Special Key(Low-Latency Trading) (TRADE)
          * @param {string} [apiName]
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {string} [symbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -178,16 +221,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Edit ip restriction. This only applies to Special Key for Low Latency Trading.
+         * Edit ip restriction. This only applies to Special Key for Low Latency
+         * Trading.
          *
-         * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+         * You need to enable Permits “Enable Spot & Margin” option for the API Key
+         * which requests this endpoint.
          *
-         * Weight: 1(UID)
+         * Weight(UID): 1
          *
-         * @summary Edit ip for Special Key(Low-Latency Trading)(TRADE)
+         * Security Type: TRADE
+         *
+         * @summary Edit ip for Special Key(Low-Latency Trading) (TRADE)
          * @param {string} ip Can be added in batches, separated by commas. Max 30 for an API key
          * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -226,19 +273,76 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Exit the Margin Special Key mode for Cross Margin Classic accounts.
+         *
+         **All outstanding liabilities under the Cross Margin Classic account must be fully repaid before calling this endpoint.** Deleting the Margin Special Key alone does not constitute a valid exit.
+         *
+         * When a user creates a Margin Special API Key, the account enters "Special Key Mode". Upon a successful request, the following actions will be performed atomically:
+         *
+         * 1. All existing Margin Special API Keys under the Cross Margin Classic mode account will be deleted.
+         * 2. All pre-execution margin checks (including Open-order-loss calculation) will revert to standard mode.
+         * 3. A cooldown period (default: 24 hours) will be enforced, during which the account will not be permitted to create new Margin Special API Keys.
+         *
+         * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+         *
+         **Preconditions:**
+         *
+         * The following conditions must be met; otherwise the request will be rejected:
+         *
+         * - Account type must be **Cross Margin Classic**.
+         * - Account must currently be in **Special Key Mode**. If not, the request silently succeeds.
+         * - Account must **not be in liquidation**.
+         * - Account must **have no liability**.
+         *
+         * You need to enable "Permits Enable Spot & Margin Trading" option for the API Key which requests this endpoint.
+         *
+         * Weight(UID): 10
+         *
+         * Security Type: TRADE
+         *
+         * @summary Exit Special Key Mode (TRADE)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
+         *
+         * @throws {RequiredError}
+         */
+        exitSpecialKeyMode: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/exit-special-key-mode',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Get Force Liquidation Record
          *
-         * Response in descending order
+         * Weight(IP): 1
          *
-         * Weight: 1(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Response in descending order
          *
          * @summary Get Force Liquidation Record (USER_DATA)
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {string} [isolatedSymbol]
+         * @param {number | bigint} [current]
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -288,10 +392,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query the coins which can be small liability exchange
          *
-         * Weight: 100
+         * Weight(IP): 100
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Small Liability Exchange Coin List (USER_DATA)
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -321,14 +427,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get Small liability Exchange History
          *
-         * Weight: 100(UID)
+         * Weight(UID): 100
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Small Liability Exchange History (USER_DATA)
-         * @param {number | bigint} current Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} size Default:10, Max:100
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {number | bigint} current
+         * @param {number | bigint} size
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -377,21 +485,73 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Repays the outstanding cross-margin liquidation loan from the user's spot wallet. A liquidation loan represents the account deficit incurred when account equity turns negative during liquidation (bankruptcy). The repayment amount must be greater than 0 and cannot exceed the remaining loan balance. If the Spot Account has insufficient USDC balance, the repayment will fail.
+         *
+         * Weight(UID): 100
+         *
+         * Security Type: MARGIN
+         *
+         * @summary Liquidation Loan Repay (MARGIN)
+         * @param {string} asset The asset to repay (e.g. USDT, USDC)
+         * @param {number} amount Repayment amount, must be greater than 0
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        liquidationLoanRepay: async (
+            asset: string,
+            amount: number,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'asset' is not null or undefined
+            assertParamExists('liquidationLoanRepay', 'asset', asset);
+            // verify required parameter 'amount' is not null or undefined
+            assertParamExists('liquidationLoanRepay', 'amount', amount);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (asset !== undefined && asset !== null) {
+                localVarQueryParameter['asset'] = asset;
+            }
+            if (amount !== undefined && amount !== null) {
+                localVarQueryParameter['amount'] = amount;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/liquidation-loan/repay',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Cancels all active orders on a symbol for margin account.<br></br>
          * This includes OCO orders.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: TRADE
          *
          * @summary Margin Account Cancel all Open Orders on a Symbol (TRADE)
          * @param {string} symbol
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {MarginAccountCancelAllOpenOrdersOnASymbolIsIsolatedEnum} [isIsolated]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginAccountCancelAllOpenOrdersOnASymbol: async (
             symbol: string,
-            isIsolated?: string,
+            isIsolated?: MarginAccountCancelAllOpenOrdersOnASymbolIsIsolatedEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -426,23 +586,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel an entire Order List for a margin account.
          *
-         * Canceling an individual leg will cancel the entire OCO
+         * Weight(UID): 1
          *
-         * Weight: 1(UID)
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - Canceling an individual leg will cancel the entire OCO
          *
          * @summary Margin Account Cancel OCO (TRADE)
          * @param {string} symbol
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
-         * @param {string} [listClientOrderId] Either `orderListId` or `listClientOrderId` must be provided
-         * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {MarginAccountCancelOcoIsIsolatedEnum} [isIsolated]
+         * @param {number | bigint} [orderListId]
+         * @param {string} [listClientOrderId]
+         * @param {string} [newClientOrderId]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginAccountCancelOco: async (
             symbol: string,
-            isIsolated?: string,
+            isIsolated?: MarginAccountCancelOcoIsIsolatedEnum,
             orderListId?: number | bigint,
             listClientOrderId?: string,
             newClientOrderId?: string,
@@ -489,23 +652,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel an active order for margin account.
          *
-         * Either orderId or origClientOrderId must be sent.
+         * Weight(IP): 10
          *
-         * Weight: 10(IP)
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - Either orderId or origClientOrderId must be sent.
          *
          * @summary Margin Account Cancel Order (TRADE)
          * @param {string} symbol
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
+         * @param {MarginAccountCancelOrderIsIsolatedEnum} [isIsolated]
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {string} [newClientOrderId]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginAccountCancelOrder: async (
             symbol: string,
-            isIsolated?: string,
+            isIsolated?: MarginAccountCancelOrderIsIsolatedEnum,
             orderId?: number | bigint,
             origClientOrderId?: string,
             newClientOrderId?: string,
@@ -552,9 +718,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Send in a new OCO for a margin account
          *
-         * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+         * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
          *
-         * Weight: 6(UID)
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
          *
          * @summary Margin Account New OCO (TRADE)
          * @param {string} symbol
@@ -562,19 +731,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} quantity
          * @param {number} price
          * @param {number} stopPrice
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {string} [listClientOrderId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {MarginAccountNewOcoIsIsolatedEnum} [isIsolated]
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {string} [limitClientOrderId] A unique Id for the limit order
          * @param {number} [limitIcebergQty]
          * @param {string} [stopClientOrderId] A unique Id for the stop loss/stop loss limit leg
          * @param {number} [stopLimitPrice] If provided, `stopLimitTimeInForce` is required.
          * @param {number} [stopIcebergQty]
-         * @param {string} [stopLimitTimeInForce] Valid values are `GTC`/`FOK`/`IOC`
-         * @param {MarginAccountNewOcoNewOrderRespTypeEnum} [newOrderRespType] Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
-         * @param {string} [sideEffectType] NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
-         * @param {string} [selfTradePreventionMode] The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
-         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {MarginAccountNewOcoStopLimitTimeInForceEnum} [stopLimitTimeInForce]
+         * @param {MarginAccountNewOcoNewOrderRespTypeEnum} [newOrderRespType]
+         * @param {MarginAccountNewOcoSideEffectTypeEnum} [sideEffectType]
+         * @param {MarginAccountNewOcoSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -584,17 +753,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             quantity: number,
             price: number,
             stopPrice: number,
-            isIsolated?: string,
+            isIsolated?: MarginAccountNewOcoIsIsolatedEnum,
             listClientOrderId?: string,
             limitClientOrderId?: string,
             limitIcebergQty?: number,
             stopClientOrderId?: string,
             stopLimitPrice?: number,
             stopIcebergQty?: number,
-            stopLimitTimeInForce?: string,
+            stopLimitTimeInForce?: MarginAccountNewOcoStopLimitTimeInForceEnum,
             newOrderRespType?: MarginAccountNewOcoNewOrderRespTypeEnum,
-            sideEffectType?: string,
-            selfTradePreventionMode?: string,
+            sideEffectType?: MarginAccountNewOcoSideEffectTypeEnum,
+            selfTradePreventionMode?: MarginAccountNewOcoSelfTradePreventionModeEnum,
             autoRepayAtCancel?: boolean,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -683,35 +852,39 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Post a new order for margin account.
          *
-         * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+         * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
          *
-         * Weight: 6(UID)
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
          *
          * @summary Margin Account New Order (TRADE)
          * @param {string} symbol
          * @param {MarginAccountNewOrderSideEnum} side
-         * @param {string} type `MARGIN`,`ISOLATED`
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
+         * @param {MarginAccountNewOrderTypeEnum} type
+         * @param {MarginAccountNewOrderIsIsolatedEnum} [isIsolated]
          * @param {number} [quantity]
          * @param {number} [quoteOrderQty]
          * @param {number} [price]
          * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
-         * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
+         * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
-         * @param {MarginAccountNewOrderNewOrderRespTypeEnum} [newOrderRespType] Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
-         * @param {string} [sideEffectType] NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
-         * @param {MarginAccountNewOrderTimeInForceEnum} [timeInForce] GTC,IOC,FOK
-         * @param {string} [selfTradePreventionMode] The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
-         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {MarginAccountNewOrderNewOrderRespTypeEnum} [newOrderRespType] MARKET and LIMIT order types default to FULL, all other orders default to ACK.
+         * @param {MarginAccountNewOrderSideEffectTypeEnum} [sideEffectType]
+         * @param {MarginAccountNewOrderTimeInForceEnum} [timeInForce]
+         * @param {MarginAccountNewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {number | bigint} [trailingDelta] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repaid after the order is cancelled.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginAccountNewOrder: async (
             symbol: string,
             side: MarginAccountNewOrderSideEnum,
-            type: string,
-            isIsolated?: string,
+            type: MarginAccountNewOrderTypeEnum,
+            isIsolated?: MarginAccountNewOrderIsIsolatedEnum,
             quantity?: number,
             quoteOrderQty?: number,
             price?: number,
@@ -719,9 +892,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             newClientOrderId?: string,
             icebergQty?: number,
             newOrderRespType?: MarginAccountNewOrderNewOrderRespTypeEnum,
-            sideEffectType?: string,
+            sideEffectType?: MarginAccountNewOrderSideEffectTypeEnum,
             timeInForce?: MarginAccountNewOrderTimeInForceEnum,
-            selfTradePreventionMode?: string,
+            selfTradePreventionMode?: MarginAccountNewOrderSelfTradePreventionModeEnum,
+            trailingDelta?: number | bigint,
             autoRepayAtCancel?: boolean,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -778,6 +952,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
+            if (trailingDelta !== undefined && trailingDelta !== null) {
+                localVarQueryParameter['trailingDelta'] = trailingDelta;
+            }
             if (autoRepayAtCancel !== undefined && autoRepayAtCancel !== null) {
                 localVarQueryParameter['autoRepayAtCancel'] = autoRepayAtCancel;
             }
@@ -800,69 +977,90 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Post a new OTO order for margin account:
          *
-         * - An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
-         * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-         * - The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
-         * - If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
-         * - When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
-         * - OTOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+         * - An OTO (One-Triggers-the-Other) is an order list comprised of 2
+         * orders.
          *
-         * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
-         * Depending on the `pendingType` or `workingType`, some optional parameters will become mandatory:
+         * - The first order is called the **working order** and must be `LIMIT` or
+         * `LIMIT_MAKER`. Initially, only the working order goes on the order book.
          *
-         * Weight: 6(UID)
+         * - The second order is called the **pending order**. It can be any order
+         * type except for `MARKET` orders using parameter `quoteOrderQty`. The
+         * pending order is only placed on the order book when the working order
+         * gets **fully filled**.
+         *
+         * - If either the working order or the pending order is cancelled
+         * individually, the other order in the order list will also be canceled or
+         * expired.
+         *
+         * - When the order list is placed, if the working order gets **immediately
+         * fully filled**, the placement response will show the working order as
+         * `FILLED` but the pending order will still appear as `PENDING_NEW`. You
+         * need to query the status of the pending order again to see its updated
+         * status.
+         *
+         * - OTOs add **2 orders** to the unfilled order count,
+         * `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+         *
+         * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
+         *
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+         * - Depending on the `pendingType` or `workingType`, some optional
+         * - parameters will become mandatory: | Type                                                     | Additional mandatory parameters                              | Additional information | | -------------------------------------------------------- | ------------------------------------------------------------ | ---------------------- | | `workingType` = `LIMIT`                                  | `workingTimeInForce`                                         |                        | | `pendingType` = `LIMIT`                                  | `pendingPrice`, `pendingTimeInForce`                         |                        | | `pendingType` = `STOP_LOSS` or `TAKE_PROFIT`             | `pendingStopPrice` and/or `pendingTrailingDelta`             |                        | | `pendingType` = `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` | `pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce` |                        | | `pendingTrailingDelta` is provided | `pendingPrice` |                        |
          *
          * @summary Margin Account New OTO (TRADE)
          * @param {string} symbol
-         * @param {string} workingType Supported values: `LIMIT`, `LIMIT_MAKER`
-         * @param {string} workingSide BUY, SELL
+         * @param {MarginAccountNewOtoWorkingTypeEnum} workingType
+         * @param {MarginAccountNewOtoWorkingSideEnum} workingSide
          * @param {number} workingPrice
-         * @param {number} workingQuantity
+         * @param {number} workingQuantity Sets the quantity for the working order.
          * @param {number} workingIcebergQty This can only be used if `workingTimeInForce` is `GTC`.
-         * @param {string} pendingType Supported values: [Order Types](https://developers.binance.com/docs/binance-spot-api-docs/enums#order-types-ordertypes-type) Note that `MARKET` orders using `quoteOrderQty` are not supported.
-         * @param {string} pendingSide BUY, SELL
-         * @param {number} pendingQuantity
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {string} [listClientOrderId] Either `orderListId` or `listClientOrderId` must be provided
-         * @param {MarginAccountNewOtoNewOrderRespTypeEnum} [newOrderRespType] Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
-         * @param {string} [sideEffectType] NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
-         * @param {string} [selfTradePreventionMode] The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
-         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
+         * @param {MarginAccountNewOtoPendingTypeEnum} pendingType
+         * @param {MarginAccountNewOtoPendingSideEnum} pendingSide
+         * @param {number} pendingQuantity Sets the quantity for the pending order.
+         * @param {MarginAccountNewOtoIsIsolatedEnum} [isIsolated]
+         * @param {string} [listClientOrderId] Arbitrary unique ID among open order lists. Automatically generated if not sent.<br/>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired.<br/>`listClientOrderId` is distinct from the `workingClientOrderId` and the `pendingClientOrderId`.
+         * @param {MarginAccountNewOtoNewOrderRespTypeEnum} [newOrderRespType] MARKET and LIMIT order types default to FULL, all other orders default to ACK.
+         * @param {MarginAccountNewOtoSideEffectTypeEnum} [sideEffectType]
+         * @param {MarginAccountNewOtoSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY order takes effect, true means that the debt generated by the order needs to be repaid after the order is cancelled.
          * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
-         * @param {string} [workingTimeInForce] GTC,IOC,FOK
+         * @param {MarginAccountNewOtoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {string} [pendingClientOrderId] Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.
          * @param {number} [pendingPrice]
          * @param {number} [pendingStopPrice]
          * @param {number} [pendingTrailingDelta]
          * @param {number} [pendingIcebergQty] This can only be used if `pendingTimeInForce` is `GTC`.
-         * @param {string} [pendingTimeInForce] GTC,IOC,FOK
+         * @param {MarginAccountNewOtoPendingTimeInForceEnum} [pendingTimeInForce]
          *
          * @throws {RequiredError}
          */
         marginAccountNewOto: async (
             symbol: string,
-            workingType: string,
-            workingSide: string,
+            workingType: MarginAccountNewOtoWorkingTypeEnum,
+            workingSide: MarginAccountNewOtoWorkingSideEnum,
             workingPrice: number,
             workingQuantity: number,
             workingIcebergQty: number,
-            pendingType: string,
-            pendingSide: string,
+            pendingType: MarginAccountNewOtoPendingTypeEnum,
+            pendingSide: MarginAccountNewOtoPendingSideEnum,
             pendingQuantity: number,
-            isIsolated?: string,
+            isIsolated?: MarginAccountNewOtoIsIsolatedEnum,
             listClientOrderId?: string,
             newOrderRespType?: MarginAccountNewOtoNewOrderRespTypeEnum,
-            sideEffectType?: string,
-            selfTradePreventionMode?: string,
+            sideEffectType?: MarginAccountNewOtoSideEffectTypeEnum,
+            selfTradePreventionMode?: MarginAccountNewOtoSelfTradePreventionModeEnum,
             autoRepayAtCancel?: boolean,
             workingClientOrderId?: string,
-            workingTimeInForce?: string,
+            workingTimeInForce?: MarginAccountNewOtoWorkingTimeInForceEnum,
             pendingClientOrderId?: string,
             pendingPrice?: number,
             pendingStopPrice?: number,
             pendingTrailingDelta?: number,
             pendingIcebergQty?: number,
-            pendingTimeInForce?: string
+            pendingTimeInForce?: MarginAccountNewOtoPendingTimeInForceEnum
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountNewOto', 'symbol', symbol);
@@ -972,83 +1170,93 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Post a new OTOCO order for margin account：
          *
-         * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
-         * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
+         *
+         * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list
+         * comprised of 3 orders.
+         *
+         * - The first order is called the **working order** and must be `LIMIT` or
+         * `LIMIT_MAKER`. Initially, only the working order goes on the order book.
          * - The behavior of the working order is the same as the OTO.
-         * - OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-         * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OCO).
-         * - OTOCOs add **3 orders** against the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
+         * - OTOCO has 2 pending orders (pending above and pending below), forming
+         * an OCO pair. The pending orders are only placed on the order book when
+         * the working order gets **fully filled**.
+         * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-oco).
+         * - OTOCOs add **3 orders** against the unfilled order count,
+         * `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
          *
-         * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
-         * Depending on the `pendingAboveType`/`pendingBelowType` or `workingType`, some optional parameters will become mandatory:
+         * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
          *
-         * Weight: 6(UID)
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+         * - Depending on the `pendingAboveType`/`pendingBelowType` or `workingType`, some optional parameters will become mandatory: | Type                                 | Additional mandatory parameters                              | Additional information | | ------------------------------------ | ------------------------------------------------------------ | ---------------------- | | `workingType` = `LIMIT`              | `workingTimeInForce`                                         |                        | | `pendingAboveType`= `LIMIT_MAKER`    | `pendingAbovePrice`                                          |                        | | `pendingAboveType`= `STOP_LOSS`      | `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`   |                        | | `pendingAboveType`=`STOP_LOSS_LIMIT` | `pendingAbovePrice`, `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`, `pendingAboveTimeInForce` |                        | | `pendingBelowType`= `LIMIT_MAKER`    | `pendingBelowPrice`                                          |                        | | `pendingBelowType`= `STOP_LOSS`      | `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`   |                        | | `pendingBelowType`=`STOP_LOSS_LIMIT` | `pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce` |                        | | `pendingAboveTrailingDelta` is provided | `pendingAbovePrice` |                        | | `pendingBelowTrailingDelta` is provided | `pendingBelowPrice` |                        |
          *
          * @summary Margin Account New OTOCO (TRADE)
          * @param {string} symbol
-         * @param {string} workingType Supported values: `LIMIT`, `LIMIT_MAKER`
-         * @param {string} workingSide BUY, SELL
+         * @param {MarginAccountNewOtocoWorkingTypeEnum} workingType
+         * @param {MarginAccountNewOtocoWorkingSideEnum} workingSide
          * @param {number} workingPrice
          * @param {number} workingQuantity
-         * @param {string} pendingSide BUY, SELL
+         * @param {MarginAccountNewOtocoPendingSideEnum} pendingSide
          * @param {number} pendingQuantity
-         * @param {string} pendingAboveType Supported values: `LIMIT_MAKER`, `STOP_LOSS`, and `STOP_LOSS_LIMIT`
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {string} [sideEffectType] NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
-         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
-         * @param {string} [listClientOrderId] Either `orderListId` or `listClientOrderId` must be provided
-         * @param {MarginAccountNewOtocoNewOrderRespTypeEnum} [newOrderRespType] Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
-         * @param {string} [selfTradePreventionMode] The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
+         * @param {MarginAccountNewOtocoPendingAboveTypeEnum} pendingAboveType
+         * @param {MarginAccountNewOtocoIsIsolatedEnum} [isIsolated]
+         * @param {MarginAccountNewOtocoSideEffectTypeEnum} [sideEffectType]
+         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY order takes effect, true means that the debt generated by the order needs to be repaid after the order is cancelled.
+         * @param {string} [listClientOrderId] Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+         * @param {MarginAccountNewOtocoNewOrderRespTypeEnum} [newOrderRespType]
+         * @param {MarginAccountNewOtocoSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
          * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`.
-         * @param {string} [workingTimeInForce] GTC,IOC,FOK
+         * @param {MarginAccountNewOtocoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {string} [pendingAboveClientOrderId] Arbitrary unique ID among open orders for the pending above order. Automatically generated if not sent.
          * @param {number} [pendingAbovePrice]
          * @param {number} [pendingAboveStopPrice]
          * @param {number} [pendingAboveTrailingDelta]
          * @param {number} [pendingAboveIcebergQty] This can only be used if `pendingAboveTimeInForce` is `GTC`.
-         * @param {string} [pendingAboveTimeInForce]
-         * @param {string} [pendingBelowType] Supported values: `LIMIT_MAKER`, `STOP_LOSS`, and `STOP_LOSS_LIMIT`
+         * @param {MarginAccountNewOtocoPendingAboveTimeInForceEnum} [pendingAboveTimeInForce]
+         * @param {MarginAccountNewOtocoPendingBelowTypeEnum} [pendingBelowType]
          * @param {string} [pendingBelowClientOrderId] Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.
          * @param {number} [pendingBelowPrice]
          * @param {number} [pendingBelowStopPrice]
          * @param {number} [pendingBelowTrailingDelta]
          * @param {number} [pendingBelowIcebergQty] This can only be used if `pendingBelowTimeInForce` is `GTC`.
-         * @param {string} [pendingBelowTimeInForce]
+         * @param {MarginAccountNewOtocoPendingBelowTimeInForceEnum} [pendingBelowTimeInForce]
          *
          * @throws {RequiredError}
          */
         marginAccountNewOtoco: async (
             symbol: string,
-            workingType: string,
-            workingSide: string,
+            workingType: MarginAccountNewOtocoWorkingTypeEnum,
+            workingSide: MarginAccountNewOtocoWorkingSideEnum,
             workingPrice: number,
             workingQuantity: number,
-            pendingSide: string,
+            pendingSide: MarginAccountNewOtocoPendingSideEnum,
             pendingQuantity: number,
-            pendingAboveType: string,
-            isIsolated?: string,
-            sideEffectType?: string,
+            pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum,
+            isIsolated?: MarginAccountNewOtocoIsIsolatedEnum,
+            sideEffectType?: MarginAccountNewOtocoSideEffectTypeEnum,
             autoRepayAtCancel?: boolean,
             listClientOrderId?: string,
             newOrderRespType?: MarginAccountNewOtocoNewOrderRespTypeEnum,
-            selfTradePreventionMode?: string,
+            selfTradePreventionMode?: MarginAccountNewOtocoSelfTradePreventionModeEnum,
             workingClientOrderId?: string,
             workingIcebergQty?: number,
-            workingTimeInForce?: string,
+            workingTimeInForce?: MarginAccountNewOtocoWorkingTimeInForceEnum,
             pendingAboveClientOrderId?: string,
             pendingAbovePrice?: number,
             pendingAboveStopPrice?: number,
             pendingAboveTrailingDelta?: number,
             pendingAboveIcebergQty?: number,
-            pendingAboveTimeInForce?: string,
-            pendingBelowType?: string,
+            pendingAboveTimeInForce?: MarginAccountNewOtocoPendingAboveTimeInForceEnum,
+            pendingBelowType?: MarginAccountNewOtocoPendingBelowTypeEnum,
             pendingBelowClientOrderId?: string,
             pendingBelowPrice?: number,
             pendingBelowStopPrice?: number,
             pendingBelowTrailingDelta?: number,
             pendingBelowIcebergQty?: number,
-            pendingBelowTimeInForce?: string
+            pendingBelowTimeInForce?: MarginAccountNewOtocoPendingBelowTimeInForceEnum
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountNewOtoco', 'symbol', symbol);
@@ -1177,20 +1385,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Margin Manual Liquidation
          *
-         * This endpoint can support Cross Margin Classic Mode and Pro Mode.
-         * And only support Isolated Margin for restricted region.
+         * Weight(UID): 3000
          *
-         * Weight: 3000
+         * Security Type: TRADE
          *
-         * @summary Margin Manual Liquidation(MARGIN)
-         * @param {string} type `MARGIN`,`ISOLATED`
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * Notes:
+         * - This endpoint supports Cross Margin Classic Mode and Pro Mode.
+         * - Isolated Margin is only supported in restricted regions.
+         *
+         * @summary Margin Manual Liquidation (TRADE)
+         * @param {MarginManualLiquidationTypeEnum} type
+         * @param {string} [symbol] When type selects `ISOLATED`, `symbol` must be filled in
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginManualLiquidation: async (
-            type: string,
+            type: MarginManualLiquidationTypeEnum,
             symbol?: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -1226,17 +1437,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Displays the user's current margin order count usage for all intervals.
          *
-         * Weight: 20(IP)
+         * Weight(IP): 20
+         *
+         * Security Type: TRADE
          *
          * @summary Query Current Margin Order Count Usage (TRADE)
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {QueryCurrentMarginOrderCountUsageIsIsolatedEnum} [isIsolated]
+         * @param {string} [symbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCurrentMarginOrderCountUsage: async (
-            isIsolated?: string,
+            isIsolated?: QueryCurrentMarginOrderCountUsageIsIsolatedEnum,
             symbol?: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -1267,23 +1480,117 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Query the current user's cross-margin liquidation loan information, including the original loan amount, repaid amount, and remaining amount. When a cross-margin account is liquidated and the account equity turns negative (bankruptcy), the system generates a liquidation loan record representing the deficit. This represents the shortfall amount denominated in USDC.
+         *
+         * Weight(UID): 100
+         *
+         * Security Type: USER_DATA
+         *
+         * @summary Query Liquidation Loan (USER_DATA)
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        queryLiquidationLoan: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/liquidation-loan',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query the repayment history of cross-margin liquidation loans (deficit caused by bankruptcy during liquidation). Supports time-range filtering and pagination.
+         *
+         * Weight(UID): 100
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The maximum query range is 90 days. If `startTime` is earlier than 90 days ago, it will be clamped to 90 days ago.
+         * - Only records with status `SUCCESS` or `PENDING` are returned. Failed repayment records are excluded.
+         *
+         * @summary Query Liquidation Loan Repay History (USER_DATA)
+         * @param {number | bigint} [startTime] Start time in Unix timestamp (milliseconds). Defaults to 7 days ago if not specified
+         * @param {number | bigint} [endTime] End time in Unix timestamp (milliseconds). Defaults to now if not specified
+         * @param {number | bigint} [current] Current page number, default `1`
+         * @param {number | bigint} [size] Page size, default `50`
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        queryLiquidationLoanRepayHistory: async (
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+            if (current !== undefined && current !== null) {
+                localVarQueryParameter['current'] = current;
+            }
+            if (size !== undefined && size !== null) {
+                localVarQueryParameter['size'] = size;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/liquidation-loan/repay-history',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Retrieves all OCO for a specific margin account based on provided optional parameters
          *
-         * Weight: 200(IP)
+         * Weight(IP): 200
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Margin Account\'s all OCO (USER_DATA)
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [fromId] If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {QueryMarginAccountsAllOcoIsIsolatedEnum} [isIsolated]
+         * @param {string} [symbol]
+         * @param {number | bigint} [fromId]
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [limit]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsAllOco: async (
-            isIsolated?: string,
+            isIsolated?: QueryMarginAccountsAllOcoIsIsolatedEnum,
             symbol?: string,
             fromId?: number | bigint,
             startTime?: number | bigint,
@@ -1332,26 +1639,33 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Margin Account's All Orders
          *
-         * If orderId is set, it will get orders >= that orderId. Otherwise the orders within 24 hours are returned.
-         * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
-         * Less than 24 hours between startTime and endTime.
+         * Weight(IP): 200
          *
-         * Weight: 200(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If orderId is set, it will get orders >= that orderId. Otherwise the
+         * orders within 24 hours are returned.
+         *
+         * - For some historical orders cummulativeQuoteQty will be < 0, meaning
+         * the data is not available at this time.
+         *
+         * - Less than 24 hours between startTime and endTime.
          *
          * @summary Query Margin Account\'s All Orders (USER_DATA)
          * @param {string} symbol
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
+         * @param {QueryMarginAccountsAllOrdersIsIsolatedEnum} [isIsolated]
          * @param {number | bigint} [orderId]
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [limit]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsAllOrders: async (
             symbol: string,
-            isIsolated?: string,
+            isIsolated?: QueryMarginAccountsAllOrdersIsIsolatedEnum,
             orderId?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint,
@@ -1402,19 +1716,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Retrieves a specific OCO based on provided optional parameters
          *
-         * Weight: 10(IP)
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Margin Account\'s OCO (USER_DATA)
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {QueryMarginAccountsOcoIsIsolatedEnum} [isIsolated]
+         * @param {string} [symbol]
+         * @param {number | bigint} [orderListId]
          * @param {string} [origClientOrderId]
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOco: async (
-            isIsolated?: string,
+            isIsolated?: QueryMarginAccountsOcoIsIsolatedEnum,
             symbol?: string,
             orderListId?: number | bigint,
             origClientOrderId?: string,
@@ -1455,17 +1771,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Margin Account's Open OCO
          *
-         * Weight: 10(IP)
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Margin Account\'s Open OCO (USER_DATA)
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {QueryMarginAccountsOpenOcoIsIsolatedEnum} [isIsolated]
+         * @param {string} [symbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOpenOco: async (
-            isIsolated?: string,
+            isIsolated?: QueryMarginAccountsOpenOcoIsIsolatedEnum,
             symbol?: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -1498,22 +1816,30 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Margin Account's Open Orders
          *
-         * If the symbol is not sent, orders for all symbols will be returned in an array.
-         * When all symbols are returned, the number of requests counted against the rate limiter is equal to the number of symbols currently trading on the exchange.
-         * If isIsolated ="TRUE", symbol must be sent.
+         * Weight(IP): 10
          *
-         * Weight: 10(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If the symbol is not sent, orders for all symbols will be returned in
+         * an array.
+         *
+         * - When all symbols are returned, the number of requests counted against
+         * the rate limiter is equal to the number of symbols currently trading on
+         * the exchange.
+         *
+         * - If isIsolated ="TRUE", symbol must be sent.
          *
          * @summary Query Margin Account\'s Open Orders (USER_DATA)
          * @param {string} [symbol] isolated margin pair
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {QueryMarginAccountsOpenOrdersIsIsolatedEnum} [isIsolated]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOpenOrders: async (
             symbol?: string,
-            isIsolated?: string,
+            isIsolated?: QueryMarginAccountsOpenOrdersIsIsolatedEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -1545,23 +1871,28 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Margin Account's Order
          *
-         * Either orderId or origClientOrderId must be sent.
-         * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
+         * Weight(IP): 10
          *
-         * Weight: 10(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Either orderId or origClientOrderId must be sent.
+         *
+         * - For some historical orders cummulativeQuoteQty will be < 0, meaning
+         * the data is not available at this time.
          *
          * @summary Query Margin Account\'s Order (USER_DATA)
          * @param {string} symbol
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
+         * @param {QueryMarginAccountsOrderIsIsolatedEnum} [isIsolated]
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOrder: async (
             symbol: string,
-            isIsolated?: string,
+            isIsolated?: QueryMarginAccountsOrderIsIsolatedEnum,
             orderId?: number | bigint,
             origClientOrderId?: string,
             recvWindow?: number | bigint
@@ -1604,26 +1935,31 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Margin Account's Trade List
          *
-         * If fromId is set, it will get trades >= that fromId. Otherwise the trades within 24 hours are returned.
-         * Less than 24 hours between startTime and endTime.
+         * Weight(IP): 10
          *
-         * Weight: 10(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If fromId is set, it will get trades >= that fromId. Otherwise the
+         * trades within 24 hours are returned.
+         *
+         * - Less than 24 hours between startTime and endTime.
          *
          * @summary Query Margin Account\'s Trade List (USER_DATA)
          * @param {string} symbol
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
+         * @param {QueryMarginAccountsTradeListIsIsolatedEnum} [isIsolated]
          * @param {number | bigint} [orderId]
-         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
+         * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [fromId] If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
-         * @param {number | bigint} [limit] Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [fromId]
+         * @param {number | bigint} [limit]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsTradeList: async (
             symbol: string,
-            isIsolated?: string,
+            isIsolated?: QueryMarginAccountsTradeListIsIsolatedEnum,
             orderId?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint,
@@ -1676,16 +2012,38 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Displays the list of orders that were expired due to STP. (Self-Trade Prevention).
          *
-         * Weight: 10(IP)
+         * Weight(IP): 10
          *
-         * @summary Query Prevented Matches(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Supported parameter combinations:
+         *
+         * - `symbol` + `preventedMatchId`
+         *
+         * - `symbol` + `orderId`
+         *
+         * - `symbol` + `orderId` + `fromPreventedMatchId`
+         *
+         * - If `orderId` is provided, all prevented matches for that order will be
+         * returned.
+         *
+         * - If `preventedMatchId` is provided, the specific prevented match will
+         * be returned.
+         *
+         * - A single request returns a maximum of 500 records. If there are more
+         * than 500 records, use `symbol` + `orderId` + `fromPreventedMatchId`
+         * combination for pagination.
+         *
+         * @summary Query Prevented Matches (USER_DATA)
          * @param {string} symbol
          * @param {number | bigint} [preventedMatchId]
          * @param {number | bigint} [orderId]
          * @param {number | bigint} [fromPreventedMatchId]
-         * @param {number | bigint} [recvWindow] No more than 60000
-         * @param {string} [isIsolated] For isolated margin or not, "TRUE", "FALSE", default "FALSE"
+         * @param {QueryPreventedMatchesIsIsolatedEnum} [isIsolated]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1694,8 +2052,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             preventedMatchId?: number | bigint,
             orderId?: number | bigint,
             fromPreventedMatchId?: number | bigint,
-            recvWindow?: number | bigint,
-            isIsolated?: string
+            isIsolated?: QueryPreventedMatchesIsIsolatedEnum,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryPreventedMatches', 'symbol', symbol);
@@ -1716,11 +2074,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if (fromPreventedMatchId !== undefined && fromPreventedMatchId !== null) {
                 localVarQueryParameter['fromPreventedMatchId'] = fromPreventedMatchId;
             }
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -1740,11 +2098,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * This only applies to Special Key for Low Latency Trading.
          *
-         * Weight: 1(UID)
+         * Weight(UID): 1
          *
-         * @summary Query Special key(Low Latency Trading)(TRADE)
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * Security Type: TRADE
+         *
+         * @summary Query Special key(Low Latency Trading) (TRADE)
+         * @param {string} [symbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1778,11 +2138,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * This only applies to Special Key for Low Latency Trading.
          *
-         * Weight: 1(UID)
+         * Weight(UID): 1
          *
-         * @summary Query Special key List(Low Latency Trading)(TRADE)
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * Security Type: TRADE
+         *
+         * @summary Query Special key List(Low Latency Trading) (TRADE)
+         * @param {string} [symbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1816,20 +2178,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Small Liability Exchange
          *
-         * Only convert once within 6 hours
-         * Only liability valuation less than 10 USDT are supported
-         * The maximum number of coin is 10
+         * Weight(UID): 3000
          *
-         * Weight: 3000(UID)
+         * Security Type: MARGIN
+         *
+         * Notes:
+         * - Only convert once within 6 hours
+         * - Only liability valuation less than 10 USDT are supported
+         * - The maximum number of coin is 10
          *
          * @summary Small Liability Exchange (MARGIN)
-         * @param {Array<string>} assetNames The assets list of small liability exchange， Example: assetNames = BTC,ETH
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {string} assetNames The assets list of small liability exchange
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         smallLiabilityExchange: async (
-            assetNames: Array<string>,
+            assetNames: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'assetNames' is not null or undefined
@@ -1839,7 +2204,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
 
-            if (assetNames) {
+            if (assetNames !== undefined && assetNames !== null) {
                 localVarQueryParameter['assetNames'] = assetNames;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -1867,8 +2232,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
  */
 export interface TradeApiInterface {
     /**
+     * **Eligibility**
+     *
      * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 7 or higher.
      * - If you are VIP level 6 or below, please contact your VIP manager for eligibility criterias.
+     * - All new Margin Special Key users are required to read, understand, and agree to the Margin Special Key Supplemental Product Terms at the master account level before creating a Margin Special Key.
+     * - Once signed at the master account level, the agreement applies to all sub-accounts. The master account and all sub-accounts (Cross Margin Classic and Portfolio Margin Pro) are authorized to create a Margin Special Key and are subject to the LiquidationLoan policy.
+     *
+     * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
      *
      **Supported Products:**
      *
@@ -1888,9 +2259,30 @@ export interface TradeApiInterface {
      *
      * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
      *
-     * Weight: 1(UID)
+     **How to use the Margin Special Key**
+     * - Use the below `sapi` endpoint to create your margin special API Key.
+     * - For accessing the Cross Margin account, do not send the `symbol` parameter.
+     * - For accessing the Isolated Margin account(s), pass the relevant `symbol` parameter in the API Key creation request.
+     * - Use the generated API Key (and Secret key, if applicable) to perform margin trading and listenKey generation via **Spot** REST API (`https://api.binance.com/api/v3/*`) endpoints.
      *
-     * @summary Create Special Key(Low-Latency Trading)(TRADE)
+     * Read [REST API](/products/spot/rest-api#signed-trade-and-user_data-endpoint-security) or [WebSocket API](/products/spot/web-socket-api#request-security) documentation to learn how to use different API keys
+     *
+     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+     *
+     * Weight(UID): 1
+     *
+     * Security Type: TRADE
+     *
+     * Response Notes:
+     * - Error Code Description
+     *
+     * - **UNSUPPORTED_OPERATION** : Portfolio Margin is an unsupported
+     * product, please change the account type to a supported margin product.
+     *
+     * - **Forbidden**:  Cross Margin Pro accounts require additional
+     * agreements, please contact your relationship manager.
+     *
+     * @summary Create Special Key(Low-Latency Trading) (TRADE)
      * @param {CreateSpecialKeyRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1900,15 +2292,26 @@ export interface TradeApiInterface {
         requestParameters: CreateSpecialKeyRequest
     ): Promise<RestApiResponse<CreateSpecialKeyResponse>>;
     /**
-     * This only applies to Special Key for Low Latency Trading.
+     * Deleting your Margin Special Key alone does not exit you from the Margin Special Key framework or discharge your obligations under the Margin Special Key Supplemental Product Terms. To fully exit, you must:
      *
-     * If apiKey is given, apiName will be ignored. If apiName is given with no apiKey, all apikeys with given apiName will be deleted.
+     * 1. Delete your Margin Special Key.
+     * 2. Ensure there are no outstanding liabilities on the account.
+     * 3. Call the Exit Margin Special Key API endpoint.
+     * 4. Confirm the exit status via the API response.
      *
-     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+     * Only after step 4 is completed and the exit status is confirmed by Binance will your account revert to standard liquidation logic and no longer be subject to the Margin Special Key Supplemental Product Terms.
      *
-     * Weight: 1(UID)
+     * If apiKey is given, apiName will be ignored. If apiName is given with no
+     * apiKey, all apikeys with given apiName will be deleted.
      *
-     * @summary Delete Special Key(Low-Latency Trading)(TRADE)
+     * You need to enable Permits “Enable Spot & Margin” option for the API Key
+     * which requests this endpoint.
+     *
+     * Weight(UID): 1
+     *
+     * Security Type: TRADE
+     *
+     * @summary Delete Special Key(Low-Latency Trading) (TRADE)
      * @param {DeleteSpecialKeyRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1916,13 +2319,17 @@ export interface TradeApiInterface {
      */
     deleteSpecialKey(requestParameters?: DeleteSpecialKeyRequest): Promise<RestApiResponse<void>>;
     /**
-     * Edit ip restriction. This only applies to Special Key for Low Latency Trading.
+     * Edit ip restriction. This only applies to Special Key for Low Latency
+     * Trading.
      *
-     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+     * You need to enable Permits “Enable Spot & Margin” option for the API Key
+     * which requests this endpoint.
      *
-     * Weight: 1(UID)
+     * Weight(UID): 1
      *
-     * @summary Edit ip for Special Key(Low-Latency Trading)(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Edit ip for Special Key(Low-Latency Trading) (TRADE)
      * @param {EditIpForSpecialKeyRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1932,11 +2339,51 @@ export interface TradeApiInterface {
         requestParameters: EditIpForSpecialKeyRequest
     ): Promise<RestApiResponse<void>>;
     /**
+     * Exit the Margin Special Key mode for Cross Margin Classic accounts.
+     *
+     **All outstanding liabilities under the Cross Margin Classic account must be fully repaid before calling this endpoint.** Deleting the Margin Special Key alone does not constitute a valid exit.
+     *
+     * When a user creates a Margin Special API Key, the account enters "Special Key Mode". Upon a successful request, the following actions will be performed atomically:
+     *
+     * 1. All existing Margin Special API Keys under the Cross Margin Classic mode account will be deleted.
+     * 2. All pre-execution margin checks (including Open-order-loss calculation) will revert to standard mode.
+     * 3. A cooldown period (default: 24 hours) will be enforced, during which the account will not be permitted to create new Margin Special API Keys.
+     *
+     * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+     *
+     **Preconditions:**
+     *
+     * The following conditions must be met; otherwise the request will be rejected:
+     *
+     * - Account type must be **Cross Margin Classic**.
+     * - Account must currently be in **Special Key Mode**. If not, the request silently succeeds.
+     * - Account must **not be in liquidation**.
+     * - Account must **have no liability**.
+     *
+     * You need to enable "Permits Enable Spot & Margin Trading" option for the API Key which requests this endpoint.
+     *
+     * Weight(UID): 10
+     *
+     * Security Type: TRADE
+     *
+     * @summary Exit Special Key Mode (TRADE)
+     * @param {ExitSpecialKeyModeRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    exitSpecialKeyMode(
+        requestParameters?: ExitSpecialKeyModeRequest
+    ): Promise<RestApiResponse<object>>;
+    /**
      * Get Force Liquidation Record
      *
-     * Response in descending order
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Response in descending order
      *
      * @summary Get Force Liquidation Record (USER_DATA)
      * @param {GetForceLiquidationRecordRequest} requestParameters Request parameters.
@@ -1950,7 +2397,9 @@ export interface TradeApiInterface {
     /**
      * Query the coins which can be small liability exchange
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Small Liability Exchange Coin List (USER_DATA)
      * @param {GetSmallLiabilityExchangeCoinListRequest} requestParameters Request parameters.
@@ -1964,7 +2413,9 @@ export interface TradeApiInterface {
     /**
      * Get Small liability Exchange History
      *
-     * Weight: 100(UID)
+     * Weight(UID): 100
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Small Liability Exchange History (USER_DATA)
      * @param {GetSmallLiabilityExchangeHistoryRequest} requestParameters Request parameters.
@@ -1976,10 +2427,28 @@ export interface TradeApiInterface {
         requestParameters: GetSmallLiabilityExchangeHistoryRequest
     ): Promise<RestApiResponse<GetSmallLiabilityExchangeHistoryResponse>>;
     /**
+     * Repays the outstanding cross-margin liquidation loan from the user's spot wallet. A liquidation loan represents the account deficit incurred when account equity turns negative during liquidation (bankruptcy). The repayment amount must be greater than 0 and cannot exceed the remaining loan balance. If the Spot Account has insufficient USDC balance, the repayment will fail.
+     *
+     * Weight(UID): 100
+     *
+     * Security Type: MARGIN
+     *
+     * @summary Liquidation Loan Repay (MARGIN)
+     * @param {LiquidationLoanRepayRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    liquidationLoanRepay(
+        requestParameters: LiquidationLoanRepayRequest
+    ): Promise<RestApiResponse<LiquidationLoanRepayResponse>>;
+    /**
      * Cancels all active orders on a symbol for margin account.<br></br>
      * This includes OCO orders.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Margin Account Cancel all Open Orders on a Symbol (TRADE)
      * @param {MarginAccountCancelAllOpenOrdersOnASymbolRequest} requestParameters Request parameters.
@@ -1993,9 +2462,12 @@ export interface TradeApiInterface {
     /**
      * Cancel an entire Order List for a margin account.
      *
-     * Canceling an individual leg will cancel the entire OCO
+     * Weight(UID): 1
      *
-     * Weight: 1(UID)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Canceling an individual leg will cancel the entire OCO
      *
      * @summary Margin Account Cancel OCO (TRADE)
      * @param {MarginAccountCancelOcoRequest} requestParameters Request parameters.
@@ -2009,9 +2481,12 @@ export interface TradeApiInterface {
     /**
      * Cancel an active order for margin account.
      *
-     * Either orderId or origClientOrderId must be sent.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either orderId or origClientOrderId must be sent.
      *
      * @summary Margin Account Cancel Order (TRADE)
      * @param {MarginAccountCancelOrderRequest} requestParameters Request parameters.
@@ -2025,9 +2500,12 @@ export interface TradeApiInterface {
     /**
      * Send in a new OCO for a margin account
      *
-     * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+     * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
      *
-     * Weight: 6(UID)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
      *
      * @summary Margin Account New OCO (TRADE)
      * @param {MarginAccountNewOcoRequest} requestParameters Request parameters.
@@ -2041,9 +2519,12 @@ export interface TradeApiInterface {
     /**
      * Post a new order for margin account.
      *
-     * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+     * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
      *
-     * Weight: 6(UID)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
      *
      * @summary Margin Account New Order (TRADE)
      * @param {MarginAccountNewOrderRequest} requestParameters Request parameters.
@@ -2057,17 +2538,38 @@ export interface TradeApiInterface {
     /**
      * Post a new OTO order for margin account:
      *
-     * - An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
-     * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-     * - The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
-     * - If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
-     * - When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
-     * - OTOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     * - An OTO (One-Triggers-the-Other) is an order list comprised of 2
+     * orders.
      *
-     * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
-     * Depending on the `pendingType` or `workingType`, some optional parameters will become mandatory:
+     * - The first order is called the **working order** and must be `LIMIT` or
+     * `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      *
-     * Weight: 6(UID)
+     * - The second order is called the **pending order**. It can be any order
+     * type except for `MARKET` orders using parameter `quoteOrderQty`. The
+     * pending order is only placed on the order book when the working order
+     * gets **fully filled**.
+     *
+     * - If either the working order or the pending order is cancelled
+     * individually, the other order in the order list will also be canceled or
+     * expired.
+     *
+     * - When the order list is placed, if the working order gets **immediately
+     * fully filled**, the placement response will show the working order as
+     * `FILLED` but the pending order will still appear as `PENDING_NEW`. You
+     * need to query the status of the pending order again to see its updated
+     * status.
+     *
+     * - OTOs add **2 orders** to the unfilled order count,
+     * `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     *
+     * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+     * - Depending on the `pendingType` or `workingType`, some optional
+     * - parameters will become mandatory: | Type                                                     | Additional mandatory parameters                              | Additional information | | -------------------------------------------------------- | ------------------------------------------------------------ | ---------------------- | | `workingType` = `LIMIT`                                  | `workingTimeInForce`                                         |                        | | `pendingType` = `LIMIT`                                  | `pendingPrice`, `pendingTimeInForce`                         |                        | | `pendingType` = `STOP_LOSS` or `TAKE_PROFIT`             | `pendingStopPrice` and/or `pendingTrailingDelta`             |                        | | `pendingType` = `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` | `pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce` |                        | | `pendingTrailingDelta` is provided | `pendingPrice` |                        |
      *
      * @summary Margin Account New OTO (TRADE)
      * @param {MarginAccountNewOtoRequest} requestParameters Request parameters.
@@ -2081,17 +2583,27 @@ export interface TradeApiInterface {
     /**
      * Post a new OTOCO order for margin account：
      *
-     * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
-     * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
+     *
+     * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list
+     * comprised of 3 orders.
+     *
+     * - The first order is called the **working order** and must be `LIMIT` or
+     * `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * - The behavior of the working order is the same as the OTO.
-     * - OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OCO).
-     * - OTOCOs add **3 orders** against the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
+     * - OTOCO has 2 pending orders (pending above and pending below), forming
+     * an OCO pair. The pending orders are only placed on the order book when
+     * the working order gets **fully filled**.
+     * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-oco).
+     * - OTOCOs add **3 orders** against the unfilled order count,
+     * `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
      *
-     * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
-     * Depending on the `pendingAboveType`/`pendingBelowType` or `workingType`, some optional parameters will become mandatory:
+     * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
      *
-     * Weight: 6(UID)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+     * - Depending on the `pendingAboveType`/`pendingBelowType` or `workingType`, some optional parameters will become mandatory: | Type                                 | Additional mandatory parameters                              | Additional information | | ------------------------------------ | ------------------------------------------------------------ | ---------------------- | | `workingType` = `LIMIT`              | `workingTimeInForce`                                         |                        | | `pendingAboveType`= `LIMIT_MAKER`    | `pendingAbovePrice`                                          |                        | | `pendingAboveType`= `STOP_LOSS`      | `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`   |                        | | `pendingAboveType`=`STOP_LOSS_LIMIT` | `pendingAbovePrice`, `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`, `pendingAboveTimeInForce` |                        | | `pendingBelowType`= `LIMIT_MAKER`    | `pendingBelowPrice`                                          |                        | | `pendingBelowType`= `STOP_LOSS`      | `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`   |                        | | `pendingBelowType`=`STOP_LOSS_LIMIT` | `pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce` |                        | | `pendingAboveTrailingDelta` is provided | `pendingAbovePrice` |                        | | `pendingBelowTrailingDelta` is provided | `pendingBelowPrice` |                        |
      *
      * @summary Margin Account New OTOCO (TRADE)
      * @param {MarginAccountNewOtocoRequest} requestParameters Request parameters.
@@ -2105,12 +2617,15 @@ export interface TradeApiInterface {
     /**
      * Margin Manual Liquidation
      *
-     * This endpoint can support Cross Margin Classic Mode and Pro Mode.
-     * And only support Isolated Margin for restricted region.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Margin Manual Liquidation(MARGIN)
+     * Notes:
+     * - This endpoint supports Cross Margin Classic Mode and Pro Mode.
+     * - Isolated Margin is only supported in restricted regions.
+     *
+     * @summary Margin Manual Liquidation (TRADE)
      * @param {MarginManualLiquidationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2122,7 +2637,9 @@ export interface TradeApiInterface {
     /**
      * Displays the user's current margin order count usage for all intervals.
      *
-     * Weight: 20(IP)
+     * Weight(IP): 20
+     *
+     * Security Type: TRADE
      *
      * @summary Query Current Margin Order Count Usage (TRADE)
      * @param {QueryCurrentMarginOrderCountUsageRequest} requestParameters Request parameters.
@@ -2134,9 +2651,47 @@ export interface TradeApiInterface {
         requestParameters?: QueryCurrentMarginOrderCountUsageRequest
     ): Promise<RestApiResponse<QueryCurrentMarginOrderCountUsageResponse>>;
     /**
+     * Query the current user's cross-margin liquidation loan information, including the original loan amount, repaid amount, and remaining amount. When a cross-margin account is liquidated and the account equity turns negative (bankruptcy), the system generates a liquidation loan record representing the deficit. This represents the shortfall amount denominated in USDC.
+     *
+     * Weight(UID): 100
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Liquidation Loan (USER_DATA)
+     * @param {QueryLiquidationLoanRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    queryLiquidationLoan(
+        requestParameters?: QueryLiquidationLoanRequest
+    ): Promise<RestApiResponse<QueryLiquidationLoanResponse>>;
+    /**
+     * Query the repayment history of cross-margin liquidation loans (deficit caused by bankruptcy during liquidation). Supports time-range filtering and pagination.
+     *
+     * Weight(UID): 100
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The maximum query range is 90 days. If `startTime` is earlier than 90 days ago, it will be clamped to 90 days ago.
+     * - Only records with status `SUCCESS` or `PENDING` are returned. Failed repayment records are excluded.
+     *
+     * @summary Query Liquidation Loan Repay History (USER_DATA)
+     * @param {QueryLiquidationLoanRepayHistoryRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    queryLiquidationLoanRepayHistory(
+        requestParameters?: QueryLiquidationLoanRepayHistoryRequest
+    ): Promise<RestApiResponse<QueryLiquidationLoanRepayHistoryResponse>>;
+    /**
      * Retrieves all OCO for a specific margin account based on provided optional parameters
      *
-     * Weight: 200(IP)
+     * Weight(IP): 200
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s all OCO (USER_DATA)
      * @param {QueryMarginAccountsAllOcoRequest} requestParameters Request parameters.
@@ -2150,11 +2705,18 @@ export interface TradeApiInterface {
     /**
      * Query Margin Account's All Orders
      *
-     * If orderId is set, it will get orders >= that orderId. Otherwise the orders within 24 hours are returned.
-     * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
-     * Less than 24 hours between startTime and endTime.
+     * Weight(IP): 200
      *
-     * Weight: 200(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If orderId is set, it will get orders >= that orderId. Otherwise the
+     * orders within 24 hours are returned.
+     *
+     * - For some historical orders cummulativeQuoteQty will be < 0, meaning
+     * the data is not available at this time.
+     *
+     * - Less than 24 hours between startTime and endTime.
      *
      * @summary Query Margin Account\'s All Orders (USER_DATA)
      * @param {QueryMarginAccountsAllOrdersRequest} requestParameters Request parameters.
@@ -2168,7 +2730,9 @@ export interface TradeApiInterface {
     /**
      * Retrieves a specific OCO based on provided optional parameters
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s OCO (USER_DATA)
      * @param {QueryMarginAccountsOcoRequest} requestParameters Request parameters.
@@ -2182,7 +2746,9 @@ export interface TradeApiInterface {
     /**
      * Query Margin Account's Open OCO
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s Open OCO (USER_DATA)
      * @param {QueryMarginAccountsOpenOcoRequest} requestParameters Request parameters.
@@ -2196,11 +2762,19 @@ export interface TradeApiInterface {
     /**
      * Query Margin Account's Open Orders
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
-     * When all symbols are returned, the number of requests counted against the rate limiter is equal to the number of symbols currently trading on the exchange.
-     * If isIsolated ="TRUE", symbol must be sent.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the symbol is not sent, orders for all symbols will be returned in
+     * an array.
+     *
+     * - When all symbols are returned, the number of requests counted against
+     * the rate limiter is equal to the number of symbols currently trading on
+     * the exchange.
+     *
+     * - If isIsolated ="TRUE", symbol must be sent.
      *
      * @summary Query Margin Account\'s Open Orders (USER_DATA)
      * @param {QueryMarginAccountsOpenOrdersRequest} requestParameters Request parameters.
@@ -2214,10 +2788,15 @@ export interface TradeApiInterface {
     /**
      * Query Margin Account's Order
      *
-     * Either orderId or origClientOrderId must be sent.
-     * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either orderId or origClientOrderId must be sent.
+     *
+     * - For some historical orders cummulativeQuoteQty will be < 0, meaning
+     * the data is not available at this time.
      *
      * @summary Query Margin Account\'s Order (USER_DATA)
      * @param {QueryMarginAccountsOrderRequest} requestParameters Request parameters.
@@ -2231,10 +2810,15 @@ export interface TradeApiInterface {
     /**
      * Query Margin Account's Trade List
      *
-     * If fromId is set, it will get trades >= that fromId. Otherwise the trades within 24 hours are returned.
-     * Less than 24 hours between startTime and endTime.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If fromId is set, it will get trades >= that fromId. Otherwise the
+     * trades within 24 hours are returned.
+     *
+     * - Less than 24 hours between startTime and endTime.
      *
      * @summary Query Margin Account\'s Trade List (USER_DATA)
      * @param {QueryMarginAccountsTradeListRequest} requestParameters Request parameters.
@@ -2246,10 +2830,32 @@ export interface TradeApiInterface {
         requestParameters: QueryMarginAccountsTradeListRequest
     ): Promise<RestApiResponse<QueryMarginAccountsTradeListResponse>>;
     /**
+     * Displays the list of orders that were expired due to STP. (Self-Trade Prevention).
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
      *
-     * @summary Query Prevented Matches(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Supported parameter combinations:
+     *
+     * - `symbol` + `preventedMatchId`
+     *
+     * - `symbol` + `orderId`
+     *
+     * - `symbol` + `orderId` + `fromPreventedMatchId`
+     *
+     * - If `orderId` is provided, all prevented matches for that order will be
+     * returned.
+     *
+     * - If `preventedMatchId` is provided, the specific prevented match will
+     * be returned.
+     *
+     * - A single request returns a maximum of 500 records. If there are more
+     * than 500 records, use `symbol` + `orderId` + `fromPreventedMatchId`
+     * combination for pagination.
+     *
+     * @summary Query Prevented Matches (USER_DATA)
      * @param {QueryPreventedMatchesRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2263,9 +2869,11 @@ export interface TradeApiInterface {
      *
      * This only applies to Special Key for Low Latency Trading.
      *
-     * Weight: 1(UID)
+     * Weight(UID): 1
      *
-     * @summary Query Special key(Low Latency Trading)(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Query Special key(Low Latency Trading) (TRADE)
      * @param {QuerySpecialKeyRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2277,9 +2885,11 @@ export interface TradeApiInterface {
     /**
      * This only applies to Special Key for Low Latency Trading.
      *
-     * Weight: 1(UID)
+     * Weight(UID): 1
      *
-     * @summary Query Special key List(Low Latency Trading)(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Query Special key List(Low Latency Trading) (TRADE)
      * @param {QuerySpecialKeyListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2291,11 +2901,14 @@ export interface TradeApiInterface {
     /**
      * Small Liability Exchange
      *
-     * Only convert once within 6 hours
-     * Only liability valuation less than 10 USDT are supported
-     * The maximum number of coin is 10
+     * Weight(UID): 3000
      *
-     * Weight: 3000(UID)
+     * Security Type: MARGIN
+     *
+     * Notes:
+     * - Only convert once within 6 hours
+     * - Only liability valuation less than 10 USDT are supported
+     * - The maximum number of coin is 10
      *
      * @summary Small Liability Exchange (MARGIN)
      * @param {SmallLiabilityExchangeRequest} requestParameters Request parameters.
@@ -2321,7 +2934,7 @@ export interface CreateSpecialKeyRequest {
     readonly apiName: string;
 
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof TradeApiCreateSpecialKey
      */
@@ -2335,7 +2948,10 @@ export interface CreateSpecialKeyRequest {
     readonly ip?: string;
 
     /**
-     * 1. If publicKey is inputted it will create an RSA or Ed25519 key. <br />2. Need to be encoded to URL-encoded format
+     * 1. If publicKey is inputted it will create an RSA or Ed25519
+     * key.
+     *
+     * 2. Need to be encoded to URL-encoded format
      * @type {string}
      * @memberof TradeApiCreateSpecialKey
      */
@@ -2343,13 +2959,13 @@ export interface CreateSpecialKeyRequest {
 
     /**
      * This parameter is only for the Ed25519 API key, and does not effact for other encryption methods. The value can be TRADE (TRADE for all permissions) or READ (READ for USER_DATA, FIX_API_READ_ONLY). The default value is TRADE.
-     * @type {string}
+     * @type {'TRADE' | 'READ'}
      * @memberof TradeApiCreateSpecialKey
      */
-    readonly permissionMode?: string;
+    readonly permissionMode?: CreateSpecialKeyPermissionModeEnum;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiCreateSpecialKey
      */
@@ -2369,14 +2985,14 @@ export interface DeleteSpecialKeyRequest {
     readonly apiName?: string;
 
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof TradeApiDeleteSpecialKey
      */
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiDeleteSpecialKey
      */
@@ -2403,9 +3019,22 @@ export interface EditIpForSpecialKeyRequest {
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiEditIpForSpecialKey
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for exitSpecialKeyMode operation in TradeApi.
+ * @interface ExitSpecialKeyModeRequest
+ */
+export interface ExitSpecialKeyModeRequest {
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number | bigint}
+     * @memberof TradeApiExitSpecialKeyMode
      */
     readonly recvWindow?: number | bigint;
 }
@@ -2416,7 +3045,7 @@ export interface EditIpForSpecialKeyRequest {
  */
 export interface GetForceLiquidationRecordRequest {
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
@@ -2430,28 +3059,28 @@ export interface GetForceLiquidationRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * isolated symbol
+     *
      * @type {string}
      * @memberof TradeApiGetForceLiquidationRecord
      */
     readonly isolatedSymbol?: string;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
     readonly size?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
@@ -2464,7 +3093,7 @@ export interface GetForceLiquidationRecordRequest {
  */
 export interface GetSmallLiabilityExchangeCoinListRequest {
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeCoinList
      */
@@ -2477,21 +3106,21 @@ export interface GetSmallLiabilityExchangeCoinListRequest {
  */
 export interface GetSmallLiabilityExchangeHistoryRequest {
     /**
-     * Currently querying page. Start from 1. Default:1
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
     readonly current: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
     readonly size: number | bigint;
 
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
@@ -2505,9 +3134,36 @@ export interface GetSmallLiabilityExchangeHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for liquidationLoanRepay operation in TradeApi.
+ * @interface LiquidationLoanRepayRequest
+ */
+export interface LiquidationLoanRepayRequest {
+    /**
+     * The asset to repay (e.g. USDT, USDC)
+     * @type {string}
+     * @memberof TradeApiLiquidationLoanRepay
+     */
+    readonly asset: string;
+
+    /**
+     * Repayment amount, must be greater than 0
+     * @type {number}
+     * @memberof TradeApiLiquidationLoanRepay
+     */
+    readonly amount: number;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiLiquidationLoanRepay
      */
     readonly recvWindow?: number | bigint;
 }
@@ -2525,14 +3181,14 @@ export interface MarginAccountCancelAllOpenOrdersOnASymbolRequest {
     readonly symbol: string;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiMarginAccountCancelAllOpenOrdersOnASymbol
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: MarginAccountCancelAllOpenOrdersOnASymbolIsIsolatedEnum;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelAllOpenOrdersOnASymbol
      */
@@ -2552,35 +3208,35 @@ export interface MarginAccountCancelOcoRequest {
     readonly symbol: string;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiMarginAccountCancelOco
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: MarginAccountCancelOcoIsIsolatedEnum;
 
     /**
-     * Either `orderListId` or `listClientOrderId` must be provided
+     *
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelOco
      */
     readonly orderListId?: number | bigint;
 
     /**
-     * Either `orderListId` or `listClientOrderId` must be provided
+     *
      * @type {string}
      * @memberof TradeApiMarginAccountCancelOco
      */
     readonly listClientOrderId?: string;
 
     /**
-     * Used to uniquely identify this cancel. Automatically generated by default
+     *
      * @type {string}
      * @memberof TradeApiMarginAccountCancelOco
      */
     readonly newClientOrderId?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelOco
      */
@@ -2600,11 +3256,11 @@ export interface MarginAccountCancelOrderRequest {
     readonly symbol: string;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiMarginAccountCancelOrder
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: MarginAccountCancelOrderIsIsolatedEnum;
 
     /**
      *
@@ -2621,14 +3277,14 @@ export interface MarginAccountCancelOrderRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * Used to uniquely identify this cancel. Automatically generated by default
+     *
      * @type {string}
      * @memberof TradeApiMarginAccountCancelOrder
      */
     readonly newClientOrderId?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelOrder
      */
@@ -2676,14 +3332,14 @@ export interface MarginAccountNewOcoRequest {
     readonly stopPrice: number;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiMarginAccountNewOco
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: MarginAccountNewOcoIsIsolatedEnum;
 
     /**
-     * Either `orderListId` or `listClientOrderId` must be provided
+     * A unique Id for the entire orderList
      * @type {string}
      * @memberof TradeApiMarginAccountNewOco
      */
@@ -2725,42 +3381,42 @@ export interface MarginAccountNewOcoRequest {
     readonly stopIcebergQty?: number;
 
     /**
-     * Valid values are `GTC`/`FOK`/`IOC`
-     * @type {string}
+     *
+     * @type {'GTC' | 'FOK' | 'IOC'}
      * @memberof TradeApiMarginAccountNewOco
      */
-    readonly stopLimitTimeInForce?: string;
+    readonly stopLimitTimeInForce?: MarginAccountNewOcoStopLimitTimeInForceEnum;
 
     /**
-     * Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
+     *
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiMarginAccountNewOco
      */
     readonly newOrderRespType?: MarginAccountNewOcoNewOrderRespTypeEnum;
 
     /**
-     * NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
-     * @type {string}
+     *
+     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY' | 'AUTO_REPAY' | 'AUTO_BORROW_REPAY'}
      * @memberof TradeApiMarginAccountNewOco
      */
-    readonly sideEffectType?: string;
+    readonly sideEffectType?: MarginAccountNewOcoSideEffectTypeEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
-     * @type {string}
+     *
+     * @type {'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'NONE'}
      * @memberof TradeApiMarginAccountNewOco
      */
-    readonly selfTradePreventionMode?: string;
+    readonly selfTradePreventionMode?: MarginAccountNewOcoSelfTradePreventionModeEnum;
 
     /**
-     * Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
+     * Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled.
      * @type {boolean}
      * @memberof TradeApiMarginAccountNewOco
      */
     readonly autoRepayAtCancel?: boolean;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountNewOco
      */
@@ -2787,18 +3443,18 @@ export interface MarginAccountNewOrderRequest {
     readonly side: MarginAccountNewOrderSideEnum;
 
     /**
-     * `MARGIN`,`ISOLATED`
-     * @type {string}
+     *
+     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiMarginAccountNewOrder
      */
-    readonly type: string;
+    readonly type: MarginAccountNewOrderTypeEnum;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiMarginAccountNewOrder
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: MarginAccountNewOrderIsIsolatedEnum;
 
     /**
      *
@@ -2829,7 +3485,7 @@ export interface MarginAccountNewOrderRequest {
     readonly stopPrice?: number;
 
     /**
-     * Used to uniquely identify this cancel. Automatically generated by default
+     * A unique id among open orders. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiMarginAccountNewOrder
      */
@@ -2843,42 +3499,49 @@ export interface MarginAccountNewOrderRequest {
     readonly icebergQty?: number;
 
     /**
-     * Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
+     * MARKET and LIMIT order types default to FULL, all other orders default to ACK.
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiMarginAccountNewOrder
      */
     readonly newOrderRespType?: MarginAccountNewOrderNewOrderRespTypeEnum;
 
     /**
-     * NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
-     * @type {string}
+     *
+     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY' | 'AUTO_REPAY' | 'AUTO_BORROW_REPAY'}
      * @memberof TradeApiMarginAccountNewOrder
      */
-    readonly sideEffectType?: string;
+    readonly sideEffectType?: MarginAccountNewOrderSideEffectTypeEnum;
 
     /**
-     * GTC,IOC,FOK
+     *
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiMarginAccountNewOrder
      */
     readonly timeInForce?: MarginAccountNewOrderTimeInForceEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
-     * @type {string}
+     *
+     * @type {'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'NONE'}
      * @memberof TradeApiMarginAccountNewOrder
      */
-    readonly selfTradePreventionMode?: string;
+    readonly selfTradePreventionMode?: MarginAccountNewOrderSelfTradePreventionModeEnum;
 
     /**
-     * Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
+     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+     * @type {number | bigint}
+     * @memberof TradeApiMarginAccountNewOrder
+     */
+    readonly trailingDelta?: number | bigint;
+
+    /**
+     * Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repaid after the order is cancelled.
      * @type {boolean}
      * @memberof TradeApiMarginAccountNewOrder
      */
     readonly autoRepayAtCancel?: boolean;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountNewOrder
      */
@@ -2898,18 +3561,18 @@ export interface MarginAccountNewOtoRequest {
     readonly symbol: string;
 
     /**
-     * Supported values: `LIMIT`, `LIMIT_MAKER`
-     * @type {string}
+     *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiMarginAccountNewOto
      */
-    readonly workingType: string;
+    readonly workingType: MarginAccountNewOtoWorkingTypeEnum;
 
     /**
-     * BUY, SELL
-     * @type {string}
+     *
+     * @type {'BUY' | 'SELL'}
      * @memberof TradeApiMarginAccountNewOto
      */
-    readonly workingSide: string;
+    readonly workingSide: MarginAccountNewOtoWorkingSideEnum;
 
     /**
      *
@@ -2919,7 +3582,7 @@ export interface MarginAccountNewOtoRequest {
     readonly workingPrice: number;
 
     /**
-     *
+     * Sets the quantity for the working order.
      * @type {number}
      * @memberof TradeApiMarginAccountNewOto
      */
@@ -2933,63 +3596,63 @@ export interface MarginAccountNewOtoRequest {
     readonly workingIcebergQty: number;
 
     /**
-     * Supported values: [Order Types](https://developers.binance.com/docs/binance-spot-api-docs/enums#order-types-ordertypes-type) Note that `MARKET` orders using `quoteOrderQty` are not supported.
-     * @type {string}
+     *
+     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiMarginAccountNewOto
      */
-    readonly pendingType: string;
-
-    /**
-     * BUY, SELL
-     * @type {string}
-     * @memberof TradeApiMarginAccountNewOto
-     */
-    readonly pendingSide: string;
+    readonly pendingType: MarginAccountNewOtoPendingTypeEnum;
 
     /**
      *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiMarginAccountNewOto
+     */
+    readonly pendingSide: MarginAccountNewOtoPendingSideEnum;
+
+    /**
+     * Sets the quantity for the pending order.
      * @type {number}
      * @memberof TradeApiMarginAccountNewOto
      */
     readonly pendingQuantity: number;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiMarginAccountNewOto
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: MarginAccountNewOtoIsIsolatedEnum;
 
     /**
-     * Either `orderListId` or `listClientOrderId` must be provided
+     * Arbitrary unique ID among open order lists. Automatically generated if not sent.<br/>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired.<br/>`listClientOrderId` is distinct from the `workingClientOrderId` and the `pendingClientOrderId`.
      * @type {string}
      * @memberof TradeApiMarginAccountNewOto
      */
     readonly listClientOrderId?: string;
 
     /**
-     * Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
+     * MARKET and LIMIT order types default to FULL, all other orders default to ACK.
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiMarginAccountNewOto
      */
     readonly newOrderRespType?: MarginAccountNewOtoNewOrderRespTypeEnum;
 
     /**
-     * NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
-     * @type {string}
+     *
+     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY'}
      * @memberof TradeApiMarginAccountNewOto
      */
-    readonly sideEffectType?: string;
+    readonly sideEffectType?: MarginAccountNewOtoSideEffectTypeEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
-     * @type {string}
+     *
+     * @type {'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'NONE'}
      * @memberof TradeApiMarginAccountNewOto
      */
-    readonly selfTradePreventionMode?: string;
+    readonly selfTradePreventionMode?: MarginAccountNewOtoSelfTradePreventionModeEnum;
 
     /**
-     * Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
+     * Only when MARGIN_BUY order takes effect, true means that the debt generated by the order needs to be repaid after the order is cancelled.
      * @type {boolean}
      * @memberof TradeApiMarginAccountNewOto
      */
@@ -3003,11 +3666,11 @@ export interface MarginAccountNewOtoRequest {
     readonly workingClientOrderId?: string;
 
     /**
-     * GTC,IOC,FOK
-     * @type {string}
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiMarginAccountNewOto
      */
-    readonly workingTimeInForce?: string;
+    readonly workingTimeInForce?: MarginAccountNewOtoWorkingTimeInForceEnum;
 
     /**
      * Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.
@@ -3045,11 +3708,11 @@ export interface MarginAccountNewOtoRequest {
     readonly pendingIcebergQty?: number;
 
     /**
-     * GTC,IOC,FOK
-     * @type {string}
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiMarginAccountNewOto
      */
-    readonly pendingTimeInForce?: string;
+    readonly pendingTimeInForce?: MarginAccountNewOtoPendingTimeInForceEnum;
 }
 
 /**
@@ -3065,18 +3728,18 @@ export interface MarginAccountNewOtocoRequest {
     readonly symbol: string;
 
     /**
-     * Supported values: `LIMIT`, `LIMIT_MAKER`
-     * @type {string}
+     *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly workingType: string;
+    readonly workingType: MarginAccountNewOtocoWorkingTypeEnum;
 
     /**
-     * BUY, SELL
-     * @type {string}
+     *
+     * @type {'BUY' | 'SELL'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly workingSide: string;
+    readonly workingSide: MarginAccountNewOtocoWorkingSideEnum;
 
     /**
      *
@@ -3093,11 +3756,11 @@ export interface MarginAccountNewOtocoRequest {
     readonly workingQuantity: number;
 
     /**
-     * BUY, SELL
-     * @type {string}
+     *
+     * @type {'BUY' | 'SELL'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly pendingSide: string;
+    readonly pendingSide: MarginAccountNewOtocoPendingSideEnum;
 
     /**
      *
@@ -3107,53 +3770,53 @@ export interface MarginAccountNewOtocoRequest {
     readonly pendingQuantity: number;
 
     /**
-     * Supported values: `LIMIT_MAKER`, `STOP_LOSS`, and `STOP_LOSS_LIMIT`
-     * @type {string}
+     *
+     * @type {'LIMIT_MAKER' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly pendingAboveType: string;
+    readonly pendingAboveType: MarginAccountNewOtocoPendingAboveTypeEnum;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: MarginAccountNewOtocoIsIsolatedEnum;
 
     /**
-     * NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
-     * @type {string}
+     *
+     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly sideEffectType?: string;
+    readonly sideEffectType?: MarginAccountNewOtocoSideEffectTypeEnum;
 
     /**
-     * Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
+     * Only when MARGIN_BUY order takes effect, true means that the debt generated by the order needs to be repaid after the order is cancelled.
      * @type {boolean}
      * @memberof TradeApiMarginAccountNewOtoco
      */
     readonly autoRepayAtCancel?: boolean;
 
     /**
-     * Either `orderListId` or `listClientOrderId` must be provided
+     * Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
      * @type {string}
      * @memberof TradeApiMarginAccountNewOtoco
      */
     readonly listClientOrderId?: string;
 
     /**
-     * Set the response JSON. ACK, RESULT, or FULL; MARKET and LIMIT order types default to FULL, all other orders default to ACK.
+     *
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
     readonly newOrderRespType?: MarginAccountNewOtocoNewOrderRespTypeEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
-     * @type {string}
+     *
+     * @type {'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'NONE'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly selfTradePreventionMode?: string;
+    readonly selfTradePreventionMode?: MarginAccountNewOtocoSelfTradePreventionModeEnum;
 
     /**
      * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
@@ -3170,11 +3833,11 @@ export interface MarginAccountNewOtocoRequest {
     readonly workingIcebergQty?: number;
 
     /**
-     * GTC,IOC,FOK
-     * @type {string}
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly workingTimeInForce?: string;
+    readonly workingTimeInForce?: MarginAccountNewOtocoWorkingTimeInForceEnum;
 
     /**
      * Arbitrary unique ID among open orders for the pending above order. Automatically generated if not sent.
@@ -3213,17 +3876,17 @@ export interface MarginAccountNewOtocoRequest {
 
     /**
      *
-     * @type {string}
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly pendingAboveTimeInForce?: string;
+    readonly pendingAboveTimeInForce?: MarginAccountNewOtocoPendingAboveTimeInForceEnum;
 
     /**
-     * Supported values: `LIMIT_MAKER`, `STOP_LOSS`, and `STOP_LOSS_LIMIT`
-     * @type {string}
+     *
+     * @type {'LIMIT_MAKER' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly pendingBelowType?: string;
+    readonly pendingBelowType?: MarginAccountNewOtocoPendingBelowTypeEnum;
 
     /**
      * Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.
@@ -3262,10 +3925,10 @@ export interface MarginAccountNewOtocoRequest {
 
     /**
      *
-     * @type {string}
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
-    readonly pendingBelowTimeInForce?: string;
+    readonly pendingBelowTimeInForce?: MarginAccountNewOtocoPendingBelowTimeInForceEnum;
 }
 
 /**
@@ -3274,21 +3937,21 @@ export interface MarginAccountNewOtocoRequest {
  */
 export interface MarginManualLiquidationRequest {
     /**
-     * `MARGIN`,`ISOLATED`
-     * @type {string}
+     *
+     * @type {'MARGIN' | 'ISOLATED'}
      * @memberof TradeApiMarginManualLiquidation
      */
-    readonly type: string;
+    readonly type: MarginManualLiquidationTypeEnum;
 
     /**
-     * isolated margin pair
+     * When type selects `ISOLATED`, `symbol` must be filled in
      * @type {string}
      * @memberof TradeApiMarginManualLiquidation
      */
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiMarginManualLiquidation
      */
@@ -3301,23 +3964,77 @@ export interface MarginManualLiquidationRequest {
  */
 export interface QueryCurrentMarginOrderCountUsageRequest {
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiQueryCurrentMarginOrderCountUsage
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: QueryCurrentMarginOrderCountUsageIsIsolatedEnum;
 
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof TradeApiQueryCurrentMarginOrderCountUsage
      */
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryCurrentMarginOrderCountUsage
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for queryLiquidationLoan operation in TradeApi.
+ * @interface QueryLiquidationLoanRequest
+ */
+export interface QueryLiquidationLoanRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryLiquidationLoan
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for queryLiquidationLoanRepayHistory operation in TradeApi.
+ * @interface QueryLiquidationLoanRepayHistoryRequest
+ */
+export interface QueryLiquidationLoanRepayHistoryRequest {
+    /**
+     * Start time in Unix timestamp (milliseconds). Defaults to 7 days ago if not specified
+     * @type {number | bigint}
+     * @memberof TradeApiQueryLiquidationLoanRepayHistory
+     */
+    readonly startTime?: number | bigint;
+
+    /**
+     * End time in Unix timestamp (milliseconds). Defaults to now if not specified
+     * @type {number | bigint}
+     * @memberof TradeApiQueryLiquidationLoanRepayHistory
+     */
+    readonly endTime?: number | bigint;
+
+    /**
+     * Current page number, default `1`
+     * @type {number | bigint}
+     * @memberof TradeApiQueryLiquidationLoanRepayHistory
+     */
+    readonly current?: number | bigint;
+
+    /**
+     * Page size, default `50`
+     * @type {number | bigint}
+     * @memberof TradeApiQueryLiquidationLoanRepayHistory
+     */
+    readonly size?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryLiquidationLoanRepayHistory
      */
     readonly recvWindow?: number | bigint;
 }
@@ -3328,28 +4045,28 @@ export interface QueryCurrentMarginOrderCountUsageRequest {
  */
 export interface QueryMarginAccountsAllOcoRequest {
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: QueryMarginAccountsAllOcoIsIsolatedEnum;
 
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
     readonly symbol?: string;
 
     /**
-     * If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
@@ -3363,14 +4080,14 @@ export interface QueryMarginAccountsAllOcoRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
     readonly limit?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
@@ -3390,11 +4107,11 @@ export interface QueryMarginAccountsAllOrdersRequest {
     readonly symbol: string;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: QueryMarginAccountsAllOrdersIsIsolatedEnum;
 
     /**
      *
@@ -3404,7 +4121,7 @@ export interface QueryMarginAccountsAllOrdersRequest {
     readonly orderId?: number | bigint;
 
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
@@ -3418,14 +4135,14 @@ export interface QueryMarginAccountsAllOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
     readonly limit?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
@@ -3438,21 +4155,21 @@ export interface QueryMarginAccountsAllOrdersRequest {
  */
 export interface QueryMarginAccountsOcoRequest {
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiQueryMarginAccountsOco
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: QueryMarginAccountsOcoIsIsolatedEnum;
 
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof TradeApiQueryMarginAccountsOco
      */
     readonly symbol?: string;
 
     /**
-     * Either `orderListId` or `listClientOrderId` must be provided
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOco
      */
@@ -3466,7 +4183,7 @@ export interface QueryMarginAccountsOcoRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOco
      */
@@ -3479,21 +4196,21 @@ export interface QueryMarginAccountsOcoRequest {
  */
 export interface QueryMarginAccountsOpenOcoRequest {
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiQueryMarginAccountsOpenOco
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: QueryMarginAccountsOpenOcoIsIsolatedEnum;
 
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof TradeApiQueryMarginAccountsOpenOco
      */
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOpenOco
      */
@@ -3513,14 +4230,14 @@ export interface QueryMarginAccountsOpenOrdersRequest {
     readonly symbol?: string;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiQueryMarginAccountsOpenOrders
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: QueryMarginAccountsOpenOrdersIsIsolatedEnum;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOpenOrders
      */
@@ -3540,11 +4257,11 @@ export interface QueryMarginAccountsOrderRequest {
     readonly symbol: string;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiQueryMarginAccountsOrder
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: QueryMarginAccountsOrderIsIsolatedEnum;
 
     /**
      *
@@ -3561,7 +4278,7 @@ export interface QueryMarginAccountsOrderRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOrder
      */
@@ -3581,11 +4298,11 @@ export interface QueryMarginAccountsTradeListRequest {
     readonly symbol: string;
 
     /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
+     *
+     * @type {'TRUE' | 'FALSE'}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
-    readonly isIsolated?: string;
+    readonly isIsolated?: QueryMarginAccountsTradeListIsIsolatedEnum;
 
     /**
      *
@@ -3595,7 +4312,7 @@ export interface QueryMarginAccountsTradeListRequest {
     readonly orderId?: number | bigint;
 
     /**
-     * Only supports querying data from the past 90 days.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
@@ -3609,21 +4326,21 @@ export interface QueryMarginAccountsTradeListRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
     readonly limit?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
@@ -3664,18 +4381,18 @@ export interface QueryPreventedMatchesRequest {
     readonly fromPreventedMatchId?: number | bigint;
 
     /**
-     * No more than 60000
+     *
+     * @type {'TRUE' | 'FALSE'}
+     * @memberof TradeApiQueryPreventedMatches
+     */
+    readonly isIsolated?: QueryPreventedMatchesIsIsolatedEnum;
+
+    /**
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryPreventedMatches
      */
     readonly recvWindow?: number | bigint;
-
-    /**
-     * For isolated margin or not, "TRUE", "FALSE", default "FALSE"
-     * @type {string}
-     * @memberof TradeApiQueryPreventedMatches
-     */
-    readonly isIsolated?: string;
 }
 
 /**
@@ -3684,14 +4401,14 @@ export interface QueryPreventedMatchesRequest {
  */
 export interface QuerySpecialKeyRequest {
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof TradeApiQuerySpecialKey
      */
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQuerySpecialKey
      */
@@ -3704,14 +4421,14 @@ export interface QuerySpecialKeyRequest {
  */
 export interface QuerySpecialKeyListRequest {
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof TradeApiQuerySpecialKeyList
      */
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiQuerySpecialKeyList
      */
@@ -3724,14 +4441,14 @@ export interface QuerySpecialKeyListRequest {
  */
 export interface SmallLiabilityExchangeRequest {
     /**
-     * The assets list of small liability exchange， Example: assetNames = BTC,ETH
-     * @type {Array<string>}
+     * The assets list of small liability exchange
+     * @type {string}
      * @memberof TradeApiSmallLiabilityExchange
      */
-    readonly assetNames: Array<string>;
+    readonly assetNames: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof TradeApiSmallLiabilityExchange
      */
@@ -3752,8 +4469,14 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * **Eligibility**
+     *
      * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 7 or higher.
      * - If you are VIP level 6 or below, please contact your VIP manager for eligibility criterias.
+     * - All new Margin Special Key users are required to read, understand, and agree to the Margin Special Key Supplemental Product Terms at the master account level before creating a Margin Special Key.
+     * - Once signed at the master account level, the agreement applies to all sub-accounts. The master account and all sub-accounts (Cross Margin Classic and Portfolio Margin Pro) are authorized to create a Margin Special Key and are subject to the LiquidationLoan policy.
+     *
+     * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
      *
      **Supported Products:**
      *
@@ -3773,14 +4496,35 @@ export class TradeApi implements TradeApiInterface {
      *
      * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
      *
-     * Weight: 1(UID)
+     **How to use the Margin Special Key**
+     * - Use the below `sapi` endpoint to create your margin special API Key.
+     * - For accessing the Cross Margin account, do not send the `symbol` parameter.
+     * - For accessing the Isolated Margin account(s), pass the relevant `symbol` parameter in the API Key creation request.
+     * - Use the generated API Key (and Secret key, if applicable) to perform margin trading and listenKey generation via **Spot** REST API (`https://api.binance.com/api/v3/*`) endpoints.
      *
-     * @summary Create Special Key(Low-Latency Trading)(TRADE)
+     * Read [REST API](/products/spot/rest-api#signed-trade-and-user_data-endpoint-security) or [WebSocket API](/products/spot/web-socket-api#request-security) documentation to learn how to use different API keys
+     *
+     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+     *
+     * Weight(UID): 1
+     *
+     * Security Type: TRADE
+     *
+     * Response Notes:
+     * - Error Code Description
+     *
+     * - **UNSUPPORTED_OPERATION** : Portfolio Margin is an unsupported
+     * product, please change the account type to a supported margin product.
+     *
+     * - **Forbidden**:  Cross Margin Pro accounts require additional
+     * agreements, please contact your relationship manager.
+     *
+     * @summary Create Special Key(Low-Latency Trading) (TRADE)
      * @param {CreateSpecialKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CreateSpecialKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Create-Special-Key-of-Low-Latency-Trading Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#create-special-key Binance API Documentation}
      */
     public async createSpecialKey(
         requestParameters: CreateSpecialKeyRequest
@@ -3806,20 +4550,31 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * This only applies to Special Key for Low Latency Trading.
+     * Deleting your Margin Special Key alone does not exit you from the Margin Special Key framework or discharge your obligations under the Margin Special Key Supplemental Product Terms. To fully exit, you must:
      *
-     * If apiKey is given, apiName will be ignored. If apiName is given with no apiKey, all apikeys with given apiName will be deleted.
+     * 1. Delete your Margin Special Key.
+     * 2. Ensure there are no outstanding liabilities on the account.
+     * 3. Call the Exit Margin Special Key API endpoint.
+     * 4. Confirm the exit status via the API response.
      *
-     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+     * Only after step 4 is completed and the exit status is confirmed by Binance will your account revert to standard liquidation logic and no longer be subject to the Margin Special Key Supplemental Product Terms.
      *
-     * Weight: 1(UID)
+     * If apiKey is given, apiName will be ignored. If apiName is given with no
+     * apiKey, all apikeys with given apiName will be deleted.
      *
-     * @summary Delete Special Key(Low-Latency Trading)(TRADE)
+     * You need to enable Permits “Enable Spot & Margin” option for the API Key
+     * which requests this endpoint.
+     *
+     * Weight(UID): 1
+     *
+     * Security Type: TRADE
+     *
+     * @summary Delete Special Key(Low-Latency Trading) (TRADE)
      * @param {DeleteSpecialKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Delete-Special-Key-of-Low-Latency-Trading Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#delete-special-key Binance API Documentation}
      */
     public async deleteSpecialKey(
         requestParameters: DeleteSpecialKeyRequest = {}
@@ -3842,18 +4597,22 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Edit ip restriction. This only applies to Special Key for Low Latency Trading.
+     * Edit ip restriction. This only applies to Special Key for Low Latency
+     * Trading.
      *
-     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
+     * You need to enable Permits “Enable Spot & Margin” option for the API Key
+     * which requests this endpoint.
      *
-     * Weight: 1(UID)
+     * Weight(UID): 1
      *
-     * @summary Edit ip for Special Key(Low-Latency Trading)(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Edit ip for Special Key(Low-Latency Trading) (TRADE)
      * @param {EditIpForSpecialKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Edit-ip-for-Special-Key-of-Low-Latency-Trading Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#edit-ip-for-special-key Binance API Documentation}
      */
     public async editIpForSpecialKey(
         requestParameters: EditIpForSpecialKeyRequest
@@ -3876,18 +4635,74 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * Exit the Margin Special Key mode for Cross Margin Classic accounts.
+     *
+     **All outstanding liabilities under the Cross Margin Classic account must be fully repaid before calling this endpoint.** Deleting the Margin Special Key alone does not constitute a valid exit.
+     *
+     * When a user creates a Margin Special API Key, the account enters "Special Key Mode". Upon a successful request, the following actions will be performed atomically:
+     *
+     * 1. All existing Margin Special API Keys under the Cross Margin Classic mode account will be deleted.
+     * 2. All pre-execution margin checks (including Open-order-loss calculation) will revert to standard mode.
+     * 3. A cooldown period (default: 24 hours) will be enforced, during which the account will not be permitted to create new Margin Special API Keys.
+     *
+     * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+     *
+     **Preconditions:**
+     *
+     * The following conditions must be met; otherwise the request will be rejected:
+     *
+     * - Account type must be **Cross Margin Classic**.
+     * - Account must currently be in **Special Key Mode**. If not, the request silently succeeds.
+     * - Account must **not be in liquidation**.
+     * - Account must **have no liability**.
+     *
+     * You need to enable "Permits Enable Spot & Margin Trading" option for the API Key which requests this endpoint.
+     *
+     * Weight(UID): 10
+     *
+     * Security Type: TRADE
+     *
+     * @summary Exit Special Key Mode (TRADE)
+     * @param {ExitSpecialKeyModeRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<object>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#exit-special-key-mode Binance API Documentation}
+     */
+    public async exitSpecialKeyMode(
+        requestParameters: ExitSpecialKeyModeRequest = {}
+    ): Promise<RestApiResponse<object>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.exitSpecialKeyMode(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<object>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Get Force Liquidation Record
      *
-     * Response in descending order
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Response in descending order
      *
      * @summary Get Force Liquidation Record (USER_DATA)
      * @param {GetForceLiquidationRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetForceLiquidationRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Get-Force-Liquidation-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#get-force-liquidation-record Binance API Documentation}
      */
     public async getForceLiquidationRecord(
         requestParameters: GetForceLiquidationRecordRequest = {}
@@ -3915,14 +4730,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query the coins which can be small liability exchange
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Small Liability Exchange Coin List (USER_DATA)
      * @param {GetSmallLiabilityExchangeCoinListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSmallLiabilityExchangeCoinListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Get-Small-Liability-Exchange-Coin-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#get-small-liability-exchange-coin-list Binance API Documentation}
      */
     public async getSmallLiabilityExchangeCoinList(
         requestParameters: GetSmallLiabilityExchangeCoinListRequest = {}
@@ -3946,14 +4763,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get Small liability Exchange History
      *
-     * Weight: 100(UID)
+     * Weight(UID): 100
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Small Liability Exchange History (USER_DATA)
      * @param {GetSmallLiabilityExchangeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSmallLiabilityExchangeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Get-Small-Liability-Exchange-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#get-small-liability-exchange-history Binance API Documentation}
      */
     public async getSmallLiabilityExchangeHistory(
         requestParameters: GetSmallLiabilityExchangeHistoryRequest
@@ -3979,17 +4798,53 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * Repays the outstanding cross-margin liquidation loan from the user's spot wallet. A liquidation loan represents the account deficit incurred when account equity turns negative during liquidation (bankruptcy). The repayment amount must be greater than 0 and cannot exceed the remaining loan balance. If the Spot Account has insufficient USDC balance, the repayment will fail.
+     *
+     * Weight(UID): 100
+     *
+     * Security Type: MARGIN
+     *
+     * @summary Liquidation Loan Repay (MARGIN)
+     * @param {LiquidationLoanRepayRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<LiquidationLoanRepayResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#liquidation-loan-repay Binance API Documentation}
+     */
+    public async liquidationLoanRepay(
+        requestParameters: LiquidationLoanRepayRequest
+    ): Promise<RestApiResponse<LiquidationLoanRepayResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.liquidationLoanRepay(
+            requestParameters?.asset,
+            requestParameters?.amount,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<LiquidationLoanRepayResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Cancels all active orders on a symbol for margin account.<br></br>
      * This includes OCO orders.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Margin Account Cancel all Open Orders on a Symbol (TRADE)
      * @param {MarginAccountCancelAllOpenOrdersOnASymbolRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountCancelAllOpenOrdersOnASymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-All-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-cancel-all-open-orders-on-asymbol Binance API Documentation}
      */
     public async marginAccountCancelAllOpenOrdersOnASymbol(
         requestParameters: MarginAccountCancelAllOpenOrdersOnASymbolRequest
@@ -4015,16 +4870,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an entire Order List for a margin account.
      *
-     * Canceling an individual leg will cancel the entire OCO
+     * Weight(UID): 1
      *
-     * Weight: 1(UID)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Canceling an individual leg will cancel the entire OCO
      *
      * @summary Margin Account Cancel OCO (TRADE)
      * @param {MarginAccountCancelOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountCancelOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-cancel-oco Binance API Documentation}
      */
     public async marginAccountCancelOco(
         requestParameters: MarginAccountCancelOcoRequest
@@ -4052,16 +4910,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active order for margin account.
      *
-     * Either orderId or origClientOrderId must be sent.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either orderId or origClientOrderId must be sent.
      *
      * @summary Margin Account Cancel Order (TRADE)
      * @param {MarginAccountCancelOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountCancelOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-cancel-order Binance API Documentation}
      */
     public async marginAccountCancelOrder(
         requestParameters: MarginAccountCancelOrderRequest
@@ -4089,16 +4950,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send in a new OCO for a margin account
      *
-     * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+     * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
      *
-     * Weight: 6(UID)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
      *
      * @summary Margin Account New OCO (TRADE)
      * @param {MarginAccountNewOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountNewOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-oco Binance API Documentation}
      */
     public async marginAccountNewOco(
         requestParameters: MarginAccountNewOcoRequest
@@ -4138,16 +5002,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Post a new order for margin account.
      *
-     * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+     * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
      *
-     * Weight: 6(UID)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
      *
      * @summary Margin Account New Order (TRADE)
      * @param {MarginAccountNewOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountNewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-order Binance API Documentation}
      */
     public async marginAccountNewOrder(
         requestParameters: MarginAccountNewOrderRequest
@@ -4167,6 +5034,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.sideEffectType,
             requestParameters?.timeInForce,
             requestParameters?.selfTradePreventionMode,
+            requestParameters?.trailingDelta,
             requestParameters?.autoRepayAtCancel,
             requestParameters?.recvWindow
         );
@@ -4185,24 +5053,45 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Post a new OTO order for margin account:
      *
-     * - An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
-     * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-     * - The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
-     * - If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
-     * - When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
-     * - OTOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     * - An OTO (One-Triggers-the-Other) is an order list comprised of 2
+     * orders.
      *
-     * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
-     * Depending on the `pendingType` or `workingType`, some optional parameters will become mandatory:
+     * - The first order is called the **working order** and must be `LIMIT` or
+     * `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      *
-     * Weight: 6(UID)
+     * - The second order is called the **pending order**. It can be any order
+     * type except for `MARKET` orders using parameter `quoteOrderQty`. The
+     * pending order is only placed on the order book when the working order
+     * gets **fully filled**.
+     *
+     * - If either the working order or the pending order is cancelled
+     * individually, the other order in the order list will also be canceled or
+     * expired.
+     *
+     * - When the order list is placed, if the working order gets **immediately
+     * fully filled**, the placement response will show the working order as
+     * `FILLED` but the pending order will still appear as `PENDING_NEW`. You
+     * need to query the status of the pending order again to see its updated
+     * status.
+     *
+     * - OTOs add **2 orders** to the unfilled order count,
+     * `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     *
+     * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+     * - Depending on the `pendingType` or `workingType`, some optional
+     * - parameters will become mandatory: | Type                                                     | Additional mandatory parameters                              | Additional information | | -------------------------------------------------------- | ------------------------------------------------------------ | ---------------------- | | `workingType` = `LIMIT`                                  | `workingTimeInForce`                                         |                        | | `pendingType` = `LIMIT`                                  | `pendingPrice`, `pendingTimeInForce`                         |                        | | `pendingType` = `STOP_LOSS` or `TAKE_PROFIT`             | `pendingStopPrice` and/or `pendingTrailingDelta`             |                        | | `pendingType` = `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` | `pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce` |                        | | `pendingTrailingDelta` is provided | `pendingPrice` |                        |
      *
      * @summary Margin Account New OTO (TRADE)
      * @param {MarginAccountNewOtoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountNewOtoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OTO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-oto Binance API Documentation}
      */
     public async marginAccountNewOto(
         requestParameters: MarginAccountNewOtoRequest
@@ -4247,24 +5136,34 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Post a new OTOCO order for margin account：
      *
-     * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
-     * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
+     *
+     * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list
+     * comprised of 3 orders.
+     *
+     * - The first order is called the **working order** and must be `LIMIT` or
+     * `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * - The behavior of the working order is the same as the OTO.
-     * - OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OCO).
-     * - OTOCOs add **3 orders** against the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
+     * - OTOCO has 2 pending orders (pending above and pending below), forming
+     * an OCO pair. The pending orders are only placed on the order book when
+     * the working order gets **fully filled**.
+     * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-oco).
+     * - OTOCOs add **3 orders** against the unfilled order count,
+     * `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
      *
-     * autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
-     * Depending on the `pendingAboveType`/`pendingBelowType` or `workingType`, some optional parameters will become mandatory:
+     * Weight: 6(UID) or 1500(UID) when sideEffectType is MARGIN_BUY or AUTO_BORROW_REPAY
      *
-     * Weight: 6(UID)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - autoRepayAtCancel is suggested to set as “FALSE” to keep liability unrepaid under high frequent new order/cancel order execution
+     * - Depending on the `pendingAboveType`/`pendingBelowType` or `workingType`, some optional parameters will become mandatory: | Type                                 | Additional mandatory parameters                              | Additional information | | ------------------------------------ | ------------------------------------------------------------ | ---------------------- | | `workingType` = `LIMIT`              | `workingTimeInForce`                                         |                        | | `pendingAboveType`= `LIMIT_MAKER`    | `pendingAbovePrice`                                          |                        | | `pendingAboveType`= `STOP_LOSS`      | `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`   |                        | | `pendingAboveType`=`STOP_LOSS_LIMIT` | `pendingAbovePrice`, `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`, `pendingAboveTimeInForce` |                        | | `pendingBelowType`= `LIMIT_MAKER`    | `pendingBelowPrice`                                          |                        | | `pendingBelowType`= `STOP_LOSS`      | `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`   |                        | | `pendingBelowType`=`STOP_LOSS_LIMIT` | `pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce` |                        | | `pendingAboveTrailingDelta` is provided | `pendingAbovePrice` |                        | | `pendingBelowTrailingDelta` is provided | `pendingBelowPrice` |                        |
      *
      * @summary Margin Account New OTOCO (TRADE)
      * @param {MarginAccountNewOtocoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountNewOtocoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OTOCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-otoco Binance API Documentation}
      */
     public async marginAccountNewOtoco(
         requestParameters: MarginAccountNewOtocoRequest
@@ -4316,17 +5215,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Margin Manual Liquidation
      *
-     * This endpoint can support Cross Margin Classic Mode and Pro Mode.
-     * And only support Isolated Margin for restricted region.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Margin Manual Liquidation(MARGIN)
+     * Notes:
+     * - This endpoint supports Cross Margin Classic Mode and Pro Mode.
+     * - Isolated Margin is only supported in restricted regions.
+     *
+     * @summary Margin Manual Liquidation (TRADE)
      * @param {MarginManualLiquidationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginManualLiquidationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Manual-Liquidation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-manual-liquidation Binance API Documentation}
      */
     public async marginManualLiquidation(
         requestParameters: MarginManualLiquidationRequest
@@ -4351,14 +5253,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Displays the user's current margin order count usage for all intervals.
      *
-     * Weight: 20(IP)
+     * Weight(IP): 20
+     *
+     * Security Type: TRADE
      *
      * @summary Query Current Margin Order Count Usage (TRADE)
      * @param {QueryCurrentMarginOrderCountUsageRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentMarginOrderCountUsageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Current-Margin-Order-Count-Usage Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-current-margin-order-count-usage Binance API Documentation}
      */
     public async queryCurrentMarginOrderCountUsage(
         requestParameters: QueryCurrentMarginOrderCountUsageRequest = {}
@@ -4382,16 +5286,91 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * Query the current user's cross-margin liquidation loan information, including the original loan amount, repaid amount, and remaining amount. When a cross-margin account is liquidated and the account equity turns negative (bankruptcy), the system generates a liquidation loan record representing the deficit. This represents the shortfall amount denominated in USDC.
+     *
+     * Weight(UID): 100
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Liquidation Loan (USER_DATA)
+     * @param {QueryLiquidationLoanRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QueryLiquidationLoanResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-liquidation-loan Binance API Documentation}
+     */
+    public async queryLiquidationLoan(
+        requestParameters: QueryLiquidationLoanRequest = {}
+    ): Promise<RestApiResponse<QueryLiquidationLoanResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.queryLiquidationLoan(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<QueryLiquidationLoanResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Query the repayment history of cross-margin liquidation loans (deficit caused by bankruptcy during liquidation). Supports time-range filtering and pagination.
+     *
+     * Weight(UID): 100
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The maximum query range is 90 days. If `startTime` is earlier than 90 days ago, it will be clamped to 90 days ago.
+     * - Only records with status `SUCCESS` or `PENDING` are returned. Failed repayment records are excluded.
+     *
+     * @summary Query Liquidation Loan Repay History (USER_DATA)
+     * @param {QueryLiquidationLoanRepayHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QueryLiquidationLoanRepayHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-liquidation-loan-repay-history Binance API Documentation}
+     */
+    public async queryLiquidationLoanRepayHistory(
+        requestParameters: QueryLiquidationLoanRepayHistoryRequest = {}
+    ): Promise<RestApiResponse<QueryLiquidationLoanRepayHistoryResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.queryLiquidationLoanRepayHistory(
+                requestParameters?.startTime,
+                requestParameters?.endTime,
+                requestParameters?.current,
+                requestParameters?.size,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<QueryLiquidationLoanRepayHistoryResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Retrieves all OCO for a specific margin account based on provided optional parameters
      *
-     * Weight: 200(IP)
+     * Weight(IP): 200
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s all OCO (USER_DATA)
      * @param {QueryMarginAccountsAllOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsAllOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-all-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-margin-accounts-all-oco Binance API Documentation}
      */
     public async queryMarginAccountsAllOco(
         requestParameters: QueryMarginAccountsAllOcoRequest = {}
@@ -4420,18 +5399,25 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Margin Account's All Orders
      *
-     * If orderId is set, it will get orders >= that orderId. Otherwise the orders within 24 hours are returned.
-     * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
-     * Less than 24 hours between startTime and endTime.
+     * Weight(IP): 200
      *
-     * Weight: 200(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If orderId is set, it will get orders >= that orderId. Otherwise the
+     * orders within 24 hours are returned.
+     *
+     * - For some historical orders cummulativeQuoteQty will be < 0, meaning
+     * the data is not available at this time.
+     *
+     * - Less than 24 hours between startTime and endTime.
      *
      * @summary Query Margin Account\'s All Orders (USER_DATA)
      * @param {QueryMarginAccountsAllOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsAllOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-All-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-margin-accounts-all-orders Binance API Documentation}
      */
     public async queryMarginAccountsAllOrders(
         requestParameters: QueryMarginAccountsAllOrdersRequest
@@ -4460,14 +5446,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Retrieves a specific OCO based on provided optional parameters
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s OCO (USER_DATA)
      * @param {QueryMarginAccountsOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-margin-accounts-oco Binance API Documentation}
      */
     public async queryMarginAccountsOco(
         requestParameters: QueryMarginAccountsOcoRequest = {}
@@ -4494,14 +5482,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Margin Account's Open OCO
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s Open OCO (USER_DATA)
      * @param {QueryMarginAccountsOpenOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOpenOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Open-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-margin-accounts-open-oco Binance API Documentation}
      */
     public async queryMarginAccountsOpenOco(
         requestParameters: QueryMarginAccountsOpenOcoRequest = {}
@@ -4526,18 +5516,26 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Margin Account's Open Orders
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
-     * When all symbols are returned, the number of requests counted against the rate limiter is equal to the number of symbols currently trading on the exchange.
-     * If isIsolated ="TRUE", symbol must be sent.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the symbol is not sent, orders for all symbols will be returned in
+     * an array.
+     *
+     * - When all symbols are returned, the number of requests counted against
+     * the rate limiter is equal to the number of symbols currently trading on
+     * the exchange.
+     *
+     * - If isIsolated ="TRUE", symbol must be sent.
      *
      * @summary Query Margin Account\'s Open Orders (USER_DATA)
      * @param {QueryMarginAccountsOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-margin-accounts-open-orders Binance API Documentation}
      */
     public async queryMarginAccountsOpenOrders(
         requestParameters: QueryMarginAccountsOpenOrdersRequest = {}
@@ -4563,17 +5561,22 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Margin Account's Order
      *
-     * Either orderId or origClientOrderId must be sent.
-     * For some historical orders cummulativeQuoteQty will be < 0, meaning the data is not available at this time.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either orderId or origClientOrderId must be sent.
+     *
+     * - For some historical orders cummulativeQuoteQty will be < 0, meaning
+     * the data is not available at this time.
      *
      * @summary Query Margin Account\'s Order (USER_DATA)
      * @param {QueryMarginAccountsOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-margin-accounts-order Binance API Documentation}
      */
     public async queryMarginAccountsOrder(
         requestParameters: QueryMarginAccountsOrderRequest
@@ -4600,17 +5603,22 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Margin Account's Trade List
      *
-     * If fromId is set, it will get trades >= that fromId. Otherwise the trades within 24 hours are returned.
-     * Less than 24 hours between startTime and endTime.
+     * Weight(IP): 10
      *
-     * Weight: 10(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If fromId is set, it will get trades >= that fromId. Otherwise the
+     * trades within 24 hours are returned.
+     *
+     * - Less than 24 hours between startTime and endTime.
      *
      * @summary Query Margin Account\'s Trade List (USER_DATA)
      * @param {QueryMarginAccountsTradeListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-margin-accounts-trade-list Binance API Documentation}
      */
     public async queryMarginAccountsTradeList(
         requestParameters: QueryMarginAccountsTradeListRequest
@@ -4638,15 +5646,37 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * Displays the list of orders that were expired due to STP. (Self-Trade Prevention).
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
      *
-     * @summary Query Prevented Matches(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Supported parameter combinations:
+     *
+     * - `symbol` + `preventedMatchId`
+     *
+     * - `symbol` + `orderId`
+     *
+     * - `symbol` + `orderId` + `fromPreventedMatchId`
+     *
+     * - If `orderId` is provided, all prevented matches for that order will be
+     * returned.
+     *
+     * - If `preventedMatchId` is provided, the specific prevented match will
+     * be returned.
+     *
+     * - A single request returns a maximum of 500 records. If there are more
+     * than 500 records, use `symbol` + `orderId` + `fromPreventedMatchId`
+     * combination for pagination.
+     *
+     * @summary Query Prevented Matches (USER_DATA)
      * @param {QueryPreventedMatchesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPreventedMatchesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Prevented-Matches Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-prevented-matches Binance API Documentation}
      */
     public async queryPreventedMatches(
         requestParameters: QueryPreventedMatchesRequest
@@ -4656,8 +5686,8 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.preventedMatchId,
             requestParameters?.orderId,
             requestParameters?.fromPreventedMatchId,
-            requestParameters?.recvWindow,
-            requestParameters?.isIsolated
+            requestParameters?.isIsolated,
+            requestParameters?.recvWindow
         );
         return sendRequest<QueryPreventedMatchesResponse>(
             this.configuration,
@@ -4676,14 +5706,16 @@ export class TradeApi implements TradeApiInterface {
      *
      * This only applies to Special Key for Low Latency Trading.
      *
-     * Weight: 1(UID)
+     * Weight(UID): 1
      *
-     * @summary Query Special key(Low Latency Trading)(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Query Special key(Low Latency Trading) (TRADE)
      * @param {QuerySpecialKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySpecialKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Special-Key-of-Low-Latency-Trading Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-special-key Binance API Documentation}
      */
     public async querySpecialKey(
         requestParameters: QuerySpecialKeyRequest = {}
@@ -4707,14 +5739,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * This only applies to Special Key for Low Latency Trading.
      *
-     * Weight: 1(UID)
+     * Weight(UID): 1
      *
-     * @summary Query Special key List(Low Latency Trading)(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Query Special key List(Low Latency Trading) (TRADE)
      * @param {QuerySpecialKeyListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySpecialKeyListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Special-Key-List-of-Low-Latency-Trading Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-special-key-list Binance API Documentation}
      */
     public async querySpecialKeyList(
         requestParameters: QuerySpecialKeyListRequest = {}
@@ -4738,18 +5772,21 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Small Liability Exchange
      *
-     * Only convert once within 6 hours
-     * Only liability valuation less than 10 USDT are supported
-     * The maximum number of coin is 10
+     * Weight(UID): 3000
      *
-     * Weight: 3000(UID)
+     * Security Type: MARGIN
+     *
+     * Notes:
+     * - Only convert once within 6 hours
+     * - Only liability valuation less than 10 USDT are supported
+     * - The maximum number of coin is 10
      *
      * @summary Small Liability Exchange (MARGIN)
      * @param {SmallLiabilityExchangeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Small-Liability-Exchange Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#small-liability-exchange Binance API Documentation}
      */
     public async smallLiabilityExchange(
         requestParameters: SmallLiabilityExchangeRequest
@@ -4771,9 +5808,40 @@ export class TradeApi implements TradeApiInterface {
     }
 }
 
+export enum CreateSpecialKeyPermissionModeEnum {
+    TRADE = 'TRADE',
+    READ = 'READ',
+}
+
+export enum MarginAccountCancelAllOpenOrdersOnASymbolIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum MarginAccountCancelOcoIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum MarginAccountCancelOrderIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
 export enum MarginAccountNewOcoSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
+}
+
+export enum MarginAccountNewOcoIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum MarginAccountNewOcoStopLimitTimeInForceEnum {
+    GTC = 'GTC',
+    FOK = 'FOK',
+    IOC = 'IOC',
 }
 
 export enum MarginAccountNewOcoNewOrderRespTypeEnum {
@@ -4782,9 +5850,38 @@ export enum MarginAccountNewOcoNewOrderRespTypeEnum {
     FULL = 'FULL',
 }
 
+export enum MarginAccountNewOcoSideEffectTypeEnum {
+    NO_SIDE_EFFECT = 'NO_SIDE_EFFECT',
+    MARGIN_BUY = 'MARGIN_BUY',
+    AUTO_REPAY = 'AUTO_REPAY',
+    AUTO_BORROW_REPAY = 'AUTO_BORROW_REPAY',
+}
+
+export enum MarginAccountNewOcoSelfTradePreventionModeEnum {
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    NONE = 'NONE',
+}
+
 export enum MarginAccountNewOrderSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
+}
+
+export enum MarginAccountNewOrderTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum MarginAccountNewOrderIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
 }
 
 export enum MarginAccountNewOrderNewOrderRespTypeEnum {
@@ -4793,10 +5890,54 @@ export enum MarginAccountNewOrderNewOrderRespTypeEnum {
     FULL = 'FULL',
 }
 
+export enum MarginAccountNewOrderSideEffectTypeEnum {
+    NO_SIDE_EFFECT = 'NO_SIDE_EFFECT',
+    MARGIN_BUY = 'MARGIN_BUY',
+    AUTO_REPAY = 'AUTO_REPAY',
+    AUTO_BORROW_REPAY = 'AUTO_BORROW_REPAY',
+}
+
 export enum MarginAccountNewOrderTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
+}
+
+export enum MarginAccountNewOrderSelfTradePreventionModeEnum {
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    NONE = 'NONE',
+}
+
+export enum MarginAccountNewOtoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum MarginAccountNewOtoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum MarginAccountNewOtoPendingTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum MarginAccountNewOtoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum MarginAccountNewOtoIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
 }
 
 export enum MarginAccountNewOtoNewOrderRespTypeEnum {
@@ -4805,8 +5946,144 @@ export enum MarginAccountNewOtoNewOrderRespTypeEnum {
     FULL = 'FULL',
 }
 
+export enum MarginAccountNewOtoSideEffectTypeEnum {
+    NO_SIDE_EFFECT = 'NO_SIDE_EFFECT',
+    MARGIN_BUY = 'MARGIN_BUY',
+}
+
+export enum MarginAccountNewOtoSelfTradePreventionModeEnum {
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    NONE = 'NONE',
+}
+
+export enum MarginAccountNewOtoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum MarginAccountNewOtoPendingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum MarginAccountNewOtocoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum MarginAccountNewOtocoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum MarginAccountNewOtocoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum MarginAccountNewOtocoPendingAboveTypeEnum {
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+}
+
+export enum MarginAccountNewOtocoIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum MarginAccountNewOtocoSideEffectTypeEnum {
+    NO_SIDE_EFFECT = 'NO_SIDE_EFFECT',
+    MARGIN_BUY = 'MARGIN_BUY',
+}
+
 export enum MarginAccountNewOtocoNewOrderRespTypeEnum {
     ACK = 'ACK',
     RESULT = 'RESULT',
     FULL = 'FULL',
+}
+
+export enum MarginAccountNewOtocoSelfTradePreventionModeEnum {
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    NONE = 'NONE',
+}
+
+export enum MarginAccountNewOtocoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum MarginAccountNewOtocoPendingAboveTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum MarginAccountNewOtocoPendingBelowTypeEnum {
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+}
+
+export enum MarginAccountNewOtocoPendingBelowTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum MarginManualLiquidationTypeEnum {
+    MARGIN = 'MARGIN',
+    ISOLATED = 'ISOLATED',
+}
+
+export enum QueryCurrentMarginOrderCountUsageIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum QueryMarginAccountsAllOcoIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum QueryMarginAccountsAllOrdersIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum QueryMarginAccountsOcoIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum QueryMarginAccountsOpenOcoIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum QueryMarginAccountsOpenOrdersIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum QueryMarginAccountsOrderIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum QueryMarginAccountsTradeListIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
+}
+
+export enum QueryPreventedMatchesIsIsolatedEnum {
+    TRUE = 'TRUE',
+    FALSE = 'FALSE',
 }

@@ -1,4 +1,8 @@
-import { MarginTrading, MARGIN_TRADING_REST_API_PROD_URL } from '../../../src';
+import {
+    MarginTrading,
+    MarginTradingRestAPI,
+    MARGIN_TRADING_REST_API_PROD_URL,
+} from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,14 +14,14 @@ const client = new MarginTrading({ configurationRestAPI });
 async function marginAccountNewOto() {
     try {
         const response = await client.restAPI.marginAccountNewOto({
-            symbol: 'symbol_example',
-            workingType: 'workingType_example',
-            workingSide: 'workingSide_example',
+            symbol: 'BTCUSDT',
+            workingType: MarginTradingRestAPI.MarginAccountNewOtoWorkingTypeEnum.LIMIT,
+            workingSide: MarginTradingRestAPI.MarginAccountNewOtoWorkingSideEnum.SELL,
             workingPrice: 1.0,
             workingQuantity: 1.0,
             workingIcebergQty: 1.0,
-            pendingType: 'Order Types',
-            pendingSide: 'pendingSide_example',
+            pendingType: MarginTradingRestAPI.MarginAccountNewOtoPendingTypeEnum.LIMIT,
+            pendingSide: MarginTradingRestAPI.MarginAccountNewOtoPendingSideEnum.BUY,
             pendingQuantity: 1.0,
         });
 

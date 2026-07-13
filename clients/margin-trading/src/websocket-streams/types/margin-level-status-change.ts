@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading WebSocket Market Streams
+ * Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Margin Trading WebSocket Market Streams
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface MarginLevelStatusChange {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof MarginLevelStatusChange
      */
     E?: number | bigint;
     /**
-     *
+     * Margin level
      * @type {string}
      * @memberof MarginLevelStatusChange
      */
     l?: string;
     /**
-     *
+     * Margin call status
      * @type {string}
      * @memberof MarginLevelStatusChange
      */

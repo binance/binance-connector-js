@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface QuerySpecialKeyResponse {
     /**
-     *
+     * api Key.
      * @type {string}
      * @memberof QuerySpecialKeyResponse
      */
     apiKey?: string;
     /**
-     *
+     * 0.0.0.0 is just an initial statereference (no extra meaning).
      * @type {string}
      * @memberof QuerySpecialKeyResponse
      */
     ip?: string;
     /**
-     *
+     * api Name.
      * @type {string}
      * @memberof QuerySpecialKeyResponse
      */
     apiName?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof QuerySpecialKeyResponse
      */
     type?: string;
     /**
-     *
+     * permission Mode.
      * @type {string}
      * @memberof QuerySpecialKeyResponse
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,37 +20,37 @@
  */
 export interface GetAllIsolatedMarginSymbolResponseInner {
     /**
-     *
+     * base.
      * @type {string}
      * @memberof GetAllIsolatedMarginSymbolResponseInner
      */
     base?: string;
     /**
-     *
+     * is Buy Allowed.
      * @type {boolean}
      * @memberof GetAllIsolatedMarginSymbolResponseInner
      */
     isBuyAllowed?: boolean;
     /**
-     *
+     * is Margin Trade.
      * @type {boolean}
      * @memberof GetAllIsolatedMarginSymbolResponseInner
      */
     isMarginTrade?: boolean;
     /**
-     *
+     * is Sell Allowed.
      * @type {boolean}
      * @memberof GetAllIsolatedMarginSymbolResponseInner
      */
     isSellAllowed?: boolean;
     /**
-     *
+     * quote.
      * @type {string}
      * @memberof GetAllIsolatedMarginSymbolResponseInner
      */
     quote?: string;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof GetAllIsolatedMarginSymbolResponseInner
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,12 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { RiskDataStreamApi } from '../../../src/rest-api';
+import { UserDataStreamApi } from '../../../src/rest-api';
 import { KeepaliveUserDataStreamRequest } from '../../../src/rest-api';
 import type { StartUserDataStreamResponse } from '../../../src/rest-api/types';
 
-describe('RiskDataStreamApi', () => {
-    let client: RiskDataStreamApi;
+describe('UserDataStreamApi', () => {
+    let client: UserDataStreamApi;
     let config: ConfigurationRestAPI;
     let mockResponse: object = {};
 
@@ -30,7 +30,7 @@ describe('RiskDataStreamApi', () => {
             apiSecret: 'test-api-secret',
             basePath: '',
         });
-        client = new RiskDataStreamApi(config);
+        client = new UserDataStreamApi(config);
     });
 
     describe('closeUserDataStream()', () => {

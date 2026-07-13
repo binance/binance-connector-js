@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading WebSocket Market Streams
+ * Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Margin Trading WebSocket Market Streams
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,72 +16,72 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ListstatusOInner } from './liststatus-oinner';
+import type { ListStatusOInner } from './list-status-oinner';
 
 /**
  *
  * @export
- * @interface Liststatus
+ * @interface ListStatus
  */
-export interface Liststatus {
+export interface ListStatus {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     s?: string;
     /**
-     *
+     * OrderListId
      * @type {number | bigint}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     g?: number | bigint;
     /**
-     *
+     * Contingency Type
      * @type {string}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     c?: string;
     /**
-     *
+     * List Status Type
      * @type {string}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     l?: string;
     /**
-     *
+     * List Order Status
      * @type {string}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     L?: string;
     /**
-     *
+     * List Reject Reason
      * @type {string}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     r?: string;
     /**
-     *
+     * List Client Order ID
      * @type {string}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     C?: string;
     /**
-     *
+     * Transaction Time
      * @type {number | bigint}
-     * @memberof Liststatus
+     * @memberof ListStatus
      */
     T?: number | bigint;
     /**
-     *
-     * @type {Array<ListstatusOInner>}
-     * @memberof Liststatus
+     * An array of objects
+     * @type {Array<ListStatusOInner>}
+     * @memberof ListStatus
      */
-    O?: Array<ListstatusOInner>;
+    O?: Array<ListStatusOInner>;
 }

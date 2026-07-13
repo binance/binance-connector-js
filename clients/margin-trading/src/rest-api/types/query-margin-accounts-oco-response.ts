@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,55 +25,55 @@ import type { QueryMarginAccountsOcoResponseOrdersInner } from './query-margin-a
  */
 export interface QueryMarginAccountsOcoResponse {
     /**
-     *
+     * order List Id.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsOcoResponse
      */
     orderListId?: number | bigint;
     /**
-     *
+     * contingency Type.
      * @type {string}
      * @memberof QueryMarginAccountsOcoResponse
      */
     contingencyType?: string;
     /**
-     *
+     * list Status Type.
      * @type {string}
      * @memberof QueryMarginAccountsOcoResponse
      */
     listStatusType?: string;
     /**
-     *
+     * list Order Status.
      * @type {string}
      * @memberof QueryMarginAccountsOcoResponse
      */
     listOrderStatus?: string;
     /**
-     *
+     * list Client Order Id.
      * @type {string}
      * @memberof QueryMarginAccountsOcoResponse
      */
     listClientOrderId?: string;
     /**
-     *
+     * transaction Time.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsOcoResponse
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof QueryMarginAccountsOcoResponse
      */
     symbol?: string;
     /**
-     *
+     * if isolated margin
      * @type {boolean}
      * @memberof QueryMarginAccountsOcoResponse
      */
     isIsolated?: boolean;
     /**
-     *
+     * orders list.
      * @type {Array<QueryMarginAccountsOcoResponseOrdersInner>}
      * @memberof QueryMarginAccountsOcoResponse
      */

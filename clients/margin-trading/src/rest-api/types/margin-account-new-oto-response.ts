@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,61 +28,61 @@ import type { MarginAccountNewOtoResponseOrdersInner } from './margin-account-ne
  */
 export interface MarginAccountNewOtoResponse {
     /**
-     *
+     * order List Id.
      * @type {number | bigint}
      * @memberof MarginAccountNewOtoResponse
      */
     orderListId?: number | bigint;
     /**
-     *
+     * contingency Type.
      * @type {string}
      * @memberof MarginAccountNewOtoResponse
      */
     contingencyType?: string;
     /**
-     *
+     * list Status Type.
      * @type {string}
      * @memberof MarginAccountNewOtoResponse
      */
     listStatusType?: string;
     /**
-     *
+     * list Order Status.
      * @type {string}
      * @memberof MarginAccountNewOtoResponse
      */
     listOrderStatus?: string;
     /**
-     *
+     * list Client Order Id.
      * @type {string}
      * @memberof MarginAccountNewOtoResponse
      */
     listClientOrderId?: string;
     /**
-     *
+     * transaction Time.
      * @type {number | bigint}
      * @memberof MarginAccountNewOtoResponse
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountNewOtoResponse
      */
     symbol?: string;
     /**
-     *
+     * is Isolated.
      * @type {boolean}
      * @memberof MarginAccountNewOtoResponse
      */
     isIsolated?: boolean;
     /**
-     *
+     * orders list.
      * @type {Array<MarginAccountNewOtoResponseOrdersInner>}
      * @memberof MarginAccountNewOtoResponse
      */
     orders?: Array<MarginAccountNewOtoResponseOrdersInner>;
     /**
-     *
+     * order Reports list.
      * @type {Array<MarginAccountNewOtoResponseOrderReportsInner>}
      * @memberof MarginAccountNewOtoResponse
      */

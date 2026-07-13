@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function queryMarginInterestRateHistory() {
     try {
         const response = await client.restAPI.queryMarginInterestRateHistory({
-            asset: 'asset_example',
+            asset: 'BTC',
         });
 
         const rateLimits = response.rateLimits!;

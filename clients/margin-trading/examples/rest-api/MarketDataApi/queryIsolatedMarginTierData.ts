@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function queryIsolatedMarginTierData() {
     try {
         const response = await client.restAPI.queryIsolatedMarginTierData({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

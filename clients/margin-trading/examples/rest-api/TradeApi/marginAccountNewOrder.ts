@@ -14,9 +14,9 @@ const client = new MarginTrading({ configurationRestAPI });
 async function marginAccountNewOrder() {
     try {
         const response = await client.restAPI.marginAccountNewOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             side: MarginTradingRestAPI.MarginAccountNewOrderSideEnum.BUY,
-            type: 'type_example',
+            type: MarginTradingRestAPI.MarginAccountNewOrderTypeEnum.LIMIT,
         });
 
         const rateLimits = response.rateLimits!;

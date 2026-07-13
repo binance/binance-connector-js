@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,61 +28,61 @@ import type { MarginAccountCancelOcoResponseOrdersInner } from './margin-account
  */
 export interface MarginAccountCancelOcoResponse {
     /**
-     *
+     * order List Id.
      * @type {number | bigint}
      * @memberof MarginAccountCancelOcoResponse
      */
     orderListId?: number | bigint;
     /**
-     *
+     * contingency Type.
      * @type {string}
      * @memberof MarginAccountCancelOcoResponse
      */
     contingencyType?: string;
     /**
-     *
+     * list Status Type.
      * @type {string}
      * @memberof MarginAccountCancelOcoResponse
      */
     listStatusType?: string;
     /**
-     *
+     * list Order Status.
      * @type {string}
      * @memberof MarginAccountCancelOcoResponse
      */
     listOrderStatus?: string;
     /**
-     *
+     * list Client Order Id.
      * @type {string}
      * @memberof MarginAccountCancelOcoResponse
      */
     listClientOrderId?: string;
     /**
-     *
+     * transaction Time.
      * @type {number | bigint}
      * @memberof MarginAccountCancelOcoResponse
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountCancelOcoResponse
      */
     symbol?: string;
     /**
-     *
+     * if isolated margin
      * @type {boolean}
      * @memberof MarginAccountCancelOcoResponse
      */
     isIsolated?: boolean;
     /**
-     *
+     * orders list.
      * @type {Array<MarginAccountCancelOcoResponseOrdersInner>}
      * @memberof MarginAccountCancelOcoResponse
      */
     orders?: Array<MarginAccountCancelOcoResponseOrdersInner>;
     /**
-     *
+     * order Reports.
      * @type {Array<MarginAccountCancelOcoResponseOrderReportsInner>}
      * @memberof MarginAccountCancelOcoResponse
      */

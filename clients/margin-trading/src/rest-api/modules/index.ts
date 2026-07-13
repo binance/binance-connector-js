@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,6 +14,6 @@
 export * from './account-api';
 export * from './borrow-repay-api';
 export * from './market-data-api';
-export * from './risk-data-stream-api';
 export * from './trade-api';
 export * from './transfer-api';
+export * from './user-data-stream-api';

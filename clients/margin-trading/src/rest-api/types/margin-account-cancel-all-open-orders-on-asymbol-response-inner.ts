@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,133 +28,133 @@ import type { MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrdersInner 
  */
 export interface MarginAccountCancelAllOpenOrdersOnASymbolResponseInner {
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     symbol?: string;
     /**
-     *
+     * if isolated margin
      * @type {boolean}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     isIsolated?: boolean;
     /**
-     *
+     * orig Client Order Id.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     origClientOrderId?: string;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * order List Id.
      * @type {number | bigint}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     orderListId?: number | bigint;
     /**
-     *
+     * client Order Id.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     price?: string;
     /**
-     *
+     * orig Qty.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     origQty?: string;
     /**
-     *
+     * executed Qty.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * cummulative Quote Qty.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * status.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     status?: string;
     /**
-     *
+     * time In Force.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     type?: string;
     /**
-     *
+     * side.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     side?: string;
     /**
-     *
+     * self Trade Prevention Mode.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * contingency Type.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     contingencyType?: string;
     /**
-     *
+     * list Status Type.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     listStatusType?: string;
     /**
-     *
+     * list Order Status.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     listOrderStatus?: string;
     /**
-     *
+     * list Client Order Id.
      * @type {string}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     listClientOrderId?: string;
     /**
-     *
+     * transaction Time.
      * @type {number | bigint}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * orders list.
      * @type {Array<MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrdersInner>}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */
     orders?: Array<MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrdersInner>;
     /**
-     *
+     * order Reports list.
      * @type {Array<MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner>}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInner
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -22,14 +21,16 @@ import {
 import type { StartUserDataStreamResponse } from '../types';
 
 /**
- * RiskDataStreamApi - axios parameter creator
+ * UserDataStreamApi - axios parameter creator
  */
-const RiskDataStreamApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
+const UserDataStreamApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
          * Close out a user data stream.
          *
-         * Weight: 3000
+         * Weight(UID): 3000
+         *
+         * Security Type: USER_STREAM
          *
          * @summary Close User Data Stream (USER_STREAM)
          *
@@ -55,7 +56,9 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Keepalive a user data stream to prevent a time out.
          *
-         * Weight: 1
+         * Weight(UID): 1
+         *
+         * Security Type: USER_STREAM
          *
          * @summary Keepalive User Data Stream (USER_STREAM)
          * @param {string} listenKey
@@ -89,7 +92,9 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Start a new user data stream.
          *
-         * Weight: 1
+         * Weight(UID): 1
+         *
+         * Security Type: USER_STREAM
          *
          * @summary Start User Data Stream (USER_STREAM)
          *
@@ -116,31 +121,35 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
 };
 
 /**
- * RiskDataStreamApi - interface
- * @interface RiskDataStreamApi
+ * UserDataStreamApi - interface
+ * @interface UserDataStreamApi
  */
-export interface RiskDataStreamApiInterface {
+export interface UserDataStreamApiInterface {
     /**
      * Close out a user data stream.
      *
-     * Weight: 3000
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Close User Data Stream (USER_STREAM)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RiskDataStreamApiInterface
+     * @memberof UserDataStreamApiInterface
      */
     closeUserDataStream(): Promise<RestApiResponse<void>>;
     /**
      * Keepalive a user data stream to prevent a time out.
      *
-     * Weight: 1
+     * Weight(UID): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      * @param {KeepaliveUserDataStreamRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RiskDataStreamApiInterface
+     * @memberof UserDataStreamApiInterface
      */
     keepaliveUserDataStream(
         requestParameters: KeepaliveUserDataStreamRequest
@@ -148,52 +157,56 @@ export interface RiskDataStreamApiInterface {
     /**
      * Start a new user data stream.
      *
-     * Weight: 1
+     * Weight(UID): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Start User Data Stream (USER_STREAM)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RiskDataStreamApiInterface
+     * @memberof UserDataStreamApiInterface
      */
     startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>>;
 }
 
 /**
- * Request parameters for keepaliveUserDataStream operation in RiskDataStreamApi.
+ * Request parameters for keepaliveUserDataStream operation in UserDataStreamApi.
  * @interface KeepaliveUserDataStreamRequest
  */
 export interface KeepaliveUserDataStreamRequest {
     /**
      *
      * @type {string}
-     * @memberof RiskDataStreamApiKeepaliveUserDataStream
+     * @memberof UserDataStreamApiKeepaliveUserDataStream
      */
     readonly listenKey: string;
 }
 
 /**
- * RiskDataStreamApi - object-oriented interface
- * @class RiskDataStreamApi
+ * UserDataStreamApi - object-oriented interface
+ * @class UserDataStreamApi
  */
-export class RiskDataStreamApi implements RiskDataStreamApiInterface {
+export class UserDataStreamApi implements UserDataStreamApiInterface {
     private readonly configuration: ConfigurationRestAPI;
     private localVarAxiosParamCreator;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.localVarAxiosParamCreator = RiskDataStreamApiAxiosParamCreator(configuration);
+        this.localVarAxiosParamCreator = UserDataStreamApiAxiosParamCreator(configuration);
     }
 
     /**
      * Close out a user data stream.
      *
-     * Weight: 3000
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Close User Data Stream (USER_STREAM)
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RiskDataStreamApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/risk-data-stream/Close-User-Data-Stream Binance API Documentation}
+     * @memberof UserDataStreamApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#close-user-data-stream Binance API Documentation}
      */
     public async closeUserDataStream(): Promise<RestApiResponse<void>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.closeUserDataStream();
@@ -212,14 +225,16 @@ export class RiskDataStreamApi implements RiskDataStreamApiInterface {
     /**
      * Keepalive a user data stream to prevent a time out.
      *
-     * Weight: 1
+     * Weight(UID): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      * @param {KeepaliveUserDataStreamRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RiskDataStreamApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/risk-data-stream/Keepalive-User-Data-Stream Binance API Documentation}
+     * @memberof UserDataStreamApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#keepalive-user-data-stream Binance API Documentation}
      */
     public async keepaliveUserDataStream(
         requestParameters: KeepaliveUserDataStreamRequest
@@ -242,13 +257,15 @@ export class RiskDataStreamApi implements RiskDataStreamApiInterface {
     /**
      * Start a new user data stream.
      *
-     * Weight: 1
+     * Weight(UID): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Start User Data Stream (USER_STREAM)
      * @returns {Promise<RestApiResponse<StartUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RiskDataStreamApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/risk-data-stream/Start-User-Data-Stream Binance API Documentation}
+     * @memberof UserDataStreamApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#start-user-data-stream Binance API Documentation}
      */
     public async startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.startUserDataStream();

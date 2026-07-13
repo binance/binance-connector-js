@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function editIpForSpecialKey() {
     try {
         const response = await client.restAPI.editIpForSpecialKey({
-            ip: 'ip_example',
+            ip: '24.156.99.202',
         });
 
         const rateLimits = response.rateLimits!;

@@ -10,7 +10,7 @@ const client = new MarginTrading({ configurationRestAPI });
 async function queryMaxTransferOutAmount() {
     try {
         const response = await client.restAPI.queryMaxTransferOutAmount({
-            asset: 'asset_example',
+            asset: 'BTC',
         });
 
         const rateLimits = response.rateLimits!;

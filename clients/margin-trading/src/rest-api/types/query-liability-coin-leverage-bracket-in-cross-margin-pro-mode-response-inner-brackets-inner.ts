@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner {
     /**
-     *
+     * leverage.
      * @type {number | bigint}
      * @memberof QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner
      */
     leverage?: number | bigint;
     /**
-     *
+     * max Debt.
      * @type {number}
      * @memberof QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner
      */
     maxDebt?: number;
     /**
-     *
+     * maintenance Margin Rate.
      * @type {number}
      * @memberof QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner
      */
     maintenanceMarginRate?: number;
     /**
-     *
+     * initial Margin Rate.
      * @type {number}
      * @memberof QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner
      */
     initialMarginRate?: number;
     /**
-     *
+     * fast Num.
      * @type {number}
      * @memberof QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner
      */

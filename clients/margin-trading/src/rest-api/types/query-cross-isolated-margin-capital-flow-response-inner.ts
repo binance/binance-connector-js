@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,45 +20,51 @@
  */
 export interface QueryCrossIsolatedMarginCapitalFlowResponseInner {
     /**
-     *
+     * id.
      * @type {number | bigint}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * tran Id.
      * @type {number | bigint}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
     tranId?: number | bigint;
     /**
-     *
+     * timestamp.
      * @type {number | bigint}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
     timestamp?: number | bigint;
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
     asset?: string;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
     symbol?: string;
     /**
-     *
+     * type.
      * @type {string}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
     type?: string;
     /**
-     *
+     * amount.
      * @type {string}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
     amount?: string;
+    /**
+     * note.
+     * @type {string}
+     * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
+     */
+    note?: string;
 }

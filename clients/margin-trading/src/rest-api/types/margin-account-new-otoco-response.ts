@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,61 +28,61 @@ import type { MarginAccountNewOtocoResponseOrdersInner } from './margin-account-
  */
 export interface MarginAccountNewOtocoResponse {
     /**
-     *
+     * order List Id.
      * @type {number | bigint}
      * @memberof MarginAccountNewOtocoResponse
      */
     orderListId?: number | bigint;
     /**
-     *
+     * contingency Type.
      * @type {string}
      * @memberof MarginAccountNewOtocoResponse
      */
     contingencyType?: string;
     /**
-     *
+     * list Status Type.
      * @type {string}
      * @memberof MarginAccountNewOtocoResponse
      */
     listStatusType?: string;
     /**
-     *
+     * list Order Status.
      * @type {string}
      * @memberof MarginAccountNewOtocoResponse
      */
     listOrderStatus?: string;
     /**
-     *
+     * list Client Order Id.
      * @type {string}
      * @memberof MarginAccountNewOtocoResponse
      */
     listClientOrderId?: string;
     /**
-     *
+     * transaction Time.
      * @type {number | bigint}
      * @memberof MarginAccountNewOtocoResponse
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof MarginAccountNewOtocoResponse
      */
     symbol?: string;
     /**
-     *
+     * is Isolated.
      * @type {boolean}
      * @memberof MarginAccountNewOtocoResponse
      */
     isIsolated?: boolean;
     /**
-     *
+     * orders list.
      * @type {Array<MarginAccountNewOtocoResponseOrdersInner>}
      * @memberof MarginAccountNewOtocoResponse
      */
     orders?: Array<MarginAccountNewOtocoResponseOrdersInner>;
     /**
-     *
+     * order Reports list.
      * @type {Array<MarginAccountNewOtocoResponseOrderReportsInner>}
      * @memberof MarginAccountNewOtocoResponse
      */

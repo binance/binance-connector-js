@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,13 +25,13 @@ import type { GetCrossMarginTransferHistoryResponseRowsInner } from './get-cross
  */
 export interface GetCrossMarginTransferHistoryResponse {
     /**
-     *
+     * rows list.
      * @type {Array<GetCrossMarginTransferHistoryResponseRowsInner>}
      * @memberof GetCrossMarginTransferHistoryResponse
      */
     rows?: Array<GetCrossMarginTransferHistoryResponseRowsInner>;
     /**
-     *
+     * total.
      * @type {number | bigint}
      * @memberof GetCrossMarginTransferHistoryResponse
      */

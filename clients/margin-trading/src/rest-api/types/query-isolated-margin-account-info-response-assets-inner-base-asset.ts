@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,67 +14,67 @@
  */
 
 /**
- *
+ * base Asset object.
  * @export
  * @interface QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
  */
 export interface QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset {
     /**
-     *
+     * asset.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     asset?: string;
     /**
-     *
+     * borrow Enabled.
      * @type {boolean}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     borrowEnabled?: boolean;
     /**
-     *
+     * borrowed.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     borrowed?: string;
     /**
-     *
+     * free.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     free?: string;
     /**
-     *
+     * interest.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     interest?: string;
     /**
-     *
+     * locked.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     locked?: string;
     /**
-     *
+     * net Asset.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     netAsset?: string;
     /**
-     *
+     * net Asset Of Btc.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     netAssetOfBtc?: string;
     /**
-     *
+     * repay Enabled.
      * @type {boolean}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     repayEnabled?: boolean;
     /**
-     *
+     * total Asset.
      * @type {string}
      * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */

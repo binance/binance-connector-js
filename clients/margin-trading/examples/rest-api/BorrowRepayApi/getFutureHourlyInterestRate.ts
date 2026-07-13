@@ -1,4 +1,8 @@
-import { MarginTrading, MARGIN_TRADING_REST_API_PROD_URL } from '../../../src';
+import {
+    MarginTrading,
+    MarginTradingRestAPI,
+    MARGIN_TRADING_REST_API_PROD_URL,
+} from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,8 +14,8 @@ const client = new MarginTrading({ configurationRestAPI });
 async function getFutureHourlyInterestRate() {
     try {
         const response = await client.restAPI.getFutureHourlyInterestRate({
-            assets: 'assets_example',
-            isIsolated: false,
+            assets: 'BTC,ETH',
+            isIsolated: MarginTradingRestAPI.GetFutureHourlyInterestRateIsIsolatedEnum.TRUE,
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,61 +20,61 @@
  */
 export interface GetForceLiquidationRecordResponseRowsInner {
     /**
-     *
+     * avg Price.
      * @type {string}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     avgPrice?: string;
     /**
-     *
+     * executed Qty.
      * @type {string}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     executedQty?: string;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     price?: string;
     /**
-     *
+     * qty.
      * @type {string}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     qty?: string;
     /**
-     *
+     * side.
      * @type {string}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     side?: string;
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     symbol?: string;
     /**
-     *
+     * time In Force.
      * @type {string}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     timeInForce?: string;
     /**
-     *
+     * is Isolated.
      * @type {boolean}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
     isIsolated?: boolean;
     /**
-     *
+     * updated Time.
      * @type {number | bigint}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Margin Trading REST API
+ * Margin REST API
  *
- * OpenAPI Specification for the Binance Margin Trading REST API
+ * Access account information, borrow and repay assets, and trade with Binance Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -43,7 +42,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Cross margin collateral ratio
          *
-         * Weight: 100(IP)
+         * Weight(IP): 100
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Cross margin collateral ratio (MARKET_DATA)
          *
@@ -69,10 +70,12 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get All Cross Margin Pairs
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Get All Cross Margin Pairs (MARKET_DATA)
-         * @param {string} [symbol] isolated margin pair
+         * @param {string} [symbol]
          *
          * @throws {RequiredError}
          */
@@ -100,11 +103,13 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get All Isolated Margin Symbol
          *
-         * Weight: 10(IP)
+         * Weight(IP): 10
          *
-         * @summary Get All Isolated Margin Symbol(MARKET_DATA)
-         * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * Security Type: MARKET_DATA
+         *
+         * @summary Get All Isolated Margin Symbol (MARKET_DATA)
+         * @param {string} [symbol]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -138,7 +143,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get All Margin Assets.
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Get All Margin Assets (MARKET_DATA)
          * @param {string} [asset]
@@ -169,10 +176,12 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get tokens or symbols delist schedule for cross margin and isolated margin
          *
-         * Weight: 100
+         * Weight(IP): 100
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Get Delist Schedule (MARKET_DATA)
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -199,15 +208,28 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         },
         /**
          * Query trading pairs with restriction on limit price range.
-         * In margin trading, you can place orders with limit price. Limit price should be within (-15%, 15%) of current index price for a list of margin trading pairs. This rule only impacts limit sell orders with limit price that is lower than current index price and limit buy orders with limit price that is higher than current index price.
          *
-         * - Buy order: Your order will be rejected with an error message notification if the limit price is 15% above the index price.
-         * - Sell order: Your order will be rejected with an error message notification if the limit price is 15% below the index price.
-         * Please review the limit price order placing strategy, backtest and calibrate the planned order size with the trading volume and order book depth to prevent trading loss.
+         * In margin trading, you can place orders with limit price. Limit price
+         * should be within (-15%, 15%) of current index price for a list of margin
+         * trading pairs. This rule only impacts limit sell orders with limit price
+         * that is lower than current index price and limit buy orders with limit
+         * price that is higher than current index price.
          *
-         * Weight: 1
+         * - Buy order: Your order will be rejected with an error message
+         * notification if the limit price is 15% above the index price.
          *
-         * @summary Get Limit Price Pairs(MARKET_DATA)
+         * - Sell order: Your order will be rejected with an error message
+         * notification if the limit price is 15% below the index price.
+         *
+         * Please review the limit price order placing strategy, backtest and
+         * calibrate the planned order size with the trading volume and order book
+         * depth to prevent trading loss.
+         *
+         * Weight(IP): 1
+         *
+         * Security Type: MARKET_DATA
+         *
+         * @summary Get Limit Price Pairs (MARKET_DATA)
          *
          * @throws {RequiredError}
          */
@@ -231,10 +253,12 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get the upcoming tokens or symbols listing schedule for Cross Margin and Isolated Margin.
          *
-         * Weight: 100
+         * Weight(IP): 100
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Get list Schedule (MARKET_DATA)
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -262,7 +286,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Margin Asset Risk-Based Liquidation Ratio
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Get Margin Asset Risk-Based Liquidation Ratio (MARKET_DATA)
          *
@@ -286,9 +312,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Get Margin Restricted Assets
+         * Get the list of margin-restricted assets.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Get Margin Restricted Assets (MARKET_DATA)
          *
@@ -314,12 +342,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get isolated margin tier data collection with any tier as https://www.binance.com/en/margin-data
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Isolated Margin Tier Data (USER_DATA)
          * @param {string} symbol
-         * @param {number | bigint} [tier] All margin tier data will be returned if tier is omitted
-         * @param {number | bigint} [recvWindow] No more than 60000
+         * @param {number | bigint} [tier]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -360,9 +390,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Liability Coin Leverage Bracket in Cross Margin Pro Mode
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Query Liability Coin Leverage Bracket in Cross Margin Pro Mode(MARKET_DATA)
+         * Security Type: MARKET_DATA
+         *
+         * @summary Query Liability Coin Leverage Bracket in Cross Margin Pro Mode (MARKET_DATA)
          *
          * @throws {RequiredError}
          */
@@ -386,14 +418,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Margin available Inventory query
          *
-         * Weight: 50
+         * Weight(UID): 50
          *
-         * @summary Query Margin Available Inventory(USER_DATA)
-         * @param {string} type `MARGIN`,`ISOLATED`
+         * Security Type: USER_DATA
+         *
+         * @summary Query Margin Available Inventory (USER_DATA)
+         * @param {QueryMarginAvailableInventoryTypeEnum} type
          *
          * @throws {RequiredError}
          */
-        queryMarginAvailableInventory: async (type: string): Promise<RequestArgs> => {
+        queryMarginAvailableInventory: async (
+            type: QueryMarginAvailableInventoryTypeEnum
+        ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('queryMarginAvailableInventory', 'type', type);
 
@@ -420,7 +456,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query Margin PriceIndex
          *
-         * Weight: 10(IP)
+         * Weight(IP): 10
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Query Margin PriceIndex (MARKET_DATA)
          * @param {string} symbol
@@ -462,7 +500,9 @@ export interface MarketDataApiInterface {
     /**
      * Cross margin collateral ratio
      *
-     * Weight: 100(IP)
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Cross margin collateral ratio (MARKET_DATA)
      *
@@ -473,7 +513,9 @@ export interface MarketDataApiInterface {
     /**
      * Get All Cross Margin Pairs
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get All Cross Margin Pairs (MARKET_DATA)
      * @param {GetAllCrossMarginPairsRequest} requestParameters Request parameters.
@@ -487,9 +529,11 @@ export interface MarketDataApiInterface {
     /**
      * Get All Isolated Margin Symbol
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
      *
-     * @summary Get All Isolated Margin Symbol(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get All Isolated Margin Symbol (MARKET_DATA)
      * @param {GetAllIsolatedMarginSymbolRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -501,7 +545,9 @@ export interface MarketDataApiInterface {
     /**
      * Get All Margin Assets.
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get All Margin Assets (MARKET_DATA)
      * @param {GetAllMarginAssetsRequest} requestParameters Request parameters.
@@ -515,7 +561,9 @@ export interface MarketDataApiInterface {
     /**
      * Get tokens or symbols delist schedule for cross margin and isolated margin
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Delist Schedule (MARKET_DATA)
      * @param {GetDelistScheduleRequest} requestParameters Request parameters.
@@ -528,15 +576,28 @@ export interface MarketDataApiInterface {
     ): Promise<RestApiResponse<GetDelistScheduleResponse>>;
     /**
      * Query trading pairs with restriction on limit price range.
-     * In margin trading, you can place orders with limit price. Limit price should be within (-15%, 15%) of current index price for a list of margin trading pairs. This rule only impacts limit sell orders with limit price that is lower than current index price and limit buy orders with limit price that is higher than current index price.
      *
-     * - Buy order: Your order will be rejected with an error message notification if the limit price is 15% above the index price.
-     * - Sell order: Your order will be rejected with an error message notification if the limit price is 15% below the index price.
-     * Please review the limit price order placing strategy, backtest and calibrate the planned order size with the trading volume and order book depth to prevent trading loss.
+     * In margin trading, you can place orders with limit price. Limit price
+     * should be within (-15%, 15%) of current index price for a list of margin
+     * trading pairs. This rule only impacts limit sell orders with limit price
+     * that is lower than current index price and limit buy orders with limit
+     * price that is higher than current index price.
      *
-     * Weight: 1
+     * - Buy order: Your order will be rejected with an error message
+     * notification if the limit price is 15% above the index price.
      *
-     * @summary Get Limit Price Pairs(MARKET_DATA)
+     * - Sell order: Your order will be rejected with an error message
+     * notification if the limit price is 15% below the index price.
+     *
+     * Please review the limit price order placing strategy, backtest and
+     * calibrate the planned order size with the trading volume and order book
+     * depth to prevent trading loss.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Limit Price Pairs (MARKET_DATA)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApiInterface
@@ -545,7 +606,9 @@ export interface MarketDataApiInterface {
     /**
      * Get the upcoming tokens or symbols listing schedule for Cross Margin and Isolated Margin.
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get list Schedule (MARKET_DATA)
      * @param {GetListScheduleRequest} requestParameters Request parameters.
@@ -559,7 +622,9 @@ export interface MarketDataApiInterface {
     /**
      * Get Margin Asset Risk-Based Liquidation Ratio
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Margin Asset Risk-Based Liquidation Ratio (MARKET_DATA)
      *
@@ -570,9 +635,11 @@ export interface MarketDataApiInterface {
         RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>
     >;
     /**
-     * Get Margin Restricted Assets
+     * Get the list of margin-restricted assets.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Margin Restricted Assets (MARKET_DATA)
      *
@@ -583,7 +650,9 @@ export interface MarketDataApiInterface {
     /**
      * Get isolated margin tier data collection with any tier as https://www.binance.com/en/margin-data
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Isolated Margin Tier Data (USER_DATA)
      * @param {QueryIsolatedMarginTierDataRequest} requestParameters Request parameters.
@@ -597,9 +666,11 @@ export interface MarketDataApiInterface {
     /**
      * Liability Coin Leverage Bracket in Cross Margin Pro Mode
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Liability Coin Leverage Bracket in Cross Margin Pro Mode(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Query Liability Coin Leverage Bracket in Cross Margin Pro Mode (MARKET_DATA)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApiInterface
@@ -610,9 +681,11 @@ export interface MarketDataApiInterface {
     /**
      * Margin available Inventory query
      *
-     * Weight: 50
+     * Weight(UID): 50
      *
-     * @summary Query Margin Available Inventory(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Margin Available Inventory (USER_DATA)
      * @param {QueryMarginAvailableInventoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -624,7 +697,9 @@ export interface MarketDataApiInterface {
     /**
      * Query Margin PriceIndex
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Query Margin PriceIndex (MARKET_DATA)
      * @param {QueryMarginPriceindexRequest} requestParameters Request parameters.
@@ -643,7 +718,7 @@ export interface MarketDataApiInterface {
  */
 export interface GetAllCrossMarginPairsRequest {
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof MarketDataApiGetAllCrossMarginPairs
      */
@@ -656,14 +731,14 @@ export interface GetAllCrossMarginPairsRequest {
  */
 export interface GetAllIsolatedMarginSymbolRequest {
     /**
-     * isolated margin pair
+     *
      * @type {string}
      * @memberof MarketDataApiGetAllIsolatedMarginSymbol
      */
     readonly symbol?: string;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof MarketDataApiGetAllIsolatedMarginSymbol
      */
@@ -689,7 +764,7 @@ export interface GetAllMarginAssetsRequest {
  */
 export interface GetDelistScheduleRequest {
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof MarketDataApiGetDelistSchedule
      */
@@ -702,7 +777,7 @@ export interface GetDelistScheduleRequest {
  */
 export interface GetListScheduleRequest {
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof MarketDataApiGetListSchedule
      */
@@ -722,14 +797,14 @@ export interface QueryIsolatedMarginTierDataRequest {
     readonly symbol: string;
 
     /**
-     * All margin tier data will be returned if tier is omitted
+     *
      * @type {number | bigint}
      * @memberof MarketDataApiQueryIsolatedMarginTierData
      */
     readonly tier?: number | bigint;
 
     /**
-     * No more than 60000
+     *
      * @type {number | bigint}
      * @memberof MarketDataApiQueryIsolatedMarginTierData
      */
@@ -742,11 +817,11 @@ export interface QueryIsolatedMarginTierDataRequest {
  */
 export interface QueryMarginAvailableInventoryRequest {
     /**
-     * `MARGIN`,`ISOLATED`
-     * @type {string}
+     *
+     * @type {'MARGIN' | 'ISOLATED'}
      * @memberof MarketDataApiQueryMarginAvailableInventory
      */
-    readonly type: string;
+    readonly type: QueryMarginAvailableInventoryTypeEnum;
 }
 
 /**
@@ -778,13 +853,15 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Cross margin collateral ratio
      *
-     * Weight: 100(IP)
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Cross margin collateral ratio (MARKET_DATA)
      * @returns {Promise<RestApiResponse<CrossMarginCollateralRatioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Cross-margin-collateral-ratio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#cross-margin-collateral-ratio Binance API Documentation}
      */
     public async crossMarginCollateralRatio(): Promise<
         RestApiResponse<CrossMarginCollateralRatioResponse>
@@ -805,14 +882,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get All Cross Margin Pairs
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get All Cross Margin Pairs (MARKET_DATA)
      * @param {GetAllCrossMarginPairsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetAllCrossMarginPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-All-Cross-Margin-Pairs Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#get-all-cross-margin-pairs Binance API Documentation}
      */
     public async getAllCrossMarginPairs(
         requestParameters: GetAllCrossMarginPairsRequest = {}
@@ -835,14 +914,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get All Isolated Margin Symbol
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
      *
-     * @summary Get All Isolated Margin Symbol(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get All Isolated Margin Symbol (MARKET_DATA)
      * @param {GetAllIsolatedMarginSymbolRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetAllIsolatedMarginSymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-All-Isolated-Margin-Symbol Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#get-all-isolated-margin-symbol Binance API Documentation}
      */
     public async getAllIsolatedMarginSymbol(
         requestParameters: GetAllIsolatedMarginSymbolRequest = {}
@@ -866,14 +947,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get All Margin Assets.
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get All Margin Assets (MARKET_DATA)
      * @param {GetAllMarginAssetsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetAllMarginAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-All-Margin-Assets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#get-all-margin-assets Binance API Documentation}
      */
     public async getAllMarginAssets(
         requestParameters: GetAllMarginAssetsRequest = {}
@@ -896,14 +979,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get tokens or symbols delist schedule for cross margin and isolated margin
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Delist Schedule (MARKET_DATA)
      * @param {GetDelistScheduleRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDelistScheduleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Delist-Schedule Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#get-delist-schedule Binance API Documentation}
      */
     public async getDelistSchedule(
         requestParameters: GetDelistScheduleRequest = {}
@@ -925,19 +1010,32 @@ export class MarketDataApi implements MarketDataApiInterface {
 
     /**
      * Query trading pairs with restriction on limit price range.
-     * In margin trading, you can place orders with limit price. Limit price should be within (-15%, 15%) of current index price for a list of margin trading pairs. This rule only impacts limit sell orders with limit price that is lower than current index price and limit buy orders with limit price that is higher than current index price.
      *
-     * - Buy order: Your order will be rejected with an error message notification if the limit price is 15% above the index price.
-     * - Sell order: Your order will be rejected with an error message notification if the limit price is 15% below the index price.
-     * Please review the limit price order placing strategy, backtest and calibrate the planned order size with the trading volume and order book depth to prevent trading loss.
+     * In margin trading, you can place orders with limit price. Limit price
+     * should be within (-15%, 15%) of current index price for a list of margin
+     * trading pairs. This rule only impacts limit sell orders with limit price
+     * that is lower than current index price and limit buy orders with limit
+     * price that is higher than current index price.
      *
-     * Weight: 1
+     * - Buy order: Your order will be rejected with an error message
+     * notification if the limit price is 15% above the index price.
      *
-     * @summary Get Limit Price Pairs(MARKET_DATA)
+     * - Sell order: Your order will be rejected with an error message
+     * notification if the limit price is 15% below the index price.
+     *
+     * Please review the limit price order placing strategy, backtest and
+     * calibrate the planned order size with the trading volume and order book
+     * depth to prevent trading loss.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Limit Price Pairs (MARKET_DATA)
      * @returns {Promise<RestApiResponse<GetLimitPricePairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Limit-Price-Pairs Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#get-limit-price-pairs Binance API Documentation}
      */
     public async getLimitPricePairs(): Promise<RestApiResponse<GetLimitPricePairsResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getLimitPricePairs();
@@ -956,14 +1054,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get the upcoming tokens or symbols listing schedule for Cross Margin and Isolated Margin.
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get list Schedule (MARKET_DATA)
      * @param {GetListScheduleRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetListScheduleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-list-Schedule Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#get-list-schedule Binance API Documentation}
      */
     public async getListSchedule(
         requestParameters: GetListScheduleRequest = {}
@@ -986,13 +1086,15 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get Margin Asset Risk-Based Liquidation Ratio
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Margin Asset Risk-Based Liquidation Ratio (MARKET_DATA)
      * @returns {Promise<RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Margin-Asset-Risk-Based-Liquidation-Ratio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#get-margin-asset-risk-based-liquidation-ratio Binance API Documentation}
      */
     public async getMarginAssetRiskBasedLiquidationRatio(): Promise<
         RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>
@@ -1012,15 +1114,17 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Get Margin Restricted Assets
+     * Get the list of margin-restricted assets.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Margin Restricted Assets (MARKET_DATA)
      * @returns {Promise<RestApiResponse<GetMarginRestrictedAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Margin-Restricted-Assets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#get-margin-restricted-assets Binance API Documentation}
      */
     public async getMarginRestrictedAssets(): Promise<
         RestApiResponse<GetMarginRestrictedAssetsResponse>
@@ -1041,14 +1145,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get isolated margin tier data collection with any tier as https://www.binance.com/en/margin-data
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Isolated Margin Tier Data (USER_DATA)
      * @param {QueryIsolatedMarginTierDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryIsolatedMarginTierDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Query-Isolated-Margin-Tier-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#query-isolated-margin-tier-data Binance API Documentation}
      */
     public async queryIsolatedMarginTierData(
         requestParameters: QueryIsolatedMarginTierDataRequest
@@ -1073,13 +1179,15 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Liability Coin Leverage Bracket in Cross Margin Pro Mode
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Liability Coin Leverage Bracket in Cross Margin Pro Mode(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Query Liability Coin Leverage Bracket in Cross Margin Pro Mode (MARKET_DATA)
      * @returns {Promise<RestApiResponse<QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Query-Liability-Coin-Leverage-Bracket-in-Cross-Margin-Pro-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#query-liability-coin-leverage-bracket-in-cross-margin-pro-mode Binance API Documentation}
      */
     public async queryLiabilityCoinLeverageBracketInCrossMarginProMode(): Promise<
         RestApiResponse<QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse>
@@ -1101,14 +1209,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Margin available Inventory query
      *
-     * Weight: 50
+     * Weight(UID): 50
      *
-     * @summary Query Margin Available Inventory(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Margin Available Inventory (USER_DATA)
      * @param {QueryMarginAvailableInventoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAvailableInventoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Query-margin-avaliable-inventory Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#query-margin-available-inventory Binance API Documentation}
      */
     public async queryMarginAvailableInventory(
         requestParameters: QueryMarginAvailableInventoryRequest
@@ -1132,14 +1242,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query Margin PriceIndex
      *
-     * Weight: 10(IP)
+     * Weight(IP): 10
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Query Margin PriceIndex (MARKET_DATA)
      * @param {QueryMarginPriceindexRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginPriceindexResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Query-Margin-PriceIndex Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/market-data#query-margin-priceindex Binance API Documentation}
      */
     public async queryMarginPriceindex(
         requestParameters: QueryMarginPriceindexRequest
@@ -1158,4 +1270,9 @@ export class MarketDataApi implements MarketDataApiInterface {
             { isSigned: false }
         );
     }
+}
+
+export enum QueryMarginAvailableInventoryTypeEnum {
+    MARGIN = 'MARGIN',
+    ISOLATED = 'ISOLATED',
 }
