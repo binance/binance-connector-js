@@ -3,7 +3,7 @@
 /**
  * Binance Pay REST API
  *
- * OpenAPI Specification for the Binance Pay REST API
+ * Query Binance Pay transaction history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface GetPayTradeHistoryResponseDataInnerPayerInfo {
     /**
-     *
+     * Nickname or merchant name.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInnerPayerInfo
      */
     name?: string;
     /**
-     *
+     * Account type: USER for personal, MERCHANT for merchant.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInnerPayerInfo
      */
     type?: string;
     /**
-     *
+     * Binance UID.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInnerPayerInfo
      */

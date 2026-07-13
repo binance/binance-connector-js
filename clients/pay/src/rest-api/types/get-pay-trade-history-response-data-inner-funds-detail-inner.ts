@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Pay REST API
  *
- * OpenAPI Specification for the Binance Pay REST API
+ * Query Binance Pay transaction history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,10 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetPayTradeHistoryResponseDataInnerFundsDetailInnerWalletAssetCost } from './get-pay-trade-history-response-data-inner-funds-detail-inner-wallet-asset-cost';
-
 /**
  *
  * @export
@@ -25,21 +20,21 @@ import type { GetPayTradeHistoryResponseDataInnerFundsDetailInnerWalletAssetCost
  */
 export interface GetPayTradeHistoryResponseDataInnerFundsDetailInner {
     /**
-     *
+     * Asset.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInnerFundsDetailInner
      */
     currency?: string;
     /**
-     *
+     * Asset amount.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInnerFundsDetailInner
      */
     amount?: string;
     /**
-     *
-     * @type {GetPayTradeHistoryResponseDataInnerFundsDetailInnerWalletAssetCost}
+     * Asset cost details per wallet type. Keys are wallet type IDs (e.g. \"1\", \"2\"), values are cost amounts.
+     * @type {{ [key: string]: string | undefined; }}
      * @memberof GetPayTradeHistoryResponseDataInnerFundsDetailInner
      */
-    walletAssetCost?: GetPayTradeHistoryResponseDataInnerFundsDetailInnerWalletAssetCost;
+    walletAssetCost?: { [key: string]: string | undefined };
 }

@@ -3,7 +3,7 @@
 /**
  * Binance Pay REST API
  *
- * OpenAPI Specification for the Binance Pay REST API
+ * Query Binance Pay transaction history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,25 +14,25 @@
  */
 
 /**
- *
+ * Extension fields.
  * @export
  * @interface GetPayTradeHistoryResponseDataInnerReceiverInfoExtend
  */
 export interface GetPayTradeHistoryResponseDataInnerReceiverInfoExtend {
     /**
-     *
+     * Bank name or digital wallet name.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInnerReceiverInfoExtend
      */
     institutionName?: string;
     /**
-     *
+     * Card number.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInnerReceiverInfoExtend
      */
     cardNumber?: string;
     /**
-     *
+     * Digital wallet ID.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInnerReceiverInfoExtend
      */

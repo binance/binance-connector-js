@@ -1,7 +1,7 @@
 /**
  * Binance Pay REST API
  *
- * OpenAPI Specification for the Binance Pay REST API
+ * Query Binance Pay transaction history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,12 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { PayApi } from '../../../src/rest-api';
+import { Api } from '../../../src/rest-api';
 import { GetPayTradeHistoryRequest } from '../../../src/rest-api';
 import type { GetPayTradeHistoryResponse } from '../../../src/rest-api/types';
 
-describe('PayApi', () => {
-    let client: PayApi;
+describe('Api', () => {
+    let client: Api;
     let config: ConfigurationRestAPI;
     let mockResponse: object = {};
 
@@ -30,7 +30,7 @@ describe('PayApi', () => {
             apiSecret: 'test-api-secret',
             basePath: '',
         });
-        client = new PayApi(config);
+        client = new Api(config);
     });
 
     describe('getPayTradeHistory()', () => {
@@ -47,17 +47,12 @@ describe('PayApi', () => {
                             amount: '23.72469206',
                             currency: 'BNB',
                             walletType: 1,
-                            walletTypes: [1, 2],
+                            walletTypes: [1],
                             fundsDetail: [
                                 {
                                     currency: 'USDT',
                                     amount: '1.2',
                                     walletAssetCost: { '1': '0.6', '2': '0.6' },
-                                },
-                                {
-                                    currency: 'ETH',
-                                    amount: '0.0001',
-                                    walletAssetCost: { '1': '0.00005', '2': '0.00005' },
                                 },
                             ],
                             payerInfo: { name: 'Jack', type: 'USER', binanceId: '12345678' },
@@ -116,17 +111,12 @@ describe('PayApi', () => {
                             amount: '23.72469206',
                             currency: 'BNB',
                             walletType: 1,
-                            walletTypes: [1, 2],
+                            walletTypes: [1],
                             fundsDetail: [
                                 {
                                     currency: 'USDT',
                                     amount: '1.2',
                                     walletAssetCost: { '1': '0.6', '2': '0.6' },
-                                },
-                                {
-                                    currency: 'ETH',
-                                    amount: '0.0001',
-                                    walletAssetCost: { '1': '0.00005', '2': '0.00005' },
                                 },
                             ],
                             payerInfo: { name: 'Jack', type: 'USER', binanceId: '12345678' },

@@ -1,7 +1,7 @@
 /**
  * Binance Pay REST API
  *
- * OpenAPI Specification for the Binance Pay REST API
+ * Query Binance Pay transaction history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -12,19 +12,19 @@
  */
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
-import { PayApi } from './modules/pay-api';
+import { Api } from './modules/api';
 
-import type { GetPayTradeHistoryRequest } from './modules/pay-api';
+import type { GetPayTradeHistoryRequest } from './modules/api';
 
 import type { GetPayTradeHistoryResponse } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
-    private payApi: PayApi;
+    private api: Api;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.payApi = new PayApi(configuration);
+        this.api = new Api(configuration);
     }
 
     /**
@@ -83,59 +83,36 @@ export class RestAPI {
     /**
      * Get Pay Trade History
      *
-     * If startTime and endTime are not sent, the recent 90 days' data will be returned.
-     * The max interval between startTime and endTime is 90 days.
-     * Support for querying orders within the last 18 months.
-     * For payerInfo and receiverInfo，there are different return values in different orderTypes.
-     * Sender's perspective when orderType is C2C
-     * payerInfo : binanceId
-     * receiverInfo : name, binanceId/accountId/email/countryCode/phoneNumber/mobileCode (based on user input)
-     * Receiver's perspective when orderType is C2C
-     * payerInfo : name
-     * receiverInfo : binanceId
-     * Sender's perspective when orderType is CRYPTO_BOX
-     * payerInfo : binanceId
-     * receiverInfo : name(the value is always "Crypto Box")
-     * Receiver's perspective when orderType is CRYPTO_BOX
-     * payerInfo : name
-     * receiverInfo : binanceId
-     * Sender's perspective when orderType is PAY
-     * payerInfo : binanceId
-     * receiverInfo : name
-     * Receiver's perspective when orderType is PAY
-     * payerInfo : name
-     * receiverInfo : binanceId, name
-     * Sender's perspective when orderType is PAY_REFUND
-     * payerInfo : binanceId, name
-     * receiverInfo : name, accountId
-     * Receiver's perspective when orderType is PAY_REFUND
-     * payerInfo : name
-     * receiverInfo :  binanceId
-     * Sender's perspective when orderType is PAYOUT
-     * payerInfo : binanceId, name
-     * receiverInfo : name, accountId
-     * Receiver's perspective when orderType is PAYOUT
-     * payerInfo : name
-     * receiverInfo :  binanceId
-     * Receiver's perspective when orderType is CRYPTO_BOX_RF
-     * payerInfo : name(the value is always "Crypto Box")
-     * receiverInfo : binanceId
-     * Sender's perspective when orderType is REMITTANCE
-     * payerInfo : binanceId
-     * receiverInfo : name, institutionName, cardNumber, digitalWalletId
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the recent 90 days' data will be returned.
+     * - The max interval between `startTime` and `endTime` is 90 days.
+     * - Support for querying orders within the last 18 months.
+     * - `payerInfo` and `receiverInfo` return different fields in different `orderType` values:
+     * - C2C sender: `payerInfo=binanceId`; `receiverInfo=name, binanceId/accountId/email/countryCode/phoneNumber/mobileCode` (based on user input).
+     * - C2C receiver: `payerInfo=name`; `receiverInfo=binanceId`.
+     * - CRYPTO_BOX sender: `payerInfo=binanceId`; `receiverInfo=name` (always `"Crypto Box"`).
+     * - CRYPTO_BOX receiver: `payerInfo=name`; `receiverInfo=binanceId`.
+     * - PAY sender: `payerInfo=binanceId`; `receiverInfo=name`.
+     * - PAY receiver: `payerInfo=name`; `receiverInfo=binanceId, name`.
+     * - PAY_REFUND sender: `payerInfo=binanceId, name`; `receiverInfo=name, accountId`.
+     * - PAY_REFUND receiver: `payerInfo=name`; `receiverInfo=binanceId`.
+     * - PAYOUT sender: `payerInfo=binanceId, name`; `receiverInfo=name, accountId`.
+     * - PAYOUT receiver: `payerInfo=name`; `receiverInfo=binanceId`.
+     * - CRYPTO_BOX_RF receiver: `payerInfo=name` (always `"Crypto Box"`); `receiverInfo=binanceId`.
+     * - REMITTANCE sender: `payerInfo=binanceId`; `receiverInfo=name, institutionName, cardNumber, digitalWalletId`.
      *
      * @summary Get Pay Trade History
      * @param {GetPayTradeHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPayTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/pay/rest-api/Get-Pay-Trade-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-pay/api/rest-api/~#get-pay-trade-history Binance API Documentation}
      */
     getPayTradeHistory(
         requestParameters: GetPayTradeHistoryRequest = {}
     ): Promise<RestApiResponse<GetPayTradeHistoryResponse>> {
-        return this.payApi.getPayTradeHistory(requestParameters);
+        return this.api.getPayTradeHistory(requestParameters);
     }
 }

@@ -4,7 +4,7 @@
 /**
  * Binance Pay REST API
  *
- * OpenAPI Specification for the Binance Pay REST API
+ * Query Binance Pay transaction history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,49 +31,49 @@ import type { GetPayTradeHistoryResponseDataInnerReceiverInfo } from './get-pay-
  */
 export interface GetPayTradeHistoryResponseDataInner {
     /**
-     *
+     * Order type. Enum: PAY, PAY_REFUND, C2C, CRYPTO_BOX, CRYPTO_BOX_RF, C2C_HOLDING, C2C_HOLDING_RF, PAYOUT, REMITTANCE.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
     orderType?: string;
     /**
-     *
+     * Transaction ID.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
     transactionId?: string;
     /**
-     *
+     * Trade timestamp.
      * @type {number | bigint}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * Order amount (up to 8 decimal places). Positive means income; negative means expenditure.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
     amount?: string;
     /**
-     *
+     * Order asset.
      * @type {string}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
     currency?: string;
     /**
-     *
+     * Main wallet type: 1=funding wallet, 2=spot wallet, 3=fiat wallet, 4 or 6=card payment, 5=earn wallet.
      * @type {number | bigint}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
     walletType?: number | bigint;
     /**
-     *
+     * Array format of wallet types. Multiple values may appear for combined payments.
      * @type {Array<number>}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
     walletTypes?: Array<number>;
     /**
-     *
+     * Funds usage details.
      * @type {Array<GetPayTradeHistoryResponseDataInnerFundsDetailInner>}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
