@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -44,12 +43,15 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Submit a withdrawal request for brokers of local entities that required travel rule.
          *
-         * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
-         * You can get `network` in `networkList` of a coin in the response
-         * Questionnaire is different for each local entity, please refer to
-         * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+         * Weight(UID): 600
          *
-         * Weight: 600
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+         * - You can get `network` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+         * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
+         * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
          *
          * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
          * @param {string} address
@@ -58,12 +60,13 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} withdrawOrderId withdrawID defined by the client (i.e. client's internal withdrawID)
          * @param {string} questionnaire JSON format questionnaire answers.
          * @param {string} originatorPii JSON format originator Pii, see StandardPii section below
-         * @param {string} signature Must be the last parameter.
          * @param {string} [addressTag] Secondary address identifier for coins like XRP,XMR etc.
          * @param {string} [network]
          * @param {string} [addressName] Description of the address. Address book cap is 200, space in name should be encoded into `%20`
-         * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
-         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+         * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for
+         * returning the fee back to the departure account. Default `false`.
+         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current
+         * "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
          *
          * @throws {RequiredError}
          */
@@ -74,7 +77,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             withdrawOrderId: string,
             questionnaire: string,
             originatorPii: string,
-            signature: string,
             addressTag?: string,
             network?: string,
             addressName?: string,
@@ -93,8 +95,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('brokerWithdraw', 'questionnaire', questionnaire);
             // verify required parameter 'originatorPii' is not null or undefined
             assertParamExists('brokerWithdraw', 'originatorPii', originatorPii);
-            // verify required parameter 'signature' is not null or undefined
-            assertParamExists('brokerWithdraw', 'signature', signature);
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
@@ -133,9 +133,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             if (originatorPii !== undefined && originatorPii !== null) {
                 localVarQueryParameter['originatorPii'] = originatorPii;
             }
-            if (signature !== undefined && signature !== null) {
-                localVarQueryParameter['signature'] = signature;
-            }
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -150,9 +147,12 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
+         * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current
+         * API key.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -185,24 +185,27 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetch deposit history for local entities that required travel rule.
          *
-         * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-         * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
-         * Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Deposit History (for local entities that required travel rule) (supporting network) (USER_DATA)
+         * Notes:
+         * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+         * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
+         * - Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+         *
+         * @summary Deposit History Travel Rule (for local entities that required travel rule) (supporting network) (USER_DATA)
          * @param {string} [trId] Comma(,) separated list of travel rule record Ids.
-         * @param {string} [txId]
+         * @param {string} [txId] Comma(,) separated list of transaction Ids.
          * @param {string} [tranId] Comma(,) separated list of wallet tran Ids.
          * @param {string} [network]
          * @param {string} [coin]
          * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
          * @param {boolean} [pendingQuestionnaire] true: Only return records that pending deposit questionnaire. false/not provided: return all records.
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [startTime] Default: 90 days from current timestamp
+         * @param {number | bigint} [endTime] Default: present timestamp
          * @param {number | bigint} [offset] Default: 0
-         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [limit]
          *
          * @throws {RequiredError}
          */
@@ -272,27 +275,30 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetch deposit history for local entities that with required travel rule information.
          *
-         * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-         * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
-         * Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+         * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
+         * - Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
          *
          * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
-         * @param {string} [depositId] Comma(,) separated list of wallet tran Ids.
-         * @param {string} [txId]
+         * @param {number | bigint} [depositId] Comma(,) separated list of wallet tran Ids.
+         * @param {string} [txId] Comma(,) separated list of transaction Ids.
          * @param {string} [network]
          * @param {string} [coin]
          * @param {boolean} [retrieveQuestionnaire] true: return `questionnaire` within response.
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [offset] Default: 0
-         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [startTime] Default: 90 days from current timestamp
+         * @param {number | bigint} [endTime] Default: present timestamp
+         * @param {number | bigint} [offset]
+         * @param {number | bigint} [limit]
          *
          * @throws {RequiredError}
          */
         depositHistoryV2: async (
-            depositId?: string,
+            depositId?: number | bigint,
             txId?: string,
             network?: string,
             coin?: string,
@@ -347,9 +353,12 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Fetch address verification list for user to check on status and other details for the addresses stored in Address Book.
+         * Fetch address verification list for user to check on status and other details for the addresses stored in
+         * Address Book.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Fetch address verification list (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -382,16 +391,23 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Country List (USER_DATA)
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getCountryList: async (): Promise<RequestArgs> => {
+        getCountryList: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -408,14 +424,20 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query the active region/city list for a given country. Currently, only supports AU entity.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Region List (USER_DATA)
-         * @param {string} countryCode ISO 2-digit country code (from `Country List` API).
+         * @param {string} countryCode ISO 2-digit country code (from Country List API).
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getRegionList: async (countryCode: string): Promise<RequestArgs> => {
+        getRegionList: async (
+            countryCode: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'countryCode' is not null or undefined
             assertParamExists('getRegionList', 'countryCode', countryCode);
 
@@ -425,6 +447,9 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             if (countryCode !== undefined && countryCode !== null) {
                 localVarQueryParameter['countryCode'] = countryCode;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -444,22 +469,24 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * The questionnaire is only applies to transactions from un-hosted wallets or VASPs that are not
          * yet onboarded with GTR.
          *
-         * Questionnaire is different for each local entity, please refer
-         * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+         * Weight(UID): 600
          *
-         * Weight: 600
+         * Security Type: USER_DATA
          *
-         * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
+         * Notes:
+         * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+         * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+         *
+         * @summary Submit Deposit Questionnaire Broker (For local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {string} subAccountId External user ID.
-         * @param {number | bigint} depositId Wallet deposit ID
+         * @param {number | bigint} depositId Wallet deposit ID.
          * @param {string} questionnaire JSON format questionnaire answers.
          * @param {string} beneficiaryPii JSON format beneficiary Pii.
-         * @param {string} signature Must be the last parameter.
          * @param {string} [network]
          * @param {string} [coin]
          * @param {number} [amount]
          * @param {string} [address]
-         * @param {string} [addressTag] Secondary address identifier for coins like XRP,XMR etc.
+         * @param {string} [addressTag]
          *
          * @throws {RequiredError}
          */
@@ -468,7 +495,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             depositId: number | bigint,
             questionnaire: string,
             beneficiaryPii: string,
-            signature: string,
             network?: string,
             coin?: string,
             amount?: number,
@@ -483,8 +509,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('submitDepositQuestionnaire', 'questionnaire', questionnaire);
             // verify required parameter 'beneficiaryPii' is not null or undefined
             assertParamExists('submitDepositQuestionnaire', 'beneficiaryPii', beneficiaryPii);
-            // verify required parameter 'signature' is not null or undefined
-            assertParamExists('submitDepositQuestionnaire', 'signature', signature);
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
@@ -517,9 +541,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             if (addressTag !== undefined && addressTag !== null) {
                 localVarQueryParameter['addressTag'] = addressTag;
             }
-            if (signature !== undefined && signature !== null) {
-                localVarQueryParameter['signature'] = signature;
-            }
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -538,10 +559,13 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
          * yet onboarded with GTR.
          *
-         * Questionnaire is different for each local entity, please refer
-         * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+         * Weight(UID): 600
          *
-         * Weight: 600
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+         * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
          *
          * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {number | bigint} tranId Wallet tran ID
@@ -590,10 +614,13 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
          * yet onboarded with GTR.
          *
-         * Questionnaire is different for each local entity, please refer
-         * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+         * Weight(UID): 600
          *
-         * Weight: 600
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+         * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
          *
          * @summary Submit Deposit Questionnaire V2 (For local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {number | bigint} depositId Wallet deposit ID
@@ -636,7 +663,9 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetch the VASP list for local entities.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -667,23 +696,27 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetch withdraw history for local entities that required travel rule.
          *
-         * `network` may not be in the response for old withdraw.
-         * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-         * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
+         * Notes:
+         * - `network` may not be in the response for old withdraw.
+         * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+         * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+         *
+         * @summary Withdraw History Travel Rule (supporting network) (USER_DATA)
          * @param {string} [trId] Comma(,) separated list of travel rule record Ids.
-         * @param {string} [txId]
-         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
+         * @param {string} [txId] Comma(,) separated list of transaction Ids.
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for
+         * query.
          * @param {string} [network]
          * @param {string} [coin]
          * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
-         * @param {number | bigint} [offset] Default: 0
-         * @param {number | bigint} [limit] min 7, max 30, default 7
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [offset]
+         * @param {number | bigint} [limit]
+         * @param {number | bigint} [startTime] Default: 90 days from current timestamp
+         * @param {number | bigint} [endTime] Default: present timestamp
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -754,29 +787,33 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetch withdraw history for local entities that required travel rule.
          *
-         * `network` may not be in the response for old withdraw.
-         * Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
-         * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-         * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
-         * If withdrawOrderId is sent, time between startTime and endTime must be less than 7 days.
-         * If withdrawOrderId is sent, startTime and endTime are not sent, will return last 7 days records by default.
-         * Maximum support trId,txId number is 45.
-         * WithdrawOrderId only support 1.
-         * If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - `network` may not be in the response for old withdraw.
+         * - Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
+         * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+         * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+         * - If withdrawOrderId is sent, time between startTime and endTime must be less than 7 days.
+         * - If withdrawOrderId is sent, startTime and endTime are not sent, will return last 7 days records by default.
+         * - Maximum support trId,txId number is 45.
+         * - WithdrawOrderId only support 1.
+         * - If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
          *
          * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {string} [trId] Comma(,) separated list of travel rule record Ids.
-         * @param {string} [txId]
-         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
+         * @param {string} [txId] Comma(,) separated list of transaction Ids.
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for
+         * query.
          * @param {string} [network]
          * @param {string} [coin]
          * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
-         * @param {number | bigint} [offset] Default: 0
-         * @param {number | bigint} [limit] min 7, max 30, default 7
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [offset]
+         * @param {number | bigint} [limit]
+         * @param {number | bigint} [startTime] Default: 90 days from current timestamp
+         * @param {number | bigint} [endTime] Default: present timestamp
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -847,24 +884,29 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Submit a withdrawal request for local entities that required travel rule.
          *
-         * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
-         * You can get `network` and `isDefault` in `networkList` of a coin in the response
-         * Questionnaire is different for each local entity, please refer to
-         * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+         * Weight(UID): 600
          *
-         * Weight: 600
+         * Security Type: USER_DATA
          *
-         * @summary Withdraw (for local entities that require travel rule) (USER_DATA)
+         * Notes:
+         * - If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+         * - You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+         * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
+         * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+         *
+         * @summary Withdraw Travel Rule (USER_DATA)
          * @param {string} coin
-         * @param {string} address
-         * @param {number} amount
+         * @param {string} address Withdrawal address
+         * @param {number} amount Amount
          * @param {string} questionnaire JSON format questionnaire answers.
-         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
-         * @param {string} [network]
+         * @param {string} [withdrawOrderId] withdrawID defined by the client (i.e. client's internal withdrawID)
+         * @param {string} [network] Withdrawal network
          * @param {string} [addressTag] Secondary address identifier for coins like XRP,XMR etc.
-         * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
-         * @param {string} [name] Description of the address. Address book cap is 200, space in name should be encoded into `%20`
-         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+         * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for
+         * returning the fee back to the departure account. Default `false`.
+         * @param {string} [name]
+         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current
+         * "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -952,12 +994,15 @@ export interface TravelRuleApiInterface {
     /**
      * Submit a withdrawal request for brokers of local entities that required travel rule.
      *
-     * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
-     * You can get `network` in `networkList` of a coin in the response
-     * Questionnaire is different for each local entity, please refer to
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+     * - You can get `network` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
      * @param {BrokerWithdrawRequest} requestParameters Request parameters.
@@ -969,9 +1014,12 @@ export interface TravelRuleApiInterface {
         requestParameters: BrokerWithdrawRequest
     ): Promise<RestApiResponse<BrokerWithdrawResponse>>;
     /**
-     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
+     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current
+     * API key.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
@@ -985,13 +1033,16 @@ export interface TravelRuleApiInterface {
     /**
      * Fetch deposit history for local entities that required travel rule.
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
-     * Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Deposit History (for local entities that required travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
+     * - Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     *
+     * @summary Deposit History Travel Rule (for local entities that required travel rule) (supporting network) (USER_DATA)
      * @param {DepositHistoryTravelRuleRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1003,11 +1054,14 @@ export interface TravelRuleApiInterface {
     /**
      * Fetch deposit history for local entities that with required travel rule information.
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
-     * Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
+     * - Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
      *
      * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
      * @param {DepositHistoryV2Request} requestParameters Request parameters.
@@ -1019,9 +1073,12 @@ export interface TravelRuleApiInterface {
         requestParameters?: DepositHistoryV2Request
     ): Promise<RestApiResponse<DepositHistoryV2Response>>;
     /**
-     * Fetch address verification list for user to check on status and other details for the addresses stored in Address Book.
+     * Fetch address verification list for user to check on status and other details for the addresses stored in
+     * Address Book.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch address verification list (USER_DATA)
      * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
@@ -1035,18 +1092,25 @@ export interface TravelRuleApiInterface {
     /**
      * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Country List (USER_DATA)
+     * @param {GetCountryListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApiInterface
      */
-    getCountryList(): Promise<RestApiResponse<GetCountryListResponse>>;
+    getCountryList(
+        requestParameters?: GetCountryListRequest
+    ): Promise<RestApiResponse<GetCountryListResponse>>;
     /**
      * Query the active region/city list for a given country. Currently, only supports AU entity.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Region List (USER_DATA)
      * @param {GetRegionListRequest} requestParameters Request parameters.
@@ -1062,12 +1126,15 @@ export interface TravelRuleApiInterface {
      * The questionnaire is only applies to transactions from un-hosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
      *
-     * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+     *
+     * @summary Submit Deposit Questionnaire Broker (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1081,10 +1148,13 @@ export interface TravelRuleApiInterface {
      * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireTravelRuleRequest} requestParameters Request parameters.
@@ -1100,10 +1170,13 @@ export interface TravelRuleApiInterface {
      * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Submit Deposit Questionnaire V2 (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireV2Request} requestParameters Request parameters.
@@ -1117,7 +1190,9 @@ export interface TravelRuleApiInterface {
     /**
      * Fetch the VASP list for local entities.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {VaspListRequest} requestParameters Request parameters.
@@ -1129,13 +1204,16 @@ export interface TravelRuleApiInterface {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * `network` may not be in the response for old withdraw.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     *
+     * @summary Withdraw History Travel Rule (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV1Request} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1147,17 +1225,20 @@ export interface TravelRuleApiInterface {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * `network` may not be in the response for old withdraw.
-     * Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
-     * If withdrawOrderId is sent, time between startTime and endTime must be less than 7 days.
-     * If withdrawOrderId is sent, startTime and endTime are not sent, will return last 7 days records by default.
-     * Maximum support trId,txId number is 45.
-     * WithdrawOrderId only support 1.
-     * If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     * - If withdrawOrderId is sent, time between startTime and endTime must be less than 7 days.
+     * - If withdrawOrderId is sent, startTime and endTime are not sent, will return last 7 days records by default.
+     * - Maximum support trId,txId number is 45.
+     * - WithdrawOrderId only support 1.
+     * - If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
      *
      * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV2Request} requestParameters Request parameters.
@@ -1171,14 +1252,17 @@ export interface TravelRuleApiInterface {
     /**
      * Submit a withdrawal request for local entities that required travel rule.
      *
-     * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
-     * You can get `network` and `isDefault` in `networkList` of a coin in the response
-     * Questionnaire is different for each local entity, please refer to
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
      *
-     * @summary Withdraw (for local entities that require travel rule) (USER_DATA)
+     * Notes:
+     * - If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+     * - You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+     *
+     * @summary Withdraw Travel Rule (USER_DATA)
      * @param {WithdrawTravelRuleRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1237,13 +1321,6 @@ export interface BrokerWithdrawRequest {
     readonly originatorPii: string;
 
     /**
-     * Must be the last parameter.
-     * @type {string}
-     * @memberof TravelRuleApiBrokerWithdraw
-     */
-    readonly signature: string;
-
-    /**
      * Secondary address identifier for coins like XRP,XMR etc.
      * @type {string}
      * @memberof TravelRuleApiBrokerWithdraw
@@ -1265,14 +1342,16 @@ export interface BrokerWithdrawRequest {
     readonly addressName?: string;
 
     /**
-     * When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
+     * When making internal transfer, `true` for returning the fee to the destination account; `false` for
+     * returning the fee back to the departure account. Default `false`.
      * @type {boolean}
      * @memberof TravelRuleApiBrokerWithdraw
      */
     readonly transactionFeeFlag?: boolean;
 
     /**
-     * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+     * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current
+     * "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
      * @type {number | bigint}
      * @memberof TravelRuleApiBrokerWithdraw
      */
@@ -1305,7 +1384,7 @@ export interface DepositHistoryTravelRuleRequest {
     readonly trId?: string;
 
     /**
-     *
+     * Comma(,) separated list of transaction Ids.
      * @type {string}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
@@ -1347,14 +1426,14 @@ export interface DepositHistoryTravelRuleRequest {
     readonly pendingQuestionnaire?: boolean;
 
     /**
-     *
+     * Default: 90 days from current timestamp
      * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Default: present timestamp
      * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
@@ -1368,7 +1447,7 @@ export interface DepositHistoryTravelRuleRequest {
     readonly offset?: number | bigint;
 
     /**
-     * min 7, max 30, default 7
+     *
      * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
@@ -1382,13 +1461,13 @@ export interface DepositHistoryTravelRuleRequest {
 export interface DepositHistoryV2Request {
     /**
      * Comma(,) separated list of wallet tran Ids.
-     * @type {string}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
-    readonly depositId?: string;
+    readonly depositId?: number | bigint;
 
     /**
-     *
+     * Comma(,) separated list of transaction Ids.
      * @type {string}
      * @memberof TravelRuleApiDepositHistoryV2
      */
@@ -1416,28 +1495,28 @@ export interface DepositHistoryV2Request {
     readonly retrieveQuestionnaire?: boolean;
 
     /**
-     *
+     * Default: 90 days from current timestamp
      * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Default: present timestamp
      * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 0
+     *
      * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
     readonly offset?: number | bigint;
 
     /**
-     * min 7, max 30, default 7
+     *
      * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
@@ -1458,16 +1537,36 @@ export interface FetchAddressVerificationListRequest {
 }
 
 /**
+ * Request parameters for getCountryList operation in TravelRuleApi.
+ * @interface GetCountryListRequest
+ */
+export interface GetCountryListRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TravelRuleApiGetCountryList
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for getRegionList operation in TravelRuleApi.
  * @interface GetRegionListRequest
  */
 export interface GetRegionListRequest {
     /**
-     * ISO 2-digit country code (from `Country List` API).
+     * ISO 2-digit country code (from Country List API).
      * @type {string}
      * @memberof TravelRuleApiGetRegionList
      */
     readonly countryCode: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TravelRuleApiGetRegionList
+     */
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1483,7 +1582,7 @@ export interface SubmitDepositQuestionnaireRequest {
     readonly subAccountId: string;
 
     /**
-     * Wallet deposit ID
+     * Wallet deposit ID.
      * @type {number | bigint}
      * @memberof TravelRuleApiSubmitDepositQuestionnaire
      */
@@ -1502,13 +1601,6 @@ export interface SubmitDepositQuestionnaireRequest {
      * @memberof TravelRuleApiSubmitDepositQuestionnaire
      */
     readonly beneficiaryPii: string;
-
-    /**
-     * Must be the last parameter.
-     * @type {string}
-     * @memberof TravelRuleApiSubmitDepositQuestionnaire
-     */
-    readonly signature: string;
 
     /**
      *
@@ -1539,7 +1631,7 @@ export interface SubmitDepositQuestionnaireRequest {
     readonly address?: string;
 
     /**
-     * Secondary address identifier for coins like XRP,XMR etc.
+     *
      * @type {string}
      * @memberof TravelRuleApiSubmitDepositQuestionnaire
      */
@@ -1612,14 +1704,15 @@ export interface WithdrawHistoryV1Request {
     readonly trId?: string;
 
     /**
-     *
+     * Comma(,) separated list of transaction Ids.
      * @type {string}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
     readonly txId?: string;
 
     /**
-     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
+     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for
+     * query.
      * @type {string}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
@@ -1647,28 +1740,28 @@ export interface WithdrawHistoryV1Request {
     readonly travelRuleStatus?: number | bigint;
 
     /**
-     * Default: 0
+     *
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
     readonly offset?: number | bigint;
 
     /**
-     * min 7, max 30, default 7
+     *
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Default: 90 days from current timestamp
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Default: present timestamp
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
@@ -1695,14 +1788,15 @@ export interface WithdrawHistoryV2Request {
     readonly trId?: string;
 
     /**
-     *
+     * Comma(,) separated list of transaction Ids.
      * @type {string}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
     readonly txId?: string;
 
     /**
-     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
+     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for
+     * query.
      * @type {string}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
@@ -1730,28 +1824,28 @@ export interface WithdrawHistoryV2Request {
     readonly travelRuleStatus?: number | bigint;
 
     /**
-     * Default: 0
+     *
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
     readonly offset?: number | bigint;
 
     /**
-     * min 7, max 30, default 7
+     *
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Default: 90 days from current timestamp
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Default: present timestamp
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
@@ -1778,14 +1872,14 @@ export interface WithdrawTravelRuleRequest {
     readonly coin: string;
 
     /**
-     *
+     * Withdrawal address
      * @type {string}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
     readonly address: string;
 
     /**
-     *
+     * Amount
      * @type {number}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
@@ -1799,14 +1893,14 @@ export interface WithdrawTravelRuleRequest {
     readonly questionnaire: string;
 
     /**
-     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
+     * withdrawID defined by the client (i.e. client's internal withdrawID)
      * @type {string}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
     readonly withdrawOrderId?: string;
 
     /**
-     *
+     * Withdrawal network
      * @type {string}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
@@ -1820,21 +1914,23 @@ export interface WithdrawTravelRuleRequest {
     readonly addressTag?: string;
 
     /**
-     * When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
+     * When making internal transfer, `true` for returning the fee to the destination account; `false` for
+     * returning the fee back to the departure account. Default `false`.
      * @type {boolean}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
     readonly transactionFeeFlag?: boolean;
 
     /**
-     * Description of the address. Address book cap is 200, space in name should be encoded into `%20`
+     *
      * @type {string}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
     readonly name?: string;
 
     /**
-     * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+     * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current
+     * "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
@@ -1864,19 +1960,22 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Submit a withdrawal request for brokers of local entities that required travel rule.
      *
-     * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
-     * You can get `network` in `networkList` of a coin in the response
-     * Questionnaire is different for each local entity, please refer to
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+     * - You can get `network` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
      * @param {BrokerWithdrawRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BrokerWithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Broker-Withdraw Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#broker-withdraw Binance API Documentation}
      */
     public async brokerWithdraw(
         requestParameters: BrokerWithdrawRequest
@@ -1888,7 +1987,6 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             requestParameters?.withdrawOrderId,
             requestParameters?.questionnaire,
             requestParameters?.originatorPii,
-            requestParameters?.signature,
             requestParameters?.addressTag,
             requestParameters?.network,
             requestParameters?.addressName,
@@ -1908,16 +2006,19 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     }
 
     /**
-     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
+     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current
+     * API key.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CheckQuestionnaireRequirementsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/questionnaire-requirements Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#check-questionnaire-requirements Binance API Documentation}
      */
     public async checkQuestionnaireRequirements(
         requestParameters: CheckQuestionnaireRequirementsRequest = {}
@@ -1941,18 +2042,21 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Fetch deposit history for local entities that required travel rule.
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
-     * Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Deposit History (for local entities that required travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
+     * - Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     *
+     * @summary Deposit History Travel Rule (for local entities that required travel rule) (supporting network) (USER_DATA)
      * @param {DepositHistoryTravelRuleRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepositHistoryTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Deposit-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#deposit-history-travel-rule Binance API Documentation}
      */
     public async depositHistoryTravelRule(
         requestParameters: DepositHistoryTravelRuleRequest = {}
@@ -1985,18 +2089,21 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Fetch deposit history for local entities that with required travel rule information.
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
-     * Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
+     * - Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
      *
      * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
      * @param {DepositHistoryV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepositHistoryV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Deposit-History-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#deposit-history-v2 Binance API Documentation}
      */
     public async depositHistoryV2(
         requestParameters: DepositHistoryV2Request = {}
@@ -2025,16 +2132,19 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     }
 
     /**
-     * Fetch address verification list for user to check on status and other details for the addresses stored in Address Book.
+     * Fetch address verification list for user to check on status and other details for the addresses stored in
+     * Address Book.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch address verification list (USER_DATA)
      * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FetchAddressVerificationListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/address-verification-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#fetch-address-verification-list Binance API Documentation}
      */
     public async fetchAddressVerificationList(
         requestParameters: FetchAddressVerificationListRequest = {}
@@ -2057,16 +2167,23 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Country List (USER_DATA)
+     * @param {GetCountryListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCountryListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/country-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#get-country-list Binance API Documentation}
      */
-    public async getCountryList(): Promise<RestApiResponse<GetCountryListResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getCountryList();
+    public async getCountryList(
+        requestParameters: GetCountryListRequest = {}
+    ): Promise<RestApiResponse<GetCountryListResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getCountryList(
+            requestParameters?.recvWindow
+        );
         return sendRequest<GetCountryListResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
@@ -2082,20 +2199,23 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Query the active region/city list for a given country. Currently, only supports AU entity.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Region List (USER_DATA)
      * @param {GetRegionListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRegionListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/region-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#get-region-list Binance API Documentation}
      */
     public async getRegionList(
         requestParameters: GetRegionListRequest
     ): Promise<RestApiResponse<GetRegionListResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getRegionList(
-            requestParameters?.countryCode
+            requestParameters?.countryCode,
+            requestParameters?.recvWindow
         );
         return sendRequest<GetRegionListResponse>(
             this.configuration,
@@ -2114,17 +2234,20 @@ export class TravelRuleApi implements TravelRuleApiInterface {
      * The questionnaire is only applies to transactions from un-hosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
      *
-     * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+     *
+     * @summary Submit Deposit Questionnaire Broker (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#submit-deposit-questionnaire Binance API Documentation}
      */
     public async submitDepositQuestionnaire(
         requestParameters: SubmitDepositQuestionnaireRequest
@@ -2134,7 +2257,6 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             requestParameters?.depositId,
             requestParameters?.questionnaire,
             requestParameters?.beneficiaryPii,
-            requestParameters?.signature,
             requestParameters?.network,
             requestParameters?.coin,
             requestParameters?.amount,
@@ -2158,17 +2280,20 @@ export class TravelRuleApi implements TravelRuleApiInterface {
      * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireTravelRuleRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#submit-deposit-questionnaire-travel-rule Binance API Documentation}
      */
     public async submitDepositQuestionnaireTravelRule(
         requestParameters: SubmitDepositQuestionnaireTravelRuleRequest
@@ -2195,17 +2320,20 @@ export class TravelRuleApi implements TravelRuleApiInterface {
      * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Submit Deposit Questionnaire V2 (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info-v2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#submit-deposit-questionnaire-v2 Binance API Documentation}
      */
     public async submitDepositQuestionnaireV2(
         requestParameters: SubmitDepositQuestionnaireV2Request
@@ -2229,14 +2357,16 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Fetch the VASP list for local entities.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {VaspListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<VaspListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/onboarded-vasp-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#vasp-list Binance API Documentation}
      */
     public async vaspList(
         requestParameters: VaspListRequest = {}
@@ -2259,18 +2389,21 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * `network` may not be in the response for old withdraw.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     *
+     * @summary Withdraw History Travel Rule (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV1Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawHistoryV1Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#withdraw-history-v1 Binance API Documentation}
      */
     public async withdrawHistoryV1(
         requestParameters: WithdrawHistoryV1Request = {}
@@ -2303,24 +2436,27 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * `network` may not be in the response for old withdraw.
-     * Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
-     * If withdrawOrderId is sent, time between startTime and endTime must be less than 7 days.
-     * If withdrawOrderId is sent, startTime and endTime are not sent, will return last 7 days records by default.
-     * Maximum support trId,txId number is 45.
-     * WithdrawOrderId only support 1.
-     * If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     * - If withdrawOrderId is sent, time between startTime and endTime must be less than 7 days.
+     * - If withdrawOrderId is sent, startTime and endTime are not sent, will return last 7 days records by default.
+     * - Maximum support trId,txId number is 45.
+     * - WithdrawOrderId only support 1.
+     * - If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
      *
      * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawHistoryV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw-History-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#withdraw-history-v2 Binance API Documentation}
      */
     public async withdrawHistoryV2(
         requestParameters: WithdrawHistoryV2Request = {}
@@ -2353,19 +2489,22 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Submit a withdrawal request for local entities that required travel rule.
      *
-     * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
-     * You can get `network` and `isDefault` in `networkList` of a coin in the response
-     * Questionnaire is different for each local entity, please refer to
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
      *
-     * @summary Withdraw (for local entities that require travel rule) (USER_DATA)
+     * Notes:
+     * - If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+     * - You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+     *
+     * @summary Withdraw Travel Rule (USER_DATA)
      * @param {WithdrawTravelRuleRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#withdraw-travel-rule Binance API Documentation}
      */
     public async withdrawTravelRule(
         requestParameters: WithdrawTravelRuleRequest

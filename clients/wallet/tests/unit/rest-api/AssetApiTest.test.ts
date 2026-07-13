@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,18 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AssetApi } from '../../../src/rest-api';
+import {
+    AssetApi,
+    DustTransferAccountTypeEnum,
+    DustlogAccountTypeEnum,
+    GetAssetsThatCanBeConvertedIntoBnbAccountTypeEnum,
+    QueryUserDelegationHistoryTypeEnum,
+    QueryUserUniversalTransferHistoryFromSymbolEnum,
+    QueryUserUniversalTransferHistoryToSymbolEnum,
+    UserUniversalTransferTypeEnum,
+    UserUniversalTransferFromSymbolEnum,
+    UserUniversalTransferToSymbolEnum,
+} from '../../../src/rest-api';
 import {
     AssetDetailRequest,
     AssetDividendRecordRequest,
@@ -104,7 +115,7 @@ describe('AssetApi', () => {
 
         it('should execute assetDetail() successfully with optional parameters', async () => {
             const params: AssetDetailRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 recvWindow: 5000,
             };
 
@@ -170,15 +181,6 @@ describe('AssetApi', () => {
                             tranId: 2968885920,
                             direction: 1,
                         },
-                        {
-                            id: 1631750237,
-                            amount: '10.00000000',
-                            asset: 'BHFT',
-                            divTime: 1563189165000,
-                            enInfo: 'BHFT distribution',
-                            tranId: 2968885920,
-                            direction: 1,
-                        },
                     ],
                     total: 2,
                 })
@@ -200,10 +202,10 @@ describe('AssetApi', () => {
 
         it('should execute assetDividendRecord() successfully with optional parameters', async () => {
             const params: AssetDividendRecordRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 7,
+                limit: 20,
                 recvWindow: 5000,
             };
 
@@ -215,15 +217,6 @@ describe('AssetApi', () => {
                             amount: '10.00000000',
                             asset: 'BHFT',
                             divTime: 1563189166000,
-                            enInfo: 'BHFT distribution',
-                            tranId: 2968885920,
-                            direction: 1,
-                        },
-                        {
-                            id: 1631750237,
-                            amount: '10.00000000',
-                            asset: 'BHFT',
-                            divTime: 1563189165000,
                             enInfo: 'BHFT distribution',
                             tranId: 2968885920,
                             direction: 1,
@@ -266,7 +259,7 @@ describe('AssetApi', () => {
     describe('dustConvert()', () => {
         it('should execute dustConvert() successfully with required parameters only', async () => {
             const params: DustConvertRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -302,10 +295,10 @@ describe('AssetApi', () => {
 
         it('should execute dustConvert() successfully with optional parameters', async () => {
             const params: DustConvertRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 accountType: 'SPOT',
                 clientId: '1',
-                targetAsset: 'targetAsset_example',
+                targetAsset: 'BTC',
                 thirdPartyClientId: '1',
                 dustQuotaAssetToTargetAssetPrice: 1.0,
             };
@@ -343,7 +336,7 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: DustConvertRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -355,7 +348,7 @@ describe('AssetApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: DustConvertRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             const errorResponse = {
@@ -376,7 +369,7 @@ describe('AssetApi', () => {
     describe('dustConvertibleAssets()', () => {
         it('should execute dustConvertibleAssets() successfully with required parameters only', async () => {
             const params: DustConvertibleAssetsRequest = {
-                targetAsset: 'targetAsset_example',
+                targetAsset: 'BTC',
             };
 
             mockResponse = JSONParse(
@@ -394,15 +387,6 @@ describe('AssetApi', () => {
                             toQuotaAssetAmount: '0.036808',
                             toTargetAssetAmount: '0.036808',
                             toTargetAssetOffExchange: '0.03607184',
-                        },
-                        {
-                            asset: 'BNB',
-                            assetFullName: 'BNB',
-                            amountFree: '0.00082768',
-                            exchange: '0.01506378',
-                            toQuotaAssetAmount: '0.7531888',
-                            toTargetAssetAmount: '0.7531888',
-                            toTargetAssetOffExchange: '0.73812502',
                         },
                     ],
                 })
@@ -424,7 +408,7 @@ describe('AssetApi', () => {
 
         it('should execute dustConvertibleAssets() successfully with optional parameters', async () => {
             const params: DustConvertibleAssetsRequest = {
-                targetAsset: 'targetAsset_example',
+                targetAsset: 'BTC',
                 accountType: 'SPOT',
                 dustQuotaAssetToTargetAssetPrice: 1.0,
             };
@@ -444,15 +428,6 @@ describe('AssetApi', () => {
                             toQuotaAssetAmount: '0.036808',
                             toTargetAssetAmount: '0.036808',
                             toTargetAssetOffExchange: '0.03607184',
-                        },
-                        {
-                            asset: 'BNB',
-                            assetFullName: 'BNB',
-                            amountFree: '0.00082768',
-                            exchange: '0.01506378',
-                            toQuotaAssetAmount: '0.7531888',
-                            toTargetAssetAmount: '0.7531888',
-                            toTargetAssetOffExchange: '0.73812502',
                         },
                     ],
                 })
@@ -474,7 +449,7 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when targetAsset is missing', async () => {
             const _params: DustConvertibleAssetsRequest = {
-                targetAsset: 'targetAsset_example',
+                targetAsset: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.targetAsset;
@@ -486,7 +461,7 @@ describe('AssetApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: DustConvertibleAssetsRequest = {
-                targetAsset: 'targetAsset_example',
+                targetAsset: 'BTC',
             };
 
             const errorResponse = {
@@ -509,7 +484,7 @@ describe('AssetApi', () => {
     describe('dustTransfer()', () => {
         it('should execute dustTransfer() successfully with required parameters only', async () => {
             const params: DustTransferRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             mockResponse = JSONParse(
@@ -524,22 +499,6 @@ describe('AssetApi', () => {
                             serviceChargeAmount: '0.00500000',
                             tranId: 2970932918,
                             transferedAmount: '0.25000000',
-                        },
-                        {
-                            amount: '0.09000000',
-                            fromAsset: 'LTC',
-                            operateTime: 1563368549404,
-                            serviceChargeAmount: '0.01548000',
-                            tranId: 2970932918,
-                            transferedAmount: '0.77400000',
-                        },
-                        {
-                            amount: '248.61878453',
-                            fromAsset: 'TRX',
-                            operateTime: 1563368549489,
-                            serviceChargeAmount: '0.00054542',
-                            tranId: 2970932918,
-                            transferedAmount: '0.02727099',
                         },
                     ],
                 })
@@ -561,8 +520,8 @@ describe('AssetApi', () => {
 
         it('should execute dustTransfer() successfully with optional parameters', async () => {
             const params: DustTransferRequest = {
-                asset: 'asset_example',
-                accountType: 'SPOT',
+                asset: 'BTC',
+                accountType: DustTransferAccountTypeEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -578,22 +537,6 @@ describe('AssetApi', () => {
                             serviceChargeAmount: '0.00500000',
                             tranId: 2970932918,
                             transferedAmount: '0.25000000',
-                        },
-                        {
-                            amount: '0.09000000',
-                            fromAsset: 'LTC',
-                            operateTime: 1563368549404,
-                            serviceChargeAmount: '0.01548000',
-                            tranId: 2970932918,
-                            transferedAmount: '0.77400000',
-                        },
-                        {
-                            amount: '248.61878453',
-                            fromAsset: 'TRX',
-                            operateTime: 1563368549489,
-                            serviceChargeAmount: '0.00054542',
-                            tranId: 2970932918,
-                            transferedAmount: '0.02727099',
                         },
                     ],
                 })
@@ -615,7 +558,7 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: DustTransferRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -627,7 +570,7 @@ describe('AssetApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: DustTransferRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             const errorResponse = {
@@ -666,41 +609,6 @@ describe('AssetApi', () => {
                                     fromAsset: 'USDT',
                                     targetAsset: 'BNB',
                                 },
-                                {
-                                    transId: 4359321,
-                                    serviceChargeAmount: '0.00001799',
-                                    amount: '0.0009',
-                                    operateTime: 1615985535000,
-                                    transferedAmount: '0.00088156',
-                                    fromAsset: 'ETH',
-                                    targetAsset: 'BNB',
-                                },
-                            ],
-                        },
-                        {
-                            operateTime: 1616203180000,
-                            totalTransferedAmount: '0.00058795',
-                            totalServiceChargeAmount: '0.000012',
-                            transId: 4357015,
-                            userAssetDribbletDetails: [
-                                {
-                                    transId: 4357015,
-                                    serviceChargeAmount: '0.00001',
-                                    amount: '0.001',
-                                    operateTime: 1616203180000,
-                                    transferedAmount: '0.00049',
-                                    fromAsset: 'USDT',
-                                    targetAsset: 'BNB',
-                                },
-                                {
-                                    transId: 4357015,
-                                    serviceChargeAmount: '0.000002',
-                                    amount: '0.0001',
-                                    operateTime: 1616203180000,
-                                    transferedAmount: '0.00009795',
-                                    fromAsset: 'ETH',
-                                    targetAsset: 'BNB',
-                                },
                             ],
                         },
                     ],
@@ -723,7 +631,7 @@ describe('AssetApi', () => {
 
         it('should execute dustlog() successfully with optional parameters', async () => {
             const params: DustlogRequest = {
-                accountType: 'SPOT',
+                accountType: DustlogAccountTypeEnum.SPOT,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 recvWindow: 5000,
@@ -746,41 +654,6 @@ describe('AssetApi', () => {
                                     operateTime: 1615985535000,
                                     transferedAmount: '0.000441',
                                     fromAsset: 'USDT',
-                                    targetAsset: 'BNB',
-                                },
-                                {
-                                    transId: 4359321,
-                                    serviceChargeAmount: '0.00001799',
-                                    amount: '0.0009',
-                                    operateTime: 1615985535000,
-                                    transferedAmount: '0.00088156',
-                                    fromAsset: 'ETH',
-                                    targetAsset: 'BNB',
-                                },
-                            ],
-                        },
-                        {
-                            operateTime: 1616203180000,
-                            totalTransferedAmount: '0.00058795',
-                            totalServiceChargeAmount: '0.000012',
-                            transId: 4357015,
-                            userAssetDribbletDetails: [
-                                {
-                                    transId: 4357015,
-                                    serviceChargeAmount: '0.00001',
-                                    amount: '0.001',
-                                    operateTime: 1616203180000,
-                                    transferedAmount: '0.00049',
-                                    fromAsset: 'USDT',
-                                    targetAsset: 'BNB',
-                                },
-                                {
-                                    transId: 4357015,
-                                    serviceChargeAmount: '0.000002',
-                                    amount: '0.0001',
-                                    operateTime: 1616203180000,
-                                    transferedAmount: '0.00009795',
-                                    fromAsset: 'ETH',
                                     targetAsset: 'BNB',
                                 },
                             ],
@@ -850,8 +723,8 @@ describe('AssetApi', () => {
 
         it('should execute fundingWallet() successfully with optional parameters', async () => {
             const params: FundingWalletRequest = {
-                asset: 'asset_example',
-                needBtcValuation: 'needBtcValuation_example',
+                asset: 'BTC',
+                needBtcValuation: true,
                 recvWindow: 5000,
             };
 
@@ -935,7 +808,7 @@ describe('AssetApi', () => {
 
         it('should execute getAssetsThatCanBeConvertedIntoBnb() successfully with optional parameters', async () => {
             const params: GetAssetsThatCanBeConvertedIntoBnbRequest = {
-                accountType: 'SPOT',
+                accountType: GetAssetsThatCanBeConvertedIntoBnbAccountTypeEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -1011,38 +884,6 @@ describe('AssetApi', () => {
                             amount: '25.0068',
                             status: 'S',
                         },
-                        {
-                            createTime: 1666776366000,
-                            tranId: 119991507468,
-                            type: 249,
-                            asset: 'USDT',
-                            amount: '0.027',
-                            status: 'S',
-                        },
-                        {
-                            createTime: 1666764505000,
-                            tranId: 119977966327,
-                            type: 248,
-                            asset: 'USDT',
-                            amount: '0.027',
-                            status: 'S',
-                        },
-                        {
-                            createTime: 1666758189000,
-                            tranId: 119973601721,
-                            type: 248,
-                            asset: 'USDT',
-                            amount: '0.018',
-                            status: 'S',
-                        },
-                        {
-                            createTime: 1666757278000,
-                            tranId: 119973028551,
-                            type: 248,
-                            asset: 'USDT',
-                            amount: '0.018',
-                            status: 'S',
-                        },
                     ],
                 })
             );
@@ -1067,7 +908,7 @@ describe('AssetApi', () => {
                 endTime: 1641782889000,
                 tranId: 1,
                 clientTranId: '1',
-                asset: 'asset_example',
+                asset: 'BTC',
                 current: 1,
                 size: 10,
             };
@@ -1082,38 +923,6 @@ describe('AssetApi', () => {
                             type: 248,
                             asset: 'USDT',
                             amount: '25.0068',
-                            status: 'S',
-                        },
-                        {
-                            createTime: 1666776366000,
-                            tranId: 119991507468,
-                            type: 249,
-                            asset: 'USDT',
-                            amount: '0.027',
-                            status: 'S',
-                        },
-                        {
-                            createTime: 1666764505000,
-                            tranId: 119977966327,
-                            type: 248,
-                            asset: 'USDT',
-                            amount: '0.027',
-                            status: 'S',
-                        },
-                        {
-                            createTime: 1666758189000,
-                            tranId: 119973601721,
-                            type: 248,
-                            asset: 'USDT',
-                            amount: '0.018',
-                            status: 'S',
-                        },
-                        {
-                            createTime: 1666757278000,
-                            tranId: 119973028551,
-                            type: 248,
-                            asset: 'USDT',
-                            amount: '0.018',
                             status: 'S',
                         },
                     ],
@@ -1188,10 +997,7 @@ describe('AssetApi', () => {
     describe('getOpenSymbolList()', () => {
         it('should execute getOpenSymbolList() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([
-                    { openTime: 1686161202000, symbols: ['BNBBTC', 'BNBETH'] },
-                    { openTime: 1686222232000, symbols: ['BTCUSDT'] },
-                ])
+                JSONStringify([{ openTime: 1686161202000, symbols: ['BNBBTC'] }])
             );
 
             const spy = jest.spyOn(client, 'getOpenSymbolList').mockReturnValue(
@@ -1227,7 +1033,7 @@ describe('AssetApi', () => {
     describe('queryUserDelegationHistory()', () => {
         it('should execute queryUserDelegationHistory() successfully with required parameters only', async () => {
             const params: QueryUserDelegationHistoryRequest = {
-                email: 'email_example',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -1242,13 +1048,6 @@ describe('AssetApi', () => {
                             asset: 'ETH',
                             amount: '1',
                             time: 1695205406000,
-                        },
-                        {
-                            clientTranId: '293915892281413632',
-                            transferType: 'Delegate',
-                            asset: 'ETH',
-                            amount: '1',
-                            time: 1695205396000,
                         },
                     ],
                 })
@@ -1270,11 +1069,11 @@ describe('AssetApi', () => {
 
         it('should execute queryUserDelegationHistory() successfully with optional parameters', async () => {
             const params: QueryUserDelegationHistoryRequest = {
-                email: 'email_example',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                type: 'type_example',
-                asset: 'asset_example',
+                type: QueryUserDelegationHistoryTypeEnum.DELEGATE,
+                asset: 'BTC',
                 current: 1,
                 size: 10,
                 recvWindow: 5000,
@@ -1290,13 +1089,6 @@ describe('AssetApi', () => {
                             asset: 'ETH',
                             amount: '1',
                             time: 1695205406000,
-                        },
-                        {
-                            clientTranId: '293915892281413632',
-                            transferType: 'Delegate',
-                            asset: 'ETH',
-                            amount: '1',
-                            time: 1695205396000,
                         },
                     ],
                 })
@@ -1318,7 +1110,7 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when email is missing', async () => {
             const _params: QueryUserDelegationHistoryRequest = {
-                email: 'email_example',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -1332,7 +1124,7 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when startTime is missing', async () => {
             const _params: QueryUserDelegationHistoryRequest = {
-                email: 'email_example',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -1346,7 +1138,7 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when endTime is missing', async () => {
             const _params: QueryUserDelegationHistoryRequest = {
-                email: 'email_example',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -1360,7 +1152,7 @@ describe('AssetApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryUserDelegationHistoryRequest = {
-                email: 'email_example',
+                email: 'abc@test.com',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -1402,14 +1194,6 @@ describe('AssetApi', () => {
                             tranId: 11415955596,
                             timestamp: 1544433328000,
                         },
-                        {
-                            asset: 'USDT',
-                            amount: '2',
-                            type: 'MAIN_UMFUTURE',
-                            status: 'CONFIRMED',
-                            tranId: 11366865406,
-                            timestamp: 1544433328000,
-                        },
                     ],
                 })
             );
@@ -1435,8 +1219,8 @@ describe('AssetApi', () => {
                 endTime: 1641782889000,
                 current: 1,
                 size: 10,
-                fromSymbol: 'fromSymbol_example',
-                toSymbol: 'toSymbol_example',
+                fromSymbol: QueryUserUniversalTransferHistoryFromSymbolEnum.ISOLATEDMARGIN_MARGIN,
+                toSymbol: QueryUserUniversalTransferHistoryToSymbolEnum.MARGIN_ISOLATEDMARGIN,
                 recvWindow: 5000,
             };
 
@@ -1450,14 +1234,6 @@ describe('AssetApi', () => {
                             type: 'MAIN_UMFUTURE',
                             status: 'CONFIRMED',
                             tranId: 11415955596,
-                            timestamp: 1544433328000,
-                        },
-                        {
-                            asset: 'USDT',
-                            amount: '2',
-                            type: 'MAIN_UMFUTURE',
-                            status: 'CONFIRMED',
-                            tranId: 11366865406,
                             timestamp: 1544433328000,
                         },
                     ],
@@ -1517,18 +1293,7 @@ describe('AssetApi', () => {
     describe('queryUserWalletBalance()', () => {
         it('should execute queryUserWalletBalance() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([
-                    { activate: true, balance: '0', walletName: 'Spot' },
-                    { activate: true, balance: '0', walletName: 'Funding' },
-                    { activate: true, balance: '0', walletName: 'Cross Margin' },
-                    { activate: true, balance: '0', walletName: 'Isolated Margin' },
-                    { activate: true, balance: '0.71842752', walletName: 'USDⓈ-M Futures' },
-                    { activate: true, balance: '0', walletName: 'COIN-M Futures' },
-                    { activate: true, balance: '0', walletName: 'Earn' },
-                    { activate: false, balance: '0', walletName: 'Options' },
-                    { activate: true, balance: '0', walletName: 'Trading Bots' },
-                    { activate: true, balance: '0', walletName: 'Copy Trading' },
-                ])
+                JSONStringify([{ activate: true, balance: '0', walletName: 'Spot' }])
             );
 
             const spy = jest.spyOn(client, 'queryUserWalletBalance').mockReturnValue(
@@ -1552,18 +1317,7 @@ describe('AssetApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { activate: true, balance: '0', walletName: 'Spot' },
-                    { activate: true, balance: '0', walletName: 'Funding' },
-                    { activate: true, balance: '0', walletName: 'Cross Margin' },
-                    { activate: true, balance: '0', walletName: 'Isolated Margin' },
-                    { activate: true, balance: '0.71842752', walletName: 'USDⓈ-M Futures' },
-                    { activate: true, balance: '0', walletName: 'COIN-M Futures' },
-                    { activate: true, balance: '0', walletName: 'Earn' },
-                    { activate: false, balance: '0', walletName: 'Options' },
-                    { activate: true, balance: '0', walletName: 'Trading Bots' },
-                    { activate: true, balance: '0', walletName: 'Copy Trading' },
-                ])
+                JSONStringify([{ activate: true, balance: '0', walletName: 'Spot' }])
             );
 
             const spy = jest.spyOn(client, 'queryUserWalletBalance').mockReturnValue(
@@ -1620,8 +1374,8 @@ describe('AssetApi', () => {
 
         it('should execute toggleBnbBurnOnSpotTradeAndMarginInterest() successfully with optional parameters', async () => {
             const params: ToggleBnbBurnOnSpotTradeAndMarginInterestRequest = {
-                spotBNBBurn: 'spotBNBBurn_example',
-                interestBNBBurn: 'interestBNBBurn_example',
+                spotBNBBurn: 'true',
+                interestBNBBurn: 'true',
                 recvWindow: 5000,
             };
 
@@ -1668,7 +1422,6 @@ describe('AssetApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     { symbol: 'ADABNB', makerCommission: '0.001', takerCommission: '0.001' },
-                    { symbol: 'BNBBTC', makerCommission: '0.001', takerCommission: '0.001' },
                 ])
             );
 
@@ -1688,14 +1441,13 @@ describe('AssetApi', () => {
 
         it('should execute tradeFee() successfully with optional parameters', async () => {
             const params: TradeFeeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ADABNB',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify([
                     { symbol: 'ADABNB', makerCommission: '0.001', takerCommission: '0.001' },
-                    { symbol: 'BNBBTC', makerCommission: '0.001', takerCommission: '0.001' },
                 ])
             );
 
@@ -1742,60 +1494,6 @@ describe('AssetApi', () => {
                         ipoable: '0',
                         btcValuation: '0',
                     },
-                    {
-                        asset: 'BCH',
-                        free: '0.9',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'BNB',
-                        free: '887.47061626',
-                        locked: '0',
-                        freeze: '10.52',
-                        withdrawing: '0.1',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'BUSD',
-                        free: '9999.7',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'SHIB',
-                        free: '532.32',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'USDT',
-                        free: '50300000001.44911105',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'WRZ',
-                        free: '1',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
                 ])
             );
 
@@ -1815,7 +1513,7 @@ describe('AssetApi', () => {
 
         it('should execute userAsset() successfully with optional parameters', async () => {
             const params: UserAssetRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 needBtcValuation: true,
                 recvWindow: 5000,
             };
@@ -1824,60 +1522,6 @@ describe('AssetApi', () => {
                 JSONStringify([
                     {
                         asset: 'AVAX',
-                        free: '1',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'BCH',
-                        free: '0.9',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'BNB',
-                        free: '887.47061626',
-                        locked: '0',
-                        freeze: '10.52',
-                        withdrawing: '0.1',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'BUSD',
-                        free: '9999.7',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'SHIB',
-                        free: '532.32',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'USDT',
-                        free: '50300000001.44911105',
-                        locked: '0',
-                        freeze: '0',
-                        withdrawing: '0',
-                        ipoable: '0',
-                        btcValuation: '0',
-                    },
-                    {
-                        asset: 'WRZ',
                         free: '1',
                         locked: '0',
                         freeze: '0',
@@ -1921,8 +1565,8 @@ describe('AssetApi', () => {
     describe('userUniversalTransfer()', () => {
         it('should execute userUniversalTransfer() successfully with required parameters only', async () => {
             const params: UserUniversalTransferRequest = {
-                type: 'type_example',
-                asset: 'asset_example',
+                type: UserUniversalTransferTypeEnum.MAIN_UMFUTURE,
+                asset: 'BTC',
                 amount: 1.0,
             };
 
@@ -1944,11 +1588,11 @@ describe('AssetApi', () => {
 
         it('should execute userUniversalTransfer() successfully with optional parameters', async () => {
             const params: UserUniversalTransferRequest = {
-                type: 'type_example',
-                asset: 'asset_example',
+                type: UserUniversalTransferTypeEnum.MAIN_UMFUTURE,
+                asset: 'BTC',
                 amount: 1.0,
-                fromSymbol: 'fromSymbol_example',
-                toSymbol: 'toSymbol_example',
+                fromSymbol: UserUniversalTransferFromSymbolEnum.ISOLATEDMARGIN_MARGIN,
+                toSymbol: UserUniversalTransferToSymbolEnum.MARGIN_ISOLATEDMARGIN,
                 recvWindow: 5000,
             };
 
@@ -1970,8 +1614,8 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: UserUniversalTransferRequest = {
-                type: 'type_example',
-                asset: 'asset_example',
+                type: UserUniversalTransferTypeEnum.MAIN_UMFUTURE,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1984,8 +1628,8 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: UserUniversalTransferRequest = {
-                type: 'type_example',
-                asset: 'asset_example',
+                type: UserUniversalTransferTypeEnum.MAIN_UMFUTURE,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -1998,8 +1642,8 @@ describe('AssetApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: UserUniversalTransferRequest = {
-                type: 'type_example',
-                asset: 'asset_example',
+                type: UserUniversalTransferTypeEnum.MAIN_UMFUTURE,
+                asset: 'BTC',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2012,8 +1656,8 @@ describe('AssetApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: UserUniversalTransferRequest = {
-                type: 'type_example',
-                asset: 'asset_example',
+                type: UserUniversalTransferTypeEnum.MAIN_UMFUTURE,
+                asset: 'BTC',
                 amount: 1.0,
             };
 

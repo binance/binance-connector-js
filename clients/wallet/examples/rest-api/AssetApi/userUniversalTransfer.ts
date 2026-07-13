@@ -1,4 +1,4 @@
-import { Wallet, WALLET_REST_API_PROD_URL } from '../../../src';
+import { Wallet, WalletRestAPI, WALLET_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,8 +10,8 @@ const client = new Wallet({ configurationRestAPI });
 async function userUniversalTransfer() {
     try {
         const response = await client.restAPI.userUniversalTransfer({
-            type: 'type_example',
-            asset: 'asset_example',
+            type: WalletRestAPI.UserUniversalTransferTypeEnum.MAIN_UMFUTURE,
+            asset: 'BTC',
             amount: 1.0,
         });
 

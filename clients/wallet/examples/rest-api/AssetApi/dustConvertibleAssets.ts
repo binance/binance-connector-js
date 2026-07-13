@@ -10,7 +10,7 @@ const client = new Wallet({ configurationRestAPI });
 async function dustConvertibleAssets() {
     try {
         const response = await client.restAPI.dustConvertibleAssets({
-            targetAsset: 'targetAsset_example',
+            targetAsset: 'BTC',
         });
 
         const rateLimits = response.rateLimits!;

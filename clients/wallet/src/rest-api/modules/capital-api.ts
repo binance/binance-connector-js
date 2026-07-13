@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -39,7 +38,9 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get information of coins (available for deposit and withdraw) for user.
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary All Coins\' Information (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -70,14 +71,17 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fetch deposit address with network.
          *
-         * If `network` is not send, return with default network of the coin.
-         * You can get `network` and `isDefault` in `networkList` in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
-         * `amount` needs to be sent if using LIGHTNING network
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `network` is not send, return with default network of the coin.
+         * - You can get `network` and `isDefault` in `networkList` in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+         * - `amount` needs to be sent if using LIGHTNING network
          *
          * @summary Deposit Address(supporting network) (USER_DATA)
-         * @param {string} coin
+         * @param {string} coin `coin` refers to the parent network address format that the address is using
          * @param {string} [network]
          * @param {number} [amount]
          * @param {number | bigint} [recvWindow]
@@ -125,20 +129,22 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fetch deposit history.
          *
+         * Weight(IP): 1
          *
-         * Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
-         * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must be less than 90 days.
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+         * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
          *
          * @summary Deposit History (supporting network) (USER_DATA)
-         * @param {boolean} [includeSource] Default: `false`, return `sourceAddress`field when set to `true`
+         * @param {boolean} [includeSource] return `sourceAddress` field when set to `true`
          * @param {string} [coin]
-         * @param {number | bigint} [status] 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [offset] Default: 0
-         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {DepositHistoryStatusEnum} [status] 0: pending, 6: credited but cannot withdraw, 7: Wrong Deposit, 8: Waiting User confirm, 1: success
+         * @param {number | bigint} [startTime] Default: 90 days from current timestamp
+         * @param {number | bigint} [endTime] Default: present timestamp
+         * @param {number | bigint} [offset]
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          * @param {string} [txId]
          *
@@ -147,7 +153,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         depositHistory: async (
             includeSource?: boolean,
             coin?: string,
-            status?: number | bigint,
+            status?: DepositHistoryStatusEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             offset?: number | bigint,
@@ -202,15 +208,13 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fetch deposit address list with network.
          *
+         * Weight(IP): 10
          *
-         * If network is not send, return with default network of the coin.
-         * You can get network and isDefault in networkList in the response of `Get /sapi/v1/capital/config/getall`.
+         * Security Type: USER_DATA
          *
-         * Weight: 10
-         *
-         * @summary Fetch deposit address list with network(USER_DATA)
-         * @param {string} coin
-         * @param {string} [network]
+         * @summary Fetch deposit address list with network (USER_DATA)
+         * @param {string} coin Coin name
+         * @param {string} [network] If network is not send, return with default network of the coin. You can get network and isDefault in networkList in the response of `Get /sapi/v1/capital/config/getall`
          *
          * @throws {RequiredError}
          */
@@ -247,7 +251,9 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fetch withdraw address list
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Fetch withdraw address list (USER_DATA)
          *
@@ -273,7 +279,9 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fetch withdraw quota
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Fetch withdraw quota (USER_DATA)
          *
@@ -299,14 +307,14 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Apply deposit credit for expired address (One click arrival)
          *
-         * Params need to be in the POST body
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
          * @summary One click arrival deposit apply (for expired address deposit) (USER_DATA)
          * @param {number | bigint} [depositId] Deposit record Id, priority use
-         * @param {string} [txId]
-         * @param {number | bigint} [subAccountId] Sub-accountId of Cloud user
+         * @param {string} [txId] Deposit txId, used when depositId is not specified
+         * @param {string} [subAccountId] Sub-accountId of Cloud user
          * @param {number | bigint} [subUserId] Sub-userId of parent user
          *
          * @throws {RequiredError}
@@ -314,7 +322,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         oneClickArrivalDepositApply: async (
             depositId?: number | bigint,
             txId?: string,
-            subAccountId?: number | bigint,
+            subAccountId?: string,
             subUserId?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -347,28 +355,31 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Submit a withdraw request.
+         * Submit a withdraw request
          *
+         * Weight(UID): 900
          *
-         * If `network` not send, return with default network of the coin.
-         * You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
-         * To check if travel rule is required, by using  `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
-         * For networks that do not support memo/tag, submitting a withdrawal request with a non-empty `addressTag` will return error `-4106 TAG_NOT_SUPPORTED_FOR_NETWORK`. Please omit the `addressTag` field for such networks. You can check whether a network requires a tag via `GET /sapi/v1/capital/config/getall`:
-         * If `withdrawTag` = `true` → memo/tag is required.
-         * If `withdrawTag` = `false` → memo/tag is not supported; omit `addressTag`.
+         * Security Type: USER_DATA
          *
-         * Weight: 900
+         * Notes:
+         * - If `network` not send, return with default network of the coin.
+         * - You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+         * - To check if travel rule is required, by using `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
+         * - "For networks that do not support memo/tag, submitting a withdrawal request with a non-empty `addressTag` will return error `-4106 TAG_NOT_SUPPORTED_FOR_NETWORK`. Please omit the `addressTag` field for such networks. You can check whether a network requires a tag via `GET /sapi/v1/capital/config/getall`: If `withdrawTag` = `true` → memo/tag is required. If `withdrawTag` = `false` → memo/tag is not supported; omit `addressTag`."
          *
-         * @summary Withdraw(USER_DATA)
+         * @summary Withdraw (USER_DATA)
          * @param {string} coin
-         * @param {string} address
-         * @param {number} amount
-         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
-         * @param {string} [network]
+         * @param {string} address Withdrawal address
+         * @param {number} amount Amount
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provide here, can be used in GET
+         * `/sapi/v1/capital/withdraw/history` for query.
+         * @param {string} [network] Withdrawal network
          * @param {string} [addressTag] Secondary address identifier for coins like XRP,XMR etc.
-         * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
-         * @param {string} [name] Description of the address. Address book cap is 200, space in name should be encoded into `%20`
-         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+         * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for
+         * returning the fee back to the departure account. Default `false`.
+         * @param {string} [name]
+         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current
+         * "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -440,27 +451,30 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Fetch withdraw history.
+         * Fetch withdraw history
          *
-         * `network` may not be in the response for old withdraw.
-         * Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
-         * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
-         * If `withdrawOrderId` is sent, time between `startTime` and `endTime` must be less than 7 days.
-         * If `withdrawOrderId` is sent, `startTime` and `endTime` are not sent, will return last 7 days records by default.
-         * Maximum support `idList` number is 45.
+         * Weight(UID): 18000 (10 requests per second)
          *
-         * Weight: 18000
-         * Request limit: 10 requests per second
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - `network` may not be in the response for old withdraw.
+         * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+         * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+         * - If `withdrawOrderId` is sent, time between `startTime` and `endTime` must be less than 7 days.
+         * - If `withdrawOrderId` is sent, `startTime` and `endTime` are not sent, will return last 7 days records by default.
+         * - Maximum support `idList` number is 45.
          *
          * @summary Withdraw History (supporting network) (USER_DATA)
          * @param {string} [coin]
-         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for
+         * query.
          * @param {number | bigint} [status] 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
          * @param {number | bigint} [offset] Default: 0
-         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [limit]
          * @param {string} [idList] id list returned in the response of POST `/sapi/v1/capital/withdraw/apply`, separated by `,`
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [startTime] Default: 90 days from current timestamp
+         * @param {number | bigint} [endTime] Default: present timestamp
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -531,7 +545,9 @@ export interface CapitalApiInterface {
     /**
      * Get information of coins (available for deposit and withdraw) for user.
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary All Coins\' Information (USER_DATA)
      * @param {AllCoinsInformationRequest} requestParameters Request parameters.
@@ -545,11 +561,14 @@ export interface CapitalApiInterface {
     /**
      * Fetch deposit address with network.
      *
-     * If `network` is not send, return with default network of the coin.
-     * You can get `network` and `isDefault` in `networkList` in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
-     * `amount` needs to be sent if using LIGHTNING network
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` is not send, return with default network of the coin.
+     * - You can get `network` and `isDefault` in `networkList` in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - `amount` needs to be sent if using LIGHTNING network
      *
      * @summary Deposit Address(supporting network) (USER_DATA)
      * @param {DepositAddressRequest} requestParameters Request parameters.
@@ -563,11 +582,13 @@ export interface CapitalApiInterface {
     /**
      * Fetch deposit history.
      *
+     * Weight(IP): 1
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must be less than 90 days.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
      *
      * @summary Deposit History (supporting network) (USER_DATA)
      * @param {DepositHistoryRequest} requestParameters Request parameters.
@@ -581,13 +602,11 @@ export interface CapitalApiInterface {
     /**
      * Fetch deposit address list with network.
      *
+     * Weight(IP): 10
      *
-     * If network is not send, return with default network of the coin.
-     * You can get network and isDefault in networkList in the response of `Get /sapi/v1/capital/config/getall`.
+     * Security Type: USER_DATA
      *
-     * Weight: 10
-     *
-     * @summary Fetch deposit address list with network(USER_DATA)
+     * @summary Fetch deposit address list with network (USER_DATA)
      * @param {FetchDepositAddressListWithNetworkRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -599,7 +618,9 @@ export interface CapitalApiInterface {
     /**
      * Fetch withdraw address list
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch withdraw address list (USER_DATA)
      *
@@ -610,7 +631,9 @@ export interface CapitalApiInterface {
     /**
      * Fetch withdraw quota
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch withdraw quota (USER_DATA)
      *
@@ -621,9 +644,9 @@ export interface CapitalApiInterface {
     /**
      * Apply deposit credit for expired address (One click arrival)
      *
-     * Params need to be in the POST body
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
      * @summary One click arrival deposit apply (for expired address deposit) (USER_DATA)
      * @param {OneClickArrivalDepositApplyRequest} requestParameters Request parameters.
@@ -635,19 +658,19 @@ export interface CapitalApiInterface {
         requestParameters?: OneClickArrivalDepositApplyRequest
     ): Promise<RestApiResponse<OneClickArrivalDepositApplyResponse>>;
     /**
-     * Submit a withdraw request.
+     * Submit a withdraw request
      *
+     * Weight(UID): 900
      *
-     * If `network` not send, return with default network of the coin.
-     * You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
-     * To check if travel rule is required, by using  `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
-     * For networks that do not support memo/tag, submitting a withdrawal request with a non-empty `addressTag` will return error `-4106 TAG_NOT_SUPPORTED_FOR_NETWORK`. Please omit the `addressTag` field for such networks. You can check whether a network requires a tag via `GET /sapi/v1/capital/config/getall`:
-     * If `withdrawTag` = `true` → memo/tag is required.
-     * If `withdrawTag` = `false` → memo/tag is not supported; omit `addressTag`.
+     * Security Type: USER_DATA
      *
-     * Weight: 900
+     * Notes:
+     * - If `network` not send, return with default network of the coin.
+     * - You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - To check if travel rule is required, by using `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
+     * - "For networks that do not support memo/tag, submitting a withdrawal request with a non-empty `addressTag` will return error `-4106 TAG_NOT_SUPPORTED_FOR_NETWORK`. Please omit the `addressTag` field for such networks. You can check whether a network requires a tag via `GET /sapi/v1/capital/config/getall`: If `withdrawTag` = `true` → memo/tag is required. If `withdrawTag` = `false` → memo/tag is not supported; omit `addressTag`."
      *
-     * @summary Withdraw(USER_DATA)
+     * @summary Withdraw (USER_DATA)
      * @param {WithdrawRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -655,17 +678,19 @@ export interface CapitalApiInterface {
      */
     withdraw(requestParameters: WithdrawRequest): Promise<RestApiResponse<WithdrawResponse>>;
     /**
-     * Fetch withdraw history.
+     * Fetch withdraw history
      *
-     * `network` may not be in the response for old withdraw.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
-     * If `withdrawOrderId` is sent, time between `startTime` and `endTime` must be less than 7 days.
-     * If `withdrawOrderId` is sent, `startTime` and `endTime` are not sent, will return last 7 days records by default.
-     * Maximum support `idList` number is 45.
+     * Weight(UID): 18000 (10 requests per second)
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     * - If `withdrawOrderId` is sent, time between `startTime` and `endTime` must be less than 7 days.
+     * - If `withdrawOrderId` is sent, `startTime` and `endTime` are not sent, will return last 7 days records by default.
+     * - Maximum support `idList` number is 45.
      *
      * @summary Withdraw History (supporting network) (USER_DATA)
      * @param {WithdrawHistoryRequest} requestParameters Request parameters.
@@ -697,7 +722,7 @@ export interface AllCoinsInformationRequest {
  */
 export interface DepositAddressRequest {
     /**
-     *
+     * `coin` refers to the parent network address format that the address is using
      * @type {string}
      * @memberof CapitalApiDepositAddress
      */
@@ -731,7 +756,7 @@ export interface DepositAddressRequest {
  */
 export interface DepositHistoryRequest {
     /**
-     * Default: `false`, return `sourceAddress`field when set to `true`
+     * return `sourceAddress` field when set to `true`
      * @type {boolean}
      * @memberof CapitalApiDepositHistory
      */
@@ -745,35 +770,35 @@ export interface DepositHistoryRequest {
     readonly coin?: string;
 
     /**
-     * 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
-     * @type {number | bigint}
+     * 0: pending, 6: credited but cannot withdraw, 7: Wrong Deposit, 8: Waiting User confirm, 1: success
+     * @type {0 | 1 | 2 | 6 | 7 | 8 | bigint}
      * @memberof CapitalApiDepositHistory
      */
-    readonly status?: number | bigint;
+    readonly status?: DepositHistoryStatusEnum;
 
     /**
-     *
+     * Default: 90 days from current timestamp
      * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Default: present timestamp
      * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 0
+     *
      * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
     readonly offset?: number | bigint;
 
     /**
-     * min 7, max 30, default 7
+     *
      * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
@@ -800,14 +825,14 @@ export interface DepositHistoryRequest {
  */
 export interface FetchDepositAddressListWithNetworkRequest {
     /**
-     *
+     * Coin name
      * @type {string}
      * @memberof CapitalApiFetchDepositAddressListWithNetwork
      */
     readonly coin: string;
 
     /**
-     *
+     * If network is not send, return with default network of the coin. You can get network and isDefault in networkList in the response of `Get /sapi/v1/capital/config/getall`
      * @type {string}
      * @memberof CapitalApiFetchDepositAddressListWithNetwork
      */
@@ -827,7 +852,7 @@ export interface OneClickArrivalDepositApplyRequest {
     readonly depositId?: number | bigint;
 
     /**
-     *
+     * Deposit txId, used when depositId is not specified
      * @type {string}
      * @memberof CapitalApiOneClickArrivalDepositApply
      */
@@ -835,10 +860,10 @@ export interface OneClickArrivalDepositApplyRequest {
 
     /**
      * Sub-accountId of Cloud user
-     * @type {number | bigint}
+     * @type {string}
      * @memberof CapitalApiOneClickArrivalDepositApply
      */
-    readonly subAccountId?: number | bigint;
+    readonly subAccountId?: string;
 
     /**
      * Sub-userId of parent user
@@ -861,28 +886,29 @@ export interface WithdrawRequest {
     readonly coin: string;
 
     /**
-     *
+     * Withdrawal address
      * @type {string}
      * @memberof CapitalApiWithdraw
      */
     readonly address: string;
 
     /**
-     *
+     * Amount
      * @type {number}
      * @memberof CapitalApiWithdraw
      */
     readonly amount: number;
 
     /**
-     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
+     * client side id for withdrawal, if provide here, can be used in GET
+     * `/sapi/v1/capital/withdraw/history` for query.
      * @type {string}
      * @memberof CapitalApiWithdraw
      */
     readonly withdrawOrderId?: string;
 
     /**
-     *
+     * Withdrawal network
      * @type {string}
      * @memberof CapitalApiWithdraw
      */
@@ -896,21 +922,23 @@ export interface WithdrawRequest {
     readonly addressTag?: string;
 
     /**
-     * When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
+     * When making internal transfer, `true` for returning the fee to the destination account; `false` for
+     * returning the fee back to the departure account. Default `false`.
      * @type {boolean}
      * @memberof CapitalApiWithdraw
      */
     readonly transactionFeeFlag?: boolean;
 
     /**
-     * Description of the address. Address book cap is 200, space in name should be encoded into `%20`
+     *
      * @type {string}
      * @memberof CapitalApiWithdraw
      */
     readonly name?: string;
 
     /**
-     * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+     * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current
+     * "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
      * @type {number | bigint}
      * @memberof CapitalApiWithdraw
      */
@@ -937,7 +965,8 @@ export interface WithdrawHistoryRequest {
     readonly coin?: string;
 
     /**
-     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
+     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for
+     * query.
      * @type {string}
      * @memberof CapitalApiWithdrawHistory
      */
@@ -958,7 +987,7 @@ export interface WithdrawHistoryRequest {
     readonly offset?: number | bigint;
 
     /**
-     * min 7, max 30, default 7
+     *
      * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
@@ -972,14 +1001,14 @@ export interface WithdrawHistoryRequest {
     readonly idList?: string;
 
     /**
-     *
+     * Default: 90 days from current timestamp
      * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Default: present timestamp
      * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
@@ -1009,14 +1038,16 @@ export class CapitalApi implements CapitalApiInterface {
     /**
      * Get information of coins (available for deposit and withdraw) for user.
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary All Coins\' Information (USER_DATA)
      * @param {AllCoinsInformationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AllCoinsInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/all-coins-info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#all-coins-information Binance API Documentation}
      */
     public async allCoinsInformation(
         requestParameters: AllCoinsInformationRequest = {}
@@ -1039,18 +1070,21 @@ export class CapitalApi implements CapitalApiInterface {
     /**
      * Fetch deposit address with network.
      *
-     * If `network` is not send, return with default network of the coin.
-     * You can get `network` and `isDefault` in `networkList` in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
-     * `amount` needs to be sent if using LIGHTNING network
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` is not send, return with default network of the coin.
+     * - You can get `network` and `isDefault` in `networkList` in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - `amount` needs to be sent if using LIGHTNING network
      *
      * @summary Deposit Address(supporting network) (USER_DATA)
      * @param {DepositAddressRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/deposite-address Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#deposit-address Binance API Documentation}
      */
     public async depositAddress(
         requestParameters: DepositAddressRequest
@@ -1076,18 +1110,20 @@ export class CapitalApi implements CapitalApiInterface {
     /**
      * Fetch deposit history.
      *
+     * Weight(IP): 1
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must be less than 90 days.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
      *
      * @summary Deposit History (supporting network) (USER_DATA)
      * @param {DepositHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/deposite-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#deposit-history Binance API Documentation}
      */
     public async depositHistory(
         requestParameters: DepositHistoryRequest = {}
@@ -1118,18 +1154,16 @@ export class CapitalApi implements CapitalApiInterface {
     /**
      * Fetch deposit address list with network.
      *
+     * Weight(IP): 10
      *
-     * If network is not send, return with default network of the coin.
-     * You can get network and isDefault in networkList in the response of `Get /sapi/v1/capital/config/getall`.
+     * Security Type: USER_DATA
      *
-     * Weight: 10
-     *
-     * @summary Fetch deposit address list with network(USER_DATA)
+     * @summary Fetch deposit address list with network (USER_DATA)
      * @param {FetchDepositAddressListWithNetworkRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FetchDepositAddressListWithNetworkResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/Fetch-deposit-address-list-with-network Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#fetch-deposit-address-list-with-network Binance API Documentation}
      */
     public async fetchDepositAddressListWithNetwork(
         requestParameters: FetchDepositAddressListWithNetworkRequest
@@ -1154,13 +1188,15 @@ export class CapitalApi implements CapitalApiInterface {
     /**
      * Fetch withdraw address list
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch withdraw address list (USER_DATA)
      * @returns {Promise<RestApiResponse<FetchWithdrawAddressListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/fetch-withdraw-address Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#fetch-withdraw-address-list Binance API Documentation}
      */
     public async fetchWithdrawAddressList(): Promise<
         RestApiResponse<FetchWithdrawAddressListResponse>
@@ -1181,13 +1217,15 @@ export class CapitalApi implements CapitalApiInterface {
     /**
      * Fetch withdraw quota
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch withdraw quota (USER_DATA)
      * @returns {Promise<RestApiResponse<FetchWithdrawQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/Fetch-withdraw-quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#fetch-withdraw-quota Binance API Documentation}
      */
     public async fetchWithdrawQuota(): Promise<RestApiResponse<FetchWithdrawQuotaResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.fetchWithdrawQuota();
@@ -1206,16 +1244,16 @@ export class CapitalApi implements CapitalApiInterface {
     /**
      * Apply deposit credit for expired address (One click arrival)
      *
-     * Params need to be in the POST body
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
      * @summary One click arrival deposit apply (for expired address deposit) (USER_DATA)
      * @param {OneClickArrivalDepositApplyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OneClickArrivalDepositApplyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/one-click-arrival-deposite-apply Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#one-click-arrival-deposit-apply Binance API Documentation}
      */
     public async oneClickArrivalDepositApply(
         requestParameters: OneClickArrivalDepositApplyRequest = {}
@@ -1239,24 +1277,24 @@ export class CapitalApi implements CapitalApiInterface {
     }
 
     /**
-     * Submit a withdraw request.
+     * Submit a withdraw request
      *
+     * Weight(UID): 900
      *
-     * If `network` not send, return with default network of the coin.
-     * You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
-     * To check if travel rule is required, by using  `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
-     * For networks that do not support memo/tag, submitting a withdrawal request with a non-empty `addressTag` will return error `-4106 TAG_NOT_SUPPORTED_FOR_NETWORK`. Please omit the `addressTag` field for such networks. You can check whether a network requires a tag via `GET /sapi/v1/capital/config/getall`:
-     * If `withdrawTag` = `true` → memo/tag is required.
-     * If `withdrawTag` = `false` → memo/tag is not supported; omit `addressTag`.
+     * Security Type: USER_DATA
      *
-     * Weight: 900
+     * Notes:
+     * - If `network` not send, return with default network of the coin.
+     * - You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - To check if travel rule is required, by using `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
+     * - "For networks that do not support memo/tag, submitting a withdrawal request with a non-empty `addressTag` will return error `-4106 TAG_NOT_SUPPORTED_FOR_NETWORK`. Please omit the `addressTag` field for such networks. You can check whether a network requires a tag via `GET /sapi/v1/capital/config/getall`: If `withdrawTag` = `true` → memo/tag is required. If `withdrawTag` = `false` → memo/tag is not supported; omit `addressTag`."
      *
-     * @summary Withdraw(USER_DATA)
+     * @summary Withdraw (USER_DATA)
      * @param {WithdrawRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/Withdraw Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#withdraw Binance API Documentation}
      */
     public async withdraw(
         requestParameters: WithdrawRequest
@@ -1286,24 +1324,26 @@ export class CapitalApi implements CapitalApiInterface {
     }
 
     /**
-     * Fetch withdraw history.
+     * Fetch withdraw history
      *
-     * `network` may not be in the response for old withdraw.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
-     * If `withdrawOrderId` is sent, time between `startTime` and `endTime` must be less than 7 days.
-     * If `withdrawOrderId` is sent, `startTime` and `endTime` are not sent, will return last 7 days records by default.
-     * Maximum support `idList` number is 45.
+     * Weight(UID): 18000 (10 requests per second)
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     * - If `withdrawOrderId` is sent, time between `startTime` and `endTime` must be less than 7 days.
+     * - If `withdrawOrderId` is sent, `startTime` and `endTime` are not sent, will return last 7 days records by default.
+     * - Maximum support `idList` number is 45.
      *
      * @summary Withdraw History (supporting network) (USER_DATA)
      * @param {WithdrawHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof CapitalApi
-     * @see {@link https://developers.binance.com/docs/wallet/capital/Withdraw-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#withdraw-history Binance API Documentation}
      */
     public async withdrawHistory(
         requestParameters: WithdrawHistoryRequest = {}
@@ -1330,4 +1370,13 @@ export class CapitalApi implements CapitalApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum DepositHistoryStatusEnum {
+    STATUS_0 = 0,
+    STATUS_1 = 1,
+    STATUS_2 = 2,
+    STATUS_6 = 6,
+    STATUS_7 = 7,
+    STATUS_8 = 8,
 }

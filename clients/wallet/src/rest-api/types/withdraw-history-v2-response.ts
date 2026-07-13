@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,11 +16,11 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { WithdrawHistoryV2ResponseInner } from './withdraw-history-v2-response-inner';
+import type { WithdrawHistoryV1ResponseInner } from './withdraw-history-v1-response-inner';
 
 /**
  *
  * @export
  * @interface WithdrawHistoryV2Response
  */
-export interface WithdrawHistoryV2Response extends Array<WithdrawHistoryV2ResponseInner> {}
+export interface WithdrawHistoryV2Response extends Array<WithdrawHistoryV1ResponseInner> {}

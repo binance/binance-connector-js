@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { CapitalApi } from '../../../src/rest-api';
+import { CapitalApi, DepositHistoryStatusEnum } from '../../../src/rest-api';
 import {
     AllCoinsInformationRequest,
     DepositAddressRequest,
@@ -100,36 +100,6 @@ describe('CapitalApi', () => {
                                 contractAddress: '0xc748673057861a797275cd8a068abb95a902e8de',
                                 denomination: 1000000,
                             },
-                            {
-                                network: 'ETH',
-                                coin: '1MBABYDOGE',
-                                withdrawIntegerMultiple: '0.01',
-                                isDefault: true,
-                                depositEnable: true,
-                                withdrawEnable: true,
-                                depositDesc: '',
-                                withdrawDesc: '',
-                                specialTips: '',
-                                specialWithdrawTips: '',
-                                name: 'Ethereum (ERC20)',
-                                resetAddressStatus: false,
-                                addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
-                                memoRegex: '',
-                                withdrawFee: '1511',
-                                withdrawMin: '3022',
-                                withdrawMax: '9999999999',
-                                withdrawInternalMin: '0.01',
-                                depositDust: '0.01',
-                                minConfirm: 6,
-                                unLockConfirm: 64,
-                                sameAddress: false,
-                                withdrawTag: false,
-                                estimatedArrivalTime: 2,
-                                busy: false,
-                                contractAddressUrl: 'https://etherscan.io/address/',
-                                contractAddress: '0xac57de9c1a09fec648e93eb98875b212db0d460b',
-                                denomination: 1000000,
-                            },
                         ],
                     },
                 ])
@@ -201,36 +171,6 @@ describe('CapitalApi', () => {
                                 contractAddress: '0xc748673057861a797275cd8a068abb95a902e8de',
                                 denomination: 1000000,
                             },
-                            {
-                                network: 'ETH',
-                                coin: '1MBABYDOGE',
-                                withdrawIntegerMultiple: '0.01',
-                                isDefault: true,
-                                depositEnable: true,
-                                withdrawEnable: true,
-                                depositDesc: '',
-                                withdrawDesc: '',
-                                specialTips: '',
-                                specialWithdrawTips: '',
-                                name: 'Ethereum (ERC20)',
-                                resetAddressStatus: false,
-                                addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
-                                memoRegex: '',
-                                withdrawFee: '1511',
-                                withdrawMin: '3022',
-                                withdrawMax: '9999999999',
-                                withdrawInternalMin: '0.01',
-                                depositDust: '0.01',
-                                minConfirm: 6,
-                                unLockConfirm: 64,
-                                sameAddress: false,
-                                withdrawTag: false,
-                                estimatedArrivalTime: 2,
-                                busy: false,
-                                contractAddressUrl: 'https://etherscan.io/address/',
-                                contractAddress: '0xac57de9c1a09fec648e93eb98875b212db0d460b',
-                                denomination: 1000000,
-                            },
                         ],
                     },
                 ])
@@ -269,7 +209,7 @@ describe('CapitalApi', () => {
     describe('depositAddress()', () => {
         it('should execute depositAddress() successfully with required parameters only', async () => {
             const params: DepositAddressRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
             };
 
             mockResponse = JSONParse(
@@ -297,7 +237,7 @@ describe('CapitalApi', () => {
 
         it('should execute depositAddress() successfully with optional parameters', async () => {
             const params: DepositAddressRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 network: 'network_example',
                 amount: 1.0,
                 recvWindow: 5000,
@@ -328,7 +268,7 @@ describe('CapitalApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: DepositAddressRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.coin;
@@ -340,7 +280,7 @@ describe('CapitalApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: DepositAddressRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
             };
 
             const errorResponse = {
@@ -379,24 +319,6 @@ describe('CapitalApi', () => {
                         walletType: 0,
                         travelRuleStatus: 0,
                     },
-                    {
-                        id: '769754833590042625',
-                        amount: '0.50000000',
-                        coin: 'IOTA',
-                        network: 'IOTA',
-                        status: 1,
-                        address:
-                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                        addressTag: '',
-                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                        insertTime: 1599620082000,
-                        completeTime: 1661493146000,
-                        transferType: 0,
-                        confirmTimes: '1/1',
-                        unlockConfirm: 0,
-                        walletType: 0,
-                        travelRuleStatus: 1,
-                    },
                 ])
             );
 
@@ -417,12 +339,12 @@ describe('CapitalApi', () => {
         it('should execute depositHistory() successfully with optional parameters', async () => {
             const params: DepositHistoryRequest = {
                 includeSource: false,
-                coin: 'coin_example',
-                status: 789,
+                coin: 'BTC',
+                status: DepositHistoryStatusEnum.STATUS_0,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 offset: 0,
-                limit: 7,
+                limit: 1000,
                 recvWindow: 5000,
                 txId: '1',
             };
@@ -445,24 +367,6 @@ describe('CapitalApi', () => {
                         unlockConfirm: 0,
                         walletType: 0,
                         travelRuleStatus: 0,
-                    },
-                    {
-                        id: '769754833590042625',
-                        amount: '0.50000000',
-                        coin: 'IOTA',
-                        network: 'IOTA',
-                        status: 1,
-                        address:
-                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                        addressTag: '',
-                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                        insertTime: 1599620082000,
-                        completeTime: 1661493146000,
-                        transferType: 0,
-                        confirmTimes: '1/1',
-                        unlockConfirm: 0,
-                        walletType: 0,
-                        travelRuleStatus: 1,
                     },
                 ])
             );
@@ -500,7 +404,7 @@ describe('CapitalApi', () => {
     describe('fetchDepositAddressListWithNetwork()', () => {
         it('should execute fetchDepositAddressListWithNetwork() successfully with required parameters only', async () => {
             const params: FetchDepositAddressListWithNetworkRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
             };
 
             mockResponse = JSONParse(
@@ -510,18 +414,6 @@ describe('CapitalApi', () => {
                         address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
                         tag: '',
                         isDefault: 0,
-                    },
-                    {
-                        coin: 'ETH',
-                        address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
-                        tag: '',
-                        isDefault: 0,
-                    },
-                    {
-                        coin: 'ETH',
-                        address: '0x00003ada75e7da97ba0db2fcde72131f712455e2',
-                        tag: '',
-                        isDefault: 1,
                     },
                 ])
             );
@@ -542,7 +434,7 @@ describe('CapitalApi', () => {
 
         it('should execute fetchDepositAddressListWithNetwork() successfully with optional parameters', async () => {
             const params: FetchDepositAddressListWithNetworkRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 network: 'network_example',
             };
 
@@ -553,18 +445,6 @@ describe('CapitalApi', () => {
                         address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
                         tag: '',
                         isDefault: 0,
-                    },
-                    {
-                        coin: 'ETH',
-                        address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
-                        tag: '',
-                        isDefault: 0,
-                    },
-                    {
-                        coin: 'ETH',
-                        address: '0x00003ada75e7da97ba0db2fcde72131f712455e2',
-                        tag: '',
-                        isDefault: 1,
                     },
                 ])
             );
@@ -585,7 +465,7 @@ describe('CapitalApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: FetchDepositAddressListWithNetworkRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.coin;
@@ -597,7 +477,7 @@ describe('CapitalApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: FetchDepositAddressListWithNetworkRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
             };
 
             const errorResponse = {
@@ -726,7 +606,7 @@ describe('CapitalApi', () => {
             const params: OneClickArrivalDepositApplyRequest = {
                 depositId: 1,
                 txId: '1',
-                subAccountId: 1,
+                subAccountId: '1',
                 subUserId: 1,
             };
 
@@ -769,7 +649,7 @@ describe('CapitalApi', () => {
     describe('withdraw()', () => {
         it('should execute withdraw() successfully with required parameters only', async () => {
             const params: WithdrawRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
             };
@@ -792,13 +672,13 @@ describe('CapitalApi', () => {
 
         it('should execute withdraw() successfully with optional parameters', async () => {
             const params: WithdrawRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 network: 'network_example',
                 addressTag: 'addressTag_example',
-                transactionFeeFlag: false,
+                transactionFeeFlag: true,
                 name: 'name_example',
                 walletType: 0,
                 recvWindow: 5000,
@@ -822,7 +702,7 @@ describe('CapitalApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: WithdrawRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
             };
@@ -836,7 +716,7 @@ describe('CapitalApi', () => {
 
         it('should throw RequiredError when address is missing', async () => {
             const _params: WithdrawRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
             };
@@ -850,7 +730,7 @@ describe('CapitalApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: WithdrawRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
             };
@@ -864,7 +744,7 @@ describe('CapitalApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: WithdrawRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
             };
@@ -906,23 +786,6 @@ describe('CapitalApi', () => {
                         txKey: '',
                         completeTime: '2023-03-23 16:52:41',
                     },
-                    {
-                        id: '156ec387f49b41df8724fa744fa82719',
-                        amount: '0.00150000',
-                        transactionFee: '0.004',
-                        coin: 'BTC',
-                        status: 6,
-                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                        applyTime: '2019-09-24 12:43:45',
-                        network: 'BTC',
-                        transferType: 0,
-                        info: '',
-                        confirmNo: 2,
-                        walletType: 1,
-                        txKey: '',
-                        completeTime: '2023-03-23 16:52:41',
-                    },
                 ])
             );
 
@@ -942,11 +805,11 @@ describe('CapitalApi', () => {
 
         it('should execute withdrawHistory() successfully with optional parameters', async () => {
             const params: WithdrawHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 withdrawOrderId: '1',
-                status: 789,
+                status: 0,
                 offset: 0,
-                limit: 7,
+                limit: 1000,
                 idList: 'idList_example',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -969,23 +832,6 @@ describe('CapitalApi', () => {
                         withdrawOrderId: 'WITHDRAWtest123',
                         info: 'The address is not valid. Please confirm with the recipient',
                         confirmNo: 3,
-                        walletType: 1,
-                        txKey: '',
-                        completeTime: '2023-03-23 16:52:41',
-                    },
-                    {
-                        id: '156ec387f49b41df8724fa744fa82719',
-                        amount: '0.00150000',
-                        transactionFee: '0.004',
-                        coin: 'BTC',
-                        status: 6,
-                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                        applyTime: '2019-09-24 12:43:45',
-                        network: 'BTC',
-                        transferType: 0,
-                        info: '',
-                        confirmNo: 2,
                         walletType: 1,
                         txKey: '',
                         completeTime: '2023-03-23 16:52:41',

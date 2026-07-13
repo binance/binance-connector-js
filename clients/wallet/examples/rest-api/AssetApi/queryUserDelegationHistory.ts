@@ -10,7 +10,7 @@ const client = new Wallet({ configurationRestAPI });
 async function queryUserDelegationHistory() {
     try {
         const response = await client.restAPI.queryUserDelegationHistory({
-            email: 'email_example',
+            email: 'abc@test.com',
             startTime: 1623319461670,
             endTime: 1641782889000,
         });

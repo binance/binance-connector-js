@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -35,7 +34,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fetch account api trading status detail.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Account API Trading Status (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -66,7 +67,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fetch account info detail.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Account info (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -97,7 +100,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fetch account status detail.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Account Status (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -128,23 +133,26 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Daily account snapshot
          *
-         * The query time period must be less then 30 days
-         * Support query within the last one month only
-         * If startTimeand endTime not sent, return records of the last 7 days by default
+         * Weight(IP): 2400
          *
-         * Weight: 2400
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The query time period must be less then 30 days
+         * - Support query within the last one month only
+         * - If startTimeand endTime not sent, return records of the last 7 days by default
          *
          * @summary Daily Account Snapshot (USER_DATA)
-         * @param {string} type
+         * @param {DailyAccountSnapshotTypeEnum} type
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         dailyAccountSnapshot: async (
-            type: string,
+            type: DailyAccountSnapshotTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             limit?: number | bigint,
@@ -186,8 +194,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         * Disable Fast Withdraw Switch
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - This request will disable fastwithdraw switch under your account. You need to enable "trade" option for the api key which requests this endpoint.
          *
          * @summary Disable Fast Withdraw Switch (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -218,10 +232,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Enable Fast Withdraw Switch (USER_DATA)
          *
-         * This request will enable fastwithdraw switch under your  account. <br></br>
-         * When Fast Withdraw Switch is on, transferring funds to a Binance account will be done instantly. There is no on-chain transaction, no transaction ID and no withdrawal fee.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - This request will enable fastwithdraw switch under your account. You need to enable "trade" option for the api key which requests this endpoint.
+         * - When Fast Withdraw Switch is on, transferring funds to a Binance account will be done instantly. There is no on-chain transaction, no transaction ID and no withdrawal fee.
          *
          * @summary Enable Fast Withdraw Switch (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -252,7 +269,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get API Key Permission
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get API Key Permission (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -291,7 +310,9 @@ export interface AccountApiInterface {
     /**
      * Fetch account api trading status detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account API Trading Status (USER_DATA)
      * @param {AccountApiTradingStatusRequest} requestParameters Request parameters.
@@ -305,7 +326,9 @@ export interface AccountApiInterface {
     /**
      * Fetch account info detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account info (USER_DATA)
      * @param {AccountInfoRequest} requestParameters Request parameters.
@@ -319,7 +342,9 @@ export interface AccountApiInterface {
     /**
      * Fetch account status detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account Status (USER_DATA)
      * @param {AccountStatusRequest} requestParameters Request parameters.
@@ -333,11 +358,14 @@ export interface AccountApiInterface {
     /**
      * Daily account snapshot
      *
-     * The query time period must be less then 30 days
-     * Support query within the last one month only
-     * If startTimeand endTime not sent, return records of the last 7 days by default
+     * Weight(IP): 2400
      *
-     * Weight: 2400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The query time period must be less then 30 days
+     * - Support query within the last one month only
+     * - If startTimeand endTime not sent, return records of the last 7 days by default
      *
      * @summary Daily Account Snapshot (USER_DATA)
      * @param {DailyAccountSnapshotRequest} requestParameters Request parameters.
@@ -349,8 +377,14 @@ export interface AccountApiInterface {
         requestParameters: DailyAccountSnapshotRequest
     ): Promise<RestApiResponse<DailyAccountSnapshotResponse>>;
     /**
+     * Disable Fast Withdraw Switch
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request will disable fastwithdraw switch under your account. You need to enable "trade" option for the api key which requests this endpoint.
      *
      * @summary Disable Fast Withdraw Switch (USER_DATA)
      * @param {DisableFastWithdrawSwitchRequest} requestParameters Request parameters.
@@ -364,10 +398,13 @@ export interface AccountApiInterface {
     /**
      * Enable Fast Withdraw Switch (USER_DATA)
      *
-     * This request will enable fastwithdraw switch under your  account. <br></br>
-     * When Fast Withdraw Switch is on, transferring funds to a Binance account will be done instantly. There is no on-chain transaction, no transaction ID and no withdrawal fee.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request will enable fastwithdraw switch under your account. You need to enable "trade" option for the api key which requests this endpoint.
+     * - When Fast Withdraw Switch is on, transferring funds to a Binance account will be done instantly. There is no on-chain transaction, no transaction ID and no withdrawal fee.
      *
      * @summary Enable Fast Withdraw Switch (USER_DATA)
      * @param {EnableFastWithdrawSwitchRequest} requestParameters Request parameters.
@@ -381,7 +418,9 @@ export interface AccountApiInterface {
     /**
      * Get API Key Permission
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get API Key Permission (USER_DATA)
      * @param {GetApiKeyPermissionRequest} requestParameters Request parameters.
@@ -440,10 +479,10 @@ export interface AccountStatusRequest {
 export interface DailyAccountSnapshotRequest {
     /**
      *
-     * @type {string}
+     * @type {'SPOT' | 'MARGIN' | 'FUTURES'}
      * @memberof AccountApiDailyAccountSnapshot
      */
-    readonly type: string;
+    readonly type: DailyAccountSnapshotTypeEnum;
 
     /**
      *
@@ -460,7 +499,7 @@ export interface DailyAccountSnapshotRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * min 7, max 30, default 7
+     *
      * @type {number | bigint}
      * @memberof AccountApiDailyAccountSnapshot
      */
@@ -529,14 +568,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Fetch account api trading status detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account API Trading Status (USER_DATA)
      * @param {AccountApiTradingStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountApiTradingStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/wallet/account/Account-API-Trading-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#account-api-trading-status Binance API Documentation}
      */
     public async accountApiTradingStatus(
         requestParameters: AccountApiTradingStatusRequest = {}
@@ -559,14 +600,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Fetch account info detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account info (USER_DATA)
      * @param {AccountInfoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/wallet/account/Account-info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#account-info Binance API Documentation}
      */
     public async accountInfo(
         requestParameters: AccountInfoRequest = {}
@@ -589,14 +632,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Fetch account status detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account Status (USER_DATA)
      * @param {AccountStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/wallet/account/Account-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#account-status Binance API Documentation}
      */
     public async accountStatus(
         requestParameters: AccountStatusRequest = {}
@@ -619,18 +664,21 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Daily account snapshot
      *
-     * The query time period must be less then 30 days
-     * Support query within the last one month only
-     * If startTimeand endTime not sent, return records of the last 7 days by default
+     * Weight(IP): 2400
      *
-     * Weight: 2400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The query time period must be less then 30 days
+     * - Support query within the last one month only
+     * - If startTimeand endTime not sent, return records of the last 7 days by default
      *
      * @summary Daily Account Snapshot (USER_DATA)
      * @param {DailyAccountSnapshotRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DailyAccountSnapshotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/wallet/account/daily-account-snapshoot Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#daily-account-snapshot Binance API Documentation}
      */
     public async dailyAccountSnapshot(
         requestParameters: DailyAccountSnapshotRequest
@@ -655,15 +703,21 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
+     * Disable Fast Withdraw Switch
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request will disable fastwithdraw switch under your account. You need to enable "trade" option for the api key which requests this endpoint.
      *
      * @summary Disable Fast Withdraw Switch (USER_DATA)
      * @param {DisableFastWithdrawSwitchRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/wallet/account/Disable-Fast-Withdraw-Switch Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#disable-fast-withdraw-switch Binance API Documentation}
      */
     public async disableFastWithdrawSwitch(
         requestParameters: DisableFastWithdrawSwitchRequest = {}
@@ -686,17 +740,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Enable Fast Withdraw Switch (USER_DATA)
      *
-     * This request will enable fastwithdraw switch under your  account. <br></br>
-     * When Fast Withdraw Switch is on, transferring funds to a Binance account will be done instantly. There is no on-chain transaction, no transaction ID and no withdrawal fee.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request will enable fastwithdraw switch under your account. You need to enable "trade" option for the api key which requests this endpoint.
+     * - When Fast Withdraw Switch is on, transferring funds to a Binance account will be done instantly. There is no on-chain transaction, no transaction ID and no withdrawal fee.
      *
      * @summary Enable Fast Withdraw Switch (USER_DATA)
      * @param {EnableFastWithdrawSwitchRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/wallet/account/Enable-Fast-Withdraw-Switch Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#enable-fast-withdraw-switch Binance API Documentation}
      */
     public async enableFastWithdrawSwitch(
         requestParameters: EnableFastWithdrawSwitchRequest = {}
@@ -719,14 +776,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get API Key Permission
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get API Key Permission (USER_DATA)
      * @param {GetApiKeyPermissionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetApiKeyPermissionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/wallet/account/api-key-permission Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#get-api-key-permission Binance API Documentation}
      */
     public async getApiKeyPermission(
         requestParameters: GetApiKeyPermissionRequest = {}
@@ -745,4 +804,10 @@ export class AccountApi implements AccountApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum DailyAccountSnapshotTypeEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+    FUTURES = 'FUTURES',
 }

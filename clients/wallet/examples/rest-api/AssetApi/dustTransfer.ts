@@ -10,7 +10,7 @@ const client = new Wallet({ configurationRestAPI });
 async function dustTransfer() {
     try {
         const response = await client.restAPI.dustTransfer({
-            asset: 'asset_example',
+            asset: 'BTC',
         });
 
         const rateLimits = response.rateLimits!;

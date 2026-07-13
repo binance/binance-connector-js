@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -62,6 +62,12 @@ export interface DepositHistoryTravelRuleResponseInner {
      */
     travelRuleStatus?: number | bigint;
     /**
+     * Overall travel rule verification status (GTR + sanctions screening combined). \"PASSED\": verification complete, deposit released. \"PENDING\": verification in progress, deposit frozen. \"REJECTED\": verification failed.
+     * @type {string}
+     * @memberof DepositHistoryTravelRuleResponseInner
+     */
+    travelRuleStatusV2?: string;
+    /**
      *
      * @type {string}
      * @memberof DepositHistoryTravelRuleResponseInner
@@ -86,6 +92,12 @@ export interface DepositHistoryTravelRuleResponseInner {
      */
     insertTime?: number | bigint;
     /**
+     * Timestamp when the deposit was fully completed/credited (epoch ms).
+     * @type {number | bigint}
+     * @memberof DepositHistoryTravelRuleResponseInner
+     */
+    completeTime?: number | bigint;
+    /**
      *
      * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
@@ -97,18 +109,6 @@ export interface DepositHistoryTravelRuleResponseInner {
      * @memberof DepositHistoryTravelRuleResponseInner
      */
     confirmTimes?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof DepositHistoryTravelRuleResponseInner
-     */
-    unlockConfirm?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof DepositHistoryTravelRuleResponseInner
-     */
-    walletType?: number | bigint;
     /**
      *
      * @type {boolean}

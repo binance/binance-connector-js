@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,121 +16,121 @@
 /**
  *
  * @export
- * @interface WithdrawHistoryV2ResponseInner
+ * @interface WithdrawHistoryV1ResponseInner
  */
-export interface WithdrawHistoryV2ResponseInner {
+export interface WithdrawHistoryV1ResponseInner {
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     id?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     trId?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     amount?: string;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     transactionFee?: string;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     coin?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     withdrawalStatus?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     travelRuleStatus?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     address?: string;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     txId?: string;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     applyTime?: string;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     network?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     transferType?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     withdrawOrderId?: string;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     info?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     confirmNo?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     walletType?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     txKey?: string;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     questionnaire?: string;
     /**
      *
      * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
+     * @memberof WithdrawHistoryV1ResponseInner
      */
     completeTime?: string;
 }

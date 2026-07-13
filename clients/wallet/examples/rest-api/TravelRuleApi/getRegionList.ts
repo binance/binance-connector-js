@@ -10,7 +10,7 @@ const client = new Wallet({ configurationRestAPI });
 async function getRegionList() {
     try {
         const response = await client.restAPI.getRegionList({
-            countryCode: 'countryCode_example',
+            countryCode: 'au',
         });
 
         const rateLimits = response.rateLimits!;

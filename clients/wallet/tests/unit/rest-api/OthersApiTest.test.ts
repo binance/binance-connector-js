@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -39,10 +39,7 @@ describe('OthersApi', () => {
     describe('getSymbolsDelistScheduleForSpot()', () => {
         it('should execute getSymbolsDelistScheduleForSpot() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([
-                    { delistTime: 1686161202000, symbols: ['ADAUSDT', 'BNBUSDT'] },
-                    { delistTime: 1686222232000, symbols: ['ETHUSDT'] },
-                ])
+                JSONStringify([{ delistTime: 1686161202000, symbols: ['ADAUSDT'] }])
             );
 
             const spy = jest.spyOn(client, 'getSymbolsDelistScheduleForSpot').mockReturnValue(
@@ -65,10 +62,7 @@ describe('OthersApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { delistTime: 1686161202000, symbols: ['ADAUSDT', 'BNBUSDT'] },
-                    { delistTime: 1686222232000, symbols: ['ETHUSDT'] },
-                ])
+                JSONStringify([{ delistTime: 1686161202000, symbols: ['ADAUSDT'] }])
             );
 
             const spy = jest.spyOn(client, 'getSymbolsDelistScheduleForSpot').mockReturnValue(

@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -61,6 +61,7 @@ import type {
     DepositHistoryTravelRuleRequest,
     DepositHistoryV2Request,
     FetchAddressVerificationListRequest,
+    GetCountryListRequest,
     GetRegionListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
@@ -199,14 +200,16 @@ export class RestAPI {
     /**
      * Fetch account api trading status detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account API Trading Status (USER_DATA)
      * @param {AccountApiTradingStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountApiTradingStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/account/Account-API-Trading-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#account-api-trading-status Binance API Documentation}
      */
     accountApiTradingStatus(
         requestParameters: AccountApiTradingStatusRequest = {}
@@ -217,14 +220,16 @@ export class RestAPI {
     /**
      * Fetch account info detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account info (USER_DATA)
      * @param {AccountInfoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/account/Account-info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#account-info Binance API Documentation}
      */
     accountInfo(
         requestParameters: AccountInfoRequest = {}
@@ -235,14 +240,16 @@ export class RestAPI {
     /**
      * Fetch account status detail.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Account Status (USER_DATA)
      * @param {AccountStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/account/Account-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#account-status Binance API Documentation}
      */
     accountStatus(
         requestParameters: AccountStatusRequest = {}
@@ -253,18 +260,21 @@ export class RestAPI {
     /**
      * Daily account snapshot
      *
-     * The query time period must be less then 30 days
-     * Support query within the last one month only
-     * If startTimeand endTime not sent, return records of the last 7 days by default
+     * Weight(IP): 2400
      *
-     * Weight: 2400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The query time period must be less then 30 days
+     * - Support query within the last one month only
+     * - If startTimeand endTime not sent, return records of the last 7 days by default
      *
      * @summary Daily Account Snapshot (USER_DATA)
      * @param {DailyAccountSnapshotRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DailyAccountSnapshotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/account/daily-account-snapshoot Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#daily-account-snapshot Binance API Documentation}
      */
     dailyAccountSnapshot(
         requestParameters: DailyAccountSnapshotRequest
@@ -273,15 +283,21 @@ export class RestAPI {
     }
 
     /**
+     * Disable Fast Withdraw Switch
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request will disable fastwithdraw switch under your account. You need to enable "trade" option for the api key which requests this endpoint.
      *
      * @summary Disable Fast Withdraw Switch (USER_DATA)
      * @param {DisableFastWithdrawSwitchRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/account/Disable-Fast-Withdraw-Switch Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#disable-fast-withdraw-switch Binance API Documentation}
      */
     disableFastWithdrawSwitch(
         requestParameters: DisableFastWithdrawSwitchRequest = {}
@@ -292,17 +308,20 @@ export class RestAPI {
     /**
      * Enable Fast Withdraw Switch (USER_DATA)
      *
-     * This request will enable fastwithdraw switch under your  account. <br></br>
-     * When Fast Withdraw Switch is on, transferring funds to a Binance account will be done instantly. There is no on-chain transaction, no transaction ID and no withdrawal fee.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - This request will enable fastwithdraw switch under your account. You need to enable "trade" option for the api key which requests this endpoint.
+     * - When Fast Withdraw Switch is on, transferring funds to a Binance account will be done instantly. There is no on-chain transaction, no transaction ID and no withdrawal fee.
      *
      * @summary Enable Fast Withdraw Switch (USER_DATA)
      * @param {EnableFastWithdrawSwitchRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/account/Enable-Fast-Withdraw-Switch Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#enable-fast-withdraw-switch Binance API Documentation}
      */
     enableFastWithdrawSwitch(
         requestParameters: EnableFastWithdrawSwitchRequest = {}
@@ -313,14 +332,16 @@ export class RestAPI {
     /**
      * Get API Key Permission
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get API Key Permission (USER_DATA)
      * @param {GetApiKeyPermissionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetApiKeyPermissionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/account/api-key-permission Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/account#get-api-key-permission Binance API Documentation}
      */
     getApiKeyPermission(
         requestParameters: GetApiKeyPermissionRequest = {}
@@ -331,17 +352,19 @@ export class RestAPI {
     /**
      * Fetch details of assets supported on Binance.
      *
+     * Weight(IP): 1
      *
-     * Please get network and other deposit or withdraw details from ``GET /sapi/v1/capital/config/getall``.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Please get network and other deposit or withdraw details from `GET /sapi/v1/capital/config/getall`.
      *
      * @summary Asset Detail (USER_DATA)
      * @param {AssetDetailRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AssetDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Asset-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#asset-detail Binance API Documentation}
      */
     assetDetail(
         requestParameters: AssetDetailRequest = {}
@@ -352,17 +375,19 @@ export class RestAPI {
     /**
      * Query asset dividend record.
      *
+     * Weight(IP): 10
      *
-     * There cannot be more than 180 days between parameter `startTime` and `endTime`.
+     * Security Type: USER_DATA
      *
-     * Weight: 10
+     * Notes:
+     * - There cannot be more than 180 days between parameter `startTime` and `endTime`.
      *
      * @summary Asset Dividend Record (USER_DATA)
      * @param {AssetDividendRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AssetDividendRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/assets-divided-record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#asset-dividend-record Binance API Documentation}
      */
     assetDividendRecord(
         requestParameters: AssetDividendRecordRequest = {}
@@ -373,14 +398,16 @@ export class RestAPI {
     /**
      * Convert dust assets
      *
-     * Weight: 10
+     * Weight(UID): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Dust Convert (USER_DATA)
      * @param {DustConvertRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DustConvertResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Convert Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#dust-convert Binance API Documentation}
      */
     dustConvert(
         requestParameters: DustConvertRequest
@@ -391,14 +418,16 @@ export class RestAPI {
     /**
      * Query dust convertible assets
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Dust Convertible Assets (USER_DATA)
      * @param {DustConvertibleAssetsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DustConvertibleAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Convertible-Assets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#dust-convertible-assets Binance API Documentation}
      */
     dustConvertibleAssets(
         requestParameters: DustConvertibleAssetsRequest
@@ -409,16 +438,19 @@ export class RestAPI {
     /**
      * Convert dust assets to BNB.
      *
-     * You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(UID): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
      *
      * @summary Dust Transfer (USER_DATA)
      * @param {DustTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DustTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#dust-transfer Binance API Documentation}
      */
     dustTransfer(
         requestParameters: DustTransferRequest
@@ -429,17 +461,20 @@ export class RestAPI {
     /**
      * Dustlog
      *
-     * Only return last 100 records
-     * Only return records after 2020/12/01
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary DustLog(USER_DATA)
+     * Notes:
+     * - Only return last 100 records
+     * - Only return records after 2020/12/01
+     *
+     * @summary DustLog (USER_DATA)
      * @param {DustlogRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DustlogResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/dust-log Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#dustlog Binance API Documentation}
      */
     dustlog(requestParameters: DustlogRequest = {}): Promise<RestApiResponse<DustlogResponse>> {
         return this.assetApi.dustlog(requestParameters);
@@ -448,17 +483,19 @@ export class RestAPI {
     /**
      * Query Funding Wallet
      *
+     * Weight(IP): 1
      *
-     * Currently supports querying the following business assets：Binance Pay, Binance Card, Binance Gift Card, Stock Token
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Currently supports querying the following business assets：Binance Pay, Binance Card, Binance Gift Card, Stock Token
      *
      * @summary Funding Wallet (USER_DATA)
      * @param {FundingWalletRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FundingWalletResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Funding-Wallet Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#funding-wallet Binance API Documentation}
      */
     fundingWallet(
         requestParameters: FundingWalletRequest = {}
@@ -469,14 +506,16 @@ export class RestAPI {
     /**
      * Get Assets That Can Be Converted Into BNB
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Assets That Can Be Converted Into BNB (USER_DATA)
      * @param {GetAssetsThatCanBeConvertedIntoBnbRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetAssetsThatCanBeConvertedIntoBnbResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/assets-can-convert-bnb Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#get-assets-that-can-be-converted-into-bnb Binance API Documentation}
      */
     getAssetsThatCanBeConvertedIntoBnb(
         requestParameters: GetAssetsThatCanBeConvertedIntoBnbRequest = {}
@@ -487,17 +526,20 @@ export class RestAPI {
     /**
      * The query of Cloud-Mining payment and refund history
      *
-     * Just return the SUCCESS records of payment and refund.
-     * For response, type = 248 means payment, type = 249 means refund, status =S means SUCCESS.
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Just return the SUCCESS records of payment and refund.
+     * - For response, type = 248 means payment, type = 249 means refund, status =S means SUCCESS.
      *
      * @summary Get Cloud-Mining payment and refund history (USER_DATA)
      * @param {GetCloudMiningPaymentAndRefundHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetCloudMiningPaymentAndRefundHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/cloud-mining-payment-and-refund-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#get-cloud-mining-payment-and-refund-history Binance API Documentation}
      */
     getCloudMiningPaymentAndRefundHistory(
         requestParameters: GetCloudMiningPaymentAndRefundHistoryRequest
@@ -506,15 +548,18 @@ export class RestAPI {
     }
 
     /**
-     * Get the list of symbols that are scheduled to be opened for trading in the market.
+     * Get the list of symbols that are scheduled to be opened for trading in
+     * the market.
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Open Symbol List (MARKET_DATA)
      *
      * @returns {Promise<RestApiResponse<GetOpenSymbolListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/open-symbol-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#get-open-symbol-list Binance API Documentation}
      */
     getOpenSymbolList(): Promise<RestApiResponse<GetOpenSymbolListResponse>> {
         return this.assetApi.getOpenSymbolList();
@@ -523,14 +568,16 @@ export class RestAPI {
     /**
      * Query User Delegation History
      *
-     * Weight: 60
+     * Weight(IP): 60
      *
-     * @summary Query User Delegation History(For Master Account)(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query User Delegation History(For Master Account) (USER_DATA)
      * @param {QueryUserDelegationHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryUserDelegationHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/query-user-delegation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#query-user-delegation-history Binance API Documentation}
      */
     queryUserDelegationHistory(
         requestParameters: QueryUserDelegationHistoryRequest
@@ -541,20 +588,22 @@ export class RestAPI {
     /**
      * Query User Universal Transfer History
      *
+     * Weight(IP): 1
      *
-     *  `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     *  `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     * Support query within the last 6 months only
-     * If `startTime`and `endTime` not sent, return records of the last 7 days by default
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
+     * - `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
+     * - Support query within the last 6 months only
+     * - If `startTime`and `endTime` not sent, return records of the last 7 days by default
      *
-     * @summary Query User Universal Transfer History(USER_DATA)
+     * @summary Query User Universal Transfer History (USER_DATA)
      * @param {QueryUserUniversalTransferHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryUserUniversalTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/query-user-universal-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#query-user-universal-transfer-history Binance API Documentation}
      */
     queryUserUniversalTransferHistory(
         requestParameters: QueryUserUniversalTransferHistoryRequest
@@ -565,14 +614,16 @@ export class RestAPI {
     /**
      * Query User Wallet Balance
      *
-     * Weight: 60
+     * Weight(IP): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query User Wallet Balance (USER_DATA)
      * @param {QueryUserWalletBalanceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryUserWalletBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Query-User-Wallet-Balance Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#query-user-wallet-balance Binance API Documentation}
      */
     queryUserWalletBalance(
         requestParameters: QueryUserWalletBalanceRequest = {}
@@ -583,16 +634,19 @@ export class RestAPI {
     /**
      * Toggle BNB Burn On Spot Trade And Margin Interest
      *
-     * "spotBNBBurn" and "interestBNBBurn" should be sent at least one.
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - "spotBNBBurn" and "interestBNBBurn" should be sent at least one.
      *
      * @summary Toggle BNB Burn On Spot Trade And Margin Interest (USER_DATA)
      * @param {ToggleBnbBurnOnSpotTradeAndMarginInterestRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ToggleBnbBurnOnSpotTradeAndMarginInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Toggle-BNB-Burn-On-Spot-Trade-And-Margin-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#toggle-bnb-burn-on-spot-trade-and-margin-interest Binance API Documentation}
      */
     toggleBnbBurnOnSpotTradeAndMarginInterest(
         requestParameters: ToggleBnbBurnOnSpotTradeAndMarginInterestRequest = {}
@@ -603,14 +657,16 @@ export class RestAPI {
     /**
      * Fetch trade fee
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Trade Fee (USER_DATA)
      * @param {TradeFeeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TradeFeeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Trade-Fee Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#trade-fee Binance API Documentation}
      */
     tradeFee(requestParameters: TradeFeeRequest = {}): Promise<RestApiResponse<TradeFeeResponse>> {
         return this.assetApi.tradeFee(requestParameters);
@@ -619,17 +675,20 @@ export class RestAPI {
     /**
      * Get user assets, just for positive data.
      *
-     * If asset is set, then return this asset, otherwise return all assets positive.
-     * If needBtcValuation is set, then return btcValudation.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If asset is set, then return this asset, otherwise return all assets positive.
+     * - If needBtcValuation is set, then return btcValudation.
      *
      * @summary User Asset (USER_DATA)
      * @param {UserAssetRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<UserAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/user-assets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#user-asset Binance API Documentation}
      */
     userAsset(
         requestParameters: UserAssetRequest = {}
@@ -638,51 +697,55 @@ export class RestAPI {
     }
 
     /**
-     * user universal transfer
+     * User universal transfer
      *
-     *  `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     *  `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     * ENUM of transfer types:
-     * MAIN_UMFUTURE   Spot account transfer to USDⓈ-M Futures account
-     * MAIN_CMFUTURE   Spot account transfer to COIN-M Futures account
-     * MAIN_MARGIN   Spot account transfer to Margin（cross）account
-     * UMFUTURE_MAIN   USDⓈ-M Futures account transfer to Spot account
-     * UMFUTURE_MARGIN   USDⓈ-M Futures account transfer to Margin（cross）account
-     * CMFUTURE_MAIN   COIN-M Futures account transfer to Spot account
-     * CMFUTURE_MARGIN   COIN-M Futures account transfer to Margin(cross) account
-     * MARGIN_MAIN   Margin（cross）account transfer to Spot account
-     * MARGIN_UMFUTURE   Margin（cross）account transfer to USDⓈ-M Futures
-     * MARGIN_CMFUTURE   Margin（cross）account transfer to COIN-M Futures
-     * ISOLATEDMARGIN_MARGIN   Isolated margin account transfer to Margin(cross) account
-     * MARGIN_ISOLATEDMARGIN   Margin(cross) account transfer to Isolated margin account
-     * ISOLATEDMARGIN_ISOLATEDMARGIN   Isolated margin account transfer to Isolated margin account
-     * MAIN_FUNDING   Spot account transfer to Funding account
-     * FUNDING_MAIN   Funding account transfer to Spot account
-     * FUNDING_UMFUTURE   Funding account transfer to UMFUTURE account
-     * UMFUTURE_FUNDING   UMFUTURE account transfer to Funding account
-     * MARGIN_FUNDING   MARGIN account transfer to Funding account
-     * FUNDING_MARGIN   Funding account transfer to Margin account
-     * FUNDING_CMFUTURE   Funding account transfer to CMFUTURE account
-     * CMFUTURE_FUNDING   CMFUTURE account transfer to Funding account
-     * MAIN_OPTION  Spot account transfer to Options account
-     * OPTION_MAIN  Options account transfer to Spot account
-     * UMFUTURE_OPTION USDⓈ-M Futures account transfer to Options account
-     * OPTION_UMFUTURE Options account transfer to USDⓈ-M Futures account
-     * MARGIN_OPTION  Margin（cross）account transfer to Options account
-     * OPTION_MARGIN  Options account transfer to Margin（cross）account
-     * FUNDING_OPTION   Funding account transfer to Options account
-     * OPTION_FUNDING   Options account transfer to Funding account
-     * MAIN_PORTFOLIO_MARGIN  Spot account transfer to Portfolio Margin account
-     * PORTFOLIO_MARGIN_MAIN  Portfolio Margin account transfer to Spot account
+     * Weight(UID): 900
      *
-     * Weight: 900
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Permits Universal Transfer option for the API Key that requests this endpoint.
+     * - `fromSymbol` must be sent when type is `ISOLATEDMARGIN_MARGIN` or `ISOLATEDMARGIN_ISOLATEDMARGIN`.
+     * - `toSymbol` must be sent when type is `MARGIN_ISOLATEDMARGIN` or `ISOLATEDMARGIN_ISOLATEDMARGIN`.
+     * - ENUM of transfer types:
+     * - `MAIN_UMFUTURE`: Spot → USDⓈ-M Futures
+     * - `MAIN_CMFUTURE`: Spot → COIN-M Futures
+     * - `MAIN_MARGIN`: Spot → Margin (cross)
+     * - `UMFUTURE_MAIN`: USDⓈ-M Futures → Spot
+     * - `UMFUTURE_MARGIN`: USDⓈ-M Futures → Margin (cross)
+     * - `CMFUTURE_MAIN`: COIN-M Futures → Spot
+     * - `CMFUTURE_MARGIN`: COIN-M Futures → Margin (cross)
+     * - `MARGIN_MAIN`: Margin (cross) → Spot
+     * - `MARGIN_UMFUTURE`: Margin (cross) → USDⓈ-M Futures
+     * - `MARGIN_CMFUTURE`: Margin (cross) → COIN-M Futures
+     * - `ISOLATEDMARGIN_MARGIN`: Isolated margin → Margin (cross)
+     * - `MARGIN_ISOLATEDMARGIN`: Margin (cross) → Isolated margin
+     * - `ISOLATEDMARGIN_ISOLATEDMARGIN`: Isolated margin → Isolated margin
+     * - `MAIN_FUNDING`: Spot → Funding
+     * - `FUNDING_MAIN`: Funding → Spot
+     * - `FUNDING_UMFUTURE`: Funding → USDⓈ-M Futures
+     * - `UMFUTURE_FUNDING`: USDⓈ-M Futures → Funding
+     * - `MARGIN_FUNDING`: Margin (cross) → Funding
+     * - `FUNDING_MARGIN`: Funding → Margin (cross)
+     * - `FUNDING_CMFUTURE`: Funding → COIN-M Futures
+     * - `CMFUTURE_FUNDING`: COIN-M Futures → Funding
+     * - `MAIN_OPTION`: Spot → Options
+     * - `OPTION_MAIN`: Options → Spot
+     * - `UMFUTURE_OPTION`: USDⓈ-M Futures → Options
+     * - `OPTION_UMFUTURE`: Options → USDⓈ-M Futures
+     * - `MARGIN_OPTION`: Margin (cross) → Options
+     * - `OPTION_MARGIN`: Options → Margin (cross)
+     * - `FUNDING_OPTION`: Funding → Options
+     * - `OPTION_FUNDING`: Options → Funding
+     * - `MAIN_PORTFOLIO_MARGIN`: Spot → Portfolio Margin
+     * - `PORTFOLIO_MARGIN_MAIN`: Portfolio Margin → Spot
      *
      * @summary User Universal Transfer (USER_DATA)
      * @param {UserUniversalTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<UserUniversalTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/asset/User-Universal-Transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#user-universal-transfer Binance API Documentation}
      */
     userUniversalTransfer(
         requestParameters: UserUniversalTransferRequest
@@ -693,14 +756,16 @@ export class RestAPI {
     /**
      * Get information of coins (available for deposit and withdraw) for user.
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary All Coins\' Information (USER_DATA)
      * @param {AllCoinsInformationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AllCoinsInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/all-coins-info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#all-coins-information Binance API Documentation}
      */
     allCoinsInformation(
         requestParameters: AllCoinsInformationRequest = {}
@@ -711,18 +776,21 @@ export class RestAPI {
     /**
      * Fetch deposit address with network.
      *
-     * If `network` is not send, return with default network of the coin.
-     * You can get `network` and `isDefault` in `networkList` in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
-     * `amount` needs to be sent if using LIGHTNING network
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` is not send, return with default network of the coin.
+     * - You can get `network` and `isDefault` in `networkList` in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - `amount` needs to be sent if using LIGHTNING network
      *
      * @summary Deposit Address(supporting network) (USER_DATA)
      * @param {DepositAddressRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/deposite-address Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#deposit-address Binance API Documentation}
      */
     depositAddress(
         requestParameters: DepositAddressRequest
@@ -733,18 +801,20 @@ export class RestAPI {
     /**
      * Fetch deposit history.
      *
+     * Weight(IP): 1
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must be less than 90 days.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
      *
      * @summary Deposit History (supporting network) (USER_DATA)
      * @param {DepositHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/deposite-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#deposit-history Binance API Documentation}
      */
     depositHistory(
         requestParameters: DepositHistoryRequest = {}
@@ -755,18 +825,16 @@ export class RestAPI {
     /**
      * Fetch deposit address list with network.
      *
+     * Weight(IP): 10
      *
-     * If network is not send, return with default network of the coin.
-     * You can get network and isDefault in networkList in the response of `Get /sapi/v1/capital/config/getall`.
+     * Security Type: USER_DATA
      *
-     * Weight: 10
-     *
-     * @summary Fetch deposit address list with network(USER_DATA)
+     * @summary Fetch deposit address list with network (USER_DATA)
      * @param {FetchDepositAddressListWithNetworkRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FetchDepositAddressListWithNetworkResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/Fetch-deposit-address-list-with-network Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#fetch-deposit-address-list-with-network Binance API Documentation}
      */
     fetchDepositAddressListWithNetwork(
         requestParameters: FetchDepositAddressListWithNetworkRequest
@@ -777,13 +845,15 @@ export class RestAPI {
     /**
      * Fetch withdraw address list
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch withdraw address list (USER_DATA)
      *
      * @returns {Promise<RestApiResponse<FetchWithdrawAddressListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/fetch-withdraw-address Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#fetch-withdraw-address-list Binance API Documentation}
      */
     fetchWithdrawAddressList(): Promise<RestApiResponse<FetchWithdrawAddressListResponse>> {
         return this.capitalApi.fetchWithdrawAddressList();
@@ -792,13 +862,15 @@ export class RestAPI {
     /**
      * Fetch withdraw quota
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch withdraw quota (USER_DATA)
      *
      * @returns {Promise<RestApiResponse<FetchWithdrawQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/Fetch-withdraw-quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#fetch-withdraw-quota Binance API Documentation}
      */
     fetchWithdrawQuota(): Promise<RestApiResponse<FetchWithdrawQuotaResponse>> {
         return this.capitalApi.fetchWithdrawQuota();
@@ -807,16 +879,16 @@ export class RestAPI {
     /**
      * Apply deposit credit for expired address (One click arrival)
      *
-     * Params need to be in the POST body
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
      * @summary One click arrival deposit apply (for expired address deposit) (USER_DATA)
      * @param {OneClickArrivalDepositApplyRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OneClickArrivalDepositApplyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/one-click-arrival-deposite-apply Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#one-click-arrival-deposit-apply Binance API Documentation}
      */
     oneClickArrivalDepositApply(
         requestParameters: OneClickArrivalDepositApplyRequest = {}
@@ -825,48 +897,50 @@ export class RestAPI {
     }
 
     /**
-     * Submit a withdraw request.
+     * Submit a withdraw request
      *
+     * Weight(UID): 900
      *
-     * If `network` not send, return with default network of the coin.
-     * You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
-     * To check if travel rule is required, by using  `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
-     * For networks that do not support memo/tag, submitting a withdrawal request with a non-empty `addressTag` will return error `-4106 TAG_NOT_SUPPORTED_FOR_NETWORK`. Please omit the `addressTag` field for such networks. You can check whether a network requires a tag via `GET /sapi/v1/capital/config/getall`:
-     * If `withdrawTag` = `true` → memo/tag is required.
-     * If `withdrawTag` = `false` → memo/tag is not supported; omit `addressTag`.
+     * Security Type: USER_DATA
      *
-     * Weight: 900
+     * Notes:
+     * - If `network` not send, return with default network of the coin.
+     * - You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - To check if travel rule is required, by using `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
+     * - "For networks that do not support memo/tag, submitting a withdrawal request with a non-empty `addressTag` will return error `-4106 TAG_NOT_SUPPORTED_FOR_NETWORK`. Please omit the `addressTag` field for such networks. You can check whether a network requires a tag via `GET /sapi/v1/capital/config/getall`: If `withdrawTag` = `true` → memo/tag is required. If `withdrawTag` = `false` → memo/tag is not supported; omit `addressTag`."
      *
-     * @summary Withdraw(USER_DATA)
+     * @summary Withdraw (USER_DATA)
      * @param {WithdrawRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<WithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/Withdraw Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#withdraw Binance API Documentation}
      */
     withdraw(requestParameters: WithdrawRequest): Promise<RestApiResponse<WithdrawResponse>> {
         return this.capitalApi.withdraw(requestParameters);
     }
 
     /**
-     * Fetch withdraw history.
+     * Fetch withdraw history
      *
-     * `network` may not be in the response for old withdraw.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
-     * If `withdrawOrderId` is sent, time between `startTime` and `endTime` must be less than 7 days.
-     * If `withdrawOrderId` is sent, `startTime` and `endTime` are not sent, will return last 7 days records by default.
-     * Maximum support `idList` number is 45.
+     * Weight(UID): 18000 (10 requests per second)
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     * - If `withdrawOrderId` is sent, time between `startTime` and `endTime` must be less than 7 days.
+     * - If `withdrawOrderId` is sent, `startTime` and `endTime` are not sent, will return last 7 days records by default.
+     * - Maximum support `idList` number is 45.
      *
      * @summary Withdraw History (supporting network) (USER_DATA)
      * @param {WithdrawHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<WithdrawHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/capital/Withdraw-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/capital#withdraw-history Binance API Documentation}
      */
     withdrawHistory(
         requestParameters: WithdrawHistoryRequest = {}
@@ -877,14 +951,16 @@ export class RestAPI {
     /**
      * Get symbols delist schedule for spot
      *
-     * Weight: 100
+     * Weight(IP): 100
      *
-     * @summary Get symbols delist schedule for spot (MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Spot Delist Schedule (MARKET_DATA)
      * @param {GetSymbolsDelistScheduleForSpotRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSymbolsDelistScheduleForSpotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/others/delist-schedule Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/others#get-symbols-delist-schedule-for-spot Binance API Documentation}
      */
     getSymbolsDelistScheduleForSpot(
         requestParameters: GetSymbolsDelistScheduleForSpotRequest = {}
@@ -895,13 +971,15 @@ export class RestAPI {
     /**
      * Fetch system status.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary System Status (System)
+     * Security Type: System
+     *
+     * @summary System Status
      *
      * @returns {Promise<RestApiResponse<SystemStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/others/System-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/others#system-status Binance API Documentation}
      */
     systemStatus(): Promise<RestApiResponse<SystemStatusResponse>> {
         return this.othersApi.systemStatus();
@@ -910,19 +988,22 @@ export class RestAPI {
     /**
      * Submit a withdrawal request for brokers of local entities that required travel rule.
      *
-     * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
-     * You can get `network` in `networkList` of a coin in the response
-     * Questionnaire is different for each local entity, please refer to
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+     * - You can get `network` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
      * @param {BrokerWithdrawRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<BrokerWithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Broker-Withdraw Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#broker-withdraw Binance API Documentation}
      */
     brokerWithdraw(
         requestParameters: BrokerWithdrawRequest
@@ -931,16 +1012,19 @@ export class RestAPI {
     }
 
     /**
-     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
+     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current
+     * API key.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CheckQuestionnaireRequirementsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/questionnaire-requirements Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#check-questionnaire-requirements Binance API Documentation}
      */
     checkQuestionnaireRequirements(
         requestParameters: CheckQuestionnaireRequirementsRequest = {}
@@ -951,18 +1035,21 @@ export class RestAPI {
     /**
      * Fetch deposit history for local entities that required travel rule.
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
-     * Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Deposit History (for local entities that required travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
+     * - Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     *
+     * @summary Deposit History Travel Rule (for local entities that required travel rule) (supporting network) (USER_DATA)
      * @param {DepositHistoryTravelRuleRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DepositHistoryTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Deposit-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#deposit-history-travel-rule Binance API Documentation}
      */
     depositHistoryTravelRule(
         requestParameters: DepositHistoryTravelRuleRequest = {}
@@ -973,18 +1060,21 @@ export class RestAPI {
     /**
      * Fetch deposit history for local entities that with required travel rule information.
      *
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
-     * Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 90 days.
+     * - Please, note that due to network-specific characteristics, the returned source address may be inaccurate. If multiple source addresses are found, only the first one will be returned.
      *
      * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
      * @param {DepositHistoryV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DepositHistoryV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Deposit-History-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#deposit-history-v2 Binance API Documentation}
      */
     depositHistoryV2(
         requestParameters: DepositHistoryV2Request = {}
@@ -993,16 +1083,19 @@ export class RestAPI {
     }
 
     /**
-     * Fetch address verification list for user to check on status and other details for the addresses stored in Address Book.
+     * Fetch address verification list for user to check on status and other details for the addresses stored in
+     * Address Book.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Fetch address verification list (USER_DATA)
      * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FetchAddressVerificationListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/address-verification-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#fetch-address-verification-list Binance API Documentation}
      */
     fetchAddressVerificationList(
         requestParameters: FetchAddressVerificationListRequest = {}
@@ -1013,29 +1106,36 @@ export class RestAPI {
     /**
      * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Country List (USER_DATA)
+     * @param {GetCountryListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetCountryListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/country-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#get-country-list Binance API Documentation}
      */
-    getCountryList(): Promise<RestApiResponse<GetCountryListResponse>> {
-        return this.travelRuleApi.getCountryList();
+    getCountryList(
+        requestParameters: GetCountryListRequest = {}
+    ): Promise<RestApiResponse<GetCountryListResponse>> {
+        return this.travelRuleApi.getCountryList(requestParameters);
     }
 
     /**
      * Query the active region/city list for a given country. Currently, only supports AU entity.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Region List (USER_DATA)
      * @param {GetRegionListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRegionListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/region-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#get-region-list Binance API Documentation}
      */
     getRegionList(
         requestParameters: GetRegionListRequest
@@ -1048,17 +1148,20 @@ export class RestAPI {
      * The questionnaire is only applies to transactions from un-hosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
      *
-     * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+     *
+     * @summary Submit Deposit Questionnaire Broker (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#submit-deposit-questionnaire Binance API Documentation}
      */
     submitDepositQuestionnaire(
         requestParameters: SubmitDepositQuestionnaireRequest
@@ -1071,17 +1174,20 @@ export class RestAPI {
      * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireTravelRuleRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#submit-deposit-questionnaire-travel-rule Binance API Documentation}
      */
     submitDepositQuestionnaireTravelRule(
         requestParameters: SubmitDepositQuestionnaireTravelRuleRequest
@@ -1094,17 +1200,20 @@ export class RestAPI {
      * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
-     * Questionnaire is different for each local entity, please refer
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
      * @summary Submit Deposit Questionnaire V2 (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info-v2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#submit-deposit-questionnaire-v2 Binance API Documentation}
      */
     submitDepositQuestionnaireV2(
         requestParameters: SubmitDepositQuestionnaireV2Request
@@ -1115,14 +1224,16 @@ export class RestAPI {
     /**
      * Fetch the VASP list for local entities.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {VaspListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<VaspListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/onboarded-vasp-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#vasp-list Binance API Documentation}
      */
     vaspList(requestParameters: VaspListRequest = {}): Promise<RestApiResponse<VaspListResponse>> {
         return this.travelRuleApi.vaspList(requestParameters);
@@ -1131,18 +1242,21 @@ export class RestAPI {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * `network` may not be in the response for old withdraw.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     *
+     * @summary Withdraw History Travel Rule (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV1Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<WithdrawHistoryV1Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#withdraw-history-v1 Binance API Documentation}
      */
     withdrawHistoryV1(
         requestParameters: WithdrawHistoryV1Request = {}
@@ -1153,24 +1267,27 @@ export class RestAPI {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * `network` may not be in the response for old withdraw.
-     * Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
-     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
-     * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
-     * If withdrawOrderId is sent, time between startTime and endTime must be less than 7 days.
-     * If withdrawOrderId is sent, startTime and endTime are not sent, will return last 7 days records by default.
-     * Maximum support trId,txId number is 45.
-     * WithdrawOrderId only support 1.
-     * If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `network` may not be in the response for old withdraw.
+     * - Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
+     * - Please notice the default `startTime` and `endTime` to make sure that time interval is within 0-90 days.
+     * - If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less than 90 days.
+     * - If withdrawOrderId is sent, time between startTime and endTime must be less than 7 days.
+     * - If withdrawOrderId is sent, startTime and endTime are not sent, will return last 7 days records by default.
+     * - Maximum support trId,txId number is 45.
+     * - WithdrawOrderId only support 1.
+     * - If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
      *
      * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<WithdrawHistoryV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw-History-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#withdraw-history-v2 Binance API Documentation}
      */
     withdrawHistoryV2(
         requestParameters: WithdrawHistoryV2Request = {}
@@ -1181,19 +1298,22 @@ export class RestAPI {
     /**
      * Submit a withdrawal request for local entities that required travel rule.
      *
-     * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
-     * You can get `network` and `isDefault` in `networkList` of a coin in the response
-     * Questionnaire is different for each local entity, please refer to
-     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
      *
-     * @summary Withdraw (for local entities that require travel rule) (USER_DATA)
+     * Notes:
+     * - If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+     * - You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
+     * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+     *
+     * @summary Withdraw Travel Rule (USER_DATA)
      * @param {WithdrawTravelRuleRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<WithdrawTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/travel-rule#withdraw-travel-rule Binance API Documentation}
      */
     withdrawTravelRule(
         requestParameters: WithdrawTravelRuleRequest

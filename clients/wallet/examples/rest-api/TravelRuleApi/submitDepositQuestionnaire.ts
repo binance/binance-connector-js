@@ -14,7 +14,6 @@ async function submitDepositQuestionnaire() {
             depositId: 1,
             questionnaire: 'questionnaire_example',
             beneficiaryPii: 'beneficiaryPii_example',
-            signature: 'signature_example',
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -24,15 +24,15 @@ export interface VaspListResponseInner {
      * @type {string}
      * @memberof VaspListResponseInner
      */
-    vaspCode?: string;
+    vaspName?: string;
     /**
      *
      * @type {string}
      * @memberof VaspListResponseInner
      */
-    vaspName?: string;
+    vaspCode?: string;
     /**
-     *
+     * For populating the `vasp` field in the deposit/withdrawal questionnaire
      * @type {string}
      * @memberof VaspListResponseInner
      */

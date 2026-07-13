@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -22,6 +22,7 @@ import {
     DepositHistoryTravelRuleRequest,
     DepositHistoryV2Request,
     FetchAddressVerificationListRequest,
+    GetCountryListRequest,
     GetRegionListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
@@ -66,12 +67,11 @@ describe('TravelRuleApi', () => {
         it('should execute brokerWithdraw() successfully with required parameters only', async () => {
             const params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
             };
 
             mockResponse = JSONParse(
@@ -95,16 +95,15 @@ describe('TravelRuleApi', () => {
         it('should execute brokerWithdraw() successfully with optional parameters', async () => {
             const params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
                 addressTag: 'addressTag_example',
                 network: 'network_example',
                 addressName: 'addressName_example',
-                transactionFeeFlag: false,
+                transactionFeeFlag: true,
                 walletType: 0,
             };
 
@@ -129,12 +128,11 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when address is missing', async () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.address;
@@ -147,12 +145,11 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when coin is missing', async () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.coin;
@@ -165,12 +162,11 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -183,12 +179,11 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when withdrawOrderId is missing', async () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.withdrawOrderId;
@@ -201,12 +196,11 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when questionnaire is missing', async () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.questionnaire;
@@ -219,12 +213,11 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when originatorPii is missing', async () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.originatorPii;
@@ -234,33 +227,14 @@ describe('TravelRuleApi', () => {
             );
         });
 
-        it('should throw RequiredError when signature is missing', async () => {
-            const _params: BrokerWithdrawRequest = {
-                address: 'address_example',
-                coin: 'coin_example',
-                amount: 1.0,
-                withdrawOrderId: '1',
-                questionnaire: 'questionnaire_example',
-                originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.signature;
-
-            await expect(client.brokerWithdraw(params)).rejects.toThrow(
-                'Required parameter signature was null or undefined when calling brokerWithdraw.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
             const params: BrokerWithdrawRequest = {
                 address: 'address_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
             };
 
             const errorResponse = {
@@ -347,34 +321,14 @@ describe('TravelRuleApi', () => {
                         network: 'BNB',
                         depositStatus: 0,
                         travelRuleStatus: 1,
+                        travelRuleStatusV2: 'PENDING',
                         address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
                         addressTag: '101764890',
                         txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
                         insertTime: 1661493146000,
+                        completeTime: 1661493206000,
                         transferType: 0,
                         confirmTimes: '1/1',
-                        unlockConfirm: 0,
-                        walletType: 0,
-                        requireQuestionnaire: false,
-                        questionnaire: null,
-                    },
-                    {
-                        trId: 2451123,
-                        tranId: 4544346245865,
-                        amount: '0.50000000',
-                        coin: 'IOTA',
-                        network: 'IOTA',
-                        depositStatus: 0,
-                        travelRuleStatus: 0,
-                        address:
-                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                        addressTag: '',
-                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                        insertTime: 1599620082000,
-                        transferType: 0,
-                        confirmTimes: '1/1',
-                        unlockConfirm: 0,
-                        walletType: 0,
                         requireQuestionnaire: false,
                         questionnaire: '{"question1":"answer1","question2":"answer2"}',
                     },
@@ -401,13 +355,13 @@ describe('TravelRuleApi', () => {
                 txId: '1',
                 tranId: '1',
                 network: 'network_example',
-                coin: 'coin_example',
-                travelRuleStatus: 789,
+                coin: 'BTC',
+                travelRuleStatus: 0,
                 pendingQuestionnaire: true,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                offset: 0,
-                limit: 7,
+                offset: 789,
+                limit: 1000,
             };
 
             mockResponse = JSONParse(
@@ -420,34 +374,14 @@ describe('TravelRuleApi', () => {
                         network: 'BNB',
                         depositStatus: 0,
                         travelRuleStatus: 1,
+                        travelRuleStatusV2: 'PENDING',
                         address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
                         addressTag: '101764890',
                         txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
                         insertTime: 1661493146000,
+                        completeTime: 1661493206000,
                         transferType: 0,
                         confirmTimes: '1/1',
-                        unlockConfirm: 0,
-                        walletType: 0,
-                        requireQuestionnaire: false,
-                        questionnaire: null,
-                    },
-                    {
-                        trId: 2451123,
-                        tranId: 4544346245865,
-                        amount: '0.50000000',
-                        coin: 'IOTA',
-                        network: 'IOTA',
-                        depositStatus: 0,
-                        travelRuleStatus: 0,
-                        address:
-                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                        addressTag: '',
-                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                        insertTime: 1599620082000,
-                        transferType: 0,
-                        confirmTimes: '1/1',
-                        unlockConfirm: 0,
-                        walletType: 0,
                         requireQuestionnaire: false,
                         questionnaire: '{"question1":"answer1","question2":"answer2"}',
                     },
@@ -525,15 +459,15 @@ describe('TravelRuleApi', () => {
 
         it('should execute depositHistoryV2() successfully with optional parameters', async () => {
             const params: DepositHistoryV2Request = {
-                depositId: '1',
+                depositId: 1,
                 txId: '1',
                 network: 'network_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 retrieveQuestionnaire: true,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 offset: 0,
-                limit: 7,
+                limit: 1000,
             };
 
             mockResponse = JSONParse(
@@ -706,6 +640,41 @@ describe('TravelRuleApi', () => {
             spy.mockRestore();
         });
 
+        it('should execute getCountryList() successfully with optional parameters', async () => {
+            const params: GetCountryListRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    countries: [
+                        {
+                            countryCode: 'au',
+                            countryName: 'Australia',
+                            blockType: 'supported',
+                            depositAllowed: true,
+                            withdrawalAllowed: true,
+                            hasRegionRestrictions: false,
+                        },
+                    ],
+                    lastUpdated: 1716300000000,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getCountryList').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetCountryListResponse>)
+            );
+            const response = await client.getCountryList(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const errorResponse = {
                 code: -1111,
@@ -725,7 +694,7 @@ describe('TravelRuleApi', () => {
     describe('getRegionList()', () => {
         it('should execute getRegionList() successfully with required parameters only', async () => {
             const params: GetRegionListRequest = {
-                countryCode: 'countryCode_example',
+                countryCode: 'au',
             };
 
             mockResponse = JSONParse(
@@ -759,7 +728,8 @@ describe('TravelRuleApi', () => {
 
         it('should execute getRegionList() successfully with optional parameters', async () => {
             const params: GetRegionListRequest = {
-                countryCode: 'countryCode_example',
+                countryCode: 'au',
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -793,7 +763,7 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when countryCode is missing', async () => {
             const _params: GetRegionListRequest = {
-                countryCode: 'countryCode_example',
+                countryCode: 'au',
             };
             const params = Object.assign({ ..._params });
             delete params?.countryCode;
@@ -805,7 +775,7 @@ describe('TravelRuleApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetRegionListRequest = {
-                countryCode: 'countryCode_example',
+                countryCode: 'au',
             };
 
             const errorResponse = {
@@ -830,7 +800,6 @@ describe('TravelRuleApi', () => {
                 depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
-                signature: 'signature_example',
             };
 
             mockResponse = JSONParse(
@@ -861,9 +830,8 @@ describe('TravelRuleApi', () => {
                 depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
-                signature: 'signature_example',
                 network: 'network_example',
-                coin: 'coin_example',
+                coin: 'BTC',
                 amount: 1.0,
                 address: 'address_example',
                 addressTag: 'addressTag_example',
@@ -897,7 +865,6 @@ describe('TravelRuleApi', () => {
                 depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.subAccountId;
@@ -913,7 +880,6 @@ describe('TravelRuleApi', () => {
                 depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.depositId;
@@ -929,7 +895,6 @@ describe('TravelRuleApi', () => {
                 depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.questionnaire;
@@ -945,7 +910,6 @@ describe('TravelRuleApi', () => {
                 depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
-                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.beneficiaryPii;
@@ -955,29 +919,12 @@ describe('TravelRuleApi', () => {
             );
         });
 
-        it('should throw RequiredError when signature is missing', async () => {
-            const _params: SubmitDepositQuestionnaireRequest = {
-                subAccountId: '1',
-                depositId: 1,
-                questionnaire: 'questionnaire_example',
-                beneficiaryPii: 'beneficiaryPii_example',
-                signature: 'signature_example',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.signature;
-
-            await expect(client.submitDepositQuestionnaire(params)).rejects.toThrow(
-                'Required parameter signature was null or undefined when calling submitDepositQuestionnaire.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
             const params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
                 depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
-                signature: 'signature_example',
             };
 
             const errorResponse = {
@@ -1218,14 +1165,7 @@ describe('TravelRuleApi', () => {
     describe('vaspList()', () => {
         it('should execute vaspList() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([
-                    { vaspCode: 'BINANCE', vaspName: 'Binance', identifier: 'I1QNLP' },
-                    {
-                        vaspCode: 'NVBH3Z_nNEHjvqbUfkaL',
-                        vaspName: 'HashKeyGlobal',
-                        identifier: 'ABC123',
-                    },
-                ])
+                JSONStringify([{ vaspName: 'Binance', vaspCode: 'BINANCE', identifier: 'xxx' }])
             );
 
             const spy = jest.spyOn(client, 'vaspList').mockReturnValue(
@@ -1248,14 +1188,7 @@ describe('TravelRuleApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { vaspCode: 'BINANCE', vaspName: 'Binance', identifier: 'I1QNLP' },
-                    {
-                        vaspCode: 'NVBH3Z_nNEHjvqbUfkaL',
-                        vaspName: 'HashKeyGlobal',
-                        identifier: 'ABC123',
-                    },
-                ])
+                JSONStringify([{ vaspName: 'Binance', vaspCode: 'BINANCE', identifier: 'xxx' }])
             );
 
             const spy = jest.spyOn(client, 'vaspList').mockReturnValue(
@@ -1313,26 +1246,6 @@ describe('TravelRuleApi', () => {
                         questionnaire: '{"question1":"answer1","question2":"answer2"}',
                         completeTime: '2023-03-23 16:52:41',
                     },
-                    {
-                        id: '156ec387f49b41df8724fa744fa82719',
-                        trId: 2231556234,
-                        amount: '0.00150000',
-                        transactionFee: '0.004',
-                        coin: 'BTC',
-                        withdrawalStatus: 6,
-                        travelRuleStatus: 0,
-                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                        applyTime: '2019-09-24 12:43:45',
-                        network: 'BTC',
-                        transferType: 0,
-                        info: '',
-                        confirmNo: 2,
-                        walletType: 1,
-                        txKey: '',
-                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                        completeTime: '2023-03-23 16:52:41',
-                    },
                 ])
             );
 
@@ -1356,10 +1269,10 @@ describe('TravelRuleApi', () => {
                 txId: '1',
                 withdrawOrderId: '1',
                 network: 'network_example',
-                coin: 'coin_example',
-                travelRuleStatus: 789,
+                coin: 'BTC',
+                travelRuleStatus: 0,
                 offset: 0,
-                limit: 7,
+                limit: 1000,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 recvWindow: 5000,
@@ -1383,26 +1296,6 @@ describe('TravelRuleApi', () => {
                         withdrawOrderId: 'WITHDRAWtest123',
                         info: 'The address is not valid. Please confirm with the recipient',
                         confirmNo: 3,
-                        walletType: 1,
-                        txKey: '',
-                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                        completeTime: '2023-03-23 16:52:41',
-                    },
-                    {
-                        id: '156ec387f49b41df8724fa744fa82719',
-                        trId: 2231556234,
-                        amount: '0.00150000',
-                        transactionFee: '0.004',
-                        coin: 'BTC',
-                        withdrawalStatus: 6,
-                        travelRuleStatus: 0,
-                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                        applyTime: '2019-09-24 12:43:45',
-                        network: 'BTC',
-                        transferType: 0,
-                        info: '',
-                        confirmNo: 2,
                         walletType: 1,
                         txKey: '',
                         questionnaire: '{"question1":"answer1","question2":"answer2"}',
@@ -1466,26 +1359,6 @@ describe('TravelRuleApi', () => {
                         questionnaire: '{"question1":"answer1","question2":"answer2"}',
                         completeTime: '2023-03-23 16:52:41',
                     },
-                    {
-                        id: '156ec387f49b41df8724fa744fa82719',
-                        trId: 2231556234,
-                        amount: '0.00150000',
-                        transactionFee: '0.004',
-                        coin: 'BTC',
-                        withdrawalStatus: 6,
-                        travelRuleStatus: 0,
-                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                        applyTime: '2019-09-24 12:43:45',
-                        network: 'BTC',
-                        transferType: 0,
-                        info: '',
-                        confirmNo: 2,
-                        walletType: 1,
-                        txKey: '',
-                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                        completeTime: '2023-03-23 16:52:41',
-                    },
                 ])
             );
 
@@ -1510,9 +1383,9 @@ describe('TravelRuleApi', () => {
                 withdrawOrderId: '1',
                 network: 'network_example',
                 coin: 'coin_example',
-                travelRuleStatus: 789,
+                travelRuleStatus: 0,
                 offset: 0,
-                limit: 7,
+                limit: 1000,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 recvWindow: 5000,
@@ -1536,26 +1409,6 @@ describe('TravelRuleApi', () => {
                         withdrawOrderId: 'WITHDRAWtest123',
                         info: 'The address is not valid. Please confirm with the recipient',
                         confirmNo: 3,
-                        walletType: 1,
-                        txKey: '',
-                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                        completeTime: '2023-03-23 16:52:41',
-                    },
-                    {
-                        id: '156ec387f49b41df8724fa744fa82719',
-                        trId: 2231556234,
-                        amount: '0.00150000',
-                        transactionFee: '0.004',
-                        coin: 'BTC',
-                        withdrawalStatus: 6,
-                        travelRuleStatus: 0,
-                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                        applyTime: '2019-09-24 12:43:45',
-                        network: 'BTC',
-                        transferType: 0,
-                        info: '',
-                        confirmNo: 2,
                         walletType: 1,
                         txKey: '',
                         questionnaire: '{"question1":"answer1","question2":"answer2"}',
@@ -1597,7 +1450,7 @@ describe('TravelRuleApi', () => {
     describe('withdrawTravelRule()', () => {
         it('should execute withdrawTravelRule() successfully with required parameters only', async () => {
             const params: WithdrawTravelRuleRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
                 questionnaire: 'questionnaire_example',
@@ -1623,14 +1476,14 @@ describe('TravelRuleApi', () => {
 
         it('should execute withdrawTravelRule() successfully with optional parameters', async () => {
             const params: WithdrawTravelRuleRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
                 questionnaire: 'questionnaire_example',
                 withdrawOrderId: '1',
                 network: 'network_example',
                 addressTag: 'addressTag_example',
-                transactionFeeFlag: false,
+                transactionFeeFlag: true,
                 name: 'name_example',
                 walletType: 0,
                 recvWindow: 5000,
@@ -1656,7 +1509,7 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: WithdrawTravelRuleRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
                 questionnaire: 'questionnaire_example',
@@ -1671,7 +1524,7 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when address is missing', async () => {
             const _params: WithdrawTravelRuleRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
                 questionnaire: 'questionnaire_example',
@@ -1686,7 +1539,7 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: WithdrawTravelRuleRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
                 questionnaire: 'questionnaire_example',
@@ -1701,7 +1554,7 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when questionnaire is missing', async () => {
             const _params: WithdrawTravelRuleRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
                 questionnaire: 'questionnaire_example',
@@ -1716,7 +1569,7 @@ describe('TravelRuleApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: WithdrawTravelRuleRequest = {
-                coin: 'coin_example',
+                coin: 'BTC',
                 address: 'address_example',
                 amount: 1.0,
                 questionnaire: 'questionnaire_example',

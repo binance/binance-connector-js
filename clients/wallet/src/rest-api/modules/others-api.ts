@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -28,9 +27,11 @@ const OthersApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Get symbols delist schedule for spot
          *
-         * Weight: 100
+         * Weight(IP): 100
          *
-         * @summary Get symbols delist schedule for spot (MARKET_DATA)
+         * Security Type: MARKET_DATA
+         *
+         * @summary Get Spot Delist Schedule (MARKET_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -61,9 +62,11 @@ const OthersApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Fetch system status.
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary System Status (System)
+         * Security Type: System
+         *
+         * @summary System Status
          *
          * @throws {RequiredError}
          */
@@ -95,9 +98,11 @@ export interface OthersApiInterface {
     /**
      * Get symbols delist schedule for spot
      *
-     * Weight: 100
+     * Weight(IP): 100
      *
-     * @summary Get symbols delist schedule for spot (MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Spot Delist Schedule (MARKET_DATA)
      * @param {GetSymbolsDelistScheduleForSpotRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -109,9 +114,11 @@ export interface OthersApiInterface {
     /**
      * Fetch system status.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary System Status (System)
+     * Security Type: System
+     *
+     * @summary System Status
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OthersApiInterface
@@ -148,14 +155,16 @@ export class OthersApi implements OthersApiInterface {
     /**
      * Get symbols delist schedule for spot
      *
-     * Weight: 100
+     * Weight(IP): 100
      *
-     * @summary Get symbols delist schedule for spot (MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Spot Delist Schedule (MARKET_DATA)
      * @param {GetSymbolsDelistScheduleForSpotRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSymbolsDelistScheduleForSpotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OthersApi
-     * @see {@link https://developers.binance.com/docs/wallet/others/delist-schedule Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/others#get-symbols-delist-schedule-for-spot Binance API Documentation}
      */
     public async getSymbolsDelistScheduleForSpot(
         requestParameters: GetSymbolsDelistScheduleForSpotRequest = {}
@@ -179,13 +188,15 @@ export class OthersApi implements OthersApiInterface {
     /**
      * Fetch system status.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary System Status (System)
+     * Security Type: System
+     *
+     * @summary System Status
      * @returns {Promise<RestApiResponse<SystemStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OthersApi
-     * @see {@link https://developers.binance.com/docs/wallet/others/System-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/others#system-status Binance API Documentation}
      */
     public async systemStatus(): Promise<RestApiResponse<SystemStatusResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.systemStatus();

@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -47,13 +46,15 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Fetch details of assets supported on Binance.
          *
+         * Weight(IP): 1
          *
-         * Please get network and other deposit or withdraw details from ``GET /sapi/v1/capital/config/getall``.
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - Please get network and other deposit or withdraw details from `GET /sapi/v1/capital/config/getall`.
          *
          * @summary Asset Detail (USER_DATA)
-         * @param {string} [asset] If asset is blank, then query all positive assets user have.
+         * @param {string} [asset]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -85,16 +86,18 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query asset dividend record.
          *
+         * Weight(IP): 10
          *
-         * There cannot be more than 180 days between parameter `startTime` and `endTime`.
+         * Security Type: USER_DATA
          *
-         * Weight: 10
+         * Notes:
+         * - There cannot be more than 180 days between parameter `startTime` and `endTime`.
          *
          * @summary Asset Dividend Record (USER_DATA)
-         * @param {string} [asset] If asset is blank, then query all positive assets user have.
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -141,11 +144,13 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Convert dust assets
          *
-         * Weight: 10
+         * Weight(UID): 10
+         *
+         * Security Type: USER_DATA
          *
          * @summary Dust Convert (USER_DATA)
          * @param {string} asset
-         * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
+         * @param {string} [accountType] `SPOT` or `MARGIN`, default `SPOT`
          * @param {string} [clientId] A unique id for the request
          * @param {string} [targetAsset]
          * @param {string} [thirdPartyClientId]
@@ -206,11 +211,13 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query dust convertible assets
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Dust Convertible Assets (USER_DATA)
          * @param {string} targetAsset
-         * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
+         * @param {string} [accountType] `SPOT` or `MARGIN`, default `SPOT`
          * @param {number} [dustQuotaAssetToTargetAssetPrice]
          *
          * @throws {RequiredError}
@@ -256,20 +263,23 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Convert dust assets to BNB.
          *
-         * You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         * Weight(UID): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
          *
          * @summary Dust Transfer (USER_DATA)
-         * @param {string} asset
-         * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
+         * @param {string} asset The asset being converted. For example: asset=BTC,USDT
+         * @param {DustTransferAccountTypeEnum} [accountType]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         dustTransfer: async (
             asset: string,
-            accountType?: string,
+            accountType?: DustTransferAccountTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -304,13 +314,16 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Dustlog
          *
-         * Only return last 100 records
-         * Only return records after 2020/12/01
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary DustLog(USER_DATA)
-         * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
+         * Notes:
+         * - Only return last 100 records
+         * - Only return records after 2020/12/01
+         *
+         * @summary DustLog (USER_DATA)
+         * @param {DustlogAccountTypeEnum} [accountType]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [recvWindow]
@@ -318,7 +331,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @throws {RequiredError}
          */
         dustlog: async (
-            accountType?: string,
+            accountType?: DustlogAccountTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             recvWindow?: number | bigint
@@ -355,21 +368,23 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Funding Wallet
          *
+         * Weight(IP): 1
          *
-         * Currently supports querying the following business assets：Binance Pay, Binance Card, Binance Gift Card, Stock Token
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - Currently supports querying the following business assets：Binance Pay, Binance Card, Binance Gift Card, Stock Token
          *
          * @summary Funding Wallet (USER_DATA)
-         * @param {string} [asset] If asset is blank, then query all positive assets user have.
-         * @param {string} [needBtcValuation] true or false
+         * @param {string} [asset]
+         * @param {boolean} [needBtcValuation]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         fundingWallet: async (
             asset?: string,
-            needBtcValuation?: string,
+            needBtcValuation?: boolean,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -401,16 +416,18 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get Assets That Can Be Converted Into BNB
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Assets That Can Be Converted Into BNB (USER_DATA)
-         * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
+         * @param {GetAssetsThatCanBeConvertedIntoBnbAccountTypeEnum} [accountType]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getAssetsThatCanBeConvertedIntoBnb: async (
-            accountType?: string,
+            accountType?: GetAssetsThatCanBeConvertedIntoBnbAccountTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -439,19 +456,22 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * The query of Cloud-Mining payment and refund history
          *
-         * Just return the SUCCESS records of payment and refund.
-         * For response, type = 248 means payment, type = 249 means refund, status =S means SUCCESS.
+         * Weight(UID): 600
          *
-         * Weight: 600
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Just return the SUCCESS records of payment and refund.
+         * - For response, type = 248 means payment, type = 249 means refund, status =S means SUCCESS.
          *
          * @summary Get Cloud-Mining payment and refund history (USER_DATA)
-         * @param {number | bigint} startTime
-         * @param {number | bigint} endTime
+         * @param {number | bigint} startTime inclusive, unit: ms
+         * @param {number | bigint} endTime exclusive, unit: ms
          * @param {number | bigint} [tranId] The transaction id
          * @param {string} [clientTranId] The unique flag
-         * @param {string} [asset] If asset is blank, then query all positive assets user have.
-         * @param {number | bigint} [current] current page, default 1, the min value is 1
-         * @param {number | bigint} [size] page size, default 10, the max value is 100
+         * @param {string} [asset] If it is blank, we will query all assets
+         * @param {number | bigint} [current]
+         * @param {number | bigint} [size]
          *
          * @throws {RequiredError}
          */
@@ -508,9 +528,12 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get the list of symbols that are scheduled to be opened for trading in the market.
+         * Get the list of symbols that are scheduled to be opened for trading in
+         * the market.
          *
-         * Weight: 100
+         * Weight(IP): 100
+         *
+         * Security Type: MARKET_DATA
          *
          * @summary Get Open Symbol List (MARKET_DATA)
          *
@@ -536,16 +559,18 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query User Delegation History
          *
-         * Weight: 60
+         * Weight(IP): 60
          *
-         * @summary Query User Delegation History(For Master Account)(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Query User Delegation History(For Master Account) (USER_DATA)
          * @param {string} email
          * @param {number | bigint} startTime
          * @param {number | bigint} endTime
-         * @param {string} [type] Delegate/Undelegate
-         * @param {string} [asset] If asset is blank, then query all positive assets user have.
-         * @param {number | bigint} [current] current page, default 1, the min value is 1
-         * @param {number | bigint} [size] page size, default 10, the max value is 100
+         * @param {QueryUserDelegationHistoryTypeEnum} [type]
+         * @param {string} [asset]
+         * @param {number | bigint} [current]
+         * @param {number | bigint} [size]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -554,7 +579,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             email: string,
             startTime: number | bigint,
             endTime: number | bigint,
-            type?: string,
+            type?: QueryUserDelegationHistoryTypeEnum,
             asset?: string,
             current?: number | bigint,
             size?: number | bigint,
@@ -611,22 +636,24 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query User Universal Transfer History
          *
+         * Weight(IP): 1
          *
-         *  `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-         *  `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-         * Support query within the last 6 months only
-         * If `startTime`and `endTime` not sent, return records of the last 7 days by default
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
+         * - `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
+         * - Support query within the last 6 months only
+         * - If `startTime`and `endTime` not sent, return records of the last 7 days by default
          *
-         * @summary Query User Universal Transfer History(USER_DATA)
+         * @summary Query User Universal Transfer History (USER_DATA)
          * @param {string} type
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] current page, default 1, the min value is 1
-         * @param {number | bigint} [size] page size, default 10, the max value is 100
-         * @param {string} [fromSymbol]
-         * @param {string} [toSymbol]
+         * @param {number | bigint} [current]
+         * @param {number | bigint} [size]
+         * @param {QueryUserUniversalTransferHistoryFromSymbolEnum} [fromSymbol]
+         * @param {QueryUserUniversalTransferHistoryToSymbolEnum} [toSymbol]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -637,8 +664,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             endTime?: number | bigint,
             current?: number | bigint,
             size?: number | bigint,
-            fromSymbol?: string,
-            toSymbol?: string,
+            fromSymbol?: QueryUserUniversalTransferHistoryFromSymbolEnum,
+            toSymbol?: QueryUserUniversalTransferHistoryToSymbolEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
@@ -688,10 +715,12 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query User Wallet Balance
          *
-         * Weight: 60
+         * Weight(IP): 60
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query User Wallet Balance (USER_DATA)
-         * @param {string} [quoteAsset] `USDT`, `ETH`, `USDC`, `BNB`, etc. default `BTC`
+         * @param {string} [quoteAsset]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -726,13 +755,16 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Toggle BNB Burn On Spot Trade And Margin Interest
          *
-         * "spotBNBBurn" and "interestBNBBurn" should be sent at least one.
+         * Weight(IP): 1
          *
-         * Weight: 1(IP)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - "spotBNBBurn" and "interestBNBBurn" should be sent at least one.
          *
          * @summary Toggle BNB Burn On Spot Trade And Margin Interest (USER_DATA)
-         * @param {string} [spotBNBBurn] "true" or "false"; Determines whether to use BNB to pay for trading fees on SPOT
-         * @param {string} [interestBNBBurn] "true" or "false"; Determines whether to use BNB to pay for margin loan's interest
+         * @param {string} [spotBNBBurn] Determines whether to use BNB to pay for trading fees on SPOT
+         * @param {string} [interestBNBBurn] Determines whether to use BNB to pay for margin loan's interest
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -771,7 +803,9 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Fetch trade fee
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Trade Fee (USER_DATA)
          * @param {string} [symbol]
@@ -806,10 +840,13 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get user assets, just for positive data.
          *
-         * If asset is set, then return this asset, otherwise return all assets positive.
-         * If needBtcValuation is set, then return btcValudation.
+         * Weight(IP): 5
          *
-         * Weight: 5
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If asset is set, then return this asset, otherwise return all assets positive.
+         * - If needBtcValuation is set, then return btcValudation.
          *
          * @summary User Asset (USER_DATA)
          * @param {string} [asset] If asset is blank, then query all positive assets user have.
@@ -850,61 +887,65 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * user universal transfer
+         * User universal transfer
          *
-         *  `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-         *  `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-         * ENUM of transfer types:
-         * MAIN_UMFUTURE   Spot account transfer to USDⓈ-M Futures account
-         * MAIN_CMFUTURE   Spot account transfer to COIN-M Futures account
-         * MAIN_MARGIN   Spot account transfer to Margin（cross）account
-         * UMFUTURE_MAIN   USDⓈ-M Futures account transfer to Spot account
-         * UMFUTURE_MARGIN   USDⓈ-M Futures account transfer to Margin（cross）account
-         * CMFUTURE_MAIN   COIN-M Futures account transfer to Spot account
-         * CMFUTURE_MARGIN   COIN-M Futures account transfer to Margin(cross) account
-         * MARGIN_MAIN   Margin（cross）account transfer to Spot account
-         * MARGIN_UMFUTURE   Margin（cross）account transfer to USDⓈ-M Futures
-         * MARGIN_CMFUTURE   Margin（cross）account transfer to COIN-M Futures
-         * ISOLATEDMARGIN_MARGIN   Isolated margin account transfer to Margin(cross) account
-         * MARGIN_ISOLATEDMARGIN   Margin(cross) account transfer to Isolated margin account
-         * ISOLATEDMARGIN_ISOLATEDMARGIN   Isolated margin account transfer to Isolated margin account
-         * MAIN_FUNDING   Spot account transfer to Funding account
-         * FUNDING_MAIN   Funding account transfer to Spot account
-         * FUNDING_UMFUTURE   Funding account transfer to UMFUTURE account
-         * UMFUTURE_FUNDING   UMFUTURE account transfer to Funding account
-         * MARGIN_FUNDING   MARGIN account transfer to Funding account
-         * FUNDING_MARGIN   Funding account transfer to Margin account
-         * FUNDING_CMFUTURE   Funding account transfer to CMFUTURE account
-         * CMFUTURE_FUNDING   CMFUTURE account transfer to Funding account
-         * MAIN_OPTION  Spot account transfer to Options account
-         * OPTION_MAIN  Options account transfer to Spot account
-         * UMFUTURE_OPTION USDⓈ-M Futures account transfer to Options account
-         * OPTION_UMFUTURE Options account transfer to USDⓈ-M Futures account
-         * MARGIN_OPTION  Margin（cross）account transfer to Options account
-         * OPTION_MARGIN  Options account transfer to Margin（cross）account
-         * FUNDING_OPTION   Funding account transfer to Options account
-         * OPTION_FUNDING   Options account transfer to Funding account
-         * MAIN_PORTFOLIO_MARGIN  Spot account transfer to Portfolio Margin account
-         * PORTFOLIO_MARGIN_MAIN  Portfolio Margin account transfer to Spot account
+         * Weight(UID): 900
          *
-         * Weight: 900
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - You need to enable Permits Universal Transfer option for the API Key that requests this endpoint.
+         * - `fromSymbol` must be sent when type is `ISOLATEDMARGIN_MARGIN` or `ISOLATEDMARGIN_ISOLATEDMARGIN`.
+         * - `toSymbol` must be sent when type is `MARGIN_ISOLATEDMARGIN` or `ISOLATEDMARGIN_ISOLATEDMARGIN`.
+         * - ENUM of transfer types:
+         * - `MAIN_UMFUTURE`: Spot → USDⓈ-M Futures
+         * - `MAIN_CMFUTURE`: Spot → COIN-M Futures
+         * - `MAIN_MARGIN`: Spot → Margin (cross)
+         * - `UMFUTURE_MAIN`: USDⓈ-M Futures → Spot
+         * - `UMFUTURE_MARGIN`: USDⓈ-M Futures → Margin (cross)
+         * - `CMFUTURE_MAIN`: COIN-M Futures → Spot
+         * - `CMFUTURE_MARGIN`: COIN-M Futures → Margin (cross)
+         * - `MARGIN_MAIN`: Margin (cross) → Spot
+         * - `MARGIN_UMFUTURE`: Margin (cross) → USDⓈ-M Futures
+         * - `MARGIN_CMFUTURE`: Margin (cross) → COIN-M Futures
+         * - `ISOLATEDMARGIN_MARGIN`: Isolated margin → Margin (cross)
+         * - `MARGIN_ISOLATEDMARGIN`: Margin (cross) → Isolated margin
+         * - `ISOLATEDMARGIN_ISOLATEDMARGIN`: Isolated margin → Isolated margin
+         * - `MAIN_FUNDING`: Spot → Funding
+         * - `FUNDING_MAIN`: Funding → Spot
+         * - `FUNDING_UMFUTURE`: Funding → USDⓈ-M Futures
+         * - `UMFUTURE_FUNDING`: USDⓈ-M Futures → Funding
+         * - `MARGIN_FUNDING`: Margin (cross) → Funding
+         * - `FUNDING_MARGIN`: Funding → Margin (cross)
+         * - `FUNDING_CMFUTURE`: Funding → COIN-M Futures
+         * - `CMFUTURE_FUNDING`: COIN-M Futures → Funding
+         * - `MAIN_OPTION`: Spot → Options
+         * - `OPTION_MAIN`: Options → Spot
+         * - `UMFUTURE_OPTION`: USDⓈ-M Futures → Options
+         * - `OPTION_UMFUTURE`: Options → USDⓈ-M Futures
+         * - `MARGIN_OPTION`: Margin (cross) → Options
+         * - `OPTION_MARGIN`: Options → Margin (cross)
+         * - `FUNDING_OPTION`: Funding → Options
+         * - `OPTION_FUNDING`: Options → Funding
+         * - `MAIN_PORTFOLIO_MARGIN`: Spot → Portfolio Margin
+         * - `PORTFOLIO_MARGIN_MAIN`: Portfolio Margin → Spot
          *
          * @summary User Universal Transfer (USER_DATA)
-         * @param {string} type
+         * @param {UserUniversalTransferTypeEnum} type
          * @param {string} asset
          * @param {number} amount
-         * @param {string} [fromSymbol]
-         * @param {string} [toSymbol]
+         * @param {UserUniversalTransferFromSymbolEnum} [fromSymbol]
+         * @param {UserUniversalTransferToSymbolEnum} [toSymbol]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         userUniversalTransfer: async (
-            type: string,
+            type: UserUniversalTransferTypeEnum,
             asset: string,
             amount: number,
-            fromSymbol?: string,
-            toSymbol?: string,
+            fromSymbol?: UserUniversalTransferFromSymbolEnum,
+            toSymbol?: UserUniversalTransferToSymbolEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
@@ -960,10 +1001,12 @@ export interface AssetApiInterface {
     /**
      * Fetch details of assets supported on Binance.
      *
+     * Weight(IP): 1
      *
-     * Please get network and other deposit or withdraw details from ``GET /sapi/v1/capital/config/getall``.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Please get network and other deposit or withdraw details from `GET /sapi/v1/capital/config/getall`.
      *
      * @summary Asset Detail (USER_DATA)
      * @param {AssetDetailRequest} requestParameters Request parameters.
@@ -977,10 +1020,12 @@ export interface AssetApiInterface {
     /**
      * Query asset dividend record.
      *
+     * Weight(IP): 10
      *
-     * There cannot be more than 180 days between parameter `startTime` and `endTime`.
+     * Security Type: USER_DATA
      *
-     * Weight: 10
+     * Notes:
+     * - There cannot be more than 180 days between parameter `startTime` and `endTime`.
      *
      * @summary Asset Dividend Record (USER_DATA)
      * @param {AssetDividendRecordRequest} requestParameters Request parameters.
@@ -994,7 +1039,9 @@ export interface AssetApiInterface {
     /**
      * Convert dust assets
      *
-     * Weight: 10
+     * Weight(UID): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Dust Convert (USER_DATA)
      * @param {DustConvertRequest} requestParameters Request parameters.
@@ -1008,7 +1055,9 @@ export interface AssetApiInterface {
     /**
      * Query dust convertible assets
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Dust Convertible Assets (USER_DATA)
      * @param {DustConvertibleAssetsRequest} requestParameters Request parameters.
@@ -1022,9 +1071,12 @@ export interface AssetApiInterface {
     /**
      * Convert dust assets to BNB.
      *
-     * You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(UID): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
      *
      * @summary Dust Transfer (USER_DATA)
      * @param {DustTransferRequest} requestParameters Request parameters.
@@ -1038,12 +1090,15 @@ export interface AssetApiInterface {
     /**
      * Dustlog
      *
-     * Only return last 100 records
-     * Only return records after 2020/12/01
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary DustLog(USER_DATA)
+     * Notes:
+     * - Only return last 100 records
+     * - Only return records after 2020/12/01
+     *
+     * @summary DustLog (USER_DATA)
      * @param {DustlogRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1053,10 +1108,12 @@ export interface AssetApiInterface {
     /**
      * Query Funding Wallet
      *
+     * Weight(IP): 1
      *
-     * Currently supports querying the following business assets：Binance Pay, Binance Card, Binance Gift Card, Stock Token
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Currently supports querying the following business assets：Binance Pay, Binance Card, Binance Gift Card, Stock Token
      *
      * @summary Funding Wallet (USER_DATA)
      * @param {FundingWalletRequest} requestParameters Request parameters.
@@ -1070,7 +1127,9 @@ export interface AssetApiInterface {
     /**
      * Get Assets That Can Be Converted Into BNB
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Assets That Can Be Converted Into BNB (USER_DATA)
      * @param {GetAssetsThatCanBeConvertedIntoBnbRequest} requestParameters Request parameters.
@@ -1084,10 +1143,13 @@ export interface AssetApiInterface {
     /**
      * The query of Cloud-Mining payment and refund history
      *
-     * Just return the SUCCESS records of payment and refund.
-     * For response, type = 248 means payment, type = 249 means refund, status =S means SUCCESS.
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Just return the SUCCESS records of payment and refund.
+     * - For response, type = 248 means payment, type = 249 means refund, status =S means SUCCESS.
      *
      * @summary Get Cloud-Mining payment and refund history (USER_DATA)
      * @param {GetCloudMiningPaymentAndRefundHistoryRequest} requestParameters Request parameters.
@@ -1099,9 +1161,12 @@ export interface AssetApiInterface {
         requestParameters: GetCloudMiningPaymentAndRefundHistoryRequest
     ): Promise<RestApiResponse<GetCloudMiningPaymentAndRefundHistoryResponse>>;
     /**
-     * Get the list of symbols that are scheduled to be opened for trading in the market.
+     * Get the list of symbols that are scheduled to be opened for trading in
+     * the market.
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Open Symbol List (MARKET_DATA)
      *
@@ -1112,9 +1177,11 @@ export interface AssetApiInterface {
     /**
      * Query User Delegation History
      *
-     * Weight: 60
+     * Weight(IP): 60
      *
-     * @summary Query User Delegation History(For Master Account)(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query User Delegation History(For Master Account) (USER_DATA)
      * @param {QueryUserDelegationHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1126,15 +1193,17 @@ export interface AssetApiInterface {
     /**
      * Query User Universal Transfer History
      *
+     * Weight(IP): 1
      *
-     *  `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     *  `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     * Support query within the last 6 months only
-     * If `startTime`and `endTime` not sent, return records of the last 7 days by default
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
+     * - `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
+     * - Support query within the last 6 months only
+     * - If `startTime`and `endTime` not sent, return records of the last 7 days by default
      *
-     * @summary Query User Universal Transfer History(USER_DATA)
+     * @summary Query User Universal Transfer History (USER_DATA)
      * @param {QueryUserUniversalTransferHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1146,7 +1215,9 @@ export interface AssetApiInterface {
     /**
      * Query User Wallet Balance
      *
-     * Weight: 60
+     * Weight(IP): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query User Wallet Balance (USER_DATA)
      * @param {QueryUserWalletBalanceRequest} requestParameters Request parameters.
@@ -1160,9 +1231,12 @@ export interface AssetApiInterface {
     /**
      * Toggle BNB Burn On Spot Trade And Margin Interest
      *
-     * "spotBNBBurn" and "interestBNBBurn" should be sent at least one.
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - "spotBNBBurn" and "interestBNBBurn" should be sent at least one.
      *
      * @summary Toggle BNB Burn On Spot Trade And Margin Interest (USER_DATA)
      * @param {ToggleBnbBurnOnSpotTradeAndMarginInterestRequest} requestParameters Request parameters.
@@ -1176,7 +1250,9 @@ export interface AssetApiInterface {
     /**
      * Fetch trade fee
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Trade Fee (USER_DATA)
      * @param {TradeFeeRequest} requestParameters Request parameters.
@@ -1188,10 +1264,13 @@ export interface AssetApiInterface {
     /**
      * Get user assets, just for positive data.
      *
-     * If asset is set, then return this asset, otherwise return all assets positive.
-     * If needBtcValuation is set, then return btcValudation.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If asset is set, then return this asset, otherwise return all assets positive.
+     * - If needBtcValuation is set, then return btcValudation.
      *
      * @summary User Asset (USER_DATA)
      * @param {UserAssetRequest} requestParameters Request parameters.
@@ -1201,44 +1280,48 @@ export interface AssetApiInterface {
      */
     userAsset(requestParameters?: UserAssetRequest): Promise<RestApiResponse<UserAssetResponse>>;
     /**
-     * user universal transfer
+     * User universal transfer
      *
-     *  `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     *  `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     * ENUM of transfer types:
-     * MAIN_UMFUTURE   Spot account transfer to USDⓈ-M Futures account
-     * MAIN_CMFUTURE   Spot account transfer to COIN-M Futures account
-     * MAIN_MARGIN   Spot account transfer to Margin（cross）account
-     * UMFUTURE_MAIN   USDⓈ-M Futures account transfer to Spot account
-     * UMFUTURE_MARGIN   USDⓈ-M Futures account transfer to Margin（cross）account
-     * CMFUTURE_MAIN   COIN-M Futures account transfer to Spot account
-     * CMFUTURE_MARGIN   COIN-M Futures account transfer to Margin(cross) account
-     * MARGIN_MAIN   Margin（cross）account transfer to Spot account
-     * MARGIN_UMFUTURE   Margin（cross）account transfer to USDⓈ-M Futures
-     * MARGIN_CMFUTURE   Margin（cross）account transfer to COIN-M Futures
-     * ISOLATEDMARGIN_MARGIN   Isolated margin account transfer to Margin(cross) account
-     * MARGIN_ISOLATEDMARGIN   Margin(cross) account transfer to Isolated margin account
-     * ISOLATEDMARGIN_ISOLATEDMARGIN   Isolated margin account transfer to Isolated margin account
-     * MAIN_FUNDING   Spot account transfer to Funding account
-     * FUNDING_MAIN   Funding account transfer to Spot account
-     * FUNDING_UMFUTURE   Funding account transfer to UMFUTURE account
-     * UMFUTURE_FUNDING   UMFUTURE account transfer to Funding account
-     * MARGIN_FUNDING   MARGIN account transfer to Funding account
-     * FUNDING_MARGIN   Funding account transfer to Margin account
-     * FUNDING_CMFUTURE   Funding account transfer to CMFUTURE account
-     * CMFUTURE_FUNDING   CMFUTURE account transfer to Funding account
-     * MAIN_OPTION  Spot account transfer to Options account
-     * OPTION_MAIN  Options account transfer to Spot account
-     * UMFUTURE_OPTION USDⓈ-M Futures account transfer to Options account
-     * OPTION_UMFUTURE Options account transfer to USDⓈ-M Futures account
-     * MARGIN_OPTION  Margin（cross）account transfer to Options account
-     * OPTION_MARGIN  Options account transfer to Margin（cross）account
-     * FUNDING_OPTION   Funding account transfer to Options account
-     * OPTION_FUNDING   Options account transfer to Funding account
-     * MAIN_PORTFOLIO_MARGIN  Spot account transfer to Portfolio Margin account
-     * PORTFOLIO_MARGIN_MAIN  Portfolio Margin account transfer to Spot account
+     * Weight(UID): 900
      *
-     * Weight: 900
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Permits Universal Transfer option for the API Key that requests this endpoint.
+     * - `fromSymbol` must be sent when type is `ISOLATEDMARGIN_MARGIN` or `ISOLATEDMARGIN_ISOLATEDMARGIN`.
+     * - `toSymbol` must be sent when type is `MARGIN_ISOLATEDMARGIN` or `ISOLATEDMARGIN_ISOLATEDMARGIN`.
+     * - ENUM of transfer types:
+     * - `MAIN_UMFUTURE`: Spot → USDⓈ-M Futures
+     * - `MAIN_CMFUTURE`: Spot → COIN-M Futures
+     * - `MAIN_MARGIN`: Spot → Margin (cross)
+     * - `UMFUTURE_MAIN`: USDⓈ-M Futures → Spot
+     * - `UMFUTURE_MARGIN`: USDⓈ-M Futures → Margin (cross)
+     * - `CMFUTURE_MAIN`: COIN-M Futures → Spot
+     * - `CMFUTURE_MARGIN`: COIN-M Futures → Margin (cross)
+     * - `MARGIN_MAIN`: Margin (cross) → Spot
+     * - `MARGIN_UMFUTURE`: Margin (cross) → USDⓈ-M Futures
+     * - `MARGIN_CMFUTURE`: Margin (cross) → COIN-M Futures
+     * - `ISOLATEDMARGIN_MARGIN`: Isolated margin → Margin (cross)
+     * - `MARGIN_ISOLATEDMARGIN`: Margin (cross) → Isolated margin
+     * - `ISOLATEDMARGIN_ISOLATEDMARGIN`: Isolated margin → Isolated margin
+     * - `MAIN_FUNDING`: Spot → Funding
+     * - `FUNDING_MAIN`: Funding → Spot
+     * - `FUNDING_UMFUTURE`: Funding → USDⓈ-M Futures
+     * - `UMFUTURE_FUNDING`: USDⓈ-M Futures → Funding
+     * - `MARGIN_FUNDING`: Margin (cross) → Funding
+     * - `FUNDING_MARGIN`: Funding → Margin (cross)
+     * - `FUNDING_CMFUTURE`: Funding → COIN-M Futures
+     * - `CMFUTURE_FUNDING`: COIN-M Futures → Funding
+     * - `MAIN_OPTION`: Spot → Options
+     * - `OPTION_MAIN`: Options → Spot
+     * - `UMFUTURE_OPTION`: USDⓈ-M Futures → Options
+     * - `OPTION_UMFUTURE`: Options → USDⓈ-M Futures
+     * - `MARGIN_OPTION`: Margin (cross) → Options
+     * - `OPTION_MARGIN`: Options → Margin (cross)
+     * - `FUNDING_OPTION`: Funding → Options
+     * - `OPTION_FUNDING`: Options → Funding
+     * - `MAIN_PORTFOLIO_MARGIN`: Spot → Portfolio Margin
+     * - `PORTFOLIO_MARGIN_MAIN`: Portfolio Margin → Spot
      *
      * @summary User Universal Transfer (USER_DATA)
      * @param {UserUniversalTransferRequest} requestParameters Request parameters.
@@ -1257,7 +1340,7 @@ export interface AssetApiInterface {
  */
 export interface AssetDetailRequest {
     /**
-     * If asset is blank, then query all positive assets user have.
+     *
      * @type {string}
      * @memberof AssetApiAssetDetail
      */
@@ -1277,7 +1360,7 @@ export interface AssetDetailRequest {
  */
 export interface AssetDividendRecordRequest {
     /**
-     * If asset is blank, then query all positive assets user have.
+     *
      * @type {string}
      * @memberof AssetApiAssetDividendRecord
      */
@@ -1298,7 +1381,7 @@ export interface AssetDividendRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * min 7, max 30, default 7
+     *
      * @type {number | bigint}
      * @memberof AssetApiAssetDividendRecord
      */
@@ -1325,7 +1408,7 @@ export interface DustConvertRequest {
     readonly asset: string;
 
     /**
-     * `SPOT` or `MARGIN`,default `SPOT`
+     * `SPOT` or `MARGIN`, default `SPOT`
      * @type {string}
      * @memberof AssetApiDustConvert
      */
@@ -1373,7 +1456,7 @@ export interface DustConvertibleAssetsRequest {
     readonly targetAsset: string;
 
     /**
-     * `SPOT` or `MARGIN`,default `SPOT`
+     * `SPOT` or `MARGIN`, default `SPOT`
      * @type {string}
      * @memberof AssetApiDustConvertibleAssets
      */
@@ -1393,18 +1476,18 @@ export interface DustConvertibleAssetsRequest {
  */
 export interface DustTransferRequest {
     /**
-     *
+     * The asset being converted. For example: asset=BTC,USDT
      * @type {string}
      * @memberof AssetApiDustTransfer
      */
     readonly asset: string;
 
     /**
-     * `SPOT` or `MARGIN`,default `SPOT`
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN'}
      * @memberof AssetApiDustTransfer
      */
-    readonly accountType?: string;
+    readonly accountType?: DustTransferAccountTypeEnum;
 
     /**
      *
@@ -1420,11 +1503,11 @@ export interface DustTransferRequest {
  */
 export interface DustlogRequest {
     /**
-     * `SPOT` or `MARGIN`,default `SPOT`
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN'}
      * @memberof AssetApiDustlog
      */
-    readonly accountType?: string;
+    readonly accountType?: DustlogAccountTypeEnum;
 
     /**
      *
@@ -1454,18 +1537,18 @@ export interface DustlogRequest {
  */
 export interface FundingWalletRequest {
     /**
-     * If asset is blank, then query all positive assets user have.
+     *
      * @type {string}
      * @memberof AssetApiFundingWallet
      */
     readonly asset?: string;
 
     /**
-     * true or false
-     * @type {string}
+     *
+     * @type {boolean}
      * @memberof AssetApiFundingWallet
      */
-    readonly needBtcValuation?: string;
+    readonly needBtcValuation?: boolean;
 
     /**
      *
@@ -1481,11 +1564,11 @@ export interface FundingWalletRequest {
  */
 export interface GetAssetsThatCanBeConvertedIntoBnbRequest {
     /**
-     * `SPOT` or `MARGIN`,default `SPOT`
-     * @type {string}
+     *
+     * @type {'SPOT' | 'MARGIN'}
      * @memberof AssetApiGetAssetsThatCanBeConvertedIntoBnb
      */
-    readonly accountType?: string;
+    readonly accountType?: GetAssetsThatCanBeConvertedIntoBnbAccountTypeEnum;
 
     /**
      *
@@ -1501,14 +1584,14 @@ export interface GetAssetsThatCanBeConvertedIntoBnbRequest {
  */
 export interface GetCloudMiningPaymentAndRefundHistoryRequest {
     /**
-     *
+     * inclusive, unit: ms
      * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
     readonly startTime: number | bigint;
 
     /**
-     *
+     * exclusive, unit: ms
      * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
@@ -1529,21 +1612,21 @@ export interface GetCloudMiningPaymentAndRefundHistoryRequest {
     readonly clientTranId?: string;
 
     /**
-     * If asset is blank, then query all positive assets user have.
+     * If it is blank, we will query all assets
      * @type {string}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
     readonly asset?: string;
 
     /**
-     * current page, default 1, the min value is 1
+     *
      * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * page size, default 10, the max value is 100
+     *
      * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
@@ -1577,28 +1660,28 @@ export interface QueryUserDelegationHistoryRequest {
     readonly endTime: number | bigint;
 
     /**
-     * Delegate/Undelegate
-     * @type {string}
+     *
+     * @type {'DELEGATE' | 'UNDELEGATE'}
      * @memberof AssetApiQueryUserDelegationHistory
      */
-    readonly type?: string;
+    readonly type?: QueryUserDelegationHistoryTypeEnum;
 
     /**
-     * If asset is blank, then query all positive assets user have.
+     *
      * @type {string}
      * @memberof AssetApiQueryUserDelegationHistory
      */
     readonly asset?: string;
 
     /**
-     * current page, default 1, the min value is 1
+     *
      * @type {number | bigint}
      * @memberof AssetApiQueryUserDelegationHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * page size, default 10, the max value is 100
+     *
      * @type {number | bigint}
      * @memberof AssetApiQueryUserDelegationHistory
      */
@@ -1639,14 +1722,14 @@ export interface QueryUserUniversalTransferHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * current page, default 1, the min value is 1
+     *
      * @type {number | bigint}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * page size, default 10, the max value is 100
+     *
      * @type {number | bigint}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
@@ -1654,17 +1737,17 @@ export interface QueryUserUniversalTransferHistoryRequest {
 
     /**
      *
-     * @type {string}
+     * @type {'ISOLATEDMARGIN_MARGIN' | 'ISOLATEDMARGIN_ISOLATEDMARGIN'}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
-    readonly fromSymbol?: string;
+    readonly fromSymbol?: QueryUserUniversalTransferHistoryFromSymbolEnum;
 
     /**
      *
-     * @type {string}
+     * @type {'MARGIN_ISOLATEDMARGIN' | 'ISOLATEDMARGIN_ISOLATEDMARGIN'}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
-    readonly toSymbol?: string;
+    readonly toSymbol?: QueryUserUniversalTransferHistoryToSymbolEnum;
 
     /**
      *
@@ -1680,7 +1763,7 @@ export interface QueryUserUniversalTransferHistoryRequest {
  */
 export interface QueryUserWalletBalanceRequest {
     /**
-     * `USDT`, `ETH`, `USDC`, `BNB`, etc. default `BTC`
+     *
      * @type {string}
      * @memberof AssetApiQueryUserWalletBalance
      */
@@ -1700,14 +1783,14 @@ export interface QueryUserWalletBalanceRequest {
  */
 export interface ToggleBnbBurnOnSpotTradeAndMarginInterestRequest {
     /**
-     * "true" or "false"; Determines whether to use BNB to pay for trading fees on SPOT
+     * Determines whether to use BNB to pay for trading fees on SPOT
      * @type {string}
      * @memberof AssetApiToggleBnbBurnOnSpotTradeAndMarginInterest
      */
     readonly spotBNBBurn?: string;
 
     /**
-     * "true" or "false"; Determines whether to use BNB to pay for margin loan's interest
+     * Determines whether to use BNB to pay for margin loan's interest
      * @type {string}
      * @memberof AssetApiToggleBnbBurnOnSpotTradeAndMarginInterest
      */
@@ -1775,10 +1858,10 @@ export interface UserAssetRequest {
 export interface UserUniversalTransferRequest {
     /**
      *
-     * @type {string}
+     * @type {'MAIN_UMFUTURE' | 'MAIN_CMFUTURE' | 'MAIN_MARGIN' | 'UMFUTURE_MAIN' | 'UMFUTURE_MARGIN' | 'CMFUTURE_MAIN' | 'CMFUTURE_MARGIN' | 'MARGIN_MAIN' | 'MARGIN_UMFUTURE' | 'MARGIN_CMFUTURE' | 'ISOLATEDMARGIN_MARGIN' | 'MARGIN_ISOLATEDMARGIN' | 'ISOLATEDMARGIN_ISOLATEDMARGIN' | 'MAIN_FUNDING' | 'FUNDING_MAIN' | 'FUNDING_UMFUTURE' | 'UMFUTURE_FUNDING' | 'MARGIN_FUNDING' | 'FUNDING_MARGIN' | 'FUNDING_CMFUTURE' | 'CMFUTURE_FUNDING' | 'MAIN_OPTION' | 'OPTION_MAIN' | 'UMFUTURE_OPTION' | 'OPTION_UMFUTURE' | 'MARGIN_OPTION' | 'OPTION_MARGIN' | 'FUNDING_OPTION' | 'OPTION_FUNDING' | 'MAIN_PORTFOLIO_MARGIN' | 'PORTFOLIO_MARGIN_MAIN'}
      * @memberof AssetApiUserUniversalTransfer
      */
-    readonly type: string;
+    readonly type: UserUniversalTransferTypeEnum;
 
     /**
      *
@@ -1796,17 +1879,17 @@ export interface UserUniversalTransferRequest {
 
     /**
      *
-     * @type {string}
+     * @type {'ISOLATEDMARGIN_MARGIN' | 'ISOLATEDMARGIN_ISOLATEDMARGIN'}
      * @memberof AssetApiUserUniversalTransfer
      */
-    readonly fromSymbol?: string;
+    readonly fromSymbol?: UserUniversalTransferFromSymbolEnum;
 
     /**
      *
-     * @type {string}
+     * @type {'MARGIN_ISOLATEDMARGIN' | 'ISOLATEDMARGIN_ISOLATEDMARGIN'}
      * @memberof AssetApiUserUniversalTransfer
      */
-    readonly toSymbol?: string;
+    readonly toSymbol?: UserUniversalTransferToSymbolEnum;
 
     /**
      *
@@ -1832,17 +1915,19 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Fetch details of assets supported on Binance.
      *
+     * Weight(IP): 1
      *
-     * Please get network and other deposit or withdraw details from ``GET /sapi/v1/capital/config/getall``.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Please get network and other deposit or withdraw details from `GET /sapi/v1/capital/config/getall`.
      *
      * @summary Asset Detail (USER_DATA)
      * @param {AssetDetailRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AssetDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Asset-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#asset-detail Binance API Documentation}
      */
     public async assetDetail(
         requestParameters: AssetDetailRequest = {}
@@ -1866,17 +1951,19 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Query asset dividend record.
      *
+     * Weight(IP): 10
      *
-     * There cannot be more than 180 days between parameter `startTime` and `endTime`.
+     * Security Type: USER_DATA
      *
-     * Weight: 10
+     * Notes:
+     * - There cannot be more than 180 days between parameter `startTime` and `endTime`.
      *
      * @summary Asset Dividend Record (USER_DATA)
      * @param {AssetDividendRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AssetDividendRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/assets-divided-record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#asset-dividend-record Binance API Documentation}
      */
     public async assetDividendRecord(
         requestParameters: AssetDividendRecordRequest = {}
@@ -1903,14 +1990,16 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Convert dust assets
      *
-     * Weight: 10
+     * Weight(UID): 10
+     *
+     * Security Type: USER_DATA
      *
      * @summary Dust Convert (USER_DATA)
      * @param {DustConvertRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DustConvertResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Convert Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#dust-convert Binance API Documentation}
      */
     public async dustConvert(
         requestParameters: DustConvertRequest
@@ -1938,14 +2027,16 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Query dust convertible assets
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Dust Convertible Assets (USER_DATA)
      * @param {DustConvertibleAssetsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DustConvertibleAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Convertible-Assets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#dust-convertible-assets Binance API Documentation}
      */
     public async dustConvertibleAssets(
         requestParameters: DustConvertibleAssetsRequest
@@ -1970,16 +2061,19 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Convert dust assets to BNB.
      *
-     * You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(UID): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
      *
      * @summary Dust Transfer (USER_DATA)
      * @param {DustTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DustTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#dust-transfer Binance API Documentation}
      */
     public async dustTransfer(
         requestParameters: DustTransferRequest
@@ -2004,17 +2098,20 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Dustlog
      *
-     * Only return last 100 records
-     * Only return records after 2020/12/01
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary DustLog(USER_DATA)
+     * Notes:
+     * - Only return last 100 records
+     * - Only return records after 2020/12/01
+     *
+     * @summary DustLog (USER_DATA)
      * @param {DustlogRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DustlogResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/dust-log Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#dustlog Binance API Documentation}
      */
     public async dustlog(
         requestParameters: DustlogRequest = {}
@@ -2040,17 +2137,19 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Query Funding Wallet
      *
+     * Weight(IP): 1
      *
-     * Currently supports querying the following business assets：Binance Pay, Binance Card, Binance Gift Card, Stock Token
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Currently supports querying the following business assets：Binance Pay, Binance Card, Binance Gift Card, Stock Token
      *
      * @summary Funding Wallet (USER_DATA)
      * @param {FundingWalletRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FundingWalletResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Funding-Wallet Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#funding-wallet Binance API Documentation}
      */
     public async fundingWallet(
         requestParameters: FundingWalletRequest = {}
@@ -2075,14 +2174,16 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Get Assets That Can Be Converted Into BNB
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Assets That Can Be Converted Into BNB (USER_DATA)
      * @param {GetAssetsThatCanBeConvertedIntoBnbRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetAssetsThatCanBeConvertedIntoBnbResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/assets-can-convert-bnb Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#get-assets-that-can-be-converted-into-bnb Binance API Documentation}
      */
     public async getAssetsThatCanBeConvertedIntoBnb(
         requestParameters: GetAssetsThatCanBeConvertedIntoBnbRequest = {}
@@ -2107,17 +2208,20 @@ export class AssetApi implements AssetApiInterface {
     /**
      * The query of Cloud-Mining payment and refund history
      *
-     * Just return the SUCCESS records of payment and refund.
-     * For response, type = 248 means payment, type = 249 means refund, status =S means SUCCESS.
+     * Weight(UID): 600
      *
-     * Weight: 600
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Just return the SUCCESS records of payment and refund.
+     * - For response, type = 248 means payment, type = 249 means refund, status =S means SUCCESS.
      *
      * @summary Get Cloud-Mining payment and refund history (USER_DATA)
      * @param {GetCloudMiningPaymentAndRefundHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCloudMiningPaymentAndRefundHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/cloud-mining-payment-and-refund-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#get-cloud-mining-payment-and-refund-history Binance API Documentation}
      */
     public async getCloudMiningPaymentAndRefundHistory(
         requestParameters: GetCloudMiningPaymentAndRefundHistoryRequest
@@ -2145,15 +2249,18 @@ export class AssetApi implements AssetApiInterface {
     }
 
     /**
-     * Get the list of symbols that are scheduled to be opened for trading in the market.
+     * Get the list of symbols that are scheduled to be opened for trading in
+     * the market.
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
      *
      * @summary Get Open Symbol List (MARKET_DATA)
      * @returns {Promise<RestApiResponse<GetOpenSymbolListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/open-symbol-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#get-open-symbol-list Binance API Documentation}
      */
     public async getOpenSymbolList(): Promise<RestApiResponse<GetOpenSymbolListResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOpenSymbolList();
@@ -2172,14 +2279,16 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Query User Delegation History
      *
-     * Weight: 60
+     * Weight(IP): 60
      *
-     * @summary Query User Delegation History(For Master Account)(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query User Delegation History(For Master Account) (USER_DATA)
      * @param {QueryUserDelegationHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUserDelegationHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/query-user-delegation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#query-user-delegation-history Binance API Documentation}
      */
     public async queryUserDelegationHistory(
         requestParameters: QueryUserDelegationHistoryRequest
@@ -2209,20 +2318,22 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Query User Universal Transfer History
      *
+     * Weight(IP): 1
      *
-     *  `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     *  `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     * Support query within the last 6 months only
-     * If `startTime`and `endTime` not sent, return records of the last 7 days by default
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
+     * - `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
+     * - Support query within the last 6 months only
+     * - If `startTime`and `endTime` not sent, return records of the last 7 days by default
      *
-     * @summary Query User Universal Transfer History(USER_DATA)
+     * @summary Query User Universal Transfer History (USER_DATA)
      * @param {QueryUserUniversalTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUserUniversalTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/query-user-universal-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#query-user-universal-transfer-history Binance API Documentation}
      */
     public async queryUserUniversalTransferHistory(
         requestParameters: QueryUserUniversalTransferHistoryRequest
@@ -2253,14 +2364,16 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Query User Wallet Balance
      *
-     * Weight: 60
+     * Weight(IP): 60
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query User Wallet Balance (USER_DATA)
      * @param {QueryUserWalletBalanceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUserWalletBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Query-User-Wallet-Balance Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#query-user-wallet-balance Binance API Documentation}
      */
     public async queryUserWalletBalance(
         requestParameters: QueryUserWalletBalanceRequest = {}
@@ -2284,16 +2397,19 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Toggle BNB Burn On Spot Trade And Margin Interest
      *
-     * "spotBNBBurn" and "interestBNBBurn" should be sent at least one.
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - "spotBNBBurn" and "interestBNBBurn" should be sent at least one.
      *
      * @summary Toggle BNB Burn On Spot Trade And Margin Interest (USER_DATA)
      * @param {ToggleBnbBurnOnSpotTradeAndMarginInterestRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ToggleBnbBurnOnSpotTradeAndMarginInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Toggle-BNB-Burn-On-Spot-Trade-And-Margin-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#toggle-bnb-burn-on-spot-trade-and-margin-interest Binance API Documentation}
      */
     public async toggleBnbBurnOnSpotTradeAndMarginInterest(
         requestParameters: ToggleBnbBurnOnSpotTradeAndMarginInterestRequest = {}
@@ -2319,14 +2435,16 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Fetch trade fee
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Trade Fee (USER_DATA)
      * @param {TradeFeeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TradeFeeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/Trade-Fee Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#trade-fee Binance API Documentation}
      */
     public async tradeFee(
         requestParameters: TradeFeeRequest = {}
@@ -2350,17 +2468,20 @@ export class AssetApi implements AssetApiInterface {
     /**
      * Get user assets, just for positive data.
      *
-     * If asset is set, then return this asset, otherwise return all assets positive.
-     * If needBtcValuation is set, then return btcValudation.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If asset is set, then return this asset, otherwise return all assets positive.
+     * - If needBtcValuation is set, then return btcValudation.
      *
      * @summary User Asset (USER_DATA)
      * @param {UserAssetRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UserAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/user-assets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#user-asset Binance API Documentation}
      */
     public async userAsset(
         requestParameters: UserAssetRequest = {}
@@ -2383,51 +2504,55 @@ export class AssetApi implements AssetApiInterface {
     }
 
     /**
-     * user universal transfer
+     * User universal transfer
      *
-     *  `fromSymbol` must be sent when type are ISOLATEDMARGIN_MARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     *  `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and ISOLATEDMARGIN_ISOLATEDMARGIN
-     * ENUM of transfer types:
-     * MAIN_UMFUTURE   Spot account transfer to USDⓈ-M Futures account
-     * MAIN_CMFUTURE   Spot account transfer to COIN-M Futures account
-     * MAIN_MARGIN   Spot account transfer to Margin（cross）account
-     * UMFUTURE_MAIN   USDⓈ-M Futures account transfer to Spot account
-     * UMFUTURE_MARGIN   USDⓈ-M Futures account transfer to Margin（cross）account
-     * CMFUTURE_MAIN   COIN-M Futures account transfer to Spot account
-     * CMFUTURE_MARGIN   COIN-M Futures account transfer to Margin(cross) account
-     * MARGIN_MAIN   Margin（cross）account transfer to Spot account
-     * MARGIN_UMFUTURE   Margin（cross）account transfer to USDⓈ-M Futures
-     * MARGIN_CMFUTURE   Margin（cross）account transfer to COIN-M Futures
-     * ISOLATEDMARGIN_MARGIN   Isolated margin account transfer to Margin(cross) account
-     * MARGIN_ISOLATEDMARGIN   Margin(cross) account transfer to Isolated margin account
-     * ISOLATEDMARGIN_ISOLATEDMARGIN   Isolated margin account transfer to Isolated margin account
-     * MAIN_FUNDING   Spot account transfer to Funding account
-     * FUNDING_MAIN   Funding account transfer to Spot account
-     * FUNDING_UMFUTURE   Funding account transfer to UMFUTURE account
-     * UMFUTURE_FUNDING   UMFUTURE account transfer to Funding account
-     * MARGIN_FUNDING   MARGIN account transfer to Funding account
-     * FUNDING_MARGIN   Funding account transfer to Margin account
-     * FUNDING_CMFUTURE   Funding account transfer to CMFUTURE account
-     * CMFUTURE_FUNDING   CMFUTURE account transfer to Funding account
-     * MAIN_OPTION  Spot account transfer to Options account
-     * OPTION_MAIN  Options account transfer to Spot account
-     * UMFUTURE_OPTION USDⓈ-M Futures account transfer to Options account
-     * OPTION_UMFUTURE Options account transfer to USDⓈ-M Futures account
-     * MARGIN_OPTION  Margin（cross）account transfer to Options account
-     * OPTION_MARGIN  Options account transfer to Margin（cross）account
-     * FUNDING_OPTION   Funding account transfer to Options account
-     * OPTION_FUNDING   Options account transfer to Funding account
-     * MAIN_PORTFOLIO_MARGIN  Spot account transfer to Portfolio Margin account
-     * PORTFOLIO_MARGIN_MAIN  Portfolio Margin account transfer to Spot account
+     * Weight(UID): 900
      *
-     * Weight: 900
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - You need to enable Permits Universal Transfer option for the API Key that requests this endpoint.
+     * - `fromSymbol` must be sent when type is `ISOLATEDMARGIN_MARGIN` or `ISOLATEDMARGIN_ISOLATEDMARGIN`.
+     * - `toSymbol` must be sent when type is `MARGIN_ISOLATEDMARGIN` or `ISOLATEDMARGIN_ISOLATEDMARGIN`.
+     * - ENUM of transfer types:
+     * - `MAIN_UMFUTURE`: Spot → USDⓈ-M Futures
+     * - `MAIN_CMFUTURE`: Spot → COIN-M Futures
+     * - `MAIN_MARGIN`: Spot → Margin (cross)
+     * - `UMFUTURE_MAIN`: USDⓈ-M Futures → Spot
+     * - `UMFUTURE_MARGIN`: USDⓈ-M Futures → Margin (cross)
+     * - `CMFUTURE_MAIN`: COIN-M Futures → Spot
+     * - `CMFUTURE_MARGIN`: COIN-M Futures → Margin (cross)
+     * - `MARGIN_MAIN`: Margin (cross) → Spot
+     * - `MARGIN_UMFUTURE`: Margin (cross) → USDⓈ-M Futures
+     * - `MARGIN_CMFUTURE`: Margin (cross) → COIN-M Futures
+     * - `ISOLATEDMARGIN_MARGIN`: Isolated margin → Margin (cross)
+     * - `MARGIN_ISOLATEDMARGIN`: Margin (cross) → Isolated margin
+     * - `ISOLATEDMARGIN_ISOLATEDMARGIN`: Isolated margin → Isolated margin
+     * - `MAIN_FUNDING`: Spot → Funding
+     * - `FUNDING_MAIN`: Funding → Spot
+     * - `FUNDING_UMFUTURE`: Funding → USDⓈ-M Futures
+     * - `UMFUTURE_FUNDING`: USDⓈ-M Futures → Funding
+     * - `MARGIN_FUNDING`: Margin (cross) → Funding
+     * - `FUNDING_MARGIN`: Funding → Margin (cross)
+     * - `FUNDING_CMFUTURE`: Funding → COIN-M Futures
+     * - `CMFUTURE_FUNDING`: COIN-M Futures → Funding
+     * - `MAIN_OPTION`: Spot → Options
+     * - `OPTION_MAIN`: Options → Spot
+     * - `UMFUTURE_OPTION`: USDⓈ-M Futures → Options
+     * - `OPTION_UMFUTURE`: Options → USDⓈ-M Futures
+     * - `MARGIN_OPTION`: Margin (cross) → Options
+     * - `OPTION_MARGIN`: Options → Margin (cross)
+     * - `FUNDING_OPTION`: Funding → Options
+     * - `OPTION_FUNDING`: Options → Funding
+     * - `MAIN_PORTFOLIO_MARGIN`: Spot → Portfolio Margin
+     * - `PORTFOLIO_MARGIN_MAIN`: Portfolio Margin → Spot
      *
      * @summary User Universal Transfer (USER_DATA)
      * @param {UserUniversalTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UserUniversalTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetApi
-     * @see {@link https://developers.binance.com/docs/wallet/asset/User-Universal-Transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#user-universal-transfer Binance API Documentation}
      */
     public async userUniversalTransfer(
         requestParameters: UserUniversalTransferRequest
@@ -2451,4 +2576,78 @@ export class AssetApi implements AssetApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum DustTransferAccountTypeEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+}
+
+export enum DustlogAccountTypeEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+}
+
+export enum GetAssetsThatCanBeConvertedIntoBnbAccountTypeEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+}
+
+export enum QueryUserDelegationHistoryTypeEnum {
+    DELEGATE = 'DELEGATE',
+    UNDELEGATE = 'UNDELEGATE',
+}
+
+export enum QueryUserUniversalTransferHistoryFromSymbolEnum {
+    ISOLATEDMARGIN_MARGIN = 'ISOLATEDMARGIN_MARGIN',
+    ISOLATEDMARGIN_ISOLATEDMARGIN = 'ISOLATEDMARGIN_ISOLATEDMARGIN',
+}
+
+export enum QueryUserUniversalTransferHistoryToSymbolEnum {
+    MARGIN_ISOLATEDMARGIN = 'MARGIN_ISOLATEDMARGIN',
+    ISOLATEDMARGIN_ISOLATEDMARGIN = 'ISOLATEDMARGIN_ISOLATEDMARGIN',
+}
+
+export enum UserUniversalTransferTypeEnum {
+    MAIN_UMFUTURE = 'MAIN_UMFUTURE',
+    MAIN_CMFUTURE = 'MAIN_CMFUTURE',
+    MAIN_MARGIN = 'MAIN_MARGIN',
+    UMFUTURE_MAIN = 'UMFUTURE_MAIN',
+    UMFUTURE_MARGIN = 'UMFUTURE_MARGIN',
+    CMFUTURE_MAIN = 'CMFUTURE_MAIN',
+    CMFUTURE_MARGIN = 'CMFUTURE_MARGIN',
+    MARGIN_MAIN = 'MARGIN_MAIN',
+    MARGIN_UMFUTURE = 'MARGIN_UMFUTURE',
+    MARGIN_CMFUTURE = 'MARGIN_CMFUTURE',
+    ISOLATEDMARGIN_MARGIN = 'ISOLATEDMARGIN_MARGIN',
+    MARGIN_ISOLATEDMARGIN = 'MARGIN_ISOLATEDMARGIN',
+    ISOLATEDMARGIN_ISOLATEDMARGIN = 'ISOLATEDMARGIN_ISOLATEDMARGIN',
+    MAIN_FUNDING = 'MAIN_FUNDING',
+    FUNDING_MAIN = 'FUNDING_MAIN',
+    FUNDING_UMFUTURE = 'FUNDING_UMFUTURE',
+    UMFUTURE_FUNDING = 'UMFUTURE_FUNDING',
+    MARGIN_FUNDING = 'MARGIN_FUNDING',
+    FUNDING_MARGIN = 'FUNDING_MARGIN',
+    FUNDING_CMFUTURE = 'FUNDING_CMFUTURE',
+    CMFUTURE_FUNDING = 'CMFUTURE_FUNDING',
+    MAIN_OPTION = 'MAIN_OPTION',
+    OPTION_MAIN = 'OPTION_MAIN',
+    UMFUTURE_OPTION = 'UMFUTURE_OPTION',
+    OPTION_UMFUTURE = 'OPTION_UMFUTURE',
+    MARGIN_OPTION = 'MARGIN_OPTION',
+    OPTION_MARGIN = 'OPTION_MARGIN',
+    FUNDING_OPTION = 'FUNDING_OPTION',
+    OPTION_FUNDING = 'OPTION_FUNDING',
+    MAIN_PORTFOLIO_MARGIN = 'MAIN_PORTFOLIO_MARGIN',
+    PORTFOLIO_MARGIN_MAIN = 'PORTFOLIO_MARGIN_MAIN',
+}
+
+export enum UserUniversalTransferFromSymbolEnum {
+    ISOLATEDMARGIN_MARGIN = 'ISOLATEDMARGIN_MARGIN',
+    ISOLATEDMARGIN_ISOLATEDMARGIN = 'ISOLATEDMARGIN_ISOLATEDMARGIN',
+}
+
+export enum UserUniversalTransferToSymbolEnum {
+    MARGIN_ISOLATEDMARGIN = 'MARGIN_ISOLATEDMARGIN',
+    ISOLATEDMARGIN_ISOLATEDMARGIN = 'ISOLATEDMARGIN_ISOLATEDMARGIN',
 }

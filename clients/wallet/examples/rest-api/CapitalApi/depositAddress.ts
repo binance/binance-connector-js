@@ -10,7 +10,7 @@ const client = new Wallet({ configurationRestAPI });
 async function depositAddress() {
     try {
         const response = await client.restAPI.depositAddress({
-            coin: 'coin_example',
+            coin: 'BTC',
         });
 
         const rateLimits = response.rateLimits!;

@@ -10,7 +10,7 @@ const client = new Wallet({ configurationRestAPI });
 async function fetchDepositAddressListWithNetwork() {
     try {
         const response = await client.restAPI.fetchDepositAddressListWithNetwork({
-            coin: 'coin_example',
+            coin: 'BTC',
         });
 
         const rateLimits = response.rateLimits!;

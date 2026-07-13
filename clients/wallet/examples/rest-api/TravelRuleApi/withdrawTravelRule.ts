@@ -10,7 +10,7 @@ const client = new Wallet({ configurationRestAPI });
 async function withdrawTravelRule() {
     try {
         const response = await client.restAPI.withdrawTravelRule({
-            coin: 'coin_example',
+            coin: 'BTC',
             address: 'address_example',
             amount: 1.0,
             questionnaire: 'questionnaire_example',

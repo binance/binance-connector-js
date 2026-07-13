@@ -1,7 +1,7 @@
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AccountApi } from '../../../src/rest-api';
+import { AccountApi, DailyAccountSnapshotTypeEnum } from '../../../src/rest-api';
 import {
     AccountApiTradingStatusRequest,
     AccountInfoRequest,
@@ -251,7 +251,7 @@ describe('AccountApi', () => {
     describe('dailyAccountSnapshot()', () => {
         it('should execute dailyAccountSnapshot() successfully with required parameters only', async () => {
             const params: DailyAccountSnapshotRequest = {
-                type: 'type_example',
+                type: DailyAccountSnapshotTypeEnum.SPOT,
             };
 
             mockResponse = JSONParse(
@@ -263,17 +263,9 @@ describe('AccountApi', () => {
                             data: {
                                 balances: [
                                     { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
-                                    { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
                                 ],
                                 totalAssetOfBtc: '0.09942700',
-                            },
-                            type: 'spot',
-                            updateTime: 1576281599000,
-                        },
-                        {
-                            data: {
                                 marginLevel: '2748.02909813',
-                                totalAssetOfBtc: '0.00274803',
                                 totalLiabilityOfBtc: '0.00000100',
                                 totalNetAssetOfBtc: '0.00274750',
                                 userAssets: [
@@ -286,12 +278,6 @@ describe('AccountApi', () => {
                                         netAsset: '1.00000000',
                                     },
                                 ],
-                            },
-                            type: 'margin',
-                            updateTime: 1576281599000,
-                        },
-                        {
-                            data: {
                                 assets: [
                                     {
                                         asset: 'USDT',
@@ -309,7 +295,7 @@ describe('AccountApi', () => {
                                     },
                                 ],
                             },
-                            type: 'futures',
+                            type: 'spot',
                             updateTime: 1576281599000,
                         },
                     ],
@@ -332,7 +318,7 @@ describe('AccountApi', () => {
 
         it('should execute dailyAccountSnapshot() successfully with optional parameters', async () => {
             const params: DailyAccountSnapshotRequest = {
-                type: 'type_example',
+                type: DailyAccountSnapshotTypeEnum.SPOT,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 limit: 7,
@@ -348,17 +334,9 @@ describe('AccountApi', () => {
                             data: {
                                 balances: [
                                     { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
-                                    { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
                                 ],
                                 totalAssetOfBtc: '0.09942700',
-                            },
-                            type: 'spot',
-                            updateTime: 1576281599000,
-                        },
-                        {
-                            data: {
                                 marginLevel: '2748.02909813',
-                                totalAssetOfBtc: '0.00274803',
                                 totalLiabilityOfBtc: '0.00000100',
                                 totalNetAssetOfBtc: '0.00274750',
                                 userAssets: [
@@ -371,12 +349,6 @@ describe('AccountApi', () => {
                                         netAsset: '1.00000000',
                                     },
                                 ],
-                            },
-                            type: 'margin',
-                            updateTime: 1576281599000,
-                        },
-                        {
-                            data: {
                                 assets: [
                                     {
                                         asset: 'USDT',
@@ -394,7 +366,7 @@ describe('AccountApi', () => {
                                     },
                                 ],
                             },
-                            type: 'futures',
+                            type: 'spot',
                             updateTime: 1576281599000,
                         },
                     ],
@@ -417,7 +389,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: DailyAccountSnapshotRequest = {
-                type: 'type_example',
+                type: DailyAccountSnapshotTypeEnum.SPOT,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -429,7 +401,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: DailyAccountSnapshotRequest = {
-                type: 'type_example',
+                type: DailyAccountSnapshotTypeEnum.SPOT,
             };
 
             const errorResponse = {
@@ -558,13 +530,13 @@ describe('AccountApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     ipRestrict: false,
-                    createTime: 1698645219000,
+                    createTime: 1623840271000,
                     enableReading: true,
                     enableWithdrawals: false,
-                    enableInternalTransfer: false,
+                    enableInternalTransfer: true,
                     enableMargin: false,
                     enableFutures: false,
-                    permitsUniversalTransfer: false,
+                    permitsUniversalTransfer: true,
                     enableVanillaOptions: false,
                     enableFixApiTrade: false,
                     enableFixReadOnly: true,
@@ -595,13 +567,13 @@ describe('AccountApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     ipRestrict: false,
-                    createTime: 1698645219000,
+                    createTime: 1623840271000,
                     enableReading: true,
                     enableWithdrawals: false,
-                    enableInternalTransfer: false,
+                    enableInternalTransfer: true,
                     enableMargin: false,
                     enableFutures: false,
-                    permitsUniversalTransfer: false,
+                    permitsUniversalTransfer: true,
                     enableVanillaOptions: false,
                     enableFixApiTrade: false,
                     enableFixReadOnly: true,

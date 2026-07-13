@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Wallet REST API
+ * Wallet REST API
  *
- * OpenAPI Specification for the Binance Wallet REST API
+ * Query balances, manage assets, and perform wallet operations via the Binance Wallet API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,25 +20,25 @@
  */
 export interface GetRegionListResponseRegionsInner {
     /**
-     *
+     * Region/city display name (use this value in questionnaire answers).
      * @type {string}
      * @memberof GetRegionListResponseRegionsInner
      */
     regionName?: string;
     /**
-     *
+     * `supported`, `limited`, or `blocked`.
      * @type {string}
      * @memberof GetRegionListResponseRegionsInner
      */
     blockType?: string;
     /**
-     *
+     * Whether deposit is allowed for this region.
      * @type {boolean}
      * @memberof GetRegionListResponseRegionsInner
      */
     depositAllowed?: boolean;
     /**
-     *
+     * Whether withdrawal is allowed for this region.
      * @type {boolean}
      * @memberof GetRegionListResponseRegionsInner
      */
