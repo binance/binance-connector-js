@@ -1,4 +1,8 @@
-import { DualInvestment, DUAL_INVESTMENT_REST_API_PROD_URL } from '../../../src';
+import {
+    DualInvestment,
+    DualInvestmentRestAPI,
+    DUAL_INVESTMENT_REST_API_PROD_URL,
+} from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,7 +14,9 @@ const client = new DualInvestment({ configurationRestAPI });
 async function changeAutoCompoundStatus() {
     try {
         const response = await client.restAPI.changeAutoCompoundStatus({
-            positionId: '1',
+            positionId: '741590',
+            autoCompoundPlan:
+                DualInvestmentRestAPI.ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
         });
 
         const rateLimits = response.rateLimits!;

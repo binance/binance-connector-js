@@ -1,4 +1,8 @@
-import { DualInvestment, DUAL_INVESTMENT_REST_API_PROD_URL } from '../../../src';
+import {
+    DualInvestment,
+    DualInvestmentRestAPI,
+    DUAL_INVESTMENT_REST_API_PROD_URL,
+} from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,9 +14,9 @@ const client = new DualInvestment({ configurationRestAPI });
 async function getDualInvestmentProductList() {
     try {
         const response = await client.restAPI.getDualInvestmentProductList({
-            optionType: 'optionType_example',
-            exercisedCoin: 'exercisedCoin_example',
-            investCoin: 'investCoin_example',
+            optionType: DualInvestmentRestAPI.GetDualInvestmentProductListOptionTypeEnum.CALL,
+            exercisedCoin: 'USDT',
+            investCoin: 'BNB',
         });
 
         const rateLimits = response.rateLimits!;

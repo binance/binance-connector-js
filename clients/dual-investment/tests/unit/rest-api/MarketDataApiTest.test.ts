@@ -1,7 +1,7 @@
 /**
- * Binance Dual Investment REST API
+ * Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Dual Investment REST API
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { MarketDataApi } from '../../../src/rest-api';
+import { MarketDataApi, GetDualInvestmentProductListOptionTypeEnum } from '../../../src/rest-api';
 import { GetDualInvestmentProductListRequest } from '../../../src/rest-api';
 import type { GetDualInvestmentProductListResponse } from '../../../src/rest-api/types';
 
@@ -36,9 +36,9 @@ describe('MarketDataApi', () => {
     describe('getDualInvestmentProductList()', () => {
         it('should execute getDualInvestmentProductList() successfully with required parameters only', async () => {
             const params: GetDualInvestmentProductListRequest = {
-                optionType: 'optionType_example',
-                exercisedCoin: 'exercisedCoin_example',
-                investCoin: 'investCoin_example',
+                optionType: GetDualInvestmentProductListOptionTypeEnum.CALL,
+                exercisedCoin: 'USDT',
+                investCoin: 'BNB',
             };
 
             mockResponse = JSONParse(
@@ -84,9 +84,9 @@ describe('MarketDataApi', () => {
 
         it('should execute getDualInvestmentProductList() successfully with optional parameters', async () => {
             const params: GetDualInvestmentProductListRequest = {
-                optionType: 'optionType_example',
-                exercisedCoin: 'exercisedCoin_example',
-                investCoin: 'investCoin_example',
+                optionType: GetDualInvestmentProductListOptionTypeEnum.CALL,
+                exercisedCoin: 'USDT',
+                investCoin: 'BNB',
                 pageSize: 10,
                 pageIndex: 1,
                 recvWindow: 5000,
@@ -135,9 +135,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when optionType is missing', async () => {
             const _params: GetDualInvestmentProductListRequest = {
-                optionType: 'optionType_example',
-                exercisedCoin: 'exercisedCoin_example',
-                investCoin: 'investCoin_example',
+                optionType: GetDualInvestmentProductListOptionTypeEnum.CALL,
+                exercisedCoin: 'USDT',
+                investCoin: 'BNB',
             };
             const params = Object.assign({ ..._params });
             delete params?.optionType;
@@ -149,9 +149,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when exercisedCoin is missing', async () => {
             const _params: GetDualInvestmentProductListRequest = {
-                optionType: 'optionType_example',
-                exercisedCoin: 'exercisedCoin_example',
-                investCoin: 'investCoin_example',
+                optionType: GetDualInvestmentProductListOptionTypeEnum.CALL,
+                exercisedCoin: 'USDT',
+                investCoin: 'BNB',
             };
             const params = Object.assign({ ..._params });
             delete params?.exercisedCoin;
@@ -163,9 +163,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when investCoin is missing', async () => {
             const _params: GetDualInvestmentProductListRequest = {
-                optionType: 'optionType_example',
-                exercisedCoin: 'exercisedCoin_example',
-                investCoin: 'investCoin_example',
+                optionType: GetDualInvestmentProductListOptionTypeEnum.CALL,
+                exercisedCoin: 'USDT',
+                investCoin: 'BNB',
             };
             const params = Object.assign({ ..._params });
             delete params?.investCoin;
@@ -177,9 +177,9 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetDualInvestmentProductListRequest = {
-                optionType: 'optionType_example',
-                exercisedCoin: 'exercisedCoin_example',
-                investCoin: 'investCoin_example',
+                optionType: GetDualInvestmentProductListOptionTypeEnum.CALL,
+                exercisedCoin: 'USDT',
+                investCoin: 'BNB',
             };
 
             const errorResponse = {

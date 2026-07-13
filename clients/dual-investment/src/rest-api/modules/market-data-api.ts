@@ -1,7 +1,7 @@
 /**
- * Binance Dual Investment REST API
+ * Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Dual Investment REST API
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -29,20 +28,24 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Dual Investment product list
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
          *
          * @summary Get Dual Investment product list
-         * @param {string} optionType Input CALL or PUT
-         * @param {string} exercisedCoin Target exercised asset, e.g.: if you subscribe to a high sell product (call option), you should input: `optionType`:CALL,`exercisedCoin`:USDT,`investCoin`:BNB; if you subscribe to a low buy product (put option), you should input: `optionType`:PUT,`exercisedCoin`:BNB,`investCoin`:USDT
-         * @param {string} investCoin Asset used for subscribing, e.g.: if you subscribe to a high sell product (call option), you should input: `optionType`:CALL,`exercisedCoin`:USDT,`investCoin`:BNB; if you subscribe to a low buy product (put option), you should input: `optionType`:PUT,`exercisedCoin`:BNB,`investCoin`:USDT
-         * @param {number | bigint} [pageSize] Default: 10, Maximum: 100
-         * @param {number | bigint} [pageIndex] Default: 1
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {GetDualInvestmentProductListOptionTypeEnum} optionType Input CALL or PUT
+         * @param {string} exercisedCoin Target exercised asset, e.g.: if you subscribe to a high sell product (call option), you should input:
+         * `optionType: CALL`, `exercisedCoin: USDT`, `investCoin: BNB`; if you subscribe to a low buy product (put
+         * option), you should input: `optionType: PUT`, `exercisedCoin: BNB`, `investCoin: USDT`
+         * @param {string} investCoin Asset used for subscribing, e.g.: if you subscribe to a high sell product (call option), you should input:
+         * `optionType: CALL`, `exercisedCoin: USDT`, `investCoin: BNB`; if you subscribe to a low buy product (put
+         * option), you should input: `optionType: PUT`, `exercisedCoin: BNB`, `investCoin: USDT`
+         * @param {number | bigint} [pageSize] Number of records per page
+         * @param {number | bigint} [pageIndex] Page index
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         getDualInvestmentProductList: async (
-            optionType: string,
+            optionType: GetDualInvestmentProductListOptionTypeEnum,
             exercisedCoin: string,
             investCoin: string,
             pageSize?: number | bigint,
@@ -102,7 +105,7 @@ export interface MarketDataApiInterface {
     /**
      * Get Dual Investment product list
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
      * @summary Get Dual Investment product list
      * @param {GetDualInvestmentProductListRequest} requestParameters Request parameters.
@@ -122,41 +125,45 @@ export interface MarketDataApiInterface {
 export interface GetDualInvestmentProductListRequest {
     /**
      * Input CALL or PUT
-     * @type {string}
+     * @type {'CALL' | 'PUT'}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
-    readonly optionType: string;
+    readonly optionType: GetDualInvestmentProductListOptionTypeEnum;
 
     /**
-     * Target exercised asset, e.g.: if you subscribe to a high sell product (call option), you should input: `optionType`:CALL,`exercisedCoin`:USDT,`investCoin`:BNB; if you subscribe to a low buy product (put option), you should input: `optionType`:PUT,`exercisedCoin`:BNB,`investCoin`:USDT
+     * Target exercised asset, e.g.: if you subscribe to a high sell product (call option), you should input:
+     * `optionType: CALL`, `exercisedCoin: USDT`, `investCoin: BNB`; if you subscribe to a low buy product (put
+     * option), you should input: `optionType: PUT`, `exercisedCoin: BNB`, `investCoin: USDT`
      * @type {string}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
     readonly exercisedCoin: string;
 
     /**
-     * Asset used for subscribing, e.g.: if you subscribe to a high sell product (call option), you should input: `optionType`:CALL,`exercisedCoin`:USDT,`investCoin`:BNB; if you subscribe to a low buy product (put option), you should input: `optionType`:PUT,`exercisedCoin`:BNB,`investCoin`:USDT
+     * Asset used for subscribing, e.g.: if you subscribe to a high sell product (call option), you should input:
+     * `optionType: CALL`, `exercisedCoin: USDT`, `investCoin: BNB`; if you subscribe to a low buy product (put
+     * option), you should input: `optionType: PUT`, `exercisedCoin: BNB`, `investCoin: USDT`
      * @type {string}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
     readonly investCoin: string;
 
     /**
-     * Default: 10, Maximum: 100
+     * Number of records per page
      * @type {number | bigint}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
     readonly pageSize?: number | bigint;
 
     /**
-     * Default: 1
+     * Page index
      * @type {number | bigint}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
     readonly pageIndex?: number | bigint;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
@@ -179,14 +186,14 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get Dual Investment product list
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
      * @summary Get Dual Investment product list
      * @param {GetDualInvestmentProductListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDualInvestmentProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/market-data/Get-Dual-Investment-product-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/market-data#get-dual-investment-product-list Binance API Documentation}
      */
     public async getDualInvestmentProductList(
         requestParameters: GetDualInvestmentProductListRequest
@@ -207,7 +214,12 @@ export class MarketDataApi implements MarketDataApiInterface {
             localVarAxiosArgs.bodyParams,
             localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
+            { isSigned: false }
         );
     }
+}
+
+export enum GetDualInvestmentProductListOptionTypeEnum {
+    CALL = 'CALL',
+    PUT = 'PUT',
 }

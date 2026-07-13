@@ -1,7 +1,7 @@
 /**
- * Binance Dual Investment REST API
+ * Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Dual Investment REST API
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { TradeApi } from '../../../src/rest-api';
+import {
+    TradeApi,
+    ChangeAutoCompoundStatusAutoCompoundPlanEnum,
+    GetDualInvestmentPositionsStatusEnum,
+    SubscribeDualInvestmentProductsAutoCompoundPlanEnum,
+} from '../../../src/rest-api';
 import {
     ChangeAutoCompoundStatusRequest,
     CheckDualInvestmentAccountsRequest,
@@ -46,7 +51,8 @@ describe('TradeApi', () => {
     describe('changeAutoCompoundStatus()', () => {
         it('should execute changeAutoCompoundStatus() successfully with required parameters only', async () => {
             const params: ChangeAutoCompoundStatusRequest = {
-                positionId: '1',
+                positionId: '741590',
+                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
             };
 
             mockResponse = JSONParse(
@@ -69,8 +75,8 @@ describe('TradeApi', () => {
 
         it('should execute changeAutoCompoundStatus() successfully with optional parameters', async () => {
             const params: ChangeAutoCompoundStatusRequest = {
-                positionId: '1',
-                autoCompoundPlan: 'autoCompoundPlan_example',
+                positionId: '741590',
+                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
                 recvWindow: 5000,
             };
 
@@ -94,7 +100,8 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when positionId is missing', async () => {
             const _params: ChangeAutoCompoundStatusRequest = {
-                positionId: '1',
+                positionId: '741590',
+                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
             };
             const params = Object.assign({ ..._params });
             delete params?.positionId;
@@ -104,9 +111,23 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when autoCompoundPlan is missing', async () => {
+            const _params: ChangeAutoCompoundStatusRequest = {
+                positionId: '741590',
+                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.autoCompoundPlan;
+
+            await expect(client.changeAutoCompoundStatus(params)).rejects.toThrow(
+                'Required parameter autoCompoundPlan was null or undefined when calling changeAutoCompoundStatus.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeAutoCompoundStatusRequest = {
-                positionId: '1',
+                positionId: '741590',
+                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
             };
 
             const errorResponse = {
@@ -207,6 +228,7 @@ describe('TradeApi', () => {
                             purchaseEndTime: 1708329600000,
                             optionType: 'PUT',
                             autoCompoundPlan: 'STANDARD',
+                            subscriptionTime: 1708243200000,
                         },
                     ],
                 })
@@ -228,7 +250,7 @@ describe('TradeApi', () => {
 
         it('should execute getDualInvestmentPositions() successfully with optional parameters', async () => {
             const params: GetDualInvestmentPositionsRequest = {
-                status: 'status_example',
+                status: GetDualInvestmentPositionsStatusEnum.PENDING,
                 pageSize: 10,
                 pageIndex: 1,
                 recvWindow: 5000,
@@ -252,6 +274,7 @@ describe('TradeApi', () => {
                             purchaseEndTime: 1708329600000,
                             optionType: 'PUT',
                             autoCompoundPlan: 'STANDARD',
+                            subscriptionTime: 1708243200000,
                         },
                     ],
                 })
@@ -292,10 +315,10 @@ describe('TradeApi', () => {
     describe('subscribeDualInvestmentProducts()', () => {
         it('should execute subscribeDualInvestmentProducts() successfully with required parameters only', async () => {
             const params: SubscribeDualInvestmentProductsRequest = {
-                id: 'id_example',
-                orderId: '1',
-                depositAmount: 1.0,
-                autoCompoundPlan: 'NONE',
+                id: '741590',
+                orderId: '8257205859',
+                depositAmount: 1,
+                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
 
             mockResponse = JSONParse(
@@ -332,10 +355,10 @@ describe('TradeApi', () => {
 
         it('should execute subscribeDualInvestmentProducts() successfully with optional parameters', async () => {
             const params: SubscribeDualInvestmentProductsRequest = {
-                id: 'id_example',
-                orderId: '1',
-                depositAmount: 1.0,
-                autoCompoundPlan: 'NONE',
+                id: '741590',
+                orderId: '8257205859',
+                depositAmount: 1,
+                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
                 recvWindow: 5000,
             };
 
@@ -373,10 +396,10 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when id is missing', async () => {
             const _params: SubscribeDualInvestmentProductsRequest = {
-                id: 'id_example',
-                orderId: '1',
-                depositAmount: 1.0,
-                autoCompoundPlan: 'NONE',
+                id: '741590',
+                orderId: '8257205859',
+                depositAmount: 1,
+                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
             const params = Object.assign({ ..._params });
             delete params?.id;
@@ -388,10 +411,10 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when orderId is missing', async () => {
             const _params: SubscribeDualInvestmentProductsRequest = {
-                id: 'id_example',
-                orderId: '1',
-                depositAmount: 1.0,
-                autoCompoundPlan: 'NONE',
+                id: '741590',
+                orderId: '8257205859',
+                depositAmount: 1,
+                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
             const params = Object.assign({ ..._params });
             delete params?.orderId;
@@ -403,10 +426,10 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when depositAmount is missing', async () => {
             const _params: SubscribeDualInvestmentProductsRequest = {
-                id: 'id_example',
-                orderId: '1',
-                depositAmount: 1.0,
-                autoCompoundPlan: 'NONE',
+                id: '741590',
+                orderId: '8257205859',
+                depositAmount: 1,
+                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
             const params = Object.assign({ ..._params });
             delete params?.depositAmount;
@@ -418,10 +441,10 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when autoCompoundPlan is missing', async () => {
             const _params: SubscribeDualInvestmentProductsRequest = {
-                id: 'id_example',
-                orderId: '1',
-                depositAmount: 1.0,
-                autoCompoundPlan: 'NONE',
+                id: '741590',
+                orderId: '8257205859',
+                depositAmount: 1,
+                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
             const params = Object.assign({ ..._params });
             delete params?.autoCompoundPlan;
@@ -433,10 +456,10 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SubscribeDualInvestmentProductsRequest = {
-                id: 'id_example',
-                orderId: '1',
-                depositAmount: 1.0,
-                autoCompoundPlan: 'NONE',
+                id: '741590',
+                orderId: '8257205859',
+                depositAmount: 1,
+                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
 
             const errorResponse = {

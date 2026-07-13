@@ -1,7 +1,7 @@
 /**
- * Binance Dual Investment REST API
+ * Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Dual Investment REST API
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -34,22 +33,29 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Change Auto-Compound status
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
          *
-         * @summary Change Auto-Compound status(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - 15:31 ~ 16:00 UTC+8: This function is disabled.
+         *
+         * @summary Change Auto-Compound status (USER_DATA)
          * @param {string} positionId Get positionId from `/sapi/v1/dci/product/positions`
-         * @param {string} [autoCompoundPlan]
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {ChangeAutoCompoundStatusAutoCompoundPlanEnum} autoCompoundPlan `NONE`: switch off the plan, `STANDARD`: standard plan, `ADVANCED`: advanced plan
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         changeAutoCompoundStatus: async (
             positionId: string,
-            autoCompoundPlan?: string,
+            autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
             assertParamExists('changeAutoCompoundStatus', 'positionId', positionId);
+            // verify required parameter 'autoCompoundPlan' is not null or undefined
+            assertParamExists('changeAutoCompoundStatus', 'autoCompoundPlan', autoCompoundPlan);
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
@@ -59,7 +65,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 localVarQueryParameter['positionId'] = positionId;
             }
             if (autoCompoundPlan !== undefined && autoCompoundPlan !== null) {
-                localVarQueryParameter['AutoCompoundPlan'] = autoCompoundPlan;
+                localVarQueryParameter['autoCompoundPlan'] = autoCompoundPlan;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -80,10 +86,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Check Dual Investment accounts
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
          *
-         * @summary Check Dual Investment accounts(USER_DATA)
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * Security Type: USER_DATA
+         *
+         * @summary Check Dual Investment accounts (USER_DATA)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -111,18 +119,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get Dual Investment positions (batch)
          *
-         * Weight: 1(IP)
+         * Weight(IP): 1
          *
-         * @summary Get Dual Investment positions(USER_DATA)
-         * @param {string} [status] `PENDING`:Products are purchasing, will give results later;`PURCHASE_SUCCESS`:purchase successfully;`SETTLED`: Products are finish settling;`PURCHASE_FAIL`:fail to purchase;`REFUNDING`:refund ongoing;`REFUND_SUCCESS`:refund to spot account successfully; `SETTLING`:Products are settling. If don't fill this field, will response all the position status.
-         * @param {number | bigint} [pageSize] Default: 10, Maximum: 100
-         * @param {number | bigint} [pageIndex] Default: 1
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * Security Type: USER_DATA
+         *
+         * @summary Get Dual Investment positions (USER_DATA)
+         * @param {GetDualInvestmentPositionsStatusEnum} [status] `PENDING`: Products are purchasing, will give results later; `PURCHASE_SUCCESS`: purchase successfully;
+         * `SETTLED`: Products are finish settling; `PURCHASE_FAIL`: fail to purchase; `REFUNDING`: refund ongoing;
+         * `REFUND_SUCCESS`: refund to spot account successfully; `SETTLING`: Products are settling. If don't fill this
+         * field, will response all the position status.
+         * @param {number | bigint} [pageSize] Number of records per page
+         * @param {number | bigint} [pageIndex] Page index
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         getDualInvestmentPositions: async (
-            status?: string,
+            status?: GetDualInvestmentPositionsStatusEnum,
             pageSize?: number | bigint,
             pageIndex?: number | bigint,
             recvWindow?: number | bigint
@@ -159,17 +172,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Subscribe Dual Investment products
          *
-         * Products are not available. // this means APR changes to lower value, or orders are not unavailable.
-         * Failed. This means System or network errors.
+         * Weight(IP): 1
          *
-         * Weight: 1(IP)
+         * Security Type: USER_DATA
          *
-         * @summary Subscribe Dual Investment products(USER_DATA)
+         * Notes:
+         * - Failed messages:
+         * - Products are not available. This means APR changed to a lower value, or the order is unavailable.
+         * - Failed. This means system or network errors.
+         *
+         * @summary Subscribe Dual Investment products (USER_DATA)
          * @param {string} id get id from `/sapi/v1/dci/product/list`
          * @param {string} orderId get orderId from `/sapi/v1/dci/product/list`
          * @param {number} depositAmount the amount for subscribing
-         * @param {string} autoCompoundPlan `NONE`: switch off the plan, `STANDARD`:standard plan,`ADVANCED`:advanced plan
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {SubscribeDualInvestmentProductsAutoCompoundPlanEnum} autoCompoundPlan `NONE`: switch off the plan, `STANDARD`: standard plan, `ADVANCED`: advanced plan
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -177,7 +194,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             id: string,
             orderId: string,
             depositAmount: number,
-            autoCompoundPlan: string,
+            autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
@@ -236,9 +253,14 @@ export interface TradeApiInterface {
     /**
      * Change Auto-Compound status
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Change Auto-Compound status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - 15:31 ~ 16:00 UTC+8: This function is disabled.
+     *
+     * @summary Change Auto-Compound status (USER_DATA)
      * @param {ChangeAutoCompoundStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -250,9 +272,11 @@ export interface TradeApiInterface {
     /**
      * Check Dual Investment accounts
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Check Dual Investment accounts(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Check Dual Investment accounts (USER_DATA)
      * @param {CheckDualInvestmentAccountsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -264,9 +288,11 @@ export interface TradeApiInterface {
     /**
      * Get Dual Investment positions (batch)
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Get Dual Investment positions(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Dual Investment positions (USER_DATA)
      * @param {GetDualInvestmentPositionsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -278,12 +304,16 @@ export interface TradeApiInterface {
     /**
      * Subscribe Dual Investment products
      *
-     * Products are not available. // this means APR changes to lower value, or orders are not unavailable.
-     * Failed. This means System or network errors.
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
      *
-     * @summary Subscribe Dual Investment products(USER_DATA)
+     * Notes:
+     * - Failed messages:
+     * - Products are not available. This means APR changed to a lower value, or the order is unavailable.
+     * - Failed. This means system or network errors.
+     *
+     * @summary Subscribe Dual Investment products (USER_DATA)
      * @param {SubscribeDualInvestmentProductsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -307,14 +337,14 @@ export interface ChangeAutoCompoundStatusRequest {
     readonly positionId: string;
 
     /**
-     *
-     * @type {string}
+     * `NONE`: switch off the plan, `STANDARD`: standard plan, `ADVANCED`: advanced plan
+     * @type {'NONE' | 'STANDARD' | 'ADVANCED'}
      * @memberof TradeApiChangeAutoCompoundStatus
      */
-    readonly autoCompoundPlan?: string;
+    readonly autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiChangeAutoCompoundStatus
      */
@@ -327,7 +357,7 @@ export interface ChangeAutoCompoundStatusRequest {
  */
 export interface CheckDualInvestmentAccountsRequest {
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiCheckDualInvestmentAccounts
      */
@@ -340,28 +370,31 @@ export interface CheckDualInvestmentAccountsRequest {
  */
 export interface GetDualInvestmentPositionsRequest {
     /**
-     * `PENDING`:Products are purchasing, will give results later;`PURCHASE_SUCCESS`:purchase successfully;`SETTLED`: Products are finish settling;`PURCHASE_FAIL`:fail to purchase;`REFUNDING`:refund ongoing;`REFUND_SUCCESS`:refund to spot account successfully; `SETTLING`:Products are settling. If don't fill this field, will response all the position status.
-     * @type {string}
+     * `PENDING`: Products are purchasing, will give results later; `PURCHASE_SUCCESS`: purchase successfully;
+     * `SETTLED`: Products are finish settling; `PURCHASE_FAIL`: fail to purchase; `REFUNDING`: refund ongoing;
+     * `REFUND_SUCCESS`: refund to spot account successfully; `SETTLING`: Products are settling. If don't fill this
+     * field, will response all the position status.
+     * @type {'PENDING' | 'PURCHASE_SUCCESS' | 'SETTLED' | 'PURCHASE_FAIL' | 'REFUNDING' | 'REFUND_SUCCESS' | 'SETTLING'}
      * @memberof TradeApiGetDualInvestmentPositions
      */
-    readonly status?: string;
+    readonly status?: GetDualInvestmentPositionsStatusEnum;
 
     /**
-     * Default: 10, Maximum: 100
+     * Number of records per page
      * @type {number | bigint}
      * @memberof TradeApiGetDualInvestmentPositions
      */
     readonly pageSize?: number | bigint;
 
     /**
-     * Default: 1
+     * Page index
      * @type {number | bigint}
      * @memberof TradeApiGetDualInvestmentPositions
      */
     readonly pageIndex?: number | bigint;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiGetDualInvestmentPositions
      */
@@ -395,14 +428,14 @@ export interface SubscribeDualInvestmentProductsRequest {
     readonly depositAmount: number;
 
     /**
-     * `NONE`: switch off the plan, `STANDARD`:standard plan,`ADVANCED`:advanced plan
-     * @type {string}
+     * `NONE`: switch off the plan, `STANDARD`: standard plan, `ADVANCED`: advanced plan
+     * @type {'NONE' | 'STANDARD' | 'ADVANCED'}
      * @memberof TradeApiSubscribeDualInvestmentProducts
      */
-    readonly autoCompoundPlan: string;
+    readonly autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiSubscribeDualInvestmentProducts
      */
@@ -425,14 +458,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Change Auto-Compound status
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Change Auto-Compound status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - 15:31 ~ 16:00 UTC+8: This function is disabled.
+     *
+     * @summary Change Auto-Compound status (USER_DATA)
      * @param {ChangeAutoCompoundStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Change-Auto-Compound-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#change-auto-compound-status Binance API Documentation}
      */
     public async changeAutoCompoundStatus(
         requestParameters: ChangeAutoCompoundStatusRequest
@@ -457,14 +495,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Check Dual Investment accounts
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Check Dual Investment accounts(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Check Dual Investment accounts (USER_DATA)
      * @param {CheckDualInvestmentAccountsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CheckDualInvestmentAccountsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Check-Dual-Investment-accounts Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#check-dual-investment-accounts Binance API Documentation}
      */
     public async checkDualInvestmentAccounts(
         requestParameters: CheckDualInvestmentAccountsRequest = {}
@@ -487,14 +527,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get Dual Investment positions (batch)
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Get Dual Investment positions(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Dual Investment positions (USER_DATA)
      * @param {GetDualInvestmentPositionsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDualInvestmentPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Get-Dual-Investment-positions Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#get-dual-investment-positions Binance API Documentation}
      */
     public async getDualInvestmentPositions(
         requestParameters: GetDualInvestmentPositionsRequest = {}
@@ -520,17 +562,21 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Subscribe Dual Investment products
      *
-     * Products are not available. // this means APR changes to lower value, or orders are not unavailable.
-     * Failed. This means System or network errors.
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
      *
-     * @summary Subscribe Dual Investment products(USER_DATA)
+     * Notes:
+     * - Failed messages:
+     * - Products are not available. This means APR changed to a lower value, or the order is unavailable.
+     * - Failed. This means system or network errors.
+     *
+     * @summary Subscribe Dual Investment products (USER_DATA)
      * @param {SubscribeDualInvestmentProductsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubscribeDualInvestmentProductsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Subscribe-Dual-Investment-products Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#subscribe-dual-investment-products Binance API Documentation}
      */
     public async subscribeDualInvestmentProducts(
         requestParameters: SubscribeDualInvestmentProductsRequest
@@ -554,4 +600,26 @@ export class TradeApi implements TradeApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum ChangeAutoCompoundStatusAutoCompoundPlanEnum {
+    NONE = 'NONE',
+    STANDARD = 'STANDARD',
+    ADVANCED = 'ADVANCED',
+}
+
+export enum GetDualInvestmentPositionsStatusEnum {
+    PENDING = 'PENDING',
+    PURCHASE_SUCCESS = 'PURCHASE_SUCCESS',
+    SETTLED = 'SETTLED',
+    PURCHASE_FAIL = 'PURCHASE_FAIL',
+    REFUNDING = 'REFUNDING',
+    REFUND_SUCCESS = 'REFUND_SUCCESS',
+    SETTLING = 'SETTLING',
+}
+
+export enum SubscribeDualInvestmentProductsAutoCompoundPlanEnum {
+    NONE = 'NONE',
+    STANDARD = 'STANDARD',
+    ADVANCED = 'ADVANCED',
 }

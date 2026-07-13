@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Dual Investment REST API
+ * Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Dual Investment REST API
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,13 +20,13 @@
  */
 export interface CheckDualInvestmentAccountsResponse {
     /**
-     *
+     * Total BTC amount in Dual Investment
      * @type {string}
      * @memberof CheckDualInvestmentAccountsResponse
      */
     totalAmountInBTC?: string;
     /**
-     *
+     * Total USDT equivalent amount in Dual Investment
      * @type {string}
      * @memberof CheckDualInvestmentAccountsResponse
      */

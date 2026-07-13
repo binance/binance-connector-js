@@ -1,7 +1,7 @@
 /**
- * Binance Dual Investment REST API
+ * Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Dual Investment REST API
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -98,14 +98,14 @@ export class RestAPI {
     /**
      * Get Dual Investment product list
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
      * @summary Get Dual Investment product list
      * @param {GetDualInvestmentProductListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDualInvestmentProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/market-data/Get-Dual-Investment-product-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/market-data#get-dual-investment-product-list Binance API Documentation}
      */
     getDualInvestmentProductList(
         requestParameters: GetDualInvestmentProductListRequest
@@ -116,14 +116,19 @@ export class RestAPI {
     /**
      * Change Auto-Compound status
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Change Auto-Compound status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - 15:31 ~ 16:00 UTC+8: This function is disabled.
+     *
+     * @summary Change Auto-Compound status (USER_DATA)
      * @param {ChangeAutoCompoundStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Change-Auto-Compound-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#change-auto-compound-status Binance API Documentation}
      */
     changeAutoCompoundStatus(
         requestParameters: ChangeAutoCompoundStatusRequest
@@ -134,14 +139,16 @@ export class RestAPI {
     /**
      * Check Dual Investment accounts
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Check Dual Investment accounts(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Check Dual Investment accounts (USER_DATA)
      * @param {CheckDualInvestmentAccountsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CheckDualInvestmentAccountsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Check-Dual-Investment-accounts Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#check-dual-investment-accounts Binance API Documentation}
      */
     checkDualInvestmentAccounts(
         requestParameters: CheckDualInvestmentAccountsRequest = {}
@@ -152,14 +159,16 @@ export class RestAPI {
     /**
      * Get Dual Investment positions (batch)
      *
-     * Weight: 1(IP)
+     * Weight(IP): 1
      *
-     * @summary Get Dual Investment positions(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Dual Investment positions (USER_DATA)
      * @param {GetDualInvestmentPositionsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDualInvestmentPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Get-Dual-Investment-positions Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#get-dual-investment-positions Binance API Documentation}
      */
     getDualInvestmentPositions(
         requestParameters: GetDualInvestmentPositionsRequest = {}
@@ -170,17 +179,21 @@ export class RestAPI {
     /**
      * Subscribe Dual Investment products
      *
-     * Products are not available. // this means APR changes to lower value, or orders are not unavailable.
-     * Failed. This means System or network errors.
+     * Weight(IP): 1
      *
-     * Weight: 1(IP)
+     * Security Type: USER_DATA
      *
-     * @summary Subscribe Dual Investment products(USER_DATA)
+     * Notes:
+     * - Failed messages:
+     * - Products are not available. This means APR changed to a lower value, or the order is unavailable.
+     * - Failed. This means system or network errors.
+     *
+     * @summary Subscribe Dual Investment products (USER_DATA)
      * @param {SubscribeDualInvestmentProductsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubscribeDualInvestmentProductsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Subscribe-Dual-Investment-products Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#subscribe-dual-investment-products Binance API Documentation}
      */
     subscribeDualInvestmentProducts(
         requestParameters: SubscribeDualInvestmentProductsRequest

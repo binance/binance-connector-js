@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Dual Investment REST API
+ * Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Dual Investment REST API
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,7 +20,7 @@
  */
 export interface GetDualInvestmentPositionsResponseListInner {
     /**
-     *
+     * positionId
      * @type {string}
      * @memberof GetDualInvestmentPositionsResponseListInner
      */
@@ -62,7 +62,7 @@ export interface GetDualInvestmentPositionsResponseListInner {
      */
     settleDate?: number | bigint;
     /**
-     *
+     * Purchase status. Possible values include PENDING, PURCHASE_SUCCESS, SETTLED, PURCHASE_FAIL, REFUNDING, REFUND_SUCCESS, and SETTLING.
      * @type {string}
      * @memberof GetDualInvestmentPositionsResponseListInner
      */
@@ -92,9 +92,15 @@ export interface GetDualInvestmentPositionsResponseListInner {
      */
     optionType?: string;
     /**
-     *
+     * NULL, STANDARD, ADVANCED
      * @type {string}
      * @memberof GetDualInvestmentPositionsResponseListInner
      */
     autoCompoundPlan?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof GetDualInvestmentPositionsResponseListInner
+     */
+    subscriptionTime?: number | bigint;
 }

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Dual Investment REST API
+ * Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Dual Investment REST API
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -68,7 +68,7 @@ export interface GetDualInvestmentProductListResponseListInner {
      */
     purchaseEndTime?: number | bigint;
     /**
-     *
+     * Whether the product can be subscribed to currently
      * @type {boolean}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
@@ -110,13 +110,13 @@ export interface GetDualInvestmentProductListResponseListInner {
      */
     optionType?: string;
     /**
-     *
+     * Whether auto-compound is enabled for this product
      * @type {boolean}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
     isAutoCompoundEnable?: boolean;
     /**
-     *
+     * Available auto-compound plans for this product
      * @type {Array<string>}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
