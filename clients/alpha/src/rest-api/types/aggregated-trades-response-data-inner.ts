@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface AggregatedTradesResponseDataInner {
     /**
-     *
+     * Aggregate trade ID.
      * @type {number | bigint}
      * @memberof AggregatedTradesResponseDataInner
      */
     a?: number | bigint;
     /**
-     *
+     * Trade price.
      * @type {string}
      * @memberof AggregatedTradesResponseDataInner
      */
     p?: string;
     /**
-     *
+     * Trade quantity.
      * @type {string}
      * @memberof AggregatedTradesResponseDataInner
      */
     q?: string;
     /**
-     *
+     * First trade ID in the aggregation.
      * @type {number | bigint}
      * @memberof AggregatedTradesResponseDataInner
      */
     f?: number | bigint;
     /**
-     *
+     * Last trade ID in the aggregation.
      * @type {number | bigint}
      * @memberof AggregatedTradesResponseDataInner
      */
     l?: number | bigint;
     /**
-     *
+     * Trade timestamp in milliseconds.
      * @type {number | bigint}
      * @memberof AggregatedTradesResponseDataInner
      */
     T?: number | bigint;
     /**
-     *
+     * Whether buyer is the market maker (deprecated).
      * @type {boolean}
      * @memberof AggregatedTradesResponseDataInner
      */

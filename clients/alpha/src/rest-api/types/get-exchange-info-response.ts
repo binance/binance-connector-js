@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,25 +25,25 @@ import type { GetExchangeInfoResponseData } from './get-exchange-info-response-d
  */
 export interface GetExchangeInfoResponse {
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {string}
      * @memberof GetExchangeInfoResponse
      */
     code?: string;
     /**
-     *
+     * Response message.
      * @type {string}
      * @memberof GetExchangeInfoResponse
      */
     message?: string;
     /**
-     *
+     * Detailed response message.
      * @type {string}
      * @memberof GetExchangeInfoResponse
      */
     messageDetail?: string;
     /**
-     *
+     * Whether request is successful.
      * @type {boolean}
      * @memberof GetExchangeInfoResponse
      */

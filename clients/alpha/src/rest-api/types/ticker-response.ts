@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,19 +25,19 @@ import type { TickerResponseData } from './ticker-response-data';
  */
 export interface TickerResponse {
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {string}
      * @memberof TickerResponse
      */
     code?: string;
     /**
-     *
+     * Response message.
      * @type {string}
      * @memberof TickerResponse
      */
     message?: string;
     /**
-     *
+     * Detailed response message.
      * @type {string}
      * @memberof TickerResponse
      */
@@ -49,7 +49,7 @@ export interface TickerResponse {
      */
     data?: TickerResponseData;
     /**
-     *
+     * Whether request is successful.
      * @type {boolean}
      * @memberof TickerResponse
      */

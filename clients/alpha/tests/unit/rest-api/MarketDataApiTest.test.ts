@@ -1,7 +1,7 @@
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,10 +15,16 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { MarketDataApi } from '../../../src/rest-api';
-import { AggregatedTradesRequest, KlinesRequest, TickerRequest } from '../../../src/rest-api';
+import { MarketDataApi, FullDepthLimitEnum, KlinesIntervalEnum } from '../../../src/rest-api';
+import {
+    AggregatedTradesRequest,
+    FullDepthRequest,
+    KlinesRequest,
+    TickerRequest,
+} from '../../../src/rest-api';
 import type {
     AggregatedTradesResponse,
+    FullDepthResponse,
     GetExchangeInfoResponse,
     KlinesResponse,
     TickerResponse,
@@ -42,7 +48,7 @@ describe('MarketDataApi', () => {
     describe('aggregatedTrades()', () => {
         it('should execute aggregatedTrades() successfully with required parameters only', async () => {
             const params: AggregatedTradesRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ALPHA_118USDC',
             };
 
             mockResponse = JSONParse(
@@ -80,10 +86,10 @@ describe('MarketDataApi', () => {
 
         it('should execute aggregatedTrades() successfully with optional parameters', async () => {
             const params: AggregatedTradesRequest = {
-                symbol: 'symbol_example',
-                fromId: 1,
-                startTime: 1623319461670,
-                endTime: 1641782889000,
+                symbol: 'ALPHA_118USDC',
+                fromId: 58470,
+                startTime: 1752568680000,
+                endTime: 1752572280000,
                 limit: 500,
             };
 
@@ -122,7 +128,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: AggregatedTradesRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ALPHA_118USDC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -134,7 +140,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AggregatedTradesRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ALPHA_118USDC',
             };
 
             const errorResponse = {
@@ -148,6 +154,112 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'aggregatedTrades').mockRejectedValueOnce(mockError);
             await expect(client.aggregatedTrades(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('fullDepth()', () => {
+        it('should execute fullDepth() successfully with required parameters only', async () => {
+            const params: FullDepthRequest = {
+                symbol: 'ALPHA_175USDT',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'message',
+                    messageDetail: 'messageDetail',
+                    success: true,
+                    data: {
+                        lastUpdateId: 47534656223,
+                        symbol: 'ALPHA_175USDT',
+                        bids: [['0.00040161', '365980.85000000']],
+                        asks: [['0.00046996', '61994.70000000']],
+                        E: 1775027836086,
+                        T: 1775027836072,
+                    },
+                })
+            );
+
+            const spy = jest.spyOn(client, 'fullDepth').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<FullDepthResponse>)
+            );
+            const response = await client.fullDepth(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute fullDepth() successfully with optional parameters', async () => {
+            const params: FullDepthRequest = {
+                symbol: 'ALPHA_175USDT',
+                limit: FullDepthLimitEnum.LIMIT_5,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'message',
+                    messageDetail: 'messageDetail',
+                    success: true,
+                    data: {
+                        lastUpdateId: 47534656223,
+                        symbol: 'ALPHA_175USDT',
+                        bids: [['0.00040161', '365980.85000000']],
+                        asks: [['0.00046996', '61994.70000000']],
+                        E: 1775027836086,
+                        T: 1775027836072,
+                    },
+                })
+            );
+
+            const spy = jest.spyOn(client, 'fullDepth').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<FullDepthResponse>)
+            );
+            const response = await client.fullDepth(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: FullDepthRequest = {
+                symbol: 'ALPHA_175USDT',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.fullDepth(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling fullDepth.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: FullDepthRequest = {
+                symbol: 'ALPHA_175USDT',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'fullDepth').mockRejectedValueOnce(mockError);
+            await expect(client.fullDepth(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -179,28 +291,14 @@ describe('MarketDataApi', () => {
                                         minPrice: '0.00000001',
                                         maxPrice: '1000',
                                         tickSize: '0.00000001',
-                                    },
-                                    {
-                                        filterType: 'LOT_SIZE',
                                         stepSize: '0.01000000',
                                         maxQty: '277778',
                                         minQty: '0.01000000',
-                                    },
-                                    { filterType: 'MAX_NUM_ORDERS', limit: 200 },
-                                    { filterType: 'MIN_NOTIONAL', minNotional: '0.1' },
-                                    { filterType: 'MAX_NOTIONAL', maxNotional: '1000000' },
-                                    {
-                                        filterType: 'NOTIONAL',
+                                        limit: 200,
                                         minNotional: '0.1',
                                         maxNotional: '1000000',
-                                    },
-                                    {
-                                        filterType: 'PERCENT_PRICE',
                                         multiplierDown: '0.20000',
                                         multiplierUp: '5',
-                                    },
-                                    {
-                                        filterType: 'PERCENT_PRICE_BY_SIDE',
                                         bidMultiplierUp: '5',
                                         askMultiplierUp: '5',
                                         bidMultiplierDown: '0.20000',
@@ -248,8 +346,8 @@ describe('MarketDataApi', () => {
     describe('klines()', () => {
         it('should execute klines() successfully with required parameters only', async () => {
             const params: KlinesRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'ALPHA_175USDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
 
             mockResponse = JSONParse(
@@ -258,22 +356,7 @@ describe('MarketDataApi', () => {
                     message: '',
                     messageDetail: '',
                     success: true,
-                    data: [
-                        [
-                            '1752642000000',
-                            '0.00171473',
-                            '0.00172515',
-                            '0.00171473',
-                            '0.00172515',
-                            '1771.86000000',
-                            '1752645599999',
-                            '3.05093481',
-                            '2',
-                            '1771.86000000',
-                            '3.05093481',
-                            0,
-                        ],
-                    ],
+                    data: [['1752642000000']],
                 })
             );
 
@@ -293,11 +376,11 @@ describe('MarketDataApi', () => {
 
         it('should execute klines() successfully with optional parameters', async () => {
             const params: KlinesRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'ALPHA_175USDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
                 limit: 500,
-                startTime: 1623319461670,
-                endTime: 1641782889000,
+                startTime: 1752642000000,
+                endTime: 1752645599999,
             };
 
             mockResponse = JSONParse(
@@ -306,22 +389,7 @@ describe('MarketDataApi', () => {
                     message: '',
                     messageDetail: '',
                     success: true,
-                    data: [
-                        [
-                            '1752642000000',
-                            '0.00171473',
-                            '0.00172515',
-                            '0.00171473',
-                            '0.00172515',
-                            '1771.86000000',
-                            '1752645599999',
-                            '3.05093481',
-                            '2',
-                            '1771.86000000',
-                            '3.05093481',
-                            0,
-                        ],
-                    ],
+                    data: [['1752642000000']],
                 })
             );
 
@@ -341,8 +409,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: KlinesRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'ALPHA_175USDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -354,8 +422,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when interval is missing', async () => {
             const _params: KlinesRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'ALPHA_175USDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -367,8 +435,8 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: KlinesRequest = {
-                symbol: 'symbol_example',
-                interval: 'interval_example',
+                symbol: 'ALPHA_175USDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
 
             const errorResponse = {
@@ -389,7 +457,7 @@ describe('MarketDataApi', () => {
     describe('ticker()', () => {
         it('should execute ticker() successfully with required parameters only', async () => {
             const params: TickerRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ALPHA_175USDT',
             };
 
             mockResponse = JSONParse(
@@ -435,7 +503,7 @@ describe('MarketDataApi', () => {
 
         it('should execute ticker() successfully with optional parameters', async () => {
             const params: TickerRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ALPHA_175USDT',
             };
 
             mockResponse = JSONParse(
@@ -481,7 +549,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: TickerRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ALPHA_175USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -493,7 +561,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: TickerRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ALPHA_175USDT',
             };
 
             const errorResponse = {

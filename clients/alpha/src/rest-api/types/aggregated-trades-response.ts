@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,25 +25,25 @@ import type { AggregatedTradesResponseDataInner } from './aggregated-trades-resp
  */
 export interface AggregatedTradesResponse {
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {string}
      * @memberof AggregatedTradesResponse
      */
     code?: string;
     /**
-     *
+     * Response message.
      * @type {string}
      * @memberof AggregatedTradesResponse
      */
     message?: string;
     /**
-     *
+     * Detailed response message.
      * @type {string}
      * @memberof AggregatedTradesResponse
      */
     messageDetail?: string;
     /**
-     *
+     * Array of aggregated trades.
      * @type {Array<AggregatedTradesResponseDataInner>}
      * @memberof AggregatedTradesResponse
      */

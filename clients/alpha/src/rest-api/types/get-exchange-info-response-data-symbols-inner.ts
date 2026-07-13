@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,61 +25,61 @@ import type { GetExchangeInfoResponseDataSymbolsInnerFiltersInner } from './get-
  */
 export interface GetExchangeInfoResponseDataSymbolsInner {
     /**
-     *
+     * Trading symbol.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     symbol?: string;
     /**
-     *
+     * Trading status.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     status?: string;
     /**
-     *
+     * Base asset symbol.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     baseAsset?: string;
     /**
-     *
+     * Quote asset symbol.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     quoteAsset?: string;
     /**
-     *
+     * Allowed precision for price.
      * @type {number | bigint}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     pricePrecision?: number | bigint;
     /**
-     *
+     * Allowed precision for quantity.
      * @type {number | bigint}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     quantityPrecision?: number | bigint;
     /**
-     *
+     * Base asset precision.
      * @type {number | bigint}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     baseAssetPrecision?: number | bigint;
     /**
-     *
+     * Quote asset precision.
      * @type {number | bigint}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     quotePrecision?: number | bigint;
     /**
-     *
+     * Trading filters and constraints.
      * @type {Array<GetExchangeInfoResponseDataSymbolsInnerFiltersInner>}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */
     filters?: Array<GetExchangeInfoResponseDataSymbolsInnerFiltersInner>;
     /**
-     *
+     * Supported order types for this symbol.
      * @type {Array<string>}
      * @memberof GetExchangeInfoResponseDataSymbolsInner
      */

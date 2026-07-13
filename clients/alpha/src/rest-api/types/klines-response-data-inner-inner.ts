@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,7 +14,6 @@
  */
 
 /**
- * @type KlinesResponseDataItemInner
- * @export
+ * @type KlinesResponseDataInnerInner
  */
-export type KlinesResponseDataItemInner = number | string;
+export type KlinesResponseDataInnerInner = number | string;

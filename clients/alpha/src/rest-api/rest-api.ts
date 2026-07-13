@@ -1,7 +1,7 @@
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,12 +16,14 @@ import { MarketDataApi } from './modules/market-data-api';
 
 import type {
     AggregatedTradesRequest,
+    FullDepthRequest,
     KlinesRequest,
     TickerRequest,
 } from './modules/market-data-api';
 
 import type {
     AggregatedTradesResponse,
+    FullDepthResponse,
     GetExchangeInfoResponse,
     KlinesResponse,
     TickerResponse,
@@ -93,14 +95,12 @@ export class RestAPI {
     /**
      * Retrieves compressed, aggregated historical trades for a specific symbol. Useful for recent trade history.
      *
-     * Weight: 0
-     *
      * @summary Aggregated Trades
      * @param {AggregatedTradesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AggregatedTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/Aggregated-Trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#aggregated-trades Binance API Documentation}
      */
     aggregatedTrades(
         requestParameters: AggregatedTradesRequest
@@ -109,15 +109,27 @@ export class RestAPI {
     }
 
     /**
-     * Fetches general exchange information, such as supported symbols, rate limits, and server time.
+     * Fetches the full order book depth (UI & API orders) for a symbol, including bid and ask orders with their prices and quantities.
      *
-     * Weight: 0
+     * @summary Full Depth
+     * @param {FullDepthRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<FullDepthResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#full-depth Binance API Documentation}
+     */
+    fullDepth(requestParameters: FullDepthRequest): Promise<RestApiResponse<FullDepthResponse>> {
+        return this.marketDataApi.fullDepth(requestParameters);
+    }
+
+    /**
+     * Fetches general exchange information, such as supported symbols, rate limits, and server time.
      *
      * @summary Get Exchange Info
      *
      * @returns {Promise<RestApiResponse<GetExchangeInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/Get-Exchange-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#get-exchange-info Binance API Documentation}
      */
     getExchangeInfo(): Promise<RestApiResponse<GetExchangeInfoResponse>> {
         return this.marketDataApi.getExchangeInfo();
@@ -126,14 +138,12 @@ export class RestAPI {
     /**
      * Fetches Kline/candlestick bars for a symbol, which include open/high/low/close prices and volume over intervals. Useful for charting and analysis.
      *
-     * Weight: 0
-     *
-     * @summary Klines (Candlestick Data)
+     * @summary Klines
      * @param {KlinesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<KlinesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/Klines Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#klines Binance API Documentation}
      */
     klines(requestParameters: KlinesRequest): Promise<RestApiResponse<KlinesResponse>> {
         return this.marketDataApi.klines(requestParameters);
@@ -142,14 +152,12 @@ export class RestAPI {
     /**
      * Gets the 24-hour rolling window price change statistics for a symbol, including volume and price changes.
      *
-     * Weight: 0
-     *
-     * @summary Ticker (24hr Price Statistics)
+     * @summary Ticker
      * @param {TickerRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/24hr-ticker-price-change Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#ticker Binance API Documentation}
      */
     ticker(requestParameters: TickerRequest): Promise<RestApiResponse<TickerResponse>> {
         return this.marketDataApi.ticker(requestParameters);
@@ -158,13 +166,11 @@ export class RestAPI {
     /**
      * Retrieves a list of all available ALPHA tokens, including their IDs and symbols. Use this to find the token ID for constructing symbols in other endpoints.
      *
-     * Weight: 0
-     *
      * @summary Token List
      *
      * @returns {Promise<RestApiResponse<TokenListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/Token-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#token-list Binance API Documentation}
      */
     tokenList(): Promise<RestApiResponse<TokenListResponse>> {
         return this.marketDataApi.tokenList();

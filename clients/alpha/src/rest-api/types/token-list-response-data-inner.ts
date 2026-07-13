@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,67 +20,67 @@
  */
 export interface TokenListResponseDataInner {
     /**
-     *
+     * Unique token identifier.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     tokenId?: string;
     /**
-     *
+     * Chain ID.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     chainId?: string;
     /**
-     *
+     * Chain icon URL.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     chainIconUrl?: string;
     /**
-     *
+     * Chain name.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     chainName?: string;
     /**
-     *
+     * Token contract address.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     contractAddress?: string;
     /**
-     *
+     * Token name.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     name?: string;
     /**
-     *
+     * Token symbol.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     symbol?: string;
     /**
-     *
+     * Token icon URL.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     iconUrl?: string;
     /**
-     *
+     * Latest token price.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     price?: string;
     /**
-     *
+     * 24-hour price change percentage.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
     percentChange24h?: string;
     /**
-     *
+     * 24-hour trading volume.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */
@@ -170,7 +170,7 @@ export interface TokenListResponseDataInner {
      */
     tradeDecimal?: number | bigint;
     /**
-     *
+     * ALPHA token ID, e.g. ALPHA_175.
      * @type {string}
      * @memberof TokenListResponseDataInner
      */

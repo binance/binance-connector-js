@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,103 +14,103 @@
  */
 
 /**
- *
+ * 24-hour rolling window ticker statistics.
  * @export
  * @interface TickerResponseData
  */
 export interface TickerResponseData {
     /**
-     *
+     * Trading pair symbol.
      * @type {string}
      * @memberof TickerResponseData
      */
     symbol?: string;
     /**
-     *
+     * Absolute price change in the 24h window.
      * @type {string}
      * @memberof TickerResponseData
      */
     priceChange?: string;
     /**
-     *
+     * Percentage price change in the 24h window.
      * @type {string}
      * @memberof TickerResponseData
      */
     priceChangePercent?: string;
     /**
-     *
+     * Weighted average price in the 24h window.
      * @type {string}
      * @memberof TickerResponseData
      */
     weightedAvgPrice?: string;
     /**
-     *
+     * Latest traded price.
      * @type {string}
      * @memberof TickerResponseData
      */
     lastPrice?: string;
     /**
-     *
+     * Quantity of the latest trade.
      * @type {string}
      * @memberof TickerResponseData
      */
     lastQty?: string;
     /**
-     *
+     * Opening price of the 24h window.
      * @type {string}
      * @memberof TickerResponseData
      */
     openPrice?: string;
     /**
-     *
+     * Highest price in the 24h window.
      * @type {string}
      * @memberof TickerResponseData
      */
     highPrice?: string;
     /**
-     *
+     * Lowest price in the 24h window.
      * @type {string}
      * @memberof TickerResponseData
      */
     lowPrice?: string;
     /**
-     *
+     * Base asset volume in the 24h window.
      * @type {string}
      * @memberof TickerResponseData
      */
     volume?: string;
     /**
-     *
+     * Quote asset volume in the 24h window.
      * @type {string}
      * @memberof TickerResponseData
      */
     quoteVolume?: string;
     /**
-     *
+     * Start time of the 24h window (milliseconds).
      * @type {number | bigint}
      * @memberof TickerResponseData
      */
     openTime?: number | bigint;
     /**
-     *
+     * End time of the 24h window (milliseconds).
      * @type {number | bigint}
      * @memberof TickerResponseData
      */
     closeTime?: number | bigint;
     /**
-     *
+     * First trade ID in the 24h window.
      * @type {number | bigint}
      * @memberof TickerResponseData
      */
     firstId?: number | bigint;
     /**
-     *
+     * Last trade ID in the 24h window.
      * @type {number | bigint}
      * @memberof TickerResponseData
      */
     lastId?: number | bigint;
     /**
-     *
+     * Total number of trades in the 24h window.
      * @type {number | bigint}
      * @memberof TickerResponseData
      */

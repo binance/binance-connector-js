@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { KlinesResponseDataItem } from './klines-response-data-item';
+import type { KlinesResponseDataInnerInner } from './klines-response-data-inner-inner';
 
 /**
  *
@@ -25,33 +25,33 @@ import type { KlinesResponseDataItem } from './klines-response-data-item';
  */
 export interface KlinesResponse {
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {string}
      * @memberof KlinesResponse
      */
     code?: string;
     /**
-     *
+     * Response message.
      * @type {string}
      * @memberof KlinesResponse
      */
     message?: string;
     /**
-     *
+     * Detailed response message.
      * @type {string}
      * @memberof KlinesResponse
      */
     messageDetail?: string;
     /**
-     *
+     * Whether request is successful.
      * @type {boolean}
      * @memberof KlinesResponse
      */
     success?: boolean;
     /**
-     *
-     * @type {Array<KlinesResponseDataItem>}
+     * Array of kline rows. Each row contains: open time, open, high, low, close, volume, close time, quote volume, trade count, taker buy base volume, taker buy quote volume, and a static 0.
+     * @type {Array<Array<KlinesResponseDataInnerInner>>}
      * @memberof KlinesResponse
      */
-    data?: Array<KlinesResponseDataItem>;
+    data?: Array<Array<KlinesResponseDataInnerInner>>;
 }

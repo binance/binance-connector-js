@@ -10,7 +10,7 @@ const client = new Alpha({ configurationRestAPI });
 async function ticker() {
     try {
         const response = await client.restAPI.ticker({
-            symbol: 'symbol_example',
+            symbol: 'ALPHA_175USDT',
         });
 
         const rateLimits = response.rateLimits!;

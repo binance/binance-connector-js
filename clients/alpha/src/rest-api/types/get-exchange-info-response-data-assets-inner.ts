@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,7 +20,7 @@
  */
 export interface GetExchangeInfoResponseDataAssetsInner {
     /**
-     *
+     * Asset symbol.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataAssetsInner
      */

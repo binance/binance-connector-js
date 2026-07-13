@@ -10,7 +10,7 @@ const client = new Alpha({ configurationRestAPI });
 async function aggregatedTrades() {
     try {
         const response = await client.restAPI.aggregatedTrades({
-            symbol: 'symbol_example',
+            symbol: 'ALPHA_118USDC',
         });
 
         const rateLimits = response.rateLimits!;

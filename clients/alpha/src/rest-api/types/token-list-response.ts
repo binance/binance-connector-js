@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,31 +25,31 @@ import type { TokenListResponseDataInner } from './token-list-response-data-inne
  */
 export interface TokenListResponse {
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {string}
      * @memberof TokenListResponse
      */
     code?: string;
     /**
-     *
+     * Response message.
      * @type {string}
      * @memberof TokenListResponse
      */
     message?: string;
     /**
-     *
+     * Detailed response message.
      * @type {string}
      * @memberof TokenListResponse
      */
     messageDetail?: string;
     /**
-     *
+     * Whether request is successful.
      * @type {boolean}
      * @memberof TokenListResponse
      */
     success?: boolean;
     /**
-     *
+     * List of ALPHA tokens and metadata.
      * @type {Array<TokenListResponseDataInner>}
      * @memberof TokenListResponse
      */

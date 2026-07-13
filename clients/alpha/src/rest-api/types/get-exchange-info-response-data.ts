@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -22,31 +22,31 @@ import type { GetExchangeInfoResponseDataAssetsInner } from './get-exchange-info
 import type { GetExchangeInfoResponseDataSymbolsInner } from './get-exchange-info-response-data-symbols-inner';
 
 /**
- *
+ * Exchange metadata, including assets and symbols.
  * @export
  * @interface GetExchangeInfoResponseData
  */
 export interface GetExchangeInfoResponseData {
     /**
-     *
+     * Timezone of market data.
      * @type {string}
      * @memberof GetExchangeInfoResponseData
      */
     timezone?: string;
     /**
-     *
+     * Supported assets.
      * @type {Array<GetExchangeInfoResponseDataAssetsInner>}
      * @memberof GetExchangeInfoResponseData
      */
     assets?: Array<GetExchangeInfoResponseDataAssetsInner>;
     /**
-     *
+     * Supported trading symbols.
      * @type {Array<GetExchangeInfoResponseDataSymbolsInner>}
      * @memberof GetExchangeInfoResponseData
      */
     symbols?: Array<GetExchangeInfoResponseDataSymbolsInner>;
     /**
-     *
+     * Order types metadata returned by backend.
      * @type {string}
      * @memberof GetExchangeInfoResponseData
      */

@@ -1,4 +1,4 @@
-import { Alpha, ALPHA_REST_API_PROD_URL } from '../../../src';
+import { Alpha, AlphaRestAPI, ALPHA_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,8 +10,8 @@ const client = new Alpha({ configurationRestAPI });
 async function klines() {
     try {
         const response = await client.restAPI.klines({
-            symbol: 'symbol_example',
-            interval: 'interval_example',
+            symbol: 'ALPHA_175USDT',
+            interval: AlphaRestAPI.KlinesIntervalEnum.INTERVAL_1s,
         });
 
         const rateLimits = response.rateLimits!;

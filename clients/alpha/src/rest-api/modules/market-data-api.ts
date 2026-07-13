@@ -1,7 +1,7 @@
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -21,6 +20,7 @@ import {
 } from '@binance/common';
 import type {
     AggregatedTradesResponse,
+    FullDepthResponse,
     GetExchangeInfoResponse,
     KlinesResponse,
     TickerResponse,
@@ -35,14 +35,12 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Retrieves compressed, aggregated historical trades for a specific symbol. Useful for recent trade history.
          *
-         * Weight: 0
-         *
          * @summary Aggregated Trades
-         * @param {string} symbol e.g., "ALPHA_175USDT" – use token ID from Token List
-         * @param {number | bigint} [fromId] starting trade ID to fetch from
-         * @param {number | bigint} [startTime] start timestamp (milliseconds)
-         * @param {number | bigint} [endTime] end timestamp (milliseconds)
-         * @param {number | bigint} [limit] number of results to return (default 500, max 1000)
+         * @param {string} symbol Trading pair symbol, e.g. ALPHA_118USDC (use token ID from Token List).
+         * @param {number | bigint} [fromId] Starting aggregate trade ID to fetch from.
+         * @param {number | bigint} [startTime] Start timestamp in milliseconds.
+         * @param {number | bigint} [endTime] End timestamp in milliseconds.
+         * @param {number | bigint} [limit] Number of results to return.
          *
          * @throws {RequiredError}
          */
@@ -89,9 +87,43 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Fetches general exchange information, such as supported symbols, rate limits, and server time.
+         * Fetches the full order book depth (UI & API orders) for a symbol, including bid and ask orders with their prices and quantities.
          *
-         * Weight: 0
+         * @summary Full Depth
+         * @param {string} symbol Trading pair symbol, e.g. ALPHA_175USDT (use token ID from Token List).
+         * @param {FullDepthLimitEnum} [limit] Number of price levels to return. Valid values: 5, 10, 20, 50, 100, 500, 1000.
+         *
+         * @throws {RequiredError}
+         */
+        fullDepth: async (symbol: string, limit?: FullDepthLimitEnum): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('fullDepth', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/bapi/defi/v1/public/alpha-trade/fullDepth',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Fetches general exchange information, such as supported symbols, rate limits, and server time.
          *
          * @summary Get Exchange Info
          *
@@ -117,20 +149,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetches Kline/candlestick bars for a symbol, which include open/high/low/close prices and volume over intervals. Useful for charting and analysis.
          *
-         * Weight: 0
-         *
-         * @summary Klines (Candlestick Data)
-         * @param {string} symbol e.g., "ALPHA_175USDT" – use token ID from Token List
-         * @param {string} interval e.g., "1h" – supported intervals: 1s, 15s, 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w, 1M
-         * @param {number | bigint} [limit] number of results to return (default 500, max 1000)
-         * @param {number | bigint} [startTime] start timestamp (milliseconds)
-         * @param {number | bigint} [endTime] end timestamp (milliseconds)
+         * @summary Klines
+         * @param {string} symbol Trading pair symbol, e.g. ALPHA_175USDT (use token ID from Token List).
+         * @param {KlinesIntervalEnum} interval Kline interval.
+         * @param {number | bigint} [limit] Number of klines to return.
+         * @param {number | bigint} [startTime] Start timestamp in milliseconds.
+         * @param {number | bigint} [endTime] End timestamp in milliseconds.
          *
          * @throws {RequiredError}
          */
         klines: async (
             symbol: string,
-            interval: string,
+            interval: KlinesIntervalEnum,
             limit?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint
@@ -175,10 +205,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Gets the 24-hour rolling window price change statistics for a symbol, including volume and price changes.
          *
-         * Weight: 0
-         *
-         * @summary Ticker (24hr Price Statistics)
-         * @param {string} symbol e.g., "ALPHA_175USDT" – use token ID from Token List
+         * @summary Ticker
+         * @param {string} symbol Trading pair symbol, e.g. ALPHA_175USDT (use token ID from Token List).
          *
          * @throws {RequiredError}
          */
@@ -208,8 +236,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         },
         /**
          * Retrieves a list of all available ALPHA tokens, including their IDs and symbols. Use this to find the token ID for constructing symbols in other endpoints.
-         *
-         * Weight: 0
          *
          * @summary Token List
          *
@@ -243,8 +269,6 @@ export interface MarketDataApiInterface {
     /**
      * Retrieves compressed, aggregated historical trades for a specific symbol. Useful for recent trade history.
      *
-     * Weight: 0
-     *
      * @summary Aggregated Trades
      * @param {AggregatedTradesRequest} requestParameters Request parameters.
      *
@@ -255,9 +279,17 @@ export interface MarketDataApiInterface {
         requestParameters: AggregatedTradesRequest
     ): Promise<RestApiResponse<AggregatedTradesResponse>>;
     /**
-     * Fetches general exchange information, such as supported symbols, rate limits, and server time.
+     * Fetches the full order book depth (UI & API orders) for a symbol, including bid and ask orders with their prices and quantities.
      *
-     * Weight: 0
+     * @summary Full Depth
+     * @param {FullDepthRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    fullDepth(requestParameters: FullDepthRequest): Promise<RestApiResponse<FullDepthResponse>>;
+    /**
+     * Fetches general exchange information, such as supported symbols, rate limits, and server time.
      *
      * @summary Get Exchange Info
      *
@@ -268,9 +300,7 @@ export interface MarketDataApiInterface {
     /**
      * Fetches Kline/candlestick bars for a symbol, which include open/high/low/close prices and volume over intervals. Useful for charting and analysis.
      *
-     * Weight: 0
-     *
-     * @summary Klines (Candlestick Data)
+     * @summary Klines
      * @param {KlinesRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -280,9 +310,7 @@ export interface MarketDataApiInterface {
     /**
      * Gets the 24-hour rolling window price change statistics for a symbol, including volume and price changes.
      *
-     * Weight: 0
-     *
-     * @summary Ticker (24hr Price Statistics)
+     * @summary Ticker
      * @param {TickerRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -291,8 +319,6 @@ export interface MarketDataApiInterface {
     ticker(requestParameters: TickerRequest): Promise<RestApiResponse<TickerResponse>>;
     /**
      * Retrieves a list of all available ALPHA tokens, including their IDs and symbols. Use this to find the token ID for constructing symbols in other endpoints.
-     *
-     * Weight: 0
      *
      * @summary Token List
      *
@@ -308,39 +334,59 @@ export interface MarketDataApiInterface {
  */
 export interface AggregatedTradesRequest {
     /**
-     * e.g., "ALPHA_175USDT" – use token ID from Token List
+     * Trading pair symbol, e.g. ALPHA_118USDC (use token ID from Token List).
      * @type {string}
      * @memberof MarketDataApiAggregatedTrades
      */
     readonly symbol: string;
 
     /**
-     * starting trade ID to fetch from
+     * Starting aggregate trade ID to fetch from.
      * @type {number | bigint}
      * @memberof MarketDataApiAggregatedTrades
      */
     readonly fromId?: number | bigint;
 
     /**
-     * start timestamp (milliseconds)
+     * Start timestamp in milliseconds.
      * @type {number | bigint}
      * @memberof MarketDataApiAggregatedTrades
      */
     readonly startTime?: number | bigint;
 
     /**
-     * end timestamp (milliseconds)
+     * End timestamp in milliseconds.
      * @type {number | bigint}
      * @memberof MarketDataApiAggregatedTrades
      */
     readonly endTime?: number | bigint;
 
     /**
-     * number of results to return (default 500, max 1000)
+     * Number of results to return.
      * @type {number | bigint}
      * @memberof MarketDataApiAggregatedTrades
      */
     readonly limit?: number | bigint;
+}
+
+/**
+ * Request parameters for fullDepth operation in MarketDataApi.
+ * @interface FullDepthRequest
+ */
+export interface FullDepthRequest {
+    /**
+     * Trading pair symbol, e.g. ALPHA_175USDT (use token ID from Token List).
+     * @type {string}
+     * @memberof MarketDataApiFullDepth
+     */
+    readonly symbol: string;
+
+    /**
+     * Number of price levels to return. Valid values: 5, 10, 20, 50, 100, 500, 1000.
+     * @type {5 | 10 | 20 | 50 | 100 | 500 | 1000 | bigint}
+     * @memberof MarketDataApiFullDepth
+     */
+    readonly limit?: FullDepthLimitEnum;
 }
 
 /**
@@ -349,35 +395,35 @@ export interface AggregatedTradesRequest {
  */
 export interface KlinesRequest {
     /**
-     * e.g., "ALPHA_175USDT" – use token ID from Token List
+     * Trading pair symbol, e.g. ALPHA_175USDT (use token ID from Token List).
      * @type {string}
      * @memberof MarketDataApiKlines
      */
     readonly symbol: string;
 
     /**
-     * e.g., "1h" – supported intervals: 1s, 15s, 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w, 1M
-     * @type {string}
+     * Kline interval.
+     * @type {'1s' | '15s' | '1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketDataApiKlines
      */
-    readonly interval: string;
+    readonly interval: KlinesIntervalEnum;
 
     /**
-     * number of results to return (default 500, max 1000)
+     * Number of klines to return.
      * @type {number | bigint}
      * @memberof MarketDataApiKlines
      */
     readonly limit?: number | bigint;
 
     /**
-     * start timestamp (milliseconds)
+     * Start timestamp in milliseconds.
      * @type {number | bigint}
      * @memberof MarketDataApiKlines
      */
     readonly startTime?: number | bigint;
 
     /**
-     * end timestamp (milliseconds)
+     * End timestamp in milliseconds.
      * @type {number | bigint}
      * @memberof MarketDataApiKlines
      */
@@ -390,7 +436,7 @@ export interface KlinesRequest {
  */
 export interface TickerRequest {
     /**
-     * e.g., "ALPHA_175USDT" – use token ID from Token List
+     * Trading pair symbol, e.g. ALPHA_175USDT (use token ID from Token List).
      * @type {string}
      * @memberof MarketDataApiTicker
      */
@@ -413,14 +459,12 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Retrieves compressed, aggregated historical trades for a specific symbol. Useful for recent trade history.
      *
-     * Weight: 0
-     *
      * @summary Aggregated Trades
      * @param {AggregatedTradesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AggregatedTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/Aggregated-Trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#aggregated-trades Binance API Documentation}
      */
     public async aggregatedTrades(
         requestParameters: AggregatedTradesRequest
@@ -445,15 +489,42 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Fetches general exchange information, such as supported symbols, rate limits, and server time.
+     * Fetches the full order book depth (UI & API orders) for a symbol, including bid and ask orders with their prices and quantities.
      *
-     * Weight: 0
+     * @summary Full Depth
+     * @param {FullDepthRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<FullDepthResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#full-depth Binance API Documentation}
+     */
+    public async fullDepth(
+        requestParameters: FullDepthRequest
+    ): Promise<RestApiResponse<FullDepthResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.fullDepth(
+            requestParameters?.symbol,
+            requestParameters?.limit
+        );
+        return sendRequest<FullDepthResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Fetches general exchange information, such as supported symbols, rate limits, and server time.
      *
      * @summary Get Exchange Info
      * @returns {Promise<RestApiResponse<GetExchangeInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/Get-Exchange-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#get-exchange-info Binance API Documentation}
      */
     public async getExchangeInfo(): Promise<RestApiResponse<GetExchangeInfoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getExchangeInfo();
@@ -472,14 +543,12 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Fetches Kline/candlestick bars for a symbol, which include open/high/low/close prices and volume over intervals. Useful for charting and analysis.
      *
-     * Weight: 0
-     *
-     * @summary Klines (Candlestick Data)
+     * @summary Klines
      * @param {KlinesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<KlinesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/Klines Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#klines Binance API Documentation}
      */
     public async klines(
         requestParameters: KlinesRequest
@@ -506,14 +575,12 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Gets the 24-hour rolling window price change statistics for a symbol, including volume and price changes.
      *
-     * Weight: 0
-     *
-     * @summary Ticker (24hr Price Statistics)
+     * @summary Ticker
      * @param {TickerRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/24hr-ticker-price-change Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#ticker Binance API Documentation}
      */
     public async ticker(
         requestParameters: TickerRequest
@@ -536,13 +603,11 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Retrieves a list of all available ALPHA tokens, including their IDs and symbols. Use this to find the token ID for constructing symbols in other endpoints.
      *
-     * Weight: 0
-     *
      * @summary Token List
      * @returns {Promise<RestApiResponse<TokenListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/alpha/market-data/rest-api/Token-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-alpha-trading/api/rest-api/market-data#token-list Binance API Documentation}
      */
     public async tokenList(): Promise<RestApiResponse<TokenListResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.tokenList();
@@ -557,4 +622,34 @@ export class MarketDataApi implements MarketDataApiInterface {
             { isSigned: false }
         );
     }
+}
+
+export enum FullDepthLimitEnum {
+    LIMIT_5 = 5,
+    LIMIT_10 = 10,
+    LIMIT_20 = 20,
+    LIMIT_50 = 50,
+    LIMIT_100 = 100,
+    LIMIT_500 = 500,
+    LIMIT_1000 = 1000,
+}
+
+export enum KlinesIntervalEnum {
+    INTERVAL_1s = '1s',
+    INTERVAL_15s = '15s',
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
 }

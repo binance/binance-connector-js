@@ -1,13 +1,25 @@
-import { buildUserAgent, ConfigurationRestAPI, ALPHA_REST_API_PROD_URL } from '@binance/common';
+import {
+    buildUserAgent,
+    ConfigurationRestAPI,
+    ConfigurationWebsocketStreams,
+    ALPHA_REST_API_PROD_URL,
+    ALPHA_WS_STREAMS_PROD_URL,
+} from '@binance/common';
 import { name, version } from '../package.json';
 import { RestAPI } from './rest-api';
 
+import { WebsocketStreams } from './websocket-streams';
+
 export interface ConfigurationAlpha {
     configurationRestAPI?: ConfigurationRestAPI;
+
+    configurationWebsocketStreams?: ConfigurationWebsocketStreams;
 }
 
 export class Alpha {
     public restAPI!: RestAPI;
+
+    public websocketStreams!: WebsocketStreams;
 
     constructor(config: ConfigurationAlpha) {
         const userAgent = buildUserAgent(name, version);
@@ -25,6 +37,17 @@ export class Alpha {
                 'User-Agent': userAgent,
             };
             this.restAPI = new RestAPI(configRestAPI);
+        }
+        if (config?.configurationWebsocketStreams) {
+            const configWebsocketStreams = new ConfigurationWebsocketStreams(
+                config.configurationWebsocketStreams
+            ) as ConfigurationWebsocketStreams & {
+                userAgent: string;
+            };
+            configWebsocketStreams.wsURL =
+                configWebsocketStreams.wsURL || ALPHA_WS_STREAMS_PROD_URL;
+            configWebsocketStreams.userAgent = userAgent;
+            this.websocketStreams = new WebsocketStreams(configWebsocketStreams);
         }
     }
 }

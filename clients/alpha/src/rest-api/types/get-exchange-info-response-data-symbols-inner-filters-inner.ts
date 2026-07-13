@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Alpha REST API
+ * Alpha Trading REST API
  *
- * OpenAPI Specification for the Binance Alpha REST API
+ * APIs for Binance Alpha Trading.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,97 +20,97 @@
  */
 export interface GetExchangeInfoResponseDataSymbolsInnerFiltersInner {
     /**
-     *
+     * Filter type.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     filterType?: string;
     /**
-     *
+     * Minimum price.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     minPrice?: string;
     /**
-     *
+     * Maximum price.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     maxPrice?: string;
     /**
-     *
+     * Tick size.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     tickSize?: string;
     /**
-     *
+     * Step size.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     stepSize?: string;
     /**
-     *
+     * Maximum quantity.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     maxQty?: string;
     /**
-     *
+     * Minimum quantity.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     minQty?: string;
     /**
-     *
+     * Maximum allowed orders for this rule.
      * @type {number | bigint}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     limit?: number | bigint;
     /**
-     *
+     * Minimum notional value.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     minNotional?: string;
     /**
-     *
+     * Maximum notional value.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     maxNotional?: string;
     /**
-     *
+     * Lower multiplier bound.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     multiplierDown?: string;
     /**
-     *
+     * Upper multiplier bound.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     multiplierUp?: string;
     /**
-     *
+     * Upper multiplier bound for bids.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     bidMultiplierUp?: string;
     /**
-     *
+     * Upper multiplier bound for asks.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     askMultiplierUp?: string;
     /**
-     *
+     * Lower multiplier bound for bids.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
     bidMultiplierDown?: string;
     /**
-     *
+     * Lower multiplier bound for asks.
      * @type {string}
      * @memberof GetExchangeInfoResponseDataSymbolsInnerFiltersInner
      */
