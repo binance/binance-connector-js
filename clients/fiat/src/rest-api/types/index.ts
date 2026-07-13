@@ -1,6 +1,6 @@
-export * from './account-info';
 export * from './deposit-response';
 export * from './deposit-response-data';
+export * from './fiat-withdraw-request-account-info';
 export * from './fiat-withdraw-response';
 export * from './get-fiat-deposit-withdraw-history-response';
 export * from './get-fiat-deposit-withdraw-history-response-data-inner';

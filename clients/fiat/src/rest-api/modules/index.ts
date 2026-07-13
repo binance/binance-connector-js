@@ -1,7 +1,7 @@
 /**
- * Binance Fiat REST API
+ * Fiat REST API
  *
- * OpenAPI Specification for the Binance Fiat REST API
+ * Query Binance fiat deposit and withdrawal history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -11,4 +11,4 @@
  * Do not edit the class manually.
  */
 
-export * from './fiat-api';
+export * from './api';

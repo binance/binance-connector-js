@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Fiat REST API
+ * Fiat REST API
  *
- * OpenAPI Specification for the Binance Fiat REST API
+ * Query Binance fiat deposit and withdrawal history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -56,7 +56,7 @@ export interface GetFiatDepositWithdrawHistoryResponseDataInner {
      */
     method?: string;
     /**
-     *
+     * Processing, Failed, Successful, Finished, Refunding, Refunded, Refund Failed, Order Partial Credit Stopped
      * @type {string}
      * @memberof GetFiatDepositWithdrawHistoryResponseDataInner
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Fiat REST API
+ * Fiat REST API
  *
- * OpenAPI Specification for the Binance Fiat REST API
+ * Query Binance fiat deposit and withdrawal history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -12,7 +12,7 @@
  */
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
-import { FiatApi } from './modules/fiat-api';
+import { Api } from './modules/api';
 
 import type {
     DepositRequest,
@@ -20,7 +20,7 @@ import type {
     GetFiatDepositWithdrawHistoryRequest,
     GetFiatPaymentsHistoryRequest,
     GetOrderDetailRequest,
-} from './modules/fiat-api';
+} from './modules/api';
 
 import type {
     DepositResponse,
@@ -32,11 +32,11 @@ import type {
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
-    private fiatApi: FiatApi;
+    private api: Api;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.fiatApi = new FiatApi(configuration);
+        this.api = new Api(configuration);
     }
 
     /**
@@ -95,113 +95,123 @@ export class RestAPI {
     /**
      * Submit deposit request, in this version, we only support BRL deposit via pix.
      *
-     *
-     *
      * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
      *
-     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: TRADE
      *
-     * @summary Deposit(TRADE)
+     * Notes:
+     * - `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+     *
+     * @summary Deposit (TRADE)
      * @param {DepositRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DepositResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Fiat-Deposit Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#deposit Binance API Documentation}
      */
     deposit(requestParameters: DepositRequest): Promise<RestApiResponse<DepositResponse>> {
-        return this.fiatApi.deposit(requestParameters);
+        return this.api.deposit(requestParameters);
     }
 
     /**
      * Submit withdraw request, in this version, we support BRL,ARS,MXN withdrawal via bank_transfer.
      *
-     * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
+     * You need to call this api first, and call query order detail api in a loop to get the status of the order until
+     * this order is successful.
      *
-     * Before calling this API, please ensure you have completed your KYC or KYB, activated your fiat service, and verified your destination bank account on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * you need to bind your bank account on web/app before using the corresponding account number
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: TRADE
      *
-     * @summary Fiat Withdraw(WITHDRAW)
+     * @summary Fiat Withdraw (TRADE)
      * @param {FiatWithdrawRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FiatWithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Fiat-Withdraw Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#fiat-withdraw Binance API Documentation}
      */
     fiatWithdraw(
         requestParameters: FiatWithdrawRequest
     ): Promise<RestApiResponse<FiatWithdrawResponse>> {
-        return this.fiatApi.fiatWithdraw(requestParameters);
+        return this.api.fiatWithdraw(requestParameters);
     }
 
     /**
      * Get Fiat Deposit/Withdraw History
      *
-     * If beginTime and endTime are not sent, the recent 30-day data will be returned.
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `beginTime` and `endTime` are not sent, recent 30-day data is returned.
      *
      * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
      * @param {GetFiatDepositWithdrawHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFiatDepositWithdrawHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Fiat-Deposit-Withdraw-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#get-fiat-deposit-withdraw-history Binance API Documentation}
      */
     getFiatDepositWithdrawHistory(
         requestParameters: GetFiatDepositWithdrawHistoryRequest
     ): Promise<RestApiResponse<GetFiatDepositWithdrawHistoryResponse>> {
-        return this.fiatApi.getFiatDepositWithdrawHistory(requestParameters);
+        return this.api.getFiatDepositWithdrawHistory(requestParameters);
     }
 
     /**
-     * Get Fiat Deposit/Withdraw History
+     * Get Fiat Payments History
      *
-     * If beginTime and endTime are not sent, the recent 30-day data will be returned.
-     * paymentMethod: Only when requesting payments history for buy (transactionType=0), response contains paymentMethod representing the way of purchase. Now we have:
-     * Cash Balance
-     * Credit Card
-     * Online Banking
-     * Bank Transfer
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `beginTime` and `endTime` are not sent, recent 30-day data is returned.
+     * - `paymentMethod` is returned only when querying buy history (`transactionType=0`).
+     * - Supported payment methods: `Cash Balance`, `Credit Card`, `Online Banking`, `Bank Transfer`.
      *
      * @summary Get Fiat Payments History (USER_DATA)
      * @param {GetFiatPaymentsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFiatPaymentsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Fiat-Payments-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#get-fiat-payments-history Binance API Documentation}
      */
     getFiatPaymentsHistory(
         requestParameters: GetFiatPaymentsHistoryRequest
     ): Promise<RestApiResponse<GetFiatPaymentsHistoryResponse>> {
-        return this.fiatApi.getFiatPaymentsHistory(requestParameters);
+        return this.api.getFiatPaymentsHistory(requestParameters);
     }
 
     /**
      * Get Order Detail
      *
-     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Get Order Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Order Detail (USER_DATA)
      * @param {GetOrderDetailRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOrderDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Order-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#get-order-detail Binance API Documentation}
      */
     getOrderDetail(
         requestParameters: GetOrderDetailRequest
     ): Promise<RestApiResponse<GetOrderDetailResponse>> {
-        return this.fiatApi.getOrderDetail(requestParameters);
+        return this.api.getOrderDetail(requestParameters);
     }
 }

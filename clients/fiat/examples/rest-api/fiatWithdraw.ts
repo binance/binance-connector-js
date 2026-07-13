@@ -1,4 +1,4 @@
-import { Fiat, FIAT_REST_API_PROD_URL } from '../../../src';
+import { Fiat, FiatRestAPI, FIAT_REST_API_PROD_URL } from '../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,9 +11,9 @@ async function fiatWithdraw() {
     try {
         const response = await client.restAPI.fiatWithdraw({
             currency: 'currency_example',
-            apiPaymentMethod: 'apiPaymentMethod_example',
+            apiPaymentMethod: FiatRestAPI.FiatWithdrawApiPaymentMethodEnum.apiPaymentMethod_example,
             amount: 789,
-            accountInfo: {},
+            accountInfo: {} as FiatRestAPI.FiatWithdrawRequestAccountInfo,
         });
 
         const rateLimits = response.rateLimits!;

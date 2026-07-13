@@ -1,7 +1,7 @@
 /**
- * Binance Fiat REST API
+ * Fiat REST API
  *
- * OpenAPI Specification for the Binance Fiat REST API
+ * Query Binance fiat deposit and withdrawal history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,11 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { FiatApi } from '../../../src/rest-api';
+import {
+    Api,
+    DepositApiPaymentMethodEnum,
+    FiatWithdrawApiPaymentMethodEnum,
+} from '../../../src/rest-api';
 import {
     DepositRequest,
     FiatWithdrawRequest,
@@ -25,14 +29,15 @@ import {
 } from '../../../src/rest-api';
 import type {
     DepositResponse,
+    FiatWithdrawRequestAccountInfo,
     FiatWithdrawResponse,
     GetFiatDepositWithdrawHistoryResponse,
     GetFiatPaymentsHistoryResponse,
     GetOrderDetailResponse,
 } from '../../../src/rest-api/types';
 
-describe('FiatApi', () => {
-    let client: FiatApi;
+describe('Api', () => {
+    let client: Api;
     let config: ConfigurationRestAPI;
     let mockResponse: object = {};
 
@@ -42,15 +47,15 @@ describe('FiatApi', () => {
             apiSecret: 'test-api-secret',
             basePath: '',
         });
-        client = new FiatApi(config);
+        client = new Api(config);
     });
 
     describe('deposit()', () => {
         it('should execute deposit() successfully with required parameters only', async () => {
             const params: DepositRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
-                amount: 789,
+                apiPaymentMethod: DepositApiPaymentMethodEnum.pix,
+                amount: 'amount_example',
             };
 
             mockResponse = JSONParse(
@@ -78,8 +83,8 @@ describe('FiatApi', () => {
         it('should execute deposit() successfully with optional parameters', async () => {
             const params: DepositRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
-                amount: 789,
+                apiPaymentMethod: DepositApiPaymentMethodEnum.pix,
+                amount: 'amount_example',
                 recvWindow: 5000,
                 ext: Object,
             };
@@ -109,8 +114,8 @@ describe('FiatApi', () => {
         it('should throw RequiredError when currency is missing', async () => {
             const _params: DepositRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
-                amount: 789,
+                apiPaymentMethod: DepositApiPaymentMethodEnum.pix,
+                amount: 'amount_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.currency;
@@ -123,8 +128,8 @@ describe('FiatApi', () => {
         it('should throw RequiredError when apiPaymentMethod is missing', async () => {
             const _params: DepositRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
-                amount: 789,
+                apiPaymentMethod: DepositApiPaymentMethodEnum.pix,
+                amount: 'amount_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.apiPaymentMethod;
@@ -137,8 +142,8 @@ describe('FiatApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: DepositRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
-                amount: 789,
+                apiPaymentMethod: DepositApiPaymentMethodEnum.pix,
+                amount: 'amount_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -151,8 +156,8 @@ describe('FiatApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: DepositRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
-                amount: 789,
+                apiPaymentMethod: DepositApiPaymentMethodEnum.pix,
+                amount: 'amount_example',
             };
 
             const errorResponse = {
@@ -174,9 +179,9 @@ describe('FiatApi', () => {
         it('should execute fiatWithdraw() successfully with required parameters only', async () => {
             const params: FiatWithdrawRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
+                apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum.bank_transfer,
                 amount: 789,
-                accountInfo: {},
+                accountInfo: {} as FiatWithdrawRequestAccountInfo,
             };
 
             mockResponse = JSONParse(
@@ -204,9 +209,9 @@ describe('FiatApi', () => {
         it('should execute fiatWithdraw() successfully with optional parameters', async () => {
             const params: FiatWithdrawRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
+                apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum.bank_transfer,
                 amount: 789,
-                accountInfo: {},
+                accountInfo: {} as FiatWithdrawRequestAccountInfo,
                 recvWindow: 5000,
                 ext: Object,
             };
@@ -236,9 +241,9 @@ describe('FiatApi', () => {
         it('should throw RequiredError when currency is missing', async () => {
             const _params: FiatWithdrawRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
+                apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum.bank_transfer,
                 amount: 789,
-                accountInfo: {},
+                accountInfo: {} as FiatWithdrawRequestAccountInfo,
             };
             const params = Object.assign({ ..._params });
             delete params?.currency;
@@ -251,9 +256,9 @@ describe('FiatApi', () => {
         it('should throw RequiredError when apiPaymentMethod is missing', async () => {
             const _params: FiatWithdrawRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
+                apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum.bank_transfer,
                 amount: 789,
-                accountInfo: {},
+                accountInfo: {} as FiatWithdrawRequestAccountInfo,
             };
             const params = Object.assign({ ..._params });
             delete params?.apiPaymentMethod;
@@ -266,9 +271,9 @@ describe('FiatApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: FiatWithdrawRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
+                apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum.bank_transfer,
                 amount: 789,
-                accountInfo: {},
+                accountInfo: {} as FiatWithdrawRequestAccountInfo,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -281,9 +286,9 @@ describe('FiatApi', () => {
         it('should throw RequiredError when accountInfo is missing', async () => {
             const _params: FiatWithdrawRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
+                apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum.bank_transfer,
                 amount: 789,
-                accountInfo: {},
+                accountInfo: {} as FiatWithdrawRequestAccountInfo,
             };
             const params = Object.assign({ ..._params });
             delete params?.accountInfo;
@@ -296,9 +301,9 @@ describe('FiatApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: FiatWithdrawRequest = {
                 currency: 'currency_example',
-                apiPaymentMethod: 'apiPaymentMethod_example',
+                apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum.bank_transfer,
                 amount: 789,
-                accountInfo: {},
+                accountInfo: {} as FiatWithdrawRequestAccountInfo,
             };
 
             const errorResponse = {
@@ -319,7 +324,7 @@ describe('FiatApi', () => {
     describe('getFiatDepositWithdrawHistory()', () => {
         it('should execute getFiatDepositWithdrawHistory() successfully with required parameters only', async () => {
             const params: GetFiatDepositWithdrawHistoryRequest = {
-                transactionType: 'transactionType_example',
+                transactionType: '0',
             };
 
             mockResponse = JSONParse(
@@ -360,8 +365,8 @@ describe('FiatApi', () => {
 
         it('should execute getFiatDepositWithdrawHistory() successfully with optional parameters', async () => {
             const params: GetFiatDepositWithdrawHistoryRequest = {
-                transactionType: 'transactionType_example',
-                beginTime: 789,
+                transactionType: '0',
+                beginTime: 1641782889000,
                 endTime: 1641782889000,
                 page: 1,
                 rows: 100,
@@ -406,7 +411,7 @@ describe('FiatApi', () => {
 
         it('should throw RequiredError when transactionType is missing', async () => {
             const _params: GetFiatDepositWithdrawHistoryRequest = {
-                transactionType: 'transactionType_example',
+                transactionType: '0',
             };
             const params = Object.assign({ ..._params });
             delete params?.transactionType;
@@ -418,7 +423,7 @@ describe('FiatApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFiatDepositWithdrawHistoryRequest = {
-                transactionType: 'transactionType_example',
+                transactionType: '0',
             };
 
             const errorResponse = {
@@ -443,7 +448,7 @@ describe('FiatApi', () => {
     describe('getFiatPaymentsHistory()', () => {
         it('should execute getFiatPaymentsHistory() successfully with required parameters only', async () => {
             const params: GetFiatPaymentsHistoryRequest = {
-                transactionType: 'transactionType_example',
+                transactionType: '0',
             };
 
             mockResponse = JSONParse(
@@ -486,8 +491,8 @@ describe('FiatApi', () => {
 
         it('should execute getFiatPaymentsHistory() successfully with optional parameters', async () => {
             const params: GetFiatPaymentsHistoryRequest = {
-                transactionType: 'transactionType_example',
-                beginTime: 789,
+                transactionType: '0',
+                beginTime: 1641782889000,
                 endTime: 1641782889000,
                 page: 1,
                 rows: 100,
@@ -534,7 +539,7 @@ describe('FiatApi', () => {
 
         it('should throw RequiredError when transactionType is missing', async () => {
             const _params: GetFiatPaymentsHistoryRequest = {
-                transactionType: 'transactionType_example',
+                transactionType: '0',
             };
             const params = Object.assign({ ..._params });
             delete params?.transactionType;
@@ -546,7 +551,7 @@ describe('FiatApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFiatPaymentsHistoryRequest = {
-                transactionType: 'transactionType_example',
+                transactionType: '0',
             };
 
             const errorResponse = {
@@ -569,7 +574,7 @@ describe('FiatApi', () => {
     describe('getOrderDetail()', () => {
         it('should execute getOrderDetail() successfully with required parameters only', async () => {
             const params: GetOrderDetailRequest = {
-                orderNo: 'orderNo_example',
+                orderNo: '036752*678',
             };
 
             mockResponse = JSONParse(
@@ -605,7 +610,7 @@ describe('FiatApi', () => {
 
         it('should execute getOrderDetail() successfully with optional parameters', async () => {
             const params: GetOrderDetailRequest = {
-                orderNo: 'orderNo_example',
+                orderNo: '036752*678',
                 recvWindow: 5000,
             };
 
@@ -642,7 +647,7 @@ describe('FiatApi', () => {
 
         it('should throw RequiredError when orderNo is missing', async () => {
             const _params: GetOrderDetailRequest = {
-                orderNo: 'orderNo_example',
+                orderNo: '036752*678',
             };
             const params = Object.assign({ ..._params });
             delete params?.orderNo;
@@ -654,7 +659,7 @@ describe('FiatApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetOrderDetailRequest = {
-                orderNo: 'orderNo_example',
+                orderNo: '036752*678',
             };
 
             const errorResponse = {

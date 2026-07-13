@@ -1,4 +1,4 @@
-import { Fiat, FIAT_REST_API_PROD_URL } from '../../../src';
+import { Fiat, FiatRestAPI, FIAT_REST_API_PROD_URL } from '../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,8 +11,8 @@ async function deposit() {
     try {
         const response = await client.restAPI.deposit({
             currency: 'currency_example',
-            apiPaymentMethod: 'apiPaymentMethod_example',
-            amount: 789,
+            apiPaymentMethod: FiatRestAPI.DepositApiPaymentMethodEnum.apiPaymentMethod_example,
+            amount: 'amount_example',
         });
 
         const rateLimits = response.rateLimits!;

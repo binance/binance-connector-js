@@ -1,4 +1,4 @@
-import { Fiat, FIAT_REST_API_PROD_URL } from '../../../src';
+import { Fiat, FIAT_REST_API_PROD_URL } from '../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,7 +10,7 @@ const client = new Fiat({ configurationRestAPI });
 async function getOrderDetail() {
     try {
         const response = await client.restAPI.getOrderDetail({
-            orderNo: 'orderNo_example',
+            orderNo: '036752*678',
         });
 
         const rateLimits = response.rateLimits!;

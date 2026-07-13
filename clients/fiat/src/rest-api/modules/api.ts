@@ -1,7 +1,7 @@
 /**
- * Binance Fiat REST API
+ * Fiat REST API
  *
- * OpenAPI Specification for the Binance Fiat REST API
+ * Query Binance fiat deposit and withdrawal history.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -20,8 +19,8 @@ import {
     type RequestArgs,
 } from '@binance/common';
 import type {
-    AccountInfo,
     DepositResponse,
+    FiatWithdrawRequestAccountInfo,
     FiatWithdrawResponse,
     GetFiatDepositWithdrawHistoryResponse,
     GetFiatPaymentsHistoryResponse,
@@ -29,36 +28,38 @@ import type {
 } from '../types';
 
 /**
- * FiatApi - axios parameter creator
+ * Api - axios parameter creator
  */
-const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
+const ApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
          * Submit deposit request, in this version, we only support BRL deposit via pix.
          *
-         *
-         *
          * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
          *
-         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+         * fiat service on our website.
          *
-         * `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+         * Weight(UID): 45000
          *
-         * Weight: 45000
+         * Security Type: TRADE
          *
-         * @summary Deposit(TRADE)
+         * Notes:
+         * - `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+         *
+         * @summary Deposit (TRADE)
          * @param {string} currency
-         * @param {string} apiPaymentMethod
-         * @param {number | bigint} amount
-         * @param {number | bigint} [recvWindow]
+         * @param {DepositApiPaymentMethodEnum} apiPaymentMethod payment method; current supported: pix
+         * @param {string} amount deposit amount
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          * @param {object} [ext]
          *
          * @throws {RequiredError}
          */
         deposit: async (
             currency: string,
-            apiPaymentMethod: string,
-            amount: number | bigint,
+            apiPaymentMethod: DepositApiPaymentMethodEnum,
+            amount: string,
             recvWindow?: number | bigint,
             ext?: object
         ): Promise<RequestArgs> => {
@@ -108,29 +109,31 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
         /**
          * Submit withdraw request, in this version, we support BRL,ARS,MXN withdrawal via bank_transfer.
          *
-         * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
+         * You need to call this api first, and call query order detail api in a loop to get the status of the order until
+         * this order is successful.
          *
-         * Before calling this API, please ensure you have completed your KYC or KYB, activated your fiat service, and verified your destination bank account on our website.
+         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+         * fiat service on our website.
          *
-         * you need to bind your bank account on web/app before using the corresponding account number
+         * Weight(UID): 45000
          *
-         * Weight: 45000
+         * Security Type: TRADE
          *
-         * @summary Fiat Withdraw(WITHDRAW)
-         * @param {string} currency
-         * @param {string} apiPaymentMethod
-         * @param {number | bigint} amount
-         * @param {AccountInfo} accountInfo
-         * @param {number | bigint} [recvWindow]
+         * @summary Fiat Withdraw (TRADE)
+         * @param {string} currency Fiat currency, such as BRL, ARS, MXN
+         * @param {FiatWithdrawApiPaymentMethodEnum} apiPaymentMethod payment method; current supported: bank_transfer
+         * @param {number | bigint} amount withdraw amount
+         * @param {FiatWithdrawRequestAccountInfo} accountInfo
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          * @param {object} [ext]
          *
          * @throws {RequiredError}
          */
         fiatWithdraw: async (
             currency: string,
-            apiPaymentMethod: string,
+            apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum,
             amount: number | bigint,
-            accountInfo: AccountInfo,
+            accountInfo: FiatWithdrawRequestAccountInfo,
             recvWindow?: number | bigint,
             ext?: object
         ): Promise<RequestArgs> => {
@@ -186,16 +189,19 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
         /**
          * Get Fiat Deposit/Withdraw History
          *
-         * If beginTime and endTime are not sent, the recent 30-day data will be returned.
+         * Weight(UID): 45000
          *
-         * Weight: 45000
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `beginTime` and `endTime` are not sent, recent 30-day data is returned.
          *
          * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
-         * @param {string} transactionType 0-buy,1-sell
+         * @param {string} transactionType 0: deposit, 1: withdraw
          * @param {number | bigint} [beginTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [page] default 1
-         * @param {number | bigint} [rows] default 100, max 500
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [rows]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -247,23 +253,23 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
             };
         },
         /**
-         * Get Fiat Deposit/Withdraw History
+         * Get Fiat Payments History
          *
-         * If beginTime and endTime are not sent, the recent 30-day data will be returned.
-         * paymentMethod: Only when requesting payments history for buy (transactionType=0), response contains paymentMethod representing the way of purchase. Now we have:
-         * Cash Balance
-         * Credit Card
-         * Online Banking
-         * Bank Transfer
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `beginTime` and `endTime` are not sent, recent 30-day data is returned.
+         * - `paymentMethod` is returned only when querying buy history (`transactionType=0`).
+         * - Supported payment methods: `Cash Balance`, `Credit Card`, `Online Banking`, `Bank Transfer`.
          *
          * @summary Get Fiat Payments History (USER_DATA)
-         * @param {string} transactionType 0-buy,1-sell
+         * @param {string} transactionType 0: buy, 1: sell
          * @param {number | bigint} [beginTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [page] default 1
-         * @param {number | bigint} [rows] default 100, max 500
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [rows]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -317,12 +323,15 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
         /**
          * Get Order Detail
          *
-         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+         * fiat service on our website.
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Get Order Detail(USER_DATA)
-         * @param {string} orderNo order id retrieved from the api call of withdrawal
+         * Security Type: USER_DATA
+         *
+         * @summary Get Order Detail (USER_DATA)
+         * @param {string} orderNo Order ID retrieved from the withdrawal API
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -361,46 +370,50 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
 };
 
 /**
- * FiatApi - interface
- * @interface FiatApi
+ * Api - interface
+ * @interface Api
  */
-export interface FiatApiInterface {
+export interface ApiInterface {
     /**
      * Submit deposit request, in this version, we only support BRL deposit via pix.
      *
-     *
-     *
      * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
      *
-     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: TRADE
      *
-     * @summary Deposit(TRADE)
+     * Notes:
+     * - `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+     *
+     * @summary Deposit (TRADE)
      * @param {DepositRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApiInterface
+     * @memberof ApiInterface
      */
     deposit(requestParameters: DepositRequest): Promise<RestApiResponse<DepositResponse>>;
     /**
      * Submit withdraw request, in this version, we support BRL,ARS,MXN withdrawal via bank_transfer.
      *
-     * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
+     * You need to call this api first, and call query order detail api in a loop to get the status of the order until
+     * this order is successful.
      *
-     * Before calling this API, please ensure you have completed your KYC or KYB, activated your fiat service, and verified your destination bank account on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * you need to bind your bank account on web/app before using the corresponding account number
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: TRADE
      *
-     * @summary Fiat Withdraw(WITHDRAW)
+     * @summary Fiat Withdraw (TRADE)
      * @param {FiatWithdrawRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApiInterface
+     * @memberof ApiInterface
      */
     fiatWithdraw(
         requestParameters: FiatWithdrawRequest
@@ -408,36 +421,39 @@ export interface FiatApiInterface {
     /**
      * Get Fiat Deposit/Withdraw History
      *
-     * If beginTime and endTime are not sent, the recent 30-day data will be returned.
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `beginTime` and `endTime` are not sent, recent 30-day data is returned.
      *
      * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
      * @param {GetFiatDepositWithdrawHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApiInterface
+     * @memberof ApiInterface
      */
     getFiatDepositWithdrawHistory(
         requestParameters: GetFiatDepositWithdrawHistoryRequest
     ): Promise<RestApiResponse<GetFiatDepositWithdrawHistoryResponse>>;
     /**
-     * Get Fiat Deposit/Withdraw History
+     * Get Fiat Payments History
      *
-     * If beginTime and endTime are not sent, the recent 30-day data will be returned.
-     * paymentMethod: Only when requesting payments history for buy (transactionType=0), response contains paymentMethod representing the way of purchase. Now we have:
-     * Cash Balance
-     * Credit Card
-     * Online Banking
-     * Bank Transfer
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `beginTime` and `endTime` are not sent, recent 30-day data is returned.
+     * - `paymentMethod` is returned only when querying buy history (`transactionType=0`).
+     * - Supported payment methods: `Cash Balance`, `Credit Card`, `Online Banking`, `Bank Transfer`.
      *
      * @summary Get Fiat Payments History (USER_DATA)
      * @param {GetFiatPaymentsHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApiInterface
+     * @memberof ApiInterface
      */
     getFiatPaymentsHistory(
         requestParameters: GetFiatPaymentsHistoryRequest
@@ -445,15 +461,18 @@ export interface FiatApiInterface {
     /**
      * Get Order Detail
      *
-     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Get Order Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Order Detail (USER_DATA)
      * @param {GetOrderDetailRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApiInterface
+     * @memberof ApiInterface
      */
     getOrderDetail(
         requestParameters: GetOrderDetailRequest
@@ -461,242 +480,244 @@ export interface FiatApiInterface {
 }
 
 /**
- * Request parameters for deposit operation in FiatApi.
+ * Request parameters for deposit operation in Api.
  * @interface DepositRequest
  */
 export interface DepositRequest {
     /**
      *
      * @type {string}
-     * @memberof FiatApiDeposit
+     * @memberof ApiDeposit
      */
     readonly currency: string;
 
     /**
-     *
+     * payment method; current supported: pix
      * @type {string}
-     * @memberof FiatApiDeposit
+     * @memberof ApiDeposit
      */
-    readonly apiPaymentMethod: string;
+    readonly apiPaymentMethod: DepositApiPaymentMethodEnum;
 
     /**
-     *
-     * @type {number | bigint}
-     * @memberof FiatApiDeposit
+     * deposit amount
+     * @type {string}
+     * @memberof ApiDeposit
      */
-    readonly amount: number | bigint;
+    readonly amount: string;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
-     * @memberof FiatApiDeposit
+     * @memberof ApiDeposit
      */
     readonly recvWindow?: number | bigint;
 
     /**
      *
      * @type {object}
-     * @memberof FiatApiDeposit
+     * @memberof ApiDeposit
      */
     readonly ext?: object;
 }
 
 /**
- * Request parameters for fiatWithdraw operation in FiatApi.
+ * Request parameters for fiatWithdraw operation in Api.
  * @interface FiatWithdrawRequest
  */
 export interface FiatWithdrawRequest {
     /**
-     *
+     * Fiat currency, such as BRL, ARS, MXN
      * @type {string}
-     * @memberof FiatApiFiatWithdraw
+     * @memberof ApiFiatWithdraw
      */
     readonly currency: string;
 
     /**
-     *
+     * payment method; current supported: bank_transfer
      * @type {string}
-     * @memberof FiatApiFiatWithdraw
+     * @memberof ApiFiatWithdraw
      */
-    readonly apiPaymentMethod: string;
+    readonly apiPaymentMethod: FiatWithdrawApiPaymentMethodEnum;
 
     /**
-     *
+     * withdraw amount
      * @type {number | bigint}
-     * @memberof FiatApiFiatWithdraw
+     * @memberof ApiFiatWithdraw
      */
     readonly amount: number | bigint;
 
     /**
      *
-     * @type {AccountInfo}
-     * @memberof FiatApiFiatWithdraw
+     * @type {FiatWithdrawRequestAccountInfo}
+     * @memberof ApiFiatWithdraw
      */
-    readonly accountInfo: AccountInfo;
+    readonly accountInfo: FiatWithdrawRequestAccountInfo;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
-     * @memberof FiatApiFiatWithdraw
+     * @memberof ApiFiatWithdraw
      */
     readonly recvWindow?: number | bigint;
 
     /**
      *
      * @type {object}
-     * @memberof FiatApiFiatWithdraw
+     * @memberof ApiFiatWithdraw
      */
     readonly ext?: object;
 }
 
 /**
- * Request parameters for getFiatDepositWithdrawHistory operation in FiatApi.
+ * Request parameters for getFiatDepositWithdrawHistory operation in Api.
  * @interface GetFiatDepositWithdrawHistoryRequest
  */
 export interface GetFiatDepositWithdrawHistoryRequest {
     /**
-     * 0-buy,1-sell
+     * 0: deposit, 1: withdraw
      * @type {string}
-     * @memberof FiatApiGetFiatDepositWithdrawHistory
+     * @memberof ApiGetFiatDepositWithdrawHistory
      */
     readonly transactionType: string;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatDepositWithdrawHistory
+     * @memberof ApiGetFiatDepositWithdrawHistory
      */
     readonly beginTime?: number | bigint;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatDepositWithdrawHistory
+     * @memberof ApiGetFiatDepositWithdrawHistory
      */
     readonly endTime?: number | bigint;
 
     /**
-     * default 1
+     *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatDepositWithdrawHistory
+     * @memberof ApiGetFiatDepositWithdrawHistory
      */
     readonly page?: number | bigint;
 
     /**
-     * default 100, max 500
+     *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatDepositWithdrawHistory
+     * @memberof ApiGetFiatDepositWithdrawHistory
      */
     readonly rows?: number | bigint;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatDepositWithdrawHistory
+     * @memberof ApiGetFiatDepositWithdrawHistory
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for getFiatPaymentsHistory operation in FiatApi.
+ * Request parameters for getFiatPaymentsHistory operation in Api.
  * @interface GetFiatPaymentsHistoryRequest
  */
 export interface GetFiatPaymentsHistoryRequest {
     /**
-     * 0-buy,1-sell
+     * 0: buy, 1: sell
      * @type {string}
-     * @memberof FiatApiGetFiatPaymentsHistory
+     * @memberof ApiGetFiatPaymentsHistory
      */
     readonly transactionType: string;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatPaymentsHistory
+     * @memberof ApiGetFiatPaymentsHistory
      */
     readonly beginTime?: number | bigint;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatPaymentsHistory
+     * @memberof ApiGetFiatPaymentsHistory
      */
     readonly endTime?: number | bigint;
 
     /**
-     * default 1
+     *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatPaymentsHistory
+     * @memberof ApiGetFiatPaymentsHistory
      */
     readonly page?: number | bigint;
 
     /**
-     * default 100, max 500
+     *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatPaymentsHistory
+     * @memberof ApiGetFiatPaymentsHistory
      */
     readonly rows?: number | bigint;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof FiatApiGetFiatPaymentsHistory
+     * @memberof ApiGetFiatPaymentsHistory
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for getOrderDetail operation in FiatApi.
+ * Request parameters for getOrderDetail operation in Api.
  * @interface GetOrderDetailRequest
  */
 export interface GetOrderDetailRequest {
     /**
-     * order id retrieved from the api call of withdrawal
+     * Order ID retrieved from the withdrawal API
      * @type {string}
-     * @memberof FiatApiGetOrderDetail
+     * @memberof ApiGetOrderDetail
      */
     readonly orderNo: string;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof FiatApiGetOrderDetail
+     * @memberof ApiGetOrderDetail
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * FiatApi - object-oriented interface
- * @class FiatApi
+ * Api - object-oriented interface
+ * @class Api
  */
-export class FiatApi implements FiatApiInterface {
+export class Api implements ApiInterface {
     private readonly configuration: ConfigurationRestAPI;
     private localVarAxiosParamCreator;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.localVarAxiosParamCreator = FiatApiAxiosParamCreator(configuration);
+        this.localVarAxiosParamCreator = ApiAxiosParamCreator(configuration);
     }
 
     /**
      * Submit deposit request, in this version, we only support BRL deposit via pix.
      *
-     *
-     *
      * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
      *
-     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: TRADE
      *
-     * @summary Deposit(TRADE)
+     * Notes:
+     * - `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+     *
+     * @summary Deposit (TRADE)
      * @param {DepositRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepositResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApi
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Fiat-Deposit Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#deposit Binance API Documentation}
      */
     public async deposit(
         requestParameters: DepositRequest
@@ -723,20 +744,22 @@ export class FiatApi implements FiatApiInterface {
     /**
      * Submit withdraw request, in this version, we support BRL,ARS,MXN withdrawal via bank_transfer.
      *
-     * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
+     * You need to call this api first, and call query order detail api in a loop to get the status of the order until
+     * this order is successful.
      *
-     * Before calling this API, please ensure you have completed your KYC or KYB, activated your fiat service, and verified your destination bank account on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * you need to bind your bank account on web/app before using the corresponding account number
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: TRADE
      *
-     * @summary Fiat Withdraw(WITHDRAW)
+     * @summary Fiat Withdraw (TRADE)
      * @param {FiatWithdrawRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FiatWithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApi
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Fiat-Withdraw Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#fiat-withdraw Binance API Documentation}
      */
     public async fiatWithdraw(
         requestParameters: FiatWithdrawRequest
@@ -764,16 +787,19 @@ export class FiatApi implements FiatApiInterface {
     /**
      * Get Fiat Deposit/Withdraw History
      *
-     * If beginTime and endTime are not sent, the recent 30-day data will be returned.
+     * Weight(UID): 45000
      *
-     * Weight: 45000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `beginTime` and `endTime` are not sent, recent 30-day data is returned.
      *
      * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
      * @param {GetFiatDepositWithdrawHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFiatDepositWithdrawHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApi
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Fiat-Deposit-Withdraw-History Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#get-fiat-deposit-withdraw-history Binance API Documentation}
      */
     public async getFiatDepositWithdrawHistory(
         requestParameters: GetFiatDepositWithdrawHistoryRequest
@@ -800,23 +826,23 @@ export class FiatApi implements FiatApiInterface {
     }
 
     /**
-     * Get Fiat Deposit/Withdraw History
+     * Get Fiat Payments History
      *
-     * If beginTime and endTime are not sent, the recent 30-day data will be returned.
-     * paymentMethod: Only when requesting payments history for buy (transactionType=0), response contains paymentMethod representing the way of purchase. Now we have:
-     * Cash Balance
-     * Credit Card
-     * Online Banking
-     * Bank Transfer
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `beginTime` and `endTime` are not sent, recent 30-day data is returned.
+     * - `paymentMethod` is returned only when querying buy history (`transactionType=0`).
+     * - Supported payment methods: `Cash Balance`, `Credit Card`, `Online Banking`, `Bank Transfer`.
      *
      * @summary Get Fiat Payments History (USER_DATA)
      * @param {GetFiatPaymentsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFiatPaymentsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApi
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Fiat-Payments-History Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#get-fiat-payments-history Binance API Documentation}
      */
     public async getFiatPaymentsHistory(
         requestParameters: GetFiatPaymentsHistoryRequest
@@ -844,16 +870,19 @@ export class FiatApi implements FiatApiInterface {
     /**
      * Get Order Detail
      *
-     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your
+     * fiat service on our website.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Get Order Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Order Detail (USER_DATA)
      * @param {GetOrderDetailRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOrderDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FiatApi
-     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Order-Detail Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-fiat/api/rest-api/~#get-order-detail Binance API Documentation}
      */
     public async getOrderDetail(
         requestParameters: GetOrderDetailRequest
@@ -873,4 +902,12 @@ export class FiatApi implements FiatApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum DepositApiPaymentMethodEnum {
+    pix = 'pix',
+}
+
+export enum FiatWithdrawApiPaymentMethodEnum {
+    bank_transfer = 'bank_transfer',
 }
