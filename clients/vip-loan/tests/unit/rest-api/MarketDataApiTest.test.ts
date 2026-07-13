@@ -1,7 +1,7 @@
 /**
- * Binance VIP Loan REST API
+ * VIP Loan REST API
  *
- * OpenAPI Specification for the Binance VIP Loan REST API
+ * Access over-collateralized loan services, manage positions, and monitor collateral via the VIP Loan API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -48,7 +48,7 @@ describe('MarketDataApi', () => {
     describe('getBorrowInterestRate()', () => {
         it('should execute getBorrowInterestRate() successfully with required parameters only', async () => {
             const params: GetBorrowInterestRateRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'BTC',
             };
 
             mockResponse = JSONParse(
@@ -58,12 +58,6 @@ describe('MarketDataApi', () => {
                         flexibleDailyInterestRate: '0.001503',
                         flexibleYearlyInterestRate: '0.548595',
                         time: 1577233578000,
-                    },
-                    {
-                        asset: 'BTC',
-                        flexibleDailyInterestRate: '0.001503',
-                        flexibleYearlyInterestRate: '0.548595',
-                        time: 1577233562000,
                     },
                 ])
             );
@@ -84,7 +78,7 @@ describe('MarketDataApi', () => {
 
         it('should execute getBorrowInterestRate() successfully with optional parameters', async () => {
             const params: GetBorrowInterestRateRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'BTC',
                 recvWindow: 5000,
             };
 
@@ -95,12 +89,6 @@ describe('MarketDataApi', () => {
                         flexibleDailyInterestRate: '0.001503',
                         flexibleYearlyInterestRate: '0.548595',
                         time: 1577233578000,
-                    },
-                    {
-                        asset: 'BTC',
-                        flexibleDailyInterestRate: '0.001503',
-                        flexibleYearlyInterestRate: '0.548595',
-                        time: 1577233562000,
                     },
                 ])
             );
@@ -121,7 +109,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when loanCoin is missing', async () => {
             const _params: GetBorrowInterestRateRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.loanCoin;
@@ -133,7 +121,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetBorrowInterestRateRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'BTC',
             };
 
             const errorResponse = {
@@ -190,7 +178,7 @@ describe('MarketDataApi', () => {
 
         it('should execute getCollateralAssetData() successfully with optional parameters', async () => {
             const params: GetCollateralAssetDataRequest = {
-                collateralCoin: 'collateralCoin_example',
+                collateralCoin: 'BUSD',
                 recvWindow: 5000,
             };
 
@@ -283,7 +271,7 @@ describe('MarketDataApi', () => {
 
         it('should execute getLoanableAssetsData() successfully with optional parameters', async () => {
             const params: GetLoanableAssetsDataRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'BUSD',
                 vipLevel: 1,
                 recvWindow: 5000,
             };
@@ -343,7 +331,7 @@ describe('MarketDataApi', () => {
     describe('getVIPLoanInterestRateHistory()', () => {
         it('should execute getVIPLoanInterestRateHistory() successfully with required parameters only', async () => {
             const params: GetVIPLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
             };
 
@@ -370,7 +358,7 @@ describe('MarketDataApi', () => {
 
         it('should execute getVIPLoanInterestRateHistory() successfully with optional parameters', async () => {
             const params: GetVIPLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -401,7 +389,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: GetVIPLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -414,7 +402,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when recvWindow is missing', async () => {
             const _params: GetVIPLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -427,7 +415,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetVIPLoanInterestRateHistoryRequest = {
-                coin: 'coin_example',
+                coin: 'USDT',
                 recvWindow: 5000,
             };
 
@@ -453,7 +441,7 @@ describe('MarketDataApi', () => {
     describe('queryVIPLoanFixedRateMarket()', () => {
         it('should execute queryVIPLoanFixedRateMarket() successfully with required parameters only', async () => {
             const params: QueryVIPLoanFixedRateMarketRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -490,10 +478,10 @@ describe('MarketDataApi', () => {
 
         it('should execute queryVIPLoanFixedRateMarket() successfully with optional parameters', async () => {
             const params: QueryVIPLoanFixedRateMarketRequest = {
-                loanCoin: 'loanCoin_example',
-                duration: 789,
+                loanCoin: 'USDT',
+                duration: 30,
                 current: 1,
-                size: 5000,
+                size: 10,
                 recvWindow: 5000,
             };
 
@@ -531,7 +519,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when loanCoin is missing', async () => {
             const _params: QueryVIPLoanFixedRateMarketRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.loanCoin;
@@ -543,7 +531,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryVIPLoanFixedRateMarketRequest = {
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'USDT',
             };
 
             const errorResponse = {

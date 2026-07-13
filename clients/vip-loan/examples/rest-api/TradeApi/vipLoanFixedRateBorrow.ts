@@ -10,12 +10,12 @@ const client = new VIPLoan({ configurationRestAPI });
 async function vipLoanFixedRateBorrow() {
     try {
         const response = await client.restAPI.vipLoanFixedRateBorrow({
-            supplyRequest: 'supplyRequest_example',
-            borrowCoin: 'borrowCoin_example',
-            loanTerm: 789,
-            borrowUid: 789,
-            collateralCoin: 'collateralCoin_example',
-            collateralAccountId: '1',
+            supplyRequest: '1212:0.12:100;3434:0.13:50',
+            borrowCoin: 'BUSD',
+            loanTerm: 30,
+            borrowUid: 12345678,
+            collateralCoin: 'BNB,ETH,BTC',
+            collateralAccountId: '12345,67890,13579',
         });
 
         const rateLimits = response.rateLimits!;

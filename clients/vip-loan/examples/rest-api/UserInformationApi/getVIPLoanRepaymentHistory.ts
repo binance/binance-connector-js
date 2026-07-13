@@ -7,20 +7,18 @@ const configurationRestAPI = {
 };
 const client = new VIPLoan({ configurationRestAPI });
 
-async function getBorrowInterestRate() {
+async function getVIPLoanRepaymentHistory() {
     try {
-        const response = await client.restAPI.getBorrowInterestRate({
-            loanCoin: 'BTC',
-        });
+        const response = await client.restAPI.getVIPLoanRepaymentHistory();
 
         const rateLimits = response.rateLimits!;
-        console.log('getBorrowInterestRate() rate limits:', rateLimits);
+        console.log('getVIPLoanRepaymentHistory() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('getBorrowInterestRate() response:', data);
+        console.log('getVIPLoanRepaymentHistory() response:', data);
     } catch (error) {
-        console.error('getBorrowInterestRate() error:', error);
+        console.error('getVIPLoanRepaymentHistory() error:', error);
     }
 }
 
-getBorrowInterestRate();
+getVIPLoanRepaymentHistory();

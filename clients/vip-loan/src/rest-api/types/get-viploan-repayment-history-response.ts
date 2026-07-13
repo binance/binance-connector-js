@@ -16,24 +16,24 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetLoanableAssetsDataResponseRowsInner } from './get-loanable-assets-data-response-rows-inner';
+import type { GetVIPLoanRepaymentHistoryResponseRowsInner } from './get-viploan-repayment-history-response-rows-inner';
 
 /**
  *
  * @export
- * @interface GetLoanableAssetsDataResponse
+ * @interface GetVIPLoanRepaymentHistoryResponse
  */
-export interface GetLoanableAssetsDataResponse {
+export interface GetVIPLoanRepaymentHistoryResponse {
     /**
      *
-     * @type {Array<GetLoanableAssetsDataResponseRowsInner>}
-     * @memberof GetLoanableAssetsDataResponse
+     * @type {Array<GetVIPLoanRepaymentHistoryResponseRowsInner>}
+     * @memberof GetVIPLoanRepaymentHistoryResponse
      */
-    rows?: Array<GetLoanableAssetsDataResponseRowsInner>;
+    rows?: Array<GetVIPLoanRepaymentHistoryResponseRowsInner>;
     /**
      *
      * @type {number | bigint}
-     * @memberof GetLoanableAssetsDataResponse
+     * @memberof GetVIPLoanRepaymentHistoryResponse
      */
     total?: number | bigint;
 }

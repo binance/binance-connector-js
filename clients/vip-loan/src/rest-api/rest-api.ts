@@ -1,7 +1,7 @@
 /**
- * Binance VIP Loan REST API
+ * VIP Loan REST API
  *
- * OpenAPI Specification for the Binance VIP Loan REST API
+ * Access over-collateralized loan services, manage positions, and monitor collateral via the VIP Loan API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -33,6 +33,7 @@ import type {
     CheckVIPLoanCollateralAccountRequest,
     GetVIPLoanAccruedInterestRequest,
     GetVIPLoanOngoingOrdersRequest,
+    GetVIPLoanRepaymentHistoryRequest,
     QueryApplicationStatusRequest,
 } from './modules/user-information-api';
 
@@ -53,6 +54,7 @@ import type {
     CheckVIPLoanCollateralAccountResponse,
     GetVIPLoanAccruedInterestResponse,
     GetVIPLoanOngoingOrdersResponse,
+    GetVIPLoanRepaymentHistoryResponse,
     QueryApplicationStatusResponse,
 } from './types';
 
@@ -125,14 +127,16 @@ export class RestAPI {
     /**
      * Get Borrow Interest Rate
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Borrow Interest Rate(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBorrowInterestRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-Borrow-Interest-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#get-borrow-interest-rate Binance API Documentation}
      */
     getBorrowInterestRate(
         requestParameters: GetBorrowInterestRateRequest
@@ -143,14 +147,16 @@ export class RestAPI {
     /**
      * Get Collateral Asset Data
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Collateral Asset Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Collateral Asset Data (USER_DATA)
      * @param {GetCollateralAssetDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetCollateralAssetDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-Collateral-Asset-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#get-collateral-asset-data Binance API Documentation}
      */
     getCollateralAssetData(
         requestParameters: GetCollateralAssetDataRequest = {}
@@ -161,14 +167,16 @@ export class RestAPI {
     /**
      * Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Loanable Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Loanable Assets Data (USER_DATA)
      * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLoanableAssetsDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-Loanable-Assets-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#get-loanable-assets-data Binance API Documentation}
      */
     getLoanableAssetsData(
         requestParameters: GetLoanableAssetsDataRequest = {}
@@ -179,18 +187,21 @@ export class RestAPI {
     /**
      * Check VIP Loan flexible interest rate history
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned
-     * The max interval between startTime and end Time is 180 days.
-     * Time based on UTC+0.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 180 days.
+     * - Time is based on UTC+0.
      *
      * @summary Get VIP Loan Interest Rate History (USER_DATA)
      * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetVIPLoanInterestRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-VIP-Loan-Interest-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#get-viploan-interest-rate-history Binance API Documentation}
      */
     getVIPLoanInterestRateHistory(
         requestParameters: GetVIPLoanInterestRateHistoryRequest
@@ -201,14 +212,16 @@ export class RestAPI {
     /**
      * Query the VIP Loan fixed rate market. Returns a paginated list of fixed-rate supply orders.
      *
-     * Weight: 6000
+     * Weight(IP): 6000
      *
-     * @summary Query VIP Loan Fixed Rate Market(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query VIP Loan Fixed Rate Market (USER_DATA)
      * @param {QueryVIPLoanFixedRateMarketRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryVIPLoanFixedRateMarketResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Query-VIP-Loan-Fixed-Rate-Market Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#query-viploan-fixed-rate-market Binance API Documentation}
      */
     queryVIPLoanFixedRateMarket(
         requestParameters: QueryVIPLoanFixedRateMarketRequest
@@ -219,19 +232,22 @@ export class RestAPI {
     /**
      * VIP loan is available for VIP users only.
      *
-     * loanAccountId refer to loan receiving account
-     * Only master account applications are supported
-     * loanAccountId and collateralAccountId under same master account
-     * loanTerm is mandatory if user choose stable rate
+     * Weight(UID): 6000
      *
-     * Weight: 0
+     * Security Type: TRADE
      *
-     * @summary VIP Loan Borrow(TRADE)
+     * Notes:
+     * - `loanAccountId` refers to the loan receiving account.
+     * - Only master account applications are supported.
+     * - `loanAccountId` and `collateralAccountId` must be under the same master account.
+     * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     *
+     * @summary VIP Loan Borrow (TRADE)
      * @param {VipLoanBorrowRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<VipLoanBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/trade#vip-loan-borrow Binance API Documentation}
      */
     vipLoanBorrow(
         requestParameters: VipLoanBorrowRequest
@@ -242,17 +258,20 @@ export class RestAPI {
     /**
      * Submit a fixed rate borrow request by matching market supply orders.
      *
-     * **Rate limit:** 2 requests per second per account.
-     * When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: TRADE
      *
-     * @summary VIP Loan Fixed Rate Borrow(TRADE)
+     * Notes:
+     * - **Rate limit:** 2 requests per second per account.
+     * - When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     *
+     * @summary VIP Loan Fixed Rate Borrow (TRADE)
      * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<VipLoanFixedRateBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Fixed-Rate-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/trade#vip-loan-fixed-rate-borrow Binance API Documentation}
      */
     vipLoanFixedRateBorrow(
         requestParameters: VipLoanFixedRateBorrowRequest
@@ -263,14 +282,16 @@ export class RestAPI {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 6000
+     * Weight(UID): 6000
      *
-     * @summary VIP Loan Renew(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary VIP Loan Renew (TRADE)
      * @param {VipLoanRenewRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<VipLoanRenewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Renew Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/trade#vip-loan-renew Binance API Documentation}
      */
     vipLoanRenew(
         requestParameters: VipLoanRenewRequest
@@ -281,14 +302,16 @@ export class RestAPI {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 6000
+     * Weight(UID): 6000
      *
-     * @summary VIP Loan Repay(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary VIP Loan Repay (TRADE)
      * @param {VipLoanRepayRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<VipLoanRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/trade#vip-loan-repay Binance API Documentation}
      */
     vipLoanRepay(
         requestParameters: VipLoanRepayRequest
@@ -299,17 +322,20 @@ export class RestAPI {
     /**
      * VIP loan is available for VIP users only
      *
-     * If the login account is loan account, all collateral accounts under the loan account can be queried.
-     * If the login account is collateral account, only the current collateral account can be queried.
+     * Weight(IP): 6000
      *
-     * Weight: 6000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the logged-in account is a borrowing account, all collateral accounts bound to that borrowing account can be queried.
+     * - If the logged-in account is a collateral account, only collateral assets under that account can be queried.
      *
      * @summary Check VIP Loan Collateral Account (USER_DATA)
      * @param {CheckVIPLoanCollateralAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CheckVIPLoanCollateralAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Check-Locked-Value-of-VIP-Collateral-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#check-viploan-collateral-account Binance API Documentation}
      */
     checkVIPLoanCollateralAccount(
         requestParameters: CheckVIPLoanCollateralAccountRequest = {}
@@ -320,17 +346,20 @@ export class RestAPI {
     /**
      * Check VIP Loan interest record
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 90 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 90 days.
      *
      * @summary Get VIP Loan Accrued Interest (USER_DATA)
      * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetVIPLoanAccruedInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Accrued-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#get-viploan-accrued-interest Binance API Documentation}
      */
     getVIPLoanAccruedInterest(
         requestParameters: GetVIPLoanAccruedInterestRequest = {}
@@ -341,14 +370,16 @@ export class RestAPI {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get VIP Loan Ongoing Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get VIP Loan Ongoing Orders (USER_DATA)
      * @param {GetVIPLoanOngoingOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetVIPLoanOngoingOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Ongoing-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#get-viploan-ongoing-orders Binance API Documentation}
      */
     getVIPLoanOngoingOrders(
         requestParameters: GetVIPLoanOngoingOrdersRequest = {}
@@ -357,16 +388,42 @@ export class RestAPI {
     }
 
     /**
+     * VIP Loans are available only to VIP users.
+     *
+     * Weight(IP): 400
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get VIP Loan Repayment History (USER_DATA)
+     * @param {GetVIPLoanRepaymentHistoryRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetVIPLoanRepaymentHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#get-viploan-repayment-history Binance API Documentation}
+     */
+    getVIPLoanRepaymentHistory(
+        requestParameters: GetVIPLoanRepaymentHistoryRequest = {}
+    ): Promise<RestApiResponse<GetVIPLoanRepaymentHistoryResponse>> {
+        return this.userInformationApi.getVIPLoanRepaymentHistory(requestParameters);
+    }
+
+    /**
      * Query Application Status
      *
-     * Weight: 400
+     * Weight(UID): 400
      *
-     * @summary Query Application Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryApplicationStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Query-Application-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#query-application-status Binance API Documentation}
      */
     queryApplicationStatus(
         requestParameters: QueryApplicationStatusRequest = {}

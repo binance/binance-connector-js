@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance VIP Loan REST API
+ * VIP Loan REST API
  *
- * OpenAPI Specification for the Binance VIP Loan REST API
+ * Access over-collateralized loan services, manage positions, and monitor collateral via the VIP Loan API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,61 +20,61 @@
  */
 export interface VipLoanFixedRateBorrowResponse {
     /**
-     *
+     * Echo of input parameter
      * @type {string}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     borrowCoin?: string;
     /**
-     *
+     * Actual total borrow amount (aggregated when multiple supplyRequest)
      * @type {string}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     borrowAmount?: string;
     /**
-     *
+     * Actual received amount
      * @type {string}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     actualReceivedAmount?: string;
     /**
-     *
+     * Echo of input parameter, comma-separated
      * @type {string}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     collateralCoin?: string;
     /**
-     *
+     * Echo of input parameter, comma-separated
      * @type {string}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     collateralAccountId?: string;
     /**
-     *
+     * Actual borrow interest rate (weighted average when multiple)
      * @type {string}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     borrowInterestRate?: string;
     /**
-     *
+     * `{loanTerm}Days`, e.g. \"30Days\"
      * @type {string}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     duration?: string;
     /**
-     *
+     * Echo of input parameter
      * @type {boolean}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     autoRepay?: boolean;
     /**
-     *
+     * Order ID
      * @type {number | bigint}
      * @memberof VipLoanFixedRateBorrowResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * `Succeeds` / `Failed` / `Processing`
      * @type {string}
      * @memberof VipLoanFixedRateBorrowResponse
      */

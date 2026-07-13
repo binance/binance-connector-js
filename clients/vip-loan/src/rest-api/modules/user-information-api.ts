@@ -1,7 +1,7 @@
 /**
- * Binance VIP Loan REST API
+ * VIP Loan REST API
  *
- * OpenAPI Specification for the Binance VIP Loan REST API
+ * Access over-collateralized loan services, manage positions, and monitor collateral via the VIP Loan API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -22,6 +21,7 @@ import type {
     CheckVIPLoanCollateralAccountResponse,
     GetVIPLoanAccruedInterestResponse,
     GetVIPLoanOngoingOrdersResponse,
+    GetVIPLoanRepaymentHistoryResponse,
     QueryApplicationStatusResponse,
 } from '../types';
 
@@ -33,10 +33,13 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
         /**
          * VIP loan is available for VIP users only
          *
-         * If the login account is loan account, all collateral accounts under the loan account can be queried.
-         * If the login account is collateral account, only the current collateral account can be queried.
+         * Weight(IP): 6000
          *
-         * Weight: 6000
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If the logged-in account is a borrowing account, all collateral accounts bound to that borrowing account can be queried.
+         * - If the logged-in account is a collateral account, only collateral assets under that account can be queried.
          *
          * @summary Check VIP Loan Collateral Account (USER_DATA)
          * @param {number | bigint} [orderId]
@@ -79,18 +82,21 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
         /**
          * Check VIP Loan interest record
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned.
-         * The max interval between startTime and endTime is 90 days.
+         * Weight(IP): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+         * - The maximum interval between `startTime` and `endTime` is 90 days.
          *
          * @summary Get VIP Loan Accrued Interest (USER_DATA)
          * @param {number | bigint} [orderId]
          * @param {string} [loanCoin]
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Page number, default 1, minimum 1
-         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [startTime] If both startTime and endTime are omitted, the most recent 90 days are returned.
+         * @param {number | bigint} [endTime] Maximum interval between startTime and endTime is 90 days.
+         * @param {number | bigint} [current] Current page number, starting from 1.
+         * @param {number | bigint} [limit] Number of records per page.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -145,15 +151,17 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
         /**
          * VIP loan is available for VIP users only.
          *
-         * Weight: 400
+         * Weight(IP): 400
          *
-         * @summary Get VIP Loan Ongoing Orders(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get VIP Loan Ongoing Orders (USER_DATA)
          * @param {number | bigint} [orderId]
          * @param {number | bigint} [collateralAccountId]
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number | bigint} [current] Page number, default 1, minimum 1
-         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [current]
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -206,13 +214,84 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
             };
         },
         /**
+         * VIP Loans are available only to VIP users.
+         *
+         * Weight(IP): 400
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+         * - The maximum interval between `startTime` and `endTime` is 180 days.
+         *
+         * @summary Get VIP Loan Repayment History (USER_DATA)
+         * @param {number | bigint} [orderId]
+         * @param {string} [loanCoin]
+         * @param {number | bigint} [startTime] If both startTime and endTime are omitted, the most recent 90 days are returned.
+         * @param {number | bigint} [endTime] Maximum interval between startTime and endTime is 180 days.
+         * @param {number | bigint} [current] Current page number, starting from 1.
+         * @param {number | bigint} [limit] Number of records per page.
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getVIPLoanRepaymentHistory: async (
+            orderId?: number | bigint,
+            loanCoin?: string,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (orderId !== undefined && orderId !== null) {
+                localVarQueryParameter['orderId'] = orderId;
+            }
+            if (loanCoin !== undefined && loanCoin !== null) {
+                localVarQueryParameter['loanCoin'] = loanCoin;
+            }
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+            if (current !== undefined && current !== null) {
+                localVarQueryParameter['current'] = current;
+            }
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/loan/vip/repay/history',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Query Application Status
          *
-         * Weight: 400
+         * Weight(UID): 400
          *
-         * @summary Query Application Status(USER_DATA)
-         * @param {number | bigint} [current] Page number, default 1, minimum 1
-         * @param {number | bigint} [limit] Default: 10; max: 100
+         * Security Type: USER_DATA
+         *
+         * @summary Query Application Status (USER_DATA)
+         * @param {number | bigint} [current] Current page number, starting from 1.
+         * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -259,10 +338,13 @@ export interface UserInformationApiInterface {
     /**
      * VIP loan is available for VIP users only
      *
-     * If the login account is loan account, all collateral accounts under the loan account can be queried.
-     * If the login account is collateral account, only the current collateral account can be queried.
+     * Weight(IP): 6000
      *
-     * Weight: 6000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the logged-in account is a borrowing account, all collateral accounts bound to that borrowing account can be queried.
+     * - If the logged-in account is a collateral account, only collateral assets under that account can be queried.
      *
      * @summary Check VIP Loan Collateral Account (USER_DATA)
      * @param {CheckVIPLoanCollateralAccountRequest} requestParameters Request parameters.
@@ -276,10 +358,13 @@ export interface UserInformationApiInterface {
     /**
      * Check VIP Loan interest record
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 90 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 90 days.
      *
      * @summary Get VIP Loan Accrued Interest (USER_DATA)
      * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
@@ -293,9 +378,11 @@ export interface UserInformationApiInterface {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get VIP Loan Ongoing Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get VIP Loan Ongoing Orders (USER_DATA)
      * @param {GetVIPLoanOngoingOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -305,11 +392,33 @@ export interface UserInformationApiInterface {
         requestParameters?: GetVIPLoanOngoingOrdersRequest
     ): Promise<RestApiResponse<GetVIPLoanOngoingOrdersResponse>>;
     /**
+     * VIP Loans are available only to VIP users.
+     *
+     * Weight(IP): 400
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get VIP Loan Repayment History (USER_DATA)
+     * @param {GetVIPLoanRepaymentHistoryRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserInformationApiInterface
+     */
+    getVIPLoanRepaymentHistory(
+        requestParameters?: GetVIPLoanRepaymentHistoryRequest
+    ): Promise<RestApiResponse<GetVIPLoanRepaymentHistoryResponse>>;
+    /**
      * Query Application Status
      *
-     * Weight: 400
+     * Weight(UID): 400
      *
-     * @summary Query Application Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -367,28 +476,28 @@ export interface GetVIPLoanAccruedInterestRequest {
     readonly loanCoin?: string;
 
     /**
-     *
+     * If both startTime and endTime are omitted, the most recent 90 days are returned.
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanAccruedInterest
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Maximum interval between startTime and endTime is 90 days.
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanAccruedInterest
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Page number, default 1, minimum 1
+     * Current page number, starting from 1.
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanAccruedInterest
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records per page.
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanAccruedInterest
      */
@@ -436,14 +545,14 @@ export interface GetVIPLoanOngoingOrdersRequest {
     readonly collateralCoin?: string;
 
     /**
-     * Page number, default 1, minimum 1
+     *
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     *
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
@@ -458,19 +567,74 @@ export interface GetVIPLoanOngoingOrdersRequest {
 }
 
 /**
+ * Request parameters for getVIPLoanRepaymentHistory operation in UserInformationApi.
+ * @interface GetVIPLoanRepaymentHistoryRequest
+ */
+export interface GetVIPLoanRepaymentHistoryRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanRepaymentHistory
+     */
+    readonly orderId?: number | bigint;
+
+    /**
+     *
+     * @type {string}
+     * @memberof UserInformationApiGetVIPLoanRepaymentHistory
+     */
+    readonly loanCoin?: string;
+
+    /**
+     * If both startTime and endTime are omitted, the most recent 90 days are returned.
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanRepaymentHistory
+     */
+    readonly startTime?: number | bigint;
+
+    /**
+     * Maximum interval between startTime and endTime is 180 days.
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanRepaymentHistory
+     */
+    readonly endTime?: number | bigint;
+
+    /**
+     * Current page number, starting from 1.
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanRepaymentHistory
+     */
+    readonly current?: number | bigint;
+
+    /**
+     * Number of records per page.
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanRepaymentHistory
+     */
+    readonly limit?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanRepaymentHistory
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for queryApplicationStatus operation in UserInformationApi.
  * @interface QueryApplicationStatusRequest
  */
 export interface QueryApplicationStatusRequest {
     /**
-     * Page number, default 1, minimum 1
+     * Current page number, starting from 1.
      * @type {number | bigint}
      * @memberof UserInformationApiQueryApplicationStatus
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     *
      * @type {number | bigint}
      * @memberof UserInformationApiQueryApplicationStatus
      */
@@ -500,17 +664,20 @@ export class UserInformationApi implements UserInformationApiInterface {
     /**
      * VIP loan is available for VIP users only
      *
-     * If the login account is loan account, all collateral accounts under the loan account can be queried.
-     * If the login account is collateral account, only the current collateral account can be queried.
+     * Weight(IP): 6000
      *
-     * Weight: 6000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the logged-in account is a borrowing account, all collateral accounts bound to that borrowing account can be queried.
+     * - If the logged-in account is a collateral account, only collateral assets under that account can be queried.
      *
      * @summary Check VIP Loan Collateral Account (USER_DATA)
      * @param {CheckVIPLoanCollateralAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CheckVIPLoanCollateralAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserInformationApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Check-Locked-Value-of-VIP-Collateral-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#check-viploan-collateral-account Binance API Documentation}
      */
     public async checkVIPLoanCollateralAccount(
         requestParameters: CheckVIPLoanCollateralAccountRequest = {}
@@ -536,17 +703,20 @@ export class UserInformationApi implements UserInformationApiInterface {
     /**
      * Check VIP Loan interest record
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned.
-     * The max interval between startTime and endTime is 90 days.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 90 days.
      *
      * @summary Get VIP Loan Accrued Interest (USER_DATA)
      * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetVIPLoanAccruedInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserInformationApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Accrued-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#get-viploan-accrued-interest Binance API Documentation}
      */
     public async getVIPLoanAccruedInterest(
         requestParameters: GetVIPLoanAccruedInterestRequest = {}
@@ -575,14 +745,16 @@ export class UserInformationApi implements UserInformationApiInterface {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get VIP Loan Ongoing Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get VIP Loan Ongoing Orders (USER_DATA)
      * @param {GetVIPLoanOngoingOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetVIPLoanOngoingOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserInformationApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Ongoing-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#get-viploan-ongoing-orders Binance API Documentation}
      */
     public async getVIPLoanOngoingOrders(
         requestParameters: GetVIPLoanOngoingOrdersRequest = {}
@@ -609,16 +781,60 @@ export class UserInformationApi implements UserInformationApiInterface {
     }
 
     /**
+     * VIP Loans are available only to VIP users.
+     *
+     * Weight(IP): 400
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 180 days.
+     *
+     * @summary Get VIP Loan Repayment History (USER_DATA)
+     * @param {GetVIPLoanRepaymentHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetVIPLoanRepaymentHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserInformationApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#get-viploan-repayment-history Binance API Documentation}
+     */
+    public async getVIPLoanRepaymentHistory(
+        requestParameters: GetVIPLoanRepaymentHistoryRequest = {}
+    ): Promise<RestApiResponse<GetVIPLoanRepaymentHistoryResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getVIPLoanRepaymentHistory(
+            requestParameters?.orderId,
+            requestParameters?.loanCoin,
+            requestParameters?.startTime,
+            requestParameters?.endTime,
+            requestParameters?.current,
+            requestParameters?.limit,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<GetVIPLoanRepaymentHistoryResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Query Application Status
      *
-     * Weight: 400
+     * Weight(UID): 400
      *
-     * @summary Query Application Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryApplicationStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserInformationApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Query-Application-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/user-information#query-application-status Binance API Documentation}
      */
     public async queryApplicationStatus(
         requestParameters: QueryApplicationStatusRequest = {}

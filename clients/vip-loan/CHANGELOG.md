@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.0.0 - 2026-07-13
+
+### Added (1)
+
+- `getVIPLoanRepaymentHistory()` (`GET /sapi/v1/loan/vip/repay/history`)
+
 ## 9.0.1 - 2026-06-18
 
 ### Changed (2)

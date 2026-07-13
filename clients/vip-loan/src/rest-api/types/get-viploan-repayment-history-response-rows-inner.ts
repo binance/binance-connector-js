@@ -16,49 +16,49 @@
 /**
  *
  * @export
- * @interface VipLoanRepayResponse
+ * @interface GetVIPLoanRepaymentHistoryResponseRowsInner
  */
-export interface VipLoanRepayResponse {
+export interface GetVIPLoanRepaymentHistoryResponseRowsInner {
     /**
      *
      * @type {string}
-     * @memberof VipLoanRepayResponse
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
      */
     loanCoin?: string;
     /**
      *
      * @type {string}
-     * @memberof VipLoanRepayResponse
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
      */
     repayAmount?: string;
     /**
      *
      * @type {string}
-     * @memberof VipLoanRepayResponse
-     */
-    remainingPrincipal?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof VipLoanRepayResponse
-     */
-    remainingInterest?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof VipLoanRepayResponse
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
      */
     collateralCoin?: string;
     /**
-     *
-     * @type {string}
-     * @memberof VipLoanRepayResponse
-     */
-    currentLTV?: string;
-    /**
      * Repayment status (`Repaid`, `Repaying`, `Failed`).
      * @type {string}
-     * @memberof VipLoanRepayResponse
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
      */
     repayStatus?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
+     */
+    loanDate?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
+     */
+    repayTime?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
+     */
+    orderId?: string;
 }

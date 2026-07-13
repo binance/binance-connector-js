@@ -10,7 +10,7 @@ const client = new VIPLoan({ configurationRestAPI });
 async function getVIPLoanInterestRateHistory() {
     try {
         const response = await client.restAPI.getVIPLoanInterestRateHistory({
-            coin: 'coin_example',
+            coin: 'USDT',
             recvWindow: 5000,
         });
 

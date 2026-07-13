@@ -11,7 +11,7 @@ async function vipLoanRenew() {
     try {
         const response = await client.restAPI.vipLoanRenew({
             orderId: 1,
-            loanTerm: 789,
+            loanTerm: 30,
         });
 
         const rateLimits = response.rateLimits!;

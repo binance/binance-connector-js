@@ -1,7 +1,7 @@
 /**
- * Binance VIP Loan REST API
+ * VIP Loan REST API
  *
- * OpenAPI Specification for the Binance VIP Loan REST API
+ * Access over-collateralized loan services, manage positions, and monitor collateral via the VIP Loan API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -35,10 +34,12 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Borrow Interest Rate
          *
-         * Weight: 400
+         * Weight(IP): 400
          *
-         * @summary Get Borrow Interest Rate(USER_DATA)
-         * @param {string} loanCoin
+         * Security Type: USER_DATA
+         *
+         * @summary Get Borrow Interest Rate (USER_DATA)
+         * @param {string} loanCoin Max 10 assets, Multiple split by ","
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -76,9 +77,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Collateral Asset Data
          *
-         * Weight: 400
+         * Weight(IP): 400
          *
-         * @summary Get Collateral Asset Data(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Collateral Asset Data (USER_DATA)
          * @param {string} [collateralCoin]
          * @param {number | bigint} [recvWindow]
          *
@@ -114,11 +117,13 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
          *
-         * Weight: 400
+         * Weight(IP): 400
          *
-         * @summary Get Loanable Assets Data(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Loanable Assets Data (USER_DATA)
          * @param {string} [loanCoin]
-         * @param {number | bigint} [vipLevel] default:user's vip level
+         * @param {number | bigint} [vipLevel] Defaults to the user's VIP level.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -157,19 +162,22 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Check VIP Loan flexible interest rate history
          *
-         * If startTime and endTime are not sent, the recent 90-day data will be returned
-         * The max interval between startTime and end Time is 180 days.
-         * Time based on UTC+0.
+         * Weight(IP): 400
          *
-         * Weight: 400
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+         * - The maximum interval between `startTime` and `endTime` is 180 days.
+         * - Time is based on UTC+0.
          *
          * @summary Get VIP Loan Interest Rate History (USER_DATA)
          * @param {string} coin
          * @param {number | bigint} recvWindow
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Page number, default 1, minimum 1
-         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [startTime] If both startTime and endTime are omitted, the most recent 90 days are returned.
+         * @param {number | bigint} [endTime] Maximum interval between startTime and endTime is 180 days. Time is based on UTC+0.
+         * @param {number | bigint} [current] Current page number, starting from 1.
+         * @param {number | bigint} [limit] Number of records per page.
          *
          * @throws {RequiredError}
          */
@@ -224,14 +232,16 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query the VIP Loan fixed rate market. Returns a paginated list of fixed-rate supply orders.
          *
-         * Weight: 6000
+         * Weight(IP): 6000
          *
-         * @summary Query VIP Loan Fixed Rate Market(USER_DATA)
-         * @param {string} loanCoin
+         * Security Type: USER_DATA
+         *
+         * @summary Query VIP Loan Fixed Rate Market (USER_DATA)
+         * @param {string} loanCoin Loan coin
          * @param {number | bigint} [duration] Duration in days, minimum 1
          * @param {number | bigint} [current] Page number, default 1, minimum 1
          * @param {number | bigint} [size] Page size, default 10, range [1, 100]
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -288,9 +298,11 @@ export interface MarketDataApiInterface {
     /**
      * Get Borrow Interest Rate
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Borrow Interest Rate(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -302,9 +314,11 @@ export interface MarketDataApiInterface {
     /**
      * Get Collateral Asset Data
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Collateral Asset Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Collateral Asset Data (USER_DATA)
      * @param {GetCollateralAssetDataRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -316,9 +330,11 @@ export interface MarketDataApiInterface {
     /**
      * Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Loanable Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Loanable Assets Data (USER_DATA)
      * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -330,11 +346,14 @@ export interface MarketDataApiInterface {
     /**
      * Check VIP Loan flexible interest rate history
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned
-     * The max interval between startTime and end Time is 180 days.
-     * Time based on UTC+0.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 180 days.
+     * - Time is based on UTC+0.
      *
      * @summary Get VIP Loan Interest Rate History (USER_DATA)
      * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.
@@ -348,9 +367,11 @@ export interface MarketDataApiInterface {
     /**
      * Query the VIP Loan fixed rate market. Returns a paginated list of fixed-rate supply orders.
      *
-     * Weight: 6000
+     * Weight(IP): 6000
      *
-     * @summary Query VIP Loan Fixed Rate Market(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query VIP Loan Fixed Rate Market (USER_DATA)
      * @param {QueryVIPLoanFixedRateMarketRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -367,7 +388,7 @@ export interface MarketDataApiInterface {
  */
 export interface GetBorrowInterestRateRequest {
     /**
-     *
+     * Max 10 assets, Multiple split by ","
      * @type {string}
      * @memberof MarketDataApiGetBorrowInterestRate
      */
@@ -414,7 +435,7 @@ export interface GetLoanableAssetsDataRequest {
     readonly loanCoin?: string;
 
     /**
-     * default:user's vip level
+     * Defaults to the user's VIP level.
      * @type {number | bigint}
      * @memberof MarketDataApiGetLoanableAssetsData
      */
@@ -448,28 +469,28 @@ export interface GetVIPLoanInterestRateHistoryRequest {
     readonly recvWindow: number | bigint;
 
     /**
-     *
+     * If both startTime and endTime are omitted, the most recent 90 days are returned.
      * @type {number | bigint}
      * @memberof MarketDataApiGetVIPLoanInterestRateHistory
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Maximum interval between startTime and endTime is 180 days. Time is based on UTC+0.
      * @type {number | bigint}
      * @memberof MarketDataApiGetVIPLoanInterestRateHistory
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Page number, default 1, minimum 1
+     * Current page number, starting from 1.
      * @type {number | bigint}
      * @memberof MarketDataApiGetVIPLoanInterestRateHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10; max: 100
+     * Number of records per page.
      * @type {number | bigint}
      * @memberof MarketDataApiGetVIPLoanInterestRateHistory
      */
@@ -482,7 +503,7 @@ export interface GetVIPLoanInterestRateHistoryRequest {
  */
 export interface QueryVIPLoanFixedRateMarketRequest {
     /**
-     *
+     * Loan coin
      * @type {string}
      * @memberof MarketDataApiQueryVIPLoanFixedRateMarket
      */
@@ -510,7 +531,7 @@ export interface QueryVIPLoanFixedRateMarketRequest {
     readonly size?: number | bigint;
 
     /**
-     *
+     * The value cannot be greater than `60000`
      * @type {number | bigint}
      * @memberof MarketDataApiQueryVIPLoanFixedRateMarket
      */
@@ -533,14 +554,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get Borrow Interest Rate
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Borrow Interest Rate(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBorrowInterestRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-Borrow-Interest-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#get-borrow-interest-rate Binance API Documentation}
      */
     public async getBorrowInterestRate(
         requestParameters: GetBorrowInterestRateRequest
@@ -564,14 +587,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get Collateral Asset Data
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Collateral Asset Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Collateral Asset Data (USER_DATA)
      * @param {GetCollateralAssetDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCollateralAssetDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-Collateral-Asset-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#get-collateral-asset-data Binance API Documentation}
      */
     public async getCollateralAssetData(
         requestParameters: GetCollateralAssetDataRequest = {}
@@ -595,14 +620,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
      *
-     * Weight: 400
+     * Weight(IP): 400
      *
-     * @summary Get Loanable Assets Data(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Loanable Assets Data (USER_DATA)
      * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLoanableAssetsDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-Loanable-Assets-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#get-loanable-assets-data Binance API Documentation}
      */
     public async getLoanableAssetsData(
         requestParameters: GetLoanableAssetsDataRequest = {}
@@ -627,18 +654,21 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Check VIP Loan flexible interest rate history
      *
-     * If startTime and endTime are not sent, the recent 90-day data will be returned
-     * The max interval between startTime and end Time is 180 days.
-     * Time based on UTC+0.
+     * Weight(IP): 400
      *
-     * Weight: 400
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
+     * - The maximum interval between `startTime` and `endTime` is 180 days.
+     * - Time is based on UTC+0.
      *
      * @summary Get VIP Loan Interest Rate History (USER_DATA)
      * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetVIPLoanInterestRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-VIP-Loan-Interest-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#get-viploan-interest-rate-history Binance API Documentation}
      */
     public async getVIPLoanInterestRateHistory(
         requestParameters: GetVIPLoanInterestRateHistoryRequest
@@ -667,14 +697,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query the VIP Loan fixed rate market. Returns a paginated list of fixed-rate supply orders.
      *
-     * Weight: 6000
+     * Weight(IP): 6000
      *
-     * @summary Query VIP Loan Fixed Rate Market(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query VIP Loan Fixed Rate Market (USER_DATA)
      * @param {QueryVIPLoanFixedRateMarketRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryVIPLoanFixedRateMarketResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Query-VIP-Loan-Fixed-Rate-Market Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/market-data#query-viploan-fixed-rate-market Binance API Documentation}
      */
     public async queryVIPLoanFixedRateMarket(
         requestParameters: QueryVIPLoanFixedRateMarketRequest

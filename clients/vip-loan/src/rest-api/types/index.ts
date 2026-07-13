@@ -12,6 +12,8 @@ export * from './get-viploan-interest-rate-history-response';
 export * from './get-viploan-interest-rate-history-response-rows-inner';
 export * from './get-viploan-ongoing-orders-response';
 export * from './get-viploan-ongoing-orders-response-rows-inner';
+export * from './get-viploan-repayment-history-response';
+export * from './get-viploan-repayment-history-response-rows-inner';
 export * from './query-application-status-response';
 export * from './query-application-status-response-rows-inner';
 export * from './query-viploan-fixed-rate-market-response';

@@ -11,10 +11,10 @@ async function vipLoanBorrow() {
     try {
         const response = await client.restAPI.vipLoanBorrow({
             loanAccountId: 1,
-            loanCoin: 'loanCoin_example',
+            loanCoin: 'BTC',
             loanAmount: 1.0,
-            collateralAccountId: '1',
-            collateralCoin: 'collateralCoin_example',
+            collateralAccountId: '12345678,12345678,12345678',
+            collateralCoin: 'BUSD,USDT,ETH',
             isFlexibleRate: true,
         });
 

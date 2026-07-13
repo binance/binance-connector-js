@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance VIP Loan REST API
+ * VIP Loan REST API
  *
- * OpenAPI Specification for the Binance VIP Loan REST API
+ * Access over-collateralized loan services, manage positions, and monitor collateral via the VIP Loan API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,13 +25,13 @@ import type { QueryVIPLoanFixedRateMarketResponseRowsInner } from './query-viplo
  */
 export interface QueryVIPLoanFixedRateMarketResponse {
     /**
-     *
+     * Total number of records
      * @type {number | bigint}
      * @memberof QueryVIPLoanFixedRateMarketResponse
      */
     total?: number | bigint;
     /**
-     *
+     * Current page data
      * @type {Array<QueryVIPLoanFixedRateMarketResponseRowsInner>}
      * @memberof QueryVIPLoanFixedRateMarketResponse
      */

@@ -1,7 +1,7 @@
 /**
- * Binance VIP Loan REST API
+ * VIP Loan REST API
  *
- * OpenAPI Specification for the Binance VIP Loan REST API
+ * Access over-collateralized loan services, manage positions, and monitor collateral via the VIP Loan API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -34,21 +33,24 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * VIP loan is available for VIP users only.
          *
-         * loanAccountId refer to loan receiving account
-         * Only master account applications are supported
-         * loanAccountId and collateralAccountId under same master account
-         * loanTerm is mandatory if user choose stable rate
+         * Weight(UID): 6000
          *
-         * Weight: 0
+         * Security Type: TRADE
          *
-         * @summary VIP Loan Borrow(TRADE)
+         * Notes:
+         * - `loanAccountId` refers to the loan receiving account.
+         * - Only master account applications are supported.
+         * - `loanAccountId` and `collateralAccountId` must be under the same master account.
+         * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+         *
+         * @summary VIP Loan Borrow (TRADE)
          * @param {number | bigint} loanAccountId
          * @param {string} loanCoin
          * @param {number} loanAmount
-         * @param {string} collateralAccountId Multiple split by `,`
-         * @param {string} collateralCoin Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
-         * @param {boolean} isFlexibleRate Default: TRUE. TRUE : flexible rate; FALSE: fixed rate
-         * @param {number | bigint} [loanTerm] Mandatory for fixed rate. Optional for fixed interest rate. Eg: 30/60 days
+         * @param {string} collateralAccountId Collateral account ID(s). Multiple split by `,`
+         * @param {string} collateralCoin
+         * @param {boolean} isFlexibleRate TRUE: flexible rate; FALSE: fixed rate
+         * @param {number | bigint} [loanTerm] Mandatory for fixed rate. Optional for flexible rate. e.g. 30/60 days
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -120,20 +122,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Submit a fixed rate borrow request by matching market supply orders.
          *
-         * **Rate limit:** 2 requests per second per account.
-         * When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+         * Weight(UID): 6000
          *
-         * Weight: 6000
+         * Security Type: TRADE
          *
-         * @summary VIP Loan Fixed Rate Borrow(TRADE)
+         * Notes:
+         * - **Rate limit:** 2 requests per second per account.
+         * - When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+         *
+         * @summary VIP Loan Fixed Rate Borrow (TRADE)
          * @param {string} supplyRequest Supply request string, positional encoding (no key). Multiple entries separated by `;`, fields separated by `:`, order: `<requestId>:<interestRate>:<amount>`. Example: `1212:0.12:100;3434:0.13:50`
          * @param {string} borrowCoin Borrow coin
-         * @param {number | bigint} loanTerm 30/60 days
+         * @param {number | bigint} loanTerm Loan term in days
          * @param {number | bigint} borrowUid Borrow receiving account UID
          * @param {string} collateralCoin Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
-         * @param {string} collateralAccountId Multiple split by `,`
+         * @param {string} collateralAccountId Collateral account ID(s), multiple separated by `,`
          * @param {boolean} [autoRepay] Default: `true`. `true`: auto repay at expiration; `false`: auto-convert to flexible (floating rate) at expiration
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -204,9 +209,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * VIP loan is available for VIP users only.
          *
-         * Weight: 6000
+         * Weight(UID): 6000
          *
-         * @summary VIP Loan Renew(TRADE)
+         * Security Type: TRADE
+         *
+         * @summary VIP Loan Renew (TRADE)
          * @param {number | bigint} orderId
          * @param {number | bigint} loanTerm 30/60 days
          * @param {number | bigint} [recvWindow]
@@ -252,9 +259,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * VIP loan is available for VIP users only.
          *
-         * Weight: 6000
+         * Weight(UID): 6000
          *
-         * @summary VIP Loan Repay(TRADE)
+         * Security Type: TRADE
+         *
+         * @summary VIP Loan Repay (TRADE)
          * @param {number | bigint} orderId
          * @param {number} amount
          * @param {number | bigint} [recvWindow]
@@ -308,14 +317,17 @@ export interface TradeApiInterface {
     /**
      * VIP loan is available for VIP users only.
      *
-     * loanAccountId refer to loan receiving account
-     * Only master account applications are supported
-     * loanAccountId and collateralAccountId under same master account
-     * loanTerm is mandatory if user choose stable rate
+     * Weight(UID): 6000
      *
-     * Weight: 0
+     * Security Type: TRADE
      *
-     * @summary VIP Loan Borrow(TRADE)
+     * Notes:
+     * - `loanAccountId` refers to the loan receiving account.
+     * - Only master account applications are supported.
+     * - `loanAccountId` and `collateralAccountId` must be under the same master account.
+     * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     *
+     * @summary VIP Loan Borrow (TRADE)
      * @param {VipLoanBorrowRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -327,12 +339,15 @@ export interface TradeApiInterface {
     /**
      * Submit a fixed rate borrow request by matching market supply orders.
      *
-     * **Rate limit:** 2 requests per second per account.
-     * When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: TRADE
      *
-     * @summary VIP Loan Fixed Rate Borrow(TRADE)
+     * Notes:
+     * - **Rate limit:** 2 requests per second per account.
+     * - When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     *
+     * @summary VIP Loan Fixed Rate Borrow (TRADE)
      * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -344,9 +359,11 @@ export interface TradeApiInterface {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 6000
+     * Weight(UID): 6000
      *
-     * @summary VIP Loan Renew(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary VIP Loan Renew (TRADE)
      * @param {VipLoanRenewRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -358,9 +375,11 @@ export interface TradeApiInterface {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 6000
+     * Weight(UID): 6000
      *
-     * @summary VIP Loan Repay(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary VIP Loan Repay (TRADE)
      * @param {VipLoanRepayRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -398,28 +417,28 @@ export interface VipLoanBorrowRequest {
     readonly loanAmount: number;
 
     /**
-     * Multiple split by `,`
+     * Collateral account ID(s). Multiple split by `,`
      * @type {string}
      * @memberof TradeApiVipLoanBorrow
      */
     readonly collateralAccountId: string;
 
     /**
-     * Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
+     *
      * @type {string}
      * @memberof TradeApiVipLoanBorrow
      */
     readonly collateralCoin: string;
 
     /**
-     * Default: TRUE. TRUE : flexible rate; FALSE: fixed rate
+     * TRUE: flexible rate; FALSE: fixed rate
      * @type {boolean}
      * @memberof TradeApiVipLoanBorrow
      */
     readonly isFlexibleRate: boolean;
 
     /**
-     * Mandatory for fixed rate. Optional for fixed interest rate. Eg: 30/60 days
+     * Mandatory for fixed rate. Optional for flexible rate. e.g. 30/60 days
      * @type {number | bigint}
      * @memberof TradeApiVipLoanBorrow
      */
@@ -453,7 +472,7 @@ export interface VipLoanFixedRateBorrowRequest {
     readonly borrowCoin: string;
 
     /**
-     * 30/60 days
+     * Loan term in days
      * @type {number | bigint}
      * @memberof TradeApiVipLoanFixedRateBorrow
      */
@@ -474,7 +493,7 @@ export interface VipLoanFixedRateBorrowRequest {
     readonly collateralCoin: string;
 
     /**
-     * Multiple split by `,`
+     * Collateral account ID(s), multiple separated by `,`
      * @type {string}
      * @memberof TradeApiVipLoanFixedRateBorrow
      */
@@ -488,7 +507,7 @@ export interface VipLoanFixedRateBorrowRequest {
     readonly autoRepay?: boolean;
 
     /**
-     *
+     * The value cannot be greater than `60000`
      * @type {number | bigint}
      * @memberof TradeApiVipLoanFixedRateBorrow
      */
@@ -565,19 +584,22 @@ export class TradeApi implements TradeApiInterface {
     /**
      * VIP loan is available for VIP users only.
      *
-     * loanAccountId refer to loan receiving account
-     * Only master account applications are supported
-     * loanAccountId and collateralAccountId under same master account
-     * loanTerm is mandatory if user choose stable rate
+     * Weight(UID): 6000
      *
-     * Weight: 0
+     * Security Type: TRADE
      *
-     * @summary VIP Loan Borrow(TRADE)
+     * Notes:
+     * - `loanAccountId` refers to the loan receiving account.
+     * - Only master account applications are supported.
+     * - `loanAccountId` and `collateralAccountId` must be under the same master account.
+     * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     *
+     * @summary VIP Loan Borrow (TRADE)
      * @param {VipLoanBorrowRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<VipLoanBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/trade#vip-loan-borrow Binance API Documentation}
      */
     public async vipLoanBorrow(
         requestParameters: VipLoanBorrowRequest
@@ -607,17 +629,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Submit a fixed rate borrow request by matching market supply orders.
      *
-     * **Rate limit:** 2 requests per second per account.
-     * When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     * Weight(UID): 6000
      *
-     * Weight: 6000
+     * Security Type: TRADE
      *
-     * @summary VIP Loan Fixed Rate Borrow(TRADE)
+     * Notes:
+     * - **Rate limit:** 2 requests per second per account.
+     * - When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     *
+     * @summary VIP Loan Fixed Rate Borrow (TRADE)
      * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<VipLoanFixedRateBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Fixed-Rate-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/trade#vip-loan-fixed-rate-borrow Binance API Documentation}
      */
     public async vipLoanFixedRateBorrow(
         requestParameters: VipLoanFixedRateBorrowRequest
@@ -647,14 +672,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 6000
+     * Weight(UID): 6000
      *
-     * @summary VIP Loan Renew(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary VIP Loan Renew (TRADE)
      * @param {VipLoanRenewRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<VipLoanRenewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Renew Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/trade#vip-loan-renew Binance API Documentation}
      */
     public async vipLoanRenew(
         requestParameters: VipLoanRenewRequest
@@ -679,14 +706,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * VIP loan is available for VIP users only.
      *
-     * Weight: 6000
+     * Weight(UID): 6000
      *
-     * @summary VIP Loan Repay(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary VIP Loan Repay (TRADE)
      * @param {VipLoanRepayRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<VipLoanRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-vip-loan/api/rest-api/trade#vip-loan-repay Binance API Documentation}
      */
     public async vipLoanRepay(
         requestParameters: VipLoanRepayRequest

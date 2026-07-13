@@ -1,7 +1,7 @@
 /**
- * Binance VIP Loan REST API
+ * VIP Loan REST API
  *
- * OpenAPI Specification for the Binance VIP Loan REST API
+ * Access over-collateralized loan services, manage positions, and monitor collateral via the VIP Loan API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,12 +20,14 @@ import {
     CheckVIPLoanCollateralAccountRequest,
     GetVIPLoanAccruedInterestRequest,
     GetVIPLoanOngoingOrdersRequest,
+    GetVIPLoanRepaymentHistoryRequest,
     QueryApplicationStatusRequest,
 } from '../../../src/rest-api';
 import type {
     CheckVIPLoanCollateralAccountResponse,
     GetVIPLoanAccruedInterestResponse,
     GetVIPLoanOngoingOrdersResponse,
+    GetVIPLoanRepaymentHistoryResponse,
     QueryApplicationStatusResponse,
 } from '../../../src/rest-api/types';
 
@@ -47,10 +49,7 @@ describe('UserInformationApi', () => {
         it('should execute checkVIPLoanCollateralAccount() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
-                    rows: [
-                        { collateralAccountId: '12345678', collateralCoin: 'BNB,BTC,ETH' },
-                        { collateralAccountId: '23456789', collateralCoin: 'BNB,BTC,ETH' },
-                    ],
+                    rows: [{ collateralAccountId: '12345678', collateralCoin: 'BNB,BTC,ETH' }],
                     total: 2,
                 })
             );
@@ -78,10 +77,7 @@ describe('UserInformationApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    rows: [
-                        { collateralAccountId: '12345678', collateralCoin: 'BNB,BTC,ETH' },
-                        { collateralAccountId: '23456789', collateralCoin: 'BNB,BTC,ETH' },
-                    ],
+                    rows: [{ collateralAccountId: '12345678', collateralCoin: 'BNB,BTC,ETH' }],
                     total: 2,
                 })
             );
@@ -153,7 +149,7 @@ describe('UserInformationApi', () => {
         it('should execute getVIPLoanAccruedInterest() successfully with optional parameters', async () => {
             const params: GetVIPLoanAccruedInterestRequest = {
                 orderId: 1,
-                loanCoin: 'loanCoin_example',
+                loanCoin: 'BTC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -252,8 +248,8 @@ describe('UserInformationApi', () => {
             const params: GetVIPLoanOngoingOrdersRequest = {
                 orderId: 1,
                 collateralAccountId: 1,
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
+                loanCoin: 'BUSD',
+                collateralCoin: 'BNB,BTC,ETH',
                 current: 1,
                 limit: 10,
                 recvWindow: 5000,
@@ -310,6 +306,99 @@ describe('UserInformationApi', () => {
                 .spyOn(client, 'getVIPLoanOngoingOrders')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getVIPLoanOngoingOrders()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getVIPLoanRepaymentHistory()', () => {
+        it('should execute getVIPLoanRepaymentHistory() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            repayAmount: '10000',
+                            collateralCoin: 'BNB,BTC,ETH',
+                            repayStatus: 'Repaid',
+                            loanDate: '1676851200000',
+                            repayTime: '1575018510000',
+                            orderId: '756783308056935434',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getVIPLoanRepaymentHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetVIPLoanRepaymentHistoryResponse>)
+            );
+            const response = await client.getVIPLoanRepaymentHistory();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getVIPLoanRepaymentHistory() successfully with optional parameters', async () => {
+            const params: GetVIPLoanRepaymentHistoryRequest = {
+                orderId: 1,
+                loanCoin: 'BUSD',
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                current: 1,
+                limit: 10,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            repayAmount: '10000',
+                            collateralCoin: 'BNB,BTC,ETH',
+                            repayStatus: 'Repaid',
+                            loanDate: '1676851200000',
+                            repayTime: '1575018510000',
+                            orderId: '756783308056935434',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getVIPLoanRepaymentHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetVIPLoanRepaymentHistoryResponse>)
+            );
+            const response = await client.getVIPLoanRepaymentHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getVIPLoanRepaymentHistory')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getVIPLoanRepaymentHistory()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

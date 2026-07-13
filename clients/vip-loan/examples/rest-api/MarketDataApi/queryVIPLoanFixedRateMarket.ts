@@ -10,7 +10,7 @@ const client = new VIPLoan({ configurationRestAPI });
 async function queryVIPLoanFixedRateMarket() {
     try {
         const response = await client.restAPI.queryVIPLoanFixedRateMarket({
-            loanCoin: 'loanCoin_example',
+            loanCoin: 'USDT',
         });
 
         const rateLimits = response.rateLimits!;
