@@ -1,7 +1,7 @@
 /**
- * Binance C2C REST API
+ * C2C REST API
  *
- * OpenAPI Specification for the Binance C2C REST API
+ * Query fiat transaction history via the C2C REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -21,36 +20,37 @@ import {
 import type { GetC2CTradeHistoryResponse } from '../types';
 
 /**
- * C2CApi - axios parameter creator
+ * Api - axios parameter creator
  */
-const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
+const ApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
          * Get C2C Trade History
          *
-         * The max interval between startTimestamp and endTimestamp is 30 days.
-         * If startTimestamp and endTimestamp are not sent, the recent 30 days' data will be returned.
-         * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The max interval between `startTimestamp` and `endTimestamp` is 30 days.
+         * - If `startTimestamp` and `endTimestamp` are not sent, the recent 30 days' data is returned.
+         * - You can only view data from the past 6 months. For all C2C orders, check `https://c2c.binance.com/en/fiatOrder`.
          *
          * @summary Get C2C Trade History (USER_DATA)
-         * @param {string} [tradeType] BUY, SELL
+         * @param {GetC2CTradeHistoryTradeTypeEnum} [tradeType] Trade side filter
          * @param {number | bigint} [startTimestamp]
          * @param {number | bigint} [endTimestamp]
-         * @param {number | bigint} [page] Default 1
-         * @param {number | bigint} [rows] default 100, max 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [page] Page number
+         * @param {number | bigint} [rows] Number of records per page
          *
          * @throws {RequiredError}
          */
         getC2CTradeHistory: async (
-            tradeType?: string,
+            tradeType?: GetC2CTradeHistoryTradeTypeEnum,
             startTimestamp?: number | bigint,
             endTimestamp?: number | bigint,
             page?: number | bigint,
-            rows?: number | bigint,
-            recvWindow?: number | bigint
+            rows?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
@@ -71,9 +71,6 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
             if (rows !== undefined && rows !== null) {
                 localVarQueryParameter['rows'] = rows;
             }
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -91,24 +88,27 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
 };
 
 /**
- * C2CApi - interface
- * @interface C2CApi
+ * Api - interface
+ * @interface Api
  */
-export interface C2CApiInterface {
+export interface ApiInterface {
     /**
      * Get C2C Trade History
      *
-     * The max interval between startTimestamp and endTimestamp is 30 days.
-     * If startTimestamp and endTimestamp are not sent, the recent 30 days' data will be returned.
-     * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The max interval between `startTimestamp` and `endTimestamp` is 30 days.
+     * - If `startTimestamp` and `endTimestamp` are not sent, the recent 30 days' data is returned.
+     * - You can only view data from the past 6 months. For all C2C orders, check `https://c2c.binance.com/en/fiatOrder`.
      *
      * @summary Get C2C Trade History (USER_DATA)
      * @param {GetC2CTradeHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof C2CApiInterface
+     * @memberof ApiInterface
      */
     getC2CTradeHistory(
         requestParameters?: GetC2CTradeHistoryRequest
@@ -116,81 +116,77 @@ export interface C2CApiInterface {
 }
 
 /**
- * Request parameters for getC2CTradeHistory operation in C2CApi.
+ * Request parameters for getC2CTradeHistory operation in Api.
  * @interface GetC2CTradeHistoryRequest
  */
 export interface GetC2CTradeHistoryRequest {
     /**
-     * BUY, SELL
-     * @type {string}
-     * @memberof C2CApiGetC2CTradeHistory
+     * Trade side filter
+     * @type {'BUY' | 'SELL'}
+     * @memberof ApiGetC2CTradeHistory
      */
-    readonly tradeType?: string;
+    readonly tradeType?: GetC2CTradeHistoryTradeTypeEnum;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof C2CApiGetC2CTradeHistory
+     * @memberof ApiGetC2CTradeHistory
      */
     readonly startTimestamp?: number | bigint;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof C2CApiGetC2CTradeHistory
+     * @memberof ApiGetC2CTradeHistory
      */
     readonly endTimestamp?: number | bigint;
 
     /**
-     * Default 1
+     * Page number
      * @type {number | bigint}
-     * @memberof C2CApiGetC2CTradeHistory
+     * @memberof ApiGetC2CTradeHistory
      */
     readonly page?: number | bigint;
 
     /**
-     * default 100, max 100
+     * Number of records per page
      * @type {number | bigint}
-     * @memberof C2CApiGetC2CTradeHistory
+     * @memberof ApiGetC2CTradeHistory
      */
     readonly rows?: number | bigint;
-
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof C2CApiGetC2CTradeHistory
-     */
-    readonly recvWindow?: number | bigint;
 }
 
 /**
- * C2CApi - object-oriented interface
- * @class C2CApi
+ * Api - object-oriented interface
+ * @class Api
  */
-export class C2CApi implements C2CApiInterface {
+export class Api implements ApiInterface {
     private readonly configuration: ConfigurationRestAPI;
     private localVarAxiosParamCreator;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.localVarAxiosParamCreator = C2CApiAxiosParamCreator(configuration);
+        this.localVarAxiosParamCreator = ApiAxiosParamCreator(configuration);
     }
 
     /**
      * Get C2C Trade History
      *
-     * The max interval between startTimestamp and endTimestamp is 30 days.
-     * If startTimestamp and endTimestamp are not sent, the recent 30 days' data will be returned.
-     * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The max interval between `startTimestamp` and `endTimestamp` is 30 days.
+     * - If `startTimestamp` and `endTimestamp` are not sent, the recent 30 days' data is returned.
+     * - You can only view data from the past 6 months. For all C2C orders, check `https://c2c.binance.com/en/fiatOrder`.
      *
      * @summary Get C2C Trade History (USER_DATA)
      * @param {GetC2CTradeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetC2CTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof C2CApi
-     * @see {@link https://developers.binance.com/docs/c2c/rest-api/Get-C2C-Trade-History Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-c2-c/api/rest-api/~#get-c2-ctrade-history Binance API Documentation}
      */
     public async getC2CTradeHistory(
         requestParameters: GetC2CTradeHistoryRequest = {}
@@ -200,8 +196,7 @@ export class C2CApi implements C2CApiInterface {
             requestParameters?.startTimestamp,
             requestParameters?.endTimestamp,
             requestParameters?.page,
-            requestParameters?.rows,
-            requestParameters?.recvWindow
+            requestParameters?.rows
         );
         return sendRequest<GetC2CTradeHistoryResponse>(
             this.configuration,
@@ -211,7 +206,12 @@ export class C2CApi implements C2CApiInterface {
             localVarAxiosArgs.bodyParams,
             localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
+            { isSigned: false }
         );
     }
+}
+
+export enum GetC2CTradeHistoryTradeTypeEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
 }

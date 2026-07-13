@@ -1,5 +1,41 @@
 # Changelog
 
+## 6.0.0 - 2026-07-13
+
+### Changed (3)
+
+- Deleted parameter `recvWindow`
+  - affected methods:
+    - `getC2CTradeHistory()` (`GET /sapi/v1/c2c/orderMatch/listUserOrderHistory`)
+- Modified parameter `tradeType`:
+  - enum added: `BUY`, `SELL`
+  - affected methods:
+    - `getC2CTradeHistory()` (`GET /sapi/v1/c2c/orderMatch/listUserOrderHistory`)
+- Modified response for `getC2CTradeHistory()` (`GET /sapi/v1/c2c/orderMatch/listUserOrderHistory`):
+  - property `data` added
+  - property `message` added
+  - property `success` added
+  - property `total` added
+  - property `code` added
+  - property `orderStatus` deleted
+  - property `tradeType` deleted
+  - property `amount` deleted
+  - property `asset` deleted
+  - property `fiatSymbol` deleted
+  - property `advNo` deleted
+  - property `fiat` deleted
+  - property `orderNumber` deleted
+  - property `takerCommissionRate` deleted
+  - property `takerAmount` deleted
+  - property `commission` deleted
+  - property `takerCommission` deleted
+  - property `createTime` deleted
+  - property `totalPrice` deleted
+  - property `counterPartNickName` deleted
+  - property `unitPrice` deleted
+  - property `additionalKycVerify` deleted
+  - property `payMethodName` deleted
+
 ## 5.0.4 - 2026-06-18
 
 ### Changed (2)

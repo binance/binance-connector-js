@@ -1,7 +1,7 @@
 /**
- * Binance C2C REST API
+ * C2C REST API
  *
- * OpenAPI Specification for the Binance C2C REST API
+ * Query fiat transaction history via the C2C REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -12,19 +12,19 @@
  */
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
-import { C2CApi } from './modules/c2-capi';
+import { Api } from './modules/api';
 
-import type { GetC2CTradeHistoryRequest } from './modules/c2-capi';
+import type { GetC2CTradeHistoryRequest } from './modules/api';
 
 import type { GetC2CTradeHistoryResponse } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
-    private c2CApi: C2CApi;
+    private api: Api;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.c2CApi = new C2CApi(configuration);
+        this.api = new Api(configuration);
     }
 
     /**
@@ -83,22 +83,25 @@ export class RestAPI {
     /**
      * Get C2C Trade History
      *
-     * The max interval between startTimestamp and endTimestamp is 30 days.
-     * If startTimestamp and endTimestamp are not sent, the recent 30 days' data will be returned.
-     * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The max interval between `startTimestamp` and `endTimestamp` is 30 days.
+     * - If `startTimestamp` and `endTimestamp` are not sent, the recent 30 days' data is returned.
+     * - You can only view data from the past 6 months. For all C2C orders, check `https://c2c.binance.com/en/fiatOrder`.
      *
      * @summary Get C2C Trade History (USER_DATA)
      * @param {GetC2CTradeHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetC2CTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/c2c/rest-api/Get-C2C-Trade-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-c2-c/api/rest-api/~#get-c2-ctrade-history Binance API Documentation}
      */
     getC2CTradeHistory(
         requestParameters: GetC2CTradeHistoryRequest = {}
     ): Promise<RestApiResponse<GetC2CTradeHistoryResponse>> {
-        return this.c2CApi.getC2CTradeHistory(requestParameters);
+        return this.api.getC2CTradeHistory(requestParameters);
     }
 }

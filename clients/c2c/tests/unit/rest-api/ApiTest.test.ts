@@ -1,7 +1,7 @@
 /**
- * Binance C2C REST API
+ * C2C REST API
  *
- * OpenAPI Specification for the Binance C2C REST API
+ * Query fiat transaction history via the C2C REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,12 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { C2CApi } from '../../../src/rest-api';
+import { Api, GetC2CTradeHistoryTradeTypeEnum } from '../../../src/rest-api';
 import { GetC2CTradeHistoryRequest } from '../../../src/rest-api';
 import type { GetC2CTradeHistoryResponse } from '../../../src/rest-api/types';
 
-describe('C2CApi', () => {
-    let client: C2CApi;
+describe('Api', () => {
+    let client: Api;
     let config: ConfigurationRestAPI;
     let mockResponse: object = {};
 
@@ -30,31 +30,40 @@ describe('C2CApi', () => {
             apiSecret: 'test-api-secret',
             basePath: '',
         });
-        client = new C2CApi(config);
+        client = new Api(config);
     });
 
     describe('getC2CTradeHistory()', () => {
         it('should execute getC2CTradeHistory() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
-                    orderNumber: '20219644646554779648',
-                    advNo: '11218246497340923904',
-                    tradeType: 'SELL',
-                    asset: 'USDT',
-                    fiat: 'CNY',
-                    fiatSymbol: '¥',
-                    amount: '343.40000000',
-                    totalPrice: '2500.00000000',
-                    unitPrice: '7.28',
-                    orderStatus: 'COMPLETED',
-                    createTime: 1722997599534,
-                    commission: '0',
-                    takerCommissionRate: '0',
-                    takerCommission: '0',
-                    takerAmount: '343.4',
-                    counterPartNickName: 'aaa-***',
-                    payMethodName: 'BANK',
-                    additionalKycVerify: 0,
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        {
+                            orderNumber: '20219644646554779648',
+                            advNo: '11218246497340923904',
+                            tradeType: 'SELL',
+                            asset: 'BUSD',
+                            fiat: 'CNY',
+                            fiatSymbol: '￥',
+                            amount: '5000.00000000',
+                            totalPrice: '33400.00000000',
+                            unitPrice: '6.68',
+                            orderStatus: 'COMPLETED',
+                            createTime: 1619361369000,
+                            commission: '0',
+                            counterPartNickName: '阿涛❤***',
+                            payMethodName: 'BANK',
+                            additionalKycVerify: 0,
+                            takerCommissionRate: '0',
+                            takerCommission: '0',
+                            takerAmount: '343.4',
+                            advertisementRole: 'TAKER',
+                        },
+                    ],
+                    total: 1,
+                    success: true,
                 })
             );
 
@@ -74,34 +83,42 @@ describe('C2CApi', () => {
 
         it('should execute getC2CTradeHistory() successfully with optional parameters', async () => {
             const params: GetC2CTradeHistoryRequest = {
-                tradeType: 'tradeType_example',
-                startTimestamp: 789,
-                endTimestamp: 789,
+                tradeType: GetC2CTradeHistoryTradeTypeEnum.BUY,
+                startTimestamp: 1770736694138,
+                endTimestamp: 1770736694138,
                 page: 1,
                 rows: 100,
-                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    orderNumber: '20219644646554779648',
-                    advNo: '11218246497340923904',
-                    tradeType: 'SELL',
-                    asset: 'USDT',
-                    fiat: 'CNY',
-                    fiatSymbol: '¥',
-                    amount: '343.40000000',
-                    totalPrice: '2500.00000000',
-                    unitPrice: '7.28',
-                    orderStatus: 'COMPLETED',
-                    createTime: 1722997599534,
-                    commission: '0',
-                    takerCommissionRate: '0',
-                    takerCommission: '0',
-                    takerAmount: '343.4',
-                    counterPartNickName: 'aaa-***',
-                    payMethodName: 'BANK',
-                    additionalKycVerify: 0,
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        {
+                            orderNumber: '20219644646554779648',
+                            advNo: '11218246497340923904',
+                            tradeType: 'SELL',
+                            asset: 'BUSD',
+                            fiat: 'CNY',
+                            fiatSymbol: '￥',
+                            amount: '5000.00000000',
+                            totalPrice: '33400.00000000',
+                            unitPrice: '6.68',
+                            orderStatus: 'COMPLETED',
+                            createTime: 1619361369000,
+                            commission: '0',
+                            counterPartNickName: '阿涛❤***',
+                            payMethodName: 'BANK',
+                            additionalKycVerify: 0,
+                            takerCommissionRate: '0',
+                            takerCommission: '0',
+                            takerAmount: '343.4',
+                            advertisementRole: 'TAKER',
+                        },
+                    ],
+                    total: 1,
+                    success: true,
                 })
             );
 

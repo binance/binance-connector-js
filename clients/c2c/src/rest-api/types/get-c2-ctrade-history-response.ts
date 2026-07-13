@@ -1,9 +1,10 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
- * Binance C2C REST API
+ * C2C REST API
  *
- * OpenAPI Specification for the Binance C2C REST API
+ * Query fiat transaction history via the C2C REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -13,6 +14,10 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GetC2CTradeHistoryResponseDataInner } from './get-c2-ctrade-history-response-data-inner';
+
 /**
  *
  * @export
@@ -20,111 +25,33 @@
  */
 export interface GetC2CTradeHistoryResponse {
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {string}
      * @memberof GetC2CTradeHistoryResponse
      */
-    orderNumber?: string;
+    code?: string;
     /**
-     *
+     * Response message.
      * @type {string}
      * @memberof GetC2CTradeHistoryResponse
      */
-    advNo?: string;
+    message?: string;
     /**
      *
-     * @type {string}
+     * @type {Array<GetC2CTradeHistoryResponseDataInner>}
      * @memberof GetC2CTradeHistoryResponse
      */
-    tradeType?: string;
+    data?: Array<GetC2CTradeHistoryResponseDataInner>;
     /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    asset?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    fiat?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    fiatSymbol?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    amount?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    totalPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    unitPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    orderStatus?: string;
-    /**
-     *
+     * Total number of records
      * @type {number | bigint}
      * @memberof GetC2CTradeHistoryResponse
      */
-    createTime?: number | bigint;
+    total?: number | bigint;
     /**
-     *
-     * @type {string}
+     * Whether request is successful
+     * @type {boolean}
      * @memberof GetC2CTradeHistoryResponse
      */
-    commission?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    takerCommissionRate?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    takerCommission?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    takerAmount?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    counterPartNickName?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    payMethodName?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof GetC2CTradeHistoryResponse
-     */
-    additionalKycVerify?: number | bigint;
+    success?: boolean;
 }

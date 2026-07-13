@@ -1,4 +1,4 @@
-import { C2C, C2C_REST_API_PROD_URL } from '../../../src';
+import { C2C, C2C_REST_API_PROD_URL } from '../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
