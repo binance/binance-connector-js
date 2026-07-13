@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Gift Card REST API
+ * Gift Card REST API
  *
- * OpenAPI Specification for the Binance Gift Card REST API
+ * Create, redeem, and check the value of Binance crypto gift cards.
  *
  * The version of the OpenAPI document: 1.0.0
  *

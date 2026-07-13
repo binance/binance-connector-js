@@ -10,7 +10,7 @@ const client = new GiftCard({ configurationRestAPI });
 async function redeemABinanceGiftCard() {
     try {
         const response = await client.restAPI.redeemABinanceGiftCard({
-            code: 'code_example',
+            code: '6H9EKF5ECCWFBHGE',
         });
 
         const rateLimits = response.rateLimits!;

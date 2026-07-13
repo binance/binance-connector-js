@@ -10,9 +10,9 @@ const client = new GiftCard({ configurationRestAPI });
 async function createADualTokenGiftCard() {
     try {
         const response = await client.restAPI.createADualTokenGiftCard({
-            baseToken: 'baseToken_example',
-            faceToken: 'faceToken_example',
-            baseTokenAmount: 1.0,
+            baseToken: 'BUSD',
+            faceToken: 'BNB',
+            baseTokenAmount: 1,
         });
 
         const rateLimits = response.rateLimits!;

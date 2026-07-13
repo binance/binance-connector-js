@@ -10,7 +10,7 @@ const client = new GiftCard({ configurationRestAPI });
 async function verifyBinanceGiftCardByGiftCardNumber() {
     try {
         const response = await client.restAPI.verifyBinanceGiftCardByGiftCardNumber({
-            referenceNo: 'referenceNo_example',
+            referenceNo: '0033002328060227',
         });
 
         const rateLimits = response.rateLimits!;

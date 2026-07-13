@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.0.0 - 2026-07-13
+
+### Changed (1)
+
+- Modified parameter `externalUid`:
+  - maxLength `null` → `400`
+  - affected methods:
+    - `redeemABinanceGiftCard()` (`POST /sapi/v1/giftcard/redeemCode`)
+
 ## 4.1.17 - 2026-06-18
 
 ### Changed (2)

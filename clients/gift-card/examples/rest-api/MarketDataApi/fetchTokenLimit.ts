@@ -10,7 +10,7 @@ const client = new GiftCard({ configurationRestAPI });
 async function fetchTokenLimit() {
     try {
         const response = await client.restAPI.fetchTokenLimit({
-            baseToken: 'baseToken_example',
+            baseToken: 'BUSD',
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,7 +1,7 @@
 /**
- * Binance Gift Card REST API
+ * Gift Card REST API
  *
- * OpenAPI Specification for the Binance Gift Card REST API
+ * Create, redeem, and check the value of Binance crypto gift cards.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -50,9 +50,9 @@ describe('MarketDataApi', () => {
     describe('createADualTokenGiftCard()', () => {
         it('should execute createADualTokenGiftCard() successfully with required parameters only', async () => {
             const params: CreateADualTokenGiftCardRequest = {
-                baseToken: 'baseToken_example',
-                faceToken: 'faceToken_example',
-                baseTokenAmount: 1.0,
+                baseToken: 'BUSD',
+                faceToken: 'BNB',
+                baseTokenAmount: 1,
             };
 
             mockResponse = JSONParse(
@@ -84,9 +84,9 @@ describe('MarketDataApi', () => {
 
         it('should execute createADualTokenGiftCard() successfully with optional parameters', async () => {
             const params: CreateADualTokenGiftCardRequest = {
-                baseToken: 'baseToken_example',
-                faceToken: 'faceToken_example',
-                baseTokenAmount: 1.0,
+                baseToken: 'BUSD',
+                faceToken: 'BNB',
+                baseTokenAmount: 1,
                 recvWindow: 5000,
             };
 
@@ -119,9 +119,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when baseToken is missing', async () => {
             const _params: CreateADualTokenGiftCardRequest = {
-                baseToken: 'baseToken_example',
-                faceToken: 'faceToken_example',
-                baseTokenAmount: 1.0,
+                baseToken: 'BUSD',
+                faceToken: 'BNB',
+                baseTokenAmount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.baseToken;
@@ -133,9 +133,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when faceToken is missing', async () => {
             const _params: CreateADualTokenGiftCardRequest = {
-                baseToken: 'baseToken_example',
-                faceToken: 'faceToken_example',
-                baseTokenAmount: 1.0,
+                baseToken: 'BUSD',
+                faceToken: 'BNB',
+                baseTokenAmount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.faceToken;
@@ -147,9 +147,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when baseTokenAmount is missing', async () => {
             const _params: CreateADualTokenGiftCardRequest = {
-                baseToken: 'baseToken_example',
-                faceToken: 'faceToken_example',
-                baseTokenAmount: 1.0,
+                baseToken: 'BUSD',
+                faceToken: 'BNB',
+                baseTokenAmount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.baseTokenAmount;
@@ -161,9 +161,9 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CreateADualTokenGiftCardRequest = {
-                baseToken: 'baseToken_example',
-                faceToken: 'faceToken_example',
-                baseTokenAmount: 1.0,
+                baseToken: 'BUSD',
+                faceToken: 'BNB',
+                baseTokenAmount: 1,
             };
 
             const errorResponse = {
@@ -186,8 +186,8 @@ describe('MarketDataApi', () => {
     describe('createASingleTokenGiftCard()', () => {
         it('should execute createASingleTokenGiftCard() successfully with required parameters only', async () => {
             const params: CreateASingleTokenGiftCardRequest = {
-                token: 'token_example',
-                amount: 1.0,
+                token: 'BNB',
+                amount: 1,
             };
 
             mockResponse = JSONParse(
@@ -219,8 +219,8 @@ describe('MarketDataApi', () => {
 
         it('should execute createASingleTokenGiftCard() successfully with optional parameters', async () => {
             const params: CreateASingleTokenGiftCardRequest = {
-                token: 'token_example',
-                amount: 1.0,
+                token: 'BNB',
+                amount: 1,
                 recvWindow: 5000,
             };
 
@@ -253,8 +253,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when token is missing', async () => {
             const _params: CreateASingleTokenGiftCardRequest = {
-                token: 'token_example',
-                amount: 1.0,
+                token: 'BNB',
+                amount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.token;
@@ -266,8 +266,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: CreateASingleTokenGiftCardRequest = {
-                token: 'token_example',
-                amount: 1.0,
+                token: 'BNB',
+                amount: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -279,8 +279,8 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CreateASingleTokenGiftCardRequest = {
-                token: 'token_example',
-                amount: 1.0,
+                token: 'BNB',
+                amount: 1,
             };
 
             const errorResponse = {
@@ -374,7 +374,7 @@ describe('MarketDataApi', () => {
     describe('fetchTokenLimit()', () => {
         it('should execute fetchTokenLimit() successfully with required parameters only', async () => {
             const params: FetchTokenLimitRequest = {
-                baseToken: 'baseToken_example',
+                baseToken: 'BUSD',
             };
 
             mockResponse = JSONParse(
@@ -402,7 +402,7 @@ describe('MarketDataApi', () => {
 
         it('should execute fetchTokenLimit() successfully with optional parameters', async () => {
             const params: FetchTokenLimitRequest = {
-                baseToken: 'baseToken_example',
+                baseToken: 'BUSD',
                 recvWindow: 5000,
             };
 
@@ -431,7 +431,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when baseToken is missing', async () => {
             const _params: FetchTokenLimitRequest = {
-                baseToken: 'baseToken_example',
+                baseToken: 'BUSD',
             };
             const params = Object.assign({ ..._params });
             delete params?.baseToken;
@@ -443,7 +443,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: FetchTokenLimitRequest = {
-                baseToken: 'baseToken_example',
+                baseToken: 'BUSD',
             };
 
             const errorResponse = {
@@ -464,7 +464,7 @@ describe('MarketDataApi', () => {
     describe('redeemABinanceGiftCard()', () => {
         it('should execute redeemABinanceGiftCard() successfully with required parameters only', async () => {
             const params: RedeemABinanceGiftCardRequest = {
-                code: 'code_example',
+                code: '6H9EKF5ECCWFBHGE',
             };
 
             mockResponse = JSONParse(
@@ -497,8 +497,8 @@ describe('MarketDataApi', () => {
 
         it('should execute redeemABinanceGiftCard() successfully with optional parameters', async () => {
             const params: RedeemABinanceGiftCardRequest = {
-                code: 'code_example',
-                externalUid: 'externalUid_example',
+                code: '6H9EKF5ECCWFBHGE',
+                externalUid: 'user-123',
                 recvWindow: 5000,
             };
 
@@ -532,7 +532,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when code is missing', async () => {
             const _params: RedeemABinanceGiftCardRequest = {
-                code: 'code_example',
+                code: '6H9EKF5ECCWFBHGE',
             };
             const params = Object.assign({ ..._params });
             delete params?.code;
@@ -544,7 +544,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: RedeemABinanceGiftCardRequest = {
-                code: 'code_example',
+                code: '6H9EKF5ECCWFBHGE',
             };
 
             const errorResponse = {
@@ -567,7 +567,7 @@ describe('MarketDataApi', () => {
     describe('verifyBinanceGiftCardByGiftCardNumber()', () => {
         it('should execute verifyBinanceGiftCardByGiftCardNumber() successfully with required parameters only', async () => {
             const params: VerifyBinanceGiftCardByGiftCardNumberRequest = {
-                referenceNo: 'referenceNo_example',
+                referenceNo: '0033002328060227',
             };
 
             mockResponse = JSONParse(
@@ -595,7 +595,7 @@ describe('MarketDataApi', () => {
 
         it('should execute verifyBinanceGiftCardByGiftCardNumber() successfully with optional parameters', async () => {
             const params: VerifyBinanceGiftCardByGiftCardNumberRequest = {
-                referenceNo: 'referenceNo_example',
+                referenceNo: '0033002328060227',
                 recvWindow: 5000,
             };
 
@@ -624,7 +624,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when referenceNo is missing', async () => {
             const _params: VerifyBinanceGiftCardByGiftCardNumberRequest = {
-                referenceNo: 'referenceNo_example',
+                referenceNo: '0033002328060227',
             };
             const params = Object.assign({ ..._params });
             delete params?.referenceNo;
@@ -636,7 +636,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: VerifyBinanceGiftCardByGiftCardNumberRequest = {
-                referenceNo: 'referenceNo_example',
+                referenceNo: '0033002328060227',
             };
 
             const errorResponse = {
