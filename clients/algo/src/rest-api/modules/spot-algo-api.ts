@@ -1,7 +1,7 @@
 /**
- * Binance Algo REST API
+ * Algo Trading REST API
  *
- * OpenAPI Specification for the Binance Algo REST API
+ * Programmatic access to Binance’s execution algorithms for creating and managing Spot and Futures algo orders.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -35,11 +34,13 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Cancel an open TWAP order
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Cancel Algo Order(TRADE)
-         * @param {number | bigint} algoId eg. 14511
-         * @param {number | bigint} [recvWindow]
+         * Security Type: TRADE
+         *
+         * @summary Cancel Spot Algo Order (TRADE)
+         * @param {number | bigint} algoId
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -76,10 +77,12 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Get all open SPOT TWAP orders
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Query Current Algo Open Orders(USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Query Current Spot Algo Open Orders (USER_DATA)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -109,22 +112,24 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Get all historical SPOT TWAP orders
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Query Historical Algo Orders(USER_DATA)
-         * @param {string} [symbol] Trading symbol eg. BTCUSDT
-         * @param {string} [side] BUY or SELL
+         * Security Type: USER_DATA
+         *
+         * @summary Query Historical Spot Algo Orders (USER_DATA)
+         * @param {string} [symbol] Trading symbol
+         * @param {QueryHistoricalAlgoOrdersSpotAlgoSideEnum} [side]
          * @param {number | bigint} [startTime] in milliseconds  eg.1641522717552
          * @param {number | bigint} [endTime] in milliseconds  eg.1641522526562
-         * @param {number | bigint} [page] Default is 1
-         * @param {number | bigint} [pageSize] MIN 1, MAX 100; Default 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [page] Page number
+         * @param {number | bigint} [pageSize] Records per page
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         queryHistoricalAlgoOrdersSpotAlgo: async (
             symbol?: string,
-            side?: string,
+            side?: QueryHistoricalAlgoOrdersSpotAlgoSideEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             page?: number | bigint,
@@ -172,13 +177,15 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Get respective sub orders for a specified algoId
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Query Sub Orders(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Query Spot Sub Orders (USER_DATA)
          * @param {number | bigint} algoId eg. 14511
-         * @param {number | bigint} [page] Default is 1
-         * @param {number | bigint} [pageSize] MIN 1, MAX 100; Default 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [page] Page number
+         * @param {number | bigint} [pageSize] Records per page
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -223,23 +230,28 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Place a new spot TWAP order with Algo service.
          *
-         * Total Algo open orders max allowed: `20` orders.
+         * Weight(UID): 3000
          *
-         * Weight: 3000
+         * Security Type: TRADE
          *
-         * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
+         * Notes:
+         * - Total Algo open orders max allowed: `20` orders.
+         *
+         * @summary Time-Weighted Spot Average Price(Twap) New Order (TRADE)
          * @param {string} symbol Trading symbol eg. BTCUSDT
-         * @param {string} side Trading side ( BUY or SELL )
-         * @param {number} quantity Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if you order is above the maximum notional per order.
-         * @param {number | bigint} duration Duration for TWAP orders in seconds. [300, 86400]
-         * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
+         * @param {TimeWeightedAveragePriceSpotAlgoSideEnum} side Trading side ( BUY or SELL )
+         * @param {number} quantity Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please
+         * reduce your size if you order is above the maximum notional per order.
+         * @param {number | bigint} duration Duration for TWAP orders in seconds
+         * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give
+         * default value
          * @param {number} [limitPrice] Limit price of the order; If it is not sent, will place order by market price by default
          *
          * @throws {RequiredError}
          */
         timeWeightedAveragePriceSpotAlgo: async (
             symbol: string,
-            side: string,
+            side: TimeWeightedAveragePriceSpotAlgoSideEnum,
             quantity: number,
             duration: number | bigint,
             clientAlgoId?: string,
@@ -300,9 +312,11 @@ export interface SpotAlgoApiInterface {
     /**
      * Cancel an open TWAP order
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel Algo Order(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel Spot Algo Order (TRADE)
      * @param {CancelAlgoOrderSpotAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -314,9 +328,11 @@ export interface SpotAlgoApiInterface {
     /**
      * Get all open SPOT TWAP orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Current Algo Open Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Current Spot Algo Open Orders (USER_DATA)
      * @param {QueryCurrentAlgoOpenOrdersSpotAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -328,9 +344,11 @@ export interface SpotAlgoApiInterface {
     /**
      * Get all historical SPOT TWAP orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Historical Algo Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Historical Spot Algo Orders (USER_DATA)
      * @param {QueryHistoricalAlgoOrdersSpotAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -342,9 +360,11 @@ export interface SpotAlgoApiInterface {
     /**
      * Get respective sub orders for a specified algoId
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Sub Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Spot Sub Orders (USER_DATA)
      * @param {QuerySubOrdersSpotAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -356,11 +376,14 @@ export interface SpotAlgoApiInterface {
     /**
      * Place a new spot TWAP order with Algo service.
      *
-     * Total Algo open orders max allowed: `20` orders.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
+     * Notes:
+     * - Total Algo open orders max allowed: `20` orders.
+     *
+     * @summary Time-Weighted Spot Average Price(Twap) New Order (TRADE)
      * @param {TimeWeightedAveragePriceSpotAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -377,14 +400,14 @@ export interface SpotAlgoApiInterface {
  */
 export interface CancelAlgoOrderSpotAlgoRequest {
     /**
-     * eg. 14511
+     *
      * @type {number | bigint}
      * @memberof SpotAlgoApiCancelAlgoOrderSpotAlgo
      */
     readonly algoId: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof SpotAlgoApiCancelAlgoOrderSpotAlgo
      */
@@ -397,7 +420,7 @@ export interface CancelAlgoOrderSpotAlgoRequest {
  */
 export interface QueryCurrentAlgoOpenOrdersSpotAlgoRequest {
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof SpotAlgoApiQueryCurrentAlgoOpenOrdersSpotAlgo
      */
@@ -410,18 +433,18 @@ export interface QueryCurrentAlgoOpenOrdersSpotAlgoRequest {
  */
 export interface QueryHistoricalAlgoOrdersSpotAlgoRequest {
     /**
-     * Trading symbol eg. BTCUSDT
+     * Trading symbol
      * @type {string}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
     readonly symbol?: string;
 
     /**
-     * BUY or SELL
-     * @type {string}
+     *
+     * @type {'BUY' | 'SELL'}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
-    readonly side?: string;
+    readonly side?: QueryHistoricalAlgoOrdersSpotAlgoSideEnum;
 
     /**
      * in milliseconds  eg.1641522717552
@@ -438,21 +461,21 @@ export interface QueryHistoricalAlgoOrdersSpotAlgoRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default is 1
+     * Page number
      * @type {number | bigint}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
     readonly page?: number | bigint;
 
     /**
-     * MIN 1, MAX 100; Default 100
+     * Records per page
      * @type {number | bigint}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
@@ -472,21 +495,21 @@ export interface QuerySubOrdersSpotAlgoRequest {
     readonly algoId: number | bigint;
 
     /**
-     * Default is 1
+     * Page number
      * @type {number | bigint}
      * @memberof SpotAlgoApiQuerySubOrdersSpotAlgo
      */
     readonly page?: number | bigint;
 
     /**
-     * MIN 1, MAX 100; Default 100
+     * Records per page
      * @type {number | bigint}
      * @memberof SpotAlgoApiQuerySubOrdersSpotAlgo
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof SpotAlgoApiQuerySubOrdersSpotAlgo
      */
@@ -507,27 +530,29 @@ export interface TimeWeightedAveragePriceSpotAlgoRequest {
 
     /**
      * Trading side ( BUY or SELL )
-     * @type {string}
+     * @type {'BUY' | 'SELL'}
      * @memberof SpotAlgoApiTimeWeightedAveragePriceSpotAlgo
      */
-    readonly side: string;
+    readonly side: TimeWeightedAveragePriceSpotAlgoSideEnum;
 
     /**
-     * Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if you order is above the maximum notional per order.
+     * Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please
+     * reduce your size if you order is above the maximum notional per order.
      * @type {number}
      * @memberof SpotAlgoApiTimeWeightedAveragePriceSpotAlgo
      */
     readonly quantity: number;
 
     /**
-     * Duration for TWAP orders in seconds. [300, 86400]
+     * Duration for TWAP orders in seconds
      * @type {number | bigint}
      * @memberof SpotAlgoApiTimeWeightedAveragePriceSpotAlgo
      */
     readonly duration: number | bigint;
 
     /**
-     * A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
+     * A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give
+     * default value
      * @type {string}
      * @memberof SpotAlgoApiTimeWeightedAveragePriceSpotAlgo
      */
@@ -557,14 +582,16 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
     /**
      * Cancel an open TWAP order
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel Algo Order(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel Spot Algo Order (TRADE)
      * @param {CancelAlgoOrderSpotAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAlgoOrderSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SpotAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Cancel-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#cancel-algo-order-spot-algo Binance API Documentation}
      */
     public async cancelAlgoOrderSpotAlgo(
         requestParameters: CancelAlgoOrderSpotAlgoRequest
@@ -588,14 +615,16 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
     /**
      * Get all open SPOT TWAP orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Current Algo Open Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Current Spot Algo Open Orders (USER_DATA)
      * @param {QueryCurrentAlgoOpenOrdersSpotAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentAlgoOpenOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SpotAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Current-Algo-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#query-current-algo-open-orders-spot-algo Binance API Documentation}
      */
     public async queryCurrentAlgoOpenOrdersSpotAlgo(
         requestParameters: QueryCurrentAlgoOpenOrdersSpotAlgoRequest = {}
@@ -619,14 +648,16 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
     /**
      * Get all historical SPOT TWAP orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Historical Algo Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Historical Spot Algo Orders (USER_DATA)
      * @param {QueryHistoricalAlgoOrdersSpotAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryHistoricalAlgoOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SpotAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Historical-Algo-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#query-historical-algo-orders-spot-algo Binance API Documentation}
      */
     public async queryHistoricalAlgoOrdersSpotAlgo(
         requestParameters: QueryHistoricalAlgoOrdersSpotAlgoRequest = {}
@@ -656,14 +687,16 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
     /**
      * Get respective sub orders for a specified algoId
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Sub Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Spot Sub Orders (USER_DATA)
      * @param {QuerySubOrdersSpotAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SpotAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Sub-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#query-sub-orders-spot-algo Binance API Documentation}
      */
     public async querySubOrdersSpotAlgo(
         requestParameters: QuerySubOrdersSpotAlgoRequest
@@ -689,16 +722,19 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
     /**
      * Place a new spot TWAP order with Algo service.
      *
-     * Total Algo open orders max allowed: `20` orders.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
+     * Notes:
+     * - Total Algo open orders max allowed: `20` orders.
+     *
+     * @summary Time-Weighted Spot Average Price(Twap) New Order (TRADE)
      * @param {TimeWeightedAveragePriceSpotAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TimeWeightedAveragePriceSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SpotAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Time-Weighted-Average-Price-New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#time-weighted-average-price-spot-algo Binance API Documentation}
      */
     public async timeWeightedAveragePriceSpotAlgo(
         requestParameters: TimeWeightedAveragePriceSpotAlgoRequest
@@ -723,4 +759,14 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum QueryHistoricalAlgoOrdersSpotAlgoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum TimeWeightedAveragePriceSpotAlgoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
 }

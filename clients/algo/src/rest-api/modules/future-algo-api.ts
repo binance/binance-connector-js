@@ -1,7 +1,7 @@
 /**
- * Binance Algo REST API
+ * Algo Trading REST API
  *
- * OpenAPI Specification for the Binance Algo REST API
+ * Programmatic access to Binance’s execution algorithms for creating and managing Spot and Futures algo orders.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -36,14 +35,17 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Cancel an active order.
          *
-         * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-         * Base URL: https://api.binance.com
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Cancel Algo Order(TRADE)
+         * Notes:
+         * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+         * - Base URL: `https://api.binance.com`
+         *
+         * @summary Cancel Futures Algo Order (TRADE)
          * @param {number | bigint} algoId eg. 14511
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -80,13 +82,16 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query Current Algo Open Orders
          *
-         * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-         * Base URL: https://api.binance.com
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Query Current Algo Open Orders(USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * Notes:
+         * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+         * - Base URL: `https://api.binance.com`
+         *
+         * @summary Query Current Futures Algo Open Orders (USER_DATA)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -116,25 +121,28 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query Historical Algo Order
          *
-         * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-         * Base URL: https://api.binance.com
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Query Historical Algo Orders(USER_DATA)
+         * Notes:
+         * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+         * - Base URL: `https://api.binance.com`
+         *
+         * @summary Query Historical Futures Algo Orders (USER_DATA)
          * @param {string} [symbol] Trading symbol eg. BTCUSDT
-         * @param {string} [side] BUY or SELL
+         * @param {QueryHistoricalAlgoOrdersFutureAlgoSideEnum} [side] BUY or SELL
          * @param {number | bigint} [startTime] in milliseconds  eg.1641522717552
          * @param {number | bigint} [endTime] in milliseconds  eg.1641522526562
-         * @param {number | bigint} [page] Default is 1
-         * @param {number | bigint} [pageSize] MIN 1, MAX 100; Default 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [page] Page number
+         * @param {number | bigint} [pageSize] Records per page
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         queryHistoricalAlgoOrdersFutureAlgo: async (
             symbol?: string,
-            side?: string,
+            side?: QueryHistoricalAlgoOrdersFutureAlgoSideEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             page?: number | bigint,
@@ -182,16 +190,19 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get respective sub orders for a specified algoId
          *
-         * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-         * Base URL: https://api.binance.com
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Query Sub Orders(USER_DATA)
+         * Notes:
+         * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+         * - Base URL: `https://api.binance.com`
+         *
+         * @summary Query Futures Sub Orders (USER_DATA)
          * @param {number | bigint} algoId eg. 14511
-         * @param {number | bigint} [page] Default is 1
-         * @param {number | bigint} [pageSize] MIN 1, MAX 100; Default 100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [page] Page number
+         * @param {number | bigint} [pageSize] Records per page
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -234,40 +245,48 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Send in a Twap new order.
-         * Only support on USDⓈ-M Contracts.
+         * Send in a Twap new order. Only support on USDⓈ-M Contracts.
          *
-         * Total Algo open orders max allowed: `30` orders.
-         * Leverage of symbols and position mode will be the same as your futures account settings. You can set up through the trading page or fapi.
-         * Receiving `"success": true` does not mean that your order will be executed. Please use the query order endpoints（`GET sapi/v1/algo/futures/openOrders` or `GET sapi/v1/algo/futures/historicalOrders`） to check the order status.
-         * For example: Your futures balance is insufficient, or open position with reduce only or position side is inconsistent with your own setting. In these cases you will receive `"success": true`, but the order status will be `expired` after we check it.
-         * `quantity` * 60 / `duration` should be larger than minQty
-         * `duration` cannot be less than 5 mins or more than 24 hours.
-         * For delivery contracts, TWAP end time should be one hour earlier than the delivery time of the symbol.
-         * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-         * Base URL: https://api.binance.com
+         * Weight(UID): 3000
          *
-         * Weight: 3000
+         * Security Type: TRADE
          *
-         * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
+         * Notes:
+         * - Other info:
+         * - Total Algo open orders max allowed: `30` orders.
+         * - Leverage and position mode follow your futures account settings.
+         * - Receiving `"success": true` does not guarantee execution; query order endpoints for final status.
+         * - If balance/position constraints fail, response may still return success but order status becomes `expired`.
+         * - `quantity * 60 / duration` must be greater than `minQty`.
+         * - `duration` cannot be less than 5 minutes or greater than 24 hours.
+         * - For delivery contracts, TWAP end time should be one hour earlier than symbol delivery time.
+         * - You need to enable the corresponding permission for the API key requesting this endpoint:
+         * - `Futures Trading Permission` — for Classic Trading Account mode
+         * - `Portfolio Margin Trading Permission` — for Portfolio Margin Account mode
+         * - Base URL: `https://api.binance.com`
+         *
+         * @summary Time-Weighted Futures Average Price (Twap) New Order (TRADE)
          * @param {string} symbol Trading symbol eg. BTCUSDT
-         * @param {string} side Trading side ( BUY or SELL )
-         * @param {number} quantity Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if you order is above the maximum notional per order.
-         * @param {number | bigint} duration Duration for TWAP orders in seconds. [300, 86400]
-         * @param {string} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
-         * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
-         * @param {boolean} [reduceOnly] "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a position
+         * @param {TimeWeightedAveragePriceFutureAlgoSideEnum} side Trading side ( BUY or SELL )
+         * @param {number} quantity Quantity of base asset; The notional (`quantity` * `mark price(base asset)`) must be more than the
+         * equivalent of 1,000 USDT and less than the equivalent of 1,000,000 USDT
+         * @param {number | bigint} duration Duration for TWAP orders in seconds
+         * @param {TimeWeightedAveragePriceFutureAlgoPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
+         * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give
+         * default value
+         * @param {boolean} [reduceOnly] "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a
+         * position
          * @param {number} [limitPrice] Limit price of the order; If it is not sent, will place order by market price by default
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         timeWeightedAveragePriceFutureAlgo: async (
             symbol: string,
-            side: string,
+            side: TimeWeightedAveragePriceFutureAlgoSideEnum,
             quantity: number,
             duration: number | bigint,
-            positionSide?: string,
+            positionSide?: TimeWeightedAveragePriceFutureAlgoPositionSideEnum,
             clientAlgoId?: string,
             reduceOnly?: boolean,
             limitPrice?: number,
@@ -327,37 +346,45 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Send in a VP new order.
-         * Only support on USDⓈ-M Contracts.
+         * Send in a VP new order. Only support on USDⓈ-M Contracts.
          *
-         * Total Algo open orders max allowed: `10` orders.
-         * Leverage of symbols and position mode will be the same as your futures account settings. You can set up through the trading page or fapi.
-         * Receiving `"success": true` does not mean that your order will be executed. Please use the query order endpoints（`GET sapi/v1/algo/futures/openOrders` or `GET sapi/v1/algo/futures/historicalOrders`） to check the order status.
-         * For example: Your futures balance is insufficient, or open position with reduce only or position side is inconsistent with your own setting. In these cases you will receive `"success": true`, but the order status will be `expired` after we check it.
-         * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-         * Base URL: https://api.binance.com
+         * Weight(UID): 300
          *
-         * Weight: 300
+         * Security Type: TRADE
          *
-         * @summary Volume Participation(VP) New Order (TRADE)
+         * Notes:
+         * - Other info:
+         * - Total Algo open orders max allowed: `10` orders.
+         * - Leverage and position mode follow your futures account settings.
+         * - Receiving `"success": true` does not guarantee execution; query order endpoints for final status.
+         * - If balance/position constraints fail, response may still return success but order status becomes `expired`.
+         * - You need to enable the corresponding permission for the API key requesting this endpoint:
+         * - `Futures Trading Permission` — for Classic Trading Account mode
+         * - `Portfolio Margin Trading Permission` — for Portfolio Margin Account mode
+         * - Base URL: `https://api.binance.com`
+         *
+         * @summary Volume Participation (VP) New Order (TRADE)
          * @param {string} symbol Trading symbol eg. BTCUSDT
-         * @param {string} side Trading side ( BUY or SELL )
-         * @param {number} quantity Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if you order is above the maximum notional per order.
-         * @param {string} urgency Represent the relative speed of the current execution; ENUM: LOW, MEDIUM, HIGH
-         * @param {string} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
-         * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
-         * @param {boolean} [reduceOnly] "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a position
+         * @param {VolumeParticipationFutureAlgoSideEnum} side Trading side ( BUY or SELL )
+         * @param {number} quantity Quantity of base asset; The notional (`quantity` * `mark price(base asset)`) must be more than the
+         * equivalent of 10,000 USDT and less than the equivalent of 1,000,000 USDT
+         * @param {VolumeParticipationFutureAlgoUrgencyEnum} urgency Represent the relative speed of the current execution; ENUM: LOW, MEDIUM, HIGH
+         * @param {VolumeParticipationFutureAlgoPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
+         * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give
+         * default value
+         * @param {boolean} [reduceOnly] "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a
+         * position
          * @param {number} [limitPrice] Limit price of the order; If it is not sent, will place order by market price by default
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         volumeParticipationFutureAlgo: async (
             symbol: string,
-            side: string,
+            side: VolumeParticipationFutureAlgoSideEnum,
             quantity: number,
-            urgency: string,
-            positionSide?: string,
+            urgency: VolumeParticipationFutureAlgoUrgencyEnum,
+            positionSide?: VolumeParticipationFutureAlgoPositionSideEnum,
             clientAlgoId?: string,
             reduceOnly?: boolean,
             limitPrice?: number,
@@ -427,12 +454,15 @@ export interface FutureAlgoApiInterface {
     /**
      * Cancel an active order.
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel Algo Order(TRADE)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Cancel Futures Algo Order (TRADE)
      * @param {CancelAlgoOrderFutureAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -444,12 +474,15 @@ export interface FutureAlgoApiInterface {
     /**
      * Query Current Algo Open Orders
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Current Algo Open Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Current Futures Algo Open Orders (USER_DATA)
      * @param {QueryCurrentAlgoOpenOrdersFutureAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -461,12 +494,15 @@ export interface FutureAlgoApiInterface {
     /**
      * Query Historical Algo Order
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Historical Algo Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Historical Futures Algo Orders (USER_DATA)
      * @param {QueryHistoricalAlgoOrdersFutureAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -478,12 +514,15 @@ export interface FutureAlgoApiInterface {
     /**
      * Get respective sub orders for a specified algoId
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Sub Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Futures Sub Orders (USER_DATA)
      * @param {QuerySubOrdersFutureAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -493,22 +532,27 @@ export interface FutureAlgoApiInterface {
         requestParameters: QuerySubOrdersFutureAlgoRequest
     ): Promise<RestApiResponse<QuerySubOrdersFutureAlgoResponse>>;
     /**
-     * Send in a Twap new order.
-     * Only support on USDⓈ-M Contracts.
+     * Send in a Twap new order. Only support on USDⓈ-M Contracts.
      *
-     * Total Algo open orders max allowed: `30` orders.
-     * Leverage of symbols and position mode will be the same as your futures account settings. You can set up through the trading page or fapi.
-     * Receiving `"success": true` does not mean that your order will be executed. Please use the query order endpoints（`GET sapi/v1/algo/futures/openOrders` or `GET sapi/v1/algo/futures/historicalOrders`） to check the order status.
-     * For example: Your futures balance is insufficient, or open position with reduce only or position side is inconsistent with your own setting. In these cases you will receive `"success": true`, but the order status will be `expired` after we check it.
-     * `quantity` * 60 / `duration` should be larger than minQty
-     * `duration` cannot be less than 5 mins or more than 24 hours.
-     * For delivery contracts, TWAP end time should be one hour earlier than the delivery time of the symbol.
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
+     * Notes:
+     * - Other info:
+     * - Total Algo open orders max allowed: `30` orders.
+     * - Leverage and position mode follow your futures account settings.
+     * - Receiving `"success": true` does not guarantee execution; query order endpoints for final status.
+     * - If balance/position constraints fail, response may still return success but order status becomes `expired`.
+     * - `quantity * 60 / duration` must be greater than `minQty`.
+     * - `duration` cannot be less than 5 minutes or greater than 24 hours.
+     * - For delivery contracts, TWAP end time should be one hour earlier than symbol delivery time.
+     * - You need to enable the corresponding permission for the API key requesting this endpoint:
+     * - `Futures Trading Permission` — for Classic Trading Account mode
+     * - `Portfolio Margin Trading Permission` — for Portfolio Margin Account mode
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Time-Weighted Futures Average Price (Twap) New Order (TRADE)
      * @param {TimeWeightedAveragePriceFutureAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -518,19 +562,24 @@ export interface FutureAlgoApiInterface {
         requestParameters: TimeWeightedAveragePriceFutureAlgoRequest
     ): Promise<RestApiResponse<TimeWeightedAveragePriceFutureAlgoResponse>>;
     /**
-     * Send in a VP new order.
-     * Only support on USDⓈ-M Contracts.
+     * Send in a VP new order. Only support on USDⓈ-M Contracts.
      *
-     * Total Algo open orders max allowed: `10` orders.
-     * Leverage of symbols and position mode will be the same as your futures account settings. You can set up through the trading page or fapi.
-     * Receiving `"success": true` does not mean that your order will be executed. Please use the query order endpoints（`GET sapi/v1/algo/futures/openOrders` or `GET sapi/v1/algo/futures/historicalOrders`） to check the order status.
-     * For example: Your futures balance is insufficient, or open position with reduce only or position side is inconsistent with your own setting. In these cases you will receive `"success": true`, but the order status will be `expired` after we check it.
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(UID): 300
      *
-     * Weight: 300
+     * Security Type: TRADE
      *
-     * @summary Volume Participation(VP) New Order (TRADE)
+     * Notes:
+     * - Other info:
+     * - Total Algo open orders max allowed: `10` orders.
+     * - Leverage and position mode follow your futures account settings.
+     * - Receiving `"success": true` does not guarantee execution; query order endpoints for final status.
+     * - If balance/position constraints fail, response may still return success but order status becomes `expired`.
+     * - You need to enable the corresponding permission for the API key requesting this endpoint:
+     * - `Futures Trading Permission` — for Classic Trading Account mode
+     * - `Portfolio Margin Trading Permission` — for Portfolio Margin Account mode
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Volume Participation (VP) New Order (TRADE)
      * @param {VolumeParticipationFutureAlgoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -554,7 +603,7 @@ export interface CancelAlgoOrderFutureAlgoRequest {
     readonly algoId: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FutureAlgoApiCancelAlgoOrderFutureAlgo
      */
@@ -567,7 +616,7 @@ export interface CancelAlgoOrderFutureAlgoRequest {
  */
 export interface QueryCurrentAlgoOpenOrdersFutureAlgoRequest {
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FutureAlgoApiQueryCurrentAlgoOpenOrdersFutureAlgo
      */
@@ -588,10 +637,10 @@ export interface QueryHistoricalAlgoOrdersFutureAlgoRequest {
 
     /**
      * BUY or SELL
-     * @type {string}
+     * @type {'BUY' | 'SELL'}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
-    readonly side?: string;
+    readonly side?: QueryHistoricalAlgoOrdersFutureAlgoSideEnum;
 
     /**
      * in milliseconds  eg.1641522717552
@@ -608,21 +657,21 @@ export interface QueryHistoricalAlgoOrdersFutureAlgoRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default is 1
+     * Page number
      * @type {number | bigint}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
     readonly page?: number | bigint;
 
     /**
-     * MIN 1, MAX 100; Default 100
+     * Records per page
      * @type {number | bigint}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
@@ -642,21 +691,21 @@ export interface QuerySubOrdersFutureAlgoRequest {
     readonly algoId: number | bigint;
 
     /**
-     * Default is 1
+     * Page number
      * @type {number | bigint}
      * @memberof FutureAlgoApiQuerySubOrdersFutureAlgo
      */
     readonly page?: number | bigint;
 
     /**
-     * MIN 1, MAX 100; Default 100
+     * Records per page
      * @type {number | bigint}
      * @memberof FutureAlgoApiQuerySubOrdersFutureAlgo
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FutureAlgoApiQuerySubOrdersFutureAlgo
      */
@@ -677,20 +726,21 @@ export interface TimeWeightedAveragePriceFutureAlgoRequest {
 
     /**
      * Trading side ( BUY or SELL )
-     * @type {string}
+     * @type {'BUY' | 'SELL'}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
-    readonly side: string;
+    readonly side: TimeWeightedAveragePriceFutureAlgoSideEnum;
 
     /**
-     * Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if you order is above the maximum notional per order.
+     * Quantity of base asset; The notional (`quantity` * `mark price(base asset)`) must be more than the
+     * equivalent of 1,000 USDT and less than the equivalent of 1,000,000 USDT
      * @type {number}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
     readonly quantity: number;
 
     /**
-     * Duration for TWAP orders in seconds. [300, 86400]
+     * Duration for TWAP orders in seconds
      * @type {number | bigint}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
@@ -698,20 +748,22 @@ export interface TimeWeightedAveragePriceFutureAlgoRequest {
 
     /**
      * Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
-     * @type {string}
+     * @type {'BOTH' | 'LONG' | 'SHORT'}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
-    readonly positionSide?: string;
+    readonly positionSide?: TimeWeightedAveragePriceFutureAlgoPositionSideEnum;
 
     /**
-     * A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
+     * A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give
+     * default value
      * @type {string}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
     readonly clientAlgoId?: string;
 
     /**
-     * "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a position
+     * "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a
+     * position
      * @type {boolean}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
@@ -725,7 +777,7 @@ export interface TimeWeightedAveragePriceFutureAlgoRequest {
     readonly limitPrice?: number;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
@@ -746,13 +798,14 @@ export interface VolumeParticipationFutureAlgoRequest {
 
     /**
      * Trading side ( BUY or SELL )
-     * @type {string}
+     * @type {'BUY' | 'SELL'}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
-    readonly side: string;
+    readonly side: VolumeParticipationFutureAlgoSideEnum;
 
     /**
-     * Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if you order is above the maximum notional per order.
+     * Quantity of base asset; The notional (`quantity` * `mark price(base asset)`) must be more than the
+     * equivalent of 10,000 USDT and less than the equivalent of 1,000,000 USDT
      * @type {number}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
@@ -760,27 +813,29 @@ export interface VolumeParticipationFutureAlgoRequest {
 
     /**
      * Represent the relative speed of the current execution; ENUM: LOW, MEDIUM, HIGH
-     * @type {string}
+     * @type {'LOW' | 'MEDIUM' | 'HIGH'}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
-    readonly urgency: string;
+    readonly urgency: VolumeParticipationFutureAlgoUrgencyEnum;
 
     /**
      * Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
-     * @type {string}
+     * @type {'BOTH' | 'LONG' | 'SHORT'}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
-    readonly positionSide?: string;
+    readonly positionSide?: VolumeParticipationFutureAlgoPositionSideEnum;
 
     /**
-     * A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
+     * A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give
+     * default value
      * @type {string}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
     readonly clientAlgoId?: string;
 
     /**
-     * "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a position
+     * "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a
+     * position
      * @type {boolean}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
@@ -794,7 +849,7 @@ export interface VolumeParticipationFutureAlgoRequest {
     readonly limitPrice?: number;
 
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
@@ -817,17 +872,20 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
     /**
      * Cancel an active order.
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel Algo Order(TRADE)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Cancel Futures Algo Order (TRADE)
      * @param {CancelAlgoOrderFutureAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAlgoOrderFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FutureAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Cancel-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#cancel-algo-order-future-algo Binance API Documentation}
      */
     public async cancelAlgoOrderFutureAlgo(
         requestParameters: CancelAlgoOrderFutureAlgoRequest
@@ -851,17 +909,20 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
     /**
      * Query Current Algo Open Orders
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Current Algo Open Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Current Futures Algo Open Orders (USER_DATA)
      * @param {QueryCurrentAlgoOpenOrdersFutureAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentAlgoOpenOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FutureAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Current-Algo-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#query-current-algo-open-orders-future-algo Binance API Documentation}
      */
     public async queryCurrentAlgoOpenOrdersFutureAlgo(
         requestParameters: QueryCurrentAlgoOpenOrdersFutureAlgoRequest = {}
@@ -885,17 +946,20 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
     /**
      * Query Historical Algo Order
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Historical Algo Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Historical Futures Algo Orders (USER_DATA)
      * @param {QueryHistoricalAlgoOrdersFutureAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryHistoricalAlgoOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FutureAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Historical-Algo-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#query-historical-algo-orders-future-algo Binance API Documentation}
      */
     public async queryHistoricalAlgoOrdersFutureAlgo(
         requestParameters: QueryHistoricalAlgoOrdersFutureAlgoRequest = {}
@@ -925,17 +989,20 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
     /**
      * Get respective sub orders for a specified algoId
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Sub Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Futures Sub Orders (USER_DATA)
      * @param {QuerySubOrdersFutureAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FutureAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Sub-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#query-sub-orders-future-algo Binance API Documentation}
      */
     public async querySubOrdersFutureAlgo(
         requestParameters: QuerySubOrdersFutureAlgoRequest
@@ -959,27 +1026,32 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
     }
 
     /**
-     * Send in a Twap new order.
-     * Only support on USDⓈ-M Contracts.
+     * Send in a Twap new order. Only support on USDⓈ-M Contracts.
      *
-     * Total Algo open orders max allowed: `30` orders.
-     * Leverage of symbols and position mode will be the same as your futures account settings. You can set up through the trading page or fapi.
-     * Receiving `"success": true` does not mean that your order will be executed. Please use the query order endpoints（`GET sapi/v1/algo/futures/openOrders` or `GET sapi/v1/algo/futures/historicalOrders`） to check the order status.
-     * For example: Your futures balance is insufficient, or open position with reduce only or position side is inconsistent with your own setting. In these cases you will receive `"success": true`, but the order status will be `expired` after we check it.
-     * `quantity` * 60 / `duration` should be larger than minQty
-     * `duration` cannot be less than 5 mins or more than 24 hours.
-     * For delivery contracts, TWAP end time should be one hour earlier than the delivery time of the symbol.
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
+     * Notes:
+     * - Other info:
+     * - Total Algo open orders max allowed: `30` orders.
+     * - Leverage and position mode follow your futures account settings.
+     * - Receiving `"success": true` does not guarantee execution; query order endpoints for final status.
+     * - If balance/position constraints fail, response may still return success but order status becomes `expired`.
+     * - `quantity * 60 / duration` must be greater than `minQty`.
+     * - `duration` cannot be less than 5 minutes or greater than 24 hours.
+     * - For delivery contracts, TWAP end time should be one hour earlier than symbol delivery time.
+     * - You need to enable the corresponding permission for the API key requesting this endpoint:
+     * - `Futures Trading Permission` — for Classic Trading Account mode
+     * - `Portfolio Margin Trading Permission` — for Portfolio Margin Account mode
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Time-Weighted Futures Average Price (Twap) New Order (TRADE)
      * @param {TimeWeightedAveragePriceFutureAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TimeWeightedAveragePriceFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FutureAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Time-Weighted-Average-Price-New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#time-weighted-average-price-future-algo Binance API Documentation}
      */
     public async timeWeightedAveragePriceFutureAlgo(
         requestParameters: TimeWeightedAveragePriceFutureAlgoRequest
@@ -1009,24 +1081,29 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
     }
 
     /**
-     * Send in a VP new order.
-     * Only support on USDⓈ-M Contracts.
+     * Send in a VP new order. Only support on USDⓈ-M Contracts.
      *
-     * Total Algo open orders max allowed: `10` orders.
-     * Leverage of symbols and position mode will be the same as your futures account settings. You can set up through the trading page or fapi.
-     * Receiving `"success": true` does not mean that your order will be executed. Please use the query order endpoints（`GET sapi/v1/algo/futures/openOrders` or `GET sapi/v1/algo/futures/historicalOrders`） to check the order status.
-     * For example: Your futures balance is insufficient, or open position with reduce only or position side is inconsistent with your own setting. In these cases you will receive `"success": true`, but the order status will be `expired` after we check it.
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(UID): 300
      *
-     * Weight: 300
+     * Security Type: TRADE
      *
-     * @summary Volume Participation(VP) New Order (TRADE)
+     * Notes:
+     * - Other info:
+     * - Total Algo open orders max allowed: `10` orders.
+     * - Leverage and position mode follow your futures account settings.
+     * - Receiving `"success": true` does not guarantee execution; query order endpoints for final status.
+     * - If balance/position constraints fail, response may still return success but order status becomes `expired`.
+     * - You need to enable the corresponding permission for the API key requesting this endpoint:
+     * - `Futures Trading Permission` — for Classic Trading Account mode
+     * - `Portfolio Margin Trading Permission` — for Portfolio Margin Account mode
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Volume Participation (VP) New Order (TRADE)
      * @param {VolumeParticipationFutureAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<VolumeParticipationFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FutureAlgoApi
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Volume-Participation-New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#volume-participation-future-algo Binance API Documentation}
      */
     public async volumeParticipationFutureAlgo(
         requestParameters: VolumeParticipationFutureAlgoRequest
@@ -1054,4 +1131,37 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum QueryHistoricalAlgoOrdersFutureAlgoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum TimeWeightedAveragePriceFutureAlgoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum TimeWeightedAveragePriceFutureAlgoPositionSideEnum {
+    BOTH = 'BOTH',
+    LONG = 'LONG',
+    SHORT = 'SHORT',
+}
+
+export enum VolumeParticipationFutureAlgoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum VolumeParticipationFutureAlgoUrgencyEnum {
+    LOW = 'LOW',
+    MEDIUM = 'MEDIUM',
+    HIGH = 'HIGH',
+}
+
+export enum VolumeParticipationFutureAlgoPositionSideEnum {
+    BOTH = 'BOTH',
+    LONG = 'LONG',
+    SHORT = 'SHORT',
 }

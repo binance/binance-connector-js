@@ -1,7 +1,7 @@
 /**
- * Binance Algo REST API
+ * Algo Trading REST API
  *
- * OpenAPI Specification for the Binance Algo REST API
+ * Programmatic access to Binance’s execution algorithms for creating and managing Spot and Futures algo orders.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,11 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { SpotAlgoApi } from '../../../src/rest-api';
+import {
+    SpotAlgoApi,
+    QueryHistoricalAlgoOrdersSpotAlgoSideEnum,
+    TimeWeightedAveragePriceSpotAlgoSideEnum,
+} from '../../../src/rest-api';
 import {
     CancelAlgoOrderSpotAlgoRequest,
     QueryCurrentAlgoOpenOrdersSpotAlgoRequest,
@@ -48,7 +52,7 @@ describe('SpotAlgoApi', () => {
     describe('cancelAlgoOrderSpotAlgo()', () => {
         it('should execute cancelAlgoOrderSpotAlgo() successfully with required parameters only', async () => {
             const params: CancelAlgoOrderSpotAlgoRequest = {
-                algoId: 1,
+                algoId: 14511,
             };
 
             mockResponse = JSONParse(
@@ -71,7 +75,7 @@ describe('SpotAlgoApi', () => {
 
         it('should execute cancelAlgoOrderSpotAlgo() successfully with optional parameters', async () => {
             const params: CancelAlgoOrderSpotAlgoRequest = {
-                algoId: 1,
+                algoId: 14511,
                 recvWindow: 5000,
             };
 
@@ -95,7 +99,7 @@ describe('SpotAlgoApi', () => {
 
         it('should throw RequiredError when algoId is missing', async () => {
             const _params: CancelAlgoOrderSpotAlgoRequest = {
-                algoId: 1,
+                algoId: 14511,
             };
             const params = Object.assign({ ..._params });
             delete params?.algoId;
@@ -107,7 +111,7 @@ describe('SpotAlgoApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAlgoOrderSpotAlgoRequest = {
-                algoId: 1,
+                algoId: 14511,
             };
 
             const errorResponse = {
@@ -145,7 +149,7 @@ describe('SpotAlgoApi', () => {
                             bookTime: 1649756817004,
                             endTime: 0,
                             algoStatus: 'WORKING',
-                            algoType: 'TWAP',
+                            algoType: 'VP',
                             urgency: 'LOW',
                         },
                     ],
@@ -187,7 +191,7 @@ describe('SpotAlgoApi', () => {
                             bookTime: 1649756817004,
                             endTime: 0,
                             algoStatus: 'WORKING',
-                            algoType: 'TWAP',
+                            algoType: 'VP',
                             urgency: 'LOW',
                         },
                     ],
@@ -270,11 +274,11 @@ describe('SpotAlgoApi', () => {
         it('should execute queryHistoricalAlgoOrdersSpotAlgo() successfully with optional parameters', async () => {
             const params: QueryHistoricalAlgoOrdersSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
+                side: QueryHistoricalAlgoOrdersSpotAlgoSideEnum.BUY,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 page: 1,
-                pageSize: 100,
+                pageSize: 10,
                 recvWindow: 5000,
             };
 
@@ -385,7 +389,7 @@ describe('SpotAlgoApi', () => {
             const params: QuerySubOrdersSpotAlgoRequest = {
                 algoId: 1,
                 page: 1,
-                pageSize: 100,
+                pageSize: 10,
                 recvWindow: 5000,
             };
 
@@ -467,8 +471,8 @@ describe('SpotAlgoApi', () => {
         it('should execute timeWeightedAveragePriceSpotAlgo() successfully with required parameters only', async () => {
             const params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceSpotAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
 
@@ -498,11 +502,11 @@ describe('SpotAlgoApi', () => {
         it('should execute timeWeightedAveragePriceSpotAlgo() successfully with optional parameters', async () => {
             const params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceSpotAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
                 clientAlgoId: '1',
-                limitPrice: 1.0,
+                limitPrice: 1,
             };
 
             mockResponse = JSONParse(
@@ -531,8 +535,8 @@ describe('SpotAlgoApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceSpotAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -546,8 +550,8 @@ describe('SpotAlgoApi', () => {
         it('should throw RequiredError when side is missing', async () => {
             const _params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceSpotAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -561,8 +565,8 @@ describe('SpotAlgoApi', () => {
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceSpotAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -576,8 +580,8 @@ describe('SpotAlgoApi', () => {
         it('should throw RequiredError when duration is missing', async () => {
             const _params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceSpotAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -591,8 +595,8 @@ describe('SpotAlgoApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceSpotAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
 

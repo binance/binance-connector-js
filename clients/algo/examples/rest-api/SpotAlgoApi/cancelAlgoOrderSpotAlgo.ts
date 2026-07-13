@@ -10,7 +10,7 @@ const client = new Algo({ configurationRestAPI });
 async function cancelAlgoOrderSpotAlgo() {
     try {
         const response = await client.restAPI.cancelAlgoOrderSpotAlgo({
-            algoId: 1,
+            algoId: 14511,
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,4 +1,4 @@
-import { Algo, ALGO_REST_API_PROD_URL } from '../../../src';
+import { Algo, AlgoRestAPI, ALGO_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,8 +11,8 @@ async function timeWeightedAveragePriceSpotAlgo() {
     try {
         const response = await client.restAPI.timeWeightedAveragePriceSpotAlgo({
             symbol: 'BTCUSDT',
-            side: 'BUY',
-            quantity: 1.0,
+            side: AlgoRestAPI.TimeWeightedAveragePriceSpotAlgoSideEnum.BUY,
+            quantity: 1,
             duration: 5000,
         });
 

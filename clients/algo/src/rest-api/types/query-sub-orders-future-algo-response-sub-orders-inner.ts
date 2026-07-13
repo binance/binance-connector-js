@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Algo REST API
+ * Algo Trading REST API
  *
- * OpenAPI Specification for the Binance Algo REST API
+ * Programmatic access to Binance’s execution algorithms for creating and managing Spot and Futures algo orders.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,85 +20,85 @@
  */
 export interface QuerySubOrdersFutureAlgoResponseSubOrdersInner {
     /**
-     *
+     * Algo order ID
      * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     algoId?: number | bigint;
     /**
-     *
+     * Sub-order ID
      * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Sub-order status
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     orderStatus?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     executedQty?: string;
     /**
-     *
+     * Executed amount
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     executedAmt?: string;
     /**
-     *
+     * Fee amount
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     feeAmt?: string;
     /**
-     *
+     * Fee asset
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     feeAsset?: string;
     /**
-     *
+     * Order creation time
      * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     bookTime?: number | bigint;
     /**
-     *
+     * Average execution price
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     avgPrice?: string;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     side?: string;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     symbol?: string;
     /**
-     *
+     * Sub-order execution sequence ID
      * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     subId?: number | bigint;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
     timeInForce?: string;
     /**
-     *
+     * Original order quantity
      * @type {string}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */

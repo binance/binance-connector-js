@@ -1,7 +1,7 @@
 /**
- * Binance Algo REST API
+ * Algo Trading REST API
  *
- * OpenAPI Specification for the Binance Algo REST API
+ * Programmatic access to Binance’s execution algorithms for creating and managing Spot and Futures algo orders.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -114,17 +114,20 @@ export class RestAPI {
     /**
      * Cancel an active order.
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel Algo Order(TRADE)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Cancel Futures Algo Order (TRADE)
      * @param {CancelAlgoOrderFutureAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelAlgoOrderFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Cancel-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#cancel-algo-order-future-algo Binance API Documentation}
      */
     cancelAlgoOrderFutureAlgo(
         requestParameters: CancelAlgoOrderFutureAlgoRequest
@@ -135,17 +138,20 @@ export class RestAPI {
     /**
      * Query Current Algo Open Orders
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Current Algo Open Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Current Futures Algo Open Orders (USER_DATA)
      * @param {QueryCurrentAlgoOpenOrdersFutureAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryCurrentAlgoOpenOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Current-Algo-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#query-current-algo-open-orders-future-algo Binance API Documentation}
      */
     queryCurrentAlgoOpenOrdersFutureAlgo(
         requestParameters: QueryCurrentAlgoOpenOrdersFutureAlgoRequest = {}
@@ -156,17 +162,20 @@ export class RestAPI {
     /**
      * Query Historical Algo Order
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Historical Algo Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Historical Futures Algo Orders (USER_DATA)
      * @param {QueryHistoricalAlgoOrdersFutureAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryHistoricalAlgoOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Historical-Algo-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#query-historical-algo-orders-future-algo Binance API Documentation}
      */
     queryHistoricalAlgoOrdersFutureAlgo(
         requestParameters: QueryHistoricalAlgoOrdersFutureAlgoRequest = {}
@@ -177,17 +186,20 @@ export class RestAPI {
     /**
      * Get respective sub orders for a specified algoId
      *
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Sub Orders(USER_DATA)
+     * Notes:
+     * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Query Futures Sub Orders (USER_DATA)
      * @param {QuerySubOrdersFutureAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Sub-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#query-sub-orders-future-algo Binance API Documentation}
      */
     querySubOrdersFutureAlgo(
         requestParameters: QuerySubOrdersFutureAlgoRequest
@@ -196,27 +208,32 @@ export class RestAPI {
     }
 
     /**
-     * Send in a Twap new order.
-     * Only support on USDⓈ-M Contracts.
+     * Send in a Twap new order. Only support on USDⓈ-M Contracts.
      *
-     * Total Algo open orders max allowed: `30` orders.
-     * Leverage of symbols and position mode will be the same as your futures account settings. You can set up through the trading page or fapi.
-     * Receiving `"success": true` does not mean that your order will be executed. Please use the query order endpoints（`GET sapi/v1/algo/futures/openOrders` or `GET sapi/v1/algo/futures/historicalOrders`） to check the order status.
-     * For example: Your futures balance is insufficient, or open position with reduce only or position side is inconsistent with your own setting. In these cases you will receive `"success": true`, but the order status will be `expired` after we check it.
-     * `quantity` * 60 / `duration` should be larger than minQty
-     * `duration` cannot be less than 5 mins or more than 24 hours.
-     * For delivery contracts, TWAP end time should be one hour earlier than the delivery time of the symbol.
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
+     * Notes:
+     * - Other info:
+     * - Total Algo open orders max allowed: `30` orders.
+     * - Leverage and position mode follow your futures account settings.
+     * - Receiving `"success": true` does not guarantee execution; query order endpoints for final status.
+     * - If balance/position constraints fail, response may still return success but order status becomes `expired`.
+     * - `quantity * 60 / duration` must be greater than `minQty`.
+     * - `duration` cannot be less than 5 minutes or greater than 24 hours.
+     * - For delivery contracts, TWAP end time should be one hour earlier than symbol delivery time.
+     * - You need to enable the corresponding permission for the API key requesting this endpoint:
+     * - `Futures Trading Permission` — for Classic Trading Account mode
+     * - `Portfolio Margin Trading Permission` — for Portfolio Margin Account mode
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Time-Weighted Futures Average Price (Twap) New Order (TRADE)
      * @param {TimeWeightedAveragePriceFutureAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TimeWeightedAveragePriceFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Time-Weighted-Average-Price-New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#time-weighted-average-price-future-algo Binance API Documentation}
      */
     timeWeightedAveragePriceFutureAlgo(
         requestParameters: TimeWeightedAveragePriceFutureAlgoRequest
@@ -225,24 +242,29 @@ export class RestAPI {
     }
 
     /**
-     * Send in a VP new order.
-     * Only support on USDⓈ-M Contracts.
+     * Send in a VP new order. Only support on USDⓈ-M Contracts.
      *
-     * Total Algo open orders max allowed: `10` orders.
-     * Leverage of symbols and position mode will be the same as your futures account settings. You can set up through the trading page or fapi.
-     * Receiving `"success": true` does not mean that your order will be executed. Please use the query order endpoints（`GET sapi/v1/algo/futures/openOrders` or `GET sapi/v1/algo/futures/historicalOrders`） to check the order status.
-     * For example: Your futures balance is insufficient, or open position with reduce only or position side is inconsistent with your own setting. In these cases you will receive `"success": true`, but the order status will be `expired` after we check it.
-     * You need to enable `Futures Trading Permission` for the api key which requests this endpoint.
-     * Base URL: https://api.binance.com
+     * Weight(UID): 300
      *
-     * Weight: 300
+     * Security Type: TRADE
      *
-     * @summary Volume Participation(VP) New Order (TRADE)
+     * Notes:
+     * - Other info:
+     * - Total Algo open orders max allowed: `10` orders.
+     * - Leverage and position mode follow your futures account settings.
+     * - Receiving `"success": true` does not guarantee execution; query order endpoints for final status.
+     * - If balance/position constraints fail, response may still return success but order status becomes `expired`.
+     * - You need to enable the corresponding permission for the API key requesting this endpoint:
+     * - `Futures Trading Permission` — for Classic Trading Account mode
+     * - `Portfolio Margin Trading Permission` — for Portfolio Margin Account mode
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Volume Participation (VP) New Order (TRADE)
      * @param {VolumeParticipationFutureAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<VolumeParticipationFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/future-algo/Volume-Participation-New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#volume-participation-future-algo Binance API Documentation}
      */
     volumeParticipationFutureAlgo(
         requestParameters: VolumeParticipationFutureAlgoRequest
@@ -253,14 +275,16 @@ export class RestAPI {
     /**
      * Cancel an open TWAP order
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel Algo Order(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel Spot Algo Order (TRADE)
      * @param {CancelAlgoOrderSpotAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelAlgoOrderSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Cancel-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#cancel-algo-order-spot-algo Binance API Documentation}
      */
     cancelAlgoOrderSpotAlgo(
         requestParameters: CancelAlgoOrderSpotAlgoRequest
@@ -271,14 +295,16 @@ export class RestAPI {
     /**
      * Get all open SPOT TWAP orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Current Algo Open Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Current Spot Algo Open Orders (USER_DATA)
      * @param {QueryCurrentAlgoOpenOrdersSpotAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryCurrentAlgoOpenOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Current-Algo-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#query-current-algo-open-orders-spot-algo Binance API Documentation}
      */
     queryCurrentAlgoOpenOrdersSpotAlgo(
         requestParameters: QueryCurrentAlgoOpenOrdersSpotAlgoRequest = {}
@@ -289,14 +315,16 @@ export class RestAPI {
     /**
      * Get all historical SPOT TWAP orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Historical Algo Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Historical Spot Algo Orders (USER_DATA)
      * @param {QueryHistoricalAlgoOrdersSpotAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryHistoricalAlgoOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Historical-Algo-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#query-historical-algo-orders-spot-algo Binance API Documentation}
      */
     queryHistoricalAlgoOrdersSpotAlgo(
         requestParameters: QueryHistoricalAlgoOrdersSpotAlgoRequest = {}
@@ -307,14 +335,16 @@ export class RestAPI {
     /**
      * Get respective sub orders for a specified algoId
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query Sub Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Spot Sub Orders (USER_DATA)
      * @param {QuerySubOrdersSpotAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySubOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Sub-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#query-sub-orders-spot-algo Binance API Documentation}
      */
     querySubOrdersSpotAlgo(
         requestParameters: QuerySubOrdersSpotAlgoRequest
@@ -325,16 +355,19 @@ export class RestAPI {
     /**
      * Place a new spot TWAP order with Algo service.
      *
-     * Total Algo open orders max allowed: `20` orders.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
+     * Notes:
+     * - Total Algo open orders max allowed: `20` orders.
+     *
+     * @summary Time-Weighted Spot Average Price(Twap) New Order (TRADE)
      * @param {TimeWeightedAveragePriceSpotAlgoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TimeWeightedAveragePriceSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/algo/spot-algo/Time-Weighted-Average-Price-New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#time-weighted-average-price-spot-algo Binance API Documentation}
      */
     timeWeightedAveragePriceSpotAlgo(
         requestParameters: TimeWeightedAveragePriceSpotAlgoRequest

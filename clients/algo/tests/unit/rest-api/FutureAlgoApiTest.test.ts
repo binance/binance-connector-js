@@ -1,7 +1,7 @@
 /**
- * Binance Algo REST API
+ * Algo Trading REST API
  *
- * OpenAPI Specification for the Binance Algo REST API
+ * Programmatic access to Binance’s execution algorithms for creating and managing Spot and Futures algo orders.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,15 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { FutureAlgoApi } from '../../../src/rest-api';
+import {
+    FutureAlgoApi,
+    QueryHistoricalAlgoOrdersFutureAlgoSideEnum,
+    TimeWeightedAveragePriceFutureAlgoSideEnum,
+    TimeWeightedAveragePriceFutureAlgoPositionSideEnum,
+    VolumeParticipationFutureAlgoSideEnum,
+    VolumeParticipationFutureAlgoUrgencyEnum,
+    VolumeParticipationFutureAlgoPositionSideEnum,
+} from '../../../src/rest-api';
 import {
     CancelAlgoOrderFutureAlgoRequest,
     QueryCurrentAlgoOpenOrdersFutureAlgoRequest,
@@ -275,7 +283,7 @@ describe('FutureAlgoApi', () => {
         it('should execute queryHistoricalAlgoOrdersFutureAlgo() successfully with optional parameters', async () => {
             const params: QueryHistoricalAlgoOrdersFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
+                side: QueryHistoricalAlgoOrdersFutureAlgoSideEnum.BUY,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 page: 1,
@@ -473,8 +481,8 @@ describe('FutureAlgoApi', () => {
         it('should execute timeWeightedAveragePriceFutureAlgo() successfully with required parameters only', async () => {
             const params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceFutureAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
 
@@ -504,13 +512,13 @@ describe('FutureAlgoApi', () => {
         it('should execute timeWeightedAveragePriceFutureAlgo() successfully with optional parameters', async () => {
             const params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceFutureAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
-                positionSide: 'BOTH',
+                positionSide: TimeWeightedAveragePriceFutureAlgoPositionSideEnum.BOTH,
                 clientAlgoId: '1',
                 reduceOnly: false,
-                limitPrice: 1.0,
+                limitPrice: 1,
                 recvWindow: 5000,
             };
 
@@ -540,8 +548,8 @@ describe('FutureAlgoApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceFutureAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -555,8 +563,8 @@ describe('FutureAlgoApi', () => {
         it('should throw RequiredError when side is missing', async () => {
             const _params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceFutureAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -570,8 +578,8 @@ describe('FutureAlgoApi', () => {
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceFutureAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -585,8 +593,8 @@ describe('FutureAlgoApi', () => {
         it('should throw RequiredError when duration is missing', async () => {
             const _params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceFutureAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -600,8 +608,8 @@ describe('FutureAlgoApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
+                side: TimeWeightedAveragePriceFutureAlgoSideEnum.BUY,
+                quantity: 1,
                 duration: 5000,
             };
 
@@ -628,9 +636,9 @@ describe('FutureAlgoApi', () => {
         it('should execute volumeParticipationFutureAlgo() successfully with required parameters only', async () => {
             const params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
-                urgency: 'LOW',
+                side: VolumeParticipationFutureAlgoSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationFutureAlgoUrgencyEnum.LOW,
             };
 
             mockResponse = JSONParse(
@@ -659,13 +667,13 @@ describe('FutureAlgoApi', () => {
         it('should execute volumeParticipationFutureAlgo() successfully with optional parameters', async () => {
             const params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
-                urgency: 'LOW',
-                positionSide: 'BOTH',
+                side: VolumeParticipationFutureAlgoSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationFutureAlgoUrgencyEnum.LOW,
+                positionSide: VolumeParticipationFutureAlgoPositionSideEnum.BOTH,
                 clientAlgoId: '1',
                 reduceOnly: false,
-                limitPrice: 1.0,
+                limitPrice: 1,
                 recvWindow: 5000,
             };
 
@@ -695,9 +703,9 @@ describe('FutureAlgoApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
-                urgency: 'LOW',
+                side: VolumeParticipationFutureAlgoSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationFutureAlgoUrgencyEnum.LOW,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -710,9 +718,9 @@ describe('FutureAlgoApi', () => {
         it('should throw RequiredError when side is missing', async () => {
             const _params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
-                urgency: 'LOW',
+                side: VolumeParticipationFutureAlgoSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationFutureAlgoUrgencyEnum.LOW,
             };
             const params = Object.assign({ ..._params });
             delete params?.side;
@@ -725,9 +733,9 @@ describe('FutureAlgoApi', () => {
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
-                urgency: 'LOW',
+                side: VolumeParticipationFutureAlgoSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationFutureAlgoUrgencyEnum.LOW,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -740,9 +748,9 @@ describe('FutureAlgoApi', () => {
         it('should throw RequiredError when urgency is missing', async () => {
             const _params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
-                urgency: 'LOW',
+                side: VolumeParticipationFutureAlgoSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationFutureAlgoUrgencyEnum.LOW,
             };
             const params = Object.assign({ ..._params });
             delete params?.urgency;
@@ -755,9 +763,9 @@ describe('FutureAlgoApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
-                side: 'BUY',
-                quantity: 1.0,
-                urgency: 'LOW',
+                side: VolumeParticipationFutureAlgoSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationFutureAlgoUrgencyEnum.LOW,
             };
 
             const errorResponse = {

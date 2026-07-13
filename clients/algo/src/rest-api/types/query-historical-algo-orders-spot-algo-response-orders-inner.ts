@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Algo REST API
+ * Algo Trading REST API
  *
- * OpenAPI Specification for the Binance Algo REST API
+ * Programmatic access to Binance’s execution algorithms for creating and managing Spot and Futures algo orders.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,79 +20,79 @@
  */
 export interface QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner {
     /**
-     *
+     * Algo order ID
      * @type {number | bigint}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     algoId?: number | bigint;
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     symbol?: string;
     /**
-     *
+     * Trading side
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     side?: string;
     /**
-     *
+     * Total order quantity
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     totalQty?: string;
     /**
-     *
+     * Executed quantity
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     executedQty?: string;
     /**
-     *
+     * Executed amount
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     executedAmt?: string;
     /**
-     *
+     * Average execution price
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     avgPrice?: string;
     /**
-     *
+     * Client-defined algo order ID
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     clientAlgoId?: string;
     /**
-     *
+     * Order creation time
      * @type {number | bigint}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     bookTime?: number | bigint;
     /**
-     *
+     * End time
      * @type {number | bigint}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     endTime?: number | bigint;
     /**
-     *
+     * Algo order status
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     algoStatus?: string;
     /**
-     *
+     * Algo order type
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     algoType?: string;
     /**
-     *
+     * Execution urgency
      * @type {string}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
