@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -100,14 +95,14 @@ describe('MarketApi', () => {
                 JSONStringify({
                     id: 'ddbfb65f-9ebf-42ec-8240-8f0f91de0867',
                     status: 200,
-                    result: { mins: 5, price: '9.35751834', closeTime: 1694061154503 },
+                    result: { mins: 5, closeTime: 1694061154503 },
                     rateLimits: [
                         {
                             rateLimitType: 'REQUEST_WEIGHT',
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })
@@ -297,8 +292,8 @@ describe('MarketApi', () => {
             mockResponse.id = randomString();
 
             const params: BlockTradesHistoricalRequest = {
-                symbol: 'BNBUSDT',
-                fromId: 1,
+                symbol: 'BNBBTC',
+                fromId: 582,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -356,8 +351,8 @@ describe('MarketApi', () => {
             };
 
             const params: BlockTradesHistoricalRequest = {
-                symbol: 'BNBUSDT',
-                fromId: 1,
+                symbol: 'BNBBTC',
+                fromId: 582,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -391,8 +386,8 @@ describe('MarketApi', () => {
             jest.useRealTimers();
 
             const params: BlockTradesHistoricalRequest = {
-                symbol: 'BNBUSDT',
-                fromId: 1,
+                symbol: 'BNBBTC',
+                fromId: 582,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -461,20 +456,8 @@ describe('MarketApi', () => {
                     status: 200,
                     result: {
                         lastUpdateId: 2731179239,
-                        bids: [
-                            ['0.01379900', '3.43200000'],
-                            ['0.01379800', '3.24300000'],
-                            ['0.01379700', '10.45500000'],
-                            ['0.01379600', '3.82100000'],
-                            ['0.01379500', '10.26200000'],
-                        ],
-                        asks: [
-                            ['0.01380000', '5.91700000'],
-                            ['0.01380100', '6.01400000'],
-                            ['0.01380200', '0.26800000'],
-                            ['0.01380300', '0.33800000'],
-                            ['0.01380400', '0.26800000'],
-                        ],
+                        bids: [['0.01379900', '3.43200000']],
+                        asks: [['0.01380000', '5.91700000']],
                     },
                     rateLimits: [
                         {
@@ -482,7 +465,7 @@ describe('MarketApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })
@@ -648,29 +631,14 @@ describe('MarketApi', () => {
                 JSONStringify({
                     id: '1dbbeb56-8eea-466a-8f6e-86bdcfa2fc0b',
                     status: 200,
-                    result: [
-                        [
-                            1655971200000,
-                            '0.01086000',
-                            '0.01086600',
-                            '0.01083600',
-                            '0.01083800',
-                            '2290.53800000',
-                            1655974799999,
-                            '24.85074442',
-                            2283,
-                            '1171.64000000',
-                            '12.71225884',
-                            '0',
-                        ],
-                    ],
+                    result: [[1499040000000]],
                     rateLimits: [
                         {
                             rateLimitType: 'REQUEST_WEIGHT',
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })
@@ -837,7 +805,7 @@ describe('MarketApi', () => {
         it('should execute referencePrice() successfully', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
-                    id: '5132affa-0aba-4831-b475-f262504556b41',
+                    id: 'ddbfb65f-9ebf-42ec-8240-8f0f91de0867',
                     status: 200,
                     result: {
                         symbol: 'BAZUSD',
@@ -846,12 +814,21 @@ describe('MarketApi', () => {
                         code: -2043,
                         msg: 'This symbol doesn\'t have a reference price.',
                     },
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 321,
+                        },
+                    ],
                 })
             );
             mockResponse.id = randomString();
 
             const params: ReferencePriceRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BAZUSD',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -908,7 +885,7 @@ describe('MarketApi', () => {
             };
 
             const params: ReferencePriceRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BAZUSD',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -942,7 +919,7 @@ describe('MarketApi', () => {
             jest.useRealTimers();
 
             const params: ReferencePriceRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BAZUSD',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1007,21 +984,30 @@ describe('MarketApi', () => {
         it('should execute referencePriceCalculation() successfully', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
-                    id: '5132affa-0aba-4831-b475-f262504556b41',
+                    id: 'ddbfb65f-9ebf-42ec-8240-8f0f91de0867',
                     status: 200,
                     result: {
                         symbol: 'BAZUSD',
-                        calculationType: 'EXTERNAL',
+                        calculationType: 'ARITHMETIC_MEAN',
                         bucketCount: 10,
                         bucketWidthMs: 1000,
                         externalCalculationId: 42,
                     },
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 321,
+                        },
+                    ],
                 })
             );
             mockResponse.id = randomString();
 
             const params: ReferencePriceCalculationRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BAZUSD',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1079,7 +1065,7 @@ describe('MarketApi', () => {
             };
 
             const params: ReferencePriceCalculationRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BAZUSD',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1113,7 +1099,7 @@ describe('MarketApi', () => {
             jest.useRealTimers();
 
             const params: ReferencePriceCalculationRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BAZUSD',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1182,15 +1168,6 @@ describe('MarketApi', () => {
                     status: 200,
                     result: {
                         symbol: 'BNBBTC',
-                        priceChange: '0.00061500',
-                        priceChangePercent: '4.735',
-                        weightedAvgPrice: '0.01368242',
-                        openPrice: '0.01298900',
-                        highPrice: '0.01418800',
-                        lowPrice: '0.01296000',
-                        lastPrice: '0.01360400',
-                        volume: '587179.23900000',
-                        quoteVolume: '8034.03382165',
                         openTime: 1659580020000,
                         closeTime: 1660184865291,
                         firstId: 192977765,
@@ -1203,7 +1180,7 @@ describe('MarketApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 4,
+                            count: 321,
                         },
                     ],
                 })
@@ -1354,21 +1331,6 @@ describe('MarketApi', () => {
                     status: 200,
                     result: {
                         symbol: 'BNBBTC',
-                        priceChange: '0.00013900',
-                        priceChangePercent: '1.020',
-                        weightedAvgPrice: '0.01382453',
-                        prevClosePrice: '0.01362800',
-                        lastPrice: '0.01376700',
-                        lastQty: '1.78800000',
-                        bidPrice: '0.01376700',
-                        bidQty: '4.64600000',
-                        askPrice: '0.01376800',
-                        askQty: '14.31400000',
-                        openPrice: '0.01362800',
-                        highPrice: '0.01414900',
-                        lowPrice: '0.01346600',
-                        volume: '69412.40500000',
-                        quoteVolume: '959.59411487',
                         openTime: 1660014164909,
                         closeTime: 1660100564909,
                         firstId: 194696115,
@@ -1381,7 +1343,7 @@ describe('MarketApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })
@@ -1530,20 +1492,14 @@ describe('MarketApi', () => {
                 JSONStringify({
                     id: '9d32157c-a556-4d27-9866-66760a174b57',
                     status: 200,
-                    result: {
-                        symbol: 'BNBBTC',
-                        bidPrice: '0.01358000',
-                        bidQty: '12.53400000',
-                        askPrice: '0.01358100',
-                        askQty: '17.83700000',
-                    },
+                    result: { symbol: 'BNBBTC' },
                     rateLimits: [
                         {
                             rateLimitType: 'REQUEST_WEIGHT',
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })
@@ -1692,14 +1648,14 @@ describe('MarketApi', () => {
                 JSONStringify({
                     id: '043a7cf2-bde3-4888-9604-c8ac41fcba4d',
                     status: 200,
-                    result: { symbol: 'BNBBTC', price: '0.01361900' },
+                    result: { symbol: 'BNBBTC' },
                     rateLimits: [
                         {
                             rateLimitType: 'REQUEST_WEIGHT',
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })
@@ -1854,33 +1810,7 @@ describe('MarketApi', () => {
                     status: 200,
                     result: [
                         {
-                            symbol: 'BNBUSDT',
-                            priceChange: '2.60000000',
-                            priceChangePercent: '1.238',
-                            weightedAvgPrice: '211.92276958',
-                            openPrice: '210.00000000',
-                            highPrice: '213.70000000',
-                            lowPrice: '209.70000000',
-                            lastPrice: '212.60000000',
-                            volume: '280709.58900000',
-                            quoteVolume: '59488753.54750000',
-                            openTime: 1695686400000,
-                            closeTime: 1695772799999,
-                            firstId: 672397461,
-                            lastId: 672496158,
-                            count: 98698,
-                        },
-                        {
                             symbol: 'BTCUSDT',
-                            priceChange: '-83.13000000',
-                            priceChangePercent: '-0.317',
-                            weightedAvgPrice: '26234.58803036',
-                            openPrice: '26304.80000000',
-                            highPrice: '26397.46000000',
-                            lowPrice: '26088.34000000',
-                            lastPrice: '26221.67000000',
-                            volume: '18495.35066000',
-                            quoteVolume: '485217905.04210480',
                             openTime: 1695686400000,
                             closeTime: 1695772799999,
                             firstId: 3220151555,
@@ -1894,7 +1824,7 @@ describe('MarketApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 8,
+                            count: 321,
                         },
                     ],
                 })
@@ -2050,8 +1980,6 @@ describe('MarketApi', () => {
                     result: [
                         {
                             a: 50000000,
-                            p: '0.00274100',
-                            q: '57.19000000',
                             f: 59120167,
                             l: 59120170,
                             T: 1565877971222,
@@ -2065,7 +1993,7 @@ describe('MarketApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })
@@ -2231,24 +2159,14 @@ describe('MarketApi', () => {
                 JSONStringify({
                     id: 'cffc9c7d-4efc-4ce0-b587-6b87448f052a',
                     status: 200,
-                    result: [
-                        {
-                            id: 0,
-                            price: '0.00005000',
-                            qty: '40.00000000',
-                            quoteQty: '0.00200000',
-                            time: 1500004800376,
-                            isBuyerMaker: true,
-                            isBestMatch: true,
-                        },
-                    ],
+                    result: [{ id: 0, time: 1500004800376, isBuyerMaker: true, isBestMatch: true }],
                     rateLimits: [
                         {
                             rateLimitType: 'REQUEST_WEIGHT',
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 10,
+                            count: 321,
                         },
                     ],
                 })
@@ -2417,9 +2335,6 @@ describe('MarketApi', () => {
                     result: [
                         {
                             id: 194686783,
-                            price: '0.01361000',
-                            qty: '0.01400000',
-                            quoteQty: '0.00019054',
                             time: 1660009530807,
                             isBuyerMaker: true,
                             isBestMatch: true,
@@ -2431,7 +2346,7 @@ describe('MarketApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })
@@ -2597,29 +2512,14 @@ describe('MarketApi', () => {
                 JSONStringify({
                     id: 'b137468a-fb20-4c06-bd6b-625148eec958',
                     status: 200,
-                    result: [
-                        [
-                            1655971200000,
-                            '0.01086000',
-                            '0.01086600',
-                            '0.01083600',
-                            '0.01083800',
-                            '2290.53800000',
-                            1655974799999,
-                            '24.85074442',
-                            2283,
-                            '1171.64000000',
-                            '12.71225884',
-                            '0',
-                        ],
-                    ],
+                    result: [[1499040000000]],
                     rateLimits: [
                         {
                             rateLimitType: 'REQUEST_WEIGHT',
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 2,
+                            count: 321,
                         },
                     ],
                 })

@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -21,10 +16,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListCancelResponseResultOrderReportsInner } from './order-list-cancel-response-result-order-reports-inner';
+import type { AllOrderListsResponseResultInnerOrdersInner } from './all-order-lists-response-result-inner-orders-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListCancelResponseResultOrdersInner } from './order-list-cancel-response-result-orders-inner';
+import type { OrderListCancelResponseResultOrderReportsInner } from './order-list-cancel-response-result-order-reports-inner';
 
 /**
  *
@@ -76,10 +71,10 @@ export interface OrderListCancelResponseResult {
     symbol?: string;
     /**
      *
-     * @type {Array<OrderListCancelResponseResultOrdersInner>}
+     * @type {Array<AllOrderListsResponseResultInnerOrdersInner>}
      * @memberof OrderListCancelResponseResult
      */
-    orders?: Array<OrderListCancelResponseResultOrdersInner>;
+    orders?: Array<AllOrderListsResponseResultInnerOrdersInner>;
     /**
      *
      * @type {Array<OrderListCancelResponseResultOrderReportsInner>}

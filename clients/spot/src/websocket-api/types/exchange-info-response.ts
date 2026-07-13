@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -21,7 +16,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ExchangeInfoResponseResult } from './exchange-info-response-result';
+import type { ExchangeFilters } from './exchange-filters';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExchangeInfoResponseSorsInner } from './exchange-info-response-sors-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExchangeInfoResponseSymbolsInner } from './exchange-info-response-symbols-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { RateLimits } from './rate-limits';
@@ -37,23 +38,35 @@ export interface ExchangeInfoResponse {
      * @type {string}
      * @memberof ExchangeInfoResponse
      */
-    id?: string;
+    timezone?: string;
     /**
      *
      * @type {number | bigint}
      * @memberof ExchangeInfoResponse
      */
-    status?: number | bigint;
-    /**
-     *
-     * @type {ExchangeInfoResponseResult}
-     * @memberof ExchangeInfoResponse
-     */
-    result?: ExchangeInfoResponseResult;
+    serverTime?: number | bigint;
     /**
      *
      * @type {Array<RateLimits>}
      * @memberof ExchangeInfoResponse
      */
     rateLimits?: Array<RateLimits>;
+    /**
+     *
+     * @type {Array<ExchangeFilters>}
+     * @memberof ExchangeInfoResponse
+     */
+    exchangeFilters?: Array<ExchangeFilters>;
+    /**
+     *
+     * @type {Array<ExchangeInfoResponseSymbolsInner>}
+     * @memberof ExchangeInfoResponse
+     */
+    symbols?: Array<ExchangeInfoResponseSymbolsInner>;
+    /**
+     *
+     * @type {Array<ExchangeInfoResponseSorsInner>}
+     * @memberof ExchangeInfoResponse
+     */
+    sors?: Array<ExchangeInfoResponseSorsInner>;
 }

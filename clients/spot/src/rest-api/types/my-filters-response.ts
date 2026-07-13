@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -21,16 +16,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AssetFilters } from './asset-filters';
+import type { MyFiltersResponseAssetFiltersInner } from './my-filters-response-asset-filters-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ExchangeFilters } from './exchange-filters';
+import type { MyFiltersResponseExchangeFiltersInner } from './my-filters-response-exchange-filters-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { RateLimits } from './rate-limits';
+import type { MyFiltersResponseRateLimitsInner } from './my-filters-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SymbolFilters } from './symbol-filters';
+import type { MyFiltersResponseSymbolFiltersInner } from './my-filters-response-symbol-filters-inner';
 
 /**
  *
@@ -40,26 +35,26 @@ import type { SymbolFilters } from './symbol-filters';
 export interface MyFiltersResponse {
     /**
      *
-     * @type {Array<ExchangeFilters>}
+     * @type {Array<MyFiltersResponseExchangeFiltersInner>}
      * @memberof MyFiltersResponse
      */
-    exchangeFilters?: Array<ExchangeFilters>;
+    exchangeFilters?: Array<MyFiltersResponseExchangeFiltersInner>;
     /**
      *
-     * @type {Array<SymbolFilters>}
+     * @type {Array<MyFiltersResponseSymbolFiltersInner>}
      * @memberof MyFiltersResponse
      */
-    symbolFilters?: Array<SymbolFilters>;
+    symbolFilters?: Array<MyFiltersResponseSymbolFiltersInner>;
     /**
      *
-     * @type {Array<AssetFilters>}
+     * @type {Array<MyFiltersResponseAssetFiltersInner>}
      * @memberof MyFiltersResponse
      */
-    assetFilters?: Array<AssetFilters>;
+    assetFilters?: Array<MyFiltersResponseAssetFiltersInner>;
     /**
      *
-     * @type {Array<RateLimits>}
+     * @type {Array<MyFiltersResponseRateLimitsInner>}
      * @memberof MyFiltersResponse
      */
-    rateLimits?: Array<RateLimits>;
+    rateLimits?: Array<MyFiltersResponseRateLimitsInner>;
 }

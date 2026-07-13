@@ -1,12 +1,7 @@
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,13 +26,18 @@ import type {
  */
 export interface UserDataStreamApiInterface {
     /**
+     * **Note:**
      *
-     * Weight: 2
+     * Users should track the corresponding subscription status of related accounts as needed.
      *
-     **Data Source**:
-     * Memory
+     * Weight(IP): 2
      *
-     * @summary WebSocket Listing all subscriptions
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Listing all subscriptions
      * @param {SessionSubscriptionsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<SessionSubscriptionsResponse>}
@@ -49,9 +49,19 @@ export interface UserDataStreamApiInterface {
 
     /**
      * Subscribe to the User Data Stream in the current WebSocket connection.
-     * Weight: 2
      *
-     * @summary WebSocket Subscribe to User Data Stream
+     **Notes:**
+     * - This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to [`session.logon`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-logon).
+     * - To check the subscription status, use [`session.status`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-status), see the `userDataStream` flag indicating you have have an active subscription.
+     * - User Data Stream events are available in both JSON and [SBE](/products/spot/faqs/sbe_faq) sessions.
+     * - Please refer to [User Data Streams](/products/spot/user-data-stream) for the event format details.
+     * - For SBE, only SBE schema 2:1 or later is supported.
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * @summary Subscribe to User Data Stream
      * @param {UserDataStreamSubscribeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<UserDataStreamSubscribeResponse>}
@@ -62,10 +72,14 @@ export interface UserDataStreamApiInterface {
     ): Promise<WebsocketApiResponse<UserDataStreamSubscribeResponse>>;
 
     /**
+     * Weight(IP): 2
      *
-     * Weight: 2
+     * Security Type: USER_STREAM
      *
-     * @summary WebSocket Subscribe to User Data Stream through signature subscription
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Subscribe to User Data Stream through signature subscription (USER_STREAM)
      * @param {UserDataStreamSubscribeSignatureRequest} requestParameters Request parameters.
      *
      * @returns {Promise<UserDataStreamSubscribeSignatureResponse>}
@@ -76,10 +90,12 @@ export interface UserDataStreamApiInterface {
     ): Promise<WebsocketApiResponse<UserDataStreamSubscribeSignatureResponse>>;
 
     /**
-     * Stop listening to the User Data Stream in the current WebSocket connection.
+     * Stop listening to the User Data Stream in the current WebSocket
+     * connection.
      *
      * Note that `session.logout` will only close the subscription created with `userDataStream.subscribe` but not subscriptions opened with `userDataStream.subscribe.signature`.
-     * Weight: 2
+     *
+     * Weight(IP): 2
      *
      * @summary WebSocket Unsubscribe from User Data Stream
      * @param {UserDataStreamUnsubscribeRequest} requestParameters Request parameters.
@@ -98,7 +114,7 @@ export interface UserDataStreamApiInterface {
  */
 export interface SessionSubscriptionsRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof UserDataStreamApiSessionSubscriptions
      */
@@ -111,7 +127,7 @@ export interface SessionSubscriptionsRequest {
  */
 export interface UserDataStreamSubscribeRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof UserDataStreamApiUserDataStreamSubscribe
      */
@@ -124,14 +140,14 @@ export interface UserDataStreamSubscribeRequest {
  */
 export interface UserDataStreamSubscribeSignatureRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof UserDataStreamApiUserDataStreamSubscribeSignature
      */
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof UserDataStreamApiUserDataStreamSubscribeSignature
      */
@@ -144,14 +160,14 @@ export interface UserDataStreamSubscribeSignatureRequest {
  */
 export interface UserDataStreamUnsubscribeRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof UserDataStreamApiUserDataStreamUnsubscribe
      */
     readonly id?: string;
 
     /**
-     * When called with no parameter, this will close all subscriptions. <br>When called with the `subscriptionId` parameter, this will attempt to close the subscription with that subscription id, if it exists.
+     * When called with no parameter, this will close all subscriptions. When called with the subscriptionId parameter, this will attempt to close the subscription with that subscription id, if it exists.
      * @type {number}
      * @memberof UserDataStreamApiUserDataStreamUnsubscribe
      */
@@ -171,17 +187,22 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
     }
 
     /**
+     * **Note:**
      *
-     * Weight: 2
+     * Users should track the corresponding subscription status of related accounts as needed.
      *
-     **Data Source**:
-     * Memory
+     * Weight(IP): 2
      *
-     * @summary WebSocket Listing all subscriptions
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Listing all subscriptions
      * @param {SessionSubscriptionsRequest} requestParameters Request parameters.
      * @returns {Promise<SessionSubscriptionsResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#listing-all-subscriptions Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/user-data-stream#session-subscriptions Binance API Documentation}
      */
     public sessionSubscriptions(
         requestParameters: SessionSubscriptionsRequest = {}
@@ -195,13 +216,23 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
 
     /**
      * Subscribe to the User Data Stream in the current WebSocket connection.
-     * Weight: 2
      *
-     * @summary WebSocket Subscribe to User Data Stream
+     **Notes:**
+     * - This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to [`session.logon`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-logon).
+     * - To check the subscription status, use [`session.status`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-status), see the `userDataStream` flag indicating you have have an active subscription.
+     * - User Data Stream events are available in both JSON and [SBE](/products/spot/faqs/sbe_faq) sessions.
+     * - Please refer to [User Data Streams](/products/spot/user-data-stream) for the event format details.
+     * - For SBE, only SBE schema 2:1 or later is supported.
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * @summary Subscribe to User Data Stream
      * @param {UserDataStreamSubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamSubscribeResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/user-data-stream#user-data-stream-subscribe Binance API Documentation}
      */
     public userDataStreamSubscribe(
         requestParameters: UserDataStreamSubscribeRequest = {}
@@ -214,14 +245,18 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
     }
 
     /**
+     * Weight(IP): 2
      *
-     * Weight: 2
+     * Security Type: USER_STREAM
      *
-     * @summary WebSocket Subscribe to User Data Stream through signature subscription
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Subscribe to User Data Stream through signature subscription (USER_STREAM)
      * @param {UserDataStreamSubscribeSignatureRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamSubscribeSignatureResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/user-data-stream#user-data-stream-subscribe-signature Binance API Documentation}
      */
     public userDataStreamSubscribeSignature(
         requestParameters: UserDataStreamSubscribeSignatureRequest = {}
@@ -234,16 +269,18 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
     }
 
     /**
-     * Stop listening to the User Data Stream in the current WebSocket connection.
+     * Stop listening to the User Data Stream in the current WebSocket
+     * connection.
      *
      * Note that `session.logout` will only close the subscription created with `userDataStream.subscribe` but not subscriptions opened with `userDataStream.subscribe.signature`.
-     * Weight: 2
+     *
+     * Weight(IP): 2
      *
      * @summary WebSocket Unsubscribe from User Data Stream
      * @param {UserDataStreamUnsubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamUnsubscribeResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#unsubscribe-from-user-data-stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/user-data-stream#user-data-stream-unsubscribe Binance API Documentation}
      */
     public userDataStreamUnsubscribe(
         requestParameters: UserDataStreamUnsubscribeRequest = {}

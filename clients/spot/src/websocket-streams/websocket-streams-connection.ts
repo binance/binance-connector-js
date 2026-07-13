@@ -1,12 +1,7 @@
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,8 +11,10 @@
  * Do not edit the class manually.
  */
 
-import { WebsocketStreamsBase, WebsocketStream } from '@binance/common';
-import { WebSocketStreamsApi } from './modules/web-socket-streams-api';
+import { WebsocketStreamsBase, WebsocketStream, createStreamHandler } from '@binance/common';
+import { Api } from './modules/api';
+
+import type { UserDataStreamEventsResponse } from './types';
 
 import type {
     AggTradeRequest,
@@ -35,7 +32,7 @@ import type {
     RollingWindowTickerRequest,
     TickerRequest,
     TradeRequest,
-} from './modules/web-socket-streams-api';
+} from './modules/api';
 
 import type {
     AggTradeResponse,
@@ -57,11 +54,11 @@ import type {
 
 export class WebsocketStreamsConnection {
     private websocketBase: WebsocketStreamsBase;
-    private webSocketStreamsApi: WebSocketStreamsApi;
+    private api: Api;
 
     constructor(websocketBase: WebsocketStreamsBase) {
         this.websocketBase = websocketBase;
-        this.webSocketStreamsApi = new WebSocketStreamsApi(websocketBase);
+        this.api = new Api(websocketBase);
     }
 
     /**
@@ -152,226 +149,291 @@ export class WebsocketStreamsConnection {
     }
 
     /**
-     * The Aggregate Trade Streams push trade information that is aggregated for a single taker order.
+     * Subscribes to the user data WebSocket stream using the provided listen key.
+     * @param listenKey - The listen key for the user data WebSocket stream.
+     * @param id - Optional user data stream ID
+     * @returns A WebSocket stream handler for the user data stream.
+     */
+    userData(listenKey: string, id?: string): WebsocketStream<UserDataStreamEventsResponse> {
+        return createStreamHandler<UserDataStreamEventsResponse>(this.websocketBase, listenKey, id);
+    }
+
+    /**
+     * The Aggregate Trade Streams push trade information that is aggregated
+     * for a single taker order.
      *
-     * @summary WebSocket Aggregate Trade Streams
+     * Update Speed: Real-time
+     *
+     * @summary Aggregate Trade Streams
      * @param {AggTradeRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<AggTradeResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#aggregate-trade-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#agg-trade Binance API Documentation}
      */
     aggTrade(requestParameters: AggTradeRequest): WebsocketStream<AggTradeResponse> {
-        return this.webSocketStreamsApi.aggTrade(requestParameters);
+        return this.api.aggTrade(requestParameters);
     }
 
     /**
-     * Rolling window ticker statistics for all market symbols, computed over multiple windows.
+     * Rolling window ticker statistics for all market symbols, computed over
+     * multiple windows.
+     *
      * Note that only tickers that have changed will be present in the array.
      *
-     * @summary WebSocket All Market Rolling Window Statistics Streams
+     * Update Speed: 1000ms
+     *
+     * @summary All Market Rolling Window Statistics Streams
      * @param {AllMarketRollingWindowTickerRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<AllMarketRollingWindowTickerResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-rolling-window-statistics-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#all-market-rolling-window-ticker Binance API Documentation}
      */
     allMarketRollingWindowTicker(
         requestParameters: AllMarketRollingWindowTickerRequest
     ): WebsocketStream<AllMarketRollingWindowTickerResponse> {
-        return this.webSocketStreamsApi.allMarketRollingWindowTicker(requestParameters);
+        return this.api.allMarketRollingWindowTicker(requestParameters);
     }
 
     /**
-     * 24hr rolling window mini-ticker statistics for all symbols that changed in an array. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs. Note that only tickers that have changed will be present in the array.
+     * 24hr rolling window mini-ticker statistics for all symbols that changed
+     * in an array. These are NOT the statistics of the UTC day, but a 24hr
+     * rolling window for the previous 24hrs. Note that only tickers that have
+     * changed will be present in the array.
      *
-     * @summary WebSocket All Market Mini Tickers Stream
+     * Update Speed: 1000ms
+     *
+     * @summary All Market Mini Tickers Stream
      * @param {AllMiniTickerRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<AllMiniTickerResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-mini-tickers-stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#all-mini-ticker Binance API Documentation}
      */
     allMiniTicker(
         requestParameters: AllMiniTickerRequest = {}
     ): WebsocketStream<AllMiniTickerResponse> {
-        return this.webSocketStreamsApi.allMiniTicker(requestParameters);
+        return this.api.allMiniTicker(requestParameters);
     }
 
     /**
      * Average price streams push changes in the average price over a fixed time interval.
      *
-     * @summary WebSocket Average Price
+     * Update Speed: 1000ms
+     *
+     * @summary Average Price
      * @param {AvgPriceRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<AvgPriceResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#average-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#avg-price Binance API Documentation}
      */
     avgPrice(requestParameters: AvgPriceRequest): WebsocketStream<AvgPriceResponse> {
-        return this.webSocketStreamsApi.avgPrice(requestParameters);
+        return this.api.avgPrice(requestParameters);
     }
 
     /**
+     * Block Trade Streams push block trade information in real-time.
      *
+     * Update Speed: Real-time
      *
-     * @summary WebSocket Block Trade Streams
+     * @summary Block Trade Streams
      * @param {BlockTradeRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<BlockTradeResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#block-trade-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#block-trade Binance API Documentation}
      */
     blockTrade(requestParameters: BlockTradeRequest): WebsocketStream<BlockTradeResponse> {
-        return this.webSocketStreamsApi.blockTrade(requestParameters);
+        return this.api.blockTrade(requestParameters);
     }
 
     /**
-     * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
-     * Multiple `<symbol>@bookTicker` streams can be subscribed to over one connection.
+     * Pushes any update to the best bid or ask's price or quantity in
+     * real-time for a specified symbol.
      *
-     * @summary WebSocket Individual Symbol Book Ticker Streams
+     * Multiple `<symbol>@bookTicker` streams can be subscribed to over one
+     * connection.
+     *
+     * Update Speed: Real-time
+     *
+     * @summary Individual Symbol Book Ticker Streams
      * @param {BookTickerRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<BookTickerResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-book-ticker-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#book-ticker Binance API Documentation}
      */
     bookTicker(requestParameters: BookTickerRequest): WebsocketStream<BookTickerResponse> {
-        return this.webSocketStreamsApi.bookTicker(requestParameters);
+        return this.api.bookTicker(requestParameters);
     }
 
     /**
      * Order book price and quantity depth updates used to locally manage an order book.
      *
-     * @summary WebSocket Diff. Depth Stream
+     * Update Speed: 1000ms or 100ms
+     *
+     * @summary Diff. Depth Stream
      * @param {DiffBookDepthRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<DiffBookDepthResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#diff-depth-stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#diff-book-depth Binance API Documentation}
      */
     diffBookDepth(requestParameters: DiffBookDepthRequest): WebsocketStream<DiffBookDepthResponse> {
-        return this.webSocketStreamsApi.diffBookDepth(requestParameters);
+        return this.api.diffBookDepth(requestParameters);
     }
 
     /**
-     * The Kline/Candlestick Stream push updates to the current klines/candlestick every second in `UTC+0` timezone
+     * The Kline/Candlestick Stream push updates to the current
+     * klines/candlestick every second in `UTC+0` timezone
      *
-     * <a id="kline-intervals"></a>
+     * Update Speed: 1000ms for `1s`, 2000ms for the other intervals
      *
-     * @summary WebSocket Kline/Candlestick Streams for UTC
+     * @summary Kline/Candlestick Streams for UTC
      * @param {KlineRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<KlineResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#klinecandlestick-streams-for-utc Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#kline Binance API Documentation}
      */
     kline(requestParameters: KlineRequest): WebsocketStream<KlineResponse> {
-        return this.webSocketStreamsApi.kline(requestParameters);
+        return this.api.kline(requestParameters);
     }
 
     /**
-     * The Kline/Candlestick Stream push updates to the current klines/candlestick every second in `UTC+8` timezone
+     * The Kline/Candlestick Stream push updates to the current
+     * klines/candlestick every second in `UTC+8` timezone
      *
-     * @summary WebSocket Kline/Candlestick Streams with timezone offset
+     **Kline/Candlestick chart intervals:**
+     *
+     * Supported intervals: See Kline/Candlestick chart intervals
+     *
+     **UTC+8 timezone offset:**
+     * - Kline intervals open and close in the UTC+8 timezone. For example the 1d klines will open at the beginning of the UTC+8 day, and close at the end of the UTC+8 day.
+     * - Note that E (event time), t (start time) and T (close time) in the payload are Unix timestamps, which are always interpreted in UTC.
+     *
+     * Update Speed: 1000ms for `1s`, 2000ms for the other intervals
+     *
+     * @summary Kline/Candlestick Streams with timezone offset
      * @param {KlineOffsetRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<KlineOffsetResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#klinecandlestick-streams-with-timezone-offset Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#kline-offset Binance API Documentation}
      */
     klineOffset(requestParameters: KlineOffsetRequest): WebsocketStream<KlineOffsetResponse> {
-        return this.webSocketStreamsApi.klineOffset(requestParameters);
+        return this.api.klineOffset(requestParameters);
     }
 
     /**
-     * 24hr rolling window mini-ticker statistics. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
+     * 24hr rolling window mini-ticker statistics. These are NOT the statistics
+     * of the UTC day, but a 24hr rolling window for the previous 24hrs.
      *
-     * @summary WebSocket Individual Symbol Mini Ticker Stream
+     * Update Speed: 1000ms
+     *
+     * @summary Individual Symbol Mini Ticker Stream
      * @param {MiniTickerRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<MiniTickerResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-mini-ticker-stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#mini-ticker Binance API Documentation}
      */
     miniTicker(requestParameters: MiniTickerRequest): WebsocketStream<MiniTickerResponse> {
-        return this.webSocketStreamsApi.miniTicker(requestParameters);
+        return this.api.miniTicker(requestParameters);
     }
 
     /**
-     * Top **\<levels\>** bids and asks, pushed every second. Valid **\<levels\>** are 5, 10, or 20.
+     * Top **\<levels\>** bids and asks, pushed every second.
+     *
+     * Update Speed: 1000ms or 100ms
      *
      * @summary WebSocket Partial Book Depth Streams
      * @param {PartialBookDepthRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<PartialBookDepthResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#partial-book-depth-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#partial-book-depth Binance API Documentation}
      */
     partialBookDepth(
         requestParameters: PartialBookDepthRequest
     ): WebsocketStream<PartialBookDepthResponse> {
-        return this.webSocketStreamsApi.partialBookDepth(requestParameters);
+        return this.api.partialBookDepth(requestParameters);
     }
 
     /**
+     * Reference price stream for a symbol.
      *
+     * Update Speed: 1000ms
      *
-     * @summary WebSocket Reference Price Streams
+     * @summary Reference Price Streams
      * @param {ReferencePriceRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<ReferencePriceResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#reference-price-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#reference-price Binance API Documentation}
      */
     referencePrice(
         requestParameters: ReferencePriceRequest
     ): WebsocketStream<ReferencePriceResponse> {
-        return this.webSocketStreamsApi.referencePrice(requestParameters);
+        return this.api.referencePrice(requestParameters);
     }
 
     /**
-     * Rolling window ticker statistics for a single symbol, computed over multiple windows.
+     * Rolling window ticker statistics for a single symbol, computed over
+     * multiple windows.
      *
-     * @summary WebSocket Individual Symbol Rolling Window Statistics Streams
+     **Note:** This stream is different from the `<symbol>@ticker` stream. The open time `"O"` always starts on a minute, while the closing time `"C"` is the current time
+     * of the update. As such, the effective window might be up to 59999ms wider than `<window_size>`.
+     *
+     * Update Speed: 1000ms
+     *
+     * @summary Individual Symbol Rolling Window Statistics Streams
      * @param {RollingWindowTickerRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<RollingWindowTickerResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-rolling-window-statistics-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#rolling-window-ticker Binance API Documentation}
      */
     rollingWindowTicker(
         requestParameters: RollingWindowTickerRequest
     ): WebsocketStream<RollingWindowTickerResponse> {
-        return this.webSocketStreamsApi.rollingWindowTicker(requestParameters);
+        return this.api.rollingWindowTicker(requestParameters);
     }
 
     /**
-     * 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs.
+     * 24hr rolling window ticker statistics for a single symbol. These are NOT
+     * the statistics of the UTC day, but a 24hr rolling window for the
+     * previous 24hrs.
      *
-     * @summary WebSocket Individual Symbol Ticker Streams
+     * Update Speed: 1000ms
+     *
+     * @summary Individual Symbol Ticker Streams
      * @param {TickerRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<TickerResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-ticker-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#ticker Binance API Documentation}
      */
     ticker(requestParameters: TickerRequest): WebsocketStream<TickerResponse> {
-        return this.webSocketStreamsApi.ticker(requestParameters);
+        return this.api.ticker(requestParameters);
     }
 
     /**
-     * The Trade Streams push raw trade information; each trade has a unique buyer and seller.
+     * The Trade Streams push raw trade information; each trade has a unique
+     * buyer and seller.
      *
-     * @summary WebSocket Trade Streams
+     * Update Speed: Real-time
+     *
+     * @summary Trade Streams
      * @param {TradeRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<TradeResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#trade-streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~#trade Binance API Documentation}
      */
     trade(requestParameters: TradeRequest): WebsocketStream<TradeResponse> {
-        return this.webSocketStreamsApi.trade(requestParameters);
+        return this.api.trade(requestParameters);
     }
 }

@@ -1,12 +1,7 @@
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -126,7 +121,7 @@ describe('MarketApi', () => {
                 fromId: 1,
                 startTime: 1735693200000,
                 endTime: 1735693200000,
-                limit: 500,
+                limit: 1,
             };
 
             mockResponse = JSONParse(
@@ -300,7 +295,7 @@ describe('MarketApi', () => {
         it('should execute depth() successfully with optional parameters', async () => {
             const params: DepthRequest = {
                 symbol: 'BNBUSDT',
-                limit: 500,
+                limit: 1,
                 symbolStatus: DepthSymbolStatusEnum.TRADING,
             };
 
@@ -395,7 +390,7 @@ describe('MarketApi', () => {
         it('should execute getTrades() successfully with optional parameters', async () => {
             const params: GetTradesRequest = {
                 symbol: 'BNBUSDT',
-                limit: 500,
+                limit: 1,
             };
 
             mockResponse = JSONParse(
@@ -461,8 +456,8 @@ describe('MarketApi', () => {
     describe('historicalBlockTrades()', () => {
         it('should execute historicalBlockTrades() successfully with required parameters only', async () => {
             const params: HistoricalBlockTradesRequest = {
-                symbol: 'BNBUSDT',
-                fromId: 1,
+                symbol: 'BNBBTC',
+                fromId: 582,
             };
 
             mockResponse = JSONParse(
@@ -494,8 +489,8 @@ describe('MarketApi', () => {
 
         it('should execute historicalBlockTrades() successfully with optional parameters', async () => {
             const params: HistoricalBlockTradesRequest = {
-                symbol: 'BNBUSDT',
-                fromId: 1,
+                symbol: 'BNBBTC',
+                fromId: 582,
                 limit: 500,
             };
 
@@ -528,8 +523,8 @@ describe('MarketApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: HistoricalBlockTradesRequest = {
-                symbol: 'BNBUSDT',
-                fromId: 1,
+                symbol: 'BNBBTC',
+                fromId: 582,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -541,8 +536,8 @@ describe('MarketApi', () => {
 
         it('should throw RequiredError when fromId is missing', async () => {
             const _params: HistoricalBlockTradesRequest = {
-                symbol: 'BNBUSDT',
-                fromId: 1,
+                symbol: 'BNBBTC',
+                fromId: 582,
             };
             const params = Object.assign({ ..._params });
             delete params?.fromId;
@@ -554,8 +549,8 @@ describe('MarketApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: HistoricalBlockTradesRequest = {
-                symbol: 'BNBUSDT',
-                fromId: 1,
+                symbol: 'BNBBTC',
+                fromId: 582,
             };
 
             const errorResponse = {
@@ -612,7 +607,7 @@ describe('MarketApi', () => {
         it('should execute historicalTrades() successfully with optional parameters', async () => {
             const params: HistoricalTradesRequest = {
                 symbol: 'BNBUSDT',
-                limit: 500,
+                limit: 1,
                 fromId: 1,
             };
 
@@ -683,24 +678,7 @@ describe('MarketApi', () => {
                 interval: KlinesIntervalEnum.INTERVAL_1s,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1499040000000,
-                        '0.01634790',
-                        '0.80000000',
-                        '0.01575800',
-                        '0.01577100',
-                        '148976.11427815',
-                        1499644799999,
-                        '2434.19055334',
-                        308,
-                        '1756.87402397',
-                        '28.46694368',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1499040000000]]));
 
             const spy = jest.spyOn(client, 'klines').mockReturnValue(
                 Promise.resolve({
@@ -722,28 +700,11 @@ describe('MarketApi', () => {
                 interval: KlinesIntervalEnum.INTERVAL_1s,
                 startTime: 1735693200000,
                 endTime: 1735693200000,
-                timeZone: 'timeZone_example',
-                limit: 500,
+                timeZone: '0',
+                limit: 1,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1499040000000,
-                        '0.01634790',
-                        '0.80000000',
-                        '0.01575800',
-                        '0.01577100',
-                        '148976.11427815',
-                        1499644799999,
-                        '2434.19055334',
-                        308,
-                        '1756.87402397',
-                        '28.46694368',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1499040000000]]));
 
             const spy = jest.spyOn(client, 'klines').mockReturnValue(
                 Promise.resolve({
@@ -902,7 +863,7 @@ describe('MarketApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'BAZUSD',
-                    calculationType: 'EXTERNAL',
+                    calculationType: 'ARITHMETIC_MEAN',
                     bucketCount: 10,
                     bucketWidthMs: 1000,
                     externalCalculationId: 42,
@@ -932,7 +893,7 @@ describe('MarketApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'BAZUSD',
-                    calculationType: 'EXTERNAL',
+                    calculationType: 'ARITHMETIC_MEAN',
                     bucketCount: 10,
                     bucketWidthMs: 1000,
                     externalCalculationId: 42,
@@ -992,15 +953,6 @@ describe('MarketApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'LTCBTC',
-                    priceChange: '-8.00000000',
-                    priceChangePercent: '-88.889',
-                    weightedAvgPrice: '2.60427807',
-                    openPrice: '0.10000000',
-                    highPrice: '2.00000000',
-                    lowPrice: '0.10000000',
-                    lastPrice: '2.00000000',
-                    volume: '39.00000000',
-                    quoteVolume: '13.40000000',
                     openTime: 1656986580000,
                     closeTime: 1657001016795,
                     firstId: 0,
@@ -1026,7 +978,7 @@ describe('MarketApi', () => {
         it('should execute ticker() successfully with optional parameters', async () => {
             const params: TickerRequest = {
                 symbol: 'BNBUSDT',
-                symbols: ['null'],
+                symbols: ['BTCUSDT'],
                 windowSize: TickerWindowSizeEnum.WINDOW_SIZE_1m,
                 type: TickerTypeEnum.FULL,
                 symbolStatus: TickerSymbolStatusEnum.TRADING,
@@ -1035,15 +987,6 @@ describe('MarketApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'LTCBTC',
-                    priceChange: '-8.00000000',
-                    priceChangePercent: '-88.889',
-                    weightedAvgPrice: '2.60427807',
-                    openPrice: '0.10000000',
-                    highPrice: '2.00000000',
-                    lowPrice: '0.10000000',
-                    lastPrice: '2.00000000',
-                    volume: '39.00000000',
-                    quoteVolume: '13.40000000',
                     openTime: 1656986580000,
                     closeTime: 1657001016795,
                     firstId: 0,
@@ -1087,21 +1030,6 @@ describe('MarketApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'BNBBTC',
-                    priceChange: '-94.99999800',
-                    priceChangePercent: '-95.960',
-                    weightedAvgPrice: '0.29628482',
-                    prevClosePrice: '0.10002000',
-                    lastPrice: '4.00000200',
-                    lastQty: '200.00000000',
-                    bidPrice: '4.00000000',
-                    bidQty: '100.00000000',
-                    askPrice: '4.00000200',
-                    askQty: '100.00000000',
-                    openPrice: '99.00000000',
-                    highPrice: '100.00000000',
-                    lowPrice: '0.10000000',
-                    volume: '8913.30000000',
-                    quoteVolume: '15.30000000',
                     openTime: 1499783499040,
                     closeTime: 1499869899040,
                     firstId: 28385,
@@ -1127,7 +1055,7 @@ describe('MarketApi', () => {
         it('should execute ticker24hr() successfully with optional parameters', async () => {
             const params: Ticker24hrRequest = {
                 symbol: 'BNBUSDT',
-                symbols: ['null'],
+                symbols: ['BTCUSDT'],
                 type: Ticker24hrTypeEnum.FULL,
                 symbolStatus: Ticker24hrSymbolStatusEnum.TRADING,
             };
@@ -1135,21 +1063,6 @@ describe('MarketApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'BNBBTC',
-                    priceChange: '-94.99999800',
-                    priceChangePercent: '-95.960',
-                    weightedAvgPrice: '0.29628482',
-                    prevClosePrice: '0.10002000',
-                    lastPrice: '4.00000200',
-                    lastQty: '200.00000000',
-                    bidPrice: '4.00000000',
-                    bidQty: '100.00000000',
-                    askPrice: '4.00000200',
-                    askQty: '100.00000000',
-                    openPrice: '99.00000000',
-                    highPrice: '100.00000000',
-                    lowPrice: '0.10000000',
-                    volume: '8913.30000000',
-                    quoteVolume: '15.30000000',
                     openTime: 1499783499040,
                     closeTime: 1499869899040,
                     firstId: 28385,
@@ -1190,15 +1103,7 @@ describe('MarketApi', () => {
 
     describe('tickerBookTicker()', () => {
         it('should execute tickerBookTicker() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify({
-                    symbol: 'LTCBTC',
-                    bidPrice: '4.00000000',
-                    bidQty: '431.00000000',
-                    askPrice: '4.00000200',
-                    askQty: '9.00000000',
-                })
-            );
+            mockResponse = JSONParse(JSONStringify({ symbol: 'LTCBTC' }));
 
             const spy = jest.spyOn(client, 'tickerBookTicker').mockReturnValue(
                 Promise.resolve({
@@ -1217,19 +1122,11 @@ describe('MarketApi', () => {
         it('should execute tickerBookTicker() successfully with optional parameters', async () => {
             const params: TickerBookTickerRequest = {
                 symbol: 'BNBUSDT',
-                symbols: ['null'],
+                symbols: ['BTCUSDT'],
                 symbolStatus: TickerBookTickerSymbolStatusEnum.TRADING,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify({
-                    symbol: 'LTCBTC',
-                    bidPrice: '4.00000000',
-                    bidQty: '431.00000000',
-                    askPrice: '4.00000200',
-                    askQty: '9.00000000',
-                })
-            );
+            mockResponse = JSONParse(JSONStringify({ symbol: 'LTCBTC' }));
 
             const spy = jest.spyOn(client, 'tickerBookTicker').mockReturnValue(
                 Promise.resolve({
@@ -1263,7 +1160,7 @@ describe('MarketApi', () => {
 
     describe('tickerPrice()', () => {
         it('should execute tickerPrice() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(JSONStringify({ symbol: 'LTCBTC', price: '4.00000200' }));
+            mockResponse = JSONParse(JSONStringify({ symbol: 'LTCBTC' }));
 
             const spy = jest.spyOn(client, 'tickerPrice').mockReturnValue(
                 Promise.resolve({
@@ -1282,11 +1179,11 @@ describe('MarketApi', () => {
         it('should execute tickerPrice() successfully with optional parameters', async () => {
             const params: TickerPriceRequest = {
                 symbol: 'BNBUSDT',
-                symbols: ['null'],
+                symbols: ['BTCUSDT'],
                 symbolStatus: TickerPriceSymbolStatusEnum.TRADING,
             };
 
-            mockResponse = JSONParse(JSONStringify({ symbol: 'LTCBTC', price: '4.00000200' }));
+            mockResponse = JSONParse(JSONStringify({ symbol: 'LTCBTC' }));
 
             const spy = jest.spyOn(client, 'tickerPrice').mockReturnValue(
                 Promise.resolve({
@@ -1323,15 +1220,6 @@ describe('MarketApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'BTCUSDT',
-                    priceChange: '-83.13000000',
-                    priceChangePercent: '-0.317',
-                    weightedAvgPrice: '26234.58803036',
-                    openPrice: '26304.80000000',
-                    highPrice: '26397.46000000',
-                    lowPrice: '26088.34000000',
-                    lastPrice: '26221.67000000',
-                    volume: '18495.35066000',
-                    quoteVolume: '485217905.04210480',
                     openTime: 1695686400000,
                     closeTime: 1695772799999,
                     firstId: 3220151555,
@@ -1357,8 +1245,8 @@ describe('MarketApi', () => {
         it('should execute tickerTradingDay() successfully with optional parameters', async () => {
             const params: TickerTradingDayRequest = {
                 symbol: 'BNBUSDT',
-                symbols: ['null'],
-                timeZone: 'timeZone_example',
+                symbols: ['BTCUSDT'],
+                timeZone: '0',
                 type: TickerTradingDayTypeEnum.FULL,
                 symbolStatus: TickerTradingDaySymbolStatusEnum.TRADING,
             };
@@ -1366,15 +1254,6 @@ describe('MarketApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     symbol: 'BTCUSDT',
-                    priceChange: '-83.13000000',
-                    priceChangePercent: '-0.317',
-                    weightedAvgPrice: '26234.58803036',
-                    openPrice: '26304.80000000',
-                    highPrice: '26397.46000000',
-                    lowPrice: '26088.34000000',
-                    lastPrice: '26221.67000000',
-                    volume: '18495.35066000',
-                    quoteVolume: '485217905.04210480',
                     openTime: 1695686400000,
                     closeTime: 1695772799999,
                     firstId: 3220151555,
@@ -1420,24 +1299,7 @@ describe('MarketApi', () => {
                 interval: UiKlinesIntervalEnum.INTERVAL_1s,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1499040000000,
-                        '0.01634790',
-                        '0.80000000',
-                        '0.01575800',
-                        '0.01577100',
-                        '148976.11427815',
-                        1499644799999,
-                        '2434.19055334',
-                        308,
-                        '1756.87402397',
-                        '28.46694368',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1499040000000]]));
 
             const spy = jest.spyOn(client, 'uiKlines').mockReturnValue(
                 Promise.resolve({
@@ -1459,28 +1321,11 @@ describe('MarketApi', () => {
                 interval: UiKlinesIntervalEnum.INTERVAL_1s,
                 startTime: 1735693200000,
                 endTime: 1735693200000,
-                timeZone: 'timeZone_example',
-                limit: 500,
+                timeZone: '0',
+                limit: 1,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1499040000000,
-                        '0.01634790',
-                        '0.80000000',
-                        '0.01575800',
-                        '0.01577100',
-                        '148976.11427815',
-                        1499644799999,
-                        '2434.19055334',
-                        308,
-                        '1756.87402397',
-                        '28.46694368',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1499040000000]]));
 
             const spy = jest.spyOn(client, 'uiKlines').mockReturnValue(
                 Promise.resolve({

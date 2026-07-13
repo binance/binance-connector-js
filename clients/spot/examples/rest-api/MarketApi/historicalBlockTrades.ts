@@ -10,8 +10,8 @@ const client = new Spot({ configurationRestAPI });
 async function historicalBlockTrades() {
     try {
         const response = await client.restAPI.historicalBlockTrades({
-            symbol: 'BNBUSDT',
-            fromId: 1,
+            symbol: 'BNBBTC',
+            fromId: 582,
         });
 
         const rateLimits = response.rateLimits!;

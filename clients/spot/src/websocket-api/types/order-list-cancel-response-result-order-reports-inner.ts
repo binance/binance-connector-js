@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -113,11 +108,95 @@ export interface OrderListCancelResponseResultOrderReportsInner {
      * @type {string}
      * @memberof OrderListCancelResponseResultOrderReportsInner
      */
-    stopPrice?: string;
+    selfTradePreventionMode?: string;
     /**
-     *
+     * Appears only if the parameter icebergQty was sent in the request.
      * @type {string}
      * @memberof OrderListCancelResponseResultOrderReportsInner
      */
-    selfTradePreventionMode?: string;
+    icebergQty?: string;
+    /**
+     * Appears only if the order expired due to STP.
+     * @type {number | bigint}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    preventedMatchId?: number | bigint;
+    /**
+     * Order quantity that expired due to STP.
+     * @type {string}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    preventedQuantity?: string;
+    /**
+     * Appears for STOP_LOSS, TAKE_PROFIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT orders.
+     * @type {string}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    stopPrice?: string;
+    /**
+     * Appears only if the strategyId parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    strategyId?: number | bigint;
+    /**
+     * Appears only if the strategyType parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    strategyType?: number | bigint;
+    /**
+     * Delta price change required before order activation.
+     * @type {number | bigint}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    trailingDelta?: number | bigint;
+    /**
+     * Time when the trailing order is now active and tracking price changes.
+     * @type {number | bigint}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    trailingTime?: number | bigint;
+    /**
+     * Field that determines whether order used SOR.
+     * @type {boolean}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    usedSor?: boolean;
+    /**
+     * Determines whether the order is being filled by the SOR or by the order book.
+     * @type {string}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    workingFloor?: string;
+    /**
+     * Price peg type. Only for pegged orders.
+     * @type {string}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    pegPriceType?: string;
+    /**
+     * Price peg offset type. Only for pegged orders, if requested.
+     * @type {string}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    pegOffsetType?: string;
+    /**
+     * Price peg offset value. Only for pegged orders, if requested.
+     * @type {number | bigint}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    pegOffsetValue?: number | bigint;
+    /**
+     * Current price order is pegged at. Only for pegged orders, once determined.
+     * @type {string}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    peggedPrice?: string;
+    /**
+     * Cause of the order\'s expiration. Appears when an order has expired.
+     * @type {string}
+     * @memberof OrderListCancelResponseResultOrderReportsInner
+     */
+    expiryReason?: string;
 }

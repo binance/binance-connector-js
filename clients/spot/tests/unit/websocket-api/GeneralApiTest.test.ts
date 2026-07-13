@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -97,27 +92,12 @@ describe('GeneralApi', () => {
                                 interval: 'MINUTE',
                                 intervalNum: 1,
                                 limit: 6000,
-                            },
-                            {
-                                rateLimitType: 'ORDERS',
-                                interval: 'SECOND',
-                                intervalNum: 10,
-                                limit: 50,
-                            },
-                            {
-                                rateLimitType: 'ORDERS',
-                                interval: 'DAY',
-                                intervalNum: 1,
-                                limit: 160000,
-                            },
-                            {
-                                rateLimitType: 'CONNECTIONS',
-                                interval: 'MINUTE',
-                                intervalNum: 5,
-                                limit: 300,
+                                count: 321,
                             },
                         ],
-                        exchangeFilters: [],
+                        exchangeFilters: [
+                            { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                        ],
                         symbols: [
                             {
                                 symbol: 'BNBBTC',
@@ -129,9 +109,7 @@ describe('GeneralApi', () => {
                                 quoteAssetPrecision: 8,
                                 baseCommissionPrecision: 8,
                                 quoteCommissionPrecision: 8,
-                                orderTypes: [
-                                    'LIMIT LIMIT_MAKER MARKET STOP_LOSS_LIMIT TAKE_PROFIT_LIMIT',
-                                ],
+                                orderTypes: ['LIMIT'],
                                 icebergAllowed: true,
                                 ocoAllowed: true,
                                 otoAllowed: true,
@@ -146,40 +124,20 @@ describe('GeneralApi', () => {
                                 filters: [
                                     {
                                         filterType: 'PRICE_FILTER',
+                                        priceExponent: 8,
                                         minPrice: '0.00000100',
                                         maxPrice: '100000.00000000',
                                         tickSize: '0.00000100',
                                     },
-                                    {
-                                        filterType: 'LOT_SIZE',
-                                        minQty: '0.00100000',
-                                        maxQty: '100000.00000000',
-                                        stepSize: '0.00100000',
-                                    },
                                 ],
-                                permissions: [],
-                                permissionSets: [['SPOT', 'MARGIN', 'TRD_GRP_004']],
+                                permissions: ['SPOT'],
+                                permissionSets: [['SPOT']],
                                 defaultSelfTradePreventionMode: 'NONE',
                                 allowedSelfTradePreventionModes: ['NONE'],
                             },
                         ],
-                        sors: [{ baseAsset: 'BTC', symbols: ['BTCUSDT BTCUSDC'] }],
+                        sors: [{ baseAsset: 'BTC', symbols: ['BTCUSDT'] }],
                     },
-                    rateLimits: [
-                        {
-                            rateLimitType: 'REQUEST_WEIGHT',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 6000,
-                        },
-                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                        {
-                            rateLimitType: 'RAW_REQUESTS',
-                            interval: 'MINUTE',
-                            intervalNum: 5,
-                            limit: 61000,
-                        },
-                    ],
                 })
             );
             mockResponse.id = randomString();
@@ -503,7 +461,7 @@ describe('GeneralApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 1,
+                            count: 321,
                         },
                     ],
                 })
@@ -658,7 +616,7 @@ describe('GeneralApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 1,
+                            count: 321,
                         },
                     ],
                 })

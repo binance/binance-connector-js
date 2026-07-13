@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,43 +20,43 @@
  */
 export interface DiffBookDepthResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof DiffBookDepthResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof DiffBookDepthResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof DiffBookDepthResponse
      */
     s?: string;
     /**
-     *
+     * First update ID in event
      * @type {number | bigint}
      * @memberof DiffBookDepthResponse
      */
     U?: number | bigint;
     /**
-     *
+     * Final update ID in event
      * @type {number | bigint}
      * @memberof DiffBookDepthResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Bids to be updated
      * @type {Array<Array<string>>}
      * @memberof DiffBookDepthResponse
      */
     b?: Array<Array<string>>;
     /**
-     *
+     * Asks to be updated
      * @type {Array<Array<string>>}
      * @memberof DiffBookDepthResponse
      */

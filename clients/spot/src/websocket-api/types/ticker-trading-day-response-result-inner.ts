@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,19 +26,19 @@ export interface TickerTradingDayResponseResultInner {
      */
     symbol?: string;
     /**
-     *
+     * Absolute price change
      * @type {string}
      * @memberof TickerTradingDayResponseResultInner
      */
     priceChange?: string;
     /**
-     *
+     * Relative price change in percent
      * @type {string}
      * @memberof TickerTradingDayResponseResultInner
      */
     priceChangePercent?: string;
     /**
-     *
+     * quoteVolume / volume
      * @type {string}
      * @memberof TickerTradingDayResponseResultInner
      */
@@ -73,13 +68,13 @@ export interface TickerTradingDayResponseResultInner {
      */
     lastPrice?: string;
     /**
-     *
+     * Volume in base asset
      * @type {string}
      * @memberof TickerTradingDayResponseResultInner
      */
     volume?: string;
     /**
-     *
+     * Volume in quote asset
      * @type {string}
      * @memberof TickerTradingDayResponseResultInner
      */
@@ -97,19 +92,19 @@ export interface TickerTradingDayResponseResultInner {
      */
     closeTime?: number | bigint;
     /**
-     *
+     * Trade ID of the first trade in the interval
      * @type {number | bigint}
      * @memberof TickerTradingDayResponseResultInner
      */
     firstId?: number | bigint;
     /**
-     *
+     * Trade ID of the last trade in the interval
      * @type {number | bigint}
      * @memberof TickerTradingDayResponseResultInner
      */
     lastId?: number | bigint;
     /**
-     *
+     * Number of trades in the interval
      * @type {number | bigint}
      * @memberof TickerTradingDayResponseResultInner
      */

@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -37,7 +32,7 @@ export interface OrderStatusResponseResult {
      */
     orderId?: number | bigint;
     /**
-     *
+     * Present only for orders that belong to an order list.
      * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
@@ -66,6 +61,12 @@ export interface OrderStatusResponseResult {
      * @memberof OrderStatusResponseResult
      */
     executedQty?: string;
+    /**
+     * Always present. Zero if the order type does not use `quoteOrderQty`.
+     * @type {string}
+     * @memberof OrderStatusResponseResult
+     */
+    origQuoteOrderQty?: string;
     /**
      *
      * @type {string}
@@ -97,37 +98,37 @@ export interface OrderStatusResponseResult {
      */
     side?: string;
     /**
-     *
+     * Always present. Zero if the order type does not use `stopPrice`.
      * @type {string}
      * @memberof OrderStatusResponseResult
      */
     stopPrice?: string;
     /**
-     *
+     * Present only if `trailingDelta` was set on the order.
      * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
     trailingDelta?: number | bigint;
     /**
-     *
+     * Present only if `trailingDelta` was set on the order.
      * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
     trailingTime?: number | bigint;
     /**
-     *
+     * Always present. Zero for non-iceberg orders.
      * @type {string}
      * @memberof OrderStatusResponseResult
      */
     icebergQty?: string;
     /**
-     *
+     * Order placement time.
      * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
     time?: number | bigint;
     /**
-     *
+     * Time of the last update to the order.
      * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
@@ -145,19 +146,13 @@ export interface OrderStatusResponseResult {
      */
     workingTime?: number | bigint;
     /**
-     *
-     * @type {string}
-     * @memberof OrderStatusResponseResult
-     */
-    origQuoteOrderQty?: string;
-    /**
-     *
+     * Present only if `strategyId` was set on the order.
      * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
     strategyId?: number | bigint;
     /**
-     *
+     * Present only if `strategyType` was set on the order.
      * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
@@ -169,15 +164,57 @@ export interface OrderStatusResponseResult {
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * Present only if the order expired due to STP.
      * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
     preventedMatchId?: number | bigint;
     /**
-     *
+     * Present only if the order expired due to STP.
      * @type {string}
      * @memberof OrderStatusResponseResult
      */
     preventedQuantity?: string;
+    /**
+     * Field that determines whether order used SOR.
+     * @type {boolean}
+     * @memberof OrderStatusResponseResult
+     */
+    usedSor?: boolean;
+    /**
+     * Determines whether the order is being filled by the SOR or by the order book.
+     * @type {string}
+     * @memberof OrderStatusResponseResult
+     */
+    workingFloor?: string;
+    /**
+     * Price peg type. Only for pegged orders.
+     * @type {string}
+     * @memberof OrderStatusResponseResult
+     */
+    pegPriceType?: string;
+    /**
+     * Price peg offset type. Only for pegged orders, if requested.
+     * @type {string}
+     * @memberof OrderStatusResponseResult
+     */
+    pegOffsetType?: string;
+    /**
+     * Price peg offset value. Only for pegged orders, if requested.
+     * @type {number | bigint}
+     * @memberof OrderStatusResponseResult
+     */
+    pegOffsetValue?: number | bigint;
+    /**
+     * Current price order is pegged at. Only for pegged orders, once determined.
+     * @type {string}
+     * @memberof OrderStatusResponseResult
+     */
+    peggedPrice?: string;
+    /**
+     * Cause of the order\'s expiration. Appears when an order has expired.
+     * @type {string}
+     * @memberof OrderStatusResponseResult
+     */
+    expiryReason?: string;
 }

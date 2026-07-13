@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -247,8 +242,8 @@ describe('AuthApi', () => {
                     id: 'c174a2b1-3f51-4580-b200-8528bd237cb7',
                     status: 200,
                     result: {
-                        apiKey: 'CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ',
-                        authorizedSince: 1649729878532,
+                        apiKey: 'apiKey',
+                        authorizedSince: 1,
                         connectedSince: 1649729873021,
                         returnRateLimits: false,
                         serverTime: 1649730611671,

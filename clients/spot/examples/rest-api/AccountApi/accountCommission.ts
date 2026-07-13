@@ -10,7 +10,7 @@ const client = new Spot({ configurationRestAPI });
 async function accountCommission() {
     try {
         const response = await client.restAPI.accountCommission({
-            symbol: 'BNBUSDT',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

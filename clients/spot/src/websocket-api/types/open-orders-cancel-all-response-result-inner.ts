@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -34,10 +29,58 @@ import type { OpenOrdersCancelAllResponseResultInnerOrdersInner } from './open-o
 export interface OpenOrdersCancelAllResponseResultInner {
     /**
      *
+     * @type {number | bigint}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    orderListId?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    contingencyType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    listStatusType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    listOrderStatus?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    listClientOrderId?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    transactionTime?: number | bigint;
+    /**
+     *
      * @type {string}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
     symbol?: string;
+    /**
+     *
+     * @type {Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    orders?: Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>;
+    /**
+     *
+     * @type {Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    orderReports?: Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>;
     /**
      *
      * @type {string}
@@ -50,12 +93,6 @@ export interface OpenOrdersCancelAllResponseResultInner {
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
     orderId?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof OpenOrdersCancelAllResponseResultInner
-     */
-    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,37 +160,37 @@ export interface OpenOrdersCancelAllResponseResultInner {
      */
     side?: string;
     /**
-     *
+     * Appears for STOP_LOSS, TAKE_PROFIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT orders.
      * @type {string}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
     stopPrice?: string;
     /**
-     *
+     * Delta price change required before order activation.
      * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
     trailingDelta?: number | bigint;
     /**
-     *
+     * Time when the trailing order is now active and tracking price changes.
      * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
     trailingTime?: number | bigint;
     /**
-     *
+     * Appears only if the parameter icebergQty was sent in the request.
      * @type {string}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
     icebergQty?: string;
     /**
-     *
+     * Appears only if the strategyId parameter was provided upon order placement.
      * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
     strategyId?: number | bigint;
     /**
-     *
+     * Appears only if the strategyType parameter was provided upon order placement.
      * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
@@ -165,45 +202,57 @@ export interface OpenOrdersCancelAllResponseResultInner {
      */
     selfTradePreventionMode?: string;
     /**
-     *
-     * @type {string}
-     * @memberof OpenOrdersCancelAllResponseResultInner
-     */
-    contingencyType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OpenOrdersCancelAllResponseResultInner
-     */
-    listStatusType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OpenOrdersCancelAllResponseResultInner
-     */
-    listOrderStatus?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OpenOrdersCancelAllResponseResultInner
-     */
-    listClientOrderId?: string;
-    /**
-     *
+     * Appears only if the order expired due to STP.
      * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    transactionTime?: number | bigint;
+    preventedMatchId?: number | bigint;
     /**
-     *
-     * @type {Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>}
+     * Order quantity that expired due to STP.
+     * @type {string}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    orders?: Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>;
+    preventedQuantity?: string;
     /**
-     *
-     * @type {Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>}
+     * Field that determines whether order used SOR.
+     * @type {boolean}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    orderReports?: Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>;
+    usedSor?: boolean;
+    /**
+     * Determines whether the order is being filled by the SOR or by the order book.
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    workingFloor?: string;
+    /**
+     * Price peg type. Only for pegged orders.
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    pegPriceType?: string;
+    /**
+     * Price peg offset type. Only for pegged orders, if requested.
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    pegOffsetType?: string;
+    /**
+     * Price peg offset value. Only for pegged orders, if requested.
+     * @type {number | bigint}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    pegOffsetValue?: number | bigint;
+    /**
+     * Current price order is pegged at. Only for pegged orders, once determined.
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    peggedPrice?: string;
+    /**
+     * Cause of the order\'s expiration. Appears when an order has expired.
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    expiryReason?: string;
 }

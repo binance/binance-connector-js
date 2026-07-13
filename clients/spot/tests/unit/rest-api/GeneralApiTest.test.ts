@@ -1,12 +1,7 @@
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -22,6 +17,7 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import {
     GeneralApi,
+    ExchangeInfoPermissionsEnum,
     ExchangeInfoSymbolStatusEnum,
     ExecutionRulesSymbolStatusEnum,
 } from '../../../src/rest-api';
@@ -58,16 +54,12 @@ describe('GeneralApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                        },
-                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                        {
-                            rateLimitType: 'RAW_REQUESTS',
-                            interval: 'MINUTE',
-                            intervalNum: 5,
-                            limit: 61000,
+                            count: 321,
                         },
                     ],
-                    exchangeFilters: [],
+                    exchangeFilters: [
+                        { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    ],
                     symbols: [
                         {
                             symbol: 'ETHBTC',
@@ -79,9 +71,7 @@ describe('GeneralApi', () => {
                             quoteAssetPrecision: 8,
                             baseCommissionPrecision: 8,
                             quoteCommissionPrecision: 8,
-                            orderTypes: [
-                                'LIMIT LIMIT_MAKER MARKET STOP_LOSS STOP_LOSS_LIMIT TAKE_PROFIT TAKE_PROFIT_LIMIT',
-                            ],
+                            orderTypes: ['LIMIT'],
                             icebergAllowed: true,
                             ocoAllowed: true,
                             otoAllowed: true,
@@ -93,13 +83,22 @@ describe('GeneralApi', () => {
                             pegInstructionsAllowed: true,
                             isSpotTradingAllowed: true,
                             isMarginTradingAllowed: true,
-                            filters: [],
-                            permissions: [],
-                            permissionSets: [['SPOT', 'MARGIN']],
+                            filters: [
+                                {
+                                    filterType: 'PRICE_FILTER',
+                                    priceExponent: 8,
+                                    minPrice: '0.00000100',
+                                    maxPrice: '100000.00000000',
+                                    tickSize: '0.00000100',
+                                },
+                            ],
+                            permissions: ['undefined'],
+                            permissionSets: [['SPOT']],
                             defaultSelfTradePreventionMode: 'NONE',
                             allowedSelfTradePreventionModes: ['NONE'],
                         },
                     ],
+                    sors: [{ baseAsset: 'BTC', symbols: ['BTCUSDT'] }],
                 })
             );
 
@@ -119,10 +118,10 @@ describe('GeneralApi', () => {
 
         it('should execute exchangeInfo() successfully with optional parameters', async () => {
             const params: ExchangeInfoRequest = {
-                symbol: 'BNBUSDT',
-                symbols: ['null'],
-                permissions: ['null'],
-                showPermissionSets: true,
+                symbol: 'ETHBTC',
+                symbols: ['BTCUSDT'],
+                permissions: [ExchangeInfoPermissionsEnum.SPOT],
+                showPermissionSets: false,
                 symbolStatus: ExchangeInfoSymbolStatusEnum.TRADING,
             };
 
@@ -136,16 +135,12 @@ describe('GeneralApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                        },
-                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                        {
-                            rateLimitType: 'RAW_REQUESTS',
-                            interval: 'MINUTE',
-                            intervalNum: 5,
-                            limit: 61000,
+                            count: 321,
                         },
                     ],
-                    exchangeFilters: [],
+                    exchangeFilters: [
+                        { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    ],
                     symbols: [
                         {
                             symbol: 'ETHBTC',
@@ -157,9 +152,7 @@ describe('GeneralApi', () => {
                             quoteAssetPrecision: 8,
                             baseCommissionPrecision: 8,
                             quoteCommissionPrecision: 8,
-                            orderTypes: [
-                                'LIMIT LIMIT_MAKER MARKET STOP_LOSS STOP_LOSS_LIMIT TAKE_PROFIT TAKE_PROFIT_LIMIT',
-                            ],
+                            orderTypes: ['LIMIT'],
                             icebergAllowed: true,
                             ocoAllowed: true,
                             otoAllowed: true,
@@ -171,13 +164,22 @@ describe('GeneralApi', () => {
                             pegInstructionsAllowed: true,
                             isSpotTradingAllowed: true,
                             isMarginTradingAllowed: true,
-                            filters: [],
-                            permissions: [],
-                            permissionSets: [['SPOT', 'MARGIN']],
+                            filters: [
+                                {
+                                    filterType: 'PRICE_FILTER',
+                                    priceExponent: 8,
+                                    minPrice: '0.00000100',
+                                    maxPrice: '100000.00000000',
+                                    tickSize: '0.00000100',
+                                },
+                            ],
+                            permissions: ['undefined'],
+                            permissionSets: [['SPOT']],
                             defaultSelfTradePreventionMode: 'NONE',
                             allowedSelfTradePreventionModes: ['NONE'],
                         },
                     ],
+                    sors: [{ baseAsset: 'BTC', symbols: ['BTCUSDT'] }],
                 })
             );
 
@@ -248,8 +250,8 @@ describe('GeneralApi', () => {
 
         it('should execute executionRules() successfully with optional parameters', async () => {
             const params: ExecutionRulesRequest = {
-                symbol: 'BNBUSDT',
-                symbols: ['null'],
+                symbol: 'BAZUSD',
+                symbols: ['BAZUSD'],
                 symbolStatus: ExecutionRulesSymbolStatusEnum.TRADING,
             };
 

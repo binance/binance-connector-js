@@ -14,8 +14,8 @@ async function blockTradesHistorical() {
         connection = await client.websocketAPI.connect();
 
         const response = await connection.blockTradesHistorical({
-            symbol: 'BNBUSDT',
-            fromId: 1,
+            symbol: 'BNBBTC',
+            fromId: 582,
         });
 
         const rateLimits = response.rateLimits!;

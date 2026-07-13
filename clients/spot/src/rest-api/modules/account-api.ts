@@ -1,12 +1,7 @@
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -48,9 +42,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
     return {
         /**
          * Get current account commission rates.
-         * Weight: 20
          *
-         * @summary Query Commission Rates
+         * Weight(IP): 20
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * @summary Query Commission Rates (USER_DATA)
          * @param {string} symbol
          *
          * @throws {RequiredError}
@@ -82,15 +82,22 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Retrieves all order lists based on provided optional parameters.
          *
-         * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
-         * Weight: 20
+         * Note that the time between `startTime` and `endTime` can't be longer
+         * than 24 hours.
          *
-         * @summary Query all Order lists
-         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
-         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
-         * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * Weight(IP): 20
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * @summary Query all Order lists (USER_DATA)
+         * @param {number | bigint} [fromId] If supplied, neither startTime or endTime can be provided
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number} [limit]
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -135,14 +142,25 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Get all account orders; active, canceled, or filled.
-         * Weight: 20
          *
-         * @summary All orders
+         * Weight(IP): 20
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * - If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
+         * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+         * - If `startTime` and/or `endTime` provided, `orderId` is not required.
+         * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+         *
+         * @summary All orders (USER_DATA)
          * @param {string} symbol
          * @param {number | bigint} [orderId]
-         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
-         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number} [limit]
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -195,11 +213,17 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Get current account information.
-         * Weight: 20
          *
-         * @summary Account information
-         * @param {boolean} [omitZeroBalances] When set to `true`, emits only the non-zero balances of an account. <br>Default value: `false`
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * Weight(IP): 20
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Memory => Database
+         *
+         * @summary Account information (USER_DATA)
+         * @param {boolean} [omitZeroBalances] When set to `true`, emits only the non-zero balances of an account.
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -232,11 +256,19 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
-         * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
          *
-         * @summary Current open orders
-         * @param {string} [symbol] Symbol to query
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * Weight: 6 for a single symbol; 80 when the symbol parameter is omitted
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Memory => Database
+         *
+         * - If the symbol is not sent, orders for all symbols will be returned in an array.
+         *
+         * @summary Current open orders (USER_DATA)
+         * @param {string} [symbol]
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -266,13 +298,23 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Check an order's status.
-         * Weight: 4
          *
-         * @summary Query order
+         * Weight(IP): 4
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Memory => Database
+         *
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
+         * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+         *
+         * @summary Query order (USER_DATA)
          * @param {string} symbol
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -316,12 +358,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Retrieves a specific order list based on provided optional parameters.
-         * Weight: 4
          *
-         * @summary Query Order list
-         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
-         * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * Weight(IP): 4
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * @summary Query Order list (USER_DATA)
+         * @param {number | bigint} [orderListId] Query order list by `orderListId`. `orderListId` or `origClientOrderId` must be provided.
+         * @param {string} [origClientOrderId] Query order list by `listClientOrderId`. `orderListId` or `origClientOrderId` must be provided.
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -358,16 +406,36 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Retrieves allocations resulting from SOR order placement.
-         * Weight: 20
          *
-         * @summary Query Allocations
+         * Weight(IP): 20
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Database"
+         *
+         * Supported parameter combinations:
+         *
+         * Parameters                                  | Response |
+         * ------------------------------------------- | -------- |
+         * `symbol`                                    | allocations from oldest to newest |
+         * `symbol` + `startTime`                      | oldest allocations since `startTime` |
+         * `symbol` + `endTime`                        | newest allocations until `endTime` |
+         * `symbol` + `startTime` + `endTime`          | allocations within the time range |
+         * `symbol` + `fromAllocationId`               | allocations by allocation ID |
+         * `symbol` + `orderId`                        | allocations related to an order starting with oldest |
+         * `symbol` + `orderId` + `fromAllocationId`   | allocations related to an order by allocation ID |
+         *
+         **Note:** The time between `startTime` and `endTime` can't be longer than 24 hours.
+         *
+         * @summary Query Allocations (USER_DATA)
          * @param {string} symbol
-         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          * @param {number} [fromAllocationId]
-         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [limit]
          * @param {number | bigint} [orderId]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -422,12 +490,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
-         * Weight: 40
+         * Retrieves the list of filters relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
          *
-         * @summary Query relevant filters
+         * Weight(IP): 40
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Memory
+         *
+         * @summary Query relevant filters (USER_DATA)
          * @param {string} symbol
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -462,24 +536,29 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Displays the list of orders that were expired due to STP.
          *
          * These are the combinations supported:
+         * - `symbol` + `preventedMatchId`
+         * - `symbol` + `orderId`
+         * - `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
+         * - `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
          *
-         * `symbol` + `preventedMatchId`
-         * `symbol` + `orderId`
-         * `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
-         * `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
          * Weight: Case                            | Weight
          * ----                            | -----
          * If `symbol` is invalid          | 2
          * Querying by `preventedMatchId`  | 2
          * Querying by `orderId`           | 20
          *
-         * @summary Query Prevented Matches
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * @summary Query Prevented Matches (USER_DATA)
          * @param {string} symbol
          * @param {number | bigint} [preventedMatchId]
          * @param {number | bigint} [orderId]
          * @param {number | bigint} [fromPreventedMatchId]
-         * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * @param {number} [limit]
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -531,19 +610,37 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Get trades for a specific account and symbol.
+         *
          * Weight: Condition| Weight|
          * ---| ---
          * |Without orderId|20|
          * |With orderId|5|
          *
-         * @summary Account trade list
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Memory => Database
+         *
+         **Notes:**:
+         * - If `fromId` is set, it will get trades >= that `fromId`. Otherwise most recent trades are returned.
+         * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+         * - These are the supported combinations of all parameters:
+         * - `symbol`
+         * - `symbol` + `orderId`
+         * - `symbol` + `startTime`
+         * - `symbol` + `endTime`
+         * - `symbol` + `fromId`
+         * - `symbol` + `startTime` + `endTime`
+         * - `symbol`+ `orderId` + `fromId`
+         *
+         * @summary Account trade list (USER_DATA)
          * @param {string} symbol
-         * @param {number | bigint} [orderId]
-         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
-         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
-         * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * @param {number | bigint} [orderId] This can only be used in combination with `symbol`.
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [fromId] TradeId to fetch from. Default gets most recent trades.
+         * @param {number} [limit]
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -598,11 +695,17 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         * Query Open Order lists
          *
-         * Weight: 6
+         * Weight(IP): 6
          *
-         * @summary Query Open Order lists
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Memory -> Database
+         *
+         * @summary Query Open Order lists (USER_DATA)
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -629,14 +732,20 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Queries all amendments of a single order.
-         * Weight: 4
          *
-         * @summary Query Order Amendments
+         * Weight(IP): 4
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * @summary Query Order Amendments (USER_DATA)
          * @param {string} symbol
          * @param {number | bigint} orderId
          * @param {number | bigint} [fromExecutionId]
-         * @param {number | bigint} [limit] Default: 500; Maximum: 1000
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * @param {number | bigint} [limit]
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -686,10 +795,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Displays the user's unfilled order count for all intervals.
-         * Weight: 40
          *
-         * @summary Query Unfilled Order Count
-         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         * Weight(IP): 40
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         **Data Source:** Memory
+         *
+         * @summary Query Unfilled Order Count (USER_DATA)
+         * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -724,9 +839,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 export interface AccountApiInterface {
     /**
      * Get current account commission rates.
-     * Weight: 20
      *
-     * @summary Query Commission Rates
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Commission Rates (USER_DATA)
      * @param {AccountCommissionRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -738,10 +859,17 @@ export interface AccountApiInterface {
     /**
      * Retrieves all order lists based on provided optional parameters.
      *
-     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
-     * Weight: 20
+     * Note that the time between `startTime` and `endTime` can't be longer
+     * than 24 hours.
      *
-     * @summary Query all Order lists
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query all Order lists (USER_DATA)
      * @param {AllOrderListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -752,9 +880,20 @@ export interface AccountApiInterface {
     ): Promise<RestApiResponse<AllOrderListResponse>>;
     /**
      * Get all account orders; active, canceled, or filled.
-     * Weight: 20
      *
-     * @summary All orders
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
+     * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     * - If `startTime` and/or `endTime` provided, `orderId` is not required.
+     * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary All orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -763,9 +902,15 @@ export interface AccountApiInterface {
     allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>>;
     /**
      * Get current account information.
-     * Weight: 20
      *
-     * @summary Account information
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * @summary Account information (USER_DATA)
      * @param {GetAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -774,9 +919,17 @@ export interface AccountApiInterface {
     getAccount(requestParameters?: GetAccountRequest): Promise<RestApiResponse<GetAccountResponse>>;
     /**
      * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
-     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
      *
-     * @summary Current open orders
+     * Weight: 6 for a single symbol; 80 when the symbol parameter is omitted
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
+     *
+     * @summary Current open orders (USER_DATA)
      * @param {GetOpenOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -787,9 +940,19 @@ export interface AccountApiInterface {
     ): Promise<RestApiResponse<GetOpenOrdersResponse>>;
     /**
      * Check an order's status.
-     * Weight: 4
      *
-     * @summary Query order
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
+     * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     *
+     * @summary Query order (USER_DATA)
      * @param {GetOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -798,9 +961,15 @@ export interface AccountApiInterface {
     getOrder(requestParameters: GetOrderRequest): Promise<RestApiResponse<GetOrderResponse>>;
     /**
      * Retrieves a specific order list based on provided optional parameters.
-     * Weight: 4
      *
-     * @summary Query Order list
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Order list (USER_DATA)
      * @param {GetOrderListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -811,9 +980,29 @@ export interface AccountApiInterface {
     ): Promise<RestApiResponse<GetOrderListResponse>>;
     /**
      * Retrieves allocations resulting from SOR order placement.
-     * Weight: 20
      *
-     * @summary Query Allocations
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database"
+     *
+     * Supported parameter combinations:
+     *
+     * Parameters                                  | Response |
+     * ------------------------------------------- | -------- |
+     * `symbol`                                    | allocations from oldest to newest |
+     * `symbol` + `startTime`                      | oldest allocations since `startTime` |
+     * `symbol` + `endTime`                        | newest allocations until `endTime` |
+     * `symbol` + `startTime` + `endTime`          | allocations within the time range |
+     * `symbol` + `fromAllocationId`               | allocations by allocation ID |
+     * `symbol` + `orderId`                        | allocations related to an order starting with oldest |
+     * `symbol` + `orderId` + `fromAllocationId`   | allocations related to an order by allocation ID |
+     *
+     **Note:** The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Query Allocations (USER_DATA)
      * @param {MyAllocationsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -823,10 +1012,16 @@ export interface AccountApiInterface {
         requestParameters: MyAllocationsRequest
     ): Promise<RestApiResponse<MyAllocationsResponse>>;
     /**
-     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
-     * Weight: 40
+     * Retrieves the list of filters relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
      *
-     * @summary Query relevant filters
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query relevant filters (USER_DATA)
      * @param {MyFiltersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -837,18 +1032,23 @@ export interface AccountApiInterface {
      * Displays the list of orders that were expired due to STP.
      *
      * These are the combinations supported:
+     * - `symbol` + `preventedMatchId`
+     * - `symbol` + `orderId`
+     * - `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
+     * - `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
      *
-     * `symbol` + `preventedMatchId`
-     * `symbol` + `orderId`
-     * `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
-     * `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
      * Weight: Case                            | Weight
      * ----                            | -----
      * If `symbol` is invalid          | 2
      * Querying by `preventedMatchId`  | 2
      * Querying by `orderId`           | 20
      *
-     * @summary Query Prevented Matches
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Prevented Matches (USER_DATA)
      * @param {MyPreventedMatchesRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -859,12 +1059,30 @@ export interface AccountApiInterface {
     ): Promise<RestApiResponse<MyPreventedMatchesResponse>>;
     /**
      * Get trades for a specific account and symbol.
+     *
      * Weight: Condition| Weight|
      * ---| ---
      * |Without orderId|20|
      * |With orderId|5|
      *
-     * @summary Account trade list
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     **Notes:**:
+     * - If `fromId` is set, it will get trades >= that `fromId`. Otherwise most recent trades are returned.
+     * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+     * - These are the supported combinations of all parameters:
+     * - `symbol`
+     * - `symbol` + `orderId`
+     * - `symbol` + `startTime`
+     * - `symbol` + `endTime`
+     * - `symbol` + `fromId`
+     * - `symbol` + `startTime` + `endTime`
+     * - `symbol`+ `orderId` + `fromId`
+     *
+     * @summary Account trade list (USER_DATA)
      * @param {MyTradesRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -872,10 +1090,16 @@ export interface AccountApiInterface {
      */
     myTrades(requestParameters: MyTradesRequest): Promise<RestApiResponse<MyTradesResponse>>;
     /**
+     * Query Open Order lists
      *
-     * Weight: 6
+     * Weight(IP): 6
      *
-     * @summary Query Open Order lists
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory -> Database
+     *
+     * @summary Query Open Order lists (USER_DATA)
      * @param {OpenOrderListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -886,9 +1110,15 @@ export interface AccountApiInterface {
     ): Promise<RestApiResponse<OpenOrderListResponse>>;
     /**
      * Queries all amendments of a single order.
-     * Weight: 4
      *
-     * @summary Query Order Amendments
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Order Amendments (USER_DATA)
      * @param {OrderAmendmentsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -899,9 +1129,15 @@ export interface AccountApiInterface {
     ): Promise<RestApiResponse<OrderAmendmentsResponse>>;
     /**
      * Displays the user's unfilled order count for all intervals.
-     * Weight: 40
      *
-     * @summary Query Unfilled Order Count
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Unfilled Order Count (USER_DATA)
      * @param {RateLimitOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -931,35 +1167,35 @@ export interface AccountCommissionRequest {
  */
 export interface AllOrderListRequest {
     /**
-     * ID to get aggregate trades from INCLUSIVE.
+     * If supplied, neither startTime or endTime can be provided
      * @type {number | bigint}
      * @memberof AccountApiAllOrderList
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades from INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof AccountApiAllOrderList
      */
     readonly startTime?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades until INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof AccountApiAllOrderList
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof AccountApiAllOrderList
      */
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAllOrderList
      */
@@ -986,21 +1222,21 @@ export interface AllOrdersRequest {
     readonly orderId?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades from INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
     readonly startTime?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades until INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof AccountApiAllOrders
      */
@@ -1020,14 +1256,14 @@ export interface AllOrdersRequest {
  */
 export interface GetAccountRequest {
     /**
-     * When set to `true`, emits only the non-zero balances of an account. <br>Default value: `false`
+     * When set to `true`, emits only the non-zero balances of an account.
      * @type {boolean}
      * @memberof AccountApiGetAccount
      */
     readonly omitZeroBalances?: boolean;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiGetAccount
      */
@@ -1040,14 +1276,14 @@ export interface GetAccountRequest {
  */
 export interface GetOpenOrdersRequest {
     /**
-     * Symbol to query
+     *
      * @type {string}
      * @memberof AccountApiGetOpenOrders
      */
     readonly symbol?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiGetOpenOrders
      */
@@ -1081,7 +1317,7 @@ export interface GetOrderRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiGetOrder
      */
@@ -1094,21 +1330,21 @@ export interface GetOrderRequest {
  */
 export interface GetOrderListRequest {
     /**
-     * Either `orderListId` or `listClientOrderId` must be provided
+     * Query order list by `orderListId`. `orderListId` or `origClientOrderId` must be provided.
      * @type {number | bigint}
      * @memberof AccountApiGetOrderList
      */
     readonly orderListId?: number | bigint;
 
     /**
-     *
+     * Query order list by `listClientOrderId`. `orderListId` or `origClientOrderId` must be provided.
      * @type {string}
      * @memberof AccountApiGetOrderList
      */
     readonly origClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiGetOrderList
      */
@@ -1128,14 +1364,14 @@ export interface MyAllocationsRequest {
     readonly symbol: string;
 
     /**
-     * Timestamp in ms to get aggregate trades from INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
     readonly startTime?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades until INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
@@ -1149,7 +1385,7 @@ export interface MyAllocationsRequest {
     readonly fromAllocationId?: number;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -1163,7 +1399,7 @@ export interface MyAllocationsRequest {
     readonly orderId?: number | bigint;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -1183,7 +1419,7 @@ export interface MyFiltersRequest {
     readonly symbol: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyFilters
      */
@@ -1224,14 +1460,14 @@ export interface MyPreventedMatchesRequest {
     readonly fromPreventedMatchId?: number | bigint;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -1251,42 +1487,42 @@ export interface MyTradesRequest {
     readonly symbol: string;
 
     /**
-     *
+     * This can only be used in combination with `symbol`.
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
     readonly orderId?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades from INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
     readonly startTime?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades until INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
     readonly endTime?: number | bigint;
 
     /**
-     * ID to get aggregate trades from INCLUSIVE.
+     * TradeId to fetch from. Default gets most recent trades.
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof AccountApiMyTrades
      */
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -1299,7 +1535,7 @@ export interface MyTradesRequest {
  */
 export interface OpenOrderListRequest {
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOpenOrderList
      */
@@ -1333,14 +1569,14 @@ export interface OrderAmendmentsRequest {
     readonly fromExecutionId?: number | bigint;
 
     /**
-     * Default: 500; Maximum: 1000
+     *
      * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
     readonly limit?: number | bigint;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOrderAmendments
      */
@@ -1353,7 +1589,7 @@ export interface OrderAmendmentsRequest {
  */
 export interface RateLimitOrderRequest {
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiRateLimitOrder
      */
@@ -1375,14 +1611,20 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Get current account commission rates.
-     * Weight: 20
      *
-     * @summary Query Commission Rates
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Commission Rates (USER_DATA)
      * @param {AccountCommissionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountCommissionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-commission-rates-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#account-commission Binance API Documentation}
      */
     public async accountCommission(
         requestParameters: AccountCommissionRequest
@@ -1405,15 +1647,22 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Retrieves all order lists based on provided optional parameters.
      *
-     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
-     * Weight: 20
+     * Note that the time between `startTime` and `endTime` can't be longer
+     * than 24 hours.
      *
-     * @summary Query all Order lists
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query all Order lists (USER_DATA)
      * @param {AllOrderListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AllOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-all-order-lists-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#all-order-list Binance API Documentation}
      */
     public async allOrderList(
         requestParameters: AllOrderListRequest = {}
@@ -1439,14 +1688,25 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Get all account orders; active, canceled, or filled.
-     * Weight: 20
      *
-     * @summary All orders
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
+     * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     * - If `startTime` and/or `endTime` provided, `orderId` is not required.
+     * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary All orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#all-orders-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#all-orders Binance API Documentation}
      */
     public async allOrders(
         requestParameters: AllOrdersRequest
@@ -1473,14 +1733,20 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Get current account information.
-     * Weight: 20
      *
-     * @summary Account information
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * @summary Account information (USER_DATA)
      * @param {GetAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-information-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#get-account Binance API Documentation}
      */
     public async getAccount(
         requestParameters: GetAccountRequest = {}
@@ -1503,14 +1769,22 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
-     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
      *
-     * @summary Current open orders
+     * Weight: 6 for a single symbol; 80 when the symbol parameter is omitted
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
+     *
+     * @summary Current open orders (USER_DATA)
      * @param {GetOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#current-open-orders-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#get-open-orders Binance API Documentation}
      */
     public async getOpenOrders(
         requestParameters: GetOpenOrdersRequest = {}
@@ -1533,14 +1807,24 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Check an order's status.
-     * Weight: 4
      *
-     * @summary Query order
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
+     * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     *
+     * @summary Query order (USER_DATA)
      * @param {GetOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#get-order Binance API Documentation}
      */
     public async getOrder(
         requestParameters: GetOrderRequest
@@ -1565,14 +1849,20 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Retrieves a specific order list based on provided optional parameters.
-     * Weight: 4
      *
-     * @summary Query Order list
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Order list (USER_DATA)
      * @param {GetOrderListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-list-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#get-order-list Binance API Documentation}
      */
     public async getOrderList(
         requestParameters: GetOrderListRequest = {}
@@ -1596,14 +1886,34 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Retrieves allocations resulting from SOR order placement.
-     * Weight: 20
      *
-     * @summary Query Allocations
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database"
+     *
+     * Supported parameter combinations:
+     *
+     * Parameters                                  | Response |
+     * ------------------------------------------- | -------- |
+     * `symbol`                                    | allocations from oldest to newest |
+     * `symbol` + `startTime`                      | oldest allocations since `startTime` |
+     * `symbol` + `endTime`                        | newest allocations until `endTime` |
+     * `symbol` + `startTime` + `endTime`          | allocations within the time range |
+     * `symbol` + `fromAllocationId`               | allocations by allocation ID |
+     * `symbol` + `orderId`                        | allocations related to an order starting with oldest |
+     * `symbol` + `orderId` + `fromAllocationId`   | allocations related to an order by allocation ID |
+     *
+     **Note:** The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Query Allocations (USER_DATA)
      * @param {MyAllocationsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MyAllocationsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-allocations-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#my-allocations Binance API Documentation}
      */
     public async myAllocations(
         requestParameters: MyAllocationsRequest
@@ -1630,15 +1940,21 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
-     * Weight: 40
+     * Retrieves the list of filters relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
      *
-     * @summary Query relevant filters
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query relevant filters (USER_DATA)
      * @param {MyFiltersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MyFiltersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-relevant-filters-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#my-filters Binance API Documentation}
      */
     public async myFilters(
         requestParameters: MyFiltersRequest
@@ -1663,23 +1979,28 @@ export class AccountApi implements AccountApiInterface {
      * Displays the list of orders that were expired due to STP.
      *
      * These are the combinations supported:
+     * - `symbol` + `preventedMatchId`
+     * - `symbol` + `orderId`
+     * - `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
+     * - `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
      *
-     * `symbol` + `preventedMatchId`
-     * `symbol` + `orderId`
-     * `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
-     * `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
      * Weight: Case                            | Weight
      * ----                            | -----
      * If `symbol` is invalid          | 2
      * Querying by `preventedMatchId`  | 2
      * Querying by `orderId`           | 20
      *
-     * @summary Query Prevented Matches
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Prevented Matches (USER_DATA)
      * @param {MyPreventedMatchesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MyPreventedMatchesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-prevented-matches-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#my-prevented-matches Binance API Documentation}
      */
     public async myPreventedMatches(
         requestParameters: MyPreventedMatchesRequest
@@ -1706,17 +2027,35 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Get trades for a specific account and symbol.
+     *
      * Weight: Condition| Weight|
      * ---| ---
      * |Without orderId|20|
      * |With orderId|5|
      *
-     * @summary Account trade list
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     **Notes:**:
+     * - If `fromId` is set, it will get trades >= that `fromId`. Otherwise most recent trades are returned.
+     * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+     * - These are the supported combinations of all parameters:
+     * - `symbol`
+     * - `symbol` + `orderId`
+     * - `symbol` + `startTime`
+     * - `symbol` + `endTime`
+     * - `symbol` + `fromId`
+     * - `symbol` + `startTime` + `endTime`
+     * - `symbol`+ `orderId` + `fromId`
+     *
+     * @summary Account trade list (USER_DATA)
      * @param {MyTradesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MyTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-trade-list-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#my-trades Binance API Documentation}
      */
     public async myTrades(
         requestParameters: MyTradesRequest
@@ -1743,15 +2082,21 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
+     * Query Open Order lists
      *
-     * Weight: 6
+     * Weight(IP): 6
      *
-     * @summary Query Open Order lists
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory -> Database
+     *
+     * @summary Query Open Order lists (USER_DATA)
      * @param {OpenOrderListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OpenOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-open-order-lists-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#open-order-list Binance API Documentation}
      */
     public async openOrderList(
         requestParameters: OpenOrderListRequest = {}
@@ -1773,14 +2118,20 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Queries all amendments of a single order.
-     * Weight: 4
      *
-     * @summary Query Order Amendments
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Order Amendments (USER_DATA)
      * @param {OrderAmendmentsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OrderAmendmentsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-amendments-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#order-amendments Binance API Documentation}
      */
     public async orderAmendments(
         requestParameters: OrderAmendmentsRequest
@@ -1806,14 +2157,20 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Displays the user's unfilled order count for all intervals.
-     * Weight: 40
      *
-     * @summary Query Unfilled Order Count
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Unfilled Order Count (USER_DATA)
      * @param {RateLimitOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RateLimitOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-unfilled-order-count-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#rate-limit-order Binance API Documentation}
      */
     public async rateLimitOrder(
         requestParameters: RateLimitOrderRequest = {}

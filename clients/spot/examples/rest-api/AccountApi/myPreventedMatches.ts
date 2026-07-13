@@ -10,7 +10,7 @@ const client = new Spot({ configurationRestAPI });
 async function myPreventedMatches() {
     try {
         const response = await client.restAPI.myPreventedMatches({
-            symbol: 'BNBUSDT',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

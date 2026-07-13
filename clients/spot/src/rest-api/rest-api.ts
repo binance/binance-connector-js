@@ -1,12 +1,7 @@
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -198,14 +193,20 @@ export class RestAPI {
 
     /**
      * Get current account commission rates.
-     * Weight: 20
      *
-     * @summary Query Commission Rates
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Commission Rates (USER_DATA)
      * @param {AccountCommissionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountCommissionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-commission-rates-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#account-commission Binance API Documentation}
      */
     accountCommission(
         requestParameters: AccountCommissionRequest
@@ -216,15 +217,22 @@ export class RestAPI {
     /**
      * Retrieves all order lists based on provided optional parameters.
      *
-     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
-     * Weight: 20
+     * Note that the time between `startTime` and `endTime` can't be longer
+     * than 24 hours.
      *
-     * @summary Query all Order lists
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query all Order lists (USER_DATA)
      * @param {AllOrderListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AllOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-all-order-lists-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#all-order-list Binance API Documentation}
      */
     allOrderList(
         requestParameters: AllOrderListRequest = {}
@@ -234,14 +242,25 @@ export class RestAPI {
 
     /**
      * Get all account orders; active, canceled, or filled.
-     * Weight: 20
      *
-     * @summary All orders
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
+     * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     * - If `startTime` and/or `endTime` provided, `orderId` is not required.
+     * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary All orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#all-orders-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#all-orders Binance API Documentation}
      */
     allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>> {
         return this.accountApi.allOrders(requestParameters);
@@ -249,14 +268,20 @@ export class RestAPI {
 
     /**
      * Get current account information.
-     * Weight: 20
      *
-     * @summary Account information
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * @summary Account information (USER_DATA)
      * @param {GetAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-information-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#get-account Binance API Documentation}
      */
     getAccount(
         requestParameters: GetAccountRequest = {}
@@ -266,14 +291,22 @@ export class RestAPI {
 
     /**
      * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
-     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
      *
-     * @summary Current open orders
+     * Weight: 6 for a single symbol; 80 when the symbol parameter is omitted
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
+     *
+     * @summary Current open orders (USER_DATA)
      * @param {GetOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#current-open-orders-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#get-open-orders Binance API Documentation}
      */
     getOpenOrders(
         requestParameters: GetOpenOrdersRequest = {}
@@ -283,14 +316,24 @@ export class RestAPI {
 
     /**
      * Check an order's status.
-     * Weight: 4
      *
-     * @summary Query order
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
+     * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     *
+     * @summary Query order (USER_DATA)
      * @param {GetOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#get-order Binance API Documentation}
      */
     getOrder(requestParameters: GetOrderRequest): Promise<RestApiResponse<GetOrderResponse>> {
         return this.accountApi.getOrder(requestParameters);
@@ -298,14 +341,20 @@ export class RestAPI {
 
     /**
      * Retrieves a specific order list based on provided optional parameters.
-     * Weight: 4
      *
-     * @summary Query Order list
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Order list (USER_DATA)
      * @param {GetOrderListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-list-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#get-order-list Binance API Documentation}
      */
     getOrderList(
         requestParameters: GetOrderListRequest = {}
@@ -315,14 +364,34 @@ export class RestAPI {
 
     /**
      * Retrieves allocations resulting from SOR order placement.
-     * Weight: 20
      *
-     * @summary Query Allocations
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database"
+     *
+     * Supported parameter combinations:
+     *
+     * Parameters                                  | Response |
+     * ------------------------------------------- | -------- |
+     * `symbol`                                    | allocations from oldest to newest |
+     * `symbol` + `startTime`                      | oldest allocations since `startTime` |
+     * `symbol` + `endTime`                        | newest allocations until `endTime` |
+     * `symbol` + `startTime` + `endTime`          | allocations within the time range |
+     * `symbol` + `fromAllocationId`               | allocations by allocation ID |
+     * `symbol` + `orderId`                        | allocations related to an order starting with oldest |
+     * `symbol` + `orderId` + `fromAllocationId`   | allocations related to an order by allocation ID |
+     *
+     **Note:** The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Query Allocations (USER_DATA)
      * @param {MyAllocationsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MyAllocationsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-allocations-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#my-allocations Binance API Documentation}
      */
     myAllocations(
         requestParameters: MyAllocationsRequest
@@ -331,15 +400,21 @@ export class RestAPI {
     }
 
     /**
-     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
-     * Weight: 40
+     * Retrieves the list of filters relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
      *
-     * @summary Query relevant filters
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query relevant filters (USER_DATA)
      * @param {MyFiltersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MyFiltersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-relevant-filters-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#my-filters Binance API Documentation}
      */
     myFilters(requestParameters: MyFiltersRequest): Promise<RestApiResponse<MyFiltersResponse>> {
         return this.accountApi.myFilters(requestParameters);
@@ -349,23 +424,28 @@ export class RestAPI {
      * Displays the list of orders that were expired due to STP.
      *
      * These are the combinations supported:
+     * - `symbol` + `preventedMatchId`
+     * - `symbol` + `orderId`
+     * - `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
+     * - `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
      *
-     * `symbol` + `preventedMatchId`
-     * `symbol` + `orderId`
-     * `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
-     * `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
      * Weight: Case                            | Weight
      * ----                            | -----
      * If `symbol` is invalid          | 2
      * Querying by `preventedMatchId`  | 2
      * Querying by `orderId`           | 20
      *
-     * @summary Query Prevented Matches
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Prevented Matches (USER_DATA)
      * @param {MyPreventedMatchesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MyPreventedMatchesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-prevented-matches-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#my-prevented-matches Binance API Documentation}
      */
     myPreventedMatches(
         requestParameters: MyPreventedMatchesRequest
@@ -375,32 +455,56 @@ export class RestAPI {
 
     /**
      * Get trades for a specific account and symbol.
+     *
      * Weight: Condition| Weight|
      * ---| ---
      * |Without orderId|20|
      * |With orderId|5|
      *
-     * @summary Account trade list
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     **Notes:**:
+     * - If `fromId` is set, it will get trades >= that `fromId`. Otherwise most recent trades are returned.
+     * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+     * - These are the supported combinations of all parameters:
+     * - `symbol`
+     * - `symbol` + `orderId`
+     * - `symbol` + `startTime`
+     * - `symbol` + `endTime`
+     * - `symbol` + `fromId`
+     * - `symbol` + `startTime` + `endTime`
+     * - `symbol`+ `orderId` + `fromId`
+     *
+     * @summary Account trade list (USER_DATA)
      * @param {MyTradesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MyTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-trade-list-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#my-trades Binance API Documentation}
      */
     myTrades(requestParameters: MyTradesRequest): Promise<RestApiResponse<MyTradesResponse>> {
         return this.accountApi.myTrades(requestParameters);
     }
 
     /**
+     * Query Open Order lists
      *
-     * Weight: 6
+     * Weight(IP): 6
      *
-     * @summary Query Open Order lists
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory -> Database
+     *
+     * @summary Query Open Order lists (USER_DATA)
      * @param {OpenOrderListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OpenOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-open-order-lists-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#open-order-list Binance API Documentation}
      */
     openOrderList(
         requestParameters: OpenOrderListRequest = {}
@@ -410,14 +514,20 @@ export class RestAPI {
 
     /**
      * Queries all amendments of a single order.
-     * Weight: 4
      *
-     * @summary Query Order Amendments
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Order Amendments (USER_DATA)
      * @param {OrderAmendmentsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderAmendmentsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-amendments-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#order-amendments Binance API Documentation}
      */
     orderAmendments(
         requestParameters: OrderAmendmentsRequest
@@ -427,14 +537,20 @@ export class RestAPI {
 
     /**
      * Displays the user's unfilled order count for all intervals.
-     * Weight: 40
      *
-     * @summary Query Unfilled Order Count
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Unfilled Order Count (USER_DATA)
      * @param {RateLimitOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RateLimitOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-unfilled-order-count-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/account#rate-limit-order Binance API Documentation}
      */
     rateLimitOrder(
         requestParameters: RateLimitOrderRequest = {}
@@ -444,14 +560,33 @@ export class RestAPI {
 
     /**
      * Current exchange trading rules and symbol information
-     * Weight: 20
+     *
+     * Weight(IP): 20
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Notes:**
+     * If the value provided to `symbol` or `symbols` do not exist, the endpoint will throw an error saying the symbol is invalid.
+     * All parameters are optional.
+     * `permissions` can support single or multiple values (e.g. `SPOT`, `["MARGIN","LEVERAGED"]`). This cannot be used in combination with `symbol` or `symbols`.
+     * If `permissions` parameter not provided, all symbols that have either `SPOT`, `MARGIN`, or `LEVERAGED` permission will be exposed.
+     * To display symbols with any permission you need to specify them explicitly in `permissions`: (e.g. `["SPOT","MARGIN",...]`.). See Account and Symbol Permissions for the full list.
+     *
+     **Examples of Symbol Permissions Interpretation from the Response:**
+     *
+     * `[["A","B"]]` means you may place an order if your account has either permission "A" **or** permission "B".
+     * `[["A"],["B"]]` means you can place an order if your account has permission "A" **and** permission "B".
+     * `[["A"],["B","C"]]` means you can place an order if your account has permission "A" **and** permission "B" or permission "C". (Inclusive or is applied here, not exclusive or, so your account may have both permission "B" and permission "C".)
      *
      * @summary Exchange information
      * @param {ExchangeInfoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ExchangeInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/general#exchange-info Binance API Documentation}
      */
     exchangeInfo(
         requestParameters: ExchangeInfoRequest = {}
@@ -460,20 +595,28 @@ export class RestAPI {
     }
 
     /**
+     * Query execution rules for symbols.
      *
-     * Weight: Parameter | Weight|
-     * ---        | ---
-     * `symbol`  | 2
-     * `symbols` | 2 for each `symbol`, capped at a max of 40|
-     * `symbolStatus` |40|
-     * None            |40|
+     * Weight: Parameter | Weight
+     * --- | ---
+     * `symbol` | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40
+     * `symbolStatus` | 40
+     * None | 40
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Note:**: No combination of multiple parameters is allowed.
      *
      * @summary Query Execution Rules
      * @param {ExecutionRulesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ExecutionRulesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#query-execution-rules Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/general#execution-rules Binance API Documentation}
      */
     executionRules(
         requestParameters: ExecutionRulesRequest = {}
@@ -483,13 +626,16 @@ export class RestAPI {
 
     /**
      * Test connectivity to the Rest API.
-     * Weight: 1
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
      *
      * @summary Test connectivity
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/general#ping Binance API Documentation}
      */
     ping(): Promise<RestApiResponse<void>> {
         return this.generalApi.ping();
@@ -497,13 +643,16 @@ export class RestAPI {
 
     /**
      * Test connectivity to the Rest API and get the current server time.
-     * Weight: 1
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
      *
      * @summary Check server time
      *
      * @returns {Promise<RestApiResponse<TimeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#check-server-time Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/general#time Binance API Documentation}
      */
     time(): Promise<RestApiResponse<TimeResponse>> {
         return this.generalApi.time();
@@ -511,14 +660,22 @@ export class RestAPI {
 
     /**
      * Get compressed, aggregate trades. Trades that fill at the time, from the same taker order, with the same price will have the quantity aggregated.
-     * Weight: 4
+     *
+     * Weight(IP): 4
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
      *
      * @summary Compressed/Aggregate trades list
      * @param {AggTradesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AggTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#compressedaggregate-trades-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#agg-trades Binance API Documentation}
      */
     aggTrades(requestParameters: AggTradesRequest): Promise<RestApiResponse<AggTradesResponse>> {
         return this.marketApi.aggTrades(requestParameters);
@@ -526,20 +683,27 @@ export class RestAPI {
 
     /**
      * Current average price for a symbol.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Current average price
      * @param {AvgPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AvgPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#current-average-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#avg-price Binance API Documentation}
      */
     avgPrice(requestParameters: AvgPriceRequest): Promise<RestApiResponse<AvgPriceResponse>> {
         return this.marketApi.avgPrice(requestParameters);
     }
 
     /**
+     * Order book
      *
      * Weight: Adjusted based on the limit:
      *
@@ -550,12 +714,17 @@ export class RestAPI {
      * 501-1000| 50
      * 1001-5000| 250
      *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary Order book
      * @param {DepthRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DepthResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#order-book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#depth Binance API Documentation}
      */
     depth(requestParameters: DepthRequest): Promise<RestApiResponse<DepthResponse>> {
         return this.marketApi.depth(requestParameters);
@@ -563,14 +732,20 @@ export class RestAPI {
 
     /**
      * Get recent trades.
-     * Weight: 25
+     *
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Recent trades list
      * @param {GetTradesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#recent-trades-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#get-trades Binance API Documentation}
      */
     getTrades(requestParameters: GetTradesRequest): Promise<RestApiResponse<GetTradesResponse>> {
         return this.marketApi.getTrades(requestParameters);
@@ -578,14 +753,20 @@ export class RestAPI {
 
     /**
      * Get block trades.
-     * Weight: 25
      *
-     * @summary Historical Block Trades
+     * Weight(IP): 25
+     *
+     * Security Type: MARKET_DATA
+     *
+     * Notes:
+     * - Data Source: Database
+     *
+     * @summary Historical Block Trades (MARKET_DATA)
      * @param {HistoricalBlockTradesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<HistoricalBlockTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#historical-block-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#historical-block-trades Binance API Documentation}
      */
     historicalBlockTrades(
         requestParameters: HistoricalBlockTradesRequest
@@ -595,14 +776,20 @@ export class RestAPI {
 
     /**
      * Get older trades.
-     * Weight: 25
+     *
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
      *
      * @summary Old trade lookup
      * @param {HistoricalTradesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<HistoricalTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#old-trade-lookup Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#historical-trades Binance API Documentation}
      */
     historicalTrades(
         requestParameters: HistoricalTradesRequest
@@ -613,29 +800,62 @@ export class RestAPI {
     /**
      * Kline/candlestick bars for a symbol.
      * Klines are uniquely identified by their open time.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported kline intervals (case-sensitive):
+     *
+     * Interval  | `interval` value
+     * --------- | ----------------
+     * seconds   | `1s`
+     * minutes   | `1m`, `3m`, `5m`, `15m`, `30m`
+     * hours     | `1h`, `2h`, `4h`, `6h`, `8h`, `12h`
+     * days      | `1d`, `3d`
+     * weeks     | `1w`
+     * months    | `1M`
+     *
+     **Notes:**
+     *
+     * If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * Supported values for `timeZone`:
+     * Hours and minutes (e.g. `-1:00`, `05:45`)
+     * Only hours (e.g. `0`, `8`, `4`)
+     * Accepted range is strictly [-12:00 to +14:00] inclusive
+     * If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
      *
      * @summary Kline/Candlestick data
      * @param {KlinesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<KlinesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#klinecandlestick-data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#klines Binance API Documentation}
      */
     klines(requestParameters: KlinesRequest): Promise<RestApiResponse<KlinesResponse>> {
         return this.marketApi.klines(requestParameters);
     }
 
     /**
+     * Query the reference price for a symbol.
      *
-     * Weight: 2
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ReferencePriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#reference-price Binance API Documentation}
      */
     referencePrice(
         requestParameters: ReferencePriceRequest
@@ -645,14 +865,20 @@ export class RestAPI {
 
     /**
      * Describes how reference price is calculated for a given symbol.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Query Reference Price Calculation
      * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ReferencePriceCalculationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price-calculation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#reference-price-calculation Binance API Documentation}
      */
     referencePriceCalculation(
         requestParameters: ReferencePriceCalculationRequest
@@ -661,15 +887,34 @@ export class RestAPI {
     }
 
     /**
+     * **Note:** This endpoint differs from `GET /api/v3/ticker/24hr`.
      *
-     * Weight: 4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     * The statistical time range of this endpoint can be up to 59999ms longer
+     * than the requested `windowSize`.
+     *
+     * `openTime` starts at the beginning of a minute, while the end time is
+     * the current time. Therefore, the actual interval can be up to 59999ms
+     * longer than the requested window.
+     *
+     * For example, if `closeTime` is 1641287867099 (January 04, 2022
+     * 09:17:47:099 UTC) and `windowSize` is `1d`, then `openTime` is
+     * 1641201420000 (January 3, 2022, 09:17:00 UTC).
+     *
+     * Weight: 4 for each requested symbol regardless of windowSize.
+     *
+     * The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
      *
      * @summary Rolling window price change statistics
      * @param {TickerRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker Binance API Documentation}
      */
     ticker(requestParameters: TickerRequest = {}): Promise<RestApiResponse<TickerResponse>> {
         return this.marketApi.ticker(requestParameters);
@@ -677,6 +922,7 @@ export class RestAPI {
 
     /**
      * 24 hour rolling window price change statistics. **Careful** when accessing this with no symbol.
+     *
      * Weight: <table>
      * <thead>
      * <tr>
@@ -715,12 +961,17 @@ export class RestAPI {
      * </tbody>
      * </table>
      *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary 24hr ticker price change statistics
      * @param {Ticker24hrRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<Ticker24hrResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker24hr Binance API Documentation}
      */
     ticker24hr(
         requestParameters: Ticker24hrRequest = {}
@@ -730,38 +981,24 @@ export class RestAPI {
 
     /**
      * Best price/qty on the order book for a symbol or symbols.
-     * Weight: <table>
-     * <thead>
-     * <tr>
-     * <th>Parameter</th>
-     * <th>Symbols Provided</th>
-     * <th>Weight</th>
-     * </tr>
-     * </thead>
-     * <tbody>
-     * <tr>
-     * <td rowspan="2">symbol</td>
-     * <td>1</td>
-     * <td>2</td>
-     * </tr>
-     * <tr>
-     * <td>symbol parameter is omitted</td>
-     * <td>4</td>
-     * </tr>
-     * <tr>
-     * <td>symbols</td>
-     * <td>Any</td>
-     * <td>4</td>
-     * </tr>
-     * </tbody>
-     * </table>
+     *
+     * Weight: |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Symbol order book ticker
      * @param {TickerBookTickerRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TickerBookTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker-book-ticker Binance API Documentation}
      */
     tickerBookTicker(
         requestParameters: TickerBookTickerRequest = {}
@@ -771,38 +1008,24 @@ export class RestAPI {
 
     /**
      * Latest price for a symbol or symbols.
-     * Weight: <table>
-     * <thead>
-     * <tr>
-     * <th>Parameter</th>
-     * <th>Symbols Provided</th>
-     * <th>Weight</th>
-     * </tr>
-     * </thead>
-     * <tbody>
-     * <tr>
-     * <td rowspan="2">symbol</td>
-     * <td>1</td>
-     * <td>2</td>
-     * </tr>
-     * <tr>
-     * <td>symbol parameter is omitted</td>
-     * <td>4</td>
-     * </tr>
-     * <tr>
-     * <td>symbols</td>
-     * <td>Any</td>
-     * <td>4</td>
-     * </tr>
-     * </tbody>
-     * </table>
+     *
+     * Weight: |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Symbol price ticker
      * @param {TickerPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TickerPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker-price Binance API Documentation}
      */
     tickerPrice(
         requestParameters: TickerPriceRequest = {}
@@ -812,14 +1035,25 @@ export class RestAPI {
 
     /**
      * Price change statistics for a trading day.
-     * Weight: 4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     *
+     * Weight: 4 for each requested symbol. The weight for this request will cap at 200 once the number of symbols in the request is more than 50.
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     **Notes:**:
+     * - Supported values for `timeZone`:
+     * - Hours and minutes (e.g. `-1:00`, `05:45`)
+     * - Only hours (e.g. `0`, `8`, `4`)
      *
      * @summary Trading Day Ticker
      * @param {TickerTradingDayRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TickerTradingDayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker-trading-day Binance API Documentation}
      */
     tickerTradingDay(
         requestParameters: TickerTradingDayRequest = {}
@@ -828,17 +1062,33 @@ export class RestAPI {
     }
 
     /**
-     * The request is similar to klines having the same parameters and response.
+     * The request is similar to klines having the same parameters and
+     * response.
      *
-     * `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
-     * Weight: 2
+     * `uiKlines` return modified kline data, optimized for presentation of
+     * candlestick charts.
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * - Supported values for `timeZone`:
+     * - Hours and minutes (e.g. `-1:00`, `05:45`)
+     * - Only hours (e.g. `0`, `8`, `4`)
+     * - Accepted range is strictly [-12:00 to +14:00] inclusive
+     * - If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * - Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
      *
      * @summary UIKlines
      * @param {UiKlinesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<UiKlinesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#uiklines Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ui-klines Binance API Documentation}
      */
     uiKlines(requestParameters: UiKlinesRequest): Promise<RestApiResponse<UiKlinesResponse>> {
         return this.marketApi.uiKlines(requestParameters);
@@ -847,14 +1097,20 @@ export class RestAPI {
     /**
      * Cancels all active orders on a symbol.
      * This includes orders that are part of an order list.
-     * Weight: 1
      *
-     * @summary Cancel All Open Orders on a Symbol
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * @summary Cancel All Open Orders on a Symbol (TRADE)
      * @param {DeleteOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DeleteOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-all-open-orders-on-a-symbol-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#delete-open-orders Binance API Documentation}
      */
     deleteOpenOrders(
         requestParameters: DeleteOpenOrdersRequest
@@ -864,14 +1120,24 @@ export class RestAPI {
 
     /**
      * Cancel an active order.
-     * Weight: 1
      *
-     * @summary Cancel order
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
+     * - The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
+     *
+     * @summary Cancel order (TRADE)
      * @param {DeleteOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DeleteOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#delete-order Binance API Documentation}
      */
     deleteOrder(
         requestParameters: DeleteOrderRequest
@@ -881,14 +1147,24 @@ export class RestAPI {
 
     /**
      * Cancel an entire Order list
-     * Weight: 1
      *
-     * @summary Cancel Order list
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     **Notes:**
+     * - Canceling an individual order from an order list will cancel the entire order list.
+     * - If both orderListId and listClientOrderId parameters are provided, the orderListId is searched first, then the listClientOrderId from that result is checked against that order. If both conditions are not met the request will be rejected.
+     *
+     * @summary Cancel Order list (TRADE)
      * @param {DeleteOrderListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<DeleteOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-list-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#delete-order-list Binance API Documentation}
      */
     deleteOrderList(
         requestParameters: DeleteOrderListRequest
@@ -900,14 +1176,50 @@ export class RestAPI {
      * Send in a new order.
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
-     * Weight: 1
      *
-     * @summary New order
+     * Weight(IP): 1
+     *
+     * Unfilled Order Count: 1
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * Some additional mandatory parameters based on order `type`:
+     *
+     * Type | Additional mandatory parameters | Additional Information
+     * ------------ | ------------| ------
+     * `LIMIT` | `timeInForce`, `quantity`, `price`|
+     * `MARKET` | `quantity` or `quoteOrderQty`| `MARKET` orders using the `quantity` field specifies the amount of the `base asset` the user wants to buy or sell at the market price. <br/> E.g. MARKET order on BTCUSDT will specify how much BTC the user is buying or selling. <br/><br/> `MARKET` orders using `quoteOrderQty` specifies the amount the user wants to spend (when buying) or receive (when selling) the `quote` asset; the correct `quantity` will be determined based on the market liquidity and `quoteOrderQty`. <br/> E.g. Using the symbol BTCUSDT: <br/> `BUY` side, the order will buy as many BTC as `quoteOrderQty` USDT can. <br/> `SELL` side, the order will sell as much BTC needed to receive `quoteOrderQty` USDT.
+     * `STOP_LOSS` | `quantity`, `stopPrice` or `trailingDelta`| This will execute a `MARKET` order when the conditions are met. (e.g. `stopPrice` is met or `trailingDelta` is activated)
+     * `STOP_LOSS_LIMIT` | `timeInForce`, `quantity`,  `price`, `stopPrice` or `trailingDelta`
+     * `TAKE_PROFIT` | `quantity`, `stopPrice` or `trailingDelta` | This will execute a `MARKET` order when the conditions are met. (e.g. `stopPrice` is met or `trailingDelta` is activated)
+     * `TAKE_PROFIT_LIMIT` | `timeInForce`, `quantity`, `price`, `stopPrice` or `trailingDelta` |
+     * `LIMIT_MAKER` | `quantity`, `price`| This is a `LIMIT` order that will be rejected if the order immediately matches and trades as a taker. <br/> This is also known as a POST-ONLY order.
+     *
+     *
+     * Notes on using parameters for Pegged Orders:
+     * These parameters are allowed for `LIMIT`, `LIMIT_MAKER`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_LIMIT` orders.
+     * If `pegPriceType` is specified, `price` becomes optional. Otherwise, it is still mandatory.
+     * `pegPriceType=PRIMARY_PEG` means the primary peg, that is the best price on the same side of the order book as your order.
+     * `pegPriceType=MARKET_PEG` means the market peg, that is the best price on the opposite side of the order book from your order.
+     * Use `pegOffsetType` and `pegOffsetValue` to request a price level other than the best one. These parameters must be specified together.
+     *
+     * Other info:
+     * Any `LIMIT` or `LIMIT_MAKER` type order can be made an iceberg order by sending an `icebergQty`.
+     * Any order with an `icebergQty` MUST have `timeInForce` set to `GTC`.
+     * For `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_LIMIT` and `TAKE_PROFIT` orders, `trailingDelta` can be combined with `stopPrice`.
+     * `MARKET` orders using `quoteOrderQty` will not break `LOT_SIZE` filter rules; the order will execute a `quantity` that will have the notional value as close as possible to `quoteOrderQty`. Trigger order price rules against market price for both MARKET and LIMIT versions:
+     * Price above market price: `STOP_LOSS` `BUY`, `TAKE_PROFIT` `SELL`
+     * Price below market price: `STOP_LOSS` `SELL`, `TAKE_PROFIT` `BUY`
+     *
+     * @summary New order (TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<NewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#new-order Binance API Documentation}
      */
     newOrder(requestParameters: NewOrderRequest): Promise<RestApiResponse<NewOrderResponse>> {
         return this.tradeApi.newOrder(requestParameters);
@@ -918,15 +1230,23 @@ export class RestAPI {
      *
      * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
-     * Weight: 4
+     * Read Order Amend Keep Priority FAQ to learn more.
      *
-     * @summary Order Amend Keep Priority
+     * Weight(IP): 4
+     *
+     * Unfilled Order Count: 0
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * @summary Order Amend Keep Priority (TRADE)
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderAmendKeepPriorityResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-amend-keep-priority-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-amend-keep-priority Binance API Documentation}
      */
     orderAmendKeepPriority(
         requestParameters: OrderAmendKeepPriorityRequest
@@ -935,18 +1255,200 @@ export class RestAPI {
     }
 
     /**
-     * * Cancels an existing order and places a new order on the same symbol.
-     * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
-     * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
-     * You can only cancel an individual order from an orderList using this endpoint, but the result is the same as canceling the entire orderList.
-     * Weight: 1
+     * - Cancels an existing order and places a new order on the same symbol.
+     * - Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
+     * - A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * - You can only cancel an individual order from an orderList using this endpoint, but the result is the same as canceling the entire orderList.
      *
-     * @summary Cancel an Existing Order and Send a New Order
+     * Weight(IP): 1
+     *
+     * Unfilled Order Count: 1
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * Similar to `POST /api/v3/order`, additional mandatory parameters are determined by `type`.
+     * Response format varies depending on whether the processing of the message succeeded, partially succeeded, or failed.
+     *
+     * <table>
+     * <thead>
+     * <tr>
+     * <th colspan=3 align=left>Request</th>
+     * <th colspan=3 align=left>Response</th>
+     * </tr>
+     * <tr>
+     * <th><code>cancelReplaceMode</code></th>
+     * <th><code>orderRateLimitExceededMode</code></th>
+     * <th>Unfilled Order Count</th>
+     * <th><code>cancelResult</code></th>
+     * <th><code>newOrderResult</code></th>
+     * <th><code>status</code></th>
+     * </tr>
+     * </thead>
+     * <tbody>
+     * <tr>
+     * <td rowspan="11"><code>STOP_ON_FAILURE</code></td>
+     * <td rowspan="6"><code>DO_NOTHING</code></td>
+     * <td rowspan="3">Within Limits</td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right><code>200</code></td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>➖ <code>NOT_ATTEMPTED</code></td>
+     * <td align=right><code>400</code></td>
+     * </tr>
+     * <tr>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>409</code></td>
+     * </tr>
+     * <tr>
+     * <td rowspan="3">Exceeds Limits</td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right>N/A</td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>➖ <code>NOT_ATTEMPTED</code></td>
+     * <td align=right>N/A</td>
+     * </tr>
+     * <tr>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right>N/A</td>
+     * </tr>
+     * <tr>
+     * <td rowspan="5"><code>CANCEL_ONLY</code></td>
+     * <td rowspan="3">Within Limits</td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right><code>200</code></td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>➖ <code>NOT_ATTEMPTED</code></td>
+     * <td align=right><code>400</code></td>
+     * </tr>
+     * <tr>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>409</code></td>
+     * </tr>
+     * <tr>
+     * <td rowspan="2">Exceeds Limits</td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>➖ <code>NOT_ATTEMPTED</code></td>
+     * <td align=right><code>429</code></td>
+     * </tr>
+     * <tr>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>429</code></td>
+     * </tr>
+     * <tr>
+     * <td rowspan="16"><code>ALLOW_FAILURE</code></td>
+     * <td rowspan="8"><code>DO_NOTHING</code></td>
+     * <td rowspan="4">Within Limits</td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right><code>200</code></td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>400</code></td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right><code>409</code></td>
+     * </tr>
+     * <tr>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>409</code></td>
+     * </tr>
+     * <tr>
+     * <td rowspan="4">Exceeds Limits</td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right>N/A</td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right>N/A</td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right>N/A</td>
+     * </tr>
+     * <tr>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right>N/A</td>
+     * </tr>
+     * <tr>
+     * <td rowspan="8"><CODE>CANCEL_ONLY</CODE></td>
+     * <td rowspan="4">Within Limits</td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right><code>200</code></td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>400</code></td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right><code>409</code></td>
+     * </tr>
+     * <tr>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>409</code></td>
+     * </tr>
+     * <tr>
+     * <td rowspan="4">Exceeds Limits</td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right><code>N/A</code></td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>400</code></td>
+     * </tr>
+     * <tr>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td align=right>N/A</td>
+     * </tr>
+     * <tr>
+     * <td>✅ <code>SUCCESS</code></td>
+     * <td>❌ <code>FAILURE</code></td>
+     * <td align=right><code>409</code></td>
+     * </tr>
+     * </tbody>
+     * </table>
+     *
+     **Notes:**
+     * - The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
+     *
+     * @summary Cancel an Existing Order and Send a New Order (TRADE)
      * @param {OrderCancelReplaceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderCancelReplaceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-an-existing-order-and-send-a-new-order-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-cancel-replace Binance API Documentation}
      */
     orderCancelReplace(
         requestParameters: OrderCancelReplaceRequest
@@ -955,28 +1457,35 @@ export class RestAPI {
     }
 
     /**
-     * Send in an one-cancels-the-other (OCO) pair, where activation of one order immediately cancels the other.
+     * Send in an one-cancels-the-other (OCO) pair, where activation of one
+     * order immediately cancels the other.
      *
-     * An OCO has 2 orders called the **above order** and **below order**.
-     * One of the orders must be a `LIMIT_MAKER/TAKE_PROFIT/TAKE_PROFIT_LIMIT` order and the other must be `STOP_LOSS` or `STOP_LOSS_LIMIT` order.
-     * Price restrictions
-     * If the OCO is on the `SELL` side:
-     * `LIMIT_MAKER/TAKE_PROFIT_LIMIT` `price` > Last Traded Price >  `STOP_LOSS/STOP_LOSS_LIMIT` `stopPrice`
-     * `TAKE_PROFIT stopPrice` > Last Traded Price > `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
-     * If the OCO is on the `BUY` side:
-     * `LIMIT_MAKER/TAKE_PROFIT_LIMIT price` < Last Traded Price < `stopPrice`
-     * `TAKE_PROFIT stopPrice` < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
-     * OCOs add **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
-     * Weight: 1
+     * - An OCO has 2 orders called the **above order** and **below order**.
+     * - One of the orders must be a `LIMIT_MAKER/TAKE_PROFIT/TAKE_PROFIT_LIMIT` order and the other must be `STOP_LOSS` or `STOP_LOSS_LIMIT` order.
+     * - Price restrictions
+     * - If the OCO is on the `SELL` side:
+     * - `LIMIT_MAKER/TAKE_PROFIT_LIMIT` `price` > Last Traded Price >  `STOP_LOSS/STOP_LOSS_LIMIT` `stopPrice`
+     * - `TAKE_PROFIT stopPrice` > Last Traded Price > `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
+     * - If the OCO is on the `BUY` side:
+     * - `LIMIT_MAKER/TAKE_PROFIT_LIMIT price` < Last Traded Price < `stopPrice`
+     * - `TAKE_PROFIT stopPrice` < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT stopPrice` * OCOs add **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     * - OCOs add 2 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
+     * Weight(IP): 1
      *
      * Unfilled Order Count: 2
      *
-     * @summary New Order list - OCO
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * @summary New Order list - OCO (TRADE)
      * @param {OrderListOcoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderListOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---oco-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-list-oco Binance API Documentation}
      */
     orderListOco(
         requestParameters: OrderListOcoRequest
@@ -985,19 +1494,25 @@ export class RestAPI {
     }
 
     /**
-     * Place an [OPO](./faqs/opo.md).
+     * Place an [OPO](/products/spot/faqs/opo).
      *
-     * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
-     * Weight: 1
+     * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS`` filter and `MAX_NUM_ORDERS`` filter.
+     *
+     * Weight(IP): 1
      *
      * Unfilled Order Count: 2
      *
-     * @summary New Order List - OPO
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * @summary New Order List - OPO (TRADE)
      * @param {OrderListOpoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderListOpoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---opo-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-list-opo Binance API Documentation}
      */
     orderListOpo(
         requestParameters: OrderListOpoRequest
@@ -1006,17 +1521,23 @@ export class RestAPI {
     }
 
     /**
-     * Place an [OPOCO](./faqs/opo.md).
-     * Weight: 1
+     * Place an [OPOCO](/products/spot/faqs/opo).
+     *
+     * Weight(IP): 1
      *
      * Unfilled Order Count: 3
      *
-     * @summary New Order List - OPOCO
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * @summary New Order List - OPOCO (TRADE)
      * @param {OrderListOpocoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderListOpocoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---opoco-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-list-opoco Binance API Documentation}
      */
     orderListOpoco(
         requestParameters: OrderListOpocoRequest
@@ -1027,22 +1548,39 @@ export class RestAPI {
     /**
      * Place an OTO.
      *
-     * An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
-     * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-     * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
-     * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
-     * When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
-     * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
-     * Weight: 1
+     * - An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
+     * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
+     * - The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
+     * - If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
+     * - When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
+     * - OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     *
+     * Weight(IP): 1
      *
      * Unfilled Order Count: 2
      *
-     * @summary New Order list - OTO
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     **Mandatory parameters based on `pendingType` or `workingType`**
+     *
+     * Depending on the `pendingType` or `workingType`, some optional parameters will become mandatory.
+     *
+     * |Type                                                  |Additional mandatory parameters|Additional information|
+     * |----                                                  |----                           |------
+     * |`workingType` = `LIMIT`                               |`workingTimeInForce`           |
+     * |`pendingType` = `LIMIT`                                |`pendingPrice`, `pendingTimeInForce`          |
+     * |`pendingType` = `STOP_LOSS` or `TAKE_PROFIT`           |`pendingStopPrice` and/or `pendingTrailingDelta`|
+     * |`pendingType` = `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`|`pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce`|
+     *
+     * @summary New Order list - OTO (TRADE)
      * @param {OrderListOtoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderListOtoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---oto-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-list-oto Binance API Documentation}
      */
     orderListOto(
         requestParameters: OrderListOtoRequest
@@ -1053,22 +1591,42 @@ export class RestAPI {
     /**
      * Place an OTOCO.
      *
-     * An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
-     * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-     * The behavior of the working order is the same as the [OTO](#new-order-list---oto-trade).
-     * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#new-order-list---oco-trade).
-     * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
-     * Weight: 1
+     * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
+     * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
+     * - The behavior of the working order is the same as the [OTO](#order-list-oto).
+     * - OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
+     * - The rules of the pending above and pending below follow the same rules as the [Order list OCO](#order-list-oco).
+     * - OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     *
+     * Weight(IP): 1
      *
      * Unfilled Order Count: 3
      *
-     * @summary New Order list - OTOCO
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     **Mandatory parameters based on `pendingAboveType`, `pendingBelowType` or `workingType`**
+     *
+     * Depending on the `pendingAboveType`/`pendingBelowType` or `workingType`, some optional parameters will become mandatory.
+     *
+     * |Type                                                       |Additional mandatory parameters|Additional information|
+     * |----                                                       |----                           |------
+     * |`workingType` = `LIMIT`                                    |`workingTimeInForce`           |
+     * |`pendingAboveType`= `LIMIT_MAKER`                                |`pendingAbovePrice`     |
+     * |`pendingAboveType` = `STOP_LOSS/TAKE_PROFIT`        |`pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`|
+     * |`pendingAboveType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT` |`pendingAbovePrice`, `pendingAboveStopPrice` and/or `pendingAboveTrailingDelta`, `pendingAboveTimeInForce`|
+     * |`pendingBelowType`= `LIMIT_MAKER`                                |`pendingBelowPrice`          |
+     * |`pendingBelowType= STOP_LOSS/TAKE_PROFIT`         |`pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`|
+     * |`pendingBelowType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT` |`pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce`|
+     *
+     * @summary New Order list - OTOCO (TRADE)
      * @param {OrderListOtocoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderListOtocoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---otoco-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-list-otoco Binance API Documentation}
      */
     orderListOtoco(
         requestParameters: OrderListOtocoRequest
@@ -1079,23 +1637,29 @@ export class RestAPI {
     /**
      * Send in a new OCO.
      *
-     * Price Restrictions:
-     * `SELL`: Limit Price > Last Price > Stop Price
-     * `BUY`: Limit Price < Last Price < Stop Price
-     * Quantity Restrictions:
-     * Both legs must have the same quantity.
-     * `ICEBERG` quantities however do not have to be the same
-     * `OCO` adds **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
-     * Weight: 1
+     * - Price Restrictions:
+     * - `SELL`: Limit Price > Last Price > Stop Price
+     * - `BUY`: Limit Price < Last Price < Stop Price
+     * - Quantity Restrictions:
+     * - Both legs must have the same quantity.
+     * - `ICEBERG` quantities however do not have to be the same
+     * - `OCO` adds **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
+     * Weight(IP): 1
      *
      * Unfilled Order Count: 2
      *
-     * @summary New OCO - Deprecated
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     * @summary New OCO - Deprecated (TRADE)
      * @param {OrderOcoRequest} requestParameters Request parameters.
      * @deprecated
      * @returns {Promise<RestApiResponse<OrderOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-oco---deprecated-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-oco Binance API Documentation}
      */
     orderOco(requestParameters: OrderOcoRequest): Promise<RestApiResponse<OrderOcoResponse>> {
         return this.tradeApi.orderOco(requestParameters);
@@ -1103,18 +1667,26 @@ export class RestAPI {
 
     /**
      * Test new order creation and signature/recvWindow long.
-     * Creates and validates a new order but does not send it into the matching engine.
-     * Weight: |Condition| Request Weight|
-     * |------------           | ------------ |
-     * |Without `computeCommissionRates`| 1|
+     *
+     * Creates and validates a new order but does not send it into the matching
+     * engine.
+     *
+     * Weight: |Condition|Weight|
+     * |---|---|
+     * |Without `computeCommissionRates`|1|
      * |With `computeCommissionRates`|20|
      *
-     * @summary Test new order
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Test new order (TRADE)
      * @param {OrderTestRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderTestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#order-test Binance API Documentation}
      */
     orderTest(requestParameters: OrderTestRequest): Promise<RestApiResponse<OrderTestResponse>> {
         return this.tradeApi.orderTest(requestParameters);
@@ -1125,17 +1697,25 @@ export class RestAPI {
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [SOR FAQ](faqs/sor_faq.md) to learn more.
-     * Weight: 1
+     * Read [SOR FAQ](/products/spot/faqs/sor_faq) to learn more.
+     *
+     * Weight(IP): 1
      *
      * Unfilled Order Count: 1
      *
-     * @summary New order using SOR
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Matching Engine
+     *
+     **Note:** `POST /api/v3/sor/order` only supports `LIMIT` and `MARKET` orders. `quoteOrderQty` is not supported.
+     *
+     * @summary New order using SOR (TRADE)
      * @param {SorOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SorOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-using-sor-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#sor-order Binance API Documentation}
      */
     sorOrder(requestParameters: SorOrderRequest): Promise<RestApiResponse<SorOrderResponse>> {
         return this.tradeApi.sorOrder(requestParameters);
@@ -1144,17 +1724,23 @@ export class RestAPI {
     /**
      * Test new order creation and signature/recvWindow using smart order routing (SOR).
      * Creates and validates a new order but does not send it into the matching engine.
-     * Weight: | Condition | Request Weight |
-     * | --------- | -------------- |
-     * | Without `computeCommissionRates`  |  1 |
-     * | With `computeCommissionRates`     | 20 |
      *
-     * @summary Test new order using SOR
+     * Weight: |Condition|Weight|
+     * |---|---|
+     * |Without `computeCommissionRates`|1|
+     * |With `computeCommissionRates`|20|
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Test new order using SOR (TRADE)
      * @param {SorOrderTestRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SorOrderTestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-using-sor-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/trade#sor-order-test Binance API Documentation}
      */
     sorOrderTest(
         requestParameters: SorOrderTestRequest

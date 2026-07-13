@@ -13,11 +13,11 @@ async function orderListOto() {
             symbol: 'BNBUSDT',
             workingType: SpotRestAPI.OrderListOtoWorkingTypeEnum.LIMIT,
             workingSide: SpotRestAPI.OrderListOtoWorkingSideEnum.BUY,
-            workingPrice: 1.0,
-            workingQuantity: 1.0,
+            workingPrice: 1,
+            workingQuantity: 1,
             pendingType: SpotRestAPI.OrderListOtoPendingTypeEnum.LIMIT,
             pendingSide: SpotRestAPI.OrderListOtoPendingSideEnum.BUY,
-            pendingQuantity: 1.0,
+            pendingQuantity: 1,
         });
 
         const rateLimits = response.rateLimits!;

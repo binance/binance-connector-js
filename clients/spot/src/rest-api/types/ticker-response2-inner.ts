@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,19 +26,19 @@ export interface TickerResponse2Inner {
      */
     symbol?: string;
     /**
-     *
+     * Absolute price change
      * @type {string}
      * @memberof TickerResponse2Inner
      */
     priceChange?: string;
     /**
-     *
+     * Relative price change in percent
      * @type {string}
      * @memberof TickerResponse2Inner
      */
     priceChangePercent?: string;
     /**
-     *
+     * QuoteVolume / Volume
      * @type {string}
      * @memberof TickerResponse2Inner
      */
@@ -79,25 +74,25 @@ export interface TickerResponse2Inner {
      */
     volume?: string;
     /**
-     *
+     * Sum of (price * volume) for all trades
      * @type {string}
      * @memberof TickerResponse2Inner
      */
     quoteVolume?: string;
     /**
-     *
+     * Open time for ticker window
      * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */
     openTime?: number | bigint;
     /**
-     *
+     * Close time for ticker window
      * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */
     closeTime?: number | bigint;
     /**
-     *
+     * Trade IDs
      * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */
@@ -109,7 +104,7 @@ export interface TickerResponse2Inner {
      */
     lastId?: number | bigint;
     /**
-     *
+     * Number of trades in the interval
      * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */

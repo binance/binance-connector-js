@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,67 +20,67 @@
  */
 export interface AggTradeResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof AggTradeResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof AggTradeResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AggTradeResponse
      */
     s?: string;
     /**
-     *
+     * Aggregate trade ID
      * @type {number | bigint}
      * @memberof AggTradeResponse
      */
     a?: number | bigint;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof AggTradeResponse
      */
     p?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof AggTradeResponse
      */
     q?: string;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
      * @memberof AggTradeResponse
      */
     f?: number | bigint;
     /**
-     *
+     * Last trade ID
      * @type {number | bigint}
      * @memberof AggTradeResponse
      */
     l?: number | bigint;
     /**
-     *
+     * Trade time
      * @type {number | bigint}
      * @memberof AggTradeResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Is the buyer the market maker?
      * @type {boolean}
      * @memberof AggTradeResponse
      */
     m?: boolean;
     /**
-     *
+     * Ignore
      * @type {boolean}
      * @memberof AggTradeResponse
      */

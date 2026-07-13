@@ -12,7 +12,7 @@ async function referencePrice() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.referencePrice({
-            symbol: 'bnbusdt',
+            symbol: 'bazusd',
         });
 
         stream.on('message', (data) => {

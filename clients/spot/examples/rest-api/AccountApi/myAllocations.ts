@@ -10,7 +10,7 @@ const client = new Spot({ configurationRestAPI });
 async function myAllocations() {
     try {
         const response = await client.restAPI.myAllocations({
-            symbol: 'BNBUSDT',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

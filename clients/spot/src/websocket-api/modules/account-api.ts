@@ -1,12 +1,7 @@
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -42,9 +37,15 @@ import type {
 export interface AccountApiInterface {
     /**
      * Get current account commission rates.
-     * Weight: 20
      *
-     * @summary WebSocket Account Commission Rates
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Account Commission Rates (USER_DATA)
      * @param {AccountCommissionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<AccountCommissionResponse>}
@@ -56,9 +57,15 @@ export interface AccountApiInterface {
 
     /**
      * Query your current unfilled order count for all intervals.
-     * Weight: 40
      *
-     * @summary WebSocket Unfilled Order Count
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Unfilled Order Count (USER_DATA)
      * @param {AccountRateLimitsOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<AccountRateLimitsOrdersResponse>}
@@ -70,9 +77,15 @@ export interface AccountApiInterface {
 
     /**
      * Query information about your account.
-     * Weight: 20
      *
-     * @summary WebSocket Account information
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * @summary Account information (USER_DATA)
      * @param {AccountStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<AccountStatusResponse>}
@@ -84,9 +97,22 @@ export interface AccountApiInterface {
 
     /**
      * Query information about all your order lists, filtered by time range.
-     * Weight: 20
      *
-     * @summary WebSocket Account order list history
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Notes:
+     * If `startTime` and/or `endTime` are specified, `fromId` is ignored.
+     * Order lists are filtered by `transactionTime` of the last order list execution status update.
+     * If `fromId` is specified, return order lists with order list ID >= `fromId`.
+     * If no condition is specified, the most recent order lists are returned.
+     * The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Account order list history (USER_DATA)
      * @param {AllOrderListsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<AllOrderListsResponse>}
@@ -98,9 +124,30 @@ export interface AccountApiInterface {
 
     /**
      * Query information about all your orders – active, canceled, filled – filtered by time range.
-     * Weight: 20
      *
-     * @summary WebSocket Account order history
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Notes:
+     *
+     * If `startTime` and/or `endTime` are specified, `orderId` is ignored.
+     *
+     * Orders are filtered by `time` of the last execution status update.
+     *
+     * If `orderId` is specified, return orders with order ID >= `orderId`.
+     *
+     * If no condition is specified, the most recent orders are returned.
+     *
+     * For some historical orders the `cummulativeQuoteQty` response field may be negative,
+     * meaning the data is not available at this time.
+     *
+     * The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Account order history (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<AllOrdersResponse>}
@@ -112,9 +159,29 @@ export interface AccountApiInterface {
 
     /**
      * Retrieves allocations resulting from SOR order placement.
-     * Weight: 20
      *
-     * @summary WebSocket Account allocations
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported parameter combinations:
+     *
+     * Parameters                                  | Response |
+     * ------------------------------------------- | -------- |
+     * `symbol`                                    | allocations from oldest to newest |
+     * `symbol` + `startTime`                      | oldest allocations since `startTime` |
+     * `symbol` + `endTime`                        | newest allocations until `endTime` |
+     * `symbol` + `startTime` + `endTime`          | allocations within the time range |
+     * `symbol` + `fromAllocationId`               | allocations by allocation ID |
+     * `symbol` + `orderId`                        | allocations related to an order starting with oldest |
+     * `symbol` + `orderId` + `fromAllocationId`   | allocations related to an order by allocation ID |
+     *
+     **Note:** The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Account allocations (USER_DATA)
      * @param {MyAllocationsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<MyAllocationsResponse>}
@@ -125,10 +192,17 @@ export interface AccountApiInterface {
     ): Promise<WebsocketApiResponse<MyAllocationsResponse>>;
 
     /**
-     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only method that shows if an account has `MAX_ASSET` filters applied to it.
-     * Weight: 40
+     * Retrieves the list of [filters](/products/spot/filters) relevant to an account on a given symbol. This is the only method
+     * that shows if an account has [`MAX_ASSET`](/products/spot/filters#max_asset) filters applied to it.
      *
-     * @summary WebSocket Query Relevant Filters
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Relevant Filters (USER_DATA)
      * @param {MyFiltersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<MyFiltersResponse>}
@@ -147,13 +221,19 @@ export interface AccountApiInterface {
      * `symbol` + `orderId`
      * `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
      * `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
+     *
      * Weight: Case                            | Weight
      * ----                            | -----
      * If `symbol` is invalid          | 2
      * Querying by `preventedMatchId`  | 2
      * Querying by `orderId`           | 20
      *
-     * @summary WebSocket Account prevented matches
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Account prevented matches (USER_DATA)
      * @param {MyPreventedMatchesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<MyPreventedMatchesResponse>}
@@ -165,12 +245,27 @@ export interface AccountApiInterface {
 
     /**
      * Query information about all your trades, filtered by time range.
+     *
      * Weight: Condition| Weight|
      * ---| ---
      * |Without orderId|20|
      * |With orderId|5|
      *
-     * @summary WebSocket Account trade history
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * Data Source: Memory => Database
+     *
+     * Notes:
+     * - If `fromId` is specified, return trades with trade ID >= `fromId`.
+     * - If `startTime` and/or `endTime` are specified, trades are filtered by execution time (`time`).
+     * - `fromId` cannot be used together with `startTime` and `endTime`.
+     * - If `orderId` is specified, only trades related to that order are returned.
+     * - `startTime` and `endTime` cannot be used together with `orderId`.
+     * - If no condition is specified, the most recent trades are returned.
+     * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Account trade history (USER_DATA)
      * @param {MyTradesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<MyTradesResponse>}
@@ -183,11 +278,17 @@ export interface AccountApiInterface {
      *
      * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
      *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: 6
+     * `userDataStream.subscribe` if on an authenticated session
+     * `userDataStream.subscribe.signature` if subscribing through signature subscription
      *
-     * @summary WebSocket Current open Order lists
+     * Weight(IP): 6
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory -> Database
+     *
+     * @summary Current open Order lists (USER_DATA)
      * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<OpenOrderListsStatusResponse>}
@@ -202,16 +303,20 @@ export interface AccountApiInterface {
      *
      * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
      *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: Adjusted based on the number of requested symbols:
+     * `userDataStream.subscribe` if on an authenticated session
+     * `userDataStream.subscribe.signature` if subscribing through signature subscription
      *
-     * | Parameter | Weight |
+     * Weight: | Parameter | Weight |
      * | --------- | ------ |
      * | `symbol`  |      6 |
      * | none      |     80 |
      *
-     * @summary WebSocket Current open orders
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * Data Source: Memory => Database
+     *
+     * @summary Current open orders (USER_DATA)
      * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<OpenOrdersStatusResponse>}
@@ -223,9 +328,15 @@ export interface AccountApiInterface {
 
     /**
      * Queries all amendments of a single order.
-     * Weight: 4
      *
-     * @summary WebSocket Query Order Amendments
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Order Amendments (USER_DATA)
      * @param {OrderAmendmentsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<OrderAmendmentsResponse>}
@@ -239,9 +350,22 @@ export interface AccountApiInterface {
      * Check execution status of an Order list.
      *
      * For execution status of individual orders, use `order.status`.
-     * Weight: 4
      *
-     * @summary WebSocket Query Order list
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Notes:
+     *
+     * `origClientOrderId` refers to `listClientOrderId` of the order list itself.
+     *
+     * If both `origClientOrderId` and `orderListId` parameters are specified,
+     * only `origClientOrderId` is used and `orderListId` is ignored.
+     *
+     * @summary Query Order list (USER_DATA)
      * @param {OrderListStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<OrderListStatusResponse>}
@@ -253,9 +377,22 @@ export interface AccountApiInterface {
 
     /**
      * Check execution status of an order.
-     * Weight: 4
      *
-     * @summary WebSocket Query order
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * Notes:
+     *
+     * If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
+     *
+     * For some historical orders the `cummulativeQuoteQty` response field may be negative,
+     * meaning the data is not available at this time.
+     *
+     * @summary Query order (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<OrderStatusResponse>}
@@ -279,7 +416,7 @@ export interface AccountCommissionRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiAccountCommission
      */
@@ -292,14 +429,14 @@ export interface AccountCommissionRequest {
  */
 export interface AccountRateLimitsOrdersRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiAccountRateLimitsOrders
      */
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAccountRateLimitsOrders
      */
@@ -312,21 +449,21 @@ export interface AccountRateLimitsOrdersRequest {
  */
 export interface AccountStatusRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiAccountStatus
      */
     readonly id?: string;
 
     /**
-     * When set to `true`, emits only the non-zero balances of an account. <br>Default value: false
+     * When set to `true`, emits only the non-zero balances of an account. Default value: `false`.
      * @type {boolean}
      * @memberof AccountApiAccountStatus
      */
     readonly omitZeroBalances?: boolean;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAccountStatus
      */
@@ -339,42 +476,42 @@ export interface AccountStatusRequest {
  */
 export interface AllOrderListsRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiAllOrderLists
      */
     readonly id?: string;
 
     /**
-     * Trade ID to begin at
+     * Order list ID to begin at
      * @type {number}
      * @memberof AccountApiAllOrderLists
      */
     readonly fromId?: number;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiAllOrderLists
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiAllOrderLists
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 100; Maximum: 5000
+     * Default: 500; Maximum: 1000
      * @type {number}
      * @memberof AccountApiAllOrderLists
      */
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAllOrderLists
      */
@@ -394,42 +531,42 @@ export interface AllOrdersRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiAllOrders
      */
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Order ID to begin at
      * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 100; Maximum: 5000
+     * Default: 500; Maximum: 1000
      * @type {number}
      * @memberof AccountApiAllOrders
      */
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAllOrders
      */
@@ -449,49 +586,49 @@ export interface MyAllocationsRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiMyAllocations
      */
     readonly id?: string;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
     readonly endTime?: number | bigint;
 
     /**
-     *
+     * Allocation ID to begin at
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
     readonly fromAllocationId?: number;
 
     /**
-     * Default: 100; Maximum: 5000
+     * Default: 500; Maximum: 1000
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
     readonly limit?: number;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Order ID
      * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
     readonly orderId?: number | bigint;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -511,14 +648,14 @@ export interface MyFiltersRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiMyFilters
      */
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyFilters
      */
@@ -538,42 +675,42 @@ export interface MyPreventedMatchesRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiMyPreventedMatches
      */
     readonly id?: string;
 
     /**
-     *
+     * Prevented match ID
      * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
     readonly preventedMatchId?: number | bigint;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Order ID
      * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Prevented match ID to begin at
      * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
     readonly fromPreventedMatchId?: number | bigint;
 
     /**
-     * Default: 100; Maximum: 5000
+     * Default: 500; Maximum: 1000
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -593,49 +730,49 @@ export interface MyTradesRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiMyTrades
      */
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * This can only be used in combination with `symbol`.
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Trade ID to begin at
+     * First trade ID to query
      * @type {number}
      * @memberof AccountApiMyTrades
      */
     readonly fromId?: number;
 
     /**
-     * Default: 100; Maximum: 5000
+     * Default: 500; Maximum: 1000
      * @type {number}
      * @memberof AccountApiMyTrades
      */
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -648,14 +785,14 @@ export interface MyTradesRequest {
  */
 export interface OpenOrderListsStatusRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiOpenOrderListsStatus
      */
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOpenOrderListsStatus
      */
@@ -668,21 +805,21 @@ export interface OpenOrderListsStatusRequest {
  */
 export interface OpenOrdersStatusRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiOpenOrdersStatus
      */
     readonly id?: string;
 
     /**
-     * Describe a single symbol
+     * If omitted, open orders for all symbols are returned
      * @type {string}
      * @memberof AccountApiOpenOrdersStatus
      */
     readonly symbol?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOpenOrdersStatus
      */
@@ -702,21 +839,21 @@ export interface OrderAmendmentsRequest {
     readonly symbol: string;
 
     /**
-     *
+     * Order ID
      * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
     readonly orderId: number | bigint;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiOrderAmendments
      */
     readonly id?: string;
 
     /**
-     *
+     * Execution ID to begin at
      * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
@@ -730,7 +867,7 @@ export interface OrderAmendmentsRequest {
     readonly limit?: number | bigint;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOrderAmendments
      */
@@ -743,28 +880,28 @@ export interface OrderAmendmentsRequest {
  */
 export interface OrderListStatusRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiOrderListStatus
      */
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Query order list by `listClientOrderId`. `orderListId` or `origClientOrderId` must be provided.
      * @type {string}
      * @memberof AccountApiOrderListStatus
      */
     readonly origClientOrderId?: string;
 
     /**
-     * Cancel order list by orderListId
+     * Query order list by `orderListId`. `orderListId` or `origClientOrderId` must be provided.
      * @type {number}
      * @memberof AccountApiOrderListStatus
      */
     readonly orderListId?: number;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOrderListStatus
      */
@@ -784,28 +921,28 @@ export interface OrderStatusRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AccountApiOrderStatus
      */
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Lookup order by `orderId`
      * @type {number | bigint}
      * @memberof AccountApiOrderStatus
      */
     readonly orderId?: number | bigint;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Lookup order by `clientOrderId`
      * @type {string}
      * @memberof AccountApiOrderStatus
      */
     readonly origClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOrderStatus
      */
@@ -826,13 +963,19 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Get current account commission rates.
-     * Weight: 20
      *
-     * @summary WebSocket Account Commission Rates
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Account Commission Rates (USER_DATA)
      * @param {AccountCommissionRequest} requestParameters Request parameters.
      * @returns {Promise<AccountCommissionResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-commission-rates-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#account-commission Binance API Documentation}
      */
     public accountCommission(
         requestParameters: AccountCommissionRequest
@@ -846,13 +989,19 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Query your current unfilled order count for all intervals.
-     * Weight: 40
      *
-     * @summary WebSocket Unfilled Order Count
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Unfilled Order Count (USER_DATA)
      * @param {AccountRateLimitsOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<AccountRateLimitsOrdersResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#unfilled-order-count-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#account-rate-limits-orders Binance API Documentation}
      */
     public accountRateLimitsOrders(
         requestParameters: AccountRateLimitsOrdersRequest = {}
@@ -866,13 +1015,19 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Query information about your account.
-     * Weight: 20
      *
-     * @summary WebSocket Account information
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * @summary Account information (USER_DATA)
      * @param {AccountStatusRequest} requestParameters Request parameters.
      * @returns {Promise<AccountStatusResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-information-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#account-status Binance API Documentation}
      */
     public accountStatus(
         requestParameters: AccountStatusRequest = {}
@@ -886,13 +1041,26 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Query information about all your order lists, filtered by time range.
-     * Weight: 20
      *
-     * @summary WebSocket Account order list history
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Notes:
+     * If `startTime` and/or `endTime` are specified, `fromId` is ignored.
+     * Order lists are filtered by `transactionTime` of the last order list execution status update.
+     * If `fromId` is specified, return order lists with order list ID >= `fromId`.
+     * If no condition is specified, the most recent order lists are returned.
+     * The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Account order list history (USER_DATA)
      * @param {AllOrderListsRequest} requestParameters Request parameters.
      * @returns {Promise<AllOrderListsResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-list-history-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#all-order-lists Binance API Documentation}
      */
     public allOrderLists(
         requestParameters: AllOrderListsRequest = {}
@@ -906,13 +1074,34 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Query information about all your orders – active, canceled, filled – filtered by time range.
-     * Weight: 20
      *
-     * @summary WebSocket Account order history
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Notes:
+     *
+     * If `startTime` and/or `endTime` are specified, `orderId` is ignored.
+     *
+     * Orders are filtered by `time` of the last execution status update.
+     *
+     * If `orderId` is specified, return orders with order ID >= `orderId`.
+     *
+     * If no condition is specified, the most recent orders are returned.
+     *
+     * For some historical orders the `cummulativeQuoteQty` response field may be negative,
+     * meaning the data is not available at this time.
+     *
+     * The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Account order history (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<AllOrdersResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-history-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#all-orders Binance API Documentation}
      */
     public allOrders(
         requestParameters: AllOrdersRequest
@@ -926,13 +1115,33 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Retrieves allocations resulting from SOR order placement.
-     * Weight: 20
      *
-     * @summary WebSocket Account allocations
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported parameter combinations:
+     *
+     * Parameters                                  | Response |
+     * ------------------------------------------- | -------- |
+     * `symbol`                                    | allocations from oldest to newest |
+     * `symbol` + `startTime`                      | oldest allocations since `startTime` |
+     * `symbol` + `endTime`                        | newest allocations until `endTime` |
+     * `symbol` + `startTime` + `endTime`          | allocations within the time range |
+     * `symbol` + `fromAllocationId`               | allocations by allocation ID |
+     * `symbol` + `orderId`                        | allocations related to an order starting with oldest |
+     * `symbol` + `orderId` + `fromAllocationId`   | allocations related to an order by allocation ID |
+     *
+     **Note:** The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Account allocations (USER_DATA)
      * @param {MyAllocationsRequest} requestParameters Request parameters.
      * @returns {Promise<MyAllocationsResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-allocations-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#my-allocations Binance API Documentation}
      */
     public myAllocations(
         requestParameters: MyAllocationsRequest
@@ -945,14 +1154,21 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only method that shows if an account has `MAX_ASSET` filters applied to it.
-     * Weight: 40
+     * Retrieves the list of [filters](/products/spot/filters) relevant to an account on a given symbol. This is the only method
+     * that shows if an account has [`MAX_ASSET`](/products/spot/filters#max_asset) filters applied to it.
      *
-     * @summary WebSocket Query Relevant Filters
+     * Weight(IP): 40
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Relevant Filters (USER_DATA)
      * @param {MyFiltersRequest} requestParameters Request parameters.
      * @returns {Promise<MyFiltersResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-relevant-filters-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#my-filters Binance API Documentation}
      */
     public myFilters(
         requestParameters: MyFiltersRequest
@@ -973,17 +1189,23 @@ export class AccountApi implements AccountApiInterface {
      * `symbol` + `orderId`
      * `symbol` + `orderId` + `fromPreventedMatchId` (`limit` will default to 500)
      * `symbol` + `orderId` + `fromPreventedMatchId` + `limit`
+     *
      * Weight: Case                            | Weight
      * ----                            | -----
      * If `symbol` is invalid          | 2
      * Querying by `preventedMatchId`  | 2
      * Querying by `orderId`           | 20
      *
-     * @summary WebSocket Account prevented matches
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Account prevented matches (USER_DATA)
      * @param {MyPreventedMatchesRequest} requestParameters Request parameters.
      * @returns {Promise<MyPreventedMatchesResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-prevented-matches-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#my-prevented-matches Binance API Documentation}
      */
     public myPreventedMatches(
         requestParameters: MyPreventedMatchesRequest
@@ -997,16 +1219,31 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Query information about all your trades, filtered by time range.
+     *
      * Weight: Condition| Weight|
      * ---| ---
      * |Without orderId|20|
      * |With orderId|5|
      *
-     * @summary WebSocket Account trade history
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * Data Source: Memory => Database
+     *
+     * Notes:
+     * - If `fromId` is specified, return trades with trade ID >= `fromId`.
+     * - If `startTime` and/or `endTime` are specified, trades are filtered by execution time (`time`).
+     * - `fromId` cannot be used together with `startTime` and `endTime`.
+     * - If `orderId` is specified, only trades related to that order are returned.
+     * - `startTime` and `endTime` cannot be used together with `orderId`.
+     * - If no condition is specified, the most recent trades are returned.
+     * - The time between `startTime` and `endTime` can't be longer than 24 hours.
+     *
+     * @summary Account trade history (USER_DATA)
      * @param {MyTradesRequest} requestParameters Request parameters.
      * @returns {Promise<MyTradesResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-trade-history-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#my-trades Binance API Documentation}
      */
     public myTrades(
         requestParameters: MyTradesRequest
@@ -1023,15 +1260,21 @@ export class AccountApi implements AccountApiInterface {
      *
      * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
      *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: 6
+     * `userDataStream.subscribe` if on an authenticated session
+     * `userDataStream.subscribe.signature` if subscribing through signature subscription
      *
-     * @summary WebSocket Current open Order lists
+     * Weight(IP): 6
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory -> Database
+     *
+     * @summary Current open Order lists (USER_DATA)
      * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
      * @returns {Promise<OpenOrderListsStatusResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#current-open-order-lists-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#open-order-lists-status Binance API Documentation}
      */
     public openOrderListsStatus(
         requestParameters: OpenOrderListsStatusRequest = {}
@@ -1048,20 +1291,24 @@ export class AccountApi implements AccountApiInterface {
      *
      * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
      *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: Adjusted based on the number of requested symbols:
+     * `userDataStream.subscribe` if on an authenticated session
+     * `userDataStream.subscribe.signature` if subscribing through signature subscription
      *
-     * | Parameter | Weight |
+     * Weight: | Parameter | Weight |
      * | --------- | ------ |
      * | `symbol`  |      6 |
      * | none      |     80 |
      *
-     * @summary WebSocket Current open orders
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * Data Source: Memory => Database
+     *
+     * @summary Current open orders (USER_DATA)
      * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
      * @returns {Promise<OpenOrdersStatusResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#current-open-orders-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#open-orders-status Binance API Documentation}
      */
     public openOrdersStatus(
         requestParameters: OpenOrdersStatusRequest = {}
@@ -1075,13 +1322,19 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Queries all amendments of a single order.
-     * Weight: 4
      *
-     * @summary WebSocket Query Order Amendments
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * @summary Query Order Amendments (USER_DATA)
      * @param {OrderAmendmentsRequest} requestParameters Request parameters.
      * @returns {Promise<OrderAmendmentsResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-amendments-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#order-amendments Binance API Documentation}
      */
     public orderAmendments(
         requestParameters: OrderAmendmentsRequest
@@ -1097,13 +1350,26 @@ export class AccountApi implements AccountApiInterface {
      * Check execution status of an Order list.
      *
      * For execution status of individual orders, use `order.status`.
-     * Weight: 4
      *
-     * @summary WebSocket Query Order list
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Notes:
+     *
+     * `origClientOrderId` refers to `listClientOrderId` of the order list itself.
+     *
+     * If both `origClientOrderId` and `orderListId` parameters are specified,
+     * only `origClientOrderId` is used and `orderListId` is ignored.
+     *
+     * @summary Query Order list (USER_DATA)
      * @param {OrderListStatusRequest} requestParameters Request parameters.
      * @returns {Promise<OrderListStatusResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-list-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#order-list-status Binance API Documentation}
      */
     public orderListStatus(
         requestParameters: OrderListStatusRequest = {}
@@ -1117,13 +1383,26 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Check execution status of an order.
-     * Weight: 4
      *
-     * @summary WebSocket Query order
+     * Weight(IP): 4
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory => Database
+     *
+     * Notes:
+     *
+     * If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
+     *
+     * For some historical orders the `cummulativeQuoteQty` response field may be negative,
+     * meaning the data is not available at this time.
+     *
+     * @summary Query order (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
      * @returns {Promise<OrderStatusResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/account#order-status Binance API Documentation}
      */
     public orderStatus(
         requestParameters: OrderStatusRequest

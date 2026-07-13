@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -19,6 +14,9 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ReferencePriceCalculationResponseResult } from './reference-price-calculation-response-result';
@@ -47,4 +45,10 @@ export interface ReferencePriceCalculationResponse {
      * @memberof ReferencePriceCalculationResponse
      */
     result?: ReferencePriceCalculationResponseResult;
+    /**
+     *
+     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @memberof ReferencePriceCalculationResponse
+     */
+    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
 }

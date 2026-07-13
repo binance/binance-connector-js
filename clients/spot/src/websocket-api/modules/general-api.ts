@@ -1,12 +1,7 @@
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,10 +26,31 @@ import type {
  */
 export interface GeneralApiInterface {
     /**
-     * Query current exchange trading rules, rate limits, and symbol information.
-     * Weight: 20
+     * Query current exchange trading rules, rate limits, and symbol
+     * information.
      *
-     * @summary WebSocket Exchange information
+     * Weight(IP): 20
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Notes:**
+     * If the value provided to `symbol` or `symbols` do not exist, the endpoint will throw an error saying the symbol is invalid.
+     * All parameters are optional.
+     * Only one of `symbol`, `symbols`, `permissions` parameters can be specified.
+     * Without parameters, `exchangeInfo` displays all symbols with `["SPOT", "MARGIN", "LEVERAGED"]` permissions.
+     * In order to list *all* active symbols on the exchange, you need to explicitly request all permissions.
+     * `permissions` accepts either a list of permissions, or a single permission name. E.g. `"SPOT"`.
+     *
+     **Examples of Symbol Permissions Interpretation from the Response:**
+     *
+     * `[["A","B"]]` means you may place an order if your account has either permission "A" **or** permission "B".
+     * `[["A"],["B"]]` means you can place an order if your account has permission "A" **and** permission "B".
+     * `[["A"],["B","C"]]` means you can place an order if your account has permission "A" **and** permission "B" or permission "C". (Inclusive or is applied here, not exclusive or, so your account may have both permission "B" and permission "C".)
+     *
+     * @summary Exchange information
      * @param {ExchangeInfoRequest} requestParameters Request parameters.
      *
      * @returns {Promise<ExchangeInfoResponse>}
@@ -45,15 +61,23 @@ export interface GeneralApiInterface {
     ): Promise<WebsocketApiResponse<ExchangeInfoResponse>>;
 
     /**
+     * Query execution rules for symbols.
      *
-     * Weight: Parameter | Weight|
-     * ---        | ---
-     * `symbol`  | 2
-     * `symbols` | 2 for each `symbol`, capped at a max of 40|
-     * `symbolStatus` |40|
-     * None            |40|
+     * Weight: Parameter | Weight
+     * --- | ---
+     * `symbol` | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40
+     * `symbolStatus` | 40
+     * None | 40
      *
-     * @summary WebSocket Query Execution Rules
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Note:** No combination of multiple parameters is allowed.
+     *
+     * @summary Query Execution Rules
      * @param {ExecutionRulesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<ExecutionRulesResponse>}
@@ -65,9 +89,17 @@ export interface GeneralApiInterface {
 
     /**
      * Test connectivity to the WebSocket API.
-     * Weight: 1
      *
-     * @summary WebSocket Test connectivity
+     * Note: You can use regular WebSocket ping frames to test connectivity as well, WebSocket API will respond with pong frames as soon as possible. ping request along with time is a safe way to test request-response handling in your application.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Test connectivity
      * @param {PingRequest} requestParameters Request parameters.
      *
      * @returns {Promise<PingResponse>}
@@ -77,9 +109,15 @@ export interface GeneralApiInterface {
 
     /**
      * Test connectivity to the WebSocket API and get the current server time.
-     * Weight: 1
      *
-     * @summary WebSocket Check server time
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Check server time
      * @param {TimeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<TimeResponse>}
@@ -94,7 +132,7 @@ export interface GeneralApiInterface {
  */
 export interface ExchangeInfoRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof GeneralApiExchangeInfo
      */
@@ -108,29 +146,29 @@ export interface ExchangeInfoRequest {
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Describe multiple symbols
      * @type {Array<string>}
      * @memberof GeneralApiExchangeInfo
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
+     * Filter symbols by permissions
      * @type {Array<string>}
      * @memberof GeneralApiExchangeInfo
      */
     readonly permissions?: Array<string>;
 
     /**
-     *
+     * Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`.
      * @type {boolean}
      * @memberof GeneralApiExchangeInfo
      */
     readonly showPermissionSets?: boolean;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK`. Cannot be used in combination with `symbol` or `symbols`.
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof GeneralApiExchangeInfo
      */
     readonly symbolStatus?: ExchangeInfoSymbolStatusEnum;
@@ -142,29 +180,29 @@ export interface ExchangeInfoRequest {
  */
 export interface ExecutionRulesRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof GeneralApiExecutionRules
      */
     readonly id?: string;
 
     /**
-     * Describe a single symbol
+     * Query for specified symbol.
      * @type {string}
      * @memberof GeneralApiExecutionRules
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Query for multiple symbols.
      * @type {Array<string>}
      * @memberof GeneralApiExecutionRules
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Query for all symbols with the specified status. Supported values: `TRADING`, `HALT`, `BREAK`
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof GeneralApiExecutionRules
      */
     readonly symbolStatus?: ExecutionRulesSymbolStatusEnum;
@@ -176,7 +214,7 @@ export interface ExecutionRulesRequest {
  */
 export interface PingRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof GeneralApiPing
      */
@@ -189,7 +227,7 @@ export interface PingRequest {
  */
 export interface TimeRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof GeneralApiTime
      */
@@ -209,14 +247,35 @@ export class GeneralApi implements GeneralApiInterface {
     }
 
     /**
-     * Query current exchange trading rules, rate limits, and symbol information.
-     * Weight: 20
+     * Query current exchange trading rules, rate limits, and symbol
+     * information.
      *
-     * @summary WebSocket Exchange information
+     * Weight(IP): 20
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Notes:**
+     * If the value provided to `symbol` or `symbols` do not exist, the endpoint will throw an error saying the symbol is invalid.
+     * All parameters are optional.
+     * Only one of `symbol`, `symbols`, `permissions` parameters can be specified.
+     * Without parameters, `exchangeInfo` displays all symbols with `["SPOT", "MARGIN", "LEVERAGED"]` permissions.
+     * In order to list *all* active symbols on the exchange, you need to explicitly request all permissions.
+     * `permissions` accepts either a list of permissions, or a single permission name. E.g. `"SPOT"`.
+     *
+     **Examples of Symbol Permissions Interpretation from the Response:**
+     *
+     * `[["A","B"]]` means you may place an order if your account has either permission "A" **or** permission "B".
+     * `[["A"],["B"]]` means you can place an order if your account has permission "A" **and** permission "B".
+     * `[["A"],["B","C"]]` means you can place an order if your account has permission "A" **and** permission "B" or permission "C". (Inclusive or is applied here, not exclusive or, so your account may have both permission "B" and permission "C".)
+     *
+     * @summary Exchange information
      * @param {ExchangeInfoRequest} requestParameters Request parameters.
      * @returns {Promise<ExchangeInfoResponse>}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#exchange-information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/general#exchange-info Binance API Documentation}
      */
     public exchangeInfo(
         requestParameters: ExchangeInfoRequest = {}
@@ -229,19 +288,27 @@ export class GeneralApi implements GeneralApiInterface {
     }
 
     /**
+     * Query execution rules for symbols.
      *
-     * Weight: Parameter | Weight|
-     * ---        | ---
-     * `symbol`  | 2
-     * `symbols` | 2 for each `symbol`, capped at a max of 40|
-     * `symbolStatus` |40|
-     * None            |40|
+     * Weight: Parameter | Weight
+     * --- | ---
+     * `symbol` | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40
+     * `symbolStatus` | 40
+     * None | 40
      *
-     * @summary WebSocket Query Execution Rules
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Note:** No combination of multiple parameters is allowed.
+     *
+     * @summary Query Execution Rules
      * @param {ExecutionRulesRequest} requestParameters Request parameters.
      * @returns {Promise<ExecutionRulesResponse>}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#query-execution-rules Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/general#execution-rules Binance API Documentation}
      */
     public executionRules(
         requestParameters: ExecutionRulesRequest = {}
@@ -255,13 +322,21 @@ export class GeneralApi implements GeneralApiInterface {
 
     /**
      * Test connectivity to the WebSocket API.
-     * Weight: 1
      *
-     * @summary WebSocket Test connectivity
+     * Note: You can use regular WebSocket ping frames to test connectivity as well, WebSocket API will respond with pong frames as soon as possible. ping request along with time is a safe way to test request-response handling in your application.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Test connectivity
      * @param {PingRequest} requestParameters Request parameters.
      * @returns {Promise<PingResponse>}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/general#ping Binance API Documentation}
      */
     public ping(requestParameters: PingRequest = {}): Promise<WebsocketApiResponse<PingResponse>> {
         return this.websocketBase.sendMessage<PingResponse>(
@@ -273,13 +348,19 @@ export class GeneralApi implements GeneralApiInterface {
 
     /**
      * Test connectivity to the WebSocket API and get the current server time.
-     * Weight: 1
      *
-     * @summary WebSocket Check server time
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Check server time
      * @param {TimeRequest} requestParameters Request parameters.
      * @returns {Promise<TimeResponse>}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#check-server-time Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/general#time Binance API Documentation}
      */
     public time(requestParameters: TimeRequest = {}): Promise<WebsocketApiResponse<TimeResponse>> {
         return this.websocketBase.sendMessage<TimeResponse>(
@@ -292,16 +373,12 @@ export class GeneralApi implements GeneralApiInterface {
 
 export enum ExchangeInfoSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum ExecutionRulesSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }

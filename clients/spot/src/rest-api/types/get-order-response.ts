@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,123 +20,201 @@
  */
 export interface GetOrderResponse {
     /**
-     *
+     * symbol.
      * @type {string}
      * @memberof GetOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * order Id.
      * @type {number | bigint}
      * @memberof GetOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * This field will always have a value of -1 if not an order list.
      * @type {number | bigint}
      * @memberof GetOrderResponse
      */
     orderListId?: number | bigint;
     /**
-     *
+     * client Order Id.
      * @type {string}
      * @memberof GetOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * price.
      * @type {string}
      * @memberof GetOrderResponse
      */
     price?: string;
     /**
-     *
+     * orig Qty.
      * @type {string}
      * @memberof GetOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * executed Qty.
      * @type {string}
      * @memberof GetOrderResponse
      */
     executedQty?: string;
     /**
-     *
-     * @type {string}
-     * @memberof GetOrderResponse
-     */
-    cummulativeQuoteQty?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetOrderResponse
-     */
-    status?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetOrderResponse
-     */
-    timeInForce?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetOrderResponse
-     */
-    type?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetOrderResponse
-     */
-    side?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetOrderResponse
-     */
-    stopPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetOrderResponse
-     */
-    icebergQty?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof GetOrderResponse
-     */
-    time?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof GetOrderResponse
-     */
-    updateTime?: number | bigint;
-    /**
-     *
-     * @type {boolean}
-     * @memberof GetOrderResponse
-     */
-    isWorking?: boolean;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof GetOrderResponse
-     */
-    workingTime?: number | bigint;
-    /**
-     *
+     * orig Quote Order Qty.
      * @type {string}
      * @memberof GetOrderResponse
      */
     origQuoteOrderQty?: string;
     /**
-     *
+     * cummulative Quote Qty.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    cummulativeQuoteQty?: string;
+    /**
+     * status.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    status?: string;
+    /**
+     * time In Force.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    timeInForce?: string;
+    /**
+     * type.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    type?: string;
+    /**
+     * side.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    side?: string;
+    /**
+     * Appears for STOP_LOSS, TAKE_PROFIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT orders.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    stopPrice?: string;
+    /**
+     * Appears only if the parameter icebergQty was sent in the request.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    icebergQty?: string;
+    /**
+     * time.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    time?: number | bigint;
+    /**
+     * update Time.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    updateTime?: number | bigint;
+    /**
+     * is Working.
+     * @type {boolean}
+     * @memberof GetOrderResponse
+     */
+    isWorking?: boolean;
+    /**
+     * working Time.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    workingTime?: number | bigint;
+    /**
+     * self Trade Prevention Mode.
      * @type {string}
      * @memberof GetOrderResponse
      */
     selfTradePreventionMode?: string;
+    /**
+     * Appears only if the order expired due to STP.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    preventedMatchId?: number | bigint;
+    /**
+     * Order quantity that expired due to STP.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    preventedQuantity?: string;
+    /**
+     * Appears only if the strategyId parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    strategyId?: number | bigint;
+    /**
+     * Appears only if the strategyType parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    strategyType?: number | bigint;
+    /**
+     * Delta price change required before order activation.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    trailingDelta?: number | bigint;
+    /**
+     * Time when the trailing order is now active and tracking price changes.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    trailingTime?: number | bigint;
+    /**
+     * Field that determines whether order used SOR.
+     * @type {boolean}
+     * @memberof GetOrderResponse
+     */
+    usedSor?: boolean;
+    /**
+     * Determines whether the order is being filled by the SOR or by the order book.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    workingFloor?: string;
+    /**
+     * Price peg type. Only for pegged orders.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    pegPriceType?: string;
+    /**
+     * Price peg offset type. Only for pegged orders, if requested.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    pegOffsetType?: string;
+    /**
+     * Price peg offset value. Only for pegged orders, if requested.
+     * @type {number | bigint}
+     * @memberof GetOrderResponse
+     */
+    pegOffsetValue?: number | bigint;
+    /**
+     * Current price order is pegged at. Only for pegged orders, once determined.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    peggedPrice?: string;
+    /**
+     * Cause of the order\'s expiration. Appears when an order has expired.
+     * @type {string}
+     * @memberof GetOrderResponse
+     */
+    expiryReason?: string;
 }

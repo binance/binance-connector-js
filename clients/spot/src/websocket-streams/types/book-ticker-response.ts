@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,37 +20,37 @@
  */
 export interface BookTickerResponse {
     /**
-     *
+     * Order book updateId
      * @type {number | bigint}
      * @memberof BookTickerResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof BookTickerResponse
      */
     s?: string;
     /**
-     *
+     * Best bid price
      * @type {string}
      * @memberof BookTickerResponse
      */
     b?: string;
     /**
-     *
+     * Best bid qty
      * @type {string}
      * @memberof BookTickerResponse
      */
     B?: string;
     /**
-     *
+     * Best ask price
      * @type {string}
      * @memberof BookTickerResponse
      */
     a?: string;
     /**
-     *
+     * Best ask qty
      * @type {string}
      * @memberof BookTickerResponse
      */

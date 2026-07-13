@@ -12,9 +12,9 @@ async function orderOco() {
         const response = await client.restAPI.orderOco({
             symbol: 'BNBUSDT',
             side: SpotRestAPI.OrderOcoSideEnum.BUY,
-            quantity: 1.0,
-            price: 1.0,
-            stopPrice: 1.0,
+            quantity: 1,
+            price: 1,
+            stopPrice: 1,
         });
 
         const rateLimits = response.rateLimits!;

@@ -10,7 +10,7 @@ const client = new Spot({ configurationRestAPI });
 async function getOrder() {
     try {
         const response = await client.restAPI.getOrder({
-            symbol: 'BNBUSDT',
+            symbol: 'LTCBTC',
         });
 
         const rateLimits = response.rateLimits!;

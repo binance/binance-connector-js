@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -30,61 +25,61 @@ import type { ListStatusOInner } from './list-status-oinner';
  */
 export interface ListStatus {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof ListStatus
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof ListStatus
      */
     s?: string;
     /**
-     *
+     * OrderListId
      * @type {number | bigint}
      * @memberof ListStatus
      */
     g?: number | bigint;
     /**
-     *
+     * Contingency Type
      * @type {string}
      * @memberof ListStatus
      */
     c?: string;
     /**
-     *
+     * List Status Type
      * @type {string}
      * @memberof ListStatus
      */
     l?: string;
     /**
-     *
+     * List Order Status
      * @type {string}
      * @memberof ListStatus
      */
     L?: string;
     /**
-     *
+     * List Reject Reason
      * @type {string}
      * @memberof ListStatus
      */
     r?: string;
     /**
-     *
+     * List Client Order ID
      * @type {string}
      * @memberof ListStatus
      */
     C?: string;
     /**
-     *
+     * Transaction Time
      * @type {number | bigint}
      * @memberof ListStatus
      */
     T?: number | bigint;
     /**
-     *
+     * An array of objects
      * @type {Array<ListStatusOInner>}
      * @memberof ListStatus
      */

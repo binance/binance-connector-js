@@ -16,8 +16,8 @@ async function orderListPlace() {
         const response = await connection.orderListPlace({
             symbol: 'BNBUSDT',
             side: SpotWebsocketAPI.OrderListPlaceSideEnum.BUY,
-            price: 1.0,
-            quantity: 1.0,
+            price: 1,
+            quantity: 1,
         });
 
         const rateLimits = response.rateLimits!;

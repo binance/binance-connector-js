@@ -1,12 +1,7 @@
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -43,9 +38,15 @@ import type {
 export interface MarketApiInterface {
     /**
      * Get current average price for a symbol.
-     * Weight: 2
      *
-     * @summary WebSocket Current average price
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Current average price
      * @param {AvgPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<AvgPriceResponse>}
@@ -55,9 +56,15 @@ export interface MarketApiInterface {
 
     /**
      * Get block trades.
-     * Weight: 25
      *
-     * @summary WebSocket Historical Block Trades
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     * - Data Source: Database
+     *
+     * @summary Historical Block Trades
      * @param {BlockTradesHistoricalRequest} requestParameters Request parameters.
      *
      * @returns {Promise<BlockTradesHistoricalResponse>}
@@ -73,21 +80,26 @@ export interface MarketApiInterface {
      * Note that this request returns limited market depth.
      *
      * If you need to continuously monitor order book updates, please consider using WebSocket Streams:
-     *
      * `<symbol>@depth<levels>`
      * `<symbol>@depth`
      *
-     * You can use `depth` request together with `<symbol>@depth` streams to [maintain a local order book](web-socket-streams.md#how-to-manage-a-local-order-book-correctly).
+     * You can use `depth` request together with `<symbol>@depth` streams to [maintain a local order book](/products/spot/web-socket-streams#how-to-manage-a-local-order-book-correctly).
+     *
      * Weight: Adjusted based on the limit:
      *
-     * |  Limit    | Weight |
-     * |:---------:|:------:|
-     * |     1–100 |      5 |
-     * |   101–500 |      25|
-     * |  501–1000 |     50 |
-     * | 1001–5000 |     250 |
+     * |Limit|Request Weight
+     * ------|-------
+     * 1-100|  5
+     * 101-500| 25
+     * 501-1000| 50
+     * 1001-5000| 250
      *
-     * @summary WebSocket Order book
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Order book
      * @param {DepthRequest} requestParameters Request parameters.
      *
      * @returns {Promise<DepthResponse>}
@@ -101,14 +113,39 @@ export interface MarketApiInterface {
      * Klines are uniquely identified by their open & close time.
      *
      * If you need access to real-time kline updates, please consider using WebSocket Streams:
-     *
      * `<symbol>@kline_<interval>`
      *
-     * If you need historical kline data,
-     * please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#klines).
-     * Weight: 2
+     * If you need historical kline data, please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#klines).
      *
-     * @summary WebSocket Klines
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported kline intervals (case-sensitive):
+     *
+     * Interval  | `interval` value
+     * --------- | ----------------
+     * seconds   | `1s`
+     * minutes   | `1m`, `3m`, `5m`, `15m`, `30m`
+     * hours     | `1h`, `2h`, `4h`, `6h`, `8h`, `12h`
+     * days      | `1d`, `3d`
+     * weeks     | `1w`
+     * months    | `1M`
+     *
+     **Notes:**
+     *
+     * If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * Supported values for `timeZone`:
+     * Hours and minutes (e.g. `-1:00`, `05:45`)
+     * Only hours (e.g. `0`, `8`, `4`)
+     * Accepted range is strictly [-12:00 to +14:00] inclusive
+     * If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
+     *
+     * @summary Klines
      * @param {KlinesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<KlinesResponse>}
@@ -117,10 +154,16 @@ export interface MarketApiInterface {
     klines(requestParameters: KlinesRequest): Promise<WebsocketApiResponse<KlinesResponse>>;
 
     /**
+     * Query Reference Price
      *
-     * Weight: 2
+     * Weight(IP): 2
      *
-     * @summary WebSocket Query Reference Price
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<ReferencePriceResponse>}
@@ -131,10 +174,16 @@ export interface MarketApiInterface {
     ): Promise<WebsocketApiResponse<ReferencePriceResponse>>;
 
     /**
-     * Describes how reference price is calculated for a given symbol.
-     * Weight: 2
+     * Query Reference Price Calculation
      *
-     * @summary WebSocket Query Reference Price Calculation
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Reference Price Calculation
      * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<ReferencePriceCalculationResponse>}
@@ -147,8 +196,33 @@ export interface MarketApiInterface {
     /**
      * Get rolling window price change statistics with a custom window.
      *
-     * This request is similar to `ticker.24hr`,
-     * but statistics are computed on demand using the arbitrary window you specify.
+     * This request is similar to `ticker.24hr` but statistics are computed on demand using the arbitrary window you specify.
+     *
+     **Note:** Window size precision is limited to 1 minute.
+     * While the `closeTime` is the current time of the request, `openTime` always start on a minute boundary.
+     * As such, the effective window might be up to 59999 ms wider than the requested `windowSize`.
+     *
+     * <details>
+     * <summary>Window computation example</summary>
+     *
+     * For example, a request for `"windowSize": "7d"` might result in the following window:
+     *
+     * ```javascript
+     * {
+     * "openTime": 1659580020000,
+     * "closeTime": 1660184865291
+     * }
+     * ```
+     *
+     * Time of the request – `closeTime` – is 1660184865291 (August 11, 2022 02:27:45.291).
+     * Requested window size should put the `openTime` 7 days before that – August 4, 02:27:45.291 –
+     * but due to limited precision it ends up a bit earlier: 1659580020000 (August 4, 2022 02:27:00),
+     * exactly at the start of a minute.
+     * </details>
+     *
+     * If you need to continuously monitor trading statistics, please consider using WebSocket Streams:
+     * `<symbol>@ticker_<window_size>` or `!ticker_<window-size>@arr`
+     *
      * Weight: Adjusted based on the number of requested symbols:
      *
      * | Symbols | Weight |
@@ -156,7 +230,29 @@ export interface MarketApiInterface {
      * |    1–50 | 4 per symbol |
      * |  51–100 |    200 |
      *
-     * @summary WebSocket Rolling window price change statistics
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported window sizes:
+     *
+     * Unit    | `windowSize` value
+     * ------- | ------------------
+     * minutes | `1m`, `2m` ... `59m`
+     * hours   | `1h`, `2h` ... `23h`
+     * days    | `1d`, `2d` ... `7d`
+     *
+     * Notes:
+     *
+     * Either `symbol` or `symbols` must be specified.
+     *
+     * Maximum number of symbols in one request: 200.
+     *
+     * Window size units cannot be combined.
+     * E.g., <code>1d 2h</code> is not supported.
+     *
+     * @summary Rolling window price change statistics
      * @param {TickerRequest} requestParameters Request parameters.
      *
      * @returns {Promise<TickerResponse>}
@@ -170,20 +266,36 @@ export interface MarketApiInterface {
      * If you need to continuously monitor trading statistics, please consider using WebSocket Streams:
      *
      * `<symbol>@ticker` or `!ticker@arr`
+     *
      * `<symbol>@miniTicker` or `!miniTicker@arr`
      *
      * If you need different window sizes,
+     *
      * use the `ticker` request.
+     *
      * Weight: Adjusted based on the number of requested symbols:
      *
-     * | Symbols     | Weight |
-     * |:-----------:|:------:|
-     * |        1–20 |      2 |
-     * |      21–100 |     40 |
-     * | 101 or more |     80 |
-     * | all symbols |     80 |
+     * |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 80|
+     * |symbols| 1-20 |2|
+     * | | 21-100 |40|
+     * | | 101+ |80|
+     * | |omitted| 80|
      *
-     * @summary WebSocket 24hr ticker price change statistics
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * Notes:
+     *
+     * `symbol` and `symbols` cannot be used together.
+     *
+     * If no symbol is specified, returns information about all symbols currently trading on the exchange.
+     *
+     * @summary 24hr ticker price change statistics
      * @param {Ticker24hrRequest} requestParameters Request parameters.
      *
      * @returns {Promise<Ticker24hrResponse>}
@@ -196,18 +308,31 @@ export interface MarketApiInterface {
     /**
      * Get the current best price and quantity on the order book.
      *
-     * If you need access to real-time order book ticker updates, please consider using WebSocket Streams:
+     * If you need access to real-time order book ticker updates, please
+     * consider using WebSocket Streams:
      *
      * `<symbol>@bookTicker`
+     *
      * Weight: Adjusted based on the number of requested symbols:
      *
-     * | Parameter | Weight |
-     * | --------- |:------:|
-     * | `symbol`  |      2 |
-     * | `symbols` |      4 |
-     * | none      |      4 |
+     * |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
      *
-     * @summary WebSocket Symbol order book ticker
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * Notes:
+     *
+     * `symbol` and `symbols` cannot be used together.
+     *
+     * If no symbol is specified, returns information about all symbols currently trading on the exchange.
+     *
+     * @summary Symbol order book ticker
      * @param {TickerBookRequest} requestParameters Request parameters.
      *
      * @returns {Promise<TickerBookResponse>}
@@ -220,19 +345,33 @@ export interface MarketApiInterface {
     /**
      * Get the latest market price for a symbol.
      *
-     * If you need access to real-time price updates, please consider using WebSocket Streams:
+     * If you need access to real-time price updates, please consider using
+     * WebSocket Streams:
      *
      * `<symbol>@aggTrade`
+     *
      * `<symbol>@trade`
+     *
      * Weight: Adjusted based on the number of requested symbols:
      *
-     * | Parameter | Weight |
-     * | --------- |:------:|
-     * | `symbol`  |      2 |
-     * | `symbols` |      4 |
-     * | none      |      4 |
+     * |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
      *
-     * @summary WebSocket Symbol price ticker
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * Notes:
+     *
+     * `symbol` and `symbols` cannot be used together.
+     *
+     * If no symbol is specified, returns information about all symbols currently trading on the exchange.
+     *
+     * @summary Symbol price ticker
      * @param {TickerPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<TickerPriceResponse>}
@@ -244,9 +383,22 @@ export interface MarketApiInterface {
 
     /**
      * Price change statistics for a trading day.
-     * Weight: 4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
      *
-     * @summary WebSocket Trading Day Ticker
+     * Weight: 4 for each requested symbol regardless of windowSize. The weight for this request will cap at 200 once the number of symbols in the request is more than 50.
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     **Notes:**
+     *
+     * Supported values for `timeZone`:
+     * Hours and minutes (e.g. `-1:00`, `05:45`)
+     * Only hours (e.g. `0`, `8`, `4`)
+     *
+     *
+     * @summary Trading Day Ticker
      * @param {TickerTradingDayRequest} requestParameters Request parameters.
      *
      * @returns {Promise<TickerTradingDayResponse>}
@@ -259,19 +411,34 @@ export interface MarketApiInterface {
     /**
      * Get aggregate trades.
      *
-     * An *aggregate trade* (aggtrade) represents one or more individual trades.
-     * Trades that fill at the same time, from the same taker order, with the same price –
-     * those trades are collected into an aggregate trade with total quantity of the individual trades.
+     * An *aggregate trade* (aggtrade) represents one or more individual
+     * trades.
      *
-     * If you need access to real-time trading activity, please consider using WebSocket Streams:
+     * Trades that fill at the same time, from the same taker order, with the
+     * same price –
+     *
+     * those trades are collected into an aggregate trade with total quantity
+     * of the individual trades.
+     *
+     * If you need access to real-time trading activity, please consider using
+     * WebSocket Streams:
      *
      * `<symbol>@aggTrade`
      *
-     * If you need historical aggregate trade data,
-     * please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#aggtrades).
-     * Weight: 4
+     * If you need historical aggregate trade data, please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#aggtrades).
      *
-     * @summary WebSocket Aggregate trades
+     * Weight(IP): 4
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `fromId` is specified, return aggtrades with aggregate trade ID >= `fromId`. Use `fromId` and `limit` to page through all aggtrades.
+     * - If `startTime` and/or `endTime` are specified, aggtrades are filtered by execution time (`T`). `fromId` cannot be used together with `startTime` and `endTime`.
+     * - If no condition is specified, the most recent aggregate trades are returned.
+     *
+     * @summary Aggregate trades
      * @param {TradesAggregateRequest} requestParameters Request parameters.
      *
      * @returns {Promise<TradesAggregateResponse>}
@@ -283,9 +450,19 @@ export interface MarketApiInterface {
 
     /**
      * Get historical trades.
-     * Weight: 25
      *
-     * @summary WebSocket Historical trades
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Notes:
+     *
+     * If `fromId` is not specified, the most recent trades are returned.
+     *
+     * @summary Historical trades
      * @param {TradesHistoricalRequest} requestParameters Request parameters.
      *
      * @returns {Promise<TradesHistoricalResponse>}
@@ -298,12 +475,19 @@ export interface MarketApiInterface {
     /**
      * Get recent trades.
      *
-     * If you need access to real-time trading activity, please consider using WebSocket Streams:
+     * If you need access to real-time trading activity, please consider using
+     * WebSocket Streams:
      *
      * `<symbol>@trade`
-     * Weight: 25
      *
-     * @summary WebSocket Recent trades
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Recent trades
      * @param {TradesRecentRequest} requestParameters Request parameters.
      *
      * @returns {Promise<TradesRecentResponse>}
@@ -316,11 +500,24 @@ export interface MarketApiInterface {
     /**
      * Get klines (candlestick bars) optimized for presentation.
      *
-     * This request is similar to `klines`, having the same parameters and response.
-     * `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
-     * Weight: 2
+     * This request is similar to `klines`, having the same parameters and response. `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
      *
-     * @summary WebSocket UI Klines
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * - Supported values for `timeZone`:
+     * - Hours and minutes (e.g. `-1:00`, `05:45`)
+     * - Only hours (e.g. `0`, `8`, `4`)
+     * - Accepted range is strictly [-12:00 to +14:00] inclusive
+     * - If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * - Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
+     *
+     * @summary UI Klines
      * @param {UiKlinesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<UiKlinesResponse>}
@@ -342,7 +539,7 @@ export interface AvgPriceRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiAvgPrice
      */
@@ -369,7 +566,7 @@ export interface BlockTradesHistoricalRequest {
     readonly fromId: number | bigint;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiBlockTradesHistorical
      */
@@ -396,22 +593,23 @@ export interface DepthRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiDepth
      */
     readonly id?: string;
 
     /**
-     * Default: 100; Maximum: 5000
+     *
      * @type {number}
      * @memberof MarketApiDepth
      */
     readonly limit?: number;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`.
+     * A status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiDepth
      */
     readonly symbolStatus?: DepthSymbolStatusEnum;
@@ -437,7 +635,7 @@ export interface KlinesRequest {
     readonly interval: KlinesIntervalEnum;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiKlines
      */
@@ -465,7 +663,7 @@ export interface KlinesRequest {
     readonly timeZone?: string;
 
     /**
-     * Default: 100; Maximum: 5000
+     *
      * @type {number}
      * @memberof MarketApiKlines
      */
@@ -485,7 +683,7 @@ export interface ReferencePriceRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiReferencePrice
      */
@@ -505,7 +703,7 @@ export interface ReferencePriceCalculationRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiReferencePriceCalculation
      */
@@ -513,7 +711,7 @@ export interface ReferencePriceCalculationRequest {
 
     /**
      *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiReferencePriceCalculation
      */
     readonly symbolStatus?: ReferencePriceCalculationSymbolStatusEnum;
@@ -525,43 +723,43 @@ export interface ReferencePriceCalculationRequest {
  */
 export interface TickerRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiTicker
      */
     readonly id?: string;
 
     /**
-     * Describe a single symbol
+     * Query ticker of a single symbol
      * @type {string}
      * @memberof MarketApiTicker
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Query ticker for multiple symbols
      * @type {Array<string>}
      * @memberof MarketApiTicker
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
+     * Ticker type. Supported values: FULL (default) or MINI
      * @type {'FULL' | 'MINI'}
      * @memberof MarketApiTicker
      */
     readonly type?: TickerTypeEnum;
 
     /**
-     *
-     * @type {'1m' | '2m' | '3m' | '4m' | '5m' | '6m' | '7m' | '8m' | '9m' | '10m' | '11m' | '12m' | '13m' | '14m' | '15m' | '16m' | '17m' | '18m' | '19m' | '20m' | '21m' | '22m' | '23m' | '24m' | '25m' | '26m' | '27m' | '28m' | '29m' | '30m' | '31m' | '32m' | '33m' | '34m' | '35m' | '36m' | '37m' | '38m' | '39m' | '40m' | '41m' | '42m' | '43m' | '44m' | '45m' | '46m' | '47m' | '48m' | '49m' | '50m' | '51m' | '52m' | '53m' | '54m' | '55m' | '56m' | '57m' | '58m' | '59m' | '1h' | '2h' | '3h' | '4h' | '5h' | '6h' | '7h' | '8h' | '9h' | '10h' | '11h' | '12h' | '13h' | '14h' | '15h' | '16h' | '17h' | '18h' | '19h' | '20h' | '21h' | '22h' | '23h' | '1d' | '2d' | '3d' | '4d' | '5d' | '6d'}
+     * Defaults to 1d if no parameter provided.
+     * @type {'1m' | '2m' | '3m' | '4m' | '5m' | '6m' | '7m' | '8m' | '9m' | '10m' | '11m' | '12m' | '13m' | '14m' | '15m' | '16m' | '17m' | '18m' | '19m' | '20m' | '21m' | '22m' | '23m' | '24m' | '25m' | '26m' | '27m' | '28m' | '29m' | '30m' | '31m' | '32m' | '33m' | '34m' | '35m' | '36m' | '37m' | '38m' | '39m' | '40m' | '41m' | '42m' | '43m' | '44m' | '45m' | '46m' | '47m' | '48m' | '49m' | '50m' | '51m' | '52m' | '53m' | '54m' | '55m' | '56m' | '57m' | '58m' | '59m' | '1h' | '2h' | '3h' | '4h' | '5h' | '6h' | '7h' | '8h' | '9h' | '10h' | '11h' | '12h' | '13h' | '14h' | '15h' | '16h' | '17h' | '18h' | '19h' | '20h' | '21h' | '22h' | '23h' | '1d' | '2d' | '3d' | '4d' | '5d' | '6d' | '7d'}
      * @memberof MarketApiTicker
      */
     readonly windowSize?: TickerWindowSizeEnum;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`. For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response. Valid values: `TRADING`, `HALT`, `BREAK`
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTicker
      */
     readonly symbolStatus?: TickerSymbolStatusEnum;
@@ -573,36 +771,36 @@ export interface TickerRequest {
  */
 export interface Ticker24hrRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiTicker24hr
      */
     readonly id?: string;
 
     /**
-     * Describe a single symbol
+     *
      * @type {string}
      * @memberof MarketApiTicker24hr
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     *
      * @type {Array<string>}
      * @memberof MarketApiTicker24hr
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
+     * Ticker type. Supported values: FULL (default) or MINI
      * @type {'FULL' | 'MINI'}
      * @memberof MarketApiTicker24hr
      */
     readonly type?: Ticker24hrTypeEnum;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`. For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response. Valid values: `TRADING`, `HALT`, `BREAK`
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTicker24hr
      */
     readonly symbolStatus?: Ticker24hrSymbolStatusEnum;
@@ -614,29 +812,29 @@ export interface Ticker24hrRequest {
  */
 export interface TickerBookRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiTickerBook
      */
     readonly id?: string;
 
     /**
-     * Describe a single symbol
+     * Query ticker for a single symbol
      * @type {string}
      * @memberof MarketApiTickerBook
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Query ticker for multiple symbols
      * @type {Array<string>}
      * @memberof MarketApiTickerBook
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`. For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response. Valid values: `TRADING`, `HALT`, `BREAK`
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTickerBook
      */
     readonly symbolStatus?: TickerBookSymbolStatusEnum;
@@ -648,29 +846,29 @@ export interface TickerBookRequest {
  */
 export interface TickerPriceRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiTickerPrice
      */
     readonly id?: string;
 
     /**
-     * Describe a single symbol
+     * Query price for a single symbol
      * @type {string}
      * @memberof MarketApiTickerPrice
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Query price for multiple symbols
      * @type {Array<string>}
      * @memberof MarketApiTickerPrice
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`. For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response. Valid values: `TRADING`, `HALT`, `BREAK`
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTickerPrice
      */
     readonly symbolStatus?: TickerPriceSymbolStatusEnum;
@@ -682,21 +880,21 @@ export interface TickerPriceRequest {
  */
 export interface TickerTradingDayRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiTickerTradingDay
      */
     readonly id?: string;
 
     /**
-     * Describe a single symbol
+     *
      * @type {string}
      * @memberof MarketApiTickerTradingDay
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     *
      * @type {Array<string>}
      * @memberof MarketApiTickerTradingDay
      */
@@ -710,15 +908,15 @@ export interface TickerTradingDayRequest {
     readonly timeZone?: string;
 
     /**
-     *
+     * Ticker type. Supported values: FULL (default) or MINI
      * @type {'FULL' | 'MINI'}
      * @memberof MarketApiTickerTradingDay
      */
     readonly type?: TickerTradingDayTypeEnum;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`. For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response. Valid values: `TRADING`, `HALT`, `BREAK`
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTickerTradingDay
      */
     readonly symbolStatus?: TickerTradingDaySymbolStatusEnum;
@@ -737,7 +935,7 @@ export interface TradesAggregateRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiTradesAggregate
      */
@@ -751,25 +949,25 @@ export interface TradesAggregateRequest {
     readonly fromId?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number | bigint}
      * @memberof MarketApiTradesAggregate
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number | bigint}
      * @memberof MarketApiTradesAggregate
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 500; Maximum: 1000
-     * @type {number | bigint}
+     *
+     * @type {number}
      * @memberof MarketApiTradesAggregate
      */
-    readonly limit?: number | bigint;
+    readonly limit?: number;
 }
 
 /**
@@ -785,7 +983,7 @@ export interface TradesHistoricalRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiTradesHistorical
      */
@@ -793,13 +991,13 @@ export interface TradesHistoricalRequest {
 
     /**
      * Trade ID to begin at
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiTradesHistorical
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
-     * Default: 100; Maximum: 5000
+     *
      * @type {number}
      * @memberof MarketApiTradesHistorical
      */
@@ -819,14 +1017,14 @@ export interface TradesRecentRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiTradesRecent
      */
     readonly id?: string;
 
     /**
-     * Default: 100; Maximum: 5000
+     *
      * @type {number}
      * @memberof MarketApiTradesRecent
      */
@@ -853,7 +1051,7 @@ export interface UiKlinesRequest {
     readonly interval: UiKlinesIntervalEnum;
 
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof MarketApiUiKlines
      */
@@ -881,7 +1079,7 @@ export interface UiKlinesRequest {
     readonly timeZone?: string;
 
     /**
-     * Default: 100; Maximum: 5000
+     *
      * @type {number}
      * @memberof MarketApiUiKlines
      */
@@ -902,13 +1100,19 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Get current average price for a symbol.
-     * Weight: 2
      *
-     * @summary WebSocket Current average price
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Current average price
      * @param {AvgPriceRequest} requestParameters Request parameters.
      * @returns {Promise<AvgPriceResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#current-average-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#avg-price Binance API Documentation}
      */
     public avgPrice(
         requestParameters: AvgPriceRequest
@@ -922,13 +1126,19 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Get block trades.
-     * Weight: 25
      *
-     * @summary WebSocket Historical Block Trades
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     * - Data Source: Database
+     *
+     * @summary Historical Block Trades
      * @param {BlockTradesHistoricalRequest} requestParameters Request parameters.
      * @returns {Promise<BlockTradesHistoricalResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#historical-block-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#block-trades-historical Binance API Documentation}
      */
     public blockTradesHistorical(
         requestParameters: BlockTradesHistoricalRequest
@@ -946,25 +1156,30 @@ export class MarketApi implements MarketApiInterface {
      * Note that this request returns limited market depth.
      *
      * If you need to continuously monitor order book updates, please consider using WebSocket Streams:
-     *
      * `<symbol>@depth<levels>`
      * `<symbol>@depth`
      *
-     * You can use `depth` request together with `<symbol>@depth` streams to [maintain a local order book](web-socket-streams.md#how-to-manage-a-local-order-book-correctly).
+     * You can use `depth` request together with `<symbol>@depth` streams to [maintain a local order book](/products/spot/web-socket-streams#how-to-manage-a-local-order-book-correctly).
+     *
      * Weight: Adjusted based on the limit:
      *
-     * |  Limit    | Weight |
-     * |:---------:|:------:|
-     * |     1–100 |      5 |
-     * |   101–500 |      25|
-     * |  501–1000 |     50 |
-     * | 1001–5000 |     250 |
+     * |Limit|Request Weight
+     * ------|-------
+     * 1-100|  5
+     * 101-500| 25
+     * 501-1000| 50
+     * 1001-5000| 250
      *
-     * @summary WebSocket Order book
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Order book
      * @param {DepthRequest} requestParameters Request parameters.
      * @returns {Promise<DepthResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#order-book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#depth Binance API Documentation}
      */
     public depth(requestParameters: DepthRequest): Promise<WebsocketApiResponse<DepthResponse>> {
         return this.websocketBase.sendMessage<DepthResponse>(
@@ -980,18 +1195,43 @@ export class MarketApi implements MarketApiInterface {
      * Klines are uniquely identified by their open & close time.
      *
      * If you need access to real-time kline updates, please consider using WebSocket Streams:
-     *
      * `<symbol>@kline_<interval>`
      *
-     * If you need historical kline data,
-     * please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#klines).
-     * Weight: 2
+     * If you need historical kline data, please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#klines).
      *
-     * @summary WebSocket Klines
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported kline intervals (case-sensitive):
+     *
+     * Interval  | `interval` value
+     * --------- | ----------------
+     * seconds   | `1s`
+     * minutes   | `1m`, `3m`, `5m`, `15m`, `30m`
+     * hours     | `1h`, `2h`, `4h`, `6h`, `8h`, `12h`
+     * days      | `1d`, `3d`
+     * weeks     | `1w`
+     * months    | `1M`
+     *
+     **Notes:**
+     *
+     * If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * Supported values for `timeZone`:
+     * Hours and minutes (e.g. `-1:00`, `05:45`)
+     * Only hours (e.g. `0`, `8`, `4`)
+     * Accepted range is strictly [-12:00 to +14:00] inclusive
+     * If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
+     *
+     * @summary Klines
      * @param {KlinesRequest} requestParameters Request parameters.
      * @returns {Promise<KlinesResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#klines Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#klines Binance API Documentation}
      */
     public klines(requestParameters: KlinesRequest): Promise<WebsocketApiResponse<KlinesResponse>> {
         return this.websocketBase.sendMessage<KlinesResponse>(
@@ -1002,14 +1242,20 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
+     * Query Reference Price
      *
-     * Weight: 2
+     * Weight(IP): 2
      *
-     * @summary WebSocket Query Reference Price
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.
      * @returns {Promise<ReferencePriceResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#query-reference-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#reference-price Binance API Documentation}
      */
     public referencePrice(
         requestParameters: ReferencePriceRequest
@@ -1022,14 +1268,20 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * Describes how reference price is calculated for a given symbol.
-     * Weight: 2
+     * Query Reference Price Calculation
      *
-     * @summary WebSocket Query Reference Price Calculation
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query Reference Price Calculation
      * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
      * @returns {Promise<ReferencePriceCalculationResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#query-reference-price-calculation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#reference-price-calculation Binance API Documentation}
      */
     public referencePriceCalculation(
         requestParameters: ReferencePriceCalculationRequest
@@ -1044,8 +1296,33 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Get rolling window price change statistics with a custom window.
      *
-     * This request is similar to `ticker.24hr`,
-     * but statistics are computed on demand using the arbitrary window you specify.
+     * This request is similar to `ticker.24hr` but statistics are computed on demand using the arbitrary window you specify.
+     *
+     **Note:** Window size precision is limited to 1 minute.
+     * While the `closeTime` is the current time of the request, `openTime` always start on a minute boundary.
+     * As such, the effective window might be up to 59999 ms wider than the requested `windowSize`.
+     *
+     * <details>
+     * <summary>Window computation example</summary>
+     *
+     * For example, a request for `"windowSize": "7d"` might result in the following window:
+     *
+     * ```javascript
+     * {
+     * "openTime": 1659580020000,
+     * "closeTime": 1660184865291
+     * }
+     * ```
+     *
+     * Time of the request – `closeTime` – is 1660184865291 (August 11, 2022 02:27:45.291).
+     * Requested window size should put the `openTime` 7 days before that – August 4, 02:27:45.291 –
+     * but due to limited precision it ends up a bit earlier: 1659580020000 (August 4, 2022 02:27:00),
+     * exactly at the start of a minute.
+     * </details>
+     *
+     * If you need to continuously monitor trading statistics, please consider using WebSocket Streams:
+     * `<symbol>@ticker_<window_size>` or `!ticker_<window-size>@arr`
+     *
      * Weight: Adjusted based on the number of requested symbols:
      *
      * | Symbols | Weight |
@@ -1053,11 +1330,33 @@ export class MarketApi implements MarketApiInterface {
      * |    1–50 | 4 per symbol |
      * |  51–100 |    200 |
      *
-     * @summary WebSocket Rolling window price change statistics
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported window sizes:
+     *
+     * Unit    | `windowSize` value
+     * ------- | ------------------
+     * minutes | `1m`, `2m` ... `59m`
+     * hours   | `1h`, `2h` ... `23h`
+     * days    | `1d`, `2d` ... `7d`
+     *
+     * Notes:
+     *
+     * Either `symbol` or `symbols` must be specified.
+     *
+     * Maximum number of symbols in one request: 200.
+     *
+     * Window size units cannot be combined.
+     * E.g., <code>1d 2h</code> is not supported.
+     *
+     * @summary Rolling window price change statistics
      * @param {TickerRequest} requestParameters Request parameters.
      * @returns {Promise<TickerResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#rolling-window-price-change-statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#ticker Binance API Documentation}
      */
     public ticker(
         requestParameters: TickerRequest = {}
@@ -1075,24 +1374,40 @@ export class MarketApi implements MarketApiInterface {
      * If you need to continuously monitor trading statistics, please consider using WebSocket Streams:
      *
      * `<symbol>@ticker` or `!ticker@arr`
+     *
      * `<symbol>@miniTicker` or `!miniTicker@arr`
      *
      * If you need different window sizes,
+     *
      * use the `ticker` request.
+     *
      * Weight: Adjusted based on the number of requested symbols:
      *
-     * | Symbols     | Weight |
-     * |:-----------:|:------:|
-     * |        1–20 |      2 |
-     * |      21–100 |     40 |
-     * | 101 or more |     80 |
-     * | all symbols |     80 |
+     * |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 80|
+     * |symbols| 1-20 |2|
+     * | | 21-100 |40|
+     * | | 101+ |80|
+     * | |omitted| 80|
      *
-     * @summary WebSocket 24hr ticker price change statistics
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * Notes:
+     *
+     * `symbol` and `symbols` cannot be used together.
+     *
+     * If no symbol is specified, returns information about all symbols currently trading on the exchange.
+     *
+     * @summary 24hr ticker price change statistics
      * @param {Ticker24hrRequest} requestParameters Request parameters.
      * @returns {Promise<Ticker24hrResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#24hr-ticker-price-change-statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#ticker24hr Binance API Documentation}
      */
     public ticker24hr(
         requestParameters: Ticker24hrRequest = {}
@@ -1107,22 +1422,35 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Get the current best price and quantity on the order book.
      *
-     * If you need access to real-time order book ticker updates, please consider using WebSocket Streams:
+     * If you need access to real-time order book ticker updates, please
+     * consider using WebSocket Streams:
      *
      * `<symbol>@bookTicker`
+     *
      * Weight: Adjusted based on the number of requested symbols:
      *
-     * | Parameter | Weight |
-     * | --------- |:------:|
-     * | `symbol`  |      2 |
-     * | `symbols` |      4 |
-     * | none      |      4 |
+     * |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
      *
-     * @summary WebSocket Symbol order book ticker
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * Notes:
+     *
+     * `symbol` and `symbols` cannot be used together.
+     *
+     * If no symbol is specified, returns information about all symbols currently trading on the exchange.
+     *
+     * @summary Symbol order book ticker
      * @param {TickerBookRequest} requestParameters Request parameters.
      * @returns {Promise<TickerBookResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-order-book-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#ticker-book Binance API Documentation}
      */
     public tickerBook(
         requestParameters: TickerBookRequest = {}
@@ -1137,23 +1465,37 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Get the latest market price for a symbol.
      *
-     * If you need access to real-time price updates, please consider using WebSocket Streams:
+     * If you need access to real-time price updates, please consider using
+     * WebSocket Streams:
      *
      * `<symbol>@aggTrade`
+     *
      * `<symbol>@trade`
+     *
      * Weight: Adjusted based on the number of requested symbols:
      *
-     * | Parameter | Weight |
-     * | --------- |:------:|
-     * | `symbol`  |      2 |
-     * | `symbols` |      4 |
-     * | none      |      4 |
+     * |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
      *
-     * @summary WebSocket Symbol price ticker
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * Notes:
+     *
+     * `symbol` and `symbols` cannot be used together.
+     *
+     * If no symbol is specified, returns information about all symbols currently trading on the exchange.
+     *
+     * @summary Symbol price ticker
      * @param {TickerPriceRequest} requestParameters Request parameters.
      * @returns {Promise<TickerPriceResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-price-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#ticker-price Binance API Documentation}
      */
     public tickerPrice(
         requestParameters: TickerPriceRequest = {}
@@ -1167,13 +1509,26 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Price change statistics for a trading day.
-     * Weight: 4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
      *
-     * @summary WebSocket Trading Day Ticker
+     * Weight: 4 for each requested symbol regardless of windowSize. The weight for this request will cap at 200 once the number of symbols in the request is more than 50.
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     **Notes:**
+     *
+     * Supported values for `timeZone`:
+     * Hours and minutes (e.g. `-1:00`, `05:45`)
+     * Only hours (e.g. `0`, `8`, `4`)
+     *
+     *
+     * @summary Trading Day Ticker
      * @param {TickerTradingDayRequest} requestParameters Request parameters.
      * @returns {Promise<TickerTradingDayResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#trading-day-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#ticker-trading-day Binance API Documentation}
      */
     public tickerTradingDay(
         requestParameters: TickerTradingDayRequest = {}
@@ -1188,23 +1543,38 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Get aggregate trades.
      *
-     * An *aggregate trade* (aggtrade) represents one or more individual trades.
-     * Trades that fill at the same time, from the same taker order, with the same price –
-     * those trades are collected into an aggregate trade with total quantity of the individual trades.
+     * An *aggregate trade* (aggtrade) represents one or more individual
+     * trades.
      *
-     * If you need access to real-time trading activity, please consider using WebSocket Streams:
+     * Trades that fill at the same time, from the same taker order, with the
+     * same price –
+     *
+     * those trades are collected into an aggregate trade with total quantity
+     * of the individual trades.
+     *
+     * If you need access to real-time trading activity, please consider using
+     * WebSocket Streams:
      *
      * `<symbol>@aggTrade`
      *
-     * If you need historical aggregate trade data,
-     * please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#aggtrades).
-     * Weight: 4
+     * If you need historical aggregate trade data, please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#aggtrades).
      *
-     * @summary WebSocket Aggregate trades
+     * Weight(IP): 4
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `fromId` is specified, return aggtrades with aggregate trade ID >= `fromId`. Use `fromId` and `limit` to page through all aggtrades.
+     * - If `startTime` and/or `endTime` are specified, aggtrades are filtered by execution time (`T`). `fromId` cannot be used together with `startTime` and `endTime`.
+     * - If no condition is specified, the most recent aggregate trades are returned.
+     *
+     * @summary Aggregate trades
      * @param {TradesAggregateRequest} requestParameters Request parameters.
      * @returns {Promise<TradesAggregateResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#aggregate-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#trades-aggregate Binance API Documentation}
      */
     public tradesAggregate(
         requestParameters: TradesAggregateRequest
@@ -1218,13 +1588,23 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Get historical trades.
-     * Weight: 25
      *
-     * @summary WebSocket Historical trades
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Notes:
+     *
+     * If `fromId` is not specified, the most recent trades are returned.
+     *
+     * @summary Historical trades
      * @param {TradesHistoricalRequest} requestParameters Request parameters.
      * @returns {Promise<TradesHistoricalResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#historical-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#trades-historical Binance API Documentation}
      */
     public tradesHistorical(
         requestParameters: TradesHistoricalRequest
@@ -1239,16 +1619,23 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Get recent trades.
      *
-     * If you need access to real-time trading activity, please consider using WebSocket Streams:
+     * If you need access to real-time trading activity, please consider using
+     * WebSocket Streams:
      *
      * `<symbol>@trade`
-     * Weight: 25
      *
-     * @summary WebSocket Recent trades
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Recent trades
      * @param {TradesRecentRequest} requestParameters Request parameters.
      * @returns {Promise<TradesRecentResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#recent-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#trades-recent Binance API Documentation}
      */
     public tradesRecent(
         requestParameters: TradesRecentRequest
@@ -1263,15 +1650,28 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Get klines (candlestick bars) optimized for presentation.
      *
-     * This request is similar to `klines`, having the same parameters and response.
-     * `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
-     * Weight: 2
+     * This request is similar to `klines`, having the same parameters and response. `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
      *
-     * @summary WebSocket UI Klines
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * - Supported values for `timeZone`:
+     * - Hours and minutes (e.g. `-1:00`, `05:45`)
+     * - Only hours (e.g. `0`, `8`, `4`)
+     * - Accepted range is strictly [-12:00 to +14:00] inclusive
+     * - If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * - Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
+     *
+     * @summary UI Klines
      * @param {UiKlinesRequest} requestParameters Request parameters.
      * @returns {Promise<UiKlinesResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#ui-klines Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/market#ui-klines Binance API Documentation}
      */
     public uiKlines(
         requestParameters: UiKlinesRequest
@@ -1286,10 +1686,8 @@ export class MarketApi implements MarketApiInterface {
 
 export enum DepthSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum KlinesIntervalEnum {
@@ -1313,10 +1711,8 @@ export enum KlinesIntervalEnum {
 
 export enum ReferencePriceCalculationSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerTypeEnum {
@@ -1413,14 +1809,13 @@ export enum TickerWindowSizeEnum {
     WINDOW_SIZE_4d = '4d',
     WINDOW_SIZE_5d = '5d',
     WINDOW_SIZE_6d = '6d',
+    WINDOW_SIZE_7d = '7d',
 }
 
 export enum TickerSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum Ticker24hrTypeEnum {
@@ -1430,26 +1825,20 @@ export enum Ticker24hrTypeEnum {
 
 export enum Ticker24hrSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerBookSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerPriceSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerTradingDayTypeEnum {
@@ -1459,10 +1848,8 @@ export enum TickerTradingDayTypeEnum {
 
 export enum TickerTradingDaySymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum UiKlinesIntervalEnum {

@@ -13,8 +13,8 @@ async function orderListOpo() {
             symbol: 'BNBUSDT',
             workingType: SpotRestAPI.OrderListOpoWorkingTypeEnum.LIMIT,
             workingSide: SpotRestAPI.OrderListOpoWorkingSideEnum.BUY,
-            workingPrice: 1.0,
-            workingQuantity: 1.0,
+            workingPrice: 1,
+            workingQuantity: 1,
             pendingType: SpotRestAPI.OrderListOpoPendingTypeEnum.LIMIT,
             pendingSide: SpotRestAPI.OrderListOpoPendingSideEnum.BUY,
         });

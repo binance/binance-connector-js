@@ -1,12 +1,7 @@
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,10 +26,19 @@ export interface AuthApiInterface {
      * After calling `session.logon`, you can omit `apiKey` and `signature` parameters for future requests that require them.
      *
      * Note that only one API key can be authenticated.
-     * Calling `session.logon` multiple times changes the current authenticated API key.
-     * Weight: 2
      *
-     * @summary WebSocket Log in with API key
+     * Calling `session.logon` multiple times changes the current authenticated API key.
+     *
+     **Note:** Only Ed25519 keys are supported for this feature.
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Log in with API key (USER_DATA)
      * @param {SessionLogonRequest} requestParameters Request parameters.
      *
      * @returns {Promise<SessionLogonResponse>}
@@ -45,15 +49,18 @@ export interface AuthApiInterface {
     ): Promise<WebsocketApiResponse<SessionLogonResponse>[]>;
 
     /**
-     * Forget the API key previously authenticated.
-     * If the connection is not authenticated, this request does nothing.
+     * Forget the API key previously authenticated. If the connection is not authenticated, this request does nothing.
      *
-     * Note that the WebSocket connection stays open after `session.logout` request.
-     * You can continue using the connection,
-     * but now you will have to explicitly provide the `apiKey` and `signature` parameters where needed.
-     * Weight: 2
+     * Note that the WebSocket connection stays open after `session.logout` request. You can continue using the connection, but now you will have to explicitly provide the `apiKey` and `signature` parameters where needed.
      *
-     * @summary WebSocket Log out of the session
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Log out of the session
      * @param {SessionLogoutRequest} requestParameters Request parameters.
      *
      * @returns {Promise<SessionLogoutResponse>}
@@ -66,9 +73,15 @@ export interface AuthApiInterface {
     /**
      * Query the status of the WebSocket connection,
      * inspecting which API key (if any) is used to authorize requests.
-     * Weight: 2
      *
-     * @summary WebSocket Query session status
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query session status
      * @param {SessionStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<SessionStatusResponse>}
@@ -85,14 +98,14 @@ export interface AuthApiInterface {
  */
 export interface SessionLogonRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AuthApiSessionLogon
      */
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AuthApiSessionLogon
      */
@@ -105,7 +118,7 @@ export interface SessionLogonRequest {
  */
 export interface SessionLogoutRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AuthApiSessionLogout
      */
@@ -118,7 +131,7 @@ export interface SessionLogoutRequest {
  */
 export interface SessionStatusRequest {
     /**
-     * Unique WebSocket request ID.
+     * Client-generated request identifier.
      * @type {string}
      * @memberof AuthApiSessionStatus
      */
@@ -143,14 +156,23 @@ export class AuthApi implements AuthApiInterface {
      * After calling `session.logon`, you can omit `apiKey` and `signature` parameters for future requests that require them.
      *
      * Note that only one API key can be authenticated.
-     * Calling `session.logon` multiple times changes the current authenticated API key.
-     * Weight: 2
      *
-     * @summary WebSocket Log in with API key
+     * Calling `session.logon` multiple times changes the current authenticated API key.
+     *
+     **Note:** Only Ed25519 keys are supported for this feature.
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Log in with API key (USER_DATA)
      * @param {SessionLogonRequest} requestParameters Request parameters.
      * @returns {Promise<SessionLogonResponse>}
      * @memberof AuthApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#log-in-with-api-key-signed Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/auth#session-logon Binance API Documentation}
      */
     public sessionLogon(
         requestParameters: SessionLogonRequest = {}
@@ -163,19 +185,22 @@ export class AuthApi implements AuthApiInterface {
     }
 
     /**
-     * Forget the API key previously authenticated.
-     * If the connection is not authenticated, this request does nothing.
+     * Forget the API key previously authenticated. If the connection is not authenticated, this request does nothing.
      *
-     * Note that the WebSocket connection stays open after `session.logout` request.
-     * You can continue using the connection,
-     * but now you will have to explicitly provide the `apiKey` and `signature` parameters where needed.
-     * Weight: 2
+     * Note that the WebSocket connection stays open after `session.logout` request. You can continue using the connection, but now you will have to explicitly provide the `apiKey` and `signature` parameters where needed.
      *
-     * @summary WebSocket Log out of the session
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Log out of the session
      * @param {SessionLogoutRequest} requestParameters Request parameters.
      * @returns {Promise<SessionLogoutResponse>}
      * @memberof AuthApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#log-out-of-the-session Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/auth#session-logout Binance API Documentation}
      */
     public sessionLogout(
         requestParameters: SessionLogoutRequest = {}
@@ -190,13 +215,19 @@ export class AuthApi implements AuthApiInterface {
     /**
      * Query the status of the WebSocket connection,
      * inspecting which API key (if any) is used to authorize requests.
-     * Weight: 2
      *
-     * @summary WebSocket Query session status
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     * @summary Query session status
      * @param {SessionStatusRequest} requestParameters Request parameters.
      * @returns {Promise<SessionStatusResponse>}
      * @memberof AuthApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#query-session-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-api/auth#session-status Binance API Documentation}
      */
     public sessionStatus(
         requestParameters: SessionStatusRequest = {}

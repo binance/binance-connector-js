@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,49 +20,49 @@
  */
 export interface BlockTradeResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof BlockTradeResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof BlockTradeResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof BlockTradeResponse
      */
     s?: string;
     /**
-     *
+     * Block Trade ID
      * @type {number | bigint}
      * @memberof BlockTradeResponse
      */
     t?: number | bigint;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof BlockTradeResponse
      */
     p?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof BlockTradeResponse
      */
     q?: string;
     /**
-     *
+     * Trade time
      * @type {number | bigint}
      * @memberof BlockTradeResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Is the buyer the maker?
      * @type {boolean}
      * @memberof BlockTradeResponse
      */

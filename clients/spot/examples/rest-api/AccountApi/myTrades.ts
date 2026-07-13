@@ -10,7 +10,7 @@ const client = new Spot({ configurationRestAPI });
 async function myTrades() {
     try {
         const response = await client.restAPI.myTrades({
-            symbol: 'BNBUSDT',
+            symbol: 'BNBBTC',
         });
 
         const rateLimits = response.rateLimits!;

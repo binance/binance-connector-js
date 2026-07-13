@@ -17,8 +17,8 @@ async function orderListPlaceOpoco() {
             symbol: 'BNBUSDT',
             workingType: SpotWebsocketAPI.OrderListPlaceOpocoWorkingTypeEnum.LIMIT,
             workingSide: SpotWebsocketAPI.OrderListPlaceOpocoWorkingSideEnum.BUY,
-            workingPrice: 1.0,
-            workingQuantity: 1.0,
+            workingPrice: 1,
+            workingQuantity: 1,
             pendingSide: SpotWebsocketAPI.OrderListPlaceOpocoPendingSideEnum.BUY,
             pendingAboveType:
                 SpotWebsocketAPI.OrderListPlaceOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,

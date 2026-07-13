@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -21,10 +16,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MyFiltersResponseResult } from './my-filters-response-result';
+import type { ExchangeFilters } from './exchange-filters';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { MaxAssetFilter } from './max-asset-filter';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { RateLimits } from './rate-limits';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { SymbolFilters } from './symbol-filters';
 
 /**
  *
@@ -34,22 +35,22 @@ import type { RateLimits } from './rate-limits';
 export interface MyFiltersResponse {
     /**
      *
-     * @type {string}
+     * @type {Array<ExchangeFilters>}
      * @memberof MyFiltersResponse
      */
-    id?: string;
+    exchangeFilters?: Array<ExchangeFilters>;
     /**
      *
-     * @type {number | bigint}
+     * @type {Array<SymbolFilters>}
      * @memberof MyFiltersResponse
      */
-    status?: number | bigint;
+    symbolFilters?: Array<SymbolFilters>;
     /**
      *
-     * @type {MyFiltersResponseResult}
+     * @type {Array<MaxAssetFilter>}
      * @memberof MyFiltersResponse
      */
-    result?: MyFiltersResponseResult;
+    assetFilters?: Array<MaxAssetFilter>;
     /**
      *
      * @type {Array<RateLimits>}

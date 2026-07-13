@@ -13,7 +13,7 @@ async function sorOrder() {
             symbol: 'BNBUSDT',
             side: SpotRestAPI.SorOrderSideEnum.BUY,
             type: SpotRestAPI.SorOrderTypeEnum.MARKET,
-            quantity: 1.0,
+            quantity: 1,
         });
 
         const rateLimits = response.rateLimits!;

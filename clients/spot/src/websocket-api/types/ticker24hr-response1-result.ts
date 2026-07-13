@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,7 +20,7 @@
  */
 export interface Ticker24hrResponse1Result {
     /**
-     *
+     * Symbol Name
      * @type {string}
      * @memberof Ticker24hrResponse1Result
      */
@@ -55,7 +50,7 @@ export interface Ticker24hrResponse1Result {
      */
     prevClosePrice?: string;
     /**
-     *
+     * Closing price of the interval
      * @type {string}
      * @memberof Ticker24hrResponse1Result
      */
@@ -91,61 +86,61 @@ export interface Ticker24hrResponse1Result {
      */
     askQty?: string;
     /**
-     *
+     * Opening price of the Interval
      * @type {string}
      * @memberof Ticker24hrResponse1Result
      */
     openPrice?: string;
     /**
-     *
+     * Highest price in the interval
      * @type {string}
      * @memberof Ticker24hrResponse1Result
      */
     highPrice?: string;
     /**
-     *
+     * Lowest  price in the interval
      * @type {string}
      * @memberof Ticker24hrResponse1Result
      */
     lowPrice?: string;
     /**
-     *
+     * Total trade volume (in base asset)
      * @type {string}
      * @memberof Ticker24hrResponse1Result
      */
     volume?: string;
     /**
-     *
+     * Total trade volume (in quote asset)
      * @type {string}
      * @memberof Ticker24hrResponse1Result
      */
     quoteVolume?: string;
     /**
-     *
+     * Start of the ticker interval
      * @type {number | bigint}
      * @memberof Ticker24hrResponse1Result
      */
     openTime?: number | bigint;
     /**
-     *
+     * End of the ticker interval
      * @type {number | bigint}
      * @memberof Ticker24hrResponse1Result
      */
     closeTime?: number | bigint;
     /**
-     *
+     * First tradeId
      * @type {number | bigint}
      * @memberof Ticker24hrResponse1Result
      */
     firstId?: number | bigint;
     /**
-     *
+     * Last tradeId
      * @type {number | bigint}
      * @memberof Ticker24hrResponse1Result
      */
     lastId?: number | bigint;
     /**
-     *
+     * Trade count
      * @type {number | bigint}
      * @memberof Ticker24hrResponse1Result
      */

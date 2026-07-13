@@ -1,12 +1,7 @@
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -49,14 +43,22 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
     return {
         /**
          * Get compressed, aggregate trades. Trades that fill at the time, from the same taker order, with the same price will have the quantity aggregated.
-         * Weight: 4
+         *
+         * Weight(IP): 4
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * - If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
          *
          * @summary Compressed/Aggregate trades list
          * @param {string} symbol
          * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
          * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
-         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [limit]
          *
          * @throws {RequiredError}
          */
@@ -104,7 +106,13 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * Current average price for a symbol.
-         * Weight: 2
+         *
+         * Weight(IP): 2
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
          *
          * @summary Current average price
          * @param {string} symbol
@@ -136,6 +144,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             };
         },
         /**
+         * Order book
          *
          * Weight: Adjusted based on the limit:
          *
@@ -146,10 +155,16 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * 501-1000| 50
          * 1001-5000| 250
          *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
+         *
          * @summary Order book
          * @param {string} symbol
-         * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {DepthSymbolStatusEnum} [symbolStatus]
+         * @param {number} [limit] If limit > 5000, only 5000 entries will be returned.
+         * @param {DepthSymbolStatusEnum} [symbolStatus] Filters for symbols that have this `tradingStatus`.
+         * A status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
          *
          * @throws {RequiredError}
          */
@@ -189,11 +204,17 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * Get recent trades.
-         * Weight: 25
+         *
+         * Weight(IP): 25
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
          *
          * @summary Recent trades list
          * @param {string} symbol
-         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [limit]
          *
          * @throws {RequiredError}
          */
@@ -226,9 +247,15 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * Get block trades.
-         * Weight: 25
          *
-         * @summary Historical Block Trades
+         * Weight(IP): 25
+         *
+         * Security Type: MARKET_DATA
+         *
+         * Notes:
+         * - Data Source: Database
+         *
+         * @summary Historical Block Trades (MARKET_DATA)
          * @param {string} symbol
          * @param {number | bigint} fromId Block trade ID to fetch from
          * @param {number | bigint} [limit] Default: 500; Maximum: 1000
@@ -273,12 +300,18 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * Get older trades.
-         * Weight: 25
+         *
+         * Weight(IP): 25
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Database
          *
          * @summary Old trade lookup
          * @param {string} symbol
-         * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number} [limit]
+         * @param {number | bigint} [fromId] TradeId to fetch from. Default gets most recent trades.
          *
          * @throws {RequiredError}
          */
@@ -319,15 +352,42 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Kline/candlestick bars for a symbol.
          * Klines are uniquely identified by their open time.
-         * Weight: 2
+         *
+         * Weight(IP): 2
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * Supported kline intervals (case-sensitive):
+         *
+         * Interval  | `interval` value
+         * --------- | ----------------
+         * seconds   | `1s`
+         * minutes   | `1m`, `3m`, `5m`, `15m`, `30m`
+         * hours     | `1h`, `2h`, `4h`, `6h`, `8h`, `12h`
+         * days      | `1d`, `3d`
+         * weeks     | `1w`
+         * months    | `1M`
+         *
+         **Notes:**
+         *
+         * If `startTime` and `endTime` are not sent, the most recent klines are returned.
+         * Supported values for `timeZone`:
+         * Hours and minutes (e.g. `-1:00`, `05:45`)
+         * Only hours (e.g. `0`, `8`, `4`)
+         * Accepted range is strictly [-12:00 to +14:00] inclusive
+         * If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+         * Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
          *
          * @summary Kline/Candlestick data
          * @param {string} symbol
          * @param {KlinesIntervalEnum} interval
-         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          * @param {string} [timeZone] Default: 0 (UTC)
-         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [limit]
          *
          * @throws {RequiredError}
          */
@@ -380,8 +440,14 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             };
         },
         /**
+         * Query the reference price for a symbol.
          *
-         * Weight: 2
+         * Weight(IP): 2
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
          *
          * @summary Query Reference Price
          * @param {string} symbol
@@ -414,11 +480,17 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * Describes how reference price is calculated for a given symbol.
-         * Weight: 2
+         *
+         * Weight(IP): 2
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
          *
          * @summary Query Reference Price Calculation
          * @param {string} symbol
-         * @param {ReferencePriceCalculationSymbolStatusEnum} [symbolStatus]
+         * @param {ReferencePriceCalculationSymbolStatusEnum} [symbolStatus] Supported values: `TRADING`, `HALT`, `BREAK`
          *
          * @throws {RequiredError}
          */
@@ -453,13 +525,36 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             };
         },
         /**
+         * **Note:** This endpoint differs from `GET /api/v3/ticker/24hr`.
          *
-         * Weight: 4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+         * The statistical time range of this endpoint can be up to 59999ms longer
+         * than the requested `windowSize`.
+         *
+         * `openTime` starts at the beginning of a minute, while the end time is
+         * the current time. Therefore, the actual interval can be up to 59999ms
+         * longer than the requested window.
+         *
+         * For example, if `closeTime` is 1641287867099 (January 04, 2022
+         * 09:17:47:099 UTC) and `windowSize` is `1d`, then `openTime` is
+         * 1641201420000 (January 3, 2022, 09:17:00 UTC).
+         *
+         * Weight: 4 for each requested symbol regardless of windowSize.
+         *
+         * The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Database
          *
          * @summary Rolling window price change statistics
-         * @param {string} [symbol] Symbol to query
-         * @param {Array<string>} [symbols] List of symbols to query
-         * @param {TickerWindowSizeEnum} [windowSize]
+         * @param {string} [symbol] Either `symbol` or `symbols` must be provided
+         * @param {Array<string>} [symbols] Either `symbol` or `symbols` must be provided
+         *
+         * Examples of accepted format for the `symbols` parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
+         *
+         * The maximum number of symbols allowed in a request is 100.
+         * @param {TickerWindowSizeEnum} [windowSize] Units cannot be combined (e.g. `1d2h` is not allowed).
          * @param {TickerTypeEnum} [type]
          * @param {TickerSymbolStatusEnum} [symbolStatus]
          *
@@ -506,6 +601,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * 24 hour rolling window price change statistics. **Careful** when accessing this with no symbol.
+         *
          * Weight: <table>
          * <thead>
          * <tr>
@@ -544,9 +640,18 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * </tbody>
          * </table>
          *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
+         *
          * @summary 24hr ticker price change statistics
-         * @param {string} [symbol] Symbol to query
-         * @param {Array<string>} [symbols] List of symbols to query
+         * @param {string} [symbol] Either `symbol` or `symbols` must be provided
+         * @param {Array<string>} [symbols] Either `symbol` or `symbols` must be provided
+         *
+         * Examples of accepted format for the `symbols` parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
+         *
+         * The maximum number of symbols allowed in a request is 100.
          * @param {Ticker24hrTypeEnum} [type]
          * @param {Ticker24hrSymbolStatusEnum} [symbolStatus]
          *
@@ -589,36 +694,27 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * Best price/qty on the order book for a symbol or symbols.
-         * Weight: <table>
-         * <thead>
-         * <tr>
-         * <th>Parameter</th>
-         * <th>Symbols Provided</th>
-         * <th>Weight</th>
-         * </tr>
-         * </thead>
-         * <tbody>
-         * <tr>
-         * <td rowspan="2">symbol</td>
-         * <td>1</td>
-         * <td>2</td>
-         * </tr>
-         * <tr>
-         * <td>symbol parameter is omitted</td>
-         * <td>4</td>
-         * </tr>
-         * <tr>
-         * <td>symbols</td>
-         * <td>Any</td>
-         * <td>4</td>
-         * </tr>
-         * </tbody>
-         * </table>
+         *
+         * Weight: |Parameter|Symbols Provided|Weight|
+         * |---|---|---|
+         * |symbol| 1 |2|
+         * | |omitted| 4|
+         * |symbols| Any |4|
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
          *
          * @summary Symbol order book ticker
-         * @param {string} [symbol] Symbol to query
-         * @param {Array<string>} [symbols] List of symbols to query
-         * @param {TickerBookTickerSymbolStatusEnum} [symbolStatus]
+         * @param {string} [symbol] Parameter symbol and symbols cannot be used in combination.
+         * If neither parameter is sent, `bookTickers` for all symbols will be returned in an array.
+         * @param {Array<string>} [symbols] Parameter symbol and symbols cannot be used in combination.
+         * If neither parameter is sent, `bookTickers` for all symbols will be returned in an array.
+         * Examples of accepted format for the symbols parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
+         * @param {TickerBookTickerSymbolStatusEnum} [symbolStatus] Filters for symbols that have this `tradingStatus`.
+         * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+         * For multiple or all symbols, non-matching ones are simply excluded from the response.
          *
          * @throws {RequiredError}
          */
@@ -655,36 +751,27 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * Latest price for a symbol or symbols.
-         * Weight: <table>
-         * <thead>
-         * <tr>
-         * <th>Parameter</th>
-         * <th>Symbols Provided</th>
-         * <th>Weight</th>
-         * </tr>
-         * </thead>
-         * <tbody>
-         * <tr>
-         * <td rowspan="2">symbol</td>
-         * <td>1</td>
-         * <td>2</td>
-         * </tr>
-         * <tr>
-         * <td>symbol parameter is omitted</td>
-         * <td>4</td>
-         * </tr>
-         * <tr>
-         * <td>symbols</td>
-         * <td>Any</td>
-         * <td>4</td>
-         * </tr>
-         * </tbody>
-         * </table>
+         *
+         * Weight: |Parameter|Symbols Provided|Weight|
+         * |---|---|---|
+         * |symbol| 1 |2|
+         * | |omitted| 4|
+         * |symbols| Any |4|
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
          *
          * @summary Symbol price ticker
-         * @param {string} [symbol] Symbol to query
-         * @param {Array<string>} [symbols] List of symbols to query
-         * @param {TickerPriceSymbolStatusEnum} [symbolStatus]
+         * @param {string} [symbol] Parameter symbol and symbols cannot be used in combination.
+         * If neither parameter is sent, prices for all symbols will be returned in an array.
+         * @param {Array<string>} [symbols] Parameter symbol and symbols cannot be used in combination.
+         * If neither parameter is sent, prices for all symbols will be returned in an array.
+         * Examples of accepted format for the symbols parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
+         * @param {TickerPriceSymbolStatusEnum} [symbolStatus] Filters for symbols that have this `tradingStatus`.
+         * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+         * For multiple or all symbols, non-matching ones are simply excluded from the response.
          *
          * @throws {RequiredError}
          */
@@ -721,14 +808,29 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         },
         /**
          * Price change statistics for a trading day.
-         * Weight: 4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+         *
+         * Weight: 4 for each requested symbol. The weight for this request will cap at 200 once the number of symbols in the request is more than 50.
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         **Notes:**:
+         * - Supported values for `timeZone`:
+         * - Hours and minutes (e.g. `-1:00`, `05:45`)
+         * - Only hours (e.g. `0`, `8`, `4`)
          *
          * @summary Trading Day Ticker
-         * @param {string} [symbol] Symbol to query
-         * @param {Array<string>} [symbols] List of symbols to query
+         * @param {string} [symbol] Either `symbol` or `symbols` must be provided.
+         * @param {Array<string>} [symbols] Either `symbol` or `symbols` must be provided.
+         * Examples of accepted format for the `symbols` parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D.
+         * The maximum number of `symbols` allowed in a request is 100.
          * @param {string} [timeZone] Default: 0 (UTC)
          * @param {TickerTradingDayTypeEnum} [type]
-         * @param {TickerTradingDaySymbolStatusEnum} [symbolStatus]
+         * @param {TickerTradingDaySymbolStatusEnum} [symbolStatus] Filters for symbols that have this `tradingStatus`.
+         * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+         * For multiple symbols, non-matching ones are simply excluded from the response.
          *
          * @throws {RequiredError}
          */
@@ -772,18 +874,34 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             };
         },
         /**
-         * The request is similar to klines having the same parameters and response.
+         * The request is similar to klines having the same parameters and
+         * response.
          *
-         * `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
-         * Weight: 2
+         * `uiKlines` return modified kline data, optimized for presentation of
+         * candlestick charts.
+         *
+         * Weight(IP): 2
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Database
+         *
+         * - If `startTime` and `endTime` are not sent, the most recent klines are returned.
+         * - Supported values for `timeZone`:
+         * - Hours and minutes (e.g. `-1:00`, `05:45`)
+         * - Only hours (e.g. `0`, `8`, `4`)
+         * - Accepted range is strictly [-12:00 to +14:00] inclusive
+         * - If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+         * - Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
          *
          * @summary UIKlines
          * @param {string} symbol
          * @param {UiKlinesIntervalEnum} interval
-         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          * @param {string} [timeZone] Default: 0 (UTC)
-         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [limit]
          *
          * @throws {RequiredError}
          */
@@ -845,7 +963,15 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 export interface MarketApiInterface {
     /**
      * Get compressed, aggregate trades. Trades that fill at the time, from the same taker order, with the same price will have the quantity aggregated.
-     * Weight: 4
+     *
+     * Weight(IP): 4
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
      *
      * @summary Compressed/Aggregate trades list
      * @param {AggTradesRequest} requestParameters Request parameters.
@@ -856,7 +982,13 @@ export interface MarketApiInterface {
     aggTrades(requestParameters: AggTradesRequest): Promise<RestApiResponse<AggTradesResponse>>;
     /**
      * Current average price for a symbol.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Current average price
      * @param {AvgPriceRequest} requestParameters Request parameters.
@@ -866,6 +998,7 @@ export interface MarketApiInterface {
      */
     avgPrice(requestParameters: AvgPriceRequest): Promise<RestApiResponse<AvgPriceResponse>>;
     /**
+     * Order book
      *
      * Weight: Adjusted based on the limit:
      *
@@ -876,6 +1009,11 @@ export interface MarketApiInterface {
      * 501-1000| 50
      * 1001-5000| 250
      *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary Order book
      * @param {DepthRequest} requestParameters Request parameters.
      *
@@ -885,7 +1023,13 @@ export interface MarketApiInterface {
     depth(requestParameters: DepthRequest): Promise<RestApiResponse<DepthResponse>>;
     /**
      * Get recent trades.
-     * Weight: 25
+     *
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Recent trades list
      * @param {GetTradesRequest} requestParameters Request parameters.
@@ -896,9 +1040,15 @@ export interface MarketApiInterface {
     getTrades(requestParameters: GetTradesRequest): Promise<RestApiResponse<GetTradesResponse>>;
     /**
      * Get block trades.
-     * Weight: 25
      *
-     * @summary Historical Block Trades
+     * Weight(IP): 25
+     *
+     * Security Type: MARKET_DATA
+     *
+     * Notes:
+     * - Data Source: Database
+     *
+     * @summary Historical Block Trades (MARKET_DATA)
      * @param {HistoricalBlockTradesRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -909,7 +1059,13 @@ export interface MarketApiInterface {
     ): Promise<RestApiResponse<HistoricalBlockTradesResponse>>;
     /**
      * Get older trades.
-     * Weight: 25
+     *
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
      *
      * @summary Old trade lookup
      * @param {HistoricalTradesRequest} requestParameters Request parameters.
@@ -923,7 +1079,34 @@ export interface MarketApiInterface {
     /**
      * Kline/candlestick bars for a symbol.
      * Klines are uniquely identified by their open time.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported kline intervals (case-sensitive):
+     *
+     * Interval  | `interval` value
+     * --------- | ----------------
+     * seconds   | `1s`
+     * minutes   | `1m`, `3m`, `5m`, `15m`, `30m`
+     * hours     | `1h`, `2h`, `4h`, `6h`, `8h`, `12h`
+     * days      | `1d`, `3d`
+     * weeks     | `1w`
+     * months    | `1M`
+     *
+     **Notes:**
+     *
+     * If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * Supported values for `timeZone`:
+     * Hours and minutes (e.g. `-1:00`, `05:45`)
+     * Only hours (e.g. `0`, `8`, `4`)
+     * Accepted range is strictly [-12:00 to +14:00] inclusive
+     * If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
      *
      * @summary Kline/Candlestick data
      * @param {KlinesRequest} requestParameters Request parameters.
@@ -933,8 +1116,14 @@ export interface MarketApiInterface {
      */
     klines(requestParameters: KlinesRequest): Promise<RestApiResponse<KlinesResponse>>;
     /**
+     * Query the reference price for a symbol.
      *
-     * Weight: 2
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.
@@ -947,7 +1136,13 @@ export interface MarketApiInterface {
     ): Promise<RestApiResponse<ReferencePriceResponse>>;
     /**
      * Describes how reference price is calculated for a given symbol.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Query Reference Price Calculation
      * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
@@ -959,8 +1154,27 @@ export interface MarketApiInterface {
         requestParameters: ReferencePriceCalculationRequest
     ): Promise<RestApiResponse<ReferencePriceCalculationResponse>>;
     /**
+     * **Note:** This endpoint differs from `GET /api/v3/ticker/24hr`.
      *
-     * Weight: 4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     * The statistical time range of this endpoint can be up to 59999ms longer
+     * than the requested `windowSize`.
+     *
+     * `openTime` starts at the beginning of a minute, while the end time is
+     * the current time. Therefore, the actual interval can be up to 59999ms
+     * longer than the requested window.
+     *
+     * For example, if `closeTime` is 1641287867099 (January 04, 2022
+     * 09:17:47:099 UTC) and `windowSize` is `1d`, then `openTime` is
+     * 1641201420000 (January 3, 2022, 09:17:00 UTC).
+     *
+     * Weight: 4 for each requested symbol regardless of windowSize.
+     *
+     * The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
      *
      * @summary Rolling window price change statistics
      * @param {TickerRequest} requestParameters Request parameters.
@@ -971,6 +1185,7 @@ export interface MarketApiInterface {
     ticker(requestParameters?: TickerRequest): Promise<RestApiResponse<TickerResponse>>;
     /**
      * 24 hour rolling window price change statistics. **Careful** when accessing this with no symbol.
+     *
      * Weight: <table>
      * <thead>
      * <tr>
@@ -1009,6 +1224,11 @@ export interface MarketApiInterface {
      * </tbody>
      * </table>
      *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary 24hr ticker price change statistics
      * @param {Ticker24hrRequest} requestParameters Request parameters.
      *
@@ -1018,31 +1238,17 @@ export interface MarketApiInterface {
     ticker24hr(requestParameters?: Ticker24hrRequest): Promise<RestApiResponse<Ticker24hrResponse>>;
     /**
      * Best price/qty on the order book for a symbol or symbols.
-     * Weight: <table>
-     * <thead>
-     * <tr>
-     * <th>Parameter</th>
-     * <th>Symbols Provided</th>
-     * <th>Weight</th>
-     * </tr>
-     * </thead>
-     * <tbody>
-     * <tr>
-     * <td rowspan="2">symbol</td>
-     * <td>1</td>
-     * <td>2</td>
-     * </tr>
-     * <tr>
-     * <td>symbol parameter is omitted</td>
-     * <td>4</td>
-     * </tr>
-     * <tr>
-     * <td>symbols</td>
-     * <td>Any</td>
-     * <td>4</td>
-     * </tr>
-     * </tbody>
-     * </table>
+     *
+     * Weight: |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Symbol order book ticker
      * @param {TickerBookTickerRequest} requestParameters Request parameters.
@@ -1055,31 +1261,17 @@ export interface MarketApiInterface {
     ): Promise<RestApiResponse<TickerBookTickerResponse>>;
     /**
      * Latest price for a symbol or symbols.
-     * Weight: <table>
-     * <thead>
-     * <tr>
-     * <th>Parameter</th>
-     * <th>Symbols Provided</th>
-     * <th>Weight</th>
-     * </tr>
-     * </thead>
-     * <tbody>
-     * <tr>
-     * <td rowspan="2">symbol</td>
-     * <td>1</td>
-     * <td>2</td>
-     * </tr>
-     * <tr>
-     * <td>symbol parameter is omitted</td>
-     * <td>4</td>
-     * </tr>
-     * <tr>
-     * <td>symbols</td>
-     * <td>Any</td>
-     * <td>4</td>
-     * </tr>
-     * </tbody>
-     * </table>
+     *
+     * Weight: |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Symbol price ticker
      * @param {TickerPriceRequest} requestParameters Request parameters.
@@ -1092,7 +1284,18 @@ export interface MarketApiInterface {
     ): Promise<RestApiResponse<TickerPriceResponse>>;
     /**
      * Price change statistics for a trading day.
-     * Weight: 4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     *
+     * Weight: 4 for each requested symbol. The weight for this request will cap at 200 once the number of symbols in the request is more than 50.
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     **Notes:**:
+     * - Supported values for `timeZone`:
+     * - Hours and minutes (e.g. `-1:00`, `05:45`)
+     * - Only hours (e.g. `0`, `8`, `4`)
      *
      * @summary Trading Day Ticker
      * @param {TickerTradingDayRequest} requestParameters Request parameters.
@@ -1104,10 +1307,26 @@ export interface MarketApiInterface {
         requestParameters?: TickerTradingDayRequest
     ): Promise<RestApiResponse<TickerTradingDayResponse>>;
     /**
-     * The request is similar to klines having the same parameters and response.
+     * The request is similar to klines having the same parameters and
+     * response.
      *
-     * `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
-     * Weight: 2
+     * `uiKlines` return modified kline data, optimized for presentation of
+     * candlestick charts.
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * - Supported values for `timeZone`:
+     * - Hours and minutes (e.g. `-1:00`, `05:45`)
+     * - Only hours (e.g. `0`, `8`, `4`)
+     * - Accepted range is strictly [-12:00 to +14:00] inclusive
+     * - If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * - Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
      *
      * @summary UIKlines
      * @param {UiKlinesRequest} requestParameters Request parameters.
@@ -1152,7 +1371,7 @@ export interface AggTradesRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof MarketApiAggTrades
      */
@@ -1185,15 +1404,16 @@ export interface DepthRequest {
     readonly symbol: string;
 
     /**
-     * Default: 500; Maximum: 1000.
+     * If limit > 5000, only 5000 entries will be returned.
      * @type {number}
      * @memberof MarketApiDepth
      */
     readonly limit?: number;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`.
+     * A status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiDepth
      */
     readonly symbolStatus?: DepthSymbolStatusEnum;
@@ -1212,7 +1432,7 @@ export interface GetTradesRequest {
     readonly symbol: string;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof MarketApiGetTrades
      */
@@ -1259,14 +1479,14 @@ export interface HistoricalTradesRequest {
     readonly symbol: string;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof MarketApiHistoricalTrades
      */
     readonly limit?: number;
 
     /**
-     * ID to get aggregate trades from INCLUSIVE.
+     * TradeId to fetch from. Default gets most recent trades.
      * @type {number | bigint}
      * @memberof MarketApiHistoricalTrades
      */
@@ -1293,14 +1513,14 @@ export interface KlinesRequest {
     readonly interval: KlinesIntervalEnum;
 
     /**
-     * Timestamp in ms to get aggregate trades from INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof MarketApiKlines
      */
     readonly startTime?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades until INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof MarketApiKlines
      */
@@ -1314,7 +1534,7 @@ export interface KlinesRequest {
     readonly timeZone?: string;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof MarketApiKlines
      */
@@ -1347,8 +1567,8 @@ export interface ReferencePriceCalculationRequest {
     readonly symbol: string;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Supported values: `TRADING`, `HALT`, `BREAK`
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiReferencePriceCalculation
      */
     readonly symbolStatus?: ReferencePriceCalculationSymbolStatusEnum;
@@ -1360,22 +1580,26 @@ export interface ReferencePriceCalculationRequest {
  */
 export interface TickerRequest {
     /**
-     * Symbol to query
+     * Either `symbol` or `symbols` must be provided
      * @type {string}
      * @memberof MarketApiTicker
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Either `symbol` or `symbols` must be provided
+     *
+     * Examples of accepted format for the `symbols` parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
+     *
+     * The maximum number of symbols allowed in a request is 100.
      * @type {Array<string>}
      * @memberof MarketApiTicker
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
-     * @type {'1m' | '2m' | '3m' | '4m' | '5m' | '6m' | '7m' | '8m' | '9m' | '10m' | '11m' | '12m' | '13m' | '14m' | '15m' | '16m' | '17m' | '18m' | '19m' | '20m' | '21m' | '22m' | '23m' | '24m' | '25m' | '26m' | '27m' | '28m' | '29m' | '30m' | '31m' | '32m' | '33m' | '34m' | '35m' | '36m' | '37m' | '38m' | '39m' | '40m' | '41m' | '42m' | '43m' | '44m' | '45m' | '46m' | '47m' | '48m' | '49m' | '50m' | '51m' | '52m' | '53m' | '54m' | '55m' | '56m' | '57m' | '58m' | '59m' | '1h' | '2h' | '3h' | '4h' | '5h' | '6h' | '7h' | '8h' | '9h' | '10h' | '11h' | '12h' | '13h' | '14h' | '15h' | '16h' | '17h' | '18h' | '19h' | '20h' | '21h' | '22h' | '23h' | '1d' | '2d' | '3d' | '4d' | '5d' | '6d'}
+     * Units cannot be combined (e.g. `1d2h` is not allowed).
+     * @type {'1m' | '2m' | '3m' | '4m' | '5m' | '6m' | '7m' | '8m' | '9m' | '10m' | '11m' | '12m' | '13m' | '14m' | '15m' | '16m' | '17m' | '18m' | '19m' | '20m' | '21m' | '22m' | '23m' | '24m' | '25m' | '26m' | '27m' | '28m' | '29m' | '30m' | '31m' | '32m' | '33m' | '34m' | '35m' | '36m' | '37m' | '38m' | '39m' | '40m' | '41m' | '42m' | '43m' | '44m' | '45m' | '46m' | '47m' | '48m' | '49m' | '50m' | '51m' | '52m' | '53m' | '54m' | '55m' | '56m' | '57m' | '58m' | '59m' | '1h' | '2h' | '3h' | '4h' | '5h' | '6h' | '7h' | '8h' | '9h' | '10h' | '11h' | '12h' | '13h' | '14h' | '15h' | '16h' | '17h' | '18h' | '19h' | '20h' | '21h' | '22h' | '23h' | '1d' | '2d' | '3d' | '4d' | '5d' | '6d' | '7d'}
      * @memberof MarketApiTicker
      */
     readonly windowSize?: TickerWindowSizeEnum;
@@ -1389,7 +1613,7 @@ export interface TickerRequest {
 
     /**
      *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTicker
      */
     readonly symbolStatus?: TickerSymbolStatusEnum;
@@ -1401,14 +1625,18 @@ export interface TickerRequest {
  */
 export interface Ticker24hrRequest {
     /**
-     * Symbol to query
+     * Either `symbol` or `symbols` must be provided
      * @type {string}
      * @memberof MarketApiTicker24hr
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Either `symbol` or `symbols` must be provided
+     *
+     * Examples of accepted format for the `symbols` parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
+     *
+     * The maximum number of symbols allowed in a request is 100.
      * @type {Array<string>}
      * @memberof MarketApiTicker24hr
      */
@@ -1423,7 +1651,7 @@ export interface Ticker24hrRequest {
 
     /**
      *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTicker24hr
      */
     readonly symbolStatus?: Ticker24hrSymbolStatusEnum;
@@ -1435,22 +1663,27 @@ export interface Ticker24hrRequest {
  */
 export interface TickerBookTickerRequest {
     /**
-     * Symbol to query
+     * Parameter symbol and symbols cannot be used in combination.
+     * If neither parameter is sent, `bookTickers` for all symbols will be returned in an array.
      * @type {string}
      * @memberof MarketApiTickerBookTicker
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Parameter symbol and symbols cannot be used in combination.
+     * If neither parameter is sent, `bookTickers` for all symbols will be returned in an array.
+     * Examples of accepted format for the symbols parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
      * @type {Array<string>}
      * @memberof MarketApiTickerBookTicker
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`.
+     * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+     * For multiple or all symbols, non-matching ones are simply excluded from the response.
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTickerBookTicker
      */
     readonly symbolStatus?: TickerBookTickerSymbolStatusEnum;
@@ -1462,22 +1695,27 @@ export interface TickerBookTickerRequest {
  */
 export interface TickerPriceRequest {
     /**
-     * Symbol to query
+     * Parameter symbol and symbols cannot be used in combination.
+     * If neither parameter is sent, prices for all symbols will be returned in an array.
      * @type {string}
      * @memberof MarketApiTickerPrice
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Parameter symbol and symbols cannot be used in combination.
+     * If neither parameter is sent, prices for all symbols will be returned in an array.
+     * Examples of accepted format for the symbols parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D
      * @type {Array<string>}
      * @memberof MarketApiTickerPrice
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`.
+     * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+     * For multiple or all symbols, non-matching ones are simply excluded from the response.
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTickerPrice
      */
     readonly symbolStatus?: TickerPriceSymbolStatusEnum;
@@ -1489,14 +1727,16 @@ export interface TickerPriceRequest {
  */
 export interface TickerTradingDayRequest {
     /**
-     * Symbol to query
+     * Either `symbol` or `symbols` must be provided.
      * @type {string}
      * @memberof MarketApiTickerTradingDay
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Either `symbol` or `symbols` must be provided.
+     * Examples of accepted format for the `symbols` parameter: ["BTCUSDT","BNBUSDT"] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D.
+     * The maximum number of `symbols` allowed in a request is 100.
      * @type {Array<string>}
      * @memberof MarketApiTickerTradingDay
      */
@@ -1517,8 +1757,10 @@ export interface TickerTradingDayRequest {
     readonly type?: TickerTradingDayTypeEnum;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`.
+     * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
+     * For multiple symbols, non-matching ones are simply excluded from the response.
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof MarketApiTickerTradingDay
      */
     readonly symbolStatus?: TickerTradingDaySymbolStatusEnum;
@@ -1544,14 +1786,14 @@ export interface UiKlinesRequest {
     readonly interval: UiKlinesIntervalEnum;
 
     /**
-     * Timestamp in ms to get aggregate trades from INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof MarketApiUiKlines
      */
     readonly startTime?: number | bigint;
 
     /**
-     * Timestamp in ms to get aggregate trades until INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof MarketApiUiKlines
      */
@@ -1565,7 +1807,7 @@ export interface UiKlinesRequest {
     readonly timeZone?: string;
 
     /**
-     * Default: 500; Maximum: 1000.
+     *
      * @type {number}
      * @memberof MarketApiUiKlines
      */
@@ -1587,14 +1829,22 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Get compressed, aggregate trades. Trades that fill at the time, from the same taker order, with the same price will have the quantity aggregated.
-     * Weight: 4
+     *
+     * Weight(IP): 4
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
      *
      * @summary Compressed/Aggregate trades list
      * @param {AggTradesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AggTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#compressedaggregate-trades-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#agg-trades Binance API Documentation}
      */
     public async aggTrades(
         requestParameters: AggTradesRequest
@@ -1620,14 +1870,20 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Current average price for a symbol.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Current average price
      * @param {AvgPriceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AvgPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#current-average-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#avg-price Binance API Documentation}
      */
     public async avgPrice(
         requestParameters: AvgPriceRequest
@@ -1648,6 +1904,7 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
+     * Order book
      *
      * Weight: Adjusted based on the limit:
      *
@@ -1658,12 +1915,17 @@ export class MarketApi implements MarketApiInterface {
      * 501-1000| 50
      * 1001-5000| 250
      *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary Order book
      * @param {DepthRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepthResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#order-book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#depth Binance API Documentation}
      */
     public async depth(requestParameters: DepthRequest): Promise<RestApiResponse<DepthResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.depth(
@@ -1685,14 +1947,20 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Get recent trades.
-     * Weight: 25
+     *
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Recent trades list
      * @param {GetTradesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#recent-trades-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#get-trades Binance API Documentation}
      */
     public async getTrades(
         requestParameters: GetTradesRequest
@@ -1715,14 +1983,20 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Get block trades.
-     * Weight: 25
      *
-     * @summary Historical Block Trades
+     * Weight(IP): 25
+     *
+     * Security Type: MARKET_DATA
+     *
+     * Notes:
+     * - Data Source: Database
+     *
+     * @summary Historical Block Trades (MARKET_DATA)
      * @param {HistoricalBlockTradesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<HistoricalBlockTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#historical-block-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#historical-block-trades Binance API Documentation}
      */
     public async historicalBlockTrades(
         requestParameters: HistoricalBlockTradesRequest
@@ -1746,14 +2020,20 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Get older trades.
-     * Weight: 25
+     *
+     * Weight(IP): 25
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
      *
      * @summary Old trade lookup
      * @param {HistoricalTradesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<HistoricalTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#old-trade-lookup Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#historical-trades Binance API Documentation}
      */
     public async historicalTrades(
         requestParameters: HistoricalTradesRequest
@@ -1778,14 +2058,41 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Kline/candlestick bars for a symbol.
      * Klines are uniquely identified by their open time.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * Supported kline intervals (case-sensitive):
+     *
+     * Interval  | `interval` value
+     * --------- | ----------------
+     * seconds   | `1s`
+     * minutes   | `1m`, `3m`, `5m`, `15m`, `30m`
+     * hours     | `1h`, `2h`, `4h`, `6h`, `8h`, `12h`
+     * days      | `1d`, `3d`
+     * weeks     | `1w`
+     * months    | `1M`
+     *
+     **Notes:**
+     *
+     * If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * Supported values for `timeZone`:
+     * Hours and minutes (e.g. `-1:00`, `05:45`)
+     * Only hours (e.g. `0`, `8`, `4`)
+     * Accepted range is strictly [-12:00 to +14:00] inclusive
+     * If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
      *
      * @summary Kline/Candlestick data
      * @param {KlinesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<KlinesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#klinecandlestick-data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#klines Binance API Documentation}
      */
     public async klines(
         requestParameters: KlinesRequest
@@ -1811,15 +2118,21 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
+     * Query the reference price for a symbol.
      *
-     * Weight: 2
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ReferencePriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#reference-price Binance API Documentation}
      */
     public async referencePrice(
         requestParameters: ReferencePriceRequest
@@ -1841,14 +2154,20 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Describes how reference price is calculated for a given symbol.
-     * Weight: 2
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Query Reference Price Calculation
      * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ReferencePriceCalculationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price-calculation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#reference-price-calculation Binance API Documentation}
      */
     public async referencePriceCalculation(
         requestParameters: ReferencePriceCalculationRequest
@@ -1870,15 +2189,34 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
+     * **Note:** This endpoint differs from `GET /api/v3/ticker/24hr`.
      *
-     * Weight: 4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     * The statistical time range of this endpoint can be up to 59999ms longer
+     * than the requested `windowSize`.
+     *
+     * `openTime` starts at the beginning of a minute, while the end time is
+     * the current time. Therefore, the actual interval can be up to 59999ms
+     * longer than the requested window.
+     *
+     * For example, if `closeTime` is 1641287867099 (January 04, 2022
+     * 09:17:47:099 UTC) and `windowSize` is `1d`, then `openTime` is
+     * 1641201420000 (January 3, 2022, 09:17:00 UTC).
+     *
+     * Weight: 4 for each requested symbol regardless of windowSize.
+     *
+     * The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
      *
      * @summary Rolling window price change statistics
      * @param {TickerRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker Binance API Documentation}
      */
     public async ticker(
         requestParameters: TickerRequest = {}
@@ -1904,6 +2242,7 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * 24 hour rolling window price change statistics. **Careful** when accessing this with no symbol.
+     *
      * Weight: <table>
      * <thead>
      * <tr>
@@ -1942,12 +2281,17 @@ export class MarketApi implements MarketApiInterface {
      * </tbody>
      * </table>
      *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary 24hr ticker price change statistics
      * @param {Ticker24hrRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<Ticker24hrResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker24hr Binance API Documentation}
      */
     public async ticker24hr(
         requestParameters: Ticker24hrRequest = {}
@@ -1972,38 +2316,24 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Best price/qty on the order book for a symbol or symbols.
-     * Weight: <table>
-     * <thead>
-     * <tr>
-     * <th>Parameter</th>
-     * <th>Symbols Provided</th>
-     * <th>Weight</th>
-     * </tr>
-     * </thead>
-     * <tbody>
-     * <tr>
-     * <td rowspan="2">symbol</td>
-     * <td>1</td>
-     * <td>2</td>
-     * </tr>
-     * <tr>
-     * <td>symbol parameter is omitted</td>
-     * <td>4</td>
-     * </tr>
-     * <tr>
-     * <td>symbols</td>
-     * <td>Any</td>
-     * <td>4</td>
-     * </tr>
-     * </tbody>
-     * </table>
+     *
+     * Weight: |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Symbol order book ticker
      * @param {TickerBookTickerRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TickerBookTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker-book-ticker Binance API Documentation}
      */
     public async tickerBookTicker(
         requestParameters: TickerBookTickerRequest = {}
@@ -2027,38 +2357,24 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Latest price for a symbol or symbols.
-     * Weight: <table>
-     * <thead>
-     * <tr>
-     * <th>Parameter</th>
-     * <th>Symbols Provided</th>
-     * <th>Weight</th>
-     * </tr>
-     * </thead>
-     * <tbody>
-     * <tr>
-     * <td rowspan="2">symbol</td>
-     * <td>1</td>
-     * <td>2</td>
-     * </tr>
-     * <tr>
-     * <td>symbol parameter is omitted</td>
-     * <td>4</td>
-     * </tr>
-     * <tr>
-     * <td>symbols</td>
-     * <td>Any</td>
-     * <td>4</td>
-     * </tr>
-     * </tbody>
-     * </table>
+     *
+     * Weight: |Parameter|Symbols Provided|Weight|
+     * |---|---|---|
+     * |symbol| 1 |2|
+     * | |omitted| 4|
+     * |symbols| Any |4|
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Symbol price ticker
      * @param {TickerPriceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TickerPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker-price Binance API Documentation}
      */
     public async tickerPrice(
         requestParameters: TickerPriceRequest = {}
@@ -2082,14 +2398,25 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      * Price change statistics for a trading day.
-     * Weight: 4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+     *
+     * Weight: 4 for each requested symbol. The weight for this request will cap at 200 once the number of symbols in the request is more than 50.
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     **Notes:**:
+     * - Supported values for `timeZone`:
+     * - Hours and minutes (e.g. `-1:00`, `05:45`)
+     * - Only hours (e.g. `0`, `8`, `4`)
      *
      * @summary Trading Day Ticker
      * @param {TickerTradingDayRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TickerTradingDayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ticker-trading-day Binance API Documentation}
      */
     public async tickerTradingDay(
         requestParameters: TickerTradingDayRequest = {}
@@ -2114,17 +2441,33 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * The request is similar to klines having the same parameters and response.
+     * The request is similar to klines having the same parameters and
+     * response.
      *
-     * `uiKlines` return modified kline data, optimized for presentation of candlestick charts.
-     * Weight: 2
+     * `uiKlines` return modified kline data, optimized for presentation of
+     * candlestick charts.
+     *
+     * Weight(IP): 2
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Database
+     *
+     * - If `startTime` and `endTime` are not sent, the most recent klines are returned.
+     * - Supported values for `timeZone`:
+     * - Hours and minutes (e.g. `-1:00`, `05:45`)
+     * - Only hours (e.g. `0`, `8`, `4`)
+     * - Accepted range is strictly [-12:00 to +14:00] inclusive
+     * - If `timeZone` provided, kline intervals are interpreted in that timezone instead of UTC.
+     * - Note that `startTime` and `endTime` are always interpreted in UTC, regardless of `timeZone`.
      *
      * @summary UIKlines
      * @param {UiKlinesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UiKlinesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#uiklines Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#ui-klines Binance API Documentation}
      */
     public async uiKlines(
         requestParameters: UiKlinesRequest
@@ -2152,10 +2495,8 @@ export class MarketApi implements MarketApiInterface {
 
 export enum DepthSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum KlinesIntervalEnum {
@@ -2179,10 +2520,8 @@ export enum KlinesIntervalEnum {
 
 export enum ReferencePriceCalculationSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerWindowSizeEnum {
@@ -2274,6 +2613,7 @@ export enum TickerWindowSizeEnum {
     WINDOW_SIZE_4d = '4d',
     WINDOW_SIZE_5d = '5d',
     WINDOW_SIZE_6d = '6d',
+    WINDOW_SIZE_7d = '7d',
 }
 
 export enum TickerTypeEnum {
@@ -2283,10 +2623,8 @@ export enum TickerTypeEnum {
 
 export enum TickerSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum Ticker24hrTypeEnum {
@@ -2296,26 +2634,20 @@ export enum Ticker24hrTypeEnum {
 
 export enum Ticker24hrSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerBookTickerSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerPriceSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerTradingDayTypeEnum {
@@ -2325,10 +2657,8 @@ export enum TickerTradingDayTypeEnum {
 
 export enum TickerTradingDaySymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum UiKlinesIntervalEnum {

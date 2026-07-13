@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,37 +20,37 @@
  */
 export interface AvgPriceResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof AvgPriceResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof AvgPriceResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AvgPriceResponse
      */
     s?: string;
     /**
-     *
+     * Average price interval
      * @type {string}
      * @memberof AvgPriceResponse
      */
     i?: string;
     /**
-     *
+     * Average price
      * @type {string}
      * @memberof AvgPriceResponse
      */
     w?: string;
     /**
-     *
+     * Last trade time
      * @type {number | bigint}
      * @memberof AvgPriceResponse
      */

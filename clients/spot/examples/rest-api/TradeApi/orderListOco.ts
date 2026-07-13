@@ -12,7 +12,7 @@ async function orderListOco() {
         const response = await client.restAPI.orderListOco({
             symbol: 'BNBUSDT',
             side: SpotRestAPI.OrderListOcoSideEnum.BUY,
-            quantity: 1.0,
+            quantity: 1,
             aboveType: SpotRestAPI.OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
             belowType: SpotRestAPI.OrderListOcoBelowTypeEnum.STOP_LOSS,
         });

@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,139 +20,139 @@
  */
 export interface TickerResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof TickerResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof TickerResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TickerResponse
      */
     s?: string;
     /**
-     *
+     * Price change
      * @type {string}
      * @memberof TickerResponse
      */
     p?: string;
     /**
-     *
+     * Price change percent
      * @type {string}
      * @memberof TickerResponse
      */
     P?: string;
     /**
-     *
+     * Weighted average price
      * @type {string}
      * @memberof TickerResponse
      */
     w?: string;
     /**
-     *
+     * First trade(F)-1 price (first trade before the 24hr rolling window)
      * @type {string}
      * @memberof TickerResponse
      */
     x?: string;
     /**
-     *
+     * Last price
      * @type {string}
      * @memberof TickerResponse
      */
     c?: string;
     /**
-     *
+     * Last quantity
      * @type {string}
      * @memberof TickerResponse
      */
     Q?: string;
     /**
-     *
+     * Best bid price
      * @type {string}
      * @memberof TickerResponse
      */
     b?: string;
     /**
-     *
+     * Best bid quantity
      * @type {string}
      * @memberof TickerResponse
      */
     B?: string;
     /**
-     *
+     * Best ask price
      * @type {string}
      * @memberof TickerResponse
      */
     a?: string;
     /**
-     *
+     * Best ask quantity
      * @type {string}
      * @memberof TickerResponse
      */
     A?: string;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof TickerResponse
      */
     o?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof TickerResponse
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof TickerResponse
      */
     l?: string;
     /**
-     *
+     * Total traded base asset volume
      * @type {string}
      * @memberof TickerResponse
      */
     v?: string;
     /**
-     *
+     * Total traded quote asset volume
      * @type {string}
      * @memberof TickerResponse
      */
     q?: string;
     /**
-     *
+     * Statistics open time
      * @type {number | bigint}
      * @memberof TickerResponse
      */
     O?: number | bigint;
     /**
-     *
+     * Statistics close time
      * @type {number | bigint}
      * @memberof TickerResponse
      */
     C?: number | bigint;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
      * @memberof TickerResponse
      */
     F?: number | bigint;
     /**
-     *
+     * Last trade Id
      * @type {number | bigint}
      * @memberof TickerResponse
      */
     L?: number | bigint;
     /**
-     *
+     * Total number of trades
      * @type {number | bigint}
      * @memberof TickerResponse
      */

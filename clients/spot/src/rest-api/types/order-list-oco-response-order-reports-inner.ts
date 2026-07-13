@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -110,12 +105,6 @@ export interface OrderListOcoResponseOrderReportsInner {
     side?: string;
     /**
      *
-     * @type {string}
-     * @memberof OrderListOcoResponseOrderReportsInner
-     */
-    stopPrice?: string;
-    /**
-     *
      * @type {number | bigint}
      * @memberof OrderListOcoResponseOrderReportsInner
      */
@@ -125,11 +114,17 @@ export interface OrderListOcoResponseOrderReportsInner {
      * @type {string}
      * @memberof OrderListOcoResponseOrderReportsInner
      */
-    icebergQty?: string;
+    selfTradePreventionMode?: string;
     /**
      *
      * @type {string}
      * @memberof OrderListOcoResponseOrderReportsInner
      */
-    selfTradePreventionMode?: string;
+    stopPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderListOcoResponseOrderReportsInner
+     */
+    icebergQty?: string;
 }

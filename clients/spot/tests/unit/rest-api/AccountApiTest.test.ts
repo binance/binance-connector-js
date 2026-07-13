@@ -1,12 +1,7 @@
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -71,7 +66,7 @@ describe('AccountApi', () => {
     describe('accountCommission()', () => {
         it('should execute accountCommission() successfully with required parameters only', async () => {
             const params: AccountCommissionRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -120,7 +115,7 @@ describe('AccountApi', () => {
 
         it('should execute accountCommission() successfully with optional parameters', async () => {
             const params: AccountCommissionRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -169,7 +164,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: AccountCommissionRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -181,7 +176,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AccountCommissionRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -214,34 +209,8 @@ describe('AccountApi', () => {
                         orders: [
                             {
                                 symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3',
-                            },
-                            {
-                                symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB',
-                            },
-                        ],
-                    },
-                    {
-                        orderListId: 28,
-                        contingencyType: 'OCO',
-                        listStatusType: 'EXEC_STARTED',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                        transactionTime: 1565245913407,
-                        symbol: 'LTCBTC',
-                        orders: [
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 2,
-                                clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 3,
-                                clientOrderId: 'z0KCjOdditiLS5ekAFtK81',
                             },
                         ],
                     },
@@ -267,8 +236,8 @@ describe('AccountApi', () => {
                 fromId: 1,
                 startTime: 1735693200000,
                 endTime: 1735693200000,
-                limit: 500,
-                recvWindow: 5000.0,
+                limit: 1,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -284,34 +253,8 @@ describe('AccountApi', () => {
                         orders: [
                             {
                                 symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3',
-                            },
-                            {
-                                symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB',
-                            },
-                        ],
-                    },
-                    {
-                        orderListId: 28,
-                        contingencyType: 'OCO',
-                        listStatusType: 'EXEC_STARTED',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                        transactionTime: 1565245913407,
-                        symbol: 'LTCBTC',
-                        orders: [
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 2,
-                                clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 3,
-                                clientOrderId: 'z0KCjOdditiLS5ekAFtK81',
                             },
                         ],
                     },
@@ -351,7 +294,7 @@ describe('AccountApi', () => {
     describe('allOrders()', () => {
         it('should execute allOrders() successfully with required parameters only', async () => {
             const params: AllOrdersRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'LTCBTC',
             };
 
             mockResponse = JSONParse(
@@ -369,14 +312,27 @@ describe('AccountApi', () => {
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         side: 'BUY',
-                        stopPrice: '0.0',
-                        icebergQty: '0.0',
+                        stopPrice: '0.00000000',
+                        icebergQty: '0.00000000',
                         time: 1499827319559,
                         updateTime: 1499827319559,
                         isWorking: true,
                         origQuoteOrderQty: '0.000000',
                         workingTime: 1499827319559,
                         selfTradePreventionMode: 'NONE',
+                        preventedMatchId: 0,
+                        preventedQuantity: '1.200000',
+                        strategyId: 1,
+                        strategyType: 1000000,
+                        trailingDelta: 10,
+                        trailingTime: -1,
+                        usedSor: true,
+                        workingFloor: 'SOR',
+                        pegPriceType: 'PRIMARY_PEG',
+                        pegOffsetType: 'PRICE_LEVEL',
+                        pegOffsetValue: 5,
+                        peggedPrice: '87523.83710000',
+                        expiryReason: 'INSUFFICIENT_LIQUIDITY',
                     },
                 ])
             );
@@ -397,12 +353,12 @@ describe('AccountApi', () => {
 
         it('should execute allOrders() successfully with optional parameters', async () => {
             const params: AllOrdersRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'LTCBTC',
                 orderId: 1,
                 startTime: 1735693200000,
                 endTime: 1735693200000,
-                limit: 500,
-                recvWindow: 5000.0,
+                limit: 1,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -420,14 +376,27 @@ describe('AccountApi', () => {
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         side: 'BUY',
-                        stopPrice: '0.0',
-                        icebergQty: '0.0',
+                        stopPrice: '0.00000000',
+                        icebergQty: '0.00000000',
                         time: 1499827319559,
                         updateTime: 1499827319559,
                         isWorking: true,
                         origQuoteOrderQty: '0.000000',
                         workingTime: 1499827319559,
                         selfTradePreventionMode: 'NONE',
+                        preventedMatchId: 0,
+                        preventedQuantity: '1.200000',
+                        strategyId: 1,
+                        strategyType: 1000000,
+                        trailingDelta: 10,
+                        trailingTime: -1,
+                        usedSor: true,
+                        workingFloor: 'SOR',
+                        pegPriceType: 'PRIMARY_PEG',
+                        pegOffsetType: 'PRICE_LEVEL',
+                        pegOffsetValue: 5,
+                        peggedPrice: '87523.83710000',
+                        expiryReason: 'INSUFFICIENT_LIQUIDITY',
                     },
                 ])
             );
@@ -448,7 +417,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: AllOrdersRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'LTCBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -460,7 +429,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AllOrdersRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'LTCBTC',
             };
 
             const errorResponse = {
@@ -500,10 +469,7 @@ describe('AccountApi', () => {
                     preventSor: false,
                     updateTime: 123456789,
                     accountType: 'SPOT',
-                    balances: [
-                        { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
-                        { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
-                    ],
+                    balances: [{ asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' }],
                     permissions: ['SPOT'],
                     uid: 354937868,
                 })
@@ -526,7 +492,7 @@ describe('AccountApi', () => {
         it('should execute getAccount() successfully with optional parameters', async () => {
             const params: GetAccountRequest = {
                 omitZeroBalances: false,
-                recvWindow: 5000.0,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -549,10 +515,7 @@ describe('AccountApi', () => {
                     preventSor: false,
                     updateTime: 123456789,
                     accountType: 'SPOT',
-                    balances: [
-                        { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
-                        { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
-                    ],
+                    balances: [{ asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' }],
                     permissions: ['SPOT'],
                     uid: 354937868,
                 })
@@ -600,19 +563,32 @@ describe('AccountApi', () => {
                         price: '0.1',
                         origQty: '1.0',
                         executedQty: '0.0',
+                        origQuoteOrderQty: '0.000000',
                         cummulativeQuoteQty: '0.0',
                         status: 'NEW',
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         side: 'BUY',
-                        stopPrice: '0.0',
-                        icebergQty: '0.0',
+                        stopPrice: '0.00000000',
+                        icebergQty: '0.00000000',
                         time: 1499827319559,
                         updateTime: 1499827319559,
                         isWorking: true,
-                        origQuoteOrderQty: '0.000000',
                         workingTime: 1499827319559,
                         selfTradePreventionMode: 'NONE',
+                        preventedMatchId: 0,
+                        preventedQuantity: '1.200000',
+                        strategyId: 1,
+                        strategyType: 1000000,
+                        trailingDelta: 10,
+                        trailingTime: -1,
+                        usedSor: true,
+                        workingFloor: 'SOR',
+                        pegPriceType: 'PRIMARY_PEG',
+                        pegOffsetType: 'PRICE_LEVEL',
+                        pegOffsetValue: 5,
+                        peggedPrice: '87523.83710000',
+                        expiryReason: 'INSUFFICIENT_LIQUIDITY',
                     },
                 ])
             );
@@ -633,8 +609,8 @@ describe('AccountApi', () => {
 
         it('should execute getOpenOrders() successfully with optional parameters', async () => {
             const params: GetOpenOrdersRequest = {
-                symbol: 'BNBUSDT',
-                recvWindow: 5000.0,
+                symbol: 'LTCBTC',
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -647,19 +623,32 @@ describe('AccountApi', () => {
                         price: '0.1',
                         origQty: '1.0',
                         executedQty: '0.0',
+                        origQuoteOrderQty: '0.000000',
                         cummulativeQuoteQty: '0.0',
                         status: 'NEW',
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         side: 'BUY',
-                        stopPrice: '0.0',
-                        icebergQty: '0.0',
+                        stopPrice: '0.00000000',
+                        icebergQty: '0.00000000',
                         time: 1499827319559,
                         updateTime: 1499827319559,
                         isWorking: true,
-                        origQuoteOrderQty: '0.000000',
                         workingTime: 1499827319559,
                         selfTradePreventionMode: 'NONE',
+                        preventedMatchId: 0,
+                        preventedQuantity: '1.200000',
+                        strategyId: 1,
+                        strategyType: 1000000,
+                        trailingDelta: 10,
+                        trailingTime: -1,
+                        usedSor: true,
+                        workingFloor: 'SOR',
+                        pegPriceType: 'PRIMARY_PEG',
+                        pegOffsetType: 'PRICE_LEVEL',
+                        pegOffsetValue: 5,
+                        peggedPrice: '87523.83710000',
+                        expiryReason: 'INSUFFICIENT_LIQUIDITY',
                     },
                 ])
             );
@@ -697,7 +686,7 @@ describe('AccountApi', () => {
     describe('getOrder()', () => {
         it('should execute getOrder() successfully with required parameters only', async () => {
             const params: GetOrderRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'LTCBTC',
             };
 
             mockResponse = JSONParse(
@@ -709,19 +698,32 @@ describe('AccountApi', () => {
                     price: '0.1',
                     origQty: '1.0',
                     executedQty: '0.0',
+                    origQuoteOrderQty: '0.000000',
                     cummulativeQuoteQty: '0.0',
                     status: 'NEW',
                     timeInForce: 'GTC',
                     type: 'LIMIT',
                     side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
+                    stopPrice: '0.00000000',
+                    icebergQty: '0.00000000',
                     time: 1499827319559,
                     updateTime: 1499827319559,
                     isWorking: true,
                     workingTime: 1499827319559,
-                    origQuoteOrderQty: '0.000000',
                     selfTradePreventionMode: 'NONE',
+                    preventedMatchId: 0,
+                    preventedQuantity: '1.200000',
+                    strategyId: 1,
+                    strategyType: 1000000,
+                    trailingDelta: 10,
+                    trailingTime: -1,
+                    usedSor: true,
+                    workingFloor: 'SOR',
+                    pegPriceType: 'PRIMARY_PEG',
+                    pegOffsetType: 'PRICE_LEVEL',
+                    pegOffsetValue: 5,
+                    peggedPrice: '87523.83710000',
+                    expiryReason: 'INSUFFICIENT_LIQUIDITY',
                 })
             );
 
@@ -741,10 +743,10 @@ describe('AccountApi', () => {
 
         it('should execute getOrder() successfully with optional parameters', async () => {
             const params: GetOrderRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'LTCBTC',
                 orderId: 1,
-                origClientOrderId: 'origClientOrderId_example',
-                recvWindow: 5000.0,
+                origClientOrderId: 'myOrder1',
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -756,19 +758,32 @@ describe('AccountApi', () => {
                     price: '0.1',
                     origQty: '1.0',
                     executedQty: '0.0',
+                    origQuoteOrderQty: '0.000000',
                     cummulativeQuoteQty: '0.0',
                     status: 'NEW',
                     timeInForce: 'GTC',
                     type: 'LIMIT',
                     side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
+                    stopPrice: '0.00000000',
+                    icebergQty: '0.00000000',
                     time: 1499827319559,
                     updateTime: 1499827319559,
                     isWorking: true,
                     workingTime: 1499827319559,
-                    origQuoteOrderQty: '0.000000',
                     selfTradePreventionMode: 'NONE',
+                    preventedMatchId: 0,
+                    preventedQuantity: '1.200000',
+                    strategyId: 1,
+                    strategyType: 1000000,
+                    trailingDelta: 10,
+                    trailingTime: -1,
+                    usedSor: true,
+                    workingFloor: 'SOR',
+                    pegPriceType: 'PRIMARY_PEG',
+                    pegOffsetType: 'PRICE_LEVEL',
+                    pegOffsetValue: 5,
+                    peggedPrice: '87523.83710000',
+                    expiryReason: 'INSUFFICIENT_LIQUIDITY',
                 })
             );
 
@@ -788,7 +803,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: GetOrderRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'LTCBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -800,7 +815,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetOrderRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'LTCBTC',
             };
 
             const errorResponse = {
@@ -830,7 +845,6 @@ describe('AccountApi', () => {
                     transactionTime: 1565245656253,
                     symbol: 'LTCBTC',
                     orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
                         { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
                     ],
                 })
@@ -852,9 +866,9 @@ describe('AccountApi', () => {
 
         it('should execute getOrderList() successfully with optional parameters', async () => {
             const params: GetOrderListRequest = {
-                orderListId: 1,
-                origClientOrderId: 'origClientOrderId_example',
-                recvWindow: 5000.0,
+                orderListId: 27,
+                origClientOrderId: '1',
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -867,7 +881,6 @@ describe('AccountApi', () => {
                     transactionTime: 1565245656253,
                     symbol: 'LTCBTC',
                     orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
                         { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
                     ],
                 })
@@ -906,7 +919,7 @@ describe('AccountApi', () => {
     describe('myAllocations()', () => {
         it('should execute myAllocations() successfully with required parameters only', async () => {
             const params: MyAllocationsRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -946,13 +959,13 @@ describe('AccountApi', () => {
 
         it('should execute myAllocations() successfully with optional parameters', async () => {
             const params: MyAllocationsRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
                 startTime: 1735693200000,
                 endTime: 1735693200000,
-                fromAllocationId: 1,
-                limit: 500,
+                fromAllocationId: 0,
+                limit: 1,
                 orderId: 1,
-                recvWindow: 5000.0,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -992,7 +1005,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MyAllocationsRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1004,7 +1017,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MyAllocationsRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -1033,9 +1046,22 @@ describe('AccountApi', () => {
                     exchangeFilters: [
                         { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
                     ],
-                    symbolFilters: [{ filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 }],
+                    symbolFilters: [
+                        {
+                            filterType: 'PRICE_FILTER',
+                            priceExponent: 8,
+                            minPrice: '0.00000100',
+                            maxPrice: '100000.00000000',
+                            tickSize: '0.00000100',
+                        },
+                    ],
                     assetFilters: [
-                        { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
+                        {
+                            filterType: 'MAX_ASSET',
+                            qtyExponent: 8,
+                            limit: '100.00000000',
+                            asset: 'BNB',
+                        },
                     ],
                     rateLimits: [
                         {
@@ -1043,13 +1069,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                        },
-                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                        {
-                            rateLimitType: 'RAW_REQUESTS',
-                            interval: 'MINUTE',
-                            intervalNum: 5,
-                            limit: 61000,
+                            count: 321,
                         },
                     ],
                 })
@@ -1072,7 +1092,7 @@ describe('AccountApi', () => {
         it('should execute myFilters() successfully with optional parameters', async () => {
             const params: MyFiltersRequest = {
                 symbol: 'BNBUSDT',
-                recvWindow: 5000.0,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -1080,9 +1100,22 @@ describe('AccountApi', () => {
                     exchangeFilters: [
                         { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
                     ],
-                    symbolFilters: [{ filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 }],
+                    symbolFilters: [
+                        {
+                            filterType: 'PRICE_FILTER',
+                            priceExponent: 8,
+                            minPrice: '0.00000100',
+                            maxPrice: '100000.00000000',
+                            tickSize: '0.00000100',
+                        },
+                    ],
                     assetFilters: [
-                        { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
+                        {
+                            filterType: 'MAX_ASSET',
+                            qtyExponent: 8,
+                            limit: '100.00000000',
+                            asset: 'BNB',
+                        },
                     ],
                     rateLimits: [
                         {
@@ -1090,13 +1123,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                        },
-                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                        {
-                            rateLimitType: 'RAW_REQUESTS',
-                            interval: 'MINUTE',
-                            intervalNum: 5,
-                            limit: 61000,
+                            count: 321,
                         },
                     ],
                 })
@@ -1151,7 +1178,7 @@ describe('AccountApi', () => {
     describe('myPreventedMatches()', () => {
         it('should execute myPreventedMatches() successfully with required parameters only', async () => {
             const params: MyPreventedMatchesRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -1187,12 +1214,12 @@ describe('AccountApi', () => {
 
         it('should execute myPreventedMatches() successfully with optional parameters', async () => {
             const params: MyPreventedMatchesRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
                 preventedMatchId: 1,
                 orderId: 1,
                 fromPreventedMatchId: 1,
-                limit: 500,
-                recvWindow: 5000.0,
+                limit: 1,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -1228,7 +1255,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MyPreventedMatchesRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1240,7 +1267,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MyPreventedMatchesRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -1261,7 +1288,7 @@ describe('AccountApi', () => {
     describe('myTrades()', () => {
         it('should execute myTrades() successfully with required parameters only', async () => {
             const params: MyTradesRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BNBBTC',
             };
 
             mockResponse = JSONParse(
@@ -1300,13 +1327,13 @@ describe('AccountApi', () => {
 
         it('should execute myTrades() successfully with optional parameters', async () => {
             const params: MyTradesRequest = {
-                symbol: 'BNBUSDT',
-                orderId: 1,
+                symbol: 'BNBBTC',
+                orderId: 100234,
                 startTime: 1735693200000,
                 endTime: 1735693200000,
                 fromId: 1,
-                limit: 500,
-                recvWindow: 5000.0,
+                limit: 1,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -1345,7 +1372,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MyTradesRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BNBBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1357,7 +1384,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MyTradesRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'BNBBTC',
             };
 
             const errorResponse = {
@@ -1390,11 +1417,6 @@ describe('AccountApi', () => {
                         orders: [
                             {
                                 symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
-                            },
-                            {
-                                symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
                             },
@@ -1419,7 +1441,7 @@ describe('AccountApi', () => {
 
         it('should execute openOrderList() successfully with optional parameters', async () => {
             const params: OpenOrderListRequest = {
-                recvWindow: 5000.0,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -1433,11 +1455,6 @@ describe('AccountApi', () => {
                         transactionTime: 1565246080644,
                         symbol: 'LTCBTC',
                         orders: [
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
-                            },
                             {
                                 symbol: 'LTCBTC',
                                 orderId: 4,
@@ -1481,8 +1498,8 @@ describe('AccountApi', () => {
     describe('orderAmendments()', () => {
         it('should execute orderAmendments() successfully with required parameters only', async () => {
             const params: OrderAmendmentsRequest = {
-                symbol: 'BNBUSDT',
-                orderId: 1,
+                symbol: 'BTCUSDT',
+                orderId: 9,
             };
 
             mockResponse = JSONParse(
@@ -1496,16 +1513,6 @@ describe('AccountApi', () => {
                         origQty: '5.00000000',
                         newQty: '4.00000000',
                         time: 1741669661670,
-                    },
-                    {
-                        symbol: 'BTCUDST',
-                        orderId: 9,
-                        executionId: 25,
-                        origClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
-                        newClientOrderId: '5uS0r35ohuQyDlCzZuYXq2',
-                        origQty: '4.00000000',
-                        newQty: '3.00000000',
-                        time: 1741672924895,
                     },
                 ])
             );
@@ -1526,11 +1533,11 @@ describe('AccountApi', () => {
 
         it('should execute orderAmendments() successfully with optional parameters', async () => {
             const params: OrderAmendmentsRequest = {
-                symbol: 'BNBUSDT',
-                orderId: 1,
-                fromExecutionId: 1,
-                limit: 500,
-                recvWindow: 5000.0,
+                symbol: 'BTCUSDT',
+                orderId: 9,
+                fromExecutionId: 22,
+                limit: 1,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -1544,16 +1551,6 @@ describe('AccountApi', () => {
                         origQty: '5.00000000',
                         newQty: '4.00000000',
                         time: 1741669661670,
-                    },
-                    {
-                        symbol: 'BTCUDST',
-                        orderId: 9,
-                        executionId: 25,
-                        origClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
-                        newClientOrderId: '5uS0r35ohuQyDlCzZuYXq2',
-                        origQty: '4.00000000',
-                        newQty: '3.00000000',
-                        time: 1741672924895,
                     },
                 ])
             );
@@ -1574,8 +1571,8 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderAmendmentsRequest = {
-                symbol: 'BNBUSDT',
-                orderId: 1,
+                symbol: 'BTCUSDT',
+                orderId: 9,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1587,8 +1584,8 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when orderId is missing', async () => {
             const _params: OrderAmendmentsRequest = {
-                symbol: 'BNBUSDT',
-                orderId: 1,
+                symbol: 'BTCUSDT',
+                orderId: 9,
             };
             const params = Object.assign({ ..._params });
             delete params?.orderId;
@@ -1600,8 +1597,8 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: OrderAmendmentsRequest = {
-                symbol: 'BNBUSDT',
-                orderId: 1,
+                symbol: 'BTCUSDT',
+                orderId: 9,
             };
 
             const errorResponse = {
@@ -1630,13 +1627,6 @@ describe('AccountApi', () => {
                         limit: 50,
                         count: 0,
                     },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 160000,
-                        count: 0,
-                    },
                 ])
             );
 
@@ -1656,7 +1646,7 @@ describe('AccountApi', () => {
 
         it('should execute rateLimitOrder() successfully with optional parameters', async () => {
             const params: RateLimitOrderRequest = {
-                recvWindow: 5000.0,
+                recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
@@ -1666,13 +1656,6 @@ describe('AccountApi', () => {
                         interval: 'SECOND',
                         intervalNum: 10,
                         limit: 50,
-                        count: 0,
-                    },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 160000,
                         count: 0,
                     },
                 ])

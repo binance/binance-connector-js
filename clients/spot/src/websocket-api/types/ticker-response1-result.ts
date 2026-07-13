@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,19 +26,19 @@ export interface TickerResponse1Result {
      */
     symbol?: string;
     /**
-     *
+     * Absolute price change
      * @type {string}
      * @memberof TickerResponse1Result
      */
     priceChange?: string;
     /**
-     *
+     * Relative price change in percent
      * @type {string}
      * @memberof TickerResponse1Result
      */
     priceChangePercent?: string;
     /**
-     *
+     * QuoteVolume / Volume
      * @type {string}
      * @memberof TickerResponse1Result
      */
@@ -79,25 +74,25 @@ export interface TickerResponse1Result {
      */
     volume?: string;
     /**
-     *
+     * Sum of (price * volume) for all trades
      * @type {string}
      * @memberof TickerResponse1Result
      */
     quoteVolume?: string;
     /**
-     *
+     * Open time for ticker window
      * @type {number | bigint}
      * @memberof TickerResponse1Result
      */
     openTime?: number | bigint;
     /**
-     *
+     * Close time for ticker window
      * @type {number | bigint}
      * @memberof TickerResponse1Result
      */
     closeTime?: number | bigint;
     /**
-     *
+     * Trade IDs
      * @type {number | bigint}
      * @memberof TickerResponse1Result
      */
@@ -109,7 +104,7 @@ export interface TickerResponse1Result {
      */
     lastId?: number | bigint;
     /**
-     *
+     * Number of trades in the interval
      * @type {number | bigint}
      * @memberof TickerResponse1Result
      */

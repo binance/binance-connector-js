@@ -10,8 +10,8 @@ const client = new Spot({ configurationRestAPI });
 async function orderAmendments() {
     try {
         const response = await client.restAPI.orderAmendments({
-            symbol: 'BNBUSDT',
-            orderId: 1,
+            symbol: 'BTCUSDT',
+            orderId: 9,
         });
 
         const rateLimits = response.rateLimits!;

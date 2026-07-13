@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,49 +20,49 @@
  */
 export interface TradesAggregateResponseResultInner {
     /**
-     *
+     * Aggregate tradeId
      * @type {number | bigint}
      * @memberof TradesAggregateResponseResultInner
      */
     a?: number | bigint;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof TradesAggregateResponseResultInner
      */
     p?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof TradesAggregateResponseResultInner
      */
     q?: string;
     /**
-     *
+     * First tradeId
      * @type {number | bigint}
      * @memberof TradesAggregateResponseResultInner
      */
     f?: number | bigint;
     /**
-     *
+     * Last tradeId
      * @type {number | bigint}
      * @memberof TradesAggregateResponseResultInner
      */
     l?: number | bigint;
     /**
-     *
+     * Timestamp
      * @type {number | bigint}
      * @memberof TradesAggregateResponseResultInner
      */
     T?: number | bigint;
     /**
-     *
+     * Was the buyer the maker?
      * @type {boolean}
      * @memberof TradesAggregateResponseResultInner
      */
     m?: boolean;
     /**
-     *
+     * Was the trade the best price match?
      * @type {boolean}
      * @memberof TradesAggregateResponseResultInner
      */

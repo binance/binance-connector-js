@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -19,109 +14,109 @@
  */
 
 /**
- *
+ * Kline payload
  * @export
  * @interface KlineResponseK
  */
 export interface KlineResponseK {
     /**
-     *
+     * Kline start time
      * @type {number | bigint}
      * @memberof KlineResponseK
      */
     t?: number | bigint;
     /**
-     *
+     * Kline close time
      * @type {number | bigint}
      * @memberof KlineResponseK
      */
     T?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof KlineResponseK
      */
     s?: string;
     /**
-     *
+     * Interval
      * @type {string}
      * @memberof KlineResponseK
      */
     i?: string;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
      * @memberof KlineResponseK
      */
     f?: number | bigint;
     /**
-     *
+     * Last trade ID
      * @type {number | bigint}
      * @memberof KlineResponseK
      */
     L?: number | bigint;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof KlineResponseK
      */
     o?: string;
     /**
-     *
+     * Close price
      * @type {string}
      * @memberof KlineResponseK
      */
     c?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof KlineResponseK
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof KlineResponseK
      */
     l?: string;
     /**
-     *
+     * Base asset volume
      * @type {string}
      * @memberof KlineResponseK
      */
     v?: string;
     /**
-     *
+     * Number of trades
      * @type {number | bigint}
      * @memberof KlineResponseK
      */
     n?: number | bigint;
     /**
-     *
+     * Is this kline closed?
      * @type {boolean}
      * @memberof KlineResponseK
      */
     x?: boolean;
     /**
-     *
+     * Quote asset volume
      * @type {string}
      * @memberof KlineResponseK
      */
     q?: string;
     /**
-     *
+     * Taker buy base asset volume
      * @type {string}
      * @memberof KlineResponseK
      */
     V?: string;
     /**
-     *
+     * Taker buy quote asset volume
      * @type {string}
      * @memberof KlineResponseK
      */
     Q?: string;
     /**
-     *
+     * Ignore
      * @type {string}
      * @memberof KlineResponseK
      */

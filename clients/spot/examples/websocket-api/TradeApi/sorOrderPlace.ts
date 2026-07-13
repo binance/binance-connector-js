@@ -17,7 +17,7 @@ async function sorOrderPlace() {
             symbol: 'BNBUSDT',
             side: SpotWebsocketAPI.SorOrderPlaceSideEnum.BUY,
             type: SpotWebsocketAPI.SorOrderPlaceTypeEnum.MARKET,
-            quantity: 1.0,
+            quantity: 1,
         });
 
         const rateLimits = response.rateLimits!;

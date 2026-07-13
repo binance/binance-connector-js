@@ -15,7 +15,7 @@ async function orderAmendKeepPriority() {
 
         const response = await connection.orderAmendKeepPriority({
             symbol: 'BNBUSDT',
-            newQty: 1.0,
+            newQty: 1,
         });
 
         const rateLimits = response.rateLimits!;

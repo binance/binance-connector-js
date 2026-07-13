@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -22,9 +17,6 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OrderTestResponseResultDiscount } from './order-test-response-result-discount';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderTestResponseResultSpecialCommissionForOrder } from './order-test-response-result-special-commission-for-order';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OrderTestResponseResultStandardCommissionForOrder } from './order-test-response-result-standard-commission-for-order';
@@ -43,10 +35,10 @@ export interface OrderTestResponseResult {
     standardCommissionForOrder?: OrderTestResponseResultStandardCommissionForOrder;
     /**
      *
-     * @type {OrderTestResponseResultSpecialCommissionForOrder}
+     * @type {OrderTestResponseResultStandardCommissionForOrder}
      * @memberof OrderTestResponseResult
      */
-    specialCommissionForOrder?: OrderTestResponseResultSpecialCommissionForOrder;
+    specialCommissionForOrder?: OrderTestResponseResultStandardCommissionForOrder;
     /**
      *
      * @type {OrderTestResponseResultStandardCommissionForOrder}

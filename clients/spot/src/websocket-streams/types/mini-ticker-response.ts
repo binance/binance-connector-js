@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,55 +20,55 @@
  */
 export interface MiniTickerResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof MiniTickerResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof MiniTickerResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MiniTickerResponse
      */
     s?: string;
     /**
-     *
+     * Close price
      * @type {string}
      * @memberof MiniTickerResponse
      */
     c?: string;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof MiniTickerResponse
      */
     o?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof MiniTickerResponse
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof MiniTickerResponse
      */
     l?: string;
     /**
-     *
+     * Total traded base asset volume
      * @type {string}
      * @memberof MiniTickerResponse
      */
     v?: string;
     /**
-     *
+     * Total traded quote asset volume
      * @type {string}
      * @memberof MiniTickerResponse
      */

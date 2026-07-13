@@ -2,14 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,6 +20,9 @@ import type { OrderTestResponseDiscount } from './order-test-response-discount';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OrderTestResponseStandardCommissionForOrder } from './order-test-response-standard-commission-for-order';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderTestResponseTaxCommissionForOrder } from './order-test-response-tax-commission-for-order';
 
 /**
  *
@@ -40,10 +38,10 @@ export interface SorOrderTestResponse {
     standardCommissionForOrder?: OrderTestResponseStandardCommissionForOrder;
     /**
      *
-     * @type {OrderTestResponseStandardCommissionForOrder}
+     * @type {OrderTestResponseTaxCommissionForOrder}
      * @memberof SorOrderTestResponse
      */
-    taxCommissionForOrder?: OrderTestResponseStandardCommissionForOrder;
+    taxCommissionForOrder?: OrderTestResponseTaxCommissionForOrder;
     /**
      *
      * @type {OrderTestResponseDiscount}

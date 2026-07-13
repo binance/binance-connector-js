@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Spot WebSocket API
+ * Spot WebSocket API
  *
- * OpenAPI Specifications for the Binance Spot WebSocket API
- *
- * API documents:
- * - [Github web-socket-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md)
- * - [General API information for web-socket-api on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -112,12 +107,6 @@ describe('AccountApi', () => {
                             buyer: '0.03000000',
                             seller: '0.04000000',
                         },
-                        taxCommission: {
-                            maker: '0.00000112',
-                            taker: '0.00000114',
-                            buyer: '0.00000118',
-                            seller: '0.00000116',
-                        },
                         discount: {
                             enabledForAccount: true,
                             enabledForSymbol: true,
@@ -131,7 +120,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 20,
+                            count: 321,
                         },
                     ],
                 })
@@ -301,13 +290,6 @@ describe('AccountApi', () => {
                     result: [
                         {
                             rateLimitType: 'ORDERS',
-                            interval: 'DAY',
-                            intervalNum: 1,
-                            limit: 160000,
-                            count: 0,
-                        },
-                        {
-                            rateLimitType: 'ORDERS',
                             interval: 'SECOND',
                             intervalNum: 10,
                             limit: 50,
@@ -320,7 +302,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 40,
+                            count: 321,
                         },
                     ],
                 })
@@ -481,22 +463,12 @@ describe('AccountApi', () => {
                         canTrade: true,
                         canWithdraw: true,
                         canDeposit: true,
-                        commissionRates: {
-                            maker: '0.00150000',
-                            taker: '0.00150000',
-                            buyer: '0.00000000',
-                            seller: '0.00000000',
-                        },
                         brokered: false,
                         requireSelfTradePrevention: false,
                         preventSor: false,
                         updateTime: 1660801833000,
                         accountType: 'SPOT',
-                        balances: [
-                            { asset: 'USDT', free: '1021.21000000', locked: '0.00000000' },
-                            { asset: 'BTC', free: '1.3447112', locked: '0.08600000' },
-                            { asset: 'BNB', free: '0.00000000', locked: '0.00000000' },
-                        ],
+                        balances: [{ asset: 'BNB' }],
                         permissions: ['SPOT'],
                         uid: 354937868,
                     },
@@ -506,7 +478,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 20,
+                            count: 321,
                         },
                     ],
                 })
@@ -671,11 +643,6 @@ describe('AccountApi', () => {
                             orders: [
                                 {
                                     symbol: 'BTCUSDT',
-                                    orderId: 12569138902,
-                                    clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
-                                },
-                                {
-                                    symbol: 'BTCUSDT',
                                     orderId: 12569138901,
                                     clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
                                 },
@@ -688,7 +655,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 20,
+                            count: 321,
                         },
                     ],
                 })
@@ -847,24 +814,29 @@ describe('AccountApi', () => {
                             orderId: 12569099453,
                             orderListId: -1,
                             clientOrderId: '4d96324ff9d44481926157',
-                            price: '23416.10000000',
-                            origQty: '0.00847000',
-                            executedQty: '0.00847000',
-                            cummulativeQuoteQty: '198.33521500',
                             status: 'FILLED',
                             timeInForce: 'GTC',
                             type: 'LIMIT',
                             side: 'SELL',
-                            stopPrice: '0.00000000',
-                            icebergQty: '0.00000000',
                             time: 1660801715639,
                             updateTime: 1660801717945,
                             isWorking: true,
                             workingTime: 1660801715639,
-                            origQuoteOrderQty: '0.00000000',
                             selfTradePreventionMode: 'NONE',
                             preventedMatchId: 0,
-                            preventedQuantity: '1.200000',
+                            icebergQty: '0.00000000',
+                            stopPrice: '0.00000000',
+                            strategyId: 1,
+                            strategyType: 1000000,
+                            trailingDelta: 10,
+                            trailingTime: -1,
+                            usedSor: true,
+                            workingFloor: 'SOR',
+                            pegPriceType: 'PRIMARY_PEG',
+                            pegOffsetType: 'PRICE_LEVEL',
+                            pegOffsetValue: 5,
+                            peggedPrice: '87523.83710000',
+                            expiryReason: 'INSUFFICIENT_LIQUIDITY',
                         },
                     ],
                     rateLimits: [
@@ -873,7 +845,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 20,
+                            count: 321,
                         },
                     ],
                 })
@@ -1046,10 +1018,6 @@ describe('AccountApi', () => {
                             allocationType: 'SOR',
                             orderId: 500,
                             orderListId: -1,
-                            price: '1.00000000',
-                            qty: '0.10000000',
-                            quoteQty: '0.10000000',
-                            commission: '0.00000000',
                             commissionAsset: 'BTC',
                             time: 1687319487614,
                             isBuyer: false,
@@ -1063,7 +1031,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 20,
+                            count: 321,
                         },
                     ],
                 })
@@ -1227,34 +1195,38 @@ describe('AccountApi', () => {
         it('should execute myFilters() successfully', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
-                    id: '1758009606869',
                     status: 200,
                     result: {
                         exchangeFilters: [
                             { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
                         ],
                         symbolFilters: [
-                            { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                            {
+                                filterType: 'PRICE_FILTER',
+                                priceExponent: 8,
+                                minPrice: '0.00000100',
+                                maxPrice: '100000.00000000',
+                                tickSize: '0.00000100',
+                            },
                         ],
                         assetFilters: [
-                            { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
+                            {
+                                filterType: 'MAX_ASSET',
+                                qtyExponent: 8,
+                                limit: '1000000.00000000',
+                                asset: 'JPY',
+                            },
+                        ],
+                        rateLimits: [
+                            {
+                                rateLimitType: 'REQUEST_WEIGHT',
+                                interval: 'MINUTE',
+                                intervalNum: 1,
+                                limit: 6000,
+                                count: 321,
+                            },
                         ],
                     },
-                    rateLimits: [
-                        {
-                            rateLimitType: 'REQUEST_WEIGHT',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 6000,
-                        },
-                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                        {
-                            rateLimitType: 'RAW_REQUESTS',
-                            interval: 'MINUTE',
-                            intervalNum: 5,
-                            limit: 61000,
-                        },
-                    ],
                 })
             );
             mockResponse.id = randomString();
@@ -1427,8 +1399,6 @@ describe('AccountApi', () => {
                             makerOrderId: 3,
                             tradeGroupId: 1,
                             selfTradePreventionMode: 'EXPIRE_MAKER',
-                            price: '1.100000',
-                            makerPreventedQuantity: '1.300000',
                             transactTime: 1669101687094,
                         },
                     ],
@@ -1438,7 +1408,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 20,
+                            count: 321,
                         },
                     ],
                 })
@@ -1608,28 +1578,9 @@ describe('AccountApi', () => {
                     result: [
                         {
                             symbol: 'BTCUSDT',
-                            id: 1650422482,
-                            orderId: 12569099453,
-                            orderListId: -1,
-                            price: '23416.50000000',
-                            qty: '0.00212000',
-                            quoteQty: '49.64298000',
-                            commission: '0.00000000',
-                            commissionAsset: 'BNB',
-                            time: 1660801715793,
-                            isBuyer: false,
-                            isMaker: true,
-                            isBestMatch: true,
-                        },
-                        {
-                            symbol: 'BTCUSDT',
                             id: 1650422481,
                             orderId: 12569099453,
                             orderListId: -1,
-                            price: '23416.10000000',
-                            qty: '0.00635000',
-                            quoteQty: '148.69223500',
-                            commission: '0.00000000',
                             commissionAsset: 'BNB',
                             time: 1660801715793,
                             isBuyer: false,
@@ -1643,7 +1594,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 20,
+                            count: 321,
                         },
                     ],
                 })
@@ -1821,11 +1772,6 @@ describe('AccountApi', () => {
                             orders: [
                                 {
                                     symbol: 'BTCUSDT',
-                                    orderId: 5,
-                                    clientOrderId: '1ZqG7bBuYwaF4SU8CwnwHm',
-                                },
-                                {
-                                    symbol: 'BTCUSDT',
                                     orderId: 4,
                                     clientOrderId: 'CUhLgTXnX5n2c0gWiLpV4d',
                                 },
@@ -1838,7 +1784,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 6,
+                            count: 321,
                         },
                     ],
                 })
@@ -1997,22 +1943,30 @@ describe('AccountApi', () => {
                             orderId: 12569099453,
                             orderListId: -1,
                             clientOrderId: '4d96324ff9d44481926157',
-                            price: '23416.10000000',
-                            origQty: '0.00847000',
-                            executedQty: '0.00720000',
-                            origQuoteOrderQty: '0.00000000',
-                            cummulativeQuoteQty: '172.43931000',
                             status: 'PARTIALLY_FILLED',
                             timeInForce: 'GTC',
                             type: 'LIMIT',
                             side: 'SELL',
-                            stopPrice: '0.00000000',
-                            icebergQty: '0.00000000',
                             time: 1660801715639,
                             updateTime: 1660801717945,
                             isWorking: true,
                             workingTime: 1660801715639,
                             selfTradePreventionMode: 'NONE',
+                            icebergQty: '0.00000000',
+                            preventedMatchId: 0,
+                            preventedQuantity: '1.200000',
+                            stopPrice: '0.00000000',
+                            strategyId: 1,
+                            strategyType: 1000000,
+                            trailingDelta: 10,
+                            trailingTime: -1,
+                            usedSor: true,
+                            workingFloor: 'SOR',
+                            pegPriceType: 'PRIMARY_PEG',
+                            pegOffsetType: 'PRICE_LEVEL',
+                            pegOffsetValue: 5,
+                            peggedPrice: '87523.83710000',
+                            expiryReason: 'INSUFFICIENT_LIQUIDITY',
                         },
                     ],
                     rateLimits: [
@@ -2021,7 +1975,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 6,
+                            count: 321,
                         },
                     ],
                 })
@@ -2181,8 +2135,6 @@ describe('AccountApi', () => {
                             executionId: 60,
                             origClientOrderId: 'my_pending_order',
                             newClientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
-                            origQty: '7.00000000',
-                            newQty: '5.00000000',
                             time: 1741924229819,
                         },
                     ],
@@ -2192,7 +2144,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 4,
+                            count: 321,
                         },
                     ],
                 })
@@ -2372,11 +2324,6 @@ describe('AccountApi', () => {
                         orders: [
                             {
                                 symbol: 'BTCUSDT',
-                                orderId: 12569138902,
-                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
                                 orderId: 12569138901,
                                 clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
                             },
@@ -2388,7 +2335,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 4,
+                            count: 321,
                         },
                     ],
                 })
@@ -2546,28 +2493,27 @@ describe('AccountApi', () => {
                         orderId: 12569099453,
                         orderListId: -1,
                         clientOrderId: '4d96324ff9d44481926157',
-                        price: '23416.10000000',
-                        origQty: '0.00847000',
-                        executedQty: '0.00847000',
-                        cummulativeQuoteQty: '198.33521500',
                         status: 'FILLED',
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         side: 'SELL',
-                        stopPrice: '0.00000000',
                         trailingDelta: 10,
                         trailingTime: -1,
-                        icebergQty: '0.00000000',
                         time: 1660801715639,
                         updateTime: 1660801717945,
                         isWorking: true,
                         workingTime: 1660801715639,
-                        origQuoteOrderQty: '0.00000000',
                         strategyId: 37463720,
                         strategyType: 1000000,
                         selfTradePreventionMode: 'NONE',
                         preventedMatchId: 0,
-                        preventedQuantity: '1.200000',
+                        usedSor: true,
+                        workingFloor: 'SOR',
+                        pegPriceType: 'PRIMARY_PEG',
+                        pegOffsetType: 'PRICE_LEVEL',
+                        pegOffsetValue: 5,
+                        peggedPrice: '87523.83710000',
+                        expiryReason: 'INSUFFICIENT_LIQUIDITY',
                     },
                     rateLimits: [
                         {
@@ -2575,7 +2521,7 @@ describe('AccountApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 4,
+                            count: 321,
                         },
                     ],
                 })

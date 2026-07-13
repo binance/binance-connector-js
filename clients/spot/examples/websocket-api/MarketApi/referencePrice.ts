@@ -14,7 +14,7 @@ async function referencePrice() {
         connection = await client.websocketAPI.connect();
 
         const response = await connection.referencePrice({
-            symbol: 'BNBUSDT',
+            symbol: 'BAZUSD',
         });
 
         const rateLimits = response.rateLimits!;

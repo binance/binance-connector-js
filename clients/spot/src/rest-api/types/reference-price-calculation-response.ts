@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,25 +26,25 @@ export interface ReferencePriceCalculationResponse {
      */
     symbol?: string;
     /**
-     *
+     * Either `ARITHMETIC_MEAN` or `EXTERNAL`.
      * @type {string}
      * @memberof ReferencePriceCalculationResponse
      */
     calculationType?: string;
     /**
-     *
+     * Present when calculationType is ARITHMETIC_MEAN.
      * @type {number | bigint}
      * @memberof ReferencePriceCalculationResponse
      */
     bucketCount?: number | bigint;
     /**
-     *
+     * Present when calculationType is ARITHMETIC_MEAN.
      * @type {number | bigint}
      * @memberof ReferencePriceCalculationResponse
      */
     bucketWidthMs?: number | bigint;
     /**
-     *
+     * Present when calculationType is EXTERNAL.
      * @type {number | bigint}
      * @memberof ReferencePriceCalculationResponse
      */

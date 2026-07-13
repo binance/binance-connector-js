@@ -16,7 +16,7 @@ async function orderListPlaceOco() {
         const response = await connection.orderListPlaceOco({
             symbol: 'BNBUSDT',
             side: SpotWebsocketAPI.OrderListPlaceOcoSideEnum.BUY,
-            quantity: 1.0,
+            quantity: 1,
             aboveType: SpotWebsocketAPI.OrderListPlaceOcoAboveTypeEnum.STOP_LOSS_LIMIT,
             belowType: SpotWebsocketAPI.OrderListPlaceOcoBelowTypeEnum.STOP_LOSS,
         });

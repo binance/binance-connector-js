@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,49 +20,49 @@
  */
 export interface AggTradesResponseInner {
     /**
-     *
+     * Aggregate tradeId
      * @type {number | bigint}
      * @memberof AggTradesResponseInner
      */
     a?: number | bigint;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof AggTradesResponseInner
      */
     p?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof AggTradesResponseInner
      */
     q?: string;
     /**
-     *
+     * First tradeId
      * @type {number | bigint}
      * @memberof AggTradesResponseInner
      */
     f?: number | bigint;
     /**
-     *
+     * Last tradeId
      * @type {number | bigint}
      * @memberof AggTradesResponseInner
      */
     l?: number | bigint;
     /**
-     *
+     * Timestamp
      * @type {number | bigint}
      * @memberof AggTradesResponseInner
      */
     T?: number | bigint;
     /**
-     *
+     * Was the buyer the maker?
      * @type {boolean}
      * @memberof AggTradesResponseInner
      */
     m?: boolean;
     /**
-     *
+     * Was the trade the best price match?
      * @type {boolean}
      * @memberof AggTradesResponseInner
      */

@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot WebSocket Streams
+ * Spot WebSocket Market Streams
  *
- * OpenAPI Specifications for the Binance Spot WebSocket Streams
- *
- * API documents:
- * - [Github web-socket-streams documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-streams.md)
- * - [General API information for web-socket-streams on website](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,103 +20,103 @@
  */
 export interface RollingWindowTickerResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     s?: string;
     /**
-     *
+     * Price change
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     p?: string;
     /**
-     *
+     * Price change percent
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     P?: string;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     o?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     l?: string;
     /**
-     *
+     * Last price
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     c?: string;
     /**
-     *
+     * Weighted average price
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     w?: string;
     /**
-     *
+     * Total traded base asset volume
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     v?: string;
     /**
-     *
+     * Total traded quote asset volume
      * @type {string}
      * @memberof RollingWindowTickerResponse
      */
     q?: string;
     /**
-     *
+     * Statistics open time
      * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
     O?: number | bigint;
     /**
-     *
+     * Statistics close time
      * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
     C?: number | bigint;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
     F?: number | bigint;
     /**
-     *
+     * Last trade Id
      * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
     L?: number | bigint;
     /**
-     *
+     * Total number of trades
      * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */

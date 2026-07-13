@@ -1,12 +1,7 @@
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -32,21 +26,44 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
     return {
         /**
          * Current exchange trading rules and symbol information
-         * Weight: 20
+         *
+         * Weight(IP): 20
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
+         *
+         **Notes:**
+         * If the value provided to `symbol` or `symbols` do not exist, the endpoint will throw an error saying the symbol is invalid.
+         * All parameters are optional.
+         * `permissions` can support single or multiple values (e.g. `SPOT`, `["MARGIN","LEVERAGED"]`). This cannot be used in combination with `symbol` or `symbols`.
+         * If `permissions` parameter not provided, all symbols that have either `SPOT`, `MARGIN`, or `LEVERAGED` permission will be exposed.
+         * To display symbols with any permission you need to specify them explicitly in `permissions`: (e.g. `["SPOT","MARGIN",...]`.). See Account and Symbol Permissions for the full list.
+         *
+         **Examples of Symbol Permissions Interpretation from the Response:**
+         *
+         * `[["A","B"]]` means you may place an order if your account has either permission "A" **or** permission "B".
+         * `[["A"],["B"]]` means you can place an order if your account has permission "A" **and** permission "B".
+         * `[["A"],["B","C"]]` means you can place an order if your account has permission "A" **and** permission "B" or permission "C". (Inclusive or is applied here, not exclusive or, so your account may have both permission "B" and permission "C".)
          *
          * @summary Exchange information
-         * @param {string} [symbol] Symbol to query
-         * @param {Array<string>} [symbols] List of symbols to query
-         * @param {Array<string>} [permissions] List of permissions to query
-         * @param {boolean} [showPermissionSets] Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`
-         * @param {ExchangeInfoSymbolStatusEnum} [symbolStatus]
+         * @param {string} [symbol] Example: curl -X GET "https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC"
+         * @param {Array<string>} [symbols] Examples: curl -X GET "https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D" or curl -g -X GET 'https://api.binance.com/api/v3/exchangeInfo?symbols=["BTCUSDT","BNBBTC"]'
+         * @param {Array<ExchangeInfoPermissionsEnum>} [permissions] Examples: curl -X GET "https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT"
+         *
+         * curl -X GET "https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D"
+         * or
+         * curl -g -X GET 'https://api.binance.com/api/v3/exchangeInfo?permissions=["MARGIN","LEVERAGED"]'
+         * @param {boolean} [showPermissionSets] Controls whether the content of the `permissionSets` field is populated or not.
+         * @param {ExchangeInfoSymbolStatusEnum} [symbolStatus] Filters for symbols that have this `tradingStatus`. Cannot be used in combination with `symbols` or `symbol`.
          *
          * @throws {RequiredError}
          */
         exchangeInfo: async (
             symbol?: string,
             symbols?: Array<string>,
-            permissions?: Array<string>,
+            permissions?: Array<ExchangeInfoPermissionsEnum>,
             showPermissionSets?: boolean,
             symbolStatus?: ExchangeInfoSymbolStatusEnum
         ): Promise<RequestArgs> => {
@@ -83,18 +100,26 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         * Query execution rules for symbols.
          *
-         * Weight: Parameter | Weight|
-         * ---        | ---
-         * `symbol`  | 2
-         * `symbols` | 2 for each `symbol`, capped at a max of 40|
-         * `symbolStatus` |40|
-         * None            |40|
+         * Weight: Parameter | Weight
+         * --- | ---
+         * `symbol` | 2
+         * `symbols` | 2 for each `symbol`, capped at a max of 40
+         * `symbolStatus` | 40
+         * None | 40
+         *
+         * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
+         *
+         **Note:**: No combination of multiple parameters is allowed.
          *
          * @summary Query Execution Rules
-         * @param {string} [symbol] Symbol to query
-         * @param {Array<string>} [symbols] List of symbols to query
-         * @param {ExecutionRulesSymbolStatusEnum} [symbolStatus]
+         * @param {string} [symbol] Query for specified symbol.
+         * @param {Array<string>} [symbols] Query for multiple symbols.
+         * @param {ExecutionRulesSymbolStatusEnum} [symbolStatus] Query for all symbols with the specified status.
          *
          * @throws {RequiredError}
          */
@@ -131,7 +156,10 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Test connectivity to the Rest API.
-         * Weight: 1
+         *
+         * Weight(IP): 1
+         *
+         * Security Type: NONE
          *
          * @summary Test connectivity
          *
@@ -156,7 +184,10 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Test connectivity to the Rest API and get the current server time.
-         * Weight: 1
+         *
+         * Weight(IP): 1
+         *
+         * Security Type: NONE
          *
          * @summary Check server time
          *
@@ -189,7 +220,26 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 export interface GeneralApiInterface {
     /**
      * Current exchange trading rules and symbol information
-     * Weight: 20
+     *
+     * Weight(IP): 20
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Notes:**
+     * If the value provided to `symbol` or `symbols` do not exist, the endpoint will throw an error saying the symbol is invalid.
+     * All parameters are optional.
+     * `permissions` can support single or multiple values (e.g. `SPOT`, `["MARGIN","LEVERAGED"]`). This cannot be used in combination with `symbol` or `symbols`.
+     * If `permissions` parameter not provided, all symbols that have either `SPOT`, `MARGIN`, or `LEVERAGED` permission will be exposed.
+     * To display symbols with any permission you need to specify them explicitly in `permissions`: (e.g. `["SPOT","MARGIN",...]`.). See Account and Symbol Permissions for the full list.
+     *
+     **Examples of Symbol Permissions Interpretation from the Response:**
+     *
+     * `[["A","B"]]` means you may place an order if your account has either permission "A" **or** permission "B".
+     * `[["A"],["B"]]` means you can place an order if your account has permission "A" **and** permission "B".
+     * `[["A"],["B","C"]]` means you can place an order if your account has permission "A" **and** permission "B" or permission "C". (Inclusive or is applied here, not exclusive or, so your account may have both permission "B" and permission "C".)
      *
      * @summary Exchange information
      * @param {ExchangeInfoRequest} requestParameters Request parameters.
@@ -201,13 +251,21 @@ export interface GeneralApiInterface {
         requestParameters?: ExchangeInfoRequest
     ): Promise<RestApiResponse<ExchangeInfoResponse>>;
     /**
+     * Query execution rules for symbols.
      *
-     * Weight: Parameter | Weight|
-     * ---        | ---
-     * `symbol`  | 2
-     * `symbols` | 2 for each `symbol`, capped at a max of 40|
-     * `symbolStatus` |40|
-     * None            |40|
+     * Weight: Parameter | Weight
+     * --- | ---
+     * `symbol` | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40
+     * `symbolStatus` | 40
+     * None | 40
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Note:**: No combination of multiple parameters is allowed.
      *
      * @summary Query Execution Rules
      * @param {ExecutionRulesRequest} requestParameters Request parameters.
@@ -220,7 +278,10 @@ export interface GeneralApiInterface {
     ): Promise<RestApiResponse<ExecutionRulesResponse>>;
     /**
      * Test connectivity to the Rest API.
-     * Weight: 1
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
      *
      * @summary Test connectivity
      *
@@ -230,7 +291,10 @@ export interface GeneralApiInterface {
     ping(): Promise<RestApiResponse<void>>;
     /**
      * Test connectivity to the Rest API and get the current server time.
-     * Weight: 1
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
      *
      * @summary Check server time
      *
@@ -246,36 +310,40 @@ export interface GeneralApiInterface {
  */
 export interface ExchangeInfoRequest {
     /**
-     * Symbol to query
+     * Example: curl -X GET "https://api.binance.com/api/v3/exchangeInfo?symbol=BNBBTC"
      * @type {string}
      * @memberof GeneralApiExchangeInfo
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Examples: curl -X GET "https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D" or curl -g -X GET 'https://api.binance.com/api/v3/exchangeInfo?symbols=["BTCUSDT","BNBBTC"]'
      * @type {Array<string>}
      * @memberof GeneralApiExchangeInfo
      */
     readonly symbols?: Array<string>;
 
     /**
-     * List of permissions to query
-     * @type {Array<string>}
+     * Examples: curl -X GET "https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT"
+     *
+     * curl -X GET "https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D"
+     * or
+     * curl -g -X GET 'https://api.binance.com/api/v3/exchangeInfo?permissions=["MARGIN","LEVERAGED"]'
+     * @type {Array<'SPOT' | 'MARGIN' | 'LEVERAGED' | 'TRD_GRP_002' | 'TRD_GRP_003' | 'TRD_GRP_004' | 'TRD_GRP_005' | 'TRD_GRP_006' | 'TRD_GRP_007' | 'TRD_GRP_008' | 'TRD_GRP_009' | 'TRD_GRP_010' | 'TRD_GRP_011' | 'TRD_GRP_012' | 'TRD_GRP_013' | 'TRD_GRP_014' | 'TRD_GRP_015' | 'TRD_GRP_016' | 'TRD_GRP_017' | 'TRD_GRP_018' | 'TRD_GRP_019' | 'TRD_GRP_020' | 'TRD_GRP_021' | 'TRD_GRP_022' | 'TRD_GRP_023' | 'TRD_GRP_024' | 'TRD_GRP_025'>}
      * @memberof GeneralApiExchangeInfo
      */
-    readonly permissions?: Array<string>;
+    readonly permissions?: Array<ExchangeInfoPermissionsEnum>;
 
     /**
-     * Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`
+     * Controls whether the content of the `permissionSets` field is populated or not.
      * @type {boolean}
      * @memberof GeneralApiExchangeInfo
      */
     readonly showPermissionSets?: boolean;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Filters for symbols that have this `tradingStatus`. Cannot be used in combination with `symbols` or `symbol`.
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof GeneralApiExchangeInfo
      */
     readonly symbolStatus?: ExchangeInfoSymbolStatusEnum;
@@ -287,22 +355,22 @@ export interface ExchangeInfoRequest {
  */
 export interface ExecutionRulesRequest {
     /**
-     * Symbol to query
+     * Query for specified symbol.
      * @type {string}
      * @memberof GeneralApiExecutionRules
      */
     readonly symbol?: string;
 
     /**
-     * List of symbols to query
+     * Query for multiple symbols.
      * @type {Array<string>}
      * @memberof GeneralApiExecutionRules
      */
     readonly symbols?: Array<string>;
 
     /**
-     *
-     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * Query for all symbols with the specified status.
+     * @type {'TRADING' | 'HALT' | 'BREAK'}
      * @memberof GeneralApiExecutionRules
      */
     readonly symbolStatus?: ExecutionRulesSymbolStatusEnum;
@@ -323,14 +391,33 @@ export class GeneralApi implements GeneralApiInterface {
 
     /**
      * Current exchange trading rules and symbol information
-     * Weight: 20
+     *
+     * Weight(IP): 20
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Notes:**
+     * If the value provided to `symbol` or `symbols` do not exist, the endpoint will throw an error saying the symbol is invalid.
+     * All parameters are optional.
+     * `permissions` can support single or multiple values (e.g. `SPOT`, `["MARGIN","LEVERAGED"]`). This cannot be used in combination with `symbol` or `symbols`.
+     * If `permissions` parameter not provided, all symbols that have either `SPOT`, `MARGIN`, or `LEVERAGED` permission will be exposed.
+     * To display symbols with any permission you need to specify them explicitly in `permissions`: (e.g. `["SPOT","MARGIN",...]`.). See Account and Symbol Permissions for the full list.
+     *
+     **Examples of Symbol Permissions Interpretation from the Response:**
+     *
+     * `[["A","B"]]` means you may place an order if your account has either permission "A" **or** permission "B".
+     * `[["A"],["B"]]` means you can place an order if your account has permission "A" **and** permission "B".
+     * `[["A"],["B","C"]]` means you can place an order if your account has permission "A" **and** permission "B" or permission "C". (Inclusive or is applied here, not exclusive or, so your account may have both permission "B" and permission "C".)
      *
      * @summary Exchange information
      * @param {ExchangeInfoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ExchangeInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/general#exchange-info Binance API Documentation}
      */
     public async exchangeInfo(
         requestParameters: ExchangeInfoRequest = {}
@@ -355,20 +442,28 @@ export class GeneralApi implements GeneralApiInterface {
     }
 
     /**
+     * Query execution rules for symbols.
      *
-     * Weight: Parameter | Weight|
-     * ---        | ---
-     * `symbol`  | 2
-     * `symbols` | 2 for each `symbol`, capped at a max of 40|
-     * `symbolStatus` |40|
-     * None            |40|
+     * Weight: Parameter | Weight
+     * --- | ---
+     * `symbol` | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40
+     * `symbolStatus` | 40
+     * None | 40
+     *
+     * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
+     *
+     **Note:**: No combination of multiple parameters is allowed.
      *
      * @summary Query Execution Rules
      * @param {ExecutionRulesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ExecutionRulesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#query-execution-rules Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/general#execution-rules Binance API Documentation}
      */
     public async executionRules(
         requestParameters: ExecutionRulesRequest = {}
@@ -392,13 +487,16 @@ export class GeneralApi implements GeneralApiInterface {
 
     /**
      * Test connectivity to the Rest API.
-     * Weight: 1
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
      *
      * @summary Test connectivity
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/general#ping Binance API Documentation}
      */
     public async ping(): Promise<RestApiResponse<void>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.ping();
@@ -416,13 +514,16 @@ export class GeneralApi implements GeneralApiInterface {
 
     /**
      * Test connectivity to the Rest API and get the current server time.
-     * Weight: 1
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: NONE
      *
      * @summary Check server time
      * @returns {Promise<RestApiResponse<TimeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#check-server-time Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/general#time Binance API Documentation}
      */
     public async time(): Promise<RestApiResponse<TimeResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.time();
@@ -439,18 +540,44 @@ export class GeneralApi implements GeneralApiInterface {
     }
 }
 
+export enum ExchangeInfoPermissionsEnum {
+    SPOT = 'SPOT',
+    MARGIN = 'MARGIN',
+    LEVERAGED = 'LEVERAGED',
+    TRD_GRP_002 = 'TRD_GRP_002',
+    TRD_GRP_003 = 'TRD_GRP_003',
+    TRD_GRP_004 = 'TRD_GRP_004',
+    TRD_GRP_005 = 'TRD_GRP_005',
+    TRD_GRP_006 = 'TRD_GRP_006',
+    TRD_GRP_007 = 'TRD_GRP_007',
+    TRD_GRP_008 = 'TRD_GRP_008',
+    TRD_GRP_009 = 'TRD_GRP_009',
+    TRD_GRP_010 = 'TRD_GRP_010',
+    TRD_GRP_011 = 'TRD_GRP_011',
+    TRD_GRP_012 = 'TRD_GRP_012',
+    TRD_GRP_013 = 'TRD_GRP_013',
+    TRD_GRP_014 = 'TRD_GRP_014',
+    TRD_GRP_015 = 'TRD_GRP_015',
+    TRD_GRP_016 = 'TRD_GRP_016',
+    TRD_GRP_017 = 'TRD_GRP_017',
+    TRD_GRP_018 = 'TRD_GRP_018',
+    TRD_GRP_019 = 'TRD_GRP_019',
+    TRD_GRP_020 = 'TRD_GRP_020',
+    TRD_GRP_021 = 'TRD_GRP_021',
+    TRD_GRP_022 = 'TRD_GRP_022',
+    TRD_GRP_023 = 'TRD_GRP_023',
+    TRD_GRP_024 = 'TRD_GRP_024',
+    TRD_GRP_025 = 'TRD_GRP_025',
+}
+
 export enum ExchangeInfoSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum ExecutionRulesSymbolStatusEnum {
     TRADING = 'TRADING',
-    END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',
     BREAK = 'BREAK',
-    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }

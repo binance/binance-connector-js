@@ -1,14 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Spot REST API
+ * Spot REST API
  *
- * OpenAPI Specifications for the Binance Spot REST API
- *
- * API documents:
- * - [Github rest-api documentation file](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md)
- * - [General API information for rest-api on website](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information)
- *
+ * Access market data, manage accounts, and trade on Binance Spot.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,19 +26,19 @@ export interface TickerTradingDayResponse1 {
      */
     symbol?: string;
     /**
-     *
+     * Absolute price change
      * @type {string}
      * @memberof TickerTradingDayResponse1
      */
     priceChange?: string;
     /**
-     *
+     * Relative price change in percent
      * @type {string}
      * @memberof TickerTradingDayResponse1
      */
     priceChangePercent?: string;
     /**
-     *
+     * quoteVolume / volume
      * @type {string}
      * @memberof TickerTradingDayResponse1
      */
@@ -73,13 +68,13 @@ export interface TickerTradingDayResponse1 {
      */
     lastPrice?: string;
     /**
-     *
+     * Volume in base asset
      * @type {string}
      * @memberof TickerTradingDayResponse1
      */
     volume?: string;
     /**
-     *
+     * Volume in quote asset
      * @type {string}
      * @memberof TickerTradingDayResponse1
      */
@@ -97,19 +92,19 @@ export interface TickerTradingDayResponse1 {
      */
     closeTime?: number | bigint;
     /**
-     *
+     * Trade ID of the first trade in the interval
      * @type {number | bigint}
      * @memberof TickerTradingDayResponse1
      */
     firstId?: number | bigint;
     /**
-     *
+     * Trade ID of the last trade in the interval
      * @type {number | bigint}
      * @memberof TickerTradingDayResponse1
      */
     lastId?: number | bigint;
     /**
-     *
+     * Number of trades in the interval
      * @type {number | bigint}
      * @memberof TickerTradingDayResponse1
      */
