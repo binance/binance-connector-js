@@ -1,6 +1,12 @@
 # Changelog
 
-## 2.4.2 - 2026-06-xx
+## 2.4.3 - 2026-07-13
+
+### Added (1)
+
+- Added `ALPHA_WS_STREAMS_PROD_URL` constant for Alpha WebSocket Streams production URL.
+
+## 2.4.2 - 2026-06-25
 
 ### Added (1)
 
