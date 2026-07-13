@@ -30,4 +30,3 @@ export * from './request-for-miner-list-response-data';
 export * from './request-for-miner-list-response-data-worker-datas-inner';
 export * from './statistic-list-response';
 export * from './statistic-list-response-data';
-export * from './statistic-list-response-data-profit-today';

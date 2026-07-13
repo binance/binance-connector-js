@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface AcquiringCoinnameResponseDataInner {
     /**
-     *
+     * Currency name
      * @type {string}
      * @memberof AcquiringCoinnameResponseDataInner
      */
     coinName?: string;
     /**
-     *
+     * ID
      * @type {number | bigint}
      * @memberof AcquiringCoinnameResponseDataInner
      */
     coinId?: number | bigint;
     /**
-     *
+     * Sort
      * @type {number | bigint}
      * @memberof AcquiringCoinnameResponseDataInner
      */
     poolIndex?: number | bigint;
     /**
-     *
+     * Algorithm
      * @type {number | bigint}
      * @memberof AcquiringCoinnameResponseDataInner
      */
     algoId?: number | bigint;
     /**
-     *
+     * Name of algorithm
      * @type {string}
      * @memberof AcquiringCoinnameResponseDataInner
      */

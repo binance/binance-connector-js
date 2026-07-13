@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,55 +20,55 @@
  */
 export interface HashrateResaleListResponseDataConfigDetailsInner {
     /**
-     *
+     * Configuration ID
      * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     configId?: number | bigint;
     /**
-     *
+     * Transfer-out sub-account
      * @type {string}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     poolUsername?: string;
     /**
-     *
+     * Transfer-in sub-account
      * @type {string}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     toPoolUsername?: string;
     /**
-     *
+     * Transfer algorithm name
      * @type {string}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     algoName?: string;
     /**
-     *
+     * Transferred hashrate
      * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     hashRate?: number | bigint;
     /**
-     *
+     * Start date
      * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     startDay?: number | bigint;
     /**
-     *
+     * End date
      * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     endDay?: number | bigint;
     /**
-     *
+     * Status: 0 Processing, 1 Cancelled, 2 Terminated
      * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     status?: number | bigint;
     /**
-     *
+     * Type: 0 Hashrate transfer record, 1 Hashrate receive record
      * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */

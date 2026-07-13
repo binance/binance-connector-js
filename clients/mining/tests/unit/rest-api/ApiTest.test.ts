@@ -1,7 +1,7 @@
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { MiningApi } from '../../../src/rest-api';
+import { Api } from '../../../src/rest-api';
 import {
     AccountListRequest,
     CancelHashrateResaleConfigurationRequest,
@@ -45,8 +45,8 @@ import type {
     StatisticListResponse,
 } from '../../../src/rest-api/types';
 
-describe('MiningApi', () => {
-    let client: MiningApi;
+describe('Api', () => {
+    let client: Api;
     let config: ConfigurationRestAPI;
     let mockResponse: object = {};
 
@@ -56,14 +56,14 @@ describe('MiningApi', () => {
             apiSecret: 'test-api-secret',
             basePath: '',
         });
-        client = new MiningApi(config);
+        client = new Api(config);
     });
 
     describe('accountList()', () => {
         it('should execute accountList() successfully with required parameters only', async () => {
             const params: AccountListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             mockResponse = JSONParse(
@@ -77,27 +77,6 @@ describe('MiningApi', () => {
                             list: [
                                 {
                                     time: 1585267200000,
-                                    hashrate: '0.00000000',
-                                    reject: '0.00000000',
-                                },
-                                {
-                                    time: 1585353600000,
-                                    hashrate: '0.00000000',
-                                    reject: '0.00000000',
-                                },
-                            ],
-                        },
-                        {
-                            type: 'D_hashrate',
-                            userName: 'test',
-                            list: [
-                                {
-                                    time: 1587906000000,
-                                    hashrate: '0.00000000',
-                                    reject: '0.00000000',
-                                },
-                                {
-                                    time: 1587909600000,
                                     hashrate: '0.00000000',
                                     reject: '0.00000000',
                                 },
@@ -123,8 +102,8 @@ describe('MiningApi', () => {
 
         it('should execute accountList() successfully with optional parameters', async () => {
             const params: AccountListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
                 recvWindow: 5000,
             };
 
@@ -139,27 +118,6 @@ describe('MiningApi', () => {
                             list: [
                                 {
                                     time: 1585267200000,
-                                    hashrate: '0.00000000',
-                                    reject: '0.00000000',
-                                },
-                                {
-                                    time: 1585353600000,
-                                    hashrate: '0.00000000',
-                                    reject: '0.00000000',
-                                },
-                            ],
-                        },
-                        {
-                            type: 'D_hashrate',
-                            userName: 'test',
-                            list: [
-                                {
-                                    time: 1587906000000,
-                                    hashrate: '0.00000000',
-                                    reject: '0.00000000',
-                                },
-                                {
-                                    time: 1587909600000,
                                     hashrate: '0.00000000',
                                     reject: '0.00000000',
                                 },
@@ -185,8 +143,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when algo is missing', async () => {
             const _params: AccountListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.algo;
@@ -198,8 +156,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when userName is missing', async () => {
             const _params: AccountListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.userName;
@@ -211,8 +169,8 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: AccountListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             const errorResponse = {
@@ -236,7 +194,7 @@ describe('MiningApi', () => {
                 JSONStringify({
                     code: 0,
                     msg: '',
-                    data: [{ algoName: 'sha256', algoId: 1, poolIndex: 0, unit: 'h/s' }],
+                    data: [{ algoName: 'SHA256-BTC', algoId: 1, poolIndex: 100, unit: 'h/s' }],
                 })
             );
 
@@ -277,7 +235,13 @@ describe('MiningApi', () => {
                     code: 0,
                     msg: '',
                     data: [
-                        { coinName: 'BTC', coinId: 1, poolIndex: 0, algoId: 1, algoName: 'sha256' },
+                        {
+                            coinName: 'BTC',
+                            coinId: 1,
+                            poolIndex: 0,
+                            algoId: 1,
+                            algoName: 'SHA256-BTC',
+                        },
                     ],
                 })
             );
@@ -315,8 +279,8 @@ describe('MiningApi', () => {
     describe('cancelHashrateResaleConfiguration()', () => {
         it('should execute cancelHashrateResaleConfiguration() successfully with required parameters only', async () => {
             const params: CancelHashrateResaleConfigurationRequest = {
-                configId: 1,
-                userName: 'userName_example',
+                configId: 168,
+                userName: 'test',
             };
 
             mockResponse = JSONParse(JSONStringify({ code: 0, msg: '', data: true }));
@@ -337,8 +301,8 @@ describe('MiningApi', () => {
 
         it('should execute cancelHashrateResaleConfiguration() successfully with optional parameters', async () => {
             const params: CancelHashrateResaleConfigurationRequest = {
-                configId: 1,
-                userName: 'userName_example',
+                configId: 168,
+                userName: 'test',
                 recvWindow: 5000,
             };
 
@@ -360,8 +324,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when configId is missing', async () => {
             const _params: CancelHashrateResaleConfigurationRequest = {
-                configId: 1,
-                userName: 'userName_example',
+                configId: 168,
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.configId;
@@ -373,8 +337,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when userName is missing', async () => {
             const _params: CancelHashrateResaleConfigurationRequest = {
-                configId: 1,
-                userName: 'userName_example',
+                configId: 168,
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.userName;
@@ -386,8 +350,8 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelHashrateResaleConfigurationRequest = {
-                configId: 1,
-                userName: 'userName_example',
+                configId: 168,
+                userName: 'test',
             };
 
             const errorResponse = {
@@ -412,8 +376,8 @@ describe('MiningApi', () => {
     describe('earningsList()', () => {
         it('should execute earningsList() successfully with required parameters only', async () => {
             const params: EarningsListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             mockResponse = JSONParse(
@@ -425,31 +389,11 @@ describe('MiningApi', () => {
                             {
                                 time: 1586188800000,
                                 type: 31,
-                                hashTransfer: null,
-                                transferAmount: null,
+                                hashTransfer: 200000000000,
+                                transferAmount: 0.02180958,
                                 dayHashRate: 129129903378244,
                                 profitAmount: 8.6083060304,
                                 coinName: 'BTC',
-                                status: 2,
-                            },
-                            {
-                                time: 1607529600000,
-                                coinName: 'BTC',
-                                type: 0,
-                                dayHashRate: 9942053925926,
-                                profitAmount: 0.85426469,
-                                hashTransfer: 200000000000,
-                                transferAmount: 0.02180958,
-                                status: 2,
-                            },
-                            {
-                                time: 1607443200000,
-                                coinName: 'BTC',
-                                type: 31,
-                                dayHashRate: 200000000000,
-                                profitAmount: 0.02905916,
-                                hashTransfer: null,
-                                transferAmount: null,
                                 status: 2,
                             },
                         ],
@@ -475,13 +419,13 @@ describe('MiningApi', () => {
 
         it('should execute earningsList() successfully with optional parameters', async () => {
             const params: EarningsListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
-                coin: 'coin_example',
-                startDate: 789,
-                endDate: 789,
+                algo: 'sha256',
+                userName: 'test',
+                coin: 'BTC',
+                startDate: 1770736694138,
+                endDate: 1770736694138,
                 pageIndex: 1,
-                pageSize: 789,
+                pageSize: 10,
                 recvWindow: 5000,
             };
 
@@ -494,31 +438,11 @@ describe('MiningApi', () => {
                             {
                                 time: 1586188800000,
                                 type: 31,
-                                hashTransfer: null,
-                                transferAmount: null,
+                                hashTransfer: 200000000000,
+                                transferAmount: 0.02180958,
                                 dayHashRate: 129129903378244,
                                 profitAmount: 8.6083060304,
                                 coinName: 'BTC',
-                                status: 2,
-                            },
-                            {
-                                time: 1607529600000,
-                                coinName: 'BTC',
-                                type: 0,
-                                dayHashRate: 9942053925926,
-                                profitAmount: 0.85426469,
-                                hashTransfer: 200000000000,
-                                transferAmount: 0.02180958,
-                                status: 2,
-                            },
-                            {
-                                time: 1607443200000,
-                                coinName: 'BTC',
-                                type: 31,
-                                dayHashRate: 200000000000,
-                                profitAmount: 0.02905916,
-                                hashTransfer: null,
-                                transferAmount: null,
                                 status: 2,
                             },
                         ],
@@ -544,8 +468,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when algo is missing', async () => {
             const _params: EarningsListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.algo;
@@ -557,8 +481,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when userName is missing', async () => {
             const _params: EarningsListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.userName;
@@ -570,8 +494,8 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: EarningsListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             const errorResponse = {
@@ -592,8 +516,8 @@ describe('MiningApi', () => {
     describe('extraBonusList()', () => {
         it('should execute extraBonusList() successfully with required parameters only', async () => {
             const params: ExtraBonusListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             mockResponse = JSONParse(
@@ -632,13 +556,13 @@ describe('MiningApi', () => {
 
         it('should execute extraBonusList() successfully with optional parameters', async () => {
             const params: ExtraBonusListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
-                coin: 'coin_example',
-                startDate: 789,
-                endDate: 789,
+                algo: 'sha256',
+                userName: 'test',
+                coin: 'BTC',
+                startDate: 1770736694138,
+                endDate: 1770736694138,
                 pageIndex: 1,
-                pageSize: 789,
+                pageSize: 10,
                 recvWindow: 5000,
             };
 
@@ -678,8 +602,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when algo is missing', async () => {
             const _params: ExtraBonusListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.algo;
@@ -691,8 +615,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when userName is missing', async () => {
             const _params: ExtraBonusListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.userName;
@@ -704,8 +628,8 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ExtraBonusListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             const errorResponse = {
@@ -726,7 +650,7 @@ describe('MiningApi', () => {
     describe('hashrateResaleDetail()', () => {
         it('should execute hashrateResaleDetail() successfully with required parameters only', async () => {
             const params: HashrateResaleDetailRequest = {
-                configId: 1,
+                configId: 168,
             };
 
             mockResponse = JSONParse(
@@ -735,15 +659,6 @@ describe('MiningApi', () => {
                     msg: '',
                     data: {
                         profitTransferDetails: [
-                            {
-                                poolUsername: 'test4001',
-                                toPoolUsername: 'pop',
-                                algoName: 'sha256',
-                                hashRate: 200000000000,
-                                day: 20201213,
-                                amount: 0.2256872,
-                                coinName: 'BTC',
-                            },
                             {
                                 poolUsername: 'test4001',
                                 toPoolUsername: 'pop',
@@ -776,9 +691,9 @@ describe('MiningApi', () => {
 
         it('should execute hashrateResaleDetail() successfully with optional parameters', async () => {
             const params: HashrateResaleDetailRequest = {
-                configId: 1,
+                configId: 168,
                 pageIndex: 1,
-                pageSize: 789,
+                pageSize: 10,
                 recvWindow: 5000,
             };
 
@@ -788,15 +703,6 @@ describe('MiningApi', () => {
                     msg: '',
                     data: {
                         profitTransferDetails: [
-                            {
-                                poolUsername: 'test4001',
-                                toPoolUsername: 'pop',
-                                algoName: 'sha256',
-                                hashRate: 200000000000,
-                                day: 20201213,
-                                amount: 0.2256872,
-                                coinName: 'BTC',
-                            },
                             {
                                 poolUsername: 'test4001',
                                 toPoolUsername: 'pop',
@@ -829,7 +735,7 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when configId is missing', async () => {
             const _params: HashrateResaleDetailRequest = {
-                configId: 1,
+                configId: 168,
             };
             const params = Object.assign({ ..._params });
             delete params?.configId;
@@ -841,7 +747,7 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: HashrateResaleDetailRequest = {
-                configId: 1,
+                configId: 168,
             };
 
             const errorResponse = {
@@ -878,17 +784,6 @@ describe('MiningApi', () => {
                                 status: 1,
                                 type: 0,
                             },
-                            {
-                                configId: 166,
-                                poolUsername: 'pop',
-                                toPoolUsername: '111111',
-                                algoName: 'Ethash',
-                                hashRate: 3320000,
-                                startDay: 20201226,
-                                endDay: 20201227,
-                                status: 0,
-                                type: 0,
-                            },
                         ],
                         totalNum: 21,
                         pageSize: 200,
@@ -913,7 +808,7 @@ describe('MiningApi', () => {
         it('should execute hashrateResaleList() successfully with optional parameters', async () => {
             const params: HashrateResaleListRequest = {
                 pageIndex: 1,
-                pageSize: 789,
+                pageSize: 10,
                 recvWindow: 5000,
             };
 
@@ -932,17 +827,6 @@ describe('MiningApi', () => {
                                 startDay: 20201210,
                                 endDay: 20210405,
                                 status: 1,
-                                type: 0,
-                            },
-                            {
-                                configId: 166,
-                                poolUsername: 'pop',
-                                toPoolUsername: '111111',
-                                algoName: 'Ethash',
-                                hashRate: 3320000,
-                                startDay: 20201226,
-                                endDay: 20201227,
-                                status: 0,
                                 type: 0,
                             },
                         ],
@@ -985,12 +869,12 @@ describe('MiningApi', () => {
     describe('hashrateResaleRequest()', () => {
         it('should execute hashrateResaleRequest() successfully with required parameters only', async () => {
             const params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
             };
 
             mockResponse = JSONParse(JSONStringify({ code: 0, msg: '', data: 171 }));
@@ -1011,12 +895,12 @@ describe('MiningApi', () => {
 
         it('should execute hashrateResaleRequest() successfully with optional parameters', async () => {
             const params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
                 recvWindow: 5000,
             };
 
@@ -1038,12 +922,12 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when userName is missing', async () => {
             const _params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
             };
             const params = Object.assign({ ..._params });
             delete params?.userName;
@@ -1055,12 +939,12 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when algo is missing', async () => {
             const _params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
             };
             const params = Object.assign({ ..._params });
             delete params?.algo;
@@ -1072,12 +956,12 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when endDate is missing', async () => {
             const _params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
             };
             const params = Object.assign({ ..._params });
             delete params?.endDate;
@@ -1089,12 +973,12 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when startDate is missing', async () => {
             const _params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
             };
             const params = Object.assign({ ..._params });
             delete params?.startDate;
@@ -1106,12 +990,12 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when toPoolUser is missing', async () => {
             const _params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
             };
             const params = Object.assign({ ..._params });
             delete params?.toPoolUser;
@@ -1123,12 +1007,12 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when hashRate is missing', async () => {
             const _params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
             };
             const params = Object.assign({ ..._params });
             delete params?.hashRate;
@@ -1140,12 +1024,12 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: HashrateResaleRequestRequest = {
-                userName: 'userName_example',
-                algo: 'algo_example',
-                endDate: 789,
-                startDate: 789,
-                toPoolUser: 'toPoolUser_example',
-                hashRate: 789,
+                userName: 'test',
+                algo: 'sha256',
+                endDate: 1770736694138,
+                startDate: 1770736694138,
+                toPoolUser: 'S19pro',
+                hashRate: 100000000,
             };
 
             const errorResponse = {
@@ -1168,7 +1052,7 @@ describe('MiningApi', () => {
     describe('miningAccountEarning()', () => {
         it('should execute miningAccountEarning() successfully with required parameters only', async () => {
             const params: MiningAccountEarningRequest = {
-                algo: 'algo_example',
+                algo: 'sha256',
             };
 
             mockResponse = JSONParse(
@@ -1208,11 +1092,11 @@ describe('MiningApi', () => {
 
         it('should execute miningAccountEarning() successfully with optional parameters', async () => {
             const params: MiningAccountEarningRequest = {
-                algo: 'algo_example',
-                startDate: 789,
-                endDate: 789,
+                algo: 'sha256',
+                startDate: 1770736694138,
+                endDate: 1770736694138,
                 pageIndex: 1,
-                pageSize: 789,
+                pageSize: 10,
                 recvWindow: 5000,
             };
 
@@ -1253,7 +1137,7 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when algo is missing', async () => {
             const _params: MiningAccountEarningRequest = {
-                algo: 'algo_example',
+                algo: 'sha256',
             };
             const params = Object.assign({ ..._params });
             delete params?.algo;
@@ -1265,7 +1149,7 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MiningAccountEarningRequest = {
-                algo: 'algo_example',
+                algo: 'sha256',
             };
 
             const errorResponse = {
@@ -1286,9 +1170,9 @@ describe('MiningApi', () => {
     describe('requestForDetailMinerList()', () => {
         it('should execute requestForDetailMinerList() successfully with required parameters only', async () => {
             const params: RequestForDetailMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
-                workerName: 'workerName_example',
+                algo: 'sha256',
+                userName: 'test',
+                workerName: 'bhdc1.16A10404B',
             };
 
             mockResponse = JSONParse(
@@ -1299,18 +1183,7 @@ describe('MiningApi', () => {
                         {
                             workerName: 'bhdc1.16A10404B',
                             type: 'H_hashrate',
-                            hashrateDatas: [
-                                { time: 1587902400000, hashrate: '0', reject: 0 },
-                                { time: 1587906000000, hashrate: '0', reject: 0 },
-                            ],
-                        },
-                        {
-                            workerName: 'bhdc1.16A10404B',
-                            type: 'D_hashrate',
-                            hashrateDatas: [
-                                { time: 1587902400000, hashrate: '0', reject: 0 },
-                                { time: 1587906000000, hashrate: '0', reject: 0 },
-                            ],
+                            hashrateDatas: [{ time: 1587902400000, hashrate: '0', reject: 0 }],
                         },
                     ],
                 })
@@ -1332,9 +1205,9 @@ describe('MiningApi', () => {
 
         it('should execute requestForDetailMinerList() successfully with optional parameters', async () => {
             const params: RequestForDetailMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
-                workerName: 'workerName_example',
+                algo: 'sha256',
+                userName: 'test',
+                workerName: 'bhdc1.16A10404B',
                 recvWindow: 5000,
             };
 
@@ -1346,18 +1219,7 @@ describe('MiningApi', () => {
                         {
                             workerName: 'bhdc1.16A10404B',
                             type: 'H_hashrate',
-                            hashrateDatas: [
-                                { time: 1587902400000, hashrate: '0', reject: 0 },
-                                { time: 1587906000000, hashrate: '0', reject: 0 },
-                            ],
-                        },
-                        {
-                            workerName: 'bhdc1.16A10404B',
-                            type: 'D_hashrate',
-                            hashrateDatas: [
-                                { time: 1587902400000, hashrate: '0', reject: 0 },
-                                { time: 1587906000000, hashrate: '0', reject: 0 },
-                            ],
+                            hashrateDatas: [{ time: 1587902400000, hashrate: '0', reject: 0 }],
                         },
                     ],
                 })
@@ -1379,9 +1241,9 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when algo is missing', async () => {
             const _params: RequestForDetailMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
-                workerName: 'workerName_example',
+                algo: 'sha256',
+                userName: 'test',
+                workerName: 'bhdc1.16A10404B',
             };
             const params = Object.assign({ ..._params });
             delete params?.algo;
@@ -1393,9 +1255,9 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when userName is missing', async () => {
             const _params: RequestForDetailMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
-                workerName: 'workerName_example',
+                algo: 'sha256',
+                userName: 'test',
+                workerName: 'bhdc1.16A10404B',
             };
             const params = Object.assign({ ..._params });
             delete params?.userName;
@@ -1407,9 +1269,9 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when workerName is missing', async () => {
             const _params: RequestForDetailMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
-                workerName: 'workerName_example',
+                algo: 'sha256',
+                userName: 'test',
+                workerName: 'bhdc1.16A10404B',
             };
             const params = Object.assign({ ..._params });
             delete params?.workerName;
@@ -1421,9 +1283,9 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: RequestForDetailMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
-                workerName: 'workerName_example',
+                algo: 'sha256',
+                userName: 'test',
+                workerName: 'bhdc1.16A10404B',
             };
 
             const errorResponse = {
@@ -1446,8 +1308,8 @@ describe('MiningApi', () => {
     describe('requestForMinerList()', () => {
         it('should execute requestForMinerList() successfully with required parameters only', async () => {
             const params: RequestForMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             mockResponse = JSONParse(
@@ -1461,18 +1323,9 @@ describe('MiningApi', () => {
                                 workerName: '2X73',
                                 status: 3,
                                 hashRate: 0,
-                                dayHashRate: 0,
-                                rejectRate: 0,
-                                lastShareTime: 1587712919000,
-                            },
-                            {
-                                workerId: '7893926126382807951',
-                                workerName: 'AZDC1.1A10101',
-                                status: 2,
-                                hashRate: 29711247541680,
                                 dayHashRate: 1.269778129801366e13,
                                 rejectRate: 0,
-                                lastShareTime: 1587969727000,
+                                lastShareTime: 1587712919000,
                             },
                         ],
                         totalNum: 18530,
@@ -1497,8 +1350,8 @@ describe('MiningApi', () => {
 
         it('should execute requestForMinerList() successfully with optional parameters', async () => {
             const params: RequestForMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
                 pageIndex: 1,
                 sort: 0,
                 sortColumn: 1,
@@ -1517,18 +1370,9 @@ describe('MiningApi', () => {
                                 workerName: '2X73',
                                 status: 3,
                                 hashRate: 0,
-                                dayHashRate: 0,
-                                rejectRate: 0,
-                                lastShareTime: 1587712919000,
-                            },
-                            {
-                                workerId: '7893926126382807951',
-                                workerName: 'AZDC1.1A10101',
-                                status: 2,
-                                hashRate: 29711247541680,
                                 dayHashRate: 1.269778129801366e13,
                                 rejectRate: 0,
-                                lastShareTime: 1587969727000,
+                                lastShareTime: 1587712919000,
                             },
                         ],
                         totalNum: 18530,
@@ -1553,8 +1397,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when algo is missing', async () => {
             const _params: RequestForMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.algo;
@@ -1566,8 +1410,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when userName is missing', async () => {
             const _params: RequestForMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.userName;
@@ -1579,8 +1423,8 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: RequestForMinerListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             const errorResponse = {
@@ -1601,8 +1445,8 @@ describe('MiningApi', () => {
     describe('statisticList()', () => {
         it('should execute statisticList() successfully with required parameters only', async () => {
             const params: StatisticListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             mockResponse = JSONParse(
@@ -1643,8 +1487,8 @@ describe('MiningApi', () => {
 
         it('should execute statisticList() successfully with optional parameters', async () => {
             const params: StatisticListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
                 recvWindow: 5000,
             };
 
@@ -1686,8 +1530,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when algo is missing', async () => {
             const _params: StatisticListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.algo;
@@ -1699,8 +1543,8 @@ describe('MiningApi', () => {
 
         it('should throw RequiredError when userName is missing', async () => {
             const _params: StatisticListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
             const params = Object.assign({ ..._params });
             delete params?.userName;
@@ -1712,8 +1556,8 @@ describe('MiningApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: StatisticListRequest = {
-                algo: 'algo_example',
-                userName: 'userName_example',
+                algo: 'sha256',
+                userName: 'test',
             };
 
             const errorResponse = {

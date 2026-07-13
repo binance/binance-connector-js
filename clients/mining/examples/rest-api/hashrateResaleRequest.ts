@@ -1,4 +1,4 @@
-import { Mining, MINING_REST_API_PROD_URL } from '../../../src';
+import { Mining, MINING_REST_API_PROD_URL } from '../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,12 +10,12 @@ const client = new Mining({ configurationRestAPI });
 async function hashrateResaleRequest() {
     try {
         const response = await client.restAPI.hashrateResaleRequest({
-            userName: 'userName_example',
-            algo: 'algo_example',
-            endDate: 789,
-            startDate: 789,
-            toPoolUser: 'toPoolUser_example',
-            hashRate: 789,
+            userName: 'test',
+            algo: 'sha256',
+            endDate: 1770736694138,
+            startDate: 1770736694138,
+            toPoolUser: 'S19pro',
+            hashRate: 100000000,
         });
 
         const rateLimits = response.rateLimits!;

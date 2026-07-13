@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,13 +25,13 @@ import type { RequestForDetailMinerListResponseDataInnerHashrateDatasInner } fro
  */
 export interface RequestForDetailMinerListResponseDataInner {
     /**
-     *
+     * Mining account name
      * @type {string}
      * @memberof RequestForDetailMinerListResponseDataInner
      */
     workerName?: string;
     /**
-     *
+     * Type of hashrate bucket
      * @type {string}
      * @memberof RequestForDetailMinerListResponseDataInner
      */

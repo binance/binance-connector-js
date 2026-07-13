@@ -1,4 +1,4 @@
-import { Mining, MINING_REST_API_PROD_URL } from '../../../src';
+import { Mining, MINING_REST_API_PROD_URL } from '../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,9 +10,9 @@ const client = new Mining({ configurationRestAPI });
 async function requestForDetailMinerList() {
     try {
         const response = await client.restAPI.requestForDetailMinerList({
-            algo: 'algo_example',
-            userName: 'userName_example',
-            workerName: 'workerName_example',
+            algo: 'sha256',
+            userName: 'test',
+            workerName: 'bhdc1.16A10404B',
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,10 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { StatisticListResponseDataProfitToday } from './statistic-list-response-data-profit-today';
-
 /**
  *
  * @export
@@ -25,55 +20,55 @@ import type { StatisticListResponseDataProfitToday } from './statistic-list-resp
  */
 export interface StatisticListResponseData {
     /**
-     *
+     * 15-minute hashrate
      * @type {string}
      * @memberof StatisticListResponseData
      */
     fifteenMinHashRate?: string;
     /**
-     *
+     * 24H hashrate
      * @type {string}
      * @memberof StatisticListResponseData
      */
     dayHashRate?: string;
     /**
-     *
+     * Effective quantity
      * @type {number | bigint}
      * @memberof StatisticListResponseData
      */
     validNum?: number | bigint;
     /**
-     *
+     * Invalid quantity
      * @type {number | bigint}
      * @memberof StatisticListResponseData
      */
     invalidNum?: number | bigint;
     /**
-     *
-     * @type {StatisticListResponseDataProfitToday}
+     * Today\'s estimate. Keys are coin symbols (e.g. BTC, BSV, BCH), values are earning amounts as strings.
+     * @type {{ [key: string]: string | undefined; }}
      * @memberof StatisticListResponseData
      */
-    profitToday?: StatisticListResponseDataProfitToday;
+    profitToday?: { [key: string]: string | undefined };
     /**
-     *
-     * @type {StatisticListResponseDataProfitToday}
+     * Yesterday\'s earnings. Keys are coin symbols (e.g. BTC, BSV, BCH), values are earning amounts as strings.
+     * @type {{ [key: string]: string | undefined; }}
      * @memberof StatisticListResponseData
      */
-    profitYesterday?: StatisticListResponseDataProfitToday;
+    profitYesterday?: { [key: string]: string | undefined };
     /**
-     *
+     * Mining account
      * @type {string}
      * @memberof StatisticListResponseData
      */
     userName?: string;
     /**
-     *
+     * Unit
      * @type {string}
      * @memberof StatisticListResponseData
      */
     unit?: string;
     /**
-     *
+     * Algorithm
      * @type {string}
      * @memberof StatisticListResponseData
      */

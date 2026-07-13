@@ -1,4 +1,4 @@
-import { Mining, MINING_REST_API_PROD_URL } from '../../../src';
+import { Mining, MINING_REST_API_PROD_URL } from '../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,8 +10,8 @@ const client = new Mining({ configurationRestAPI });
 async function cancelHashrateResaleConfiguration() {
     try {
         const response = await client.restAPI.cancelHashrateResaleConfiguration({
-            configId: 1,
-            userName: 'userName_example',
+            configId: 168,
+            userName: 'test',
         });
 
         const rateLimits = response.rateLimits!;

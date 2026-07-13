@@ -1,7 +1,7 @@
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -12,7 +12,7 @@
  */
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
-import { MiningApi } from './modules/mining-api';
+import { Api } from './modules/api';
 
 import type {
     AccountListRequest,
@@ -26,7 +26,7 @@ import type {
     RequestForDetailMinerListRequest,
     RequestForMinerListRequest,
     StatisticListRequest,
-} from './modules/mining-api';
+} from './modules/api';
 
 import type {
     AccountListResponse,
@@ -46,11 +46,11 @@ import type {
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
-    private miningApi: MiningApi;
+    private api: Api;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.miningApi = new MiningApi(configuration);
+        this.api = new Api(configuration);
     }
 
     /**
@@ -109,227 +109,254 @@ export class RestAPI {
     /**
      * Query Account List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Account List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account List (USER_DATA)
      * @param {AccountListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Account-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#account-list Binance API Documentation}
      */
     accountList(
         requestParameters: AccountListRequest
     ): Promise<RestApiResponse<AccountListResponse>> {
-        return this.miningApi.accountList(requestParameters);
+        return this.api.accountList(requestParameters);
     }
 
     /**
      * Acquiring Algorithm
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Acquiring Algorithm(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Acquiring Algorithm (MARKET_DATA)
      *
      * @returns {Promise<RestApiResponse<AcquiringAlgorithmResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Acquiring-Algorithm Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#acquiring-algorithm Binance API Documentation}
      */
     acquiringAlgorithm(): Promise<RestApiResponse<AcquiringAlgorithmResponse>> {
-        return this.miningApi.acquiringAlgorithm();
+        return this.api.acquiringAlgorithm();
     }
 
     /**
      * Acquiring CoinName
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Acquiring CoinName(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Acquiring CoinName (MARKET_DATA)
      *
      * @returns {Promise<RestApiResponse<AcquiringCoinnameResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Acquiring-CoinName Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#acquiring-coinname Binance API Documentation}
      */
     acquiringCoinname(): Promise<RestApiResponse<AcquiringCoinnameResponse>> {
-        return this.miningApi.acquiringCoinname();
+        return this.api.acquiringCoinname();
     }
 
     /**
+     * Cancel hashrate resale configuration
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Cancel hashrate resale configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Cancel hashrate resale configuration (USER_DATA)
      * @param {CancelHashrateResaleConfigurationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelHashrateResaleConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Cancel-hashrate-resale-configuration Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#cancel-hashrate-resale-configuration Binance API Documentation}
      */
     cancelHashrateResaleConfiguration(
         requestParameters: CancelHashrateResaleConfigurationRequest
     ): Promise<RestApiResponse<CancelHashrateResaleConfigurationResponse>> {
-        return this.miningApi.cancelHashrateResaleConfiguration(requestParameters);
+        return this.api.cancelHashrateResaleConfiguration(requestParameters);
     }
 
     /**
      * Query Earnings List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Earnings List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Earnings List (USER_DATA)
      * @param {EarningsListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<EarningsListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Earnings-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#earnings-list Binance API Documentation}
      */
     earningsList(
         requestParameters: EarningsListRequest
     ): Promise<RestApiResponse<EarningsListResponse>> {
-        return this.miningApi.earningsList(requestParameters);
+        return this.api.earningsList(requestParameters);
     }
 
     /**
      * Extra Bonus List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Extra Bonus List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Extra Bonus List (USER_DATA)
      * @param {ExtraBonusListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ExtraBonusListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Extra-Bonus-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#extra-bonus-list Binance API Documentation}
      */
     extraBonusList(
         requestParameters: ExtraBonusListRequest
     ): Promise<RestApiResponse<ExtraBonusListResponse>> {
-        return this.miningApi.extraBonusList(requestParameters);
+        return this.api.extraBonusList(requestParameters);
     }
 
     /**
      * Hashrate Resale Detail(USER_DATA)
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale Detail (USER_DATA)
      * @param {HashrateResaleDetailRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<HashrateResaleDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#hashrate-resale-detail Binance API Documentation}
      */
     hashrateResaleDetail(
         requestParameters: HashrateResaleDetailRequest
     ): Promise<RestApiResponse<HashrateResaleDetailResponse>> {
-        return this.miningApi.hashrateResaleDetail(requestParameters);
+        return this.api.hashrateResaleDetail(requestParameters);
     }
 
     /**
      * Hashrate Resale List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale List
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale List (USER_DATA)
      * @param {HashrateResaleListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<HashrateResaleListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#hashrate-resale-list Binance API Documentation}
      */
     hashrateResaleList(
         requestParameters: HashrateResaleListRequest = {}
     ): Promise<RestApiResponse<HashrateResaleListResponse>> {
-        return this.miningApi.hashrateResaleList(requestParameters);
+        return this.api.hashrateResaleList(requestParameters);
     }
 
     /**
      * Hashrate Resale Request
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale Request(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale Request (USER_DATA)
      * @param {HashrateResaleRequestRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<HashrateResaleRequestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-Request Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#hashrate-resale-request Binance API Documentation}
      */
     hashrateResaleRequest(
         requestParameters: HashrateResaleRequestRequest
     ): Promise<RestApiResponse<HashrateResaleRequestResponse>> {
-        return this.miningApi.hashrateResaleRequest(requestParameters);
+        return this.api.hashrateResaleRequest(requestParameters);
     }
 
     /**
      * Mining Account Earning
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Mining Account Earning(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Mining Account Earning (USER_DATA)
      * @param {MiningAccountEarningRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MiningAccountEarningResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Mining-Account-Earning Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#mining-account-earning Binance API Documentation}
      */
     miningAccountEarning(
         requestParameters: MiningAccountEarningRequest
     ): Promise<RestApiResponse<MiningAccountEarningResponse>> {
-        return this.miningApi.miningAccountEarning(requestParameters);
+        return this.api.miningAccountEarning(requestParameters);
     }
 
     /**
      * Request for Detail Miner List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Request for Detail Miner List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Request for Detail Miner List (USER_DATA)
      * @param {RequestForDetailMinerListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RequestForDetailMinerListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Request-for-Detail-Miner-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#request-for-detail-miner-list Binance API Documentation}
      */
     requestForDetailMinerList(
         requestParameters: RequestForDetailMinerListRequest
     ): Promise<RestApiResponse<RequestForDetailMinerListResponse>> {
-        return this.miningApi.requestForDetailMinerList(requestParameters);
+        return this.api.requestForDetailMinerList(requestParameters);
     }
 
     /**
      * Request for Miner List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Request for Miner List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Request for Miner List (USER_DATA)
      * @param {RequestForMinerListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RequestForMinerListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Request-for-Miner-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#request-for-miner-list Binance API Documentation}
      */
     requestForMinerList(
         requestParameters: RequestForMinerListRequest
     ): Promise<RestApiResponse<RequestForMinerListResponse>> {
-        return this.miningApi.requestForMinerList(requestParameters);
+        return this.api.requestForMinerList(requestParameters);
     }
 
     /**
      * Statistic List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Statistic List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Statistic List (USER_DATA)
      * @param {StatisticListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<StatisticListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Statistic-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#statistic-list Binance API Documentation}
      */
     statisticList(
         requestParameters: StatisticListRequest
     ): Promise<RestApiResponse<StatisticListResponse>> {
-        return this.miningApi.statisticList(requestParameters);
+        return this.api.statisticList(requestParameters);
     }
 }

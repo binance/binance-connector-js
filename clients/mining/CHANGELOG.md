@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.0.0 - 2026-07-13
+
+### Changed (1)
+
+- Modified response for `statisticList()` (`GET /sapi/v1/mining/statistics/user/status`):
+  - `data`.`profitToday`: property `BCH` deleted
+  - `data`.`profitToday`: property `BSV` deleted
+  - `data`.`profitToday`: property `BTC` deleted
+  - `data`.`profitYesterday`: property `BCH` deleted
+  - `data`.`profitYesterday`: property `BSV` deleted
+  - `data`.`profitYesterday`: property `BTC` deleted
+
 ## 5.0.14 - 2026-06-18
 
 ### Changed (2)

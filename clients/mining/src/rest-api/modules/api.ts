@@ -1,7 +1,7 @@
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -36,19 +35,21 @@ import type {
 } from '../types';
 
 /**
- * MiningApi - axios parameter creator
+ * Api - axios parameter creator
  */
-const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
+const ApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
          * Query Account List
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Account List(USER_DATA)
-         * @param {string} algo Algorithm(sha256) sha256
-         * @param {string} userName Mining account test
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Account List (USER_DATA)
+         * @param {string} algo Algorithm name.
+         * @param {string} userName Mining account
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -91,9 +92,11 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Acquiring Algorithm
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Acquiring Algorithm(MARKET_DATA)
+         * Security Type: MARKET_DATA
+         *
+         * @summary Acquiring Algorithm (MARKET_DATA)
          *
          * @throws {RequiredError}
          */
@@ -117,9 +120,11 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Acquiring CoinName
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Acquiring CoinName(MARKET_DATA)
+         * Security Type: MARKET_DATA
+         *
+         * @summary Acquiring CoinName (MARKET_DATA)
          *
          * @throws {RequiredError}
          */
@@ -141,13 +146,16 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             };
         },
         /**
+         * Cancel hashrate resale configuration
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Cancel hashrate resale configuration(USER_DATA)
-         * @param {number | bigint} configId Mining ID 168
-         * @param {string} userName Mining account test
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Cancel hashrate resale configuration (USER_DATA)
+         * @param {number | bigint} configId Mining ID
+         * @param {string} userName Mining Account
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -190,17 +198,19 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Query Earnings List
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Earnings List(USER_DATA)
-         * @param {string} algo Algorithm(sha256) sha256
-         * @param {string} userName Mining account test
-         * @param {string} [coin] Coin Name
-         * @param {number | bigint} [startDate] Millisecond timestamp
-         * @param {number | bigint} [endDate] Millisecond timestamp
-         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number | bigint} [pageSize] Min 10,Max 200
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Earnings List (USER_DATA)
+         * @param {string} algo Algorithm name.
+         * @param {string} userName Mining account.
+         * @param {string} [coin] Coin name
+         * @param {number | bigint} [startDate] Search start time in milliseconds.
+         * @param {number | bigint} [endDate] Search end time in milliseconds.
+         * @param {number | bigint} [pageIndex] Page number, starting from 1.
+         * @param {number | bigint} [pageSize] Number of rows per page.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -263,17 +273,19 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Extra Bonus List
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Extra Bonus List(USER_DATA)
-         * @param {string} algo Algorithm(sha256) sha256
-         * @param {string} userName Mining account test
-         * @param {string} [coin] Coin Name
-         * @param {number | bigint} [startDate] Millisecond timestamp
-         * @param {number | bigint} [endDate] Millisecond timestamp
-         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number | bigint} [pageSize] Min 10,Max 200
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Extra Bonus List (USER_DATA)
+         * @param {string} algo Transfer algorithm
+         * @param {string} userName Mining account
+         * @param {string} [coin] Coin name
+         * @param {number | bigint} [startDate] Search start time in milliseconds.
+         * @param {number | bigint} [endDate] Search end time in milliseconds.
+         * @param {number | bigint} [pageIndex] Page number, starting from 1.
+         * @param {number | bigint} [pageSize] Number of rows per page.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -336,13 +348,15 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Hashrate Resale Detail(USER_DATA)
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Hashrate Resale Detail(USER_DATA)
-         * @param {number | bigint} configId Mining ID 168
-         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number | bigint} [pageSize] Min 10,Max 200
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Hashrate Resale Detail (USER_DATA)
+         * @param {number | bigint} configId Configuration ID.
+         * @param {number | bigint} [pageIndex] Page number, starting from 1.
+         * @param {number | bigint} [pageSize] Number of rows per page.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -387,12 +401,14 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Hashrate Resale List
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Hashrate Resale List
-         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number | bigint} [pageSize] Min 10,Max 200
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Hashrate Resale List (USER_DATA)
+         * @param {number | bigint} [pageIndex] Page number, starting from 1.
+         * @param {number | bigint} [pageSize] Number of rows per page.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -430,16 +446,19 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Hashrate Resale Request
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Hashrate Resale Request(USER_DATA)
-         * @param {string} userName Mining account test
-         * @param {string} algo Algorithm(sha256) sha256
-         * @param {number | bigint} endDate Resale End Time (Millisecond timestamp) 1617659086000
-         * @param {number | bigint} startDate Resale Start Time(Millisecond timestamp) 1607659086000
-         * @param {string} toPoolUser Mining Account S19pro
-         * @param {number | bigint} hashRate Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000) 100000000
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Hashrate Resale Request (USER_DATA)
+         * @param {string} userName Mining Account
+         * @param {string} algo Transfer algorithm
+         * @param {number | bigint} endDate Resale End Time (Millisecond timestamp)
+         * @param {number | bigint} startDate Resale Start Time(Millisecond timestamp)
+         * @param {string} toPoolUser Mining Account
+         * @param {number | bigint} hashRate Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than
+         * 500000)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -506,15 +525,17 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Mining Account Earning
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Mining Account Earning(USER_DATA)
-         * @param {string} algo Algorithm(sha256) sha256
+         * Security Type: USER_DATA
+         *
+         * @summary Mining Account Earning (USER_DATA)
+         * @param {string} algo Algorithm
          * @param {number | bigint} [startDate] Millisecond timestamp
          * @param {number | bigint} [endDate] Millisecond timestamp
-         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number | bigint} [pageSize] Min 10,Max 200
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [pageIndex] Page number, starting from 1.
+         * @param {number | bigint} [pageSize] Number of rows per page.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -567,13 +588,15 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Request for Detail Miner List
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Request for Detail Miner List(USER_DATA)
-         * @param {string} algo Algorithm(sha256) sha256
-         * @param {string} userName Mining account test
-         * @param {string} workerName Miner’s name(required) bhdc1.16A10404B
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Request for Detail Miner List (USER_DATA)
+         * @param {string} algo Algorithm
+         * @param {string} userName Mining account
+         * @param {string} workerName Miner name.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -622,16 +645,19 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Request for Miner List
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Request for Miner List(USER_DATA)
-         * @param {string} algo Algorithm(sha256) sha256
-         * @param {string} userName Mining account test
-         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number | bigint} [sort] sort sequence(default=0)0 positive sequence，1 negative sequence
-         * @param {number | bigint} [sortColumn] Sort by( default 1): <br></br>1: miner name, <br></br>2: real-time computing power, <br></br>3: daily average computing power, <br></br>4: real-time rejection rate, <br></br>5: last submission time
-         * @param {number | bigint} [workerStatus] miners status(default=0),0 all，1 valid，2 invalid，3 failure
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Request for Miner List (USER_DATA)
+         * @param {string} algo Algorithm
+         * @param {string} userName Mining account
+         * @param {number | bigint} [pageIndex] Page number, starting from 1.
+         * @param {number | bigint} [sort] Sort order. 0 for ascending, 1 for descending.
+         * @param {number | bigint} [sortColumn] Sort by: 1 miner name, 2 real-time hashrate, 3 daily average hashrate, 4 real-time rejection
+         * rate, 5 last submission time
+         * @param {number | bigint} [workerStatus] Miner status. 0 all, 1 valid, 2 invalid, 3 failure.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -690,12 +716,14 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Statistic List
          *
-         * Weight: 5
+         * Weight(IP): 1
          *
-         * @summary Statistic List(USER_DATA)
-         * @param {string} algo Algorithm(sha256) sha256
-         * @param {string} userName Mining account test
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Statistic List (USER_DATA)
+         * @param {string} algo Algorithm
+         * @param {string} userName Mining account
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -739,20 +767,22 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 };
 
 /**
- * MiningApi - interface
- * @interface MiningApi
+ * Api - interface
+ * @interface Api
  */
-export interface MiningApiInterface {
+export interface ApiInterface {
     /**
      * Query Account List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Account List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account List (USER_DATA)
      * @param {AccountListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     accountList(
         requestParameters: AccountListRequest
@@ -760,34 +790,41 @@ export interface MiningApiInterface {
     /**
      * Acquiring Algorithm
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Acquiring Algorithm(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Acquiring Algorithm (MARKET_DATA)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     acquiringAlgorithm(): Promise<RestApiResponse<AcquiringAlgorithmResponse>>;
     /**
      * Acquiring CoinName
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Acquiring CoinName(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Acquiring CoinName (MARKET_DATA)
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     acquiringCoinname(): Promise<RestApiResponse<AcquiringCoinnameResponse>>;
     /**
+     * Cancel hashrate resale configuration
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Cancel hashrate resale configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Cancel hashrate resale configuration (USER_DATA)
      * @param {CancelHashrateResaleConfigurationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     cancelHashrateResaleConfiguration(
         requestParameters: CancelHashrateResaleConfigurationRequest
@@ -795,13 +832,15 @@ export interface MiningApiInterface {
     /**
      * Query Earnings List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Earnings List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Earnings List (USER_DATA)
      * @param {EarningsListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     earningsList(
         requestParameters: EarningsListRequest
@@ -809,13 +848,15 @@ export interface MiningApiInterface {
     /**
      * Extra Bonus List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Extra Bonus List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Extra Bonus List (USER_DATA)
      * @param {ExtraBonusListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     extraBonusList(
         requestParameters: ExtraBonusListRequest
@@ -823,13 +864,15 @@ export interface MiningApiInterface {
     /**
      * Hashrate Resale Detail(USER_DATA)
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale Detail (USER_DATA)
      * @param {HashrateResaleDetailRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     hashrateResaleDetail(
         requestParameters: HashrateResaleDetailRequest
@@ -837,13 +880,15 @@ export interface MiningApiInterface {
     /**
      * Hashrate Resale List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale List
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale List (USER_DATA)
      * @param {HashrateResaleListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     hashrateResaleList(
         requestParameters?: HashrateResaleListRequest
@@ -851,13 +896,15 @@ export interface MiningApiInterface {
     /**
      * Hashrate Resale Request
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale Request(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale Request (USER_DATA)
      * @param {HashrateResaleRequestRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     hashrateResaleRequest(
         requestParameters: HashrateResaleRequestRequest
@@ -865,13 +912,15 @@ export interface MiningApiInterface {
     /**
      * Mining Account Earning
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Mining Account Earning(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Mining Account Earning (USER_DATA)
      * @param {MiningAccountEarningRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     miningAccountEarning(
         requestParameters: MiningAccountEarningRequest
@@ -879,13 +928,15 @@ export interface MiningApiInterface {
     /**
      * Request for Detail Miner List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Request for Detail Miner List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Request for Detail Miner List (USER_DATA)
      * @param {RequestForDetailMinerListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     requestForDetailMinerList(
         requestParameters: RequestForDetailMinerListRequest
@@ -893,13 +944,15 @@ export interface MiningApiInterface {
     /**
      * Request for Miner List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Request for Miner List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Request for Miner List (USER_DATA)
      * @param {RequestForMinerListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     requestForMinerList(
         requestParameters: RequestForMinerListRequest
@@ -907,13 +960,15 @@ export interface MiningApiInterface {
     /**
      * Statistic List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Statistic List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Statistic List (USER_DATA)
      * @param {StatisticListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApiInterface
+     * @memberof ApiInterface
      */
     statisticList(
         requestParameters: StatisticListRequest
@@ -921,487 +976,491 @@ export interface MiningApiInterface {
 }
 
 /**
- * Request parameters for accountList operation in MiningApi.
+ * Request parameters for accountList operation in Api.
  * @interface AccountListRequest
  */
 export interface AccountListRequest {
     /**
-     * Algorithm(sha256) sha256
+     * Algorithm name.
      * @type {string}
-     * @memberof MiningApiAccountList
+     * @memberof ApiAccountList
      */
     readonly algo: string;
 
     /**
-     * Mining account test
+     * Mining account
      * @type {string}
-     * @memberof MiningApiAccountList
+     * @memberof ApiAccountList
      */
     readonly userName: string;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiAccountList
+     * @memberof ApiAccountList
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for cancelHashrateResaleConfiguration operation in MiningApi.
+ * Request parameters for cancelHashrateResaleConfiguration operation in Api.
  * @interface CancelHashrateResaleConfigurationRequest
  */
 export interface CancelHashrateResaleConfigurationRequest {
     /**
-     * Mining ID 168
+     * Mining ID
      * @type {number | bigint}
-     * @memberof MiningApiCancelHashrateResaleConfiguration
+     * @memberof ApiCancelHashrateResaleConfiguration
      */
     readonly configId: number | bigint;
 
     /**
-     * Mining account test
+     * Mining Account
      * @type {string}
-     * @memberof MiningApiCancelHashrateResaleConfiguration
+     * @memberof ApiCancelHashrateResaleConfiguration
      */
     readonly userName: string;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiCancelHashrateResaleConfiguration
+     * @memberof ApiCancelHashrateResaleConfiguration
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for earningsList operation in MiningApi.
+ * Request parameters for earningsList operation in Api.
  * @interface EarningsListRequest
  */
 export interface EarningsListRequest {
     /**
-     * Algorithm(sha256) sha256
+     * Algorithm name.
      * @type {string}
-     * @memberof MiningApiEarningsList
+     * @memberof ApiEarningsList
      */
     readonly algo: string;
 
     /**
-     * Mining account test
+     * Mining account.
      * @type {string}
-     * @memberof MiningApiEarningsList
+     * @memberof ApiEarningsList
      */
     readonly userName: string;
 
     /**
-     * Coin Name
+     * Coin name
      * @type {string}
-     * @memberof MiningApiEarningsList
+     * @memberof ApiEarningsList
      */
     readonly coin?: string;
 
     /**
-     * Millisecond timestamp
+     * Search start time in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiEarningsList
+     * @memberof ApiEarningsList
      */
     readonly startDate?: number | bigint;
 
     /**
-     * Millisecond timestamp
+     * Search end time in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiEarningsList
+     * @memberof ApiEarningsList
      */
     readonly endDate?: number | bigint;
 
     /**
-     * Page number, empty default first page, starting from 1
+     * Page number, starting from 1.
      * @type {number | bigint}
-     * @memberof MiningApiEarningsList
+     * @memberof ApiEarningsList
      */
     readonly pageIndex?: number | bigint;
 
     /**
-     * Min 10,Max 200
+     * Number of rows per page.
      * @type {number | bigint}
-     * @memberof MiningApiEarningsList
+     * @memberof ApiEarningsList
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiEarningsList
+     * @memberof ApiEarningsList
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for extraBonusList operation in MiningApi.
+ * Request parameters for extraBonusList operation in Api.
  * @interface ExtraBonusListRequest
  */
 export interface ExtraBonusListRequest {
     /**
-     * Algorithm(sha256) sha256
+     * Transfer algorithm
      * @type {string}
-     * @memberof MiningApiExtraBonusList
+     * @memberof ApiExtraBonusList
      */
     readonly algo: string;
 
     /**
-     * Mining account test
+     * Mining account
      * @type {string}
-     * @memberof MiningApiExtraBonusList
+     * @memberof ApiExtraBonusList
      */
     readonly userName: string;
 
     /**
-     * Coin Name
+     * Coin name
      * @type {string}
-     * @memberof MiningApiExtraBonusList
+     * @memberof ApiExtraBonusList
      */
     readonly coin?: string;
 
     /**
-     * Millisecond timestamp
+     * Search start time in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiExtraBonusList
+     * @memberof ApiExtraBonusList
      */
     readonly startDate?: number | bigint;
 
     /**
-     * Millisecond timestamp
+     * Search end time in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiExtraBonusList
+     * @memberof ApiExtraBonusList
      */
     readonly endDate?: number | bigint;
 
     /**
-     * Page number, empty default first page, starting from 1
+     * Page number, starting from 1.
      * @type {number | bigint}
-     * @memberof MiningApiExtraBonusList
+     * @memberof ApiExtraBonusList
      */
     readonly pageIndex?: number | bigint;
 
     /**
-     * Min 10,Max 200
+     * Number of rows per page.
      * @type {number | bigint}
-     * @memberof MiningApiExtraBonusList
+     * @memberof ApiExtraBonusList
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiExtraBonusList
+     * @memberof ApiExtraBonusList
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for hashrateResaleDetail operation in MiningApi.
+ * Request parameters for hashrateResaleDetail operation in Api.
  * @interface HashrateResaleDetailRequest
  */
 export interface HashrateResaleDetailRequest {
     /**
-     * Mining ID 168
+     * Configuration ID.
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleDetail
+     * @memberof ApiHashrateResaleDetail
      */
     readonly configId: number | bigint;
 
     /**
-     * Page number, empty default first page, starting from 1
+     * Page number, starting from 1.
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleDetail
+     * @memberof ApiHashrateResaleDetail
      */
     readonly pageIndex?: number | bigint;
 
     /**
-     * Min 10,Max 200
+     * Number of rows per page.
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleDetail
+     * @memberof ApiHashrateResaleDetail
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleDetail
+     * @memberof ApiHashrateResaleDetail
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for hashrateResaleList operation in MiningApi.
+ * Request parameters for hashrateResaleList operation in Api.
  * @interface HashrateResaleListRequest
  */
 export interface HashrateResaleListRequest {
     /**
-     * Page number, empty default first page, starting from 1
+     * Page number, starting from 1.
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleList
+     * @memberof ApiHashrateResaleList
      */
     readonly pageIndex?: number | bigint;
 
     /**
-     * Min 10,Max 200
+     * Number of rows per page.
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleList
+     * @memberof ApiHashrateResaleList
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleList
+     * @memberof ApiHashrateResaleList
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for hashrateResaleRequest operation in MiningApi.
+ * Request parameters for hashrateResaleRequest operation in Api.
  * @interface HashrateResaleRequestRequest
  */
 export interface HashrateResaleRequestRequest {
     /**
-     * Mining account test
+     * Mining Account
      * @type {string}
-     * @memberof MiningApiHashrateResaleRequest
+     * @memberof ApiHashrateResaleRequest
      */
     readonly userName: string;
 
     /**
-     * Algorithm(sha256) sha256
+     * Transfer algorithm
      * @type {string}
-     * @memberof MiningApiHashrateResaleRequest
+     * @memberof ApiHashrateResaleRequest
      */
     readonly algo: string;
 
     /**
-     * Resale End Time (Millisecond timestamp) 1617659086000
+     * Resale End Time (Millisecond timestamp)
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleRequest
+     * @memberof ApiHashrateResaleRequest
      */
     readonly endDate: number | bigint;
 
     /**
-     * Resale Start Time(Millisecond timestamp) 1607659086000
+     * Resale Start Time(Millisecond timestamp)
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleRequest
+     * @memberof ApiHashrateResaleRequest
      */
     readonly startDate: number | bigint;
 
     /**
-     * Mining Account S19pro
+     * Mining Account
      * @type {string}
-     * @memberof MiningApiHashrateResaleRequest
+     * @memberof ApiHashrateResaleRequest
      */
     readonly toPoolUser: string;
 
     /**
-     * Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000) 100000000
+     * Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than
+     * 500000)
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleRequest
+     * @memberof ApiHashrateResaleRequest
      */
     readonly hashRate: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiHashrateResaleRequest
+     * @memberof ApiHashrateResaleRequest
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for miningAccountEarning operation in MiningApi.
+ * Request parameters for miningAccountEarning operation in Api.
  * @interface MiningAccountEarningRequest
  */
 export interface MiningAccountEarningRequest {
     /**
-     * Algorithm(sha256) sha256
+     * Algorithm
      * @type {string}
-     * @memberof MiningApiMiningAccountEarning
+     * @memberof ApiMiningAccountEarning
      */
     readonly algo: string;
 
     /**
      * Millisecond timestamp
      * @type {number | bigint}
-     * @memberof MiningApiMiningAccountEarning
+     * @memberof ApiMiningAccountEarning
      */
     readonly startDate?: number | bigint;
 
     /**
      * Millisecond timestamp
      * @type {number | bigint}
-     * @memberof MiningApiMiningAccountEarning
+     * @memberof ApiMiningAccountEarning
      */
     readonly endDate?: number | bigint;
 
     /**
-     * Page number, empty default first page, starting from 1
+     * Page number, starting from 1.
      * @type {number | bigint}
-     * @memberof MiningApiMiningAccountEarning
+     * @memberof ApiMiningAccountEarning
      */
     readonly pageIndex?: number | bigint;
 
     /**
-     * Min 10,Max 200
+     * Number of rows per page.
      * @type {number | bigint}
-     * @memberof MiningApiMiningAccountEarning
+     * @memberof ApiMiningAccountEarning
      */
     readonly pageSize?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiMiningAccountEarning
+     * @memberof ApiMiningAccountEarning
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for requestForDetailMinerList operation in MiningApi.
+ * Request parameters for requestForDetailMinerList operation in Api.
  * @interface RequestForDetailMinerListRequest
  */
 export interface RequestForDetailMinerListRequest {
     /**
-     * Algorithm(sha256) sha256
+     * Algorithm
      * @type {string}
-     * @memberof MiningApiRequestForDetailMinerList
+     * @memberof ApiRequestForDetailMinerList
      */
     readonly algo: string;
 
     /**
-     * Mining account test
+     * Mining account
      * @type {string}
-     * @memberof MiningApiRequestForDetailMinerList
+     * @memberof ApiRequestForDetailMinerList
      */
     readonly userName: string;
 
     /**
-     * Miner’s name(required) bhdc1.16A10404B
+     * Miner name.
      * @type {string}
-     * @memberof MiningApiRequestForDetailMinerList
+     * @memberof ApiRequestForDetailMinerList
      */
     readonly workerName: string;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiRequestForDetailMinerList
+     * @memberof ApiRequestForDetailMinerList
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for requestForMinerList operation in MiningApi.
+ * Request parameters for requestForMinerList operation in Api.
  * @interface RequestForMinerListRequest
  */
 export interface RequestForMinerListRequest {
     /**
-     * Algorithm(sha256) sha256
+     * Algorithm
      * @type {string}
-     * @memberof MiningApiRequestForMinerList
+     * @memberof ApiRequestForMinerList
      */
     readonly algo: string;
 
     /**
-     * Mining account test
+     * Mining account
      * @type {string}
-     * @memberof MiningApiRequestForMinerList
+     * @memberof ApiRequestForMinerList
      */
     readonly userName: string;
 
     /**
-     * Page number, empty default first page, starting from 1
+     * Page number, starting from 1.
      * @type {number | bigint}
-     * @memberof MiningApiRequestForMinerList
+     * @memberof ApiRequestForMinerList
      */
     readonly pageIndex?: number | bigint;
 
     /**
-     * sort sequence(default=0)0 positive sequence，1 negative sequence
+     * Sort order. 0 for ascending, 1 for descending.
      * @type {number | bigint}
-     * @memberof MiningApiRequestForMinerList
+     * @memberof ApiRequestForMinerList
      */
     readonly sort?: number | bigint;
 
     /**
-     * Sort by( default 1): <br></br>1: miner name, <br></br>2: real-time computing power, <br></br>3: daily average computing power, <br></br>4: real-time rejection rate, <br></br>5: last submission time
+     * Sort by: 1 miner name, 2 real-time hashrate, 3 daily average hashrate, 4 real-time rejection
+     * rate, 5 last submission time
      * @type {number | bigint}
-     * @memberof MiningApiRequestForMinerList
+     * @memberof ApiRequestForMinerList
      */
     readonly sortColumn?: number | bigint;
 
     /**
-     * miners status(default=0),0 all，1 valid，2 invalid，3 failure
+     * Miner status. 0 all, 1 valid, 2 invalid, 3 failure.
      * @type {number | bigint}
-     * @memberof MiningApiRequestForMinerList
+     * @memberof ApiRequestForMinerList
      */
     readonly workerStatus?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiRequestForMinerList
+     * @memberof ApiRequestForMinerList
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * Request parameters for statisticList operation in MiningApi.
+ * Request parameters for statisticList operation in Api.
  * @interface StatisticListRequest
  */
 export interface StatisticListRequest {
     /**
-     * Algorithm(sha256) sha256
+     * Algorithm
      * @type {string}
-     * @memberof MiningApiStatisticList
+     * @memberof ApiStatisticList
      */
     readonly algo: string;
 
     /**
-     * Mining account test
+     * Mining account
      * @type {string}
-     * @memberof MiningApiStatisticList
+     * @memberof ApiStatisticList
      */
     readonly userName: string;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof MiningApiStatisticList
+     * @memberof ApiStatisticList
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * MiningApi - object-oriented interface
- * @class MiningApi
+ * Api - object-oriented interface
+ * @class Api
  */
-export class MiningApi implements MiningApiInterface {
+export class Api implements ApiInterface {
     private readonly configuration: ConfigurationRestAPI;
     private localVarAxiosParamCreator;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.localVarAxiosParamCreator = MiningApiAxiosParamCreator(configuration);
+        this.localVarAxiosParamCreator = ApiAxiosParamCreator(configuration);
     }
 
     /**
      * Query Account List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Account List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account List (USER_DATA)
      * @param {AccountListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Account-List Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#account-list Binance API Documentation}
      */
     public async accountList(
         requestParameters: AccountListRequest
@@ -1426,13 +1485,15 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Acquiring Algorithm
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Acquiring Algorithm(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Acquiring Algorithm (MARKET_DATA)
      * @returns {Promise<RestApiResponse<AcquiringAlgorithmResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Acquiring-Algorithm Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#acquiring-algorithm Binance API Documentation}
      */
     public async acquiringAlgorithm(): Promise<RestApiResponse<AcquiringAlgorithmResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.acquiringAlgorithm();
@@ -1451,13 +1512,15 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Acquiring CoinName
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Acquiring CoinName(MARKET_DATA)
+     * Security Type: MARKET_DATA
+     *
+     * @summary Acquiring CoinName (MARKET_DATA)
      * @returns {Promise<RestApiResponse<AcquiringCoinnameResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Acquiring-CoinName Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#acquiring-coinname Binance API Documentation}
      */
     public async acquiringCoinname(): Promise<RestApiResponse<AcquiringCoinnameResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.acquiringCoinname();
@@ -1474,15 +1537,18 @@ export class MiningApi implements MiningApiInterface {
     }
 
     /**
+     * Cancel hashrate resale configuration
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Cancel hashrate resale configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Cancel hashrate resale configuration (USER_DATA)
      * @param {CancelHashrateResaleConfigurationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelHashrateResaleConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Cancel-hashrate-resale-configuration Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#cancel-hashrate-resale-configuration Binance API Documentation}
      */
     public async cancelHashrateResaleConfiguration(
         requestParameters: CancelHashrateResaleConfigurationRequest
@@ -1508,14 +1574,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Query Earnings List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Earnings List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Earnings List (USER_DATA)
      * @param {EarningsListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EarningsListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Earnings-List Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#earnings-list Binance API Documentation}
      */
     public async earningsList(
         requestParameters: EarningsListRequest
@@ -1545,14 +1613,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Extra Bonus List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Extra Bonus List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Extra Bonus List (USER_DATA)
      * @param {ExtraBonusListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ExtraBonusListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Extra-Bonus-List Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#extra-bonus-list Binance API Documentation}
      */
     public async extraBonusList(
         requestParameters: ExtraBonusListRequest
@@ -1582,14 +1652,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Hashrate Resale Detail(USER_DATA)
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale Detail (USER_DATA)
      * @param {HashrateResaleDetailRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<HashrateResaleDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-Detail Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#hashrate-resale-detail Binance API Documentation}
      */
     public async hashrateResaleDetail(
         requestParameters: HashrateResaleDetailRequest
@@ -1615,14 +1687,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Hashrate Resale List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale List
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale List (USER_DATA)
      * @param {HashrateResaleListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<HashrateResaleListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-List Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#hashrate-resale-list Binance API Documentation}
      */
     public async hashrateResaleList(
         requestParameters: HashrateResaleListRequest = {}
@@ -1647,14 +1721,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Hashrate Resale Request
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Hashrate Resale Request(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Hashrate Resale Request (USER_DATA)
      * @param {HashrateResaleRequestRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<HashrateResaleRequestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-Request Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#hashrate-resale-request Binance API Documentation}
      */
     public async hashrateResaleRequest(
         requestParameters: HashrateResaleRequestRequest
@@ -1683,14 +1759,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Mining Account Earning
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Mining Account Earning(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Mining Account Earning (USER_DATA)
      * @param {MiningAccountEarningRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MiningAccountEarningResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Mining-Account-Earning Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#mining-account-earning Binance API Documentation}
      */
     public async miningAccountEarning(
         requestParameters: MiningAccountEarningRequest
@@ -1718,14 +1796,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Request for Detail Miner List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Request for Detail Miner List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Request for Detail Miner List (USER_DATA)
      * @param {RequestForDetailMinerListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RequestForDetailMinerListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Request-for-Detail-Miner-List Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#request-for-detail-miner-list Binance API Documentation}
      */
     public async requestForDetailMinerList(
         requestParameters: RequestForDetailMinerListRequest
@@ -1751,14 +1831,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Request for Miner List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Request for Miner List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Request for Miner List (USER_DATA)
      * @param {RequestForMinerListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RequestForMinerListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Request-for-Miner-List Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#request-for-miner-list Binance API Documentation}
      */
     public async requestForMinerList(
         requestParameters: RequestForMinerListRequest
@@ -1787,14 +1869,16 @@ export class MiningApi implements MiningApiInterface {
     /**
      * Statistic List
      *
-     * Weight: 5
+     * Weight(IP): 1
      *
-     * @summary Statistic List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Statistic List (USER_DATA)
      * @param {StatisticListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<StatisticListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MiningApi
-     * @see {@link https://developers.binance.com/docs/mining/rest-api/Statistic-List Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-mining/api/rest-api/~#statistic-list Binance API Documentation}
      */
     public async statisticList(
         requestParameters: StatisticListRequest

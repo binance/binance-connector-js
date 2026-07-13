@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface EarningsListResponseDataAccountProfitsInner {
     /**
-     *
+     * Mining date
      * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
     time?: number | bigint;
     /**
-     *
+     * 0: Mining Wallet, 5: Mining Address, 7: Pool Savings, 8: Transferred, 31: Income Transfer, 32: Hashrate Resale-Mining Wallet, 33: Hashrate Resale-Pool Savings
      * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
     type?: number | bigint;
     /**
-     *
+     * Transferred hashrate
      * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
     hashTransfer?: number | bigint;
     /**
-     *
+     * Transferred income
      * @type {number}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
     transferAmount?: number;
     /**
-     *
+     * Daily hashrate
      * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
     dayHashRate?: number | bigint;
     /**
-     *
+     * Earnings amount
      * @type {number}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
     profitAmount?: number;
     /**
-     *
+     * Coin type
      * @type {string}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
     coinName?: string;
     /**
-     *
+     * Status: 0 Unpaid, 1 Paying, 2 Paid
      * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */

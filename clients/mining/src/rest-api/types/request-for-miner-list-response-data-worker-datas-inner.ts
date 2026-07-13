@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface RequestForMinerListResponseDataWorkerDatasInner {
     /**
-     *
+     * Miner ID
      * @type {string}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
     workerId?: string;
     /**
-     *
+     * Miner name
      * @type {string}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
     workerName?: string;
     /**
-     *
+     * Status: 1 Valid, 2 Invalid, 3 No longer valid
      * @type {number | bigint}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
     status?: number | bigint;
     /**
-     *
+     * Real-time rate
      * @type {number | bigint}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
     hashRate?: number | bigint;
     /**
-     *
+     * 24H hashrate
      * @type {number}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
     dayHashRate?: number;
     /**
-     *
+     * Real-time rejection rate
      * @type {number | bigint}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
     rejectRate?: number | bigint;
     /**
-     *
+     * Last share time
      * @type {number | bigint}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */

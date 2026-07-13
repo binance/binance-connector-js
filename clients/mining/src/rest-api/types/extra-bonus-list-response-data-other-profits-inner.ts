@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface ExtraBonusListResponseDataOtherProfitsInner {
     /**
-     *
+     * Mining date
      * @type {number | bigint}
      * @memberof ExtraBonusListResponseDataOtherProfitsInner
      */
     time?: number | bigint;
     /**
-     *
+     * Coin name
      * @type {string}
      * @memberof ExtraBonusListResponseDataOtherProfitsInner
      */
     coinName?: string;
     /**
-     *
+     * 1: Merged Mining, 2: Activity Bonus, 3: Rebate, 4: Smart Pool, 6: Income Transfer, 7: Pool Savings
      * @type {number | bigint}
      * @memberof ExtraBonusListResponseDataOtherProfitsInner
      */
     type?: number | bigint;
     /**
-     *
+     * Amount
      * @type {number}
      * @memberof ExtraBonusListResponseDataOtherProfitsInner
      */
     profitAmount?: number;
     /**
-     *
+     * Status: 0 Unpaid, 1 Paying, 2 Paid
      * @type {number | bigint}
      * @memberof ExtraBonusListResponseDataOtherProfitsInner
      */

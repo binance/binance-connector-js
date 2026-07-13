@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Mining REST API
+ * Mining REST API
  *
- * OpenAPI Specification for the Binance Mining REST API
+ * Query mining status, earnings, and account data via the Binance Pool API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface HashrateResaleDetailResponseDataProfitTransferDetailsInner {
     /**
-     *
+     * Transfer-out sub-account
      * @type {string}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
     poolUsername?: string;
     /**
-     *
+     * Transfer-in sub-account
      * @type {string}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
     toPoolUsername?: string;
     /**
-     *
+     * Transfer algorithm name
      * @type {string}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
     algoName?: string;
     /**
-     *
+     * Transferred hashrate
      * @type {number | bigint}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
     hashRate?: number | bigint;
     /**
-     *
+     * Transfer date
      * @type {number | bigint}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
     day?: number | bigint;
     /**
-     *
+     * Transferred income
      * @type {number}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
     amount?: number;
     /**
-     *
+     * Income coin
      * @type {string}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
