@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Convert REST API
+ * Convert REST API
  *
- * OpenAPI Specification for the Binance Convert REST API
+ * Request quotes and execute cryptocurrency conversions via the Convert REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *

@@ -1,7 +1,7 @@
 /**
- * Binance Convert REST API
+ * Convert REST API
  *
- * OpenAPI Specification for the Binance Convert REST API
+ * Request quotes and execute cryptocurrency conversions via the Convert REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,14 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { TradeApi } from '../../../src/rest-api';
+import {
+    TradeApi,
+    PlaceLimitOrderSideEnum,
+    PlaceLimitOrderExpiredTypeEnum,
+    PlaceLimitOrderWalletTypeEnum,
+    SendQuoteRequestWalletTypeEnum,
+    SendQuoteRequestValidTimeEnum,
+} from '../../../src/rest-api';
 import {
     AcceptQuoteRequest,
     CancelLimitOrderRequest,
@@ -140,7 +147,7 @@ describe('TradeApi', () => {
     describe('cancelLimitOrder()', () => {
         it('should execute cancelLimitOrder() successfully with required parameters only', async () => {
             const params: CancelLimitOrderRequest = {
-                orderId: 1,
+                orderId: 1603680255057330400,
             };
 
             mockResponse = JSONParse(
@@ -163,7 +170,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelLimitOrder() successfully with optional parameters', async () => {
             const params: CancelLimitOrderRequest = {
-                orderId: 1,
+                orderId: 1603680255057330400,
                 recvWindow: 5000,
             };
 
@@ -187,7 +194,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when orderId is missing', async () => {
             const _params: CancelLimitOrderRequest = {
-                orderId: 1,
+                orderId: 1603680255057330400,
             };
             const params = Object.assign({ ..._params });
             delete params?.orderId;
@@ -199,7 +206,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelLimitOrderRequest = {
-                orderId: 1,
+                orderId: 1603680255057330400,
             };
 
             const errorResponse = {
@@ -438,11 +445,11 @@ describe('TradeApi', () => {
     describe('placeLimitOrder()', () => {
         it('should execute placeLimitOrder() successfully with required parameters only', async () => {
             const params: PlaceLimitOrderRequest = {
-                baseAsset: 'baseAsset_example',
-                quoteAsset: 'quoteAsset_example',
-                limitPrice: 1.0,
-                side: 'BUY',
-                expiredType: 'expiredType_example',
+                baseAsset: 'BTC',
+                quoteAsset: 'USDT',
+                limitPrice: 1,
+                side: PlaceLimitOrderSideEnum.BUY,
+                expiredType: PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
             };
 
             mockResponse = JSONParse(
@@ -465,14 +472,14 @@ describe('TradeApi', () => {
 
         it('should execute placeLimitOrder() successfully with optional parameters', async () => {
             const params: PlaceLimitOrderRequest = {
-                baseAsset: 'baseAsset_example',
-                quoteAsset: 'quoteAsset_example',
-                limitPrice: 1.0,
-                side: 'BUY',
-                expiredType: 'expiredType_example',
-                baseAmount: 1.0,
-                quoteAmount: 1.0,
-                walletType: '',
+                baseAsset: 'BTC',
+                quoteAsset: 'USDT',
+                limitPrice: 1,
+                side: PlaceLimitOrderSideEnum.BUY,
+                expiredType: PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
+                baseAmount: 1,
+                quoteAmount: 1,
+                walletType: PlaceLimitOrderWalletTypeEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -496,11 +503,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when baseAsset is missing', async () => {
             const _params: PlaceLimitOrderRequest = {
-                baseAsset: 'baseAsset_example',
-                quoteAsset: 'quoteAsset_example',
-                limitPrice: 1.0,
-                side: 'BUY',
-                expiredType: 'expiredType_example',
+                baseAsset: 'BTC',
+                quoteAsset: 'USDT',
+                limitPrice: 1,
+                side: PlaceLimitOrderSideEnum.BUY,
+                expiredType: PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
             };
             const params = Object.assign({ ..._params });
             delete params?.baseAsset;
@@ -512,11 +519,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when quoteAsset is missing', async () => {
             const _params: PlaceLimitOrderRequest = {
-                baseAsset: 'baseAsset_example',
-                quoteAsset: 'quoteAsset_example',
-                limitPrice: 1.0,
-                side: 'BUY',
-                expiredType: 'expiredType_example',
+                baseAsset: 'BTC',
+                quoteAsset: 'USDT',
+                limitPrice: 1,
+                side: PlaceLimitOrderSideEnum.BUY,
+                expiredType: PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
             };
             const params = Object.assign({ ..._params });
             delete params?.quoteAsset;
@@ -528,11 +535,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when limitPrice is missing', async () => {
             const _params: PlaceLimitOrderRequest = {
-                baseAsset: 'baseAsset_example',
-                quoteAsset: 'quoteAsset_example',
-                limitPrice: 1.0,
-                side: 'BUY',
-                expiredType: 'expiredType_example',
+                baseAsset: 'BTC',
+                quoteAsset: 'USDT',
+                limitPrice: 1,
+                side: PlaceLimitOrderSideEnum.BUY,
+                expiredType: PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
             };
             const params = Object.assign({ ..._params });
             delete params?.limitPrice;
@@ -544,11 +551,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: PlaceLimitOrderRequest = {
-                baseAsset: 'baseAsset_example',
-                quoteAsset: 'quoteAsset_example',
-                limitPrice: 1.0,
-                side: 'BUY',
-                expiredType: 'expiredType_example',
+                baseAsset: 'BTC',
+                quoteAsset: 'USDT',
+                limitPrice: 1,
+                side: PlaceLimitOrderSideEnum.BUY,
+                expiredType: PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
             };
             const params = Object.assign({ ..._params });
             delete params?.side;
@@ -560,11 +567,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when expiredType is missing', async () => {
             const _params: PlaceLimitOrderRequest = {
-                baseAsset: 'baseAsset_example',
-                quoteAsset: 'quoteAsset_example',
-                limitPrice: 1.0,
-                side: 'BUY',
-                expiredType: 'expiredType_example',
+                baseAsset: 'BTC',
+                quoteAsset: 'USDT',
+                limitPrice: 1,
+                side: PlaceLimitOrderSideEnum.BUY,
+                expiredType: PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
             };
             const params = Object.assign({ ..._params });
             delete params?.expiredType;
@@ -576,11 +583,11 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: PlaceLimitOrderRequest = {
-                baseAsset: 'baseAsset_example',
-                quoteAsset: 'quoteAsset_example',
-                limitPrice: 1.0,
-                side: 'BUY',
-                expiredType: 'expiredType_example',
+                baseAsset: 'BTC',
+                quoteAsset: 'USDT',
+                limitPrice: 1,
+                side: PlaceLimitOrderSideEnum.BUY,
+                expiredType: PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
             };
 
             const errorResponse = {
@@ -692,8 +699,8 @@ describe('TradeApi', () => {
     describe('sendQuoteRequest()', () => {
         it('should execute sendQuoteRequest() successfully with required parameters only', async () => {
             const params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -723,12 +730,12 @@ describe('TradeApi', () => {
 
         it('should execute sendQuoteRequest() successfully with optional parameters', async () => {
             const params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
-                fromAmount: 1.0,
-                toAmount: 1.0,
-                walletType: '',
-                validTime: '10s',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
+                fromAmount: 1,
+                toAmount: 1,
+                walletType: SendQuoteRequestWalletTypeEnum.SPOT,
+                validTime: SendQuoteRequestValidTimeEnum.VALID_TIME_10s,
                 recvWindow: 5000,
             };
 
@@ -759,8 +766,8 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when fromAsset is missing', async () => {
             const _params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.fromAsset;
@@ -772,8 +779,8 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when toAsset is missing', async () => {
             const _params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.toAsset;
@@ -785,8 +792,8 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
 
             const errorResponse = {

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Convert REST API
+ * Convert REST API
  *
- * OpenAPI Specification for the Binance Convert REST API
+ * Request quotes and execute cryptocurrency conversions via the Convert REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -32,43 +32,43 @@ export interface GetConvertTradeHistoryResponseListInner {
      */
     orderId?: number | bigint;
     /**
-     *
+     * Order status
      * @type {string}
      * @memberof GetConvertTradeHistoryResponseListInner
      */
     orderStatus?: string;
     /**
-     *
+     * Source asset
      * @type {string}
      * @memberof GetConvertTradeHistoryResponseListInner
      */
     fromAsset?: string;
     /**
-     *
+     * Source amount
      * @type {string}
      * @memberof GetConvertTradeHistoryResponseListInner
      */
     fromAmount?: string;
     /**
-     *
+     * Destination asset
      * @type {string}
      * @memberof GetConvertTradeHistoryResponseListInner
      */
     toAsset?: string;
     /**
-     *
+     * Destination amount
      * @type {string}
      * @memberof GetConvertTradeHistoryResponseListInner
      */
     toAmount?: string;
     /**
-     *
+     * Price ratio
      * @type {string}
      * @memberof GetConvertTradeHistoryResponseListInner
      */
     ratio?: string;
     /**
-     *
+     * Inverse price ratio
      * @type {string}
      * @memberof GetConvertTradeHistoryResponseListInner
      */

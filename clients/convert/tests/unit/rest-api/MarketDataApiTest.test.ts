@@ -1,7 +1,7 @@
 /**
- * Binance Convert REST API
+ * Convert REST API
  *
- * OpenAPI Specification for the Binance Convert REST API
+ * Request quotes and execute cryptocurrency conversions via the Convert REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -49,7 +49,7 @@ describe('MarketDataApi', () => {
                         fromAssetMinAmount: '0.0004',
                         fromAssetMaxAmount: '50',
                         toAssetMinAmount: '20',
-                        toAssetMaxAmount: '9E+24',
+                        toAssetMaxAmount: '2500000',
                     },
                 ])
             );
@@ -70,8 +70,8 @@ describe('MarketDataApi', () => {
 
         it('should execute listAllConvertPairs() successfully with optional parameters', async () => {
             const params: ListAllConvertPairsRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -82,7 +82,7 @@ describe('MarketDataApi', () => {
                         fromAssetMinAmount: '0.0004',
                         fromAssetMaxAmount: '50',
                         toAssetMinAmount: '20',
-                        toAssetMaxAmount: '9E+24',
+                        toAssetMaxAmount: '2500000',
                     },
                 ])
             );
@@ -119,12 +119,7 @@ describe('MarketDataApi', () => {
 
     describe('queryOrderQuantityPrecisionPerAsset()', () => {
         it('should execute queryOrderQuantityPrecisionPerAsset() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify([
-                    { asset: 'BTC', fraction: 8 },
-                    { asset: 'SHIB', fraction: 2 },
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([{ asset: 'BTC', fraction: 8 }]));
 
             const spy = jest.spyOn(client, 'queryOrderQuantityPrecisionPerAsset').mockReturnValue(
                 Promise.resolve({
@@ -145,12 +140,7 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    { asset: 'BTC', fraction: 8 },
-                    { asset: 'SHIB', fraction: 2 },
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([{ asset: 'BTC', fraction: 8 }]));
 
             const spy = jest.spyOn(client, 'queryOrderQuantityPrecisionPerAsset').mockReturnValue(
                 Promise.resolve({

@@ -1,4 +1,4 @@
-import { Convert, CONVERT_REST_API_PROD_URL } from '../../../src';
+import { Convert, ConvertRestAPI, CONVERT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,11 +10,11 @@ const client = new Convert({ configurationRestAPI });
 async function placeLimitOrder() {
     try {
         const response = await client.restAPI.placeLimitOrder({
-            baseAsset: 'baseAsset_example',
-            quoteAsset: 'quoteAsset_example',
-            limitPrice: 1.0,
-            side: 'BUY',
-            expiredType: 'expiredType_example',
+            baseAsset: 'BTC',
+            quoteAsset: 'USDT',
+            limitPrice: 1,
+            side: ConvertRestAPI.PlaceLimitOrderSideEnum.BUY,
+            expiredType: ConvertRestAPI.PlaceLimitOrderExpiredTypeEnum.EXPIRED_TYPE_1_D,
         });
 
         const rateLimits = response.rateLimits!;

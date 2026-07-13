@@ -1,7 +1,7 @@
 /**
- * Binance Convert REST API
+ * Convert REST API
  *
- * OpenAPI Specification for the Binance Convert REST API
+ * Request quotes and execute cryptocurrency conversions via the Convert REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -29,12 +28,14 @@ import type {
 const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
-         * Query for all convertible token pairs and the tokens’ respective upper/lower limits
+         * Query for all convertible token pairs and the tokens’ respective
+         * upper/lower limits
          *
-         * User needs to supply either or both of the input parameter
-         * If not defined for both fromAsset and toAsset, only partial token pairs will be returned
+         * Weight(IP): 3000
          *
-         * Weight: 3000(IP)
+         * Notes:
+         * - User needs to supply either or both input parameters.
+         * - If only one of `fromAsset` and `toAsset` is provided, only partial token pairs are returned.
          *
          * @summary List All Convert Pairs
          * @param {string} [fromAsset] User spends coin
@@ -69,10 +70,12 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query for supported asset’s precision information
          *
-         * Weight: 100(IP)
+         * Weight(IP): 100
          *
-         * @summary Query order quantity precision per asset(USER_DATA)
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * Security Type: USER_DATA
+         *
+         * @summary Query order quantity precision per asset (USER_DATA)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -108,12 +111,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
  */
 export interface MarketDataApiInterface {
     /**
-     * Query for all convertible token pairs and the tokens’ respective upper/lower limits
+     * Query for all convertible token pairs and the tokens’ respective
+     * upper/lower limits
      *
-     * User needs to supply either or both of the input parameter
-     * If not defined for both fromAsset and toAsset, only partial token pairs will be returned
+     * Weight(IP): 3000
      *
-     * Weight: 3000(IP)
+     * Notes:
+     * - User needs to supply either or both input parameters.
+     * - If only one of `fromAsset` and `toAsset` is provided, only partial token pairs are returned.
      *
      * @summary List All Convert Pairs
      * @param {ListAllConvertPairsRequest} requestParameters Request parameters.
@@ -127,9 +132,11 @@ export interface MarketDataApiInterface {
     /**
      * Query for supported asset’s precision information
      *
-     * Weight: 100(IP)
+     * Weight(IP): 100
      *
-     * @summary Query order quantity precision per asset(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query order quantity precision per asset (USER_DATA)
      * @param {QueryOrderQuantityPrecisionPerAssetRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -166,7 +173,7 @@ export interface ListAllConvertPairsRequest {
  */
 export interface QueryOrderQuantityPrecisionPerAssetRequest {
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof MarketDataApiQueryOrderQuantityPrecisionPerAsset
      */
@@ -187,19 +194,21 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Query for all convertible token pairs and the tokens’ respective upper/lower limits
+     * Query for all convertible token pairs and the tokens’ respective
+     * upper/lower limits
      *
-     * User needs to supply either or both of the input parameter
-     * If not defined for both fromAsset and toAsset, only partial token pairs will be returned
+     * Weight(IP): 3000
      *
-     * Weight: 3000(IP)
+     * Notes:
+     * - User needs to supply either or both input parameters.
+     * - If only one of `fromAsset` and `toAsset` is provided, only partial token pairs are returned.
      *
      * @summary List All Convert Pairs
      * @param {ListAllConvertPairsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ListAllConvertPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/convert/market-data/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/market-data#list-all-convert-pairs Binance API Documentation}
      */
     public async listAllConvertPairs(
         requestParameters: ListAllConvertPairsRequest = {}
@@ -223,14 +232,16 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query for supported asset’s precision information
      *
-     * Weight: 100(IP)
+     * Weight(IP): 100
      *
-     * @summary Query order quantity precision per asset(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query order quantity precision per asset (USER_DATA)
      * @param {QueryOrderQuantityPrecisionPerAssetRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryOrderQuantityPrecisionPerAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/convert/market-data/Query-order-quantity-precision-per-asset Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/market-data#query-order-quantity-precision-per-asset Binance API Documentation}
      */
     public async queryOrderQuantityPrecisionPerAsset(
         requestParameters: QueryOrderQuantityPrecisionPerAssetRequest = {}

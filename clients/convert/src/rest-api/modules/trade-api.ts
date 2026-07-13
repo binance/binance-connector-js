@@ -1,7 +1,7 @@
 /**
- * Binance Convert REST API
+ * Convert REST API
  *
- * OpenAPI Specification for the Binance Convert REST API
+ * Request quotes and execute cryptocurrency conversions via the Convert REST API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -37,11 +36,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Accept the offered quote by quote ID.
          *
-         * Weight: 500(UID)
+         * Weight(UID): 500
+         *
+         * Security Type: TRADE
          *
          * @summary Accept Quote (TRADE)
          * @param {string} quoteId
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -78,11 +79,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Enable users to cancel a limit order
          *
-         * Weight: 200(UID)
+         * Weight(UID): 200
          *
-         * @summary Cancel limit order (USER_DATA)
+         * Security Type: TRADE
+         *
+         * @summary Cancel limit order (TRADE)
          * @param {number | bigint} orderId The orderId from `placeOrder` api
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -119,15 +122,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get Convert Trade History
          *
-         * The max interval between startTime and endTime is 30 days.
+         * Weight(UID): 3000
          *
-         * Weight: 3000
+         * Security Type: USER_DATA
          *
-         * @summary Get Convert Trade History(USER_DATA)
+         * Notes:
+         * - The max interval between `startTime` and `endTime` is 30 days.
+         *
+         * @summary Get Convert Trade History (USER_DATA)
          * @param {number | bigint} startTime
          * @param {number | bigint} endTime
-         * @param {number | bigint} [limit] Default 100, Max 1000
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [limit] Number of records to return
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -174,9 +180,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query order status by order ID.
          *
-         * Weight: 100(UID)
+         * Weight(UID): 100
          *
-         * @summary Order status(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Order status (USER_DATA)
          * @param {string} [orderId] Either orderId or quoteId is required
          * @param {string} [quoteId] Either orderId or quoteId is required
          *
@@ -209,22 +217,27 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Enable users to place a limit order
          *
-         * `baseAsset` or `quoteAsset` can be determined via `exchangeInfo` endpoint.
-         * Limit price is defined from `baseAsset` to `quoteAsset`.
-         * Either `baseAmount` or `quoteAmount` is used.
+         * Weight(UID): 500
          *
-         * Weight: 500(UID)
+         * Security Type: TRADE
          *
-         * @summary Place limit order (USER_DATA)
-         * @param {string} baseAsset base asset (use the response `fromIsBase` from `GET /sapi/v1/convert/exchangeInfo` api to check which one is baseAsset )
+         * Notes:
+         * - `baseAsset` and `quoteAsset` can be determined via the `exchangeInfo` endpoint.
+         * - Limit price is defined from `baseAsset` to `quoteAsset`.
+         * - Exactly one of `baseAmount` or `quoteAmount` should be sent.
+         *
+         * @summary Place limit order (TRADE)
+         * @param {string} baseAsset base asset (use the response `fromIsBase` from `GET /sapi/v1/convert/exchangeInfo` api to check
+         * which one is baseAsset )
          * @param {string} quoteAsset quote asset
          * @param {number} limitPrice Symbol limit price (from baseAsset to quoteAsset)
-         * @param {string} side `BUY` or `SELL`
-         * @param {string} expiredType 1_D, 3_D, 7_D, 30_D  (D means day)
-         * @param {number} [baseAmount] Base asset amount.  (One of `baseAmount` or `quoteAmount` is required)
-         * @param {number} [quoteAmount] Quote asset amount.  (One of `baseAmount` or `quoteAmount` is required)
-         * @param {string} [walletType] It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {PlaceLimitOrderSideEnum} side `BUY` or `SELL`
+         * @param {PlaceLimitOrderExpiredTypeEnum} expiredType Order expiry duration. 1_D, 3_D, 7_D, 30_D (D means day)
+         * @param {number} [baseAmount] Base asset amount. (One of `baseAmount` or `quoteAmount` is required)
+         * @param {number} [quoteAmount] Quote asset amount. (One of `baseAmount` or `quoteAmount` is required)
+         * @param {PlaceLimitOrderWalletTypeEnum} [walletType] Wallet to use for payment. Supported values: `SPOT`, `FUNDING`, `EARN`.
+         * Combined wallets also supported: `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN`, `SPOT_EARN`. Default is `SPOT`.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -232,11 +245,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             baseAsset: string,
             quoteAsset: string,
             limitPrice: number,
-            side: string,
-            expiredType: string,
+            side: PlaceLimitOrderSideEnum,
+            expiredType: PlaceLimitOrderExpiredTypeEnum,
             baseAmount?: number,
             quoteAmount?: number,
-            walletType?: string,
+            walletType?: PlaceLimitOrderWalletTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'baseAsset' is not null or undefined
@@ -295,12 +308,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Request a quote for the requested token pairs
+         * Query current open limit orders
          *
-         * Weight: 3000(UID)
+         * Weight(UID): 3000
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query limit open orders (USER_DATA)
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -328,19 +343,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Request a quote for the requested token pairs
          *
-         * Either fromAmount or toAmount should be sent
-         * `quoteId` will be returned only if you have enough funds to convert
+         * Weight(UID): 200
          *
-         * Weight: 200(UID)
+         * Security Type: TRADE
          *
-         * @summary Send Quote Request(USER_DATA)
+         * Notes:
+         * - Either `fromAmount` or `toAmount` should be sent.
+         * - `quoteId` is returned only if you have enough funds to convert.
+         *
+         * @summary Send Quote Request (TRADE)
          * @param {string} fromAsset
          * @param {string} toAsset
          * @param {number} [fromAmount] When specified, it is the amount you will be debited after the conversion
          * @param {number} [toAmount] When specified, it is the amount you will be credited after the conversion
-         * @param {string} [walletType] It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
-         * @param {string} [validTime] 10s, 30s, 1m, default 10s
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
+         * @param {SendQuoteRequestWalletTypeEnum} [walletType] Wallet to use for payment. Supported values: `SPOT`, `FUNDING`, `EARN`.
+         * Combined wallets also supported: `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN`, `SPOT_EARN`. Default is `SPOT`.
+         * @param {SendQuoteRequestValidTimeEnum} [validTime] Quote valid duration. Supported values: 10s, 30s, 1m. Default is 10s.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -349,8 +368,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             toAsset: string,
             fromAmount?: number,
             toAmount?: number,
-            walletType?: string,
-            validTime?: string,
+            walletType?: SendQuoteRequestWalletTypeEnum,
+            validTime?: SendQuoteRequestValidTimeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromAsset' is not null or undefined
@@ -407,7 +426,9 @@ export interface TradeApiInterface {
     /**
      * Accept the offered quote by quote ID.
      *
-     * Weight: 500(UID)
+     * Weight(UID): 500
+     *
+     * Security Type: TRADE
      *
      * @summary Accept Quote (TRADE)
      * @param {AcceptQuoteRequest} requestParameters Request parameters.
@@ -421,9 +442,11 @@ export interface TradeApiInterface {
     /**
      * Enable users to cancel a limit order
      *
-     * Weight: 200(UID)
+     * Weight(UID): 200
      *
-     * @summary Cancel limit order (USER_DATA)
+     * Security Type: TRADE
+     *
+     * @summary Cancel limit order (TRADE)
      * @param {CancelLimitOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -435,11 +458,14 @@ export interface TradeApiInterface {
     /**
      * Get Convert Trade History
      *
-     * The max interval between startTime and endTime is 30 days.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
      *
-     * @summary Get Convert Trade History(USER_DATA)
+     * Notes:
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     *
+     * @summary Get Convert Trade History (USER_DATA)
      * @param {GetConvertTradeHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -451,9 +477,11 @@ export interface TradeApiInterface {
     /**
      * Query order status by order ID.
      *
-     * Weight: 100(UID)
+     * Weight(UID): 100
      *
-     * @summary Order status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Order status (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -465,13 +493,16 @@ export interface TradeApiInterface {
     /**
      * Enable users to place a limit order
      *
-     * `baseAsset` or `quoteAsset` can be determined via `exchangeInfo` endpoint.
-     * Limit price is defined from `baseAsset` to `quoteAsset`.
-     * Either `baseAmount` or `quoteAmount` is used.
+     * Weight(UID): 500
      *
-     * Weight: 500(UID)
+     * Security Type: TRADE
      *
-     * @summary Place limit order (USER_DATA)
+     * Notes:
+     * - `baseAsset` and `quoteAsset` can be determined via the `exchangeInfo` endpoint.
+     * - Limit price is defined from `baseAsset` to `quoteAsset`.
+     * - Exactly one of `baseAmount` or `quoteAmount` should be sent.
+     *
+     * @summary Place limit order (TRADE)
      * @param {PlaceLimitOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -481,9 +512,11 @@ export interface TradeApiInterface {
         requestParameters: PlaceLimitOrderRequest
     ): Promise<RestApiResponse<PlaceLimitOrderResponse>>;
     /**
-     * Request a quote for the requested token pairs
+     * Query current open limit orders
      *
-     * Weight: 3000(UID)
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query limit open orders (USER_DATA)
      * @param {QueryLimitOpenOrdersRequest} requestParameters Request parameters.
@@ -497,12 +530,15 @@ export interface TradeApiInterface {
     /**
      * Request a quote for the requested token pairs
      *
-     * Either fromAmount or toAmount should be sent
-     * `quoteId` will be returned only if you have enough funds to convert
+     * Weight(UID): 200
      *
-     * Weight: 200(UID)
+     * Security Type: TRADE
      *
-     * @summary Send Quote Request(USER_DATA)
+     * Notes:
+     * - Either `fromAmount` or `toAmount` should be sent.
+     * - `quoteId` is returned only if you have enough funds to convert.
+     *
+     * @summary Send Quote Request (TRADE)
      * @param {SendQuoteRequestRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -526,7 +562,7 @@ export interface AcceptQuoteRequest {
     readonly quoteId: string;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiAcceptQuote
      */
@@ -546,7 +582,7 @@ export interface CancelLimitOrderRequest {
     readonly orderId: number | bigint;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiCancelLimitOrder
      */
@@ -573,14 +609,14 @@ export interface GetConvertTradeHistoryRequest {
     readonly endTime: number | bigint;
 
     /**
-     * Default 100, Max 1000
+     * Number of records to return
      * @type {number | bigint}
      * @memberof TradeApiGetConvertTradeHistory
      */
     readonly limit?: number | bigint;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiGetConvertTradeHistory
      */
@@ -613,7 +649,8 @@ export interface OrderStatusRequest {
  */
 export interface PlaceLimitOrderRequest {
     /**
-     * base asset (use the response `fromIsBase` from `GET /sapi/v1/convert/exchangeInfo` api to check which one is baseAsset )
+     * base asset (use the response `fromIsBase` from `GET /sapi/v1/convert/exchangeInfo` api to check
+     * which one is baseAsset )
      * @type {string}
      * @memberof TradeApiPlaceLimitOrder
      */
@@ -635,41 +672,42 @@ export interface PlaceLimitOrderRequest {
 
     /**
      * `BUY` or `SELL`
-     * @type {string}
+     * @type {'BUY' | 'SELL'}
      * @memberof TradeApiPlaceLimitOrder
      */
-    readonly side: string;
+    readonly side: PlaceLimitOrderSideEnum;
 
     /**
-     * 1_D, 3_D, 7_D, 30_D  (D means day)
-     * @type {string}
+     * Order expiry duration. 1_D, 3_D, 7_D, 30_D (D means day)
+     * @type {'1_D' | '3_D' | '7_D' | '30_D'}
      * @memberof TradeApiPlaceLimitOrder
      */
-    readonly expiredType: string;
+    readonly expiredType: PlaceLimitOrderExpiredTypeEnum;
 
     /**
-     * Base asset amount.  (One of `baseAmount` or `quoteAmount` is required)
+     * Base asset amount. (One of `baseAmount` or `quoteAmount` is required)
      * @type {number}
      * @memberof TradeApiPlaceLimitOrder
      */
     readonly baseAmount?: number;
 
     /**
-     * Quote asset amount.  (One of `baseAmount` or `quoteAmount` is required)
+     * Quote asset amount. (One of `baseAmount` or `quoteAmount` is required)
      * @type {number}
      * @memberof TradeApiPlaceLimitOrder
      */
     readonly quoteAmount?: number;
 
     /**
-     * It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
-     * @type {string}
+     * Wallet to use for payment. Supported values: `SPOT`, `FUNDING`, `EARN`.
+     * Combined wallets also supported: `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN`, `SPOT_EARN`. Default is `SPOT`.
+     * @type {'SPOT' | 'FUNDING' | 'EARN' | 'SPOT_FUNDING' | 'FUNDING_EARN' | 'SPOT_FUNDING_EARN' | 'SPOT_EARN'}
      * @memberof TradeApiPlaceLimitOrder
      */
-    readonly walletType?: string;
+    readonly walletType?: PlaceLimitOrderWalletTypeEnum;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiPlaceLimitOrder
      */
@@ -682,7 +720,7 @@ export interface PlaceLimitOrderRequest {
  */
 export interface QueryLimitOpenOrdersRequest {
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiQueryLimitOpenOrders
      */
@@ -723,21 +761,22 @@ export interface SendQuoteRequestRequest {
     readonly toAmount?: number;
 
     /**
-     * It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
-     * @type {string}
+     * Wallet to use for payment. Supported values: `SPOT`, `FUNDING`, `EARN`.
+     * Combined wallets also supported: `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN`, `SPOT_EARN`. Default is `SPOT`.
+     * @type {'SPOT' | 'FUNDING' | 'EARN' | 'SPOT_FUNDING' | 'FUNDING_EARN' | 'SPOT_FUNDING_EARN' | 'SPOT_EARN'}
      * @memberof TradeApiSendQuoteRequest
      */
-    readonly walletType?: string;
+    readonly walletType?: SendQuoteRequestWalletTypeEnum;
 
     /**
-     * 10s, 30s, 1m, default 10s
-     * @type {string}
+     * Quote valid duration. Supported values: 10s, 30s, 1m. Default is 10s.
+     * @type {'10s' | '30s' | '1m'}
      * @memberof TradeApiSendQuoteRequest
      */
-    readonly validTime?: string;
+    readonly validTime?: SendQuoteRequestValidTimeEnum;
 
     /**
-     * The value cannot be greater than 60000
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiSendQuoteRequest
      */
@@ -760,14 +799,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Accept the offered quote by quote ID.
      *
-     * Weight: 500(UID)
+     * Weight(UID): 500
+     *
+     * Security Type: TRADE
      *
      * @summary Accept Quote (TRADE)
      * @param {AcceptQuoteRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AcceptQuoteResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/convert/trade/Accept-Quote Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/trade#accept-quote Binance API Documentation}
      */
     public async acceptQuote(
         requestParameters: AcceptQuoteRequest
@@ -791,14 +832,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Enable users to cancel a limit order
      *
-     * Weight: 200(UID)
+     * Weight(UID): 200
      *
-     * @summary Cancel limit order (USER_DATA)
+     * Security Type: TRADE
+     *
+     * @summary Cancel limit order (TRADE)
      * @param {CancelLimitOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelLimitOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/convert/trade/Cancel-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/trade#cancel-limit-order Binance API Documentation}
      */
     public async cancelLimitOrder(
         requestParameters: CancelLimitOrderRequest
@@ -822,16 +865,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get Convert Trade History
      *
-     * The max interval between startTime and endTime is 30 days.
+     * Weight(UID): 3000
      *
-     * Weight: 3000
+     * Security Type: USER_DATA
      *
-     * @summary Get Convert Trade History(USER_DATA)
+     * Notes:
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     *
+     * @summary Get Convert Trade History (USER_DATA)
      * @param {GetConvertTradeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetConvertTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/convert/trade/Get-Convert-Trade-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/trade#get-convert-trade-history Binance API Documentation}
      */
     public async getConvertTradeHistory(
         requestParameters: GetConvertTradeHistoryRequest
@@ -857,14 +903,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query order status by order ID.
      *
-     * Weight: 100(UID)
+     * Weight(UID): 100
      *
-     * @summary Order status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Order status (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OrderStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/convert/trade/Order-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/trade#order-status Binance API Documentation}
      */
     public async orderStatus(
         requestParameters: OrderStatusRequest = {}
@@ -888,18 +936,21 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Enable users to place a limit order
      *
-     * `baseAsset` or `quoteAsset` can be determined via `exchangeInfo` endpoint.
-     * Limit price is defined from `baseAsset` to `quoteAsset`.
-     * Either `baseAmount` or `quoteAmount` is used.
+     * Weight(UID): 500
      *
-     * Weight: 500(UID)
+     * Security Type: TRADE
      *
-     * @summary Place limit order (USER_DATA)
+     * Notes:
+     * - `baseAsset` and `quoteAsset` can be determined via the `exchangeInfo` endpoint.
+     * - Limit price is defined from `baseAsset` to `quoteAsset`.
+     * - Exactly one of `baseAmount` or `quoteAmount` should be sent.
+     *
+     * @summary Place limit order (TRADE)
      * @param {PlaceLimitOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<PlaceLimitOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/convert/trade/Place-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/trade#place-limit-order Binance API Documentation}
      */
     public async placeLimitOrder(
         requestParameters: PlaceLimitOrderRequest
@@ -928,16 +979,18 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Request a quote for the requested token pairs
+     * Query current open limit orders
      *
-     * Weight: 3000(UID)
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query limit open orders (USER_DATA)
      * @param {QueryLimitOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryLimitOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/convert/trade/Query-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/trade#query-limit-open-orders Binance API Documentation}
      */
     public async queryLimitOpenOrders(
         requestParameters: QueryLimitOpenOrdersRequest = {}
@@ -960,17 +1013,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Request a quote for the requested token pairs
      *
-     * Either fromAmount or toAmount should be sent
-     * `quoteId` will be returned only if you have enough funds to convert
+     * Weight(UID): 200
      *
-     * Weight: 200(UID)
+     * Security Type: TRADE
      *
-     * @summary Send Quote Request(USER_DATA)
+     * Notes:
+     * - Either `fromAmount` or `toAmount` should be sent.
+     * - `quoteId` is returned only if you have enough funds to convert.
+     *
+     * @summary Send Quote Request (TRADE)
      * @param {SendQuoteRequestRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SendQuoteRequestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/convert/trade/Send-quote-request Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-convert/api/rest-api/trade#send-quote-request Binance API Documentation}
      */
     public async sendQuoteRequest(
         requestParameters: SendQuoteRequestRequest
@@ -995,4 +1051,42 @@ export class TradeApi implements TradeApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum PlaceLimitOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum PlaceLimitOrderExpiredTypeEnum {
+    EXPIRED_TYPE_1_D = '1_D',
+    EXPIRED_TYPE_3_D = '3_D',
+    EXPIRED_TYPE_7_D = '7_D',
+    EXPIRED_TYPE_30_D = '30_D',
+}
+
+export enum PlaceLimitOrderWalletTypeEnum {
+    SPOT = 'SPOT',
+    FUNDING = 'FUNDING',
+    EARN = 'EARN',
+    SPOT_FUNDING = 'SPOT_FUNDING',
+    FUNDING_EARN = 'FUNDING_EARN',
+    SPOT_FUNDING_EARN = 'SPOT_FUNDING_EARN',
+    SPOT_EARN = 'SPOT_EARN',
+}
+
+export enum SendQuoteRequestWalletTypeEnum {
+    SPOT = 'SPOT',
+    FUNDING = 'FUNDING',
+    EARN = 'EARN',
+    SPOT_FUNDING = 'SPOT_FUNDING',
+    FUNDING_EARN = 'FUNDING_EARN',
+    SPOT_FUNDING_EARN = 'SPOT_FUNDING_EARN',
+    SPOT_EARN = 'SPOT_EARN',
+}
+
+export enum SendQuoteRequestValidTimeEnum {
+    VALID_TIME_10s = '10s',
+    VALID_TIME_30s = '30s',
+    VALID_TIME_1m = '1m',
 }
