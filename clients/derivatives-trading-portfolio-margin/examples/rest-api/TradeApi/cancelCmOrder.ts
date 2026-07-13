@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function cancelCmOrder() {
     try {
         const response = await client.restAPI.cancelCmOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_200925',
         });
 
         const rateLimits = response.rateLimits!;

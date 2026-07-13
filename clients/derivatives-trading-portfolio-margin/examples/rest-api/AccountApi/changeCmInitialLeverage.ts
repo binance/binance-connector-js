@@ -13,8 +13,8 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function changeCmInitialLeverage() {
     try {
         const response = await client.restAPI.changeCmInitialLeverage({
-            symbol: 'symbol_example',
-            leverage: 789,
+            symbol: 'BTCUSD_200925',
+            leverage: 21,
         });
 
         const rateLimits = response.rateLimits!;

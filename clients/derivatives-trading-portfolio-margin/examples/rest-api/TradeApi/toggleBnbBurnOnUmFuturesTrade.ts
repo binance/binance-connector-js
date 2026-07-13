@@ -1,5 +1,6 @@
 import {
     DerivativesTradingPortfolioMargin,
+    DerivativesTradingPortfolioMarginRestAPI,
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -13,7 +14,9 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function toggleBnbBurnOnUmFuturesTrade() {
     try {
         const response = await client.restAPI.toggleBnbBurnOnUmFuturesTrade({
-            feeBurn: 'feeBurn_example',
+            feeBurn:
+                DerivativesTradingPortfolioMarginRestAPI.ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum
+                    .TRUE,
         });
 
         const rateLimits = response.rateLimits!;

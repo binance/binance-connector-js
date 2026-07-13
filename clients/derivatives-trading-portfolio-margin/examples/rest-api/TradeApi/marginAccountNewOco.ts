@@ -14,7 +14,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function marginAccountNewOco() {
     try {
         const response = await client.restAPI.marginAccountNewOco({
-            symbol: 'symbol_example',
+            symbol: 'LTCBTC',
             side: DerivativesTradingPortfolioMarginRestAPI.MarginAccountNewOcoSideEnum.BUY,
             quantity: 1.0,
             price: 1.0,

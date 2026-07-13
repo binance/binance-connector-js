@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,115 +20,115 @@
  */
 export interface QueryCurrentUmOpenConditionalOrderResponse {
     /**
-     *
+     * New Client Strategy ID.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     newClientStrategyId?: string;
     /**
-     *
+     * Strategy ID.
      * @type {number | bigint}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     strategyId?: number | bigint;
     /**
-     *
+     * Strategy Status.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     strategyStatus?: string;
     /**
-     *
+     * Strategy Type.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     strategyType?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     bookTime?: number | bigint;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
     goodTillDate?: number | bigint;
     /**
-     *
+     * Price Match.
      * @type {string}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */

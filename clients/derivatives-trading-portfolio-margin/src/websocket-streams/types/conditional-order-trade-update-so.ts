@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Portfolio Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,127 +20,127 @@
  */
 export interface ConditionalOrderTradeUpdateSo {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     s?: string;
     /**
-     *
+     * Strategy Client Order Id
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     c?: string;
     /**
-     *
+     * Strategy ID
      * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     si?: number | bigint;
     /**
-     *
+     * Side
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     S?: string;
     /**
-     *
+     * Strategy Type
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     st?: string;
     /**
-     *
+     * Time in Force
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     f?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     q?: string;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     p?: string;
     /**
-     *
+     * Stop Price. Please ignore with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     sp?: string;
     /**
-     *
+     * Strategy Order Status
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     os?: string;
     /**
-     *
+     * Order book Time
      * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     T?: number | bigint;
     /**
-     *
+     * Order update Time
      * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     ut?: number | bigint;
     /**
-     *
+     * Is this reduce only
      * @type {boolean}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     R?: boolean;
     /**
-     *
+     * Stop Price Working Type
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     wt?: string;
     /**
-     *
+     * Position Side
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     ps?: string;
     /**
-     *
+     * If Close-All, pushed with conditional order
      * @type {boolean}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     cp?: boolean;
     /**
-     *
+     * Activation Price, only pushed with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     AP?: string;
     /**
-     *
+     * Callback Rate, only pushed with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     cr?: string;
     /**
-     *
+     * Order Id
      * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     i?: number | bigint;
     /**
-     *
+     * STP mode
      * @type {string}
      * @memberof ConditionalOrderTradeUpdateSo
      */
     V?: string;
     /**
-     *
+     * TIF GTD order auto cancel time
      * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */

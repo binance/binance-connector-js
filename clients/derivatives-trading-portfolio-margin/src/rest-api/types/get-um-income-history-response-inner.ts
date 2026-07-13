@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface GetUmIncomeHistoryResponseInner {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof GetUmIncomeHistoryResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Income type.
      * @type {string}
      * @memberof GetUmIncomeHistoryResponseInner
      */
     incomeType?: string;
     /**
-     *
+     * Income amount.
      * @type {string}
      * @memberof GetUmIncomeHistoryResponseInner
      */
     income?: string;
     /**
-     *
+     * Income asset.
      * @type {string}
      * @memberof GetUmIncomeHistoryResponseInner
      */
     asset?: string;
     /**
-     *
+     * Extra information.
      * @type {string}
      * @memberof GetUmIncomeHistoryResponseInner
      */
     info?: string;
     /**
-     *
+     * Event time.
      * @type {number | bigint}
      * @memberof GetUmIncomeHistoryResponseInner
      */
     time?: number | bigint;
     /**
-     *
-     * @type {number | bigint}
+     * Transaction ID.
+     * @type {string}
      * @memberof GetUmIncomeHistoryResponseInner
      */
-    tranId?: number | bigint;
+    tranId?: string;
     /**
-     *
+     * Trade ID, if existing.
      * @type {string}
      * @memberof GetUmIncomeHistoryResponseInner
      */

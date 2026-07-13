@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface ChangeCmInitialLeverageResponse {
     /**
-     *
+     * current initial leverage
      * @type {number | bigint}
      * @memberof ChangeCmInitialLeverageResponse
      */
     leverage?: number | bigint;
     /**
-     *
+     * maximum quantity of base asset
      * @type {string}
      * @memberof ChangeCmInitialLeverageResponse
      */
     maxQty?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof ChangeCmInitialLeverageResponse
      */

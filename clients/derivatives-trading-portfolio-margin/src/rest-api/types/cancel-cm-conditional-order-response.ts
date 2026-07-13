@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,109 +20,109 @@
  */
 export interface CancelCmConditionalOrderResponse {
     /**
-     *
+     * New Client Strategy ID.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     newClientStrategyId?: string;
     /**
-     *
+     * Strategy ID.
      * @type {number | bigint}
      * @memberof CancelCmConditionalOrderResponse
      */
     strategyId?: number | bigint;
     /**
-     *
+     * Strategy Status.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     strategyStatus?: string;
     /**
-     *
+     * Strategy Type.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     strategyType?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof CancelCmConditionalOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * order place time
      * @type {number | bigint}
      * @memberof CancelCmConditionalOrderResponse
      */
     bookTime?: number | bigint;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof CancelCmConditionalOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof CancelCmConditionalOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * Price Protect.
      * @type {boolean}
      * @memberof CancelCmConditionalOrderResponse
      */

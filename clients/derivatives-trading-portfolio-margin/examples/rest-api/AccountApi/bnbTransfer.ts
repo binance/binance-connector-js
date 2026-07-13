@@ -1,5 +1,6 @@
 import {
     DerivativesTradingPortfolioMargin,
+    DerivativesTradingPortfolioMarginRestAPI,
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -14,7 +15,8 @@ async function bnbTransfer() {
     try {
         const response = await client.restAPI.bnbTransfer({
             amount: 1.0,
-            transferSide: 'transferSide_example',
+            transferSide:
+                DerivativesTradingPortfolioMarginRestAPI.BnbTransferTransferSideEnum.TO_UM,
         });
 
         const rateLimits = response.rateLimits!;

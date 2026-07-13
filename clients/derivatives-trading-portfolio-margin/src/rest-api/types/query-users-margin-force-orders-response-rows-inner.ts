@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,55 +20,55 @@
  */
 export interface QueryUsersMarginForceOrdersResponseRowsInner {
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
     avgPrice?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
     executedQty?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
     price?: string;
     /**
-     *
+     * Qty.
      * @type {string}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
     qty?: string;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
     side?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
     symbol?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
     timeInForce?: string;
     /**
-     *
+     * Updated Time.
      * @type {number | bigint}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */

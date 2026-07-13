@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,13 +28,13 @@ import type { GetCmAccountDetailResponsePositionsInner } from './get-cm-account-
  */
 export interface GetCmAccountDetailResponse {
     /**
-     *
+     * Assets.
      * @type {Array<GetCmAccountDetailResponseAssetsInner>}
      * @memberof GetCmAccountDetailResponse
      */
     assets?: Array<GetCmAccountDetailResponseAssetsInner>;
     /**
-     *
+     * positions of all symbols in the market are returned
      * @type {Array<GetCmAccountDetailResponsePositionsInner>}
      * @memberof GetCmAccountDetailResponse
      */

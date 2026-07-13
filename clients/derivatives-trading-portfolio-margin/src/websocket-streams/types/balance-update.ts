@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Portfolio Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface Balanceupdate
+ * @interface BalanceUpdate
  */
-export interface Balanceupdate {
+export interface BalanceUpdate {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
-     * @memberof Balanceupdate
+     * @memberof BalanceUpdate
      */
     E?: number | bigint;
     /**
-     *
+     * Asset
      * @type {string}
-     * @memberof Balanceupdate
+     * @memberof BalanceUpdate
      */
     a?: string;
     /**
-     *
+     * Balance Delta
      * @type {string}
-     * @memberof Balanceupdate
+     * @memberof BalanceUpdate
      */
     d?: string;
     /**
-     *
+     * Event updateId
      * @type {number | bigint}
-     * @memberof Balanceupdate
+     * @memberof BalanceUpdate
      */
     U?: number | bigint;
     /**
-     *
+     * Clear Time
      * @type {number | bigint}
-     * @memberof Balanceupdate
+     * @memberof BalanceUpdate
      */
     T?: number | bigint;
 }

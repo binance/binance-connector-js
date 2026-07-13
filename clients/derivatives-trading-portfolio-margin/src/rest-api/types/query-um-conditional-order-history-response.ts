@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,145 +20,145 @@
  */
 export interface QueryUmConditionalOrderHistoryResponse {
     /**
-     *
+     * New Client Strategy ID.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     newClientStrategyId?: string;
     /**
-     *
+     * Strategy ID.
      * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     strategyId?: number | bigint;
     /**
-     *
+     * Strategy Status.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     strategyStatus?: string;
     /**
-     *
+     * Strategy Type.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     strategyType?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     stopPrice?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     symbol?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable，only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Normal order status after trigger if appliable, only have when the strategy is triggered
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     status?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     bookTime?: number | bigint;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Trigger Time.
      * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     triggerTime?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     priceRate?: string;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     workingType?: string;
     /**
-     *
+     * Price Protect.
      * @type {boolean}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */

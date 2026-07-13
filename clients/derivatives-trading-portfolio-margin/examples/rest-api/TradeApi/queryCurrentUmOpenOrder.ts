@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function queryCurrentUmOpenOrder() {
     try {
         const response = await client.restAPI.queryCurrentUmOpenOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

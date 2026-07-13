@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,121 +20,121 @@
  */
 export interface QueryAllCmConditionalOrdersResponseInner {
     /**
-     *
+     * New Client Strategy ID.
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     newClientStrategyId?: string;
     /**
-     *
+     * Strategy ID.
      * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     strategyId?: number | bigint;
     /**
-     *
+     * Strategy Status.
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     strategyStatus?: string;
     /**
-     *
+     * Strategy Type.
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     strategyType?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Normal order status after trigger if appliable, only have when the strategy is triggered
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     bookTime?: number | bigint;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Trigger Time.
      * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     triggerTime?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */

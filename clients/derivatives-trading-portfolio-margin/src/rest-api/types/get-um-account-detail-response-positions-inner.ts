@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,85 +20,85 @@
  */
 export interface GetUmAccountDetailResponsePositionsInner {
     /**
-     *
+     * symbol name
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     symbol?: string;
     /**
-     *
+     * total initial margin required with current mark price
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     initialMargin?: string;
     /**
-     *
+     * maintenance margin required
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     maintMargin?: string;
     /**
-     *
+     * unrealized profit
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * initial margin required for positions with current mark price
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * initial margin required for open orders with current mark price
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * current initial leverage
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     leverage?: string;
     /**
-     *
+     * average entry price
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     entryPrice?: string;
     /**
-     *
+     * maximum available notional with current leverage
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     maxNotional?: string;
     /**
-     *
+     * bids notional, ignore
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     bidNotional?: string;
     /**
-     *
+     * ask notional, ignore
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     askNotional?: string;
     /**
-     *
+     * position side
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     positionSide?: string;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
     positionAmt?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */

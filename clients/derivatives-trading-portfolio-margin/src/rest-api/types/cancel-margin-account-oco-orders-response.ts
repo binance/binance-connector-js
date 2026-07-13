@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,55 +28,55 @@ import type { CancelMarginAccountOcoOrdersResponseOrdersInner } from './cancel-m
  */
 export interface CancelMarginAccountOcoOrdersResponse {
     /**
-     *
+     * Order List ID.
      * @type {number | bigint}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
     orderListId?: number | bigint;
     /**
-     *
+     * Contingency Type.
      * @type {string}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
     contingencyType?: string;
     /**
-     *
+     * List Status Type.
      * @type {string}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
     listStatusType?: string;
     /**
-     *
+     * List Order Status.
      * @type {string}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
     listOrderStatus?: string;
     /**
-     *
+     * List Client Order ID.
      * @type {string}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
     listClientOrderId?: string;
     /**
-     *
+     * Transaction Time.
      * @type {number | bigint}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
     symbol?: string;
     /**
-     *
+     * Orders.
      * @type {Array<CancelMarginAccountOcoOrdersResponseOrdersInner>}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
     orders?: Array<CancelMarginAccountOcoOrdersResponseOrdersInner>;
     /**
-     *
+     * Order Reports.
      * @type {Array<CancelMarginAccountOcoOrdersResponseOrderReportsInner>}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface GetMarginBorrowLoanInterestHistoryResponseRowsInner {
     /**
-     *
+     * Tx ID.
      * @type {number | bigint}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
     txId?: number | bigint;
     /**
-     *
+     * Interest Accured Time.
      * @type {number | bigint}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
     interestAccuredTime?: number | bigint;
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
     asset?: string;
     /**
-     *
+     * Raw Asset.
      * @type {string}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
     rawAsset?: string;
     /**
-     *
+     * Principal repaid
      * @type {string}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
     principal?: string;
     /**
-     *
+     * Interest repaid
      * @type {string}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
     interest?: string;
     /**
-     *
+     * daily interest rate
      * @type {string}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
     interestRate?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */

@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function queryCurrentMarginOpenOrder() {
     try {
         const response = await client.restAPI.queryCurrentMarginOpenOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface QueryMarginLoanRecordResponseRowsInner {
     /**
-     *
+     * Tx ID.
      * @type {number | bigint}
      * @memberof QueryMarginLoanRecordResponseRowsInner
      */
     txId?: number | bigint;
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof QueryMarginLoanRecordResponseRowsInner
      */
     asset?: string;
     /**
-     *
+     * Principal repaid
      * @type {string}
      * @memberof QueryMarginLoanRecordResponseRowsInner
      */
     principal?: string;
     /**
-     *
+     * Timestamp.
      * @type {number | bigint}
      * @memberof QueryMarginLoanRecordResponseRowsInner
      */
     timestamp?: number | bigint;
     /**
-     *
+     * one of PENDING (pending execution), CONFIRMED (successfully loaned), FAILED (execution failed, nothing happened to your account);
      * @type {string}
      * @memberof QueryMarginLoanRecordResponseRowsInner
      */

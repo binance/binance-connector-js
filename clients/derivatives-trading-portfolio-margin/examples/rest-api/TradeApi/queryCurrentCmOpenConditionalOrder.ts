@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function queryCurrentCmOpenConditionalOrder() {
     try {
         const response = await client.restAPI.queryCurrentCmOpenConditionalOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_200925',
         });
 
         const rateLimits = response.rateLimits!;

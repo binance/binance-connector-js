@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface GetUmAccountDetailV2ResponsePositionsInner {
     /**
-     *
+     * symbol name
      * @type {string}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */
     symbol?: string;
     /**
-     *
+     * total initial margin required with current mark price
      * @type {string}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */
     initialMargin?: string;
     /**
-     *
+     * maintenance margin required
      * @type {string}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */
     maintMargin?: string;
     /**
-     *
+     * unrealized profit
      * @type {string}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * position side
      * @type {string}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */
     positionSide?: string;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */
     positionAmt?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Notional.
      * @type {string}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface UmFuturesAccountConfigurationResponse {
     /**
-     *
+     * account commission tier
      * @type {number | bigint}
      * @memberof UmFuturesAccountConfigurationResponse
      */
     feeTier?: number | bigint;
     /**
-     *
+     * if can trade
      * @type {boolean}
      * @memberof UmFuturesAccountConfigurationResponse
      */
     canTrade?: boolean;
     /**
-     *
+     * if can transfer in asset
      * @type {boolean}
      * @memberof UmFuturesAccountConfigurationResponse
      */
     canDeposit?: boolean;
     /**
-     *
+     * if can transfer out asset
      * @type {boolean}
      * @memberof UmFuturesAccountConfigurationResponse
      */
     canWithdraw?: boolean;
     /**
-     *
+     * \"true\": Hedge Mode; \"false\": One-way Mode
      * @type {boolean}
      * @memberof UmFuturesAccountConfigurationResponse
      */
     dualSidePosition?: boolean;
     /**
-     *
+     * reserved property, please ignore
      * @type {number | bigint}
      * @memberof UmFuturesAccountConfigurationResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Multi Assets Margin.
      * @type {boolean}
      * @memberof UmFuturesAccountConfigurationResponse
      */
     multiAssetsMargin?: boolean;
     /**
-     *
+     * Trade Group ID.
      * @type {number | bigint}
      * @memberof UmFuturesAccountConfigurationResponse
      */

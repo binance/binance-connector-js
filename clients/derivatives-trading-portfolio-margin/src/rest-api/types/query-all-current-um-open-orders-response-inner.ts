@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,121 +20,121 @@
  */
 export interface QueryAllCurrentUmOpenOrdersResponseInner {
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Cum Quote.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
     goodTillDate?: number | bigint;
     /**
-     *
+     * Price Match.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface GetUserCommissionRateForUmResponse {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof GetUserCommissionRateForUmResponse
      */
     symbol?: string;
     /**
-     *
+     * 0.02%
      * @type {string}
      * @memberof GetUserCommissionRateForUmResponse
      */
     makerCommissionRate?: string;
     /**
-     *
+     * 0.04%
      * @type {string}
      * @memberof GetUserCommissionRateForUmResponse
      */

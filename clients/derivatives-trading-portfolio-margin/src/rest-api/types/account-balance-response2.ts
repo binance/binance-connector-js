@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,73 +20,73 @@
  */
 export interface AccountBalanceResponse2 {
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     asset?: string;
     /**
-     *
+     * Total Wallet Balance.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     totalWalletBalance?: string;
     /**
-     *
+     * Cross Margin Borrowed.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     crossMarginBorrowed?: string;
     /**
-     *
+     * Cross Margin Free.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     crossMarginFree?: string;
     /**
-     *
+     * Cross Margin Interest.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     crossMarginInterest?: string;
     /**
-     *
+     * Cross Margin Locked.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     crossMarginLocked?: string;
     /**
-     *
+     * Um Wallet Balance.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     umWalletBalance?: string;
     /**
-     *
+     * Um Unrealized PNL.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     umUnrealizedPNL?: string;
     /**
-     *
+     * Cm Wallet Balance.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     cmWalletBalance?: string;
     /**
-     *
+     * Cm Unrealized PNL.
      * @type {string}
      * @memberof AccountBalanceResponse2
      */
     cmUnrealizedPNL?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof AccountBalanceResponse2
      */
     updateTime?: number | bigint;
     /**
-     *
+     * negative balance amount
      * @type {string}
      * @memberof AccountBalanceResponse2
      */

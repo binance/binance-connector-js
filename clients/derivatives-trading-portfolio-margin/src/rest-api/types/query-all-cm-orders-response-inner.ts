@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,109 +20,109 @@
  */
 export interface QueryAllCmOrdersResponseInner {
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Cum Base.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     cumBase?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryAllCmOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryAllCmOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     pair?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryAllCmOrdersResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof QueryAllCmOrdersResponseInner
      */

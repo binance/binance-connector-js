@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface GetUmFuturesTransactionDownloadLinkByIdResponse {
     /**
-     *
+     * Download ID.
      * @type {string}
      * @memberof GetUmFuturesTransactionDownloadLinkByIdResponse
      */
     downloadId?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof GetUmFuturesTransactionDownloadLinkByIdResponse
      */
     status?: string;
     /**
-     *
+     * The link is mapped to download id
      * @type {string}
      * @memberof GetUmFuturesTransactionDownloadLinkByIdResponse
      */
     url?: string;
     /**
-     *
+     * S3 Link.
      * @type {string}
      * @memberof GetUmFuturesTransactionDownloadLinkByIdResponse
      */
     s3Link?: string;
     /**
-     *
+     * ignore
      * @type {boolean}
      * @memberof GetUmFuturesTransactionDownloadLinkByIdResponse
      */
     notified?: boolean;
     /**
-     *
+     * The link would expire after this timestamp
      * @type {number | bigint}
      * @memberof GetUmFuturesTransactionDownloadLinkByIdResponse
      */
     expirationTimestamp?: number | bigint;
     /**
-     *
+     * Is Expired.
      * @type {string}
      * @memberof GetUmFuturesTransactionDownloadLinkByIdResponse
      */

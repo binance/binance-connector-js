@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,67 +28,67 @@ import type { MarginAccountNewOcoResponseOrdersInner } from './margin-account-ne
  */
 export interface MarginAccountNewOcoResponse {
     /**
-     *
+     * Order List ID.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponse
      */
     orderListId?: number | bigint;
     /**
-     *
+     * Contingency Type.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     contingencyType?: string;
     /**
-     *
+     * List Status Type.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     listStatusType?: string;
     /**
-     *
+     * List Order Status.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     listOrderStatus?: string;
     /**
-     *
+     * List Client Order ID.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     listClientOrderId?: string;
     /**
-     *
+     * Transaction Time.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponse
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     symbol?: string;
     /**
-     *
+     * will not return if no margin trade happens
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     marginBuyBorrowAmount?: string;
     /**
-     *
+     * will not return if no margin trade happens
      * @type {string}
      * @memberof MarginAccountNewOcoResponse
      */
     marginBuyBorrowAsset?: string;
     /**
-     *
+     * Orders.
      * @type {Array<MarginAccountNewOcoResponseOrdersInner>}
      * @memberof MarginAccountNewOcoResponse
      */
     orders?: Array<MarginAccountNewOcoResponseOrdersInner>;
     /**
-     *
+     * Order Reports.
      * @type {Array<MarginAccountNewOcoResponseOrderReportsInner>}
      * @memberof MarginAccountNewOcoResponse
      */

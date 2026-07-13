@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function cancelAllUmAlgoOpenOrders() {
     try {
         const response = await client.restAPI.cancelAllUmAlgoOpenOrders({
-            symbol: 'symbol_example',
+            symbol: 'BNBUSDT',
         });
 
         const rateLimits = response.rateLimits!;

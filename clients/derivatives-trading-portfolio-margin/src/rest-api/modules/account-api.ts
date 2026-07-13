@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -72,9 +71,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query account balance
          *
-         * Weight: 20
+         * Weight(IP): 20
          *
-         * @summary Account Balance(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Account Balance (USER_DATA)
          * @param {string} [asset]
          * @param {number | bigint} [recvWindow]
          *
@@ -110,9 +111,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query account information
          *
-         * Weight: 20
+         * Weight(IP): 20
          *
-         * @summary Account Information(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Account Information (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -141,20 +144,23 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Transfer BNB in and out of UM
          *
-         * The endpoint can only be called 10 times per 10 minutes in a rolling manner
+         * Weight(IP): 750
          *
-         * Weight: 750
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - The endpoint can only be called 10 times per 10 minutes in a rolling manner
          *
          * @summary BNB transfer (TRADE)
          * @param {number} amount
-         * @param {string} transferSide "TO_UM","FROM_UM"
+         * @param {BnbTransferTransferSideEnum} transferSide
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         bnbTransfer: async (
             amount: number,
-            transferSide: string,
+            transferSide: BnbTransferTransferSideEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
@@ -191,16 +197,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Change Auto-repay-futures Status
          *
-         * Weight: 750
+         * Weight(IP): 750
          *
-         * @summary Change Auto-repay-futures Status(TRADE)
-         * @param {string} autoRepay Default: `true`; `false` for turn off the auto-repay futures negative balance function
+         * Security Type: TRADE
+         *
+         * @summary Change Auto-repay-futures Status (TRADE)
+         * @param {ChangeAutoRepayFuturesStatusAutoRepayEnum} autoRepay `false` for turn off the auto-repay futures negative balance function
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeAutoRepayFuturesStatus: async (
-            autoRepay: string,
+            autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'autoRepay' is not null or undefined
@@ -232,11 +240,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Change user's initial leverage of specific symbol in CM.
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: TRADE
          *
          * @summary Change CM Initial Leverage (TRADE)
          * @param {string} symbol
-         * @param {number | bigint} leverage target initial leverage: int from 1 to 125
+         * @param {number | bigint} leverage target initial leverage
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -280,16 +290,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in CM
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Change CM Position Mode(TRADE)
-         * @param {string} dualSidePosition "true": Hedge Mode; "false": One-way Mode
+         * Security Type: TRADE
+         *
+         * @summary Change CM Position Mode (TRADE)
+         * @param {ChangeCmPositionModeDualSidePositionEnum} dualSidePosition "true": Hedge Mode; "false": One-way Mode
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeCmPositionMode: async (
-            dualSidePosition: string,
+            dualSidePosition: ChangeCmPositionModeDualSidePositionEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'dualSidePosition' is not null or undefined
@@ -321,11 +333,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Change user's initial leverage of specific symbol in UM.
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Change UM Initial Leverage(TRADE)
+         * Security Type: TRADE
+         *
+         * @summary Change UM Initial Leverage (TRADE)
          * @param {string} symbol
-         * @param {number | bigint} leverage target initial leverage: int from 1 to 125
+         * @param {number | bigint} leverage target initial leverage
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -369,16 +383,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in UM
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Change UM Position Mode(TRADE)
-         * @param {string} dualSidePosition "true": Hedge Mode; "false": One-way Mode
+         * Security Type: TRADE
+         *
+         * @summary Change UM Position Mode (TRADE)
+         * @param {ChangeUmPositionModeDualSidePositionEnum} dualSidePosition "true": Hedge Mode; "false": One-way Mode
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeUmPositionMode: async (
-            dualSidePosition: string,
+            dualSidePosition: ChangeUmPositionModeDualSidePositionEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'dualSidePosition' is not null or undefined
@@ -410,9 +426,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query CM notional and leverage brackets
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary CM Notional and Leverage Brackets(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary CM Notional and Leverage Brackets (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [recvWindow]
          *
@@ -448,12 +466,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Fund collection for Portfolio Margin
          *
-         * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
-         * You can only use this function 500 times per hour in a rolling manner.
+         * Weight(IP): 750
          *
-         * Weight: 750
+         * Security Type: TRADE
          *
-         * @summary Fund Auto-collection(TRADE)
+         * Notes:
+         * - BNB assets will not be auto-collected.
+         * - Rolling window endpoint can be called at most 500 times per hour.
+         *
+         * @summary Fund Auto-collection (TRADE)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -482,11 +503,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Transfers specific asset from Futures Account to Margin account
          *
-         * The BNB transfer is not be supported
+         * Weight(IP): 30
          *
-         * Weight: 30
+         * Security Type: TRADE
          *
-         * @summary Fund Collection by Asset(TRADE)
+         * Notes:
+         * - The BNB transfer is not be supported
+         *
+         * @summary Fund Collection by Asset (TRADE)
          * @param {string} asset
          * @param {number | bigint} [recvWindow]
          *
@@ -525,9 +549,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query Auto-repay-futures Status
          *
-         * Weight: 30
+         * Weight(IP): 30
          *
-         * @summary Get Auto-repay-futures Status(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Auto-repay-futures Status (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -556,9 +582,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current CM account asset and position information.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Get CM Account Detail(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get CM Account Detail (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -587,9 +615,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in CM
          *
-         * Weight: 30
+         * Weight(IP): 30
          *
-         * @summary Get CM Current Position Mode(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get CM Current Position Mode (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -616,30 +646,32 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Get CM Income History
+         * Get CM Income History.
          *
+         * Weight(IP): 30
          *
-         * If `incomeType` is not sent, all kinds of flow will be returned
-         * "trandId" is unique in the same "incomeType" for a user
-         * The interval between `startTime` and `endTime` can not exceed 200 days:
-         * If `startTime` and `endTime` are not sent, the last 200 days will be returned
+         * Security Type: USER_DATA
          *
-         * Weight: 30
+         * Notes:
+         * - If `incomeType` is not sent, all kinds of flow will be returned
+         * - "trandId" is unique in the same "incomeType" for a user
+         * - The interval between `startTime` and `endTime` can not exceed 200 days:
+         * - If `startTime` and `endTime` are not sent, the last 200 days will be returned
          *
-         * @summary Get CM Income History(USER_DATA)
+         * @summary Get CM Income History (USER_DATA)
          * @param {string} [symbol]
-         * @param {string} [incomeType] TRANSFER, WELCOME_BONUS, REALIZED_PNL, FUNDING_FEE, COMMISSION, INSURANCE_CLEAR, REFERRAL_KICKBACK, COMMISSION_REBATE, API_REBATE, CONTEST_REWARD, CROSS_COLLATERAL_TRANSFER, OPTIONS_PREMIUM_FEE, OPTIONS_SETTLE_PROFIT, INTERNAL_TRANSFER, AUTO_EXCHANGE, DELIVERED_SETTELMENT, COIN_SWAP_DEPOSIT, COIN_SWAP_WITHDRAW, POSITION_LIMIT_INCREASE_FEE
+         * @param {GetCmIncomeHistoryIncomeTypeEnum} [incomeType]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
          * @param {number | bigint} [page]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getCmIncomeHistory: async (
             symbol?: string,
-            incomeType?: string,
+            incomeType?: GetCmIncomeHistoryIncomeTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             page?: number | bigint,
@@ -687,14 +719,17 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get download id for UM futures order history
          *
-         * Request Limitation is 10 times per month, shared by front end download page and rest api
-         * The time between `startTime` and `endTime` can not be longer than 1 year
+         * Weight(IP): 1500
          *
-         * Weight: 1500
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Request Limitation is 10 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
          *
          * @summary Get Download Id For UM Futures Order History (USER_DATA)
-         * @param {number | bigint} startTime
-         * @param {number | bigint} endTime
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -738,14 +773,17 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get download id for UM futures trade history
          *
-         * Request Limitation is 5 times per month, shared by front end download page and rest api
-         * The time between `startTime` and `endTime` can not be longer than 1 year
+         * Weight(IP): 1500
          *
-         * Weight: 1500
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Request Limitation is 5 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
          *
          * @summary Get Download Id For UM Futures Trade History (USER_DATA)
-         * @param {number | bigint} startTime
-         * @param {number | bigint} endTime
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -789,14 +827,17 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get download id for UM futures transaction history
          *
-         * Request Limitation is 5 times per month, shared by front end download page and rest api
-         * The time between `startTime` and `endTime` can not be longer than 1 year
+         * Weight(IP): 1500
          *
-         * Weight: 1500
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Request Limitation is 5 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
          *
          * @summary Get Download Id For UM Futures Transaction History (USER_DATA)
-         * @param {number | bigint} startTime
-         * @param {number | bigint} endTime
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -844,29 +885,31 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get Margin Borrow/Loan Interest History
          *
+         * Weight(IP): 1
          *
-         * Response in descending order
-         * The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
-         * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-         * If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
-         * If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
-         * Type in response has 5 enums:
-         * `PERIODIC` interest charged per hour
-         * `ON_BORROW` first interest charged on borrow
-         * `PERIODIC_CONVERTED` interest charged per hour converted into BNB
-         * `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
-         * `PORTFOLIO` Portfolio Margin negative balance daily interest
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - Response in descending order
+         * - The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
+         * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+         * - If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
+         * - If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
+         * - Type in response has 5 enums:
+         * - `PERIODIC` interest charged per hour
+         * - `ON_BORROW` first interest charged on borrow
+         * - `PERIODIC_CONVERTED` interest charged per hour converted into BNB
+         * - `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
+         * - `PORTFOLIO` Portfolio Margin negative balance daily interest
          *
-         * @summary Get Margin Borrow/Loan Interest History(USER_DATA)
+         * @summary Get Margin Borrow/Loan Interest History (USER_DATA)
          * @param {string} [asset]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
-         * @param {string} [archived] Default: `false`. Set to `true` for archived data from 6 months ago
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current page number.
+         * @param {number | bigint} [size] Number of results returned.
+         * @param {GetMarginBorrowLoanInterestHistoryArchivedEnum} [archived] Set to true to query archived data from 6 months ago.
+         * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -876,7 +919,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             endTime?: number | bigint,
             current?: number | bigint,
             size?: number | bigint,
-            archived?: string,
+            archived?: GetMarginBorrowLoanInterestHistoryArchivedEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -920,9 +963,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current UM account asset and position information.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Get UM Account Detail(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get UM Account Detail (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -951,9 +996,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current UM account asset and position information.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Get UM Account Detail V2(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get UM Account Detail V2 (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -982,9 +1029,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in UM
          *
-         * Weight: 30
+         * Weight(IP): 30
          *
-         * @summary Get UM Current Position Mode(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get UM Current Position Mode (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1013,11 +1062,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get UM futures order download link by Id
          *
-         * Download link expiration: 7 days
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
          *
-         * @summary Get UM Futures Order Download Link by Id(USER_DATA)
+         * Notes:
+         * - Download link expiration: 7 days
+         *
+         * @summary Get UM Futures Order Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
          * @param {number | bigint} [recvWindow]
          *
@@ -1056,11 +1108,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get UM futures trade download link by Id
          *
-         * Download link expiration: 7 days
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
          *
-         * @summary Get UM Futures Trade Download Link by Id(USER_DATA)
+         * Notes:
+         * - Download link expiration: 7 days
+         *
+         * @summary Get UM Futures Trade Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
          * @param {number | bigint} [recvWindow]
          *
@@ -1099,11 +1154,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get UM futures Transaction download link by Id
          *
-         * Download link expiration: 7 days
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
          *
-         * @summary Get UM Futures Transaction Download Link by Id(USER_DATA)
+         * Notes:
+         * - Download link expiration: 7 days
+         *
+         * @summary Get UM Futures Transaction Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
          * @param {number | bigint} [recvWindow]
          *
@@ -1140,29 +1198,32 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Get UM Income History
+         * Get UM Income History.
          *
-         * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-         * If `incomeType` is not sent, all kinds of flow will be returned
-         * "trandId" is unique in the same incomeType for a user
-         * Income history only contains data for the last three months
+         * Weight(IP): 30
          *
-         * Weight: 30
+         * Security Type: USER_DATA
          *
-         * @summary Get UM Income History(USER_DATA)
+         * Notes:
+         * - If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
+         * - If `incomeType` is not sent, all kinds of flow will be returned
+         * - "trandId" is unique in the same incomeType for a user
+         * - Income history only contains data for the last three months
+         *
+         * @summary Get UM Income History (USER_DATA)
          * @param {string} [symbol]
-         * @param {string} [incomeType] TRANSFER, WELCOME_BONUS, REALIZED_PNL, FUNDING_FEE, COMMISSION, INSURANCE_CLEAR, REFERRAL_KICKBACK, COMMISSION_REBATE, API_REBATE, CONTEST_REWARD, CROSS_COLLATERAL_TRANSFER, OPTIONS_PREMIUM_FEE, OPTIONS_SETTLE_PROFIT, INTERNAL_TRANSFER, AUTO_EXCHANGE, DELIVERED_SETTELMENT, COIN_SWAP_DEPOSIT, COIN_SWAP_WITHDRAW, POSITION_LIMIT_INCREASE_FEE
+         * @param {GetUmIncomeHistoryIncomeTypeEnum} [incomeType] Income type.
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [page]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [page] Page number.
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getUmIncomeHistory: async (
             symbol?: string,
-            incomeType?: string,
+            incomeType?: GetUmIncomeHistoryIncomeTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             page?: number | bigint,
@@ -1210,10 +1271,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get User Commission Rate for CM
          *
-         * Weight: 20
+         * Weight(IP): 20
          *
-         * @summary Get User Commission Rate for CM(USER_DATA)
-         * @param {string} symbol
+         * Security Type: USER_DATA
+         *
+         * @summary Get User Commission Rate for CM (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1251,10 +1314,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get User Commission Rate for UM
          *
-         * Weight: 20
+         * Weight(IP): 20
          *
-         * @summary Get User Commission Rate for UM(USER_DATA)
-         * @param {string} symbol
+         * Security Type: USER_DATA
+         *
+         * @summary Get User Commission Rate for UM (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1292,11 +1357,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query margin max borrow
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Margin Max Borrow(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Margin Max Borrow (USER_DATA)
          * @param {string} asset
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -1333,10 +1400,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Portfolio Margin UM Trading Quantitative Rules Indicators
          *
-         * Weight: 1 for a single symbol
-         * 10 when the symbol parameter is omitted
+         * Weight: - 1 for a single `symbol`
+         * - 10 when `symbol` is omitted
          *
-         * @summary Portfolio Margin UM Trading Quantitative Rules Indicators(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Portfolio Margin UM Trading Quantitative Rules Indicators (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [recvWindow]
          *
@@ -1372,14 +1441,17 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current CM position information.
          *
-         * If neither `marginAsset` nor `pair` is sent, positions of all symbols with `TRADING` status will be returned.
-         * for One-way Mode user, the response will only show the "BOTH" positions
-         * for Hedge Mode user, the response will show "LONG", and "SHORT" positions.
-         * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Query CM Position Information(USER_DATA)
+         * Notes:
+         * - If neither `marginAsset` nor `pair` is sent, positions of all symbols with `TRADING` status will be returned.
+         * - for One-way Mode user, the response will only show the "BOTH" positions
+         * - for Hedge Mode user, the response will show "LONG", and "SHORT" positions. **Note**
+         * - Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+         *
+         * @summary Query CM Position Information (USER_DATA)
          * @param {string} [marginAsset]
          * @param {string} [pair]
          * @param {number | bigint} [recvWindow]
@@ -1420,23 +1492,26 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query margin loan record
          *
-         * txId or startTime must be sent. txId takes precedence.
-         * Response in descending order
-         * The max interval between `startTime` and `endTime` is 30 days.
-         * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-         * Set `archived` to `true` to query data from 6 months ago
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
          *
-         * @summary Query Margin Loan Record(USER_DATA)
+         * Notes:
+         * - txId or startTime must be sent. txId takes precedence.
+         * - Response in descending order
+         * - The max interval between `startTime` and `endTime` is 30 days.
+         * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+         * - Set `archived` to `true` to query data from 6 months ago
+         *
+         * @summary Query Margin Loan Record (USER_DATA)
          * @param {string} asset
          * @param {number | bigint} [txId] the `tranId` in `POST/papi/v1/marginLoan`
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
-         * @param {string} [archived] Default: `false`. Set to `true` for archived data from 6 months ago
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current page number.
+         * @param {number | bigint} [size] Number of results returned.
+         * @param {QueryMarginLoanRecordArchivedEnum} [archived] Set to true to query archived data from 6 months ago.
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -1447,7 +1522,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             endTime?: number | bigint,
             current?: number | bigint,
             size?: number | bigint,
-            archived?: string,
+            archived?: QueryMarginLoanRecordArchivedEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -1497,9 +1572,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query Margin Max Withdraw
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Query Margin Max Withdraw(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Query Margin Max Withdraw (USER_DATA)
          * @param {string} asset
          * @param {number | bigint} [recvWindow]
          *
@@ -1538,22 +1615,25 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query margin repay record.
          *
-         * txId or startTime must be sent. txId takes precedence.
-         * Response in descending order
-         * The max interval between `startTime` and `endTime` is 30 days.
-         * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-         * Set `archived` to `true` to query data from 6 months ago
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
          *
-         * @summary Query Margin repay Record(USER_DATA)
+         * Notes:
+         * - txId or startTime must be sent. txId takes precedence.
+         * - Response in descending order
+         * - The max interval between `startTime` and `endTime` is 30 days.
+         * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+         * - Set `archived` to `true` to query data from 6 months ago
+         *
+         * @summary Query Margin repay Record (USER_DATA)
          * @param {string} asset
-         * @param {number | bigint} [txId] the `tranId` in `POST/papi/v1/marginLoan`
+         * @param {number | bigint} [txId] the `tranId` in `POST /papi/v1/repayLoan`
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
-         * @param {string} [archived] Default: `false`. Set to `true` for archived data from 6 months ago
+         * @param {number | bigint} [current] Current page number.
+         * @param {number | bigint} [size] Number of results returned.
+         * @param {QueryMarginRepayRecordArchivedEnum} [archived] Set to true to query archived data from 6 months ago.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1565,7 +1645,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             endTime?: number | bigint,
             current?: number | bigint,
             size?: number | bigint,
-            archived?: string,
+            archived?: QueryMarginRepayRecordArchivedEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -1615,19 +1695,22 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query interest history of negative balance for portfolio margin.
          *
-         * Response in descending order
-         * The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
-         * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-         * If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
-         * If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
+         * Weight(IP): 50
          *
-         * Weight: 50
+         * Security Type: USER_DATA
          *
-         * @summary Query Portfolio Margin Negative Balance Interest History(USER_DATA)
+         * Notes:
+         * - Results are returned in descending order.
+         * - The query range cannot exceed 30 days to ensure data correctness.
+         * - If both `startTime` and `endTime` are omitted, the most recent 7 days are returned by default.
+         * - If `startTime` is provided but `endTime` is omitted, records from `startTime` to now are returned; if that exceeds 30 days, only the most recent 30 days are returned.
+         * - If `endTime` is provided but `startTime` is omitted, records from the 7 days before `endTime` are returned.
+         *
+         * @summary Query Portfolio Margin Negative Balance Interest History (USER_DATA)
          * @param {string} [asset]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [size] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1674,13 +1757,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current UM position information.
          *
-         * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
-         * for One-way Mode user, the response will only show the "BOTH" positions
-         * for Hedge Mode user, the response will show "LONG", and "SHORT" positions.
+         * Weight(IP): 5
          *
-         * Weight: 5
+         * Security Type: USER_DATA
          *
-         * @summary Query UM Position Information(USER_DATA)
+         * Notes:
+         * - Please use with account push event `ACCOUNT_UPDATE` for timeliness and accuracy.
+         * - In One-way Mode, only positions with side `BOTH` are shown.
+         * - In Hedge Mode, positions with sides `BOTH`, `LONG`, and `SHORT` are shown.
+         *
+         * @summary Query UM Position Information (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [recvWindow]
          *
@@ -1716,10 +1802,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query user negative balance auto exchange record
          *
-         * Response in descending order
-         * The max interval between `startTime` and `endTime` is 3 months.
+         * Weight(IP): 100
          *
-         * Weight: 100
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Response in descending order
+         * - The max interval between `startTime` and `endTime` is 3 months.
          *
          * @summary Query User Negative Balance Auto Exchange Record (USER_DATA)
          * @param {number | bigint} startTime
@@ -1767,7 +1856,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query User Rate Limit
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query User Rate Limit (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -1798,9 +1889,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Repay futures Negative Balance
          *
-         * Weight: 750
+         * Weight(IP): 750
          *
-         * @summary Repay futures Negative Balance(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Repay futures Negative Balance (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1829,9 +1922,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query UM Futures account configuration
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary UM Futures Account Configuration(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary UM Futures Account Configuration (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1862,10 +1957,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current UM account symbol configuration.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary UM Futures Symbol Configuration(USER_DATA)
-         * @param {string} [symbol]
+         * Security Type: USER_DATA
+         *
+         * @summary UM Futures Symbol Configuration (USER_DATA)
+         * @param {string} [symbol] Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1900,7 +1997,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query UM notional and leverage brackets
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary UM Notional and Leverage Brackets (USER_DATA)
          * @param {string} [symbol]
@@ -1946,9 +2045,11 @@ export interface AccountApiInterface {
     /**
      * Query account balance
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Account Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Balance (USER_DATA)
      * @param {AccountBalanceRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1960,9 +2061,11 @@ export interface AccountApiInterface {
     /**
      * Query account information
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Account Information(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information (USER_DATA)
      * @param {AccountInformationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1974,9 +2077,12 @@ export interface AccountApiInterface {
     /**
      * Transfer BNB in and out of UM
      *
-     * The endpoint can only be called 10 times per 10 minutes in a rolling manner
+     * Weight(IP): 750
      *
-     * Weight: 750
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - The endpoint can only be called 10 times per 10 minutes in a rolling manner
      *
      * @summary BNB transfer (TRADE)
      * @param {BnbTransferRequest} requestParameters Request parameters.
@@ -1990,9 +2096,11 @@ export interface AccountApiInterface {
     /**
      * Change Auto-repay-futures Status
      *
-     * Weight: 750
+     * Weight(IP): 750
      *
-     * @summary Change Auto-repay-futures Status(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change Auto-repay-futures Status (TRADE)
      * @param {ChangeAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2004,7 +2112,9 @@ export interface AccountApiInterface {
     /**
      * Change user's initial leverage of specific symbol in CM.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Change CM Initial Leverage (TRADE)
      * @param {ChangeCmInitialLeverageRequest} requestParameters Request parameters.
@@ -2018,9 +2128,11 @@ export interface AccountApiInterface {
     /**
      * Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in CM
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change CM Position Mode(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change CM Position Mode (TRADE)
      * @param {ChangeCmPositionModeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2032,9 +2144,11 @@ export interface AccountApiInterface {
     /**
      * Change user's initial leverage of specific symbol in UM.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change UM Initial Leverage(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change UM Initial Leverage (TRADE)
      * @param {ChangeUmInitialLeverageRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2046,9 +2160,11 @@ export interface AccountApiInterface {
     /**
      * Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in UM
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change UM Position Mode(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change UM Position Mode (TRADE)
      * @param {ChangeUmPositionModeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2060,9 +2176,11 @@ export interface AccountApiInterface {
     /**
      * Query CM notional and leverage brackets
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary CM Notional and Leverage Brackets(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary CM Notional and Leverage Brackets (USER_DATA)
      * @param {CmNotionalAndLeverageBracketsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2074,12 +2192,15 @@ export interface AccountApiInterface {
     /**
      * Fund collection for Portfolio Margin
      *
-     * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
-     * You can only use this function 500 times per hour in a rolling manner.
+     * Weight(IP): 750
      *
-     * Weight: 750
+     * Security Type: TRADE
      *
-     * @summary Fund Auto-collection(TRADE)
+     * Notes:
+     * - BNB assets will not be auto-collected.
+     * - Rolling window endpoint can be called at most 500 times per hour.
+     *
+     * @summary Fund Auto-collection (TRADE)
      * @param {FundAutoCollectionRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2091,11 +2212,14 @@ export interface AccountApiInterface {
     /**
      * Transfers specific asset from Futures Account to Margin account
      *
-     * The BNB transfer is not be supported
+     * Weight(IP): 30
      *
-     * Weight: 30
+     * Security Type: TRADE
      *
-     * @summary Fund Collection by Asset(TRADE)
+     * Notes:
+     * - The BNB transfer is not be supported
+     *
+     * @summary Fund Collection by Asset (TRADE)
      * @param {FundCollectionByAssetRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2107,9 +2231,11 @@ export interface AccountApiInterface {
     /**
      * Query Auto-repay-futures Status
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get Auto-repay-futures Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Auto-repay-futures Status (USER_DATA)
      * @param {GetAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2121,9 +2247,11 @@ export interface AccountApiInterface {
     /**
      * Get current CM account asset and position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get CM Account Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get CM Account Detail (USER_DATA)
      * @param {GetCmAccountDetailRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2135,9 +2263,11 @@ export interface AccountApiInterface {
     /**
      * Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in CM
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get CM Current Position Mode(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get CM Current Position Mode (USER_DATA)
      * @param {GetCmCurrentPositionModeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2147,17 +2277,19 @@ export interface AccountApiInterface {
         requestParameters?: GetCmCurrentPositionModeRequest
     ): Promise<RestApiResponse<GetCmCurrentPositionModeResponse>>;
     /**
-     * Get CM Income History
+     * Get CM Income History.
      *
+     * Weight(IP): 30
      *
-     * If `incomeType` is not sent, all kinds of flow will be returned
-     * "trandId" is unique in the same "incomeType" for a user
-     * The interval between `startTime` and `endTime` can not exceed 200 days:
-     * If `startTime` and `endTime` are not sent, the last 200 days will be returned
+     * Security Type: USER_DATA
      *
-     * Weight: 30
+     * Notes:
+     * - If `incomeType` is not sent, all kinds of flow will be returned
+     * - "trandId" is unique in the same "incomeType" for a user
+     * - The interval between `startTime` and `endTime` can not exceed 200 days:
+     * - If `startTime` and `endTime` are not sent, the last 200 days will be returned
      *
-     * @summary Get CM Income History(USER_DATA)
+     * @summary Get CM Income History (USER_DATA)
      * @param {GetCmIncomeHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2169,10 +2301,13 @@ export interface AccountApiInterface {
     /**
      * Get download id for UM futures order history
      *
-     * Request Limitation is 10 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 10 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For UM Futures Order History (USER_DATA)
      * @param {GetDownloadIdForUmFuturesOrderHistoryRequest} requestParameters Request parameters.
@@ -2186,10 +2321,13 @@ export interface AccountApiInterface {
     /**
      * Get download id for UM futures trade history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For UM Futures Trade History (USER_DATA)
      * @param {GetDownloadIdForUmFuturesTradeHistoryRequest} requestParameters Request parameters.
@@ -2203,10 +2341,13 @@ export interface AccountApiInterface {
     /**
      * Get download id for UM futures transaction history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For UM Futures Transaction History (USER_DATA)
      * @param {GetDownloadIdForUmFuturesTransactionHistoryRequest} requestParameters Request parameters.
@@ -2220,22 +2361,24 @@ export interface AccountApiInterface {
     /**
      * Get Margin Borrow/Loan Interest History
      *
+     * Weight(IP): 1
      *
-     * Response in descending order
-     * The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
-     * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-     * If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
-     * If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
-     * Type in response has 5 enums:
-     * `PERIODIC` interest charged per hour
-     * `ON_BORROW` first interest charged on borrow
-     * `PERIODIC_CONVERTED` interest charged per hour converted into BNB
-     * `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
-     * `PORTFOLIO` Portfolio Margin negative balance daily interest
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Response in descending order
+     * - The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
+     * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+     * - If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
+     * - If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
+     * - Type in response has 5 enums:
+     * - `PERIODIC` interest charged per hour
+     * - `ON_BORROW` first interest charged on borrow
+     * - `PERIODIC_CONVERTED` interest charged per hour converted into BNB
+     * - `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
+     * - `PORTFOLIO` Portfolio Margin negative balance daily interest
      *
-     * @summary Get Margin Borrow/Loan Interest History(USER_DATA)
+     * @summary Get Margin Borrow/Loan Interest History (USER_DATA)
      * @param {GetMarginBorrowLoanInterestHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2247,9 +2390,11 @@ export interface AccountApiInterface {
     /**
      * Get current UM account asset and position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get UM Account Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get UM Account Detail (USER_DATA)
      * @param {GetUmAccountDetailRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2261,9 +2406,11 @@ export interface AccountApiInterface {
     /**
      * Get current UM account asset and position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get UM Account Detail V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get UM Account Detail V2 (USER_DATA)
      * @param {GetUmAccountDetailV2Request} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2275,9 +2422,11 @@ export interface AccountApiInterface {
     /**
      * Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in UM
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get UM Current Position Mode(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get UM Current Position Mode (USER_DATA)
      * @param {GetUmCurrentPositionModeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2289,11 +2438,14 @@ export interface AccountApiInterface {
     /**
      * Get UM futures order download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get UM Futures Order Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get UM Futures Order Download Link by Id (USER_DATA)
      * @param {GetUmFuturesOrderDownloadLinkByIdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2305,11 +2457,14 @@ export interface AccountApiInterface {
     /**
      * Get UM futures trade download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get UM Futures Trade Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get UM Futures Trade Download Link by Id (USER_DATA)
      * @param {GetUmFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2321,11 +2476,14 @@ export interface AccountApiInterface {
     /**
      * Get UM futures Transaction download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get UM Futures Transaction Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get UM Futures Transaction Download Link by Id (USER_DATA)
      * @param {GetUmFuturesTransactionDownloadLinkByIdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2335,16 +2493,19 @@ export interface AccountApiInterface {
         requestParameters: GetUmFuturesTransactionDownloadLinkByIdRequest
     ): Promise<RestApiResponse<GetUmFuturesTransactionDownloadLinkByIdResponse>>;
     /**
-     * Get UM Income History
+     * Get UM Income History.
      *
-     * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-     * If `incomeType` is not sent, all kinds of flow will be returned
-     * "trandId" is unique in the same incomeType for a user
-     * Income history only contains data for the last three months
+     * Weight(IP): 30
      *
-     * Weight: 30
+     * Security Type: USER_DATA
      *
-     * @summary Get UM Income History(USER_DATA)
+     * Notes:
+     * - If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
+     * - If `incomeType` is not sent, all kinds of flow will be returned
+     * - "trandId" is unique in the same incomeType for a user
+     * - Income history only contains data for the last three months
+     *
+     * @summary Get UM Income History (USER_DATA)
      * @param {GetUmIncomeHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2356,9 +2517,11 @@ export interface AccountApiInterface {
     /**
      * Get User Commission Rate for CM
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Get User Commission Rate for CM(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get User Commission Rate for CM (USER_DATA)
      * @param {GetUserCommissionRateForCmRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2370,9 +2533,11 @@ export interface AccountApiInterface {
     /**
      * Get User Commission Rate for UM
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Get User Commission Rate for UM(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get User Commission Rate for UM (USER_DATA)
      * @param {GetUserCommissionRateForUmRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2384,9 +2549,11 @@ export interface AccountApiInterface {
     /**
      * Query margin max borrow
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Margin Max Borrow(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Margin Max Borrow (USER_DATA)
      * @param {MarginMaxBorrowRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2398,10 +2565,12 @@ export interface AccountApiInterface {
     /**
      * Portfolio Margin UM Trading Quantitative Rules Indicators
      *
-     * Weight: 1 for a single symbol
-     * 10 when the symbol parameter is omitted
+     * Weight: - 1 for a single `symbol`
+     * - 10 when `symbol` is omitted
      *
-     * @summary Portfolio Margin UM Trading Quantitative Rules Indicators(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Portfolio Margin UM Trading Quantitative Rules Indicators (USER_DATA)
      * @param {PortfolioMarginUmTradingQuantitativeRulesIndicatorsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2413,14 +2582,17 @@ export interface AccountApiInterface {
     /**
      * Get current CM position information.
      *
-     * If neither `marginAsset` nor `pair` is sent, positions of all symbols with `TRADING` status will be returned.
-     * for One-way Mode user, the response will only show the "BOTH" positions
-     * for Hedge Mode user, the response will show "LONG", and "SHORT" positions.
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query CM Position Information(USER_DATA)
+     * Notes:
+     * - If neither `marginAsset` nor `pair` is sent, positions of all symbols with `TRADING` status will be returned.
+     * - for One-way Mode user, the response will only show the "BOTH" positions
+     * - for Hedge Mode user, the response will show "LONG", and "SHORT" positions. **Note**
+     * - Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     *
+     * @summary Query CM Position Information (USER_DATA)
      * @param {QueryCmPositionInformationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2432,15 +2604,18 @@ export interface AccountApiInterface {
     /**
      * Query margin loan record
      *
-     * txId or startTime must be sent. txId takes precedence.
-     * Response in descending order
-     * The max interval between `startTime` and `endTime` is 30 days.
-     * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-     * Set `archived` to `true` to query data from 6 months ago
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Query Margin Loan Record(USER_DATA)
+     * Notes:
+     * - txId or startTime must be sent. txId takes precedence.
+     * - Response in descending order
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+     * - Set `archived` to `true` to query data from 6 months ago
+     *
+     * @summary Query Margin Loan Record (USER_DATA)
      * @param {QueryMarginLoanRecordRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2452,9 +2627,11 @@ export interface AccountApiInterface {
     /**
      * Query Margin Max Withdraw
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Query Margin Max Withdraw(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Margin Max Withdraw (USER_DATA)
      * @param {QueryMarginMaxWithdrawRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2466,15 +2643,18 @@ export interface AccountApiInterface {
     /**
      * Query margin repay record.
      *
-     * txId or startTime must be sent. txId takes precedence.
-     * Response in descending order
-     * The max interval between `startTime` and `endTime` is 30 days.
-     * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-     * Set `archived` to `true` to query data from 6 months ago
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Query Margin repay Record(USER_DATA)
+     * Notes:
+     * - txId or startTime must be sent. txId takes precedence.
+     * - Response in descending order
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+     * - Set `archived` to `true` to query data from 6 months ago
+     *
+     * @summary Query Margin repay Record (USER_DATA)
      * @param {QueryMarginRepayRecordRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2486,15 +2666,18 @@ export interface AccountApiInterface {
     /**
      * Query interest history of negative balance for portfolio margin.
      *
-     * Response in descending order
-     * The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
-     * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-     * If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
-     * If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
      *
-     * @summary Query Portfolio Margin Negative Balance Interest History(USER_DATA)
+     * Notes:
+     * - Results are returned in descending order.
+     * - The query range cannot exceed 30 days to ensure data correctness.
+     * - If both `startTime` and `endTime` are omitted, the most recent 7 days are returned by default.
+     * - If `startTime` is provided but `endTime` is omitted, records from `startTime` to now are returned; if that exceeds 30 days, only the most recent 30 days are returned.
+     * - If `endTime` is provided but `startTime` is omitted, records from the 7 days before `endTime` are returned.
+     *
+     * @summary Query Portfolio Margin Negative Balance Interest History (USER_DATA)
      * @param {QueryPortfolioMarginNegativeBalanceInterestHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2506,13 +2689,16 @@ export interface AccountApiInterface {
     /**
      * Get current UM position information.
      *
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
-     * for One-way Mode user, the response will only show the "BOTH" positions
-     * for Hedge Mode user, the response will show "LONG", and "SHORT" positions.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
      *
-     * @summary Query UM Position Information(USER_DATA)
+     * Notes:
+     * - Please use with account push event `ACCOUNT_UPDATE` for timeliness and accuracy.
+     * - In One-way Mode, only positions with side `BOTH` are shown.
+     * - In Hedge Mode, positions with sides `BOTH`, `LONG`, and `SHORT` are shown.
+     *
+     * @summary Query UM Position Information (USER_DATA)
      * @param {QueryUmPositionInformationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2524,10 +2710,13 @@ export interface AccountApiInterface {
     /**
      * Query user negative balance auto exchange record
      *
-     * Response in descending order
-     * The max interval between `startTime` and `endTime` is 3 months.
+     * Weight(IP): 100
      *
-     * Weight: 100
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Response in descending order
+     * - The max interval between `startTime` and `endTime` is 3 months.
      *
      * @summary Query User Negative Balance Auto Exchange Record (USER_DATA)
      * @param {QueryUserNegativeBalanceAutoExchangeRecordRequest} requestParameters Request parameters.
@@ -2541,7 +2730,9 @@ export interface AccountApiInterface {
     /**
      * Query User Rate Limit
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query User Rate Limit (USER_DATA)
      * @param {QueryUserRateLimitRequest} requestParameters Request parameters.
@@ -2555,9 +2746,11 @@ export interface AccountApiInterface {
     /**
      * Repay futures Negative Balance
      *
-     * Weight: 750
+     * Weight(IP): 750
      *
-     * @summary Repay futures Negative Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Repay futures Negative Balance (USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2569,9 +2762,11 @@ export interface AccountApiInterface {
     /**
      * Query UM Futures account configuration
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary UM Futures Account Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary UM Futures Account Configuration (USER_DATA)
      * @param {UmFuturesAccountConfigurationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2583,9 +2778,11 @@ export interface AccountApiInterface {
     /**
      * Get current UM account symbol configuration.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary UM Futures Symbol Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary UM Futures Symbol Configuration (USER_DATA)
      * @param {UmFuturesSymbolConfigurationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2597,7 +2794,9 @@ export interface AccountApiInterface {
     /**
      * Query UM notional and leverage brackets
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary UM Notional and Leverage Brackets (USER_DATA)
      * @param {UmNotionalAndLeverageBracketsRequest} requestParameters Request parameters.
@@ -2656,11 +2855,11 @@ export interface BnbTransferRequest {
     readonly amount: number;
 
     /**
-     * "TO_UM","FROM_UM"
-     * @type {string}
+     *
+     * @type {'TO_UM' | 'FROM_UM'}
      * @memberof AccountApiBnbTransfer
      */
-    readonly transferSide: string;
+    readonly transferSide: BnbTransferTransferSideEnum;
 
     /**
      *
@@ -2676,11 +2875,11 @@ export interface BnbTransferRequest {
  */
 export interface ChangeAutoRepayFuturesStatusRequest {
     /**
-     * Default: `true`; `false` for turn off the auto-repay futures negative balance function
-     * @type {string}
+     * `false` for turn off the auto-repay futures negative balance function
+     * @type {'true' | 'false'}
      * @memberof AccountApiChangeAutoRepayFuturesStatus
      */
-    readonly autoRepay: string;
+    readonly autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum;
 
     /**
      *
@@ -2703,7 +2902,7 @@ export interface ChangeCmInitialLeverageRequest {
     readonly symbol: string;
 
     /**
-     * target initial leverage: int from 1 to 125
+     * target initial leverage
      * @type {number | bigint}
      * @memberof AccountApiChangeCmInitialLeverage
      */
@@ -2724,10 +2923,10 @@ export interface ChangeCmInitialLeverageRequest {
 export interface ChangeCmPositionModeRequest {
     /**
      * "true": Hedge Mode; "false": One-way Mode
-     * @type {string}
+     * @type {'true' | 'false'}
      * @memberof AccountApiChangeCmPositionMode
      */
-    readonly dualSidePosition: string;
+    readonly dualSidePosition: ChangeCmPositionModeDualSidePositionEnum;
 
     /**
      *
@@ -2750,7 +2949,7 @@ export interface ChangeUmInitialLeverageRequest {
     readonly symbol: string;
 
     /**
-     * target initial leverage: int from 1 to 125
+     * target initial leverage
      * @type {number | bigint}
      * @memberof AccountApiChangeUmInitialLeverage
      */
@@ -2771,10 +2970,10 @@ export interface ChangeUmInitialLeverageRequest {
 export interface ChangeUmPositionModeRequest {
     /**
      * "true": Hedge Mode; "false": One-way Mode
-     * @type {string}
+     * @type {'true' | 'false'}
      * @memberof AccountApiChangeUmPositionMode
      */
-    readonly dualSidePosition: string;
+    readonly dualSidePosition: ChangeUmPositionModeDualSidePositionEnum;
 
     /**
      *
@@ -2889,11 +3088,11 @@ export interface GetCmIncomeHistoryRequest {
     readonly symbol?: string;
 
     /**
-     * TRANSFER, WELCOME_BONUS, REALIZED_PNL, FUNDING_FEE, COMMISSION, INSURANCE_CLEAR, REFERRAL_KICKBACK, COMMISSION_REBATE, API_REBATE, CONTEST_REWARD, CROSS_COLLATERAL_TRANSFER, OPTIONS_PREMIUM_FEE, OPTIONS_SETTLE_PROFIT, INTERNAL_TRANSFER, AUTO_EXCHANGE, DELIVERED_SETTELMENT, COIN_SWAP_DEPOSIT, COIN_SWAP_WITHDRAW, POSITION_LIMIT_INCREASE_FEE
-     * @type {string}
+     *
+     * @type {'TRANSFER' | 'WELCOME_BONUS' | 'FUNDING_FEE' | 'REALIZED_PNL' | 'COMMISSION' | 'INSURANCE_CLEAR' | 'DELIVERED_SETTELMENT'}
      * @memberof AccountApiGetCmIncomeHistory
      */
-    readonly incomeType?: string;
+    readonly incomeType?: GetCmIncomeHistoryIncomeTypeEnum;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
@@ -2917,7 +3116,7 @@ export interface GetCmIncomeHistoryRequest {
     readonly page?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiGetCmIncomeHistory
      */
@@ -2937,14 +3136,14 @@ export interface GetCmIncomeHistoryRequest {
  */
 export interface GetDownloadIdForUmFuturesOrderHistoryRequest {
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesOrderHistory
      */
     readonly startTime: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesOrderHistory
      */
@@ -2964,14 +3163,14 @@ export interface GetDownloadIdForUmFuturesOrderHistoryRequest {
  */
 export interface GetDownloadIdForUmFuturesTradeHistoryRequest {
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTradeHistory
      */
     readonly startTime: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTradeHistory
      */
@@ -2991,14 +3190,14 @@ export interface GetDownloadIdForUmFuturesTradeHistoryRequest {
  */
 export interface GetDownloadIdForUmFuturesTransactionHistoryRequest {
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTransactionHistory
      */
     readonly startTime: number | bigint;
 
     /**
-     *
+     * Timestamp in ms
      * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTransactionHistory
      */
@@ -3039,28 +3238,28 @@ export interface GetMarginBorrowLoanInterestHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Current page number.
      * @type {number | bigint}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
     readonly size?: number | bigint;
 
     /**
-     * Default: `false`. Set to `true` for archived data from 6 months ago
-     * @type {string}
+     * Set to true to query archived data from 6 months ago.
+     * @type {'true' | 'false'}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
-    readonly archived?: string;
+    readonly archived?: GetMarginBorrowLoanInterestHistoryArchivedEnum;
 
     /**
-     *
+     * The value cannot be greater than `60000`
      * @type {number | bigint}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
@@ -3179,11 +3378,11 @@ export interface GetUmIncomeHistoryRequest {
     readonly symbol?: string;
 
     /**
-     * TRANSFER, WELCOME_BONUS, REALIZED_PNL, FUNDING_FEE, COMMISSION, INSURANCE_CLEAR, REFERRAL_KICKBACK, COMMISSION_REBATE, API_REBATE, CONTEST_REWARD, CROSS_COLLATERAL_TRANSFER, OPTIONS_PREMIUM_FEE, OPTIONS_SETTLE_PROFIT, INTERNAL_TRANSFER, AUTO_EXCHANGE, DELIVERED_SETTELMENT, COIN_SWAP_DEPOSIT, COIN_SWAP_WITHDRAW, POSITION_LIMIT_INCREASE_FEE
-     * @type {string}
+     * Income type.
+     * @type {'TRANSFER' | 'WELCOME_BONUS' | 'REALIZED_PNL' | 'FUNDING_FEE' | 'COMMISSION' | 'INSURANCE_CLEAR' | 'REFERRAL_KICKBACK' | 'COMMISSION_REBATE' | 'API_REBATE' | 'CONTEST_REWARD' | 'CROSS_COLLATERAL_TRANSFER' | 'OPTIONS_PREMIUM_FEE' | 'OPTIONS_SETTLE_PROFIT' | 'INTERNAL_TRANSFER' | 'AUTO_EXCHANGE' | 'DELIVERED_SETTELMENT' | 'COIN_SWAP_DEPOSIT' | 'COIN_SWAP_WITHDRAW' | 'POSITION_LIMIT_INCREASE_FEE'}
      * @memberof AccountApiGetUmIncomeHistory
      */
-    readonly incomeType?: string;
+    readonly incomeType?: GetUmIncomeHistoryIncomeTypeEnum;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
@@ -3200,14 +3399,14 @@ export interface GetUmIncomeHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     *
+     * Page number.
      * @type {number | bigint}
      * @memberof AccountApiGetUmIncomeHistory
      */
     readonly page?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiGetUmIncomeHistory
      */
@@ -3227,7 +3426,7 @@ export interface GetUmIncomeHistoryRequest {
  */
 export interface GetUserCommissionRateForCmRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AccountApiGetUserCommissionRateForCm
      */
@@ -3247,7 +3446,7 @@ export interface GetUserCommissionRateForCmRequest {
  */
 export interface GetUserCommissionRateForUmRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AccountApiGetUserCommissionRateForUm
      */
@@ -3274,7 +3473,7 @@ export interface MarginMaxBorrowRequest {
     readonly asset: string;
 
     /**
-     *
+     * The value cannot be greater than `60000`
      * @type {number | bigint}
      * @memberof AccountApiMarginMaxBorrow
      */
@@ -3362,28 +3561,28 @@ export interface QueryMarginLoanRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Current page number.
      * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
     readonly size?: number | bigint;
 
     /**
-     * Default: `false`. Set to `true` for archived data from 6 months ago
-     * @type {string}
+     * Set to true to query archived data from 6 months ago.
+     * @type {'true' | 'false'}
      * @memberof AccountApiQueryMarginLoanRecord
      */
-    readonly archived?: string;
+    readonly archived?: QueryMarginLoanRecordArchivedEnum;
 
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
@@ -3423,7 +3622,7 @@ export interface QueryMarginRepayRecordRequest {
     readonly asset: string;
 
     /**
-     * the `tranId` in `POST/papi/v1/marginLoan`
+     * the `tranId` in `POST /papi/v1/repayLoan`
      * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
@@ -3444,25 +3643,25 @@ export interface QueryMarginRepayRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Current page number.
      * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
     readonly size?: number | bigint;
 
     /**
-     * Default: `false`. Set to `true` for archived data from 6 months ago
-     * @type {string}
+     * Set to true to query archived data from 6 months ago.
+     * @type {'true' | 'false'}
      * @memberof AccountApiQueryMarginRepayRecord
      */
-    readonly archived?: string;
+    readonly archived?: QueryMarginRepayRecordArchivedEnum;
 
     /**
      *
@@ -3499,7 +3698,7 @@ export interface QueryPortfolioMarginNegativeBalanceInterestHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginNegativeBalanceInterestHistory
      */
@@ -3605,7 +3804,7 @@ export interface UmFuturesAccountConfigurationRequest {
  */
 export interface UmFuturesSymbolConfigurationRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AccountApiUmFuturesSymbolConfiguration
      */
@@ -3655,14 +3854,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query account balance
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Account Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Balance (USER_DATA)
      * @param {AccountBalanceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Account-Balance Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#account-balance Binance API Documentation}
      */
     public async accountBalance(
         requestParameters: AccountBalanceRequest = {}
@@ -3686,14 +3887,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query account information
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Account Information(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information (USER_DATA)
      * @param {AccountInformationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Account-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#account-information Binance API Documentation}
      */
     public async accountInformation(
         requestParameters: AccountInformationRequest = {}
@@ -3716,16 +3919,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Transfer BNB in and out of UM
      *
-     * The endpoint can only be called 10 times per 10 minutes in a rolling manner
+     * Weight(IP): 750
      *
-     * Weight: 750
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - The endpoint can only be called 10 times per 10 minutes in a rolling manner
      *
      * @summary BNB transfer (TRADE)
      * @param {BnbTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BnbTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/BNB-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#bnb-transfer Binance API Documentation}
      */
     public async bnbTransfer(
         requestParameters: BnbTransferRequest
@@ -3750,14 +3956,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Change Auto-repay-futures Status
      *
-     * Weight: 750
+     * Weight(IP): 750
      *
-     * @summary Change Auto-repay-futures Status(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change Auto-repay-futures Status (TRADE)
      * @param {ChangeAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ChangeAutoRepayFuturesStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Change-Auto-repay-futures-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#change-auto-repay-futures-status Binance API Documentation}
      */
     public async changeAutoRepayFuturesStatus(
         requestParameters: ChangeAutoRepayFuturesStatusRequest
@@ -3781,14 +3989,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Change user's initial leverage of specific symbol in CM.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Change CM Initial Leverage (TRADE)
      * @param {ChangeCmInitialLeverageRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ChangeCmInitialLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Change-CM-Initial-Leverage Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#change-cm-initial-leverage Binance API Documentation}
      */
     public async changeCmInitialLeverage(
         requestParameters: ChangeCmInitialLeverageRequest
@@ -3813,14 +4023,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in CM
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change CM Position Mode(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change CM Position Mode (TRADE)
      * @param {ChangeCmPositionModeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ChangeCmPositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Change-CM-Position-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#change-cm-position-mode Binance API Documentation}
      */
     public async changeCmPositionMode(
         requestParameters: ChangeCmPositionModeRequest
@@ -3844,14 +4056,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Change user's initial leverage of specific symbol in UM.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change UM Initial Leverage(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change UM Initial Leverage (TRADE)
      * @param {ChangeUmInitialLeverageRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ChangeUmInitialLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Change-UM-Initial-Leverage Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#change-um-initial-leverage Binance API Documentation}
      */
     public async changeUmInitialLeverage(
         requestParameters: ChangeUmInitialLeverageRequest
@@ -3876,14 +4090,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in UM
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change UM Position Mode(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change UM Position Mode (TRADE)
      * @param {ChangeUmPositionModeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ChangeUmPositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Change-UM-Position-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#change-um-position-mode Binance API Documentation}
      */
     public async changeUmPositionMode(
         requestParameters: ChangeUmPositionModeRequest
@@ -3907,14 +4123,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query CM notional and leverage brackets
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary CM Notional and Leverage Brackets(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary CM Notional and Leverage Brackets (USER_DATA)
      * @param {CmNotionalAndLeverageBracketsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CmNotionalAndLeverageBracketsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/CM-Notional-and-Leverage-Brackets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#cm-notional-and-leverage-brackets Binance API Documentation}
      */
     public async cmNotionalAndLeverageBrackets(
         requestParameters: CmNotionalAndLeverageBracketsRequest = {}
@@ -3939,17 +4157,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Fund collection for Portfolio Margin
      *
-     * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
-     * You can only use this function 500 times per hour in a rolling manner.
+     * Weight(IP): 750
      *
-     * Weight: 750
+     * Security Type: TRADE
      *
-     * @summary Fund Auto-collection(TRADE)
+     * Notes:
+     * - BNB assets will not be auto-collected.
+     * - Rolling window endpoint can be called at most 500 times per hour.
+     *
+     * @summary Fund Auto-collection (TRADE)
      * @param {FundAutoCollectionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FundAutoCollectionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Fund-Auto-collection Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#fund-auto-collection Binance API Documentation}
      */
     public async fundAutoCollection(
         requestParameters: FundAutoCollectionRequest = {}
@@ -3972,16 +4193,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Transfers specific asset from Futures Account to Margin account
      *
-     * The BNB transfer is not be supported
+     * Weight(IP): 30
      *
-     * Weight: 30
+     * Security Type: TRADE
      *
-     * @summary Fund Collection by Asset(TRADE)
+     * Notes:
+     * - The BNB transfer is not be supported
+     *
+     * @summary Fund Collection by Asset (TRADE)
      * @param {FundCollectionByAssetRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FundCollectionByAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Fund-Collection-by-Asset Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#fund-collection-by-asset Binance API Documentation}
      */
     public async fundCollectionByAsset(
         requestParameters: FundCollectionByAssetRequest
@@ -4005,14 +4229,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query Auto-repay-futures Status
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get Auto-repay-futures Status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Auto-repay-futures Status (USER_DATA)
      * @param {GetAutoRepayFuturesStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetAutoRepayFuturesStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-Auto-repay-futures-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-auto-repay-futures-status Binance API Documentation}
      */
     public async getAutoRepayFuturesStatus(
         requestParameters: GetAutoRepayFuturesStatusRequest = {}
@@ -4035,14 +4261,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current CM account asset and position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get CM Account Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get CM Account Detail (USER_DATA)
      * @param {GetCmAccountDetailRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCmAccountDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-CM-Account-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-account-detail Binance API Documentation}
      */
     public async getCmAccountDetail(
         requestParameters: GetCmAccountDetailRequest = {}
@@ -4065,14 +4293,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in CM
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get CM Current Position Mode(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get CM Current Position Mode (USER_DATA)
      * @param {GetCmCurrentPositionModeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCmCurrentPositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-CM-Current-Position-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-current-position-mode Binance API Documentation}
      */
     public async getCmCurrentPositionMode(
         requestParameters: GetCmCurrentPositionModeRequest = {}
@@ -4093,22 +4323,24 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Get CM Income History
+     * Get CM Income History.
      *
+     * Weight(IP): 30
      *
-     * If `incomeType` is not sent, all kinds of flow will be returned
-     * "trandId" is unique in the same "incomeType" for a user
-     * The interval between `startTime` and `endTime` can not exceed 200 days:
-     * If `startTime` and `endTime` are not sent, the last 200 days will be returned
+     * Security Type: USER_DATA
      *
-     * Weight: 30
+     * Notes:
+     * - If `incomeType` is not sent, all kinds of flow will be returned
+     * - "trandId" is unique in the same "incomeType" for a user
+     * - The interval between `startTime` and `endTime` can not exceed 200 days:
+     * - If `startTime` and `endTime` are not sent, the last 200 days will be returned
      *
-     * @summary Get CM Income History(USER_DATA)
+     * @summary Get CM Income History (USER_DATA)
      * @param {GetCmIncomeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCmIncomeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-CM-Income-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-income-history Binance API Documentation}
      */
     public async getCmIncomeHistory(
         requestParameters: GetCmIncomeHistoryRequest = {}
@@ -4137,17 +4369,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get download id for UM futures order history
      *
-     * Request Limitation is 10 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 10 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For UM Futures Order History (USER_DATA)
      * @param {GetDownloadIdForUmFuturesOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDownloadIdForUmFuturesOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-Download-Id-For-UM-Futures-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-um-futures-order-history Binance API Documentation}
      */
     public async getDownloadIdForUmFuturesOrderHistory(
         requestParameters: GetDownloadIdForUmFuturesOrderHistoryRequest
@@ -4173,17 +4408,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get download id for UM futures trade history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For UM Futures Trade History (USER_DATA)
      * @param {GetDownloadIdForUmFuturesTradeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDownloadIdForUmFuturesTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-Download-Id-For-UM-Futures-Trade-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-um-futures-trade-history Binance API Documentation}
      */
     public async getDownloadIdForUmFuturesTradeHistory(
         requestParameters: GetDownloadIdForUmFuturesTradeHistoryRequest
@@ -4209,17 +4447,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get download id for UM futures transaction history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1500
      *
-     * Weight: 1500
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For UM Futures Transaction History (USER_DATA)
      * @param {GetDownloadIdForUmFuturesTransactionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDownloadIdForUmFuturesTransactionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-Download-Id-For-UM-Futures-Transaction-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-um-futures-transaction-history Binance API Documentation}
      */
     public async getDownloadIdForUmFuturesTransactionHistory(
         requestParameters: GetDownloadIdForUmFuturesTransactionHistoryRequest
@@ -4245,27 +4486,29 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get Margin Borrow/Loan Interest History
      *
+     * Weight(IP): 1
      *
-     * Response in descending order
-     * The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
-     * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-     * If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
-     * If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
-     * Type in response has 5 enums:
-     * `PERIODIC` interest charged per hour
-     * `ON_BORROW` first interest charged on borrow
-     * `PERIODIC_CONVERTED` interest charged per hour converted into BNB
-     * `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
-     * `PORTFOLIO` Portfolio Margin negative balance daily interest
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Response in descending order
+     * - The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
+     * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+     * - If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
+     * - If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
+     * - Type in response has 5 enums:
+     * - `PERIODIC` interest charged per hour
+     * - `ON_BORROW` first interest charged on borrow
+     * - `PERIODIC_CONVERTED` interest charged per hour converted into BNB
+     * - `ON_BORROW_CONVERTED` first interest charged on borrow converted into BNB
+     * - `PORTFOLIO` Portfolio Margin negative balance daily interest
      *
-     * @summary Get Margin Borrow/Loan Interest History(USER_DATA)
+     * @summary Get Margin Borrow/Loan Interest History (USER_DATA)
      * @param {GetMarginBorrowLoanInterestHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetMarginBorrowLoanInterestHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-Margin-BorrowLoan-Interest-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-margin-borrow-loan-interest-history Binance API Documentation}
      */
     public async getMarginBorrowLoanInterestHistory(
         requestParameters: GetMarginBorrowLoanInterestHistoryRequest = {}
@@ -4295,14 +4538,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current UM account asset and position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get UM Account Detail(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get UM Account Detail (USER_DATA)
      * @param {GetUmAccountDetailRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUmAccountDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Account-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-um-account-detail Binance API Documentation}
      */
     public async getUmAccountDetail(
         requestParameters: GetUmAccountDetailRequest = {}
@@ -4325,14 +4570,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current UM account asset and position information.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Get UM Account Detail V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get UM Account Detail V2 (USER_DATA)
      * @param {GetUmAccountDetailV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUmAccountDetailV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Account-Detail-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-um-account-detail-v2 Binance API Documentation}
      */
     public async getUmAccountDetailV2(
         requestParameters: GetUmAccountDetailV2Request = {}
@@ -4355,14 +4602,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol in UM
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get UM Current Position Mode(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get UM Current Position Mode (USER_DATA)
      * @param {GetUmCurrentPositionModeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUmCurrentPositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Current-Position-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-um-current-position-mode Binance API Documentation}
      */
     public async getUmCurrentPositionMode(
         requestParameters: GetUmCurrentPositionModeRequest = {}
@@ -4385,16 +4634,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get UM futures order download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get UM Futures Order Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get UM Futures Order Download Link by Id (USER_DATA)
      * @param {GetUmFuturesOrderDownloadLinkByIdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUmFuturesOrderDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Futures-Order-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-um-futures-order-download-link-by-id Binance API Documentation}
      */
     public async getUmFuturesOrderDownloadLinkById(
         requestParameters: GetUmFuturesOrderDownloadLinkByIdRequest
@@ -4419,16 +4671,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get UM futures trade download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get UM Futures Trade Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get UM Futures Trade Download Link by Id (USER_DATA)
      * @param {GetUmFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUmFuturesTradeDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Futures-Trade-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-um-futures-trade-download-link-by-id Binance API Documentation}
      */
     public async getUmFuturesTradeDownloadLinkById(
         requestParameters: GetUmFuturesTradeDownloadLinkByIdRequest
@@ -4453,16 +4708,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get UM futures Transaction download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get UM Futures Transaction Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get UM Futures Transaction Download Link by Id (USER_DATA)
      * @param {GetUmFuturesTransactionDownloadLinkByIdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUmFuturesTransactionDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Futures-Transaction-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-um-futures-transaction-download-link-by-id Binance API Documentation}
      */
     public async getUmFuturesTransactionDownloadLinkById(
         requestParameters: GetUmFuturesTransactionDownloadLinkByIdRequest
@@ -4485,21 +4743,24 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Get UM Income History
+     * Get UM Income History.
      *
-     * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-     * If `incomeType` is not sent, all kinds of flow will be returned
-     * "trandId" is unique in the same incomeType for a user
-     * Income history only contains data for the last three months
+     * Weight(IP): 30
      *
-     * Weight: 30
+     * Security Type: USER_DATA
      *
-     * @summary Get UM Income History(USER_DATA)
+     * Notes:
+     * - If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
+     * - If `incomeType` is not sent, all kinds of flow will be returned
+     * - "trandId" is unique in the same incomeType for a user
+     * - Income history only contains data for the last three months
+     *
+     * @summary Get UM Income History (USER_DATA)
      * @param {GetUmIncomeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUmIncomeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Income-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-um-income-history Binance API Documentation}
      */
     public async getUmIncomeHistory(
         requestParameters: GetUmIncomeHistoryRequest = {}
@@ -4528,14 +4789,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get User Commission Rate for CM
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Get User Commission Rate for CM(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get User Commission Rate for CM (USER_DATA)
      * @param {GetUserCommissionRateForCmRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUserCommissionRateForCmResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-User-Commission-Rate-for-CM Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-user-commission-rate-for-cm Binance API Documentation}
      */
     public async getUserCommissionRateForCm(
         requestParameters: GetUserCommissionRateForCmRequest
@@ -4559,14 +4822,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get User Commission Rate for UM
      *
-     * Weight: 20
+     * Weight(IP): 20
      *
-     * @summary Get User Commission Rate for UM(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get User Commission Rate for UM (USER_DATA)
      * @param {GetUserCommissionRateForUmRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUserCommissionRateForUmResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-User-Commission-Rate-for-UM Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-user-commission-rate-for-um Binance API Documentation}
      */
     public async getUserCommissionRateForUm(
         requestParameters: GetUserCommissionRateForUmRequest
@@ -4590,14 +4855,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query margin max borrow
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Margin Max Borrow(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Margin Max Borrow (USER_DATA)
      * @param {MarginMaxBorrowRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginMaxBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Margin-Max-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#margin-max-borrow Binance API Documentation}
      */
     public async marginMaxBorrow(
         requestParameters: MarginMaxBorrowRequest
@@ -4621,15 +4888,17 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Portfolio Margin UM Trading Quantitative Rules Indicators
      *
-     * Weight: 1 for a single symbol
-     * 10 when the symbol parameter is omitted
+     * Weight: - 1 for a single `symbol`
+     * - 10 when `symbol` is omitted
      *
-     * @summary Portfolio Margin UM Trading Quantitative Rules Indicators(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Portfolio Margin UM Trading Quantitative Rules Indicators (USER_DATA)
      * @param {PortfolioMarginUmTradingQuantitativeRulesIndicatorsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Portfolio-Margin-UM-Trading-Quantitative-Rules-Indicators Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#portfolio-margin-um-trading-quantitative-rules-indicators Binance API Documentation}
      */
     public async portfolioMarginUmTradingQuantitativeRulesIndicators(
         requestParameters: PortfolioMarginUmTradingQuantitativeRulesIndicatorsRequest = {}
@@ -4654,19 +4923,22 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current CM position information.
      *
-     * If neither `marginAsset` nor `pair` is sent, positions of all symbols with `TRADING` status will be returned.
-     * for One-way Mode user, the response will only show the "BOTH" positions
-     * for Hedge Mode user, the response will show "LONG", and "SHORT" positions.
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query CM Position Information(USER_DATA)
+     * Notes:
+     * - If neither `marginAsset` nor `pair` is sent, positions of all symbols with `TRADING` status will be returned.
+     * - for One-way Mode user, the response will only show the "BOTH" positions
+     * - for Hedge Mode user, the response will show "LONG", and "SHORT" positions. **Note**
+     * - Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     *
+     * @summary Query CM Position Information (USER_DATA)
      * @param {QueryCmPositionInformationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCmPositionInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Query-CM-Position-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#query-cm-position-information Binance API Documentation}
      */
     public async queryCmPositionInformation(
         requestParameters: QueryCmPositionInformationRequest = {}
@@ -4691,20 +4963,23 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query margin loan record
      *
-     * txId or startTime must be sent. txId takes precedence.
-     * Response in descending order
-     * The max interval between `startTime` and `endTime` is 30 days.
-     * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-     * Set `archived` to `true` to query data from 6 months ago
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Query Margin Loan Record(USER_DATA)
+     * Notes:
+     * - txId or startTime must be sent. txId takes precedence.
+     * - Response in descending order
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+     * - Set `archived` to `true` to query data from 6 months ago
+     *
+     * @summary Query Margin Loan Record (USER_DATA)
      * @param {QueryMarginLoanRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginLoanRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Query-Margin-Loan-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#query-margin-loan-record Binance API Documentation}
      */
     public async queryMarginLoanRecord(
         requestParameters: QueryMarginLoanRecordRequest
@@ -4734,14 +5009,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query Margin Max Withdraw
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Query Margin Max Withdraw(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query Margin Max Withdraw (USER_DATA)
      * @param {QueryMarginMaxWithdrawRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginMaxWithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Query-Margin-Max-Withdraw Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#query-margin-max-withdraw Binance API Documentation}
      */
     public async queryMarginMaxWithdraw(
         requestParameters: QueryMarginMaxWithdrawRequest
@@ -4765,20 +5042,23 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query margin repay record.
      *
-     * txId or startTime must be sent. txId takes precedence.
-     * Response in descending order
-     * The max interval between `startTime` and `endTime` is 30 days.
-     * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-     * Set `archived` to `true` to query data from 6 months ago
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Query Margin repay Record(USER_DATA)
+     * Notes:
+     * - txId or startTime must be sent. txId takes precedence.
+     * - Response in descending order
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - If `startTime` and `endTime` not sent, return records of the last 7 days by default
+     * - Set `archived` to `true` to query data from 6 months ago
+     *
+     * @summary Query Margin repay Record (USER_DATA)
      * @param {QueryMarginRepayRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginRepayRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Query-Margin-repay-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#query-margin-repay-record Binance API Documentation}
      */
     public async queryMarginRepayRecord(
         requestParameters: QueryMarginRepayRecordRequest
@@ -4808,20 +5088,23 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query interest history of negative balance for portfolio margin.
      *
-     * Response in descending order
-     * The max interval between startTime and endTime is 30 days. It is a MUST to ensure data correctness.
-     * If `startTime` and `endTime` not sent, return records of the last 7 days by default
-     * If `startTime` is sent and `endTime` is not sent, the records from `startTime` to the present will be returned; if `startTime` is more than 30 days ago, the records of the past 30 days will be returned.
-     * If `startTime` is not sent and `endTime` is sent, the records of the 7 days before `endTime` is returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
      *
-     * @summary Query Portfolio Margin Negative Balance Interest History(USER_DATA)
+     * Notes:
+     * - Results are returned in descending order.
+     * - The query range cannot exceed 30 days to ensure data correctness.
+     * - If both `startTime` and `endTime` are omitted, the most recent 7 days are returned by default.
+     * - If `startTime` is provided but `endTime` is omitted, records from `startTime` to now are returned; if that exceeds 30 days, only the most recent 30 days are returned.
+     * - If `endTime` is provided but `startTime` is omitted, records from the 7 days before `endTime` are returned.
+     *
+     * @summary Query Portfolio Margin Negative Balance Interest History (USER_DATA)
      * @param {QueryPortfolioMarginNegativeBalanceInterestHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginNegativeBalanceInterestHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Query-Portfolio-Margin-Negative-Balance-Interest-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#query-portfolio-margin-negative-balance-interest-history Binance API Documentation}
      */
     public async queryPortfolioMarginNegativeBalanceInterestHistory(
         requestParameters: QueryPortfolioMarginNegativeBalanceInterestHistoryRequest = {}
@@ -4849,18 +5132,21 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current UM position information.
      *
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
-     * for One-way Mode user, the response will only show the "BOTH" positions
-     * for Hedge Mode user, the response will show "LONG", and "SHORT" positions.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
      *
-     * @summary Query UM Position Information(USER_DATA)
+     * Notes:
+     * - Please use with account push event `ACCOUNT_UPDATE` for timeliness and accuracy.
+     * - In One-way Mode, only positions with side `BOTH` are shown.
+     * - In Hedge Mode, positions with sides `BOTH`, `LONG`, and `SHORT` are shown.
+     *
+     * @summary Query UM Position Information (USER_DATA)
      * @param {QueryUmPositionInformationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUmPositionInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Query-UM-Position-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#query-um-position-information Binance API Documentation}
      */
     public async queryUmPositionInformation(
         requestParameters: QueryUmPositionInformationRequest = {}
@@ -4884,17 +5170,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query user negative balance auto exchange record
      *
-     * Response in descending order
-     * The max interval between `startTime` and `endTime` is 3 months.
+     * Weight(IP): 100
      *
-     * Weight: 100
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Response in descending order
+     * - The max interval between `startTime` and `endTime` is 3 months.
      *
      * @summary Query User Negative Balance Auto Exchange Record (USER_DATA)
      * @param {QueryUserNegativeBalanceAutoExchangeRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUserNegativeBalanceAutoExchangeRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Query-User-Negative-Balance-Auto-Exchange-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#query-user-negative-balance-auto-exchange-record Binance API Documentation}
      */
     public async queryUserNegativeBalanceAutoExchangeRecord(
         requestParameters: QueryUserNegativeBalanceAutoExchangeRecordRequest
@@ -4920,14 +5209,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query User Rate Limit
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query User Rate Limit (USER_DATA)
      * @param {QueryUserRateLimitRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUserRateLimitResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Query-User-Rate-Limit Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#query-user-rate-limit Binance API Documentation}
      */
     public async queryUserRateLimit(
         requestParameters: QueryUserRateLimitRequest = {}
@@ -4950,14 +5241,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Repay futures Negative Balance
      *
-     * Weight: 750
+     * Weight(IP): 750
      *
-     * @summary Repay futures Negative Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Repay futures Negative Balance (USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Repay-futures-Negative-Balance Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#repay-futures-negative-balance Binance API Documentation}
      */
     public async repayFuturesNegativeBalance(
         requestParameters: RepayFuturesNegativeBalanceRequest = {}
@@ -4980,14 +5273,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query UM Futures account configuration
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary UM Futures Account Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary UM Futures Account Configuration (USER_DATA)
      * @param {UmFuturesAccountConfigurationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UmFuturesAccountConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Futures-Account-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#um-futures-account-configuration Binance API Documentation}
      */
     public async umFuturesAccountConfiguration(
         requestParameters: UmFuturesAccountConfigurationRequest = {}
@@ -5011,14 +5306,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current UM account symbol configuration.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary UM Futures Symbol Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary UM Futures Symbol Configuration (USER_DATA)
      * @param {UmFuturesSymbolConfigurationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UmFuturesSymbolConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/Get-UM-Futures-Symbol-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#um-futures-symbol-configuration Binance API Documentation}
      */
     public async umFuturesSymbolConfiguration(
         requestParameters: UmFuturesSymbolConfigurationRequest = {}
@@ -5042,14 +5339,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query UM notional and leverage brackets
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary UM Notional and Leverage Brackets (USER_DATA)
      * @param {UmNotionalAndLeverageBracketsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UmNotionalAndLeverageBracketsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/account/UM-Notional-and-Leverage-Brackets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#um-notional-and-leverage-brackets Binance API Documentation}
      */
     public async umNotionalAndLeverageBrackets(
         requestParameters: UmNotionalAndLeverageBracketsRequest = {}
@@ -5070,4 +5369,71 @@ export class AccountApi implements AccountApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum BnbTransferTransferSideEnum {
+    TO_UM = 'TO_UM',
+    FROM_UM = 'FROM_UM',
+}
+
+export enum ChangeAutoRepayFuturesStatusAutoRepayEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum ChangeCmPositionModeDualSidePositionEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum ChangeUmPositionModeDualSidePositionEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum GetCmIncomeHistoryIncomeTypeEnum {
+    TRANSFER = 'TRANSFER',
+    WELCOME_BONUS = 'WELCOME_BONUS',
+    FUNDING_FEE = 'FUNDING_FEE',
+    REALIZED_PNL = 'REALIZED_PNL',
+    COMMISSION = 'COMMISSION',
+    INSURANCE_CLEAR = 'INSURANCE_CLEAR',
+    DELIVERED_SETTELMENT = 'DELIVERED_SETTELMENT',
+}
+
+export enum GetMarginBorrowLoanInterestHistoryArchivedEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum GetUmIncomeHistoryIncomeTypeEnum {
+    TRANSFER = 'TRANSFER',
+    WELCOME_BONUS = 'WELCOME_BONUS',
+    REALIZED_PNL = 'REALIZED_PNL',
+    FUNDING_FEE = 'FUNDING_FEE',
+    COMMISSION = 'COMMISSION',
+    INSURANCE_CLEAR = 'INSURANCE_CLEAR',
+    REFERRAL_KICKBACK = 'REFERRAL_KICKBACK',
+    COMMISSION_REBATE = 'COMMISSION_REBATE',
+    API_REBATE = 'API_REBATE',
+    CONTEST_REWARD = 'CONTEST_REWARD',
+    CROSS_COLLATERAL_TRANSFER = 'CROSS_COLLATERAL_TRANSFER',
+    OPTIONS_PREMIUM_FEE = 'OPTIONS_PREMIUM_FEE',
+    OPTIONS_SETTLE_PROFIT = 'OPTIONS_SETTLE_PROFIT',
+    INTERNAL_TRANSFER = 'INTERNAL_TRANSFER',
+    AUTO_EXCHANGE = 'AUTO_EXCHANGE',
+    DELIVERED_SETTELMENT = 'DELIVERED_SETTELMENT',
+    COIN_SWAP_DEPOSIT = 'COIN_SWAP_DEPOSIT',
+    COIN_SWAP_WITHDRAW = 'COIN_SWAP_WITHDRAW',
+    POSITION_LIMIT_INCREASE_FEE = 'POSITION_LIMIT_INCREASE_FEE',
+}
+
+export enum QueryMarginLoanRecordArchivedEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum QueryMarginRepayRecordArchivedEnum {
+    TRUE = 'true',
+    FALSE = 'false',
 }

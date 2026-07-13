@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,67 +20,67 @@
  */
 export interface MarginAccountTradeListResponseInner {
     /**
-     *
+     * Commission.
      * @type {string}
      * @memberof MarginAccountTradeListResponseInner
      */
     commission?: string;
     /**
-     *
+     * Commission Asset.
      * @type {string}
      * @memberof MarginAccountTradeListResponseInner
      */
     commissionAsset?: string;
     /**
-     *
+     * ID.
      * @type {number | bigint}
      * @memberof MarginAccountTradeListResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * Is Best Match.
      * @type {boolean}
      * @memberof MarginAccountTradeListResponseInner
      */
     isBestMatch?: boolean;
     /**
-     *
+     * Is Buyer.
      * @type {boolean}
      * @memberof MarginAccountTradeListResponseInner
      */
     isBuyer?: boolean;
     /**
-     *
+     * Is Maker.
      * @type {boolean}
      * @memberof MarginAccountTradeListResponseInner
      */
     isMaker?: boolean;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof MarginAccountTradeListResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof MarginAccountTradeListResponseInner
      */
     price?: string;
     /**
-     *
+     * Qty.
      * @type {string}
      * @memberof MarginAccountTradeListResponseInner
      */
     qty?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof MarginAccountTradeListResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Event time.
      * @type {number | bigint}
      * @memberof MarginAccountTradeListResponseInner
      */

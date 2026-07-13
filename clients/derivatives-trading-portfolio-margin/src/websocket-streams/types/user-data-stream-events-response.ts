@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Portfolio Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -26,13 +26,13 @@ import type { AccountConfigUpdateAc } from './account-config-update-ac';
 import type { AccountUpdate } from './account-update';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AlgoUpdate } from './algo-update';
+import type { AlgoOrderUpdate } from './algo-order-update';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AlgoUpdateAo } from './algo-update-ao';
+import type { AlgoOrderUpdateAo } from './algo-order-update-ao';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Balanceupdate } from './balanceupdate';
+import type { BalanceUpdate } from './balance-update';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ConditionalOrderTradeUpdate } from './conditional-order-trade-update';
@@ -41,43 +41,48 @@ import type { ConditionalOrderTradeUpdate } from './conditional-order-trade-upda
 import type { ConditionalOrderTradeUpdateSo } from './conditional-order-trade-update-so';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Executionreport } from './executionreport';
+import type { ExecutionReport } from './execution-report';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Liabilitychange } from './liabilitychange';
+import type { LiabilityChange } from './liability-change';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Listenkeyexpired } from './listenkeyexpired';
+import type { ListenKeyExpired } from './listen-key-expired';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Openorderloss } from './openorderloss';
+import type { OpenOrderLoss } from './open-order-loss';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OpenorderlossOInner } from './openorderloss-oinner';
+import type { OpenOrderLossOInner } from './open-order-loss-oinner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OrderTradeUpdate } from './order-trade-update';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Outboundaccountposition } from './outboundaccountposition';
+import type { OrderTradeUpdateO } from './order-trade-update-o';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Risklevelchange } from './risklevelchange';
+import type { OutboundAccountPosition } from './outbound-account-position';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OutboundAccountPositionBInner } from './outbound-account-position-binner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RiskLevelChange } from './risk-level-change';
 
 /**
  * @type UserDataStreamEventsResponse
- * @export
  */
 export type UserDataStreamEventsResponse =
     | ({ e: 'ACCOUNT_CONFIG_UPDATE' } & AccountConfigUpdate)
     | ({ e: 'ACCOUNT_UPDATE' } & AccountUpdate)
-    | ({ e: 'ALGO_UPDATE' } & AlgoUpdate)
+    | ({ e: 'ALGO_UPDATE' } & AlgoOrderUpdate)
     | ({ e: 'CONDITIONAL_ORDER_TRADE_UPDATE' } & ConditionalOrderTradeUpdate)
     | ({ e: 'ORDER_TRADE_UPDATE' } & OrderTradeUpdate)
-    | ({ e: 'balanceUpdate' } & Balanceupdate)
-    | ({ e: 'executionReport' } & Executionreport)
-    | ({ e: 'liabilityChange' } & Liabilitychange)
-    | ({ e: 'listenKeyExpired' } & Listenkeyexpired)
-    | ({ e: 'openOrderLoss' } & Openorderloss)
-    | ({ e: 'outboundAccountPosition' } & Outboundaccountposition)
-    | ({ e: 'riskLevelChange' } & Risklevelchange);
+    | ({ e: 'balanceUpdate' } & BalanceUpdate)
+    | ({ e: 'executionReport' } & ExecutionReport)
+    | ({ e: 'liabilityChange' } & LiabilityChange)
+    | ({ e: 'listenKeyExpired' } & ListenKeyExpired)
+    | ({ e: 'openOrderLoss' } & OpenOrderLoss)
+    | ({ e: 'outboundAccountPosition' } & OutboundAccountPosition)
+    | ({ e: 'riskLevelChange' } & RiskLevelChange);

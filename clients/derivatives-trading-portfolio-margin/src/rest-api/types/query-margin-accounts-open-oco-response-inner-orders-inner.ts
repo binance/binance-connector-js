@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface QueryMarginAccountsOpenOcoResponseInnerOrdersInner {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryMarginAccountsOpenOcoResponseInnerOrdersInner
      */
     symbol?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryMarginAccountsOpenOcoResponseInnerOrdersInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof QueryMarginAccountsOpenOcoResponseInnerOrdersInner
      */

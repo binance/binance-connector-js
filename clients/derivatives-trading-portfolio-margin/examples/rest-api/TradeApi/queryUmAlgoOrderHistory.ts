@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function queryUmAlgoOrderHistory() {
     try {
         const response = await client.restAPI.queryUmAlgoOrderHistory({
-            symbol: 'symbol_example',
+            symbol: 'BNBUSDT',
         });
 
         const rateLimits = response.rateLimits!;

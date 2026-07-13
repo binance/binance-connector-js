@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,139 +20,139 @@
  */
 export interface QueryCmConditionalOrderHistoryResponse {
     /**
-     *
+     * New Client Strategy ID.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     newClientStrategyId?: string;
     /**
-     *
+     * Strategy ID.
      * @type {number | bigint}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     strategyId?: number | bigint;
     /**
-     *
+     * Strategy Status.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     strategyStatus?: string;
     /**
-     *
+     * Strategy Type.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     strategyType?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     positionSide?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     stopPrice?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     symbol?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable，only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Normal order status after trigger if appliable, only have when the strategy is triggered
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     status?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     bookTime?: number | bigint;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Trigger Time.
      * @type {number | bigint}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     triggerTime?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     priceRate?: string;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     workingType?: string;
     /**
-     *
+     * Price Protect.
      * @type {boolean}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * Price Match.
      * @type {string}
      * @memberof QueryCmConditionalOrderHistoryResponse
      */

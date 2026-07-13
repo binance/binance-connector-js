@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function cancelMarginAccountAllOpenOrdersOnASymbol() {
     try {
         const response = await client.restAPI.cancelMarginAccountAllOpenOrdersOnASymbol({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

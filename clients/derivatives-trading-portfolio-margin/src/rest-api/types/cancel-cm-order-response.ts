@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,103 +20,103 @@
  */
 export interface CancelCmOrderResponse {
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Cum Qty.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     cumQty?: string;
     /**
-     *
+     * Cum Base.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     cumBase?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof CancelCmOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof CancelCmOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     status?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Pair.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     pair?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof CancelCmOrderResponse
      */
     type?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof CancelCmOrderResponse
      */

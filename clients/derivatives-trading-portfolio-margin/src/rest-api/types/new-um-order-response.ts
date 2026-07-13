@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,115 +20,115 @@
  */
 export interface NewUmOrderResponse {
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Cum Qty.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     cumQty?: string;
     /**
-     *
+     * Cum Quote.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof NewUmOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof NewUmOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     status?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     type?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof NewUmOrderResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof NewUmOrderResponse
      */
     goodTillDate?: number | bigint;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof NewUmOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Price Match.
      * @type {string}
      * @memberof NewUmOrderResponse
      */

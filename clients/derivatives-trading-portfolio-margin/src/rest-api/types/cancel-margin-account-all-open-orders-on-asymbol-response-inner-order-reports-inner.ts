@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,91 +20,91 @@
  */
 export interface CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     symbol?: string;
     /**
-     *
+     * Orig Client Order ID.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     origClientOrderId?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Order List ID.
      * @type {number | bigint}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     orderListId?: number | bigint;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     price?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     origQty?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     executedQty?: string;
     /**
-     *
+     * Cummulative Quote Qty.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     status?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     type?: string;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     side?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
     stopPrice?: string;
     /**
-     *
+     * Iceberg Qty.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,79 +20,79 @@
  */
 export interface AccountBalanceResponse1Inner {
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     asset?: string;
     /**
-     *
+     * Total Wallet Balance.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     totalWalletBalance?: string;
     /**
-     *
+     * Cross Margin Asset.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     crossMarginAsset?: string;
     /**
-     *
+     * Cross Margin Borrowed.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     crossMarginBorrowed?: string;
     /**
-     *
+     * Cross Margin Free.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     crossMarginFree?: string;
     /**
-     *
+     * Cross Margin Interest.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     crossMarginInterest?: string;
     /**
-     *
+     * Cross Margin Locked.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     crossMarginLocked?: string;
     /**
-     *
+     * Um Wallet Balance.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     umWalletBalance?: string;
     /**
-     *
+     * Um Unrealized PNL.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     umUnrealizedPNL?: string;
     /**
-     *
+     * Cm Wallet Balance.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     cmWalletBalance?: string;
     /**
-     *
+     * Cm Unrealized PNL.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
     cmUnrealizedPNL?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof AccountBalanceResponse1Inner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * negative balance amount
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */

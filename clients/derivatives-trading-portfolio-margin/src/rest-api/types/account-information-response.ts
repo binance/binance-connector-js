@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,61 +20,61 @@
  */
 export interface AccountInformationResponse {
     /**
-     *
+     * Portfolio margin account maintenance margin rate
      * @type {string}
      * @memberof AccountInformationResponse
      */
     uniMMR?: string;
     /**
-     *
+     * Account equity, in USD value
      * @type {string}
      * @memberof AccountInformationResponse
      */
     accountEquity?: string;
     /**
-     *
+     * Account equity without collateral rate, in USD value
      * @type {string}
      * @memberof AccountInformationResponse
      */
     actualEquity?: string;
     /**
-     *
+     * Account Initial Margin.
      * @type {string}
      * @memberof AccountInformationResponse
      */
     accountInitialMargin?: string;
     /**
-     *
+     * Portfolio margin account maintenance margin, unit：USD
      * @type {string}
      * @memberof AccountInformationResponse
      */
     accountMaintMargin?: string;
     /**
-     *
+     * Portfolio margin account status:\"NORMAL\", \"MARGIN_CALL\", \"SUPPLY_MARGIN\", \"REDUCE_ONLY\", \"ACTIVE_LIQUIDATION\", \"FORCE_LIQUIDATION\", \"BANKRUPTED\"
      * @type {string}
      * @memberof AccountInformationResponse
      */
     accountStatus?: string;
     /**
-     *
+     * Portfolio margin maximum amount for transfer out in USD
      * @type {string}
      * @memberof AccountInformationResponse
      */
     virtualMaxWithdrawAmount?: string;
     /**
-     *
+     * Total Available Balance.
      * @type {string}
      * @memberof AccountInformationResponse
      */
     totalAvailableBalance?: string;
     /**
-     *
+     * in USD margin open order
      * @type {string}
      * @memberof AccountInformationResponse
      */
     totalMarginOpenLoss?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof AccountInformationResponse
      */

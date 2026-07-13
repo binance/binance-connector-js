@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,31 +14,31 @@
  */
 
 /**
- *
+ * Adl Quantile.
  * @export
  * @interface CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
  */
 export interface CmPositionAdlQuantileEstimationResponseInnerAdlQuantile {
     /**
-     *
+     * adl quantile for \"LONG\" position in hedge mode
      * @type {number | bigint}
      * @memberof CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
     LONG?: number | bigint;
     /**
-     *
+     * adl qauntile for \"SHORT\" position in hedge mode
      * @type {number | bigint}
      * @memberof CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
     SHORT?: number | bigint;
     /**
-     *
+     * only a sign, ignore the value
      * @type {number | bigint}
      * @memberof CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
     HEDGE?: number | bigint;
     /**
-     *
+     * adl qunatile for position in one-way mode
      * @type {number | bigint}
      * @memberof CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
      */

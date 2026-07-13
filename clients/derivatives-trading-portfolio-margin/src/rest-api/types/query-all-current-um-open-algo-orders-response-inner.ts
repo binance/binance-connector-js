@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -84,18 +84,6 @@ export interface QueryAllCurrentUmOpenAlgoOrdersResponseInner {
      * @type {string}
      * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
      */
-    actualOrderId?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
-     */
-    actualPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
-     */
     triggerPrice?: string;
     /**
      *
@@ -103,42 +91,6 @@ export interface QueryAllCurrentUmOpenAlgoOrdersResponseInner {
      * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
      */
     price?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
-     */
-    icebergQuantity?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
-     */
-    tpTriggerPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
-     */
-    tpPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
-     */
-    slTriggerPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
-     */
-    slPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAllCurrentUmOpenAlgoOrdersResponseInner
-     */
-    tpOrderType?: string;
     /**
      *
      * @type {string}

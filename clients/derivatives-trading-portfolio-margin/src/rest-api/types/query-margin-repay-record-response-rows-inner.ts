@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface QueryMarginRepayRecordResponseRowsInner {
     /**
-     *
+     * Total amount repaid
      * @type {string}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */
     amount?: string;
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */
     asset?: string;
     /**
-     *
+     * Interest repaid
      * @type {string}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */
     interest?: string;
     /**
-     *
+     * Principal repaid
      * @type {string}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */
     principal?: string;
     /**
-     *
+     * one of PENDING (pending execution), CONFIRMED (successfully execution), FAILED (execution failed, nothing happened to your account)
      * @type {string}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */
     status?: string;
     /**
-     *
+     * Timestamp.
      * @type {number | bigint}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */
     timestamp?: number | bigint;
     /**
-     *
+     * Tx ID.
      * @type {number | bigint}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */

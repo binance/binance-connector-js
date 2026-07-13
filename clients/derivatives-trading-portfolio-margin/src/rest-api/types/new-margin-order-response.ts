@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,91 +25,91 @@ import type { NewMarginOrderResponseFillsInner } from './new-margin-order-respon
  */
 export interface NewMarginOrderResponse {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof NewMarginOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Transact Time.
      * @type {number | bigint}
      * @memberof NewMarginOrderResponse
      */
     transactTime?: number | bigint;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     price?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Cummulative Quote Qty.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     status?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     type?: string;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     side?: string;
     /**
-     *
+     * will not return if no margin trade happens
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     marginBuyBorrowAmount?: string;
     /**
-     *
+     * will not return if no margin trade happens
      * @type {string}
      * @memberof NewMarginOrderResponse
      */
     marginBuyBorrowAsset?: string;
     /**
-     *
+     * Fills.
      * @type {Array<NewMarginOrderResponseFillsInner>}
      * @memberof NewMarginOrderResponse
      */

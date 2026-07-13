@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -22,7 +22,7 @@ import type { QueryCmModifyOrderHistoryResponseInnerAmendmentOrigQty } from './q
 import type { QueryCmModifyOrderHistoryResponseInnerAmendmentPrice } from './query-cm-modify-order-history-response-inner-amendment-price';
 
 /**
- *
+ * Amendment.
  * @export
  * @interface QueryCmModifyOrderHistoryResponseInnerAmendment
  */
@@ -40,7 +40,7 @@ export interface QueryCmModifyOrderHistoryResponseInnerAmendment {
      */
     origQty?: QueryCmModifyOrderHistoryResponseInnerAmendmentOrigQty;
     /**
-     *
+     * Order modification count, representing the number of times the order has been modified
      * @type {number | bigint}
      * @memberof QueryCmModifyOrderHistoryResponseInnerAmendment
      */

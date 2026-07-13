@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,103 +20,103 @@
  */
 export interface NewCmOrderResponse {
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Cum Qty.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     cumQty?: string;
     /**
-     *
+     * Cum Base.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     cumBase?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof NewCmOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof NewCmOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     status?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Pair.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     pair?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof NewCmOrderResponse
      */
     type?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof NewCmOrderResponse
      */

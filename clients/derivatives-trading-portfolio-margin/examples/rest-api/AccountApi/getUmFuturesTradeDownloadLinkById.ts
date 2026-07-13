@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function getUmFuturesTradeDownloadLinkById() {
     try {
         const response = await client.restAPI.getUmFuturesTradeDownloadLinkById({
-            downloadId: '1',
+            downloadId: '545923594199212032',
         });
 
         const rateLimits = response.rateLimits!;

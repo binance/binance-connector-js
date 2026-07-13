@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -30,10 +30,12 @@ import {
     NewCmConditionalOrderPositionSideEnum,
     NewCmConditionalOrderTimeInForceEnum,
     NewCmConditionalOrderWorkingTypeEnum,
+    NewCmConditionalOrderPriceProtectEnum,
     NewCmOrderSideEnum,
     NewCmOrderTypeEnum,
     NewCmOrderPositionSideEnum,
     NewCmOrderTimeInForceEnum,
+    NewCmOrderReduceOnlyEnum,
     NewCmOrderPriceMatchEnum,
     NewCmOrderNewOrderRespTypeEnum,
     NewMarginOrderSideEnum,
@@ -42,30 +44,37 @@ import {
     NewMarginOrderSideEffectTypeEnum,
     NewMarginOrderTimeInForceEnum,
     NewMarginOrderSelfTradePreventionModeEnum,
+    NewUmAlgoOrderAlgoTypeEnum,
     NewUmAlgoOrderSideEnum,
     NewUmAlgoOrderTypeEnum,
     NewUmAlgoOrderPositionSideEnum,
     NewUmAlgoOrderTimeInForceEnum,
     NewUmAlgoOrderWorkingTypeEnum,
     NewUmAlgoOrderPriceMatchEnum,
+    NewUmAlgoOrderPriceProtectEnum,
+    NewUmAlgoOrderReduceOnlyEnum,
     NewUmAlgoOrderNewOrderRespTypeEnum,
     NewUmAlgoOrderSelfTradePreventionModeEnum,
     NewUmConditionalOrderSideEnum,
     NewUmConditionalOrderStrategyTypeEnum,
     NewUmConditionalOrderPositionSideEnum,
     NewUmConditionalOrderTimeInForceEnum,
+    NewUmConditionalOrderReduceOnlyEnum,
     NewUmConditionalOrderWorkingTypeEnum,
+    NewUmConditionalOrderPriceProtectEnum,
     NewUmConditionalOrderPriceMatchEnum,
     NewUmConditionalOrderSelfTradePreventionModeEnum,
     NewUmOrderSideEnum,
     NewUmOrderTypeEnum,
     NewUmOrderPositionSideEnum,
     NewUmOrderTimeInForceEnum,
+    NewUmOrderReduceOnlyEnum,
     NewUmOrderNewOrderRespTypeEnum,
     NewUmOrderPriceMatchEnum,
     NewUmOrderSelfTradePreventionModeEnum,
     QueryUsersCmForceOrdersAutoCloseTypeEnum,
     QueryUsersUmForceOrdersAutoCloseTypeEnum,
+    ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum,
 } from '../../../src/rest-api';
 import {
     CancelAllCmOpenConditionalOrdersRequest,
@@ -215,7 +224,7 @@ describe('TradeApi', () => {
     describe('cancelAllCmOpenConditionalOrders()', () => {
         it('should execute cancelAllCmOpenConditionalOrders() successfully with required parameters only', async () => {
             const params: CancelAllCmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -241,7 +250,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelAllCmOpenConditionalOrders() successfully with optional parameters', async () => {
             const params: CancelAllCmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -268,7 +277,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelAllCmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -280,7 +289,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAllCmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -305,7 +314,7 @@ describe('TradeApi', () => {
     describe('cancelAllCmOpenOrders()', () => {
         it('should execute cancelAllCmOpenOrders() successfully with required parameters only', async () => {
             const params: CancelAllCmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -328,7 +337,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelAllCmOpenOrders() successfully with optional parameters', async () => {
             const params: CancelAllCmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -352,7 +361,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelAllCmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -364,7 +373,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAllCmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -387,7 +396,7 @@ describe('TradeApi', () => {
     describe('cancelAllUmAlgoOpenOrders()', () => {
         it('should execute cancelAllUmAlgoOpenOrders() successfully with required parameters only', async () => {
             const params: CancelAllUmAlgoOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBUSDT',
             };
 
             mockResponse = JSONParse(
@@ -410,7 +419,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelAllUmAlgoOpenOrders() successfully with optional parameters', async () => {
             const params: CancelAllUmAlgoOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBUSDT',
                 recvWindow: 5000,
             };
 
@@ -434,7 +443,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelAllUmAlgoOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -446,7 +455,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAllUmAlgoOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBUSDT',
             };
 
             const errorResponse = {
@@ -469,7 +478,7 @@ describe('TradeApi', () => {
     describe('cancelAllUmOpenConditionalOrders()', () => {
         it('should execute cancelAllUmOpenConditionalOrders() successfully with required parameters only', async () => {
             const params: CancelAllUmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -495,7 +504,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelAllUmOpenConditionalOrders() successfully with optional parameters', async () => {
             const params: CancelAllUmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -522,7 +531,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelAllUmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -534,7 +543,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAllUmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -559,7 +568,7 @@ describe('TradeApi', () => {
     describe('cancelAllUmOpenOrders()', () => {
         it('should execute cancelAllUmOpenOrders() successfully with required parameters only', async () => {
             const params: CancelAllUmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -582,7 +591,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelAllUmOpenOrders() successfully with optional parameters', async () => {
             const params: CancelAllUmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -606,7 +615,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelAllUmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -618,7 +627,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelAllUmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -641,7 +650,7 @@ describe('TradeApi', () => {
     describe('cancelCmConditionalOrder()', () => {
         it('should execute cancelCmConditionalOrder() successfully with required parameters only', async () => {
             const params: CancelCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -683,7 +692,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelCmConditionalOrder() successfully with optional parameters', async () => {
             const params: CancelCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 strategyId: 1,
                 newClientStrategyId: '1',
                 recvWindow: 5000,
@@ -728,7 +737,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -740,7 +749,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -763,7 +772,7 @@ describe('TradeApi', () => {
     describe('cancelCmOrder()', () => {
         it('should execute cancelCmOrder() successfully with required parameters only', async () => {
             const params: CancelCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             mockResponse = JSONParse(
@@ -804,7 +813,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelCmOrder() successfully with optional parameters', async () => {
             const params: CancelCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -848,7 +857,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -860,7 +869,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             const errorResponse = {
@@ -881,7 +890,7 @@ describe('TradeApi', () => {
     describe('cancelMarginAccountAllOpenOrdersOnASymbol()', () => {
         it('should execute cancelMarginAccountAllOpenOrdersOnASymbol() successfully with required parameters only', async () => {
             const params: CancelMarginAccountAllOpenOrdersOnASymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -900,25 +909,16 @@ describe('TradeApi', () => {
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         side: 'BUY',
-                    },
-                    {
-                        orderListId: 1929,
                         contingencyType: 'OCO',
                         listStatusType: 'ALL_DONE',
                         listOrderStatus: 'ALL_DONE',
                         listClientOrderId: '2inzWQdDvZLHbbAmAozX2N',
                         transactionTime: 1585230948299,
-                        symbol: 'BTCUSDT',
                         orders: [
                             {
                                 symbol: 'BTCUSDT',
                                 orderId: 20,
                                 clientOrderId: 'CwOOIPHSmYywx6jZX77TdL',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 21,
-                                clientOrderId: '461cPg51vQjV3zIMOXNz39',
                             },
                         ],
                         orderReports: [
@@ -938,22 +938,6 @@ describe('TradeApi', () => {
                                 side: 'BUY',
                                 stopPrice: '0.378131',
                                 icebergQty: '0.017083',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                origClientOrderId: '461cPg51vQjV3zIMOXNz39',
-                                orderId: 21,
-                                orderListId: 1929,
-                                clientOrderId: 'pXLV6Hz6mprAcVYpVMTGgx',
-                                price: '0.008791',
-                                origQty: '0.690354',
-                                executedQty: '0.000000',
-                                cummulativeQuoteQty: '0.000000',
-                                status: 'CANCELED',
-                                timeInForce: 'GTC',
-                                type: 'LIMIT_MAKER',
-                                side: 'BUY',
-                                icebergQty: '0.639962',
                             },
                         ],
                     },
@@ -978,7 +962,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelMarginAccountAllOpenOrdersOnASymbol() successfully with optional parameters', async () => {
             const params: CancelMarginAccountAllOpenOrdersOnASymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -998,25 +982,16 @@ describe('TradeApi', () => {
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         side: 'BUY',
-                    },
-                    {
-                        orderListId: 1929,
                         contingencyType: 'OCO',
                         listStatusType: 'ALL_DONE',
                         listOrderStatus: 'ALL_DONE',
                         listClientOrderId: '2inzWQdDvZLHbbAmAozX2N',
                         transactionTime: 1585230948299,
-                        symbol: 'BTCUSDT',
                         orders: [
                             {
                                 symbol: 'BTCUSDT',
                                 orderId: 20,
                                 clientOrderId: 'CwOOIPHSmYywx6jZX77TdL',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 21,
-                                clientOrderId: '461cPg51vQjV3zIMOXNz39',
                             },
                         ],
                         orderReports: [
@@ -1036,22 +1011,6 @@ describe('TradeApi', () => {
                                 side: 'BUY',
                                 stopPrice: '0.378131',
                                 icebergQty: '0.017083',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                origClientOrderId: '461cPg51vQjV3zIMOXNz39',
-                                orderId: 21,
-                                orderListId: 1929,
-                                clientOrderId: 'pXLV6Hz6mprAcVYpVMTGgx',
-                                price: '0.008791',
-                                origQty: '0.690354',
-                                executedQty: '0.000000',
-                                cummulativeQuoteQty: '0.000000',
-                                status: 'CANCELED',
-                                timeInForce: 'GTC',
-                                type: 'LIMIT_MAKER',
-                                side: 'BUY',
-                                icebergQty: '0.639962',
                             },
                         ],
                     },
@@ -1076,7 +1035,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelMarginAccountAllOpenOrdersOnASymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1088,7 +1047,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelMarginAccountAllOpenOrdersOnASymbolRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -1113,7 +1072,7 @@ describe('TradeApi', () => {
     describe('cancelMarginAccountOcoOrders()', () => {
         it('should execute cancelMarginAccountOcoOrders() successfully with required parameters only', async () => {
             const params: CancelMarginAccountOcoOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
 
             mockResponse = JSONParse(
@@ -1127,7 +1086,6 @@ describe('TradeApi', () => {
                     symbol: 'LTCBTC',
                     orders: [
                         { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'TXOvglzXuaubXAaENpaRCB' },
                     ],
                     orderReports: [
                         {
@@ -1145,21 +1103,6 @@ describe('TradeApi', () => {
                             type: 'STOP_LOSS_LIMIT',
                             side: 'SELL',
                             stopPrice: '1.00000000',
-                        },
-                        {
-                            symbol: 'LTCBTC',
-                            origClientOrderId: 'TXOvglzXuaubXAaENpaRCB',
-                            orderId: 3,
-                            orderListId: 0,
-                            clientOrderId: 'unfWT8ig8i0uj6lPuYLez6',
-                            price: '3.00000000',
-                            origQty: '10.00000000',
-                            executedQty: '0.00000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
                         },
                     ],
                 })
@@ -1181,7 +1124,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelMarginAccountOcoOrders() successfully with optional parameters', async () => {
             const params: CancelMarginAccountOcoOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 orderListId: 1,
                 listClientOrderId: '1',
                 newClientOrderId: '1',
@@ -1199,7 +1142,6 @@ describe('TradeApi', () => {
                     symbol: 'LTCBTC',
                     orders: [
                         { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'TXOvglzXuaubXAaENpaRCB' },
                     ],
                     orderReports: [
                         {
@@ -1217,21 +1159,6 @@ describe('TradeApi', () => {
                             type: 'STOP_LOSS_LIMIT',
                             side: 'SELL',
                             stopPrice: '1.00000000',
-                        },
-                        {
-                            symbol: 'LTCBTC',
-                            origClientOrderId: 'TXOvglzXuaubXAaENpaRCB',
-                            orderId: 3,
-                            orderListId: 0,
-                            clientOrderId: 'unfWT8ig8i0uj6lPuYLez6',
-                            price: '3.00000000',
-                            origQty: '10.00000000',
-                            executedQty: '0.00000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
                         },
                     ],
                 })
@@ -1253,7 +1180,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelMarginAccountOcoOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1265,7 +1192,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelMarginAccountOcoOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
 
             const errorResponse = {
@@ -1290,7 +1217,7 @@ describe('TradeApi', () => {
     describe('cancelMarginAccountOrder()', () => {
         it('should execute cancelMarginAccountOrder() successfully with required parameters only', async () => {
             const params: CancelMarginAccountOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
 
             mockResponse = JSONParse(
@@ -1326,7 +1253,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelMarginAccountOrder() successfully with optional parameters', async () => {
             const params: CancelMarginAccountOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 orderId: 1,
                 origClientOrderId: '1',
                 newClientOrderId: '1',
@@ -1366,7 +1293,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelMarginAccountOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1378,7 +1305,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelMarginAccountOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
             };
 
             const errorResponse = {
@@ -1418,8 +1345,8 @@ describe('TradeApi', () => {
 
         it('should execute cancelUmAlgoOrder() successfully with optional parameters', async () => {
             const params: CancelUmAlgoOrderRequest = {
-                algoId: 1,
-                clientAlgoId: '1',
+                algoId: 2146760,
+                clientAlgoId: '6B2I9XVcJpCjqPAJ4YoFX7',
                 recvWindow: 5000,
             };
 
@@ -1458,7 +1385,7 @@ describe('TradeApi', () => {
     describe('cancelUmConditionalOrder()', () => {
         it('should execute cancelUmConditionalOrder() successfully with required parameters only', async () => {
             const params: CancelUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -1503,7 +1430,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelUmConditionalOrder() successfully with optional parameters', async () => {
             const params: CancelUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 strategyId: 1,
                 newClientStrategyId: '1',
                 recvWindow: 5000,
@@ -1551,7 +1478,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1563,7 +1490,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -1586,7 +1513,7 @@ describe('TradeApi', () => {
     describe('cancelUmOrder()', () => {
         it('should execute cancelUmOrder() successfully with required parameters only', async () => {
             const params: CancelUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -1629,7 +1556,7 @@ describe('TradeApi', () => {
 
         it('should execute cancelUmOrder() successfully with optional parameters', async () => {
             const params: CancelUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -1675,7 +1602,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CancelUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1687,7 +1614,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CancelUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -1746,12 +1673,12 @@ describe('TradeApi', () => {
 
         it('should execute cmAccountTradeList() successfully with optional parameters', async () => {
             const params: CmAccountTradeListRequest = {
-                symbol: 'symbol_example',
-                pair: 'pair_example',
+                symbol: 'BTCUSD_200626',
+                pair: 'BTCUSD',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 fromId: 1,
-                limit: 100,
+                limit: 50,
                 recvWindow: 5000,
             };
 
@@ -1812,8 +1739,10 @@ describe('TradeApi', () => {
         it('should execute cmPositionAdlQuantileEstimation() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify([
-                    { symbol: 'BTCUSD_200925', adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0 } },
-                    { symbol: 'BTCUSD_201225', adlQuantile: { LONG: 1, SHORT: 2, BOTH: 0 } },
+                    {
+                        symbol: 'BTCUSD_201225',
+                        adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0, BOTH: 0 },
+                    },
                 ])
             );
 
@@ -1833,14 +1762,16 @@ describe('TradeApi', () => {
 
         it('should execute cmPositionAdlQuantileEstimation() successfully with optional parameters', async () => {
             const params: CmPositionAdlQuantileEstimationRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_201225',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify([
-                    { symbol: 'BTCUSD_200925', adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0 } },
-                    { symbol: 'BTCUSD_201225', adlQuantile: { LONG: 1, SHORT: 2, BOTH: 0 } },
+                    {
+                        symbol: 'BTCUSD_201225',
+                        adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0, BOTH: 0 },
+                    },
                 ])
             );
 
@@ -1993,7 +1924,7 @@ describe('TradeApi', () => {
     describe('marginAccountBorrow()', () => {
         it('should execute marginAccountBorrow() successfully with required parameters only', async () => {
             const params: MarginAccountBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
 
@@ -2015,7 +1946,7 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountBorrow() successfully with optional parameters', async () => {
             const params: MarginAccountBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -2038,7 +1969,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: MarginAccountBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2051,7 +1982,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: MarginAccountBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2064,7 +1995,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
 
@@ -2086,7 +2017,7 @@ describe('TradeApi', () => {
     describe('marginAccountNewOco()', () => {
         it('should execute marginAccountNewOco() successfully with required parameters only', async () => {
             const params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2106,7 +2037,6 @@ describe('TradeApi', () => {
                     marginBuyBorrowAsset: 'BTC',
                     orders: [
                         { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'Kk7sqHb9J6mJWTMDVW7Vos' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'xTXKaGYd4bluPVp78IVRvl' },
                     ],
                     orderReports: [
                         {
@@ -2124,21 +2054,6 @@ describe('TradeApi', () => {
                             type: 'STOP_LOSS',
                             side: 'BUY',
                             stopPrice: '0.960664',
-                        },
-                        {
-                            symbol: 'LTCBTC',
-                            orderId: 3,
-                            orderListId: 0,
-                            clientOrderId: 'xTXKaGYd4bluPVp78IVRvl',
-                            transactTime: 1563417480525,
-                            price: '0.036435',
-                            origQty: '0.624363',
-                            executedQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'BUY',
                         },
                     ],
                 })
@@ -2160,7 +2075,7 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountNewOco() successfully with optional parameters', async () => {
             const params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2190,7 +2105,6 @@ describe('TradeApi', () => {
                     marginBuyBorrowAsset: 'BTC',
                     orders: [
                         { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'Kk7sqHb9J6mJWTMDVW7Vos' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'xTXKaGYd4bluPVp78IVRvl' },
                     ],
                     orderReports: [
                         {
@@ -2208,21 +2122,6 @@ describe('TradeApi', () => {
                             type: 'STOP_LOSS',
                             side: 'BUY',
                             stopPrice: '0.960664',
-                        },
-                        {
-                            symbol: 'LTCBTC',
-                            orderId: 3,
-                            orderListId: 0,
-                            clientOrderId: 'xTXKaGYd4bluPVp78IVRvl',
-                            transactTime: 1563417480525,
-                            price: '0.036435',
-                            origQty: '0.624363',
-                            executedQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'BUY',
                         },
                     ],
                 })
@@ -2244,7 +2143,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2260,7 +2159,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2276,7 +2175,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2292,7 +2191,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when price is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2308,7 +2207,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when stopPrice is missing', async () => {
             const _params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2324,7 +2223,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountNewOcoRequest = {
-                symbol: 'symbol_example',
+                symbol: 'LTCBTC',
                 side: MarginAccountNewOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2349,7 +2248,7 @@ describe('TradeApi', () => {
     describe('marginAccountRepay()', () => {
         it('should execute marginAccountRepay() successfully with required parameters only', async () => {
             const params: MarginAccountRepayRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
 
@@ -2371,7 +2270,7 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountRepay() successfully with optional parameters', async () => {
             const params: MarginAccountRepayRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -2394,7 +2293,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: MarginAccountRepayRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2407,7 +2306,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: MarginAccountRepayRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2420,7 +2319,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountRepayRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
 
@@ -2442,14 +2341,14 @@ describe('TradeApi', () => {
     describe('marginAccountRepayDebt()', () => {
         it('should execute marginAccountRepayDebt() successfully with required parameters only', async () => {
             const params: MarginAccountRepayDebtRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     amount: '0.10000000',
                     asset: 'BNB',
-                    specifyRepayAssets: ['USDT', 'BTC'],
+                    specifyRepayAssets: ['USDT'],
                     updateTime: 1636371437000,
                     success: true,
                 })
@@ -2471,9 +2370,9 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountRepayDebt() successfully with optional parameters', async () => {
             const params: MarginAccountRepayDebtRequest = {
-                asset: 'asset_example',
-                amount: 'amount_example',
-                specifyRepayAssets: 'specifyRepayAssets_example',
+                asset: 'USDT',
+                amount: '1.0',
+                specifyRepayAssets: 'BNB',
                 recvWindow: 5000,
             };
 
@@ -2481,7 +2380,7 @@ describe('TradeApi', () => {
                 JSONStringify({
                     amount: '0.10000000',
                     asset: 'BNB',
-                    specifyRepayAssets: ['USDT', 'BTC'],
+                    specifyRepayAssets: ['USDT'],
                     updateTime: 1636371437000,
                     success: true,
                 })
@@ -2503,7 +2402,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: MarginAccountRepayDebtRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -2515,7 +2414,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountRepayDebtRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             const errorResponse = {
@@ -2538,7 +2437,7 @@ describe('TradeApi', () => {
     describe('marginAccountTradeList()', () => {
         it('should execute marginAccountTradeList() successfully with required parameters only', async () => {
             const params: MarginAccountTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -2575,12 +2474,12 @@ describe('TradeApi', () => {
 
         it('should execute marginAccountTradeList() successfully with optional parameters', async () => {
             const params: MarginAccountTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 fromId: 1,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -2618,7 +2517,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2630,7 +2529,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -2653,7 +2552,7 @@ describe('TradeApi', () => {
     describe('modifyCmOrder()', () => {
         it('should execute modifyCmOrder() successfully with required parameters only', async () => {
             const params: ModifyCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyCmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2698,13 +2597,13 @@ describe('TradeApi', () => {
 
         it('should execute modifyCmOrder() successfully with optional parameters', async () => {
             const params: ModifyCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyCmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 orderId: 1,
                 origClientOrderId: '1',
-                priceMatch: ModifyCmOrderPriceMatchEnum.NONE,
+                priceMatch: ModifyCmOrderPriceMatchEnum.OPPONENT,
                 recvWindow: 5000,
             };
 
@@ -2747,7 +2646,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ModifyCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyCmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2762,7 +2661,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: ModifyCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyCmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2777,7 +2676,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: ModifyCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyCmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2792,7 +2691,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when price is missing', async () => {
             const _params: ModifyCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyCmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2807,7 +2706,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ModifyCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 side: ModifyCmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2831,7 +2730,7 @@ describe('TradeApi', () => {
     describe('modifyUmOrder()', () => {
         it('should execute modifyUmOrder() successfully with required parameters only', async () => {
             const params: ModifyUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyUmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2878,13 +2777,13 @@ describe('TradeApi', () => {
 
         it('should execute modifyUmOrder() successfully with optional parameters', async () => {
             const params: ModifyUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyUmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 orderId: 1,
                 origClientOrderId: '1',
-                priceMatch: ModifyUmOrderPriceMatchEnum.NONE,
+                priceMatch: ModifyUmOrderPriceMatchEnum.OPPONENT,
                 recvWindow: 5000,
             };
 
@@ -2929,7 +2828,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ModifyUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyUmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2944,7 +2843,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: ModifyUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyUmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2959,7 +2858,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: ModifyUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyUmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2974,7 +2873,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when price is missing', async () => {
             const _params: ModifyUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyUmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -2989,7 +2888,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ModifyUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyUmOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -3013,7 +2912,7 @@ describe('TradeApi', () => {
     describe('newCmConditionalOrder()', () => {
         it('should execute newCmConditionalOrder() successfully with required parameters only', async () => {
             const params: NewCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmConditionalOrderSideEnum.BUY,
                 strategyType: NewCmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3058,16 +2957,16 @@ describe('TradeApi', () => {
 
         it('should execute newCmConditionalOrder() successfully with optional parameters', async () => {
             const params: NewCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmConditionalOrderSideEnum.BUY,
                 strategyType: NewCmConditionalOrderStrategyTypeEnum.STOP,
                 positionSide: NewCmConditionalOrderPositionSideEnum.BOTH,
                 timeInForce: NewCmConditionalOrderTimeInForceEnum.GTC,
                 quantity: 1.0,
-                reduceOnly: 'false',
+                reduceOnly: 'true',
                 price: 1.0,
                 workingType: NewCmConditionalOrderWorkingTypeEnum.MARK_PRICE,
-                priceProtect: 'false',
+                priceProtect: NewCmConditionalOrderPriceProtectEnum.TRUE,
                 newClientStrategyId: '1',
                 stopPrice: 1.0,
                 activationPrice: 1.0,
@@ -3115,7 +3014,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmConditionalOrderSideEnum.BUY,
                 strategyType: NewCmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3129,7 +3028,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: NewCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmConditionalOrderSideEnum.BUY,
                 strategyType: NewCmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3143,7 +3042,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when strategyType is missing', async () => {
             const _params: NewCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmConditionalOrderSideEnum.BUY,
                 strategyType: NewCmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3157,7 +3056,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewCmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmConditionalOrderSideEnum.BUY,
                 strategyType: NewCmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3182,7 +3081,7 @@ describe('TradeApi', () => {
     describe('newCmOrder()', () => {
         it('should execute newCmOrder() successfully with required parameters only', async () => {
             const params: NewCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmOrderSideEnum.BUY,
                 type: NewCmOrderTypeEnum.LIMIT,
             };
@@ -3225,15 +3124,15 @@ describe('TradeApi', () => {
 
         it('should execute newCmOrder() successfully with optional parameters', async () => {
             const params: NewCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmOrderSideEnum.BUY,
                 type: NewCmOrderTypeEnum.LIMIT,
                 positionSide: NewCmOrderPositionSideEnum.BOTH,
                 timeInForce: NewCmOrderTimeInForceEnum.GTC,
                 quantity: 1.0,
-                reduceOnly: 'false',
+                reduceOnly: NewCmOrderReduceOnlyEnum.TRUE,
                 price: 1.0,
-                priceMatch: NewCmOrderPriceMatchEnum.NONE,
+                priceMatch: NewCmOrderPriceMatchEnum.OPPONENT,
                 newClientOrderId: '1',
                 newOrderRespType: NewCmOrderNewOrderRespTypeEnum.ACK,
                 recvWindow: 5000,
@@ -3277,7 +3176,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmOrderSideEnum.BUY,
                 type: NewCmOrderTypeEnum.LIMIT,
             };
@@ -3291,7 +3190,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: NewCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmOrderSideEnum.BUY,
                 type: NewCmOrderTypeEnum.LIMIT,
             };
@@ -3305,7 +3204,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: NewCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmOrderSideEnum.BUY,
                 type: NewCmOrderTypeEnum.LIMIT,
             };
@@ -3319,7 +3218,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewCmOrderSideEnum.BUY,
                 type: NewCmOrderTypeEnum.LIMIT,
             };
@@ -3342,7 +3241,7 @@ describe('TradeApi', () => {
     describe('newMarginOrder()', () => {
         it('should execute newMarginOrder() successfully with required parameters only', async () => {
             const params: NewMarginOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewMarginOrderSideEnum.BUY,
                 type: NewMarginOrderTypeEnum.LIMIT,
             };
@@ -3370,12 +3269,6 @@ describe('TradeApi', () => {
                             commission: '4.00000000',
                             commissionAsset: 'USDT',
                         },
-                        {
-                            price: '3999.00000000',
-                            qty: '5.00000000',
-                            commission: '19.99500000',
-                            commissionAsset: 'USDT',
-                        },
                     ],
                 })
             );
@@ -3396,7 +3289,7 @@ describe('TradeApi', () => {
 
         it('should execute newMarginOrder() successfully with optional parameters', async () => {
             const params: NewMarginOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewMarginOrderSideEnum.BUY,
                 type: NewMarginOrderTypeEnum.LIMIT,
                 quantity: 1.0,
@@ -3436,12 +3329,6 @@ describe('TradeApi', () => {
                             commission: '4.00000000',
                             commissionAsset: 'USDT',
                         },
-                        {
-                            price: '3999.00000000',
-                            qty: '5.00000000',
-                            commission: '19.99500000',
-                            commissionAsset: 'USDT',
-                        },
                     ],
                 })
             );
@@ -3462,7 +3349,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewMarginOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewMarginOrderSideEnum.BUY,
                 type: NewMarginOrderTypeEnum.LIMIT,
             };
@@ -3476,7 +3363,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: NewMarginOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewMarginOrderSideEnum.BUY,
                 type: NewMarginOrderTypeEnum.LIMIT,
             };
@@ -3490,7 +3377,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: NewMarginOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewMarginOrderSideEnum.BUY,
                 type: NewMarginOrderTypeEnum.LIMIT,
             };
@@ -3504,7 +3391,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewMarginOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewMarginOrderSideEnum.BUY,
                 type: NewMarginOrderTypeEnum.LIMIT,
             };
@@ -3527,11 +3414,11 @@ describe('TradeApi', () => {
     describe('newUmAlgoOrder()', () => {
         it('should execute newUmAlgoOrder() successfully with required parameters only', async () => {
             const params: NewUmAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.LIMIT,
-                quantity: 1.0,
+                type: NewUmAlgoOrderTypeEnum.STOP,
+                quantity: 0.01,
             };
 
             mockResponse = JSONParse(
@@ -3548,7 +3435,6 @@ describe('TradeApi', () => {
                     algoStatus: 'NEW',
                     triggerPrice: '750.000',
                     price: '750.000',
-                    icebergQuantity: null,
                     selfTradePreventionMode: 'EXPIRE_MAKER',
                     workingType: 'CONTRACT_PRICE',
                     priceMatch: 'NONE',
@@ -3579,25 +3465,25 @@ describe('TradeApi', () => {
 
         it('should execute newUmAlgoOrder() successfully with optional parameters', async () => {
             const params: NewUmAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.LIMIT,
-                quantity: 1.0,
+                type: NewUmAlgoOrderTypeEnum.STOP,
+                quantity: 0.01,
                 positionSide: NewUmAlgoOrderPositionSideEnum.BOTH,
-                timeInForce: NewUmAlgoOrderTimeInForceEnum.GTC,
-                price: 1.0,
-                triggerPrice: 1.0,
+                timeInForce: NewUmAlgoOrderTimeInForceEnum.IOC,
+                price: 750.0,
+                triggerPrice: 750.0,
                 workingType: NewUmAlgoOrderWorkingTypeEnum.MARK_PRICE,
-                priceMatch: NewUmAlgoOrderPriceMatchEnum.NONE,
-                priceProtect: 'false',
-                reduceOnly: 'false',
-                activatePrice: 1.0,
-                callbackRate: 1.0,
-                clientAlgoId: '1',
+                priceMatch: NewUmAlgoOrderPriceMatchEnum.OPPONENT,
+                priceProtect: NewUmAlgoOrderPriceProtectEnum.TRUE,
+                reduceOnly: NewUmAlgoOrderReduceOnlyEnum.TRUE,
+                activatePrice: 700,
+                callbackRate: 1,
+                clientAlgoId: '6B2I9XVcJpCjqPAJ4YoFX7',
                 newOrderRespType: NewUmAlgoOrderNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: NewUmAlgoOrderSelfTradePreventionModeEnum.NONE,
-                goodTillDate: 789,
+                goodTillDate: 0,
                 recvWindow: 5000,
             };
 
@@ -3615,7 +3501,6 @@ describe('TradeApi', () => {
                     algoStatus: 'NEW',
                     triggerPrice: '750.000',
                     price: '750.000',
-                    icebergQuantity: null,
                     selfTradePreventionMode: 'EXPIRE_MAKER',
                     workingType: 'CONTRACT_PRICE',
                     priceMatch: 'NONE',
@@ -3646,11 +3531,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when algoType is missing', async () => {
             const _params: NewUmAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.LIMIT,
-                quantity: 1.0,
+                type: NewUmAlgoOrderTypeEnum.STOP,
+                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.algoType;
@@ -3662,11 +3547,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewUmAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.LIMIT,
-                quantity: 1.0,
+                type: NewUmAlgoOrderTypeEnum.STOP,
+                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -3678,11 +3563,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: NewUmAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.LIMIT,
-                quantity: 1.0,
+                type: NewUmAlgoOrderTypeEnum.STOP,
+                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.side;
@@ -3694,11 +3579,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: NewUmAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.LIMIT,
-                quantity: 1.0,
+                type: NewUmAlgoOrderTypeEnum.STOP,
+                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -3710,11 +3595,11 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: NewUmAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.LIMIT,
-                quantity: 1.0,
+                type: NewUmAlgoOrderTypeEnum.STOP,
+                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -3726,11 +3611,11 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewUmAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.LIMIT,
-                quantity: 1.0,
+                type: NewUmAlgoOrderTypeEnum.STOP,
+                quantity: 0.01,
             };
 
             const errorResponse = {
@@ -3751,7 +3636,7 @@ describe('TradeApi', () => {
     describe('newUmConditionalOrder()', () => {
         it('should execute newUmConditionalOrder() successfully with required parameters only', async () => {
             const params: NewUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmConditionalOrderSideEnum.BUY,
                 strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3798,23 +3683,23 @@ describe('TradeApi', () => {
 
         it('should execute newUmConditionalOrder() successfully with optional parameters', async () => {
             const params: NewUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmConditionalOrderSideEnum.BUY,
                 strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
                 positionSide: NewUmConditionalOrderPositionSideEnum.BOTH,
                 timeInForce: NewUmConditionalOrderTimeInForceEnum.GTC,
                 quantity: 1.0,
-                reduceOnly: 'false',
+                reduceOnly: NewUmConditionalOrderReduceOnlyEnum.TRUE,
                 price: 1.0,
                 workingType: NewUmConditionalOrderWorkingTypeEnum.MARK_PRICE,
-                priceProtect: 'false',
+                priceProtect: NewUmConditionalOrderPriceProtectEnum.TRUE,
                 newClientStrategyId: '1',
                 stopPrice: 1.0,
                 activationPrice: 1.0,
                 callbackRate: 1.0,
-                priceMatch: NewUmConditionalOrderPriceMatchEnum.NONE,
+                priceMatch: NewUmConditionalOrderPriceMatchEnum.OPPONENT,
                 selfTradePreventionMode: NewUmConditionalOrderSelfTradePreventionModeEnum.NONE,
-                goodTillDate: 789,
+                goodTillDate: 1770736694138,
                 recvWindow: 5000,
             };
 
@@ -3860,7 +3745,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmConditionalOrderSideEnum.BUY,
                 strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3874,7 +3759,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: NewUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmConditionalOrderSideEnum.BUY,
                 strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3888,7 +3773,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when strategyType is missing', async () => {
             const _params: NewUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmConditionalOrderSideEnum.BUY,
                 strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3902,7 +3787,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewUmConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmConditionalOrderSideEnum.BUY,
                 strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
             };
@@ -3927,7 +3812,7 @@ describe('TradeApi', () => {
     describe('newUmOrder()', () => {
         it('should execute newUmOrder() successfully with required parameters only', async () => {
             const params: NewUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmOrderSideEnum.BUY,
                 type: NewUmOrderTypeEnum.LIMIT,
             };
@@ -3972,19 +3857,19 @@ describe('TradeApi', () => {
 
         it('should execute newUmOrder() successfully with optional parameters', async () => {
             const params: NewUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmOrderSideEnum.BUY,
                 type: NewUmOrderTypeEnum.LIMIT,
                 positionSide: NewUmOrderPositionSideEnum.BOTH,
                 timeInForce: NewUmOrderTimeInForceEnum.GTC,
                 quantity: 1.0,
-                reduceOnly: 'false',
+                reduceOnly: NewUmOrderReduceOnlyEnum.TRUE,
                 price: 1.0,
                 newClientOrderId: '1',
                 newOrderRespType: NewUmOrderNewOrderRespTypeEnum.ACK,
-                priceMatch: NewUmOrderPriceMatchEnum.NONE,
+                priceMatch: NewUmOrderPriceMatchEnum.OPPONENT,
                 selfTradePreventionMode: NewUmOrderSelfTradePreventionModeEnum.NONE,
-                goodTillDate: 789,
+                goodTillDate: 1770736694138,
                 recvWindow: 5000,
             };
 
@@ -4028,7 +3913,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmOrderSideEnum.BUY,
                 type: NewUmOrderTypeEnum.LIMIT,
             };
@@ -4042,7 +3927,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when side is missing', async () => {
             const _params: NewUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmOrderSideEnum.BUY,
                 type: NewUmOrderTypeEnum.LIMIT,
             };
@@ -4056,7 +3941,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: NewUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmOrderSideEnum.BUY,
                 type: NewUmOrderTypeEnum.LIMIT,
             };
@@ -4070,7 +3955,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: NewUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewUmOrderSideEnum.BUY,
                 type: NewUmOrderTypeEnum.LIMIT,
             };
@@ -4135,11 +4020,11 @@ describe('TradeApi', () => {
 
         it('should execute queryAllCmConditionalOrders() successfully with optional parameters', async () => {
             const params: QueryAllCmConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 strategyId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -4204,10 +4089,6 @@ describe('TradeApi', () => {
 
     describe('queryAllCmOrders()', () => {
         it('should execute queryAllCmOrders() successfully with required parameters only', async () => {
-            const params: QueryAllCmOrdersRequest = {
-                symbol: 'symbol_example',
-            };
-
             mockResponse = JSONParse(
                 JSONStringify([
                     {
@@ -4241,7 +4122,7 @@ describe('TradeApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<QueryAllCmOrdersResponse>)
             );
-            const response = await client.queryAllCmOrders(params);
+            const response = await client.queryAllCmOrders();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -4249,12 +4130,12 @@ describe('TradeApi', () => {
 
         it('should execute queryAllCmOrders() successfully with optional parameters', async () => {
             const params: QueryAllCmOrdersRequest = {
-                symbol: 'symbol_example',
-                pair: 'pair_example',
+                symbol: 'BTCUSD_200925',
+                pair: 'BTCUSD',
                 orderId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -4297,23 +4178,7 @@ describe('TradeApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: QueryAllCmOrdersRequest = {
-                symbol: 'symbol_example',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.queryAllCmOrders(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling queryAllCmOrders.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: QueryAllCmOrdersRequest = {
-                symbol: 'symbol_example',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -4324,7 +4189,7 @@ describe('TradeApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'queryAllCmOrders').mockRejectedValueOnce(mockError);
-            await expect(client.queryAllCmOrders(params)).rejects.toThrow('ResponseError');
+            await expect(client.queryAllCmOrders()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -4372,7 +4237,7 @@ describe('TradeApi', () => {
 
         it('should execute queryAllCurrentCmOpenConditionalOrders() successfully with optional parameters', async () => {
             const params: QueryAllCurrentCmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD',
                 recvWindow: 5000,
             };
 
@@ -4478,8 +4343,8 @@ describe('TradeApi', () => {
 
         it('should execute queryAllCurrentCmOpenOrders() successfully with optional parameters', async () => {
             const params: QueryAllCurrentCmOpenOrdersRequest = {
-                symbol: 'symbol_example',
-                pair: 'pair_example',
+                symbol: 'BTCUSD_200925',
+                pair: 'BTCUSD',
                 recvWindow: 5000,
             };
 
@@ -4545,8 +4410,8 @@ describe('TradeApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        algoId: 2148627,
-                        clientAlgoId: 'MRumok0dkhrP4kCm12AHaB',
+                        algoId: 2146760,
+                        clientAlgoId: '6B2I9XVcJpCjqPAJ4YoFX7',
                         algoType: 'CONDITIONAL',
                         orderType: 'TAKE_PROFIT',
                         symbol: 'BNBUSDT',
@@ -4555,24 +4420,16 @@ describe('TradeApi', () => {
                         timeInForce: 'GTC',
                         quantity: '0.01',
                         algoStatus: 'NEW',
-                        actualOrderId: '',
-                        actualPrice: '0.00000',
                         triggerPrice: '750.000',
                         price: '750.000',
-                        icebergQuantity: null,
-                        tpTriggerPrice: '0.000',
-                        tpPrice: '0.000',
-                        slTriggerPrice: '0.000',
-                        slPrice: '0.000',
-                        tpOrderType: '',
-                        selfTradePreventionMode: 'EXPIRE_MAKER',
+                        selfTradePreventionMode: 'NONE',
                         workingType: 'CONTRACT_PRICE',
                         priceMatch: 'NONE',
                         closePosition: false,
                         priceProtect: false,
                         reduceOnly: false,
-                        createTime: 1750514941540,
-                        updateTime: 1750514941540,
+                        createTime: 1750485492076,
+                        updateTime: 1750485492076,
                         triggerTime: 0,
                         goodTillDate: 0,
                     },
@@ -4595,17 +4452,17 @@ describe('TradeApi', () => {
 
         it('should execute queryAllCurrentUmOpenAlgoOrders() successfully with optional parameters', async () => {
             const params: QueryAllCurrentUmOpenAlgoOrdersRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
-                algoId: 1,
+                algoType: 'CONDITIONAL',
+                symbol: 'BNBUSDT',
+                algoId: 2146760,
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        algoId: 2148627,
-                        clientAlgoId: 'MRumok0dkhrP4kCm12AHaB',
+                        algoId: 2146760,
+                        clientAlgoId: '6B2I9XVcJpCjqPAJ4YoFX7',
                         algoType: 'CONDITIONAL',
                         orderType: 'TAKE_PROFIT',
                         symbol: 'BNBUSDT',
@@ -4614,24 +4471,16 @@ describe('TradeApi', () => {
                         timeInForce: 'GTC',
                         quantity: '0.01',
                         algoStatus: 'NEW',
-                        actualOrderId: '',
-                        actualPrice: '0.00000',
                         triggerPrice: '750.000',
                         price: '750.000',
-                        icebergQuantity: null,
-                        tpTriggerPrice: '0.000',
-                        tpPrice: '0.000',
-                        slTriggerPrice: '0.000',
-                        slPrice: '0.000',
-                        tpOrderType: '',
-                        selfTradePreventionMode: 'EXPIRE_MAKER',
+                        selfTradePreventionMode: 'NONE',
                         workingType: 'CONTRACT_PRICE',
                         priceMatch: 'NONE',
                         closePosition: false,
                         priceProtect: false,
                         reduceOnly: false,
-                        createTime: 1750514941540,
-                        updateTime: 1750514941540,
+                        createTime: 1750485492076,
+                        updateTime: 1750485492076,
                         triggerTime: 0,
                         goodTillDate: 0,
                     },
@@ -4716,7 +4565,7 @@ describe('TradeApi', () => {
 
         it('should execute queryAllCurrentUmOpenConditionalOrders() successfully with optional parameters', async () => {
             const params: QueryAllCurrentUmOpenConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -4827,7 +4676,7 @@ describe('TradeApi', () => {
 
         it('should execute queryAllCurrentUmOpenOrders() successfully with optional parameters', async () => {
             const params: QueryAllCurrentUmOpenOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -4893,7 +4742,7 @@ describe('TradeApi', () => {
     describe('queryAllMarginAccountOrders()', () => {
         it('should execute queryAllMarginAccountOrders() successfully with required parameters only', async () => {
             const params: QueryAllMarginAccountOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -4917,8 +4766,8 @@ describe('TradeApi', () => {
                         updateTime: 1565769342148,
                         accountId: 152950866,
                         selfTradePreventionMode: 'EXPIRE_TAKER',
-                        preventedMatchId: null,
-                        preventedQuantity: null,
+                        preventedMatchId: 'null',
+                        preventedQuantity: 'null',
                     },
                 ])
             );
@@ -4939,11 +4788,11 @@ describe('TradeApi', () => {
 
         it('should execute queryAllMarginAccountOrders() successfully with optional parameters', async () => {
             const params: QueryAllMarginAccountOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -4968,8 +4817,8 @@ describe('TradeApi', () => {
                         updateTime: 1565769342148,
                         accountId: 152950866,
                         selfTradePreventionMode: 'EXPIRE_TAKER',
-                        preventedMatchId: null,
-                        preventedQuantity: null,
+                        preventedMatchId: 'null',
+                        preventedQuantity: 'null',
                     },
                 ])
             );
@@ -4990,7 +4839,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryAllMarginAccountOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -5002,7 +4851,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryAllMarginAccountOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -5072,11 +4921,11 @@ describe('TradeApi', () => {
 
         it('should execute queryAllUmConditionalOrders() successfully with optional parameters', async () => {
             const params: QueryAllUmConditionalOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 strategyId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -5145,7 +4994,7 @@ describe('TradeApi', () => {
     describe('queryAllUmOrders()', () => {
         it('should execute queryAllUmOrders() successfully with required parameters only', async () => {
             const params: QueryAllUmOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -5191,11 +5040,11 @@ describe('TradeApi', () => {
 
         it('should execute queryAllUmOrders() successfully with optional parameters', async () => {
             const params: QueryAllUmOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -5242,7 +5091,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryAllUmOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -5254,7 +5103,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryAllUmOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -5275,7 +5124,7 @@ describe('TradeApi', () => {
     describe('queryCmConditionalOrderHistory()', () => {
         it('should execute queryCmConditionalOrderHistory() successfully with required parameters only', async () => {
             const params: QueryCmConditionalOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -5322,7 +5171,7 @@ describe('TradeApi', () => {
 
         it('should execute queryCmConditionalOrderHistory() successfully with optional parameters', async () => {
             const params: QueryCmConditionalOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 strategyId: 1,
                 newClientStrategyId: '1',
                 recvWindow: 5000,
@@ -5372,7 +5221,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCmConditionalOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -5384,7 +5233,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCmConditionalOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -5409,7 +5258,7 @@ describe('TradeApi', () => {
     describe('queryCmModifyOrderHistory()', () => {
         it('should execute queryCmModifyOrderHistory() successfully with required parameters only', async () => {
             const params: QueryCmModifyOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -5425,32 +5274,6 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
-                        },
-                    },
-                    {
-                        amendmentId: 5361,
-                        symbol: 'BTCUSD_PERP',
-                        pair: 'BTCUSD',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629184533946,
-                        amendment: {
-                            price: { before: '30005', after: '30004' },
-                            origQty: { before: '1', after: '1' },
-                            count: 2,
-                        },
-                    },
-                    {
-                        amendmentId: 5325,
-                        symbol: 'BTCUSD_PERP',
-                        pair: 'BTCUSD',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629182711787,
-                        amendment: {
-                            price: { before: '30002', after: '30005' },
-                            origQty: { before: '1', after: '1' },
-                            count: 1,
                         },
                     },
                 ])
@@ -5472,12 +5295,12 @@ describe('TradeApi', () => {
 
         it('should execute queryCmModifyOrderHistory() successfully with optional parameters', async () => {
             const params: QueryCmModifyOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 origClientOrderId: '1',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -5494,32 +5317,6 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
-                        },
-                    },
-                    {
-                        amendmentId: 5361,
-                        symbol: 'BTCUSD_PERP',
-                        pair: 'BTCUSD',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629184533946,
-                        amendment: {
-                            price: { before: '30005', after: '30004' },
-                            origQty: { before: '1', after: '1' },
-                            count: 2,
-                        },
-                    },
-                    {
-                        amendmentId: 5325,
-                        symbol: 'BTCUSD_PERP',
-                        pair: 'BTCUSD',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629182711787,
-                        amendment: {
-                            price: { before: '30002', after: '30005' },
-                            origQty: { before: '1', after: '1' },
-                            count: 1,
                         },
                     },
                 ])
@@ -5541,7 +5338,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCmModifyOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -5553,7 +5350,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCmModifyOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -5576,7 +5373,7 @@ describe('TradeApi', () => {
     describe('queryCmOrder()', () => {
         it('should execute queryCmOrder() successfully with required parameters only', async () => {
             const params: QueryCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             mockResponse = JSONParse(
@@ -5618,7 +5415,7 @@ describe('TradeApi', () => {
 
         it('should execute queryCmOrder() successfully with optional parameters', async () => {
             const params: QueryCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -5663,7 +5460,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -5675,7 +5472,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             const errorResponse = {
@@ -5696,7 +5493,7 @@ describe('TradeApi', () => {
     describe('queryCurrentCmOpenConditionalOrder()', () => {
         it('should execute queryCurrentCmOpenConditionalOrder() successfully with required parameters only', async () => {
             const params: QueryCurrentCmOpenConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             mockResponse = JSONParse(
@@ -5736,7 +5533,7 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentCmOpenConditionalOrder() successfully with optional parameters', async () => {
             const params: QueryCurrentCmOpenConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
                 strategyId: 1,
                 newClientStrategyId: '1',
                 recvWindow: 5000,
@@ -5779,7 +5576,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCurrentCmOpenConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -5791,7 +5588,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCurrentCmOpenConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_200925',
             };
 
             const errorResponse = {
@@ -5816,7 +5613,7 @@ describe('TradeApi', () => {
     describe('queryCurrentCmOpenOrder()', () => {
         it('should execute queryCurrentCmOpenOrder() successfully with required parameters only', async () => {
             const params: QueryCurrentCmOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -5860,9 +5657,9 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentCmOpenOrder() successfully with optional parameters', async () => {
             const params: QueryCurrentCmOpenOrderRequest = {
-                symbol: 'symbol_example',
-                orderId: 1,
-                origClientOrderId: '1',
+                symbol: 'BTCUSDT',
+                orderId: 1917641,
+                origClientOrderId: 'abc',
                 recvWindow: 5000,
             };
 
@@ -5907,7 +5704,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCurrentCmOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -5919,7 +5716,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCurrentCmOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -5942,7 +5739,7 @@ describe('TradeApi', () => {
     describe('queryCurrentMarginOpenOrder()', () => {
         it('should execute queryCurrentMarginOpenOrder() successfully with required parameters only', async () => {
             const params: QueryCurrentMarginOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -5966,8 +5763,8 @@ describe('TradeApi', () => {
                         updateTime: 1562040170089,
                         accountId: 152950866,
                         selfTradePreventionMode: 'EXPIRE_TAKER',
-                        preventedMatchId: null,
-                        preventedQuantity: null,
+                        preventedMatchId: 'null',
+                        preventedQuantity: 'null',
                     },
                 ])
             );
@@ -5988,7 +5785,7 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentMarginOpenOrder() successfully with optional parameters', async () => {
             const params: QueryCurrentMarginOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -6013,8 +5810,8 @@ describe('TradeApi', () => {
                         updateTime: 1562040170089,
                         accountId: 152950866,
                         selfTradePreventionMode: 'EXPIRE_TAKER',
-                        preventedMatchId: null,
-                        preventedQuantity: null,
+                        preventedMatchId: 'null',
+                        preventedQuantity: 'null',
                     },
                 ])
             );
@@ -6035,7 +5832,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCurrentMarginOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -6047,7 +5844,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCurrentMarginOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -6087,12 +5884,6 @@ describe('TradeApi', () => {
                     actualPrice: '0.00000',
                     triggerPrice: '750.000',
                     price: '750.000',
-                    icebergQuantity: null,
-                    tpTriggerPrice: '0.000',
-                    tpPrice: '0.000',
-                    slTriggerPrice: '0.000',
-                    slPrice: '0.000',
-                    tpOrderType: '',
                     selfTradePreventionMode: 'EXPIRE_MAKER',
                     workingType: 'CONTRACT_PRICE',
                     priceMatch: 'NONE',
@@ -6122,8 +5913,8 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentUmOpenAlgoOrder() successfully with optional parameters', async () => {
             const params: QueryCurrentUmOpenAlgoOrderRequest = {
-                algoId: 1,
-                clientAlgoId: '1',
+                algoId: 2146760,
+                clientAlgoId: '6B2I9XVcJpCjqPAJ4YoFX7',
                 recvWindow: 5000,
             };
 
@@ -6143,12 +5934,6 @@ describe('TradeApi', () => {
                     actualPrice: '0.00000',
                     triggerPrice: '750.000',
                     price: '750.000',
-                    icebergQuantity: null,
-                    tpTriggerPrice: '0.000',
-                    tpPrice: '0.000',
-                    slTriggerPrice: '0.000',
-                    slPrice: '0.000',
-                    tpOrderType: '',
                     selfTradePreventionMode: 'EXPIRE_MAKER',
                     workingType: 'CONTRACT_PRICE',
                     priceMatch: 'NONE',
@@ -6197,7 +5982,7 @@ describe('TradeApi', () => {
     describe('queryCurrentUmOpenConditionalOrder()', () => {
         it('should execute queryCurrentUmOpenConditionalOrder() successfully with required parameters only', async () => {
             const params: QueryCurrentUmOpenConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -6240,7 +6025,7 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentUmOpenConditionalOrder() successfully with optional parameters', async () => {
             const params: QueryCurrentUmOpenConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 strategyId: 1,
                 newClientStrategyId: '1',
                 recvWindow: 5000,
@@ -6286,7 +6071,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCurrentUmOpenConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -6298,7 +6083,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCurrentUmOpenConditionalOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -6323,7 +6108,7 @@ describe('TradeApi', () => {
     describe('queryCurrentUmOpenOrder()', () => {
         it('should execute queryCurrentUmOpenOrder() successfully with required parameters only', async () => {
             const params: QueryCurrentUmOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -6367,7 +6152,7 @@ describe('TradeApi', () => {
 
         it('should execute queryCurrentUmOpenOrder() successfully with optional parameters', async () => {
             const params: QueryCurrentUmOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -6414,7 +6199,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryCurrentUmOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -6426,7 +6211,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryCurrentUmOpenOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -6449,7 +6234,7 @@ describe('TradeApi', () => {
     describe('queryMarginAccountOrder()', () => {
         it('should execute queryMarginAccountOrder() successfully with required parameters only', async () => {
             const params: QueryMarginAccountOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -6472,8 +6257,8 @@ describe('TradeApi', () => {
                     updateTime: 1562133008725,
                     accountId: 152950866,
                     selfTradePreventionMode: 'EXPIRE_TAKER',
-                    preventedMatchId: null,
-                    preventedQuantity: null,
+                    preventedMatchId: 'null',
+                    preventedQuantity: 'null',
                 })
             );
 
@@ -6493,7 +6278,7 @@ describe('TradeApi', () => {
 
         it('should execute queryMarginAccountOrder() successfully with optional parameters', async () => {
             const params: QueryMarginAccountOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -6519,8 +6304,8 @@ describe('TradeApi', () => {
                     updateTime: 1562133008725,
                     accountId: 152950866,
                     selfTradePreventionMode: 'EXPIRE_TAKER',
-                    preventedMatchId: null,
-                    preventedQuantity: null,
+                    preventedMatchId: 'null',
+                    preventedQuantity: 'null',
                 })
             );
 
@@ -6540,7 +6325,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryMarginAccountOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -6552,7 +6337,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginAccountOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -6590,32 +6375,6 @@ describe('TradeApi', () => {
                                 orderId: 4,
                                 clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB',
                             },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3',
-                            },
-                        ],
-                    },
-                    {
-                        orderListId: 28,
-                        contingencyType: 'OCO',
-                        listStatusType: 'EXEC_STARTED',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                        transactionTime: 1565245913407,
-                        symbol: 'LTCBTC',
-                        orders: [
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 2,
-                                clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 3,
-                                clientOrderId: 'z0KCjOdditiLS5ekAFtK81',
-                            },
                         ],
                     },
                 ])
@@ -6640,7 +6399,7 @@ describe('TradeApi', () => {
                 fromId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -6659,32 +6418,6 @@ describe('TradeApi', () => {
                                 symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3',
-                            },
-                        ],
-                    },
-                    {
-                        orderListId: 28,
-                        contingencyType: 'OCO',
-                        listStatusType: 'EXEC_STARTED',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                        transactionTime: 1565245913407,
-                        symbol: 'LTCBTC',
-                        orders: [
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 2,
-                                clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 3,
-                                clientOrderId: 'z0KCjOdditiLS5ekAFtK81',
                             },
                         ],
                     },
@@ -6736,7 +6469,6 @@ describe('TradeApi', () => {
                     symbol: 'LTCBTC',
                     orders: [
                         { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
                     ],
                 })
             );
@@ -6773,7 +6505,6 @@ describe('TradeApi', () => {
                     symbol: 'LTCBTC',
                     orders: [
                         { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
                     ],
                 })
             );
@@ -6828,11 +6559,6 @@ describe('TradeApi', () => {
                                 orderId: 4,
                                 clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
                             },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
-                            },
                         ],
                     },
                 ])
@@ -6872,11 +6598,6 @@ describe('TradeApi', () => {
                                 symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
-                            },
-                            {
-                                symbol: 'LTCBTC',
-                                orderId: 5,
-                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
                             },
                         ],
                     },
@@ -6918,7 +6639,7 @@ describe('TradeApi', () => {
     describe('queryUmAlgoOrderHistory()', () => {
         it('should execute queryUmAlgoOrderHistory() successfully with required parameters only', async () => {
             const params: QueryUmAlgoOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBUSDT',
             };
 
             mockResponse = JSONParse(
@@ -6938,12 +6659,6 @@ describe('TradeApi', () => {
                         actualPrice: '0.00000',
                         triggerPrice: '750.000',
                         price: '750.000',
-                        icebergQuantity: null,
-                        tpTriggerPrice: '0.000',
-                        tpPrice: '0.000',
-                        slTriggerPrice: '0.000',
-                        slPrice: '0.000',
-                        tpOrderType: '',
                         selfTradePreventionMode: 'EXPIRE_MAKER',
                         workingType: 'CONTRACT_PRICE',
                         priceMatch: 'NONE',
@@ -6974,11 +6689,11 @@ describe('TradeApi', () => {
 
         it('should execute queryUmAlgoOrderHistory() successfully with optional parameters', async () => {
             const params: QueryUmAlgoOrderHistoryRequest = {
-                symbol: 'symbol_example',
-                algoId: 1,
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-                limit: 100,
+                symbol: 'BNBUSDT',
+                algoId: 2146760,
+                startTime: 1770130294138,
+                endTime: 1770736694138,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -6999,12 +6714,6 @@ describe('TradeApi', () => {
                         actualPrice: '0.00000',
                         triggerPrice: '750.000',
                         price: '750.000',
-                        icebergQuantity: null,
-                        tpTriggerPrice: '0.000',
-                        tpPrice: '0.000',
-                        slTriggerPrice: '0.000',
-                        slPrice: '0.000',
-                        tpOrderType: '',
                         selfTradePreventionMode: 'EXPIRE_MAKER',
                         workingType: 'CONTRACT_PRICE',
                         priceMatch: 'NONE',
@@ -7035,7 +6744,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryUmAlgoOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -7047,7 +6756,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryUmAlgoOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBUSDT',
             };
 
             const errorResponse = {
@@ -7070,7 +6779,7 @@ describe('TradeApi', () => {
     describe('queryUmConditionalOrderHistory()', () => {
         it('should execute queryUmConditionalOrderHistory() successfully with required parameters only', async () => {
             const params: QueryUmConditionalOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -7118,7 +6827,7 @@ describe('TradeApi', () => {
 
         it('should execute queryUmConditionalOrderHistory() successfully with optional parameters', async () => {
             const params: QueryUmConditionalOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 strategyId: 1,
                 newClientStrategyId: '1',
                 recvWindow: 5000,
@@ -7169,7 +6878,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryUmConditionalOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -7181,7 +6890,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryUmConditionalOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -7206,7 +6915,7 @@ describe('TradeApi', () => {
     describe('queryUmModifyOrderHistory()', () => {
         it('should execute queryUmModifyOrderHistory() successfully with required parameters only', async () => {
             const params: QueryUmModifyOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -7222,34 +6931,6 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
-                        },
-                        priceMatch: 'NONE',
-                    },
-                    {
-                        amendmentId: 5361,
-                        symbol: 'BTCUSDT',
-                        pair: 'BTCUSDT',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629184533946,
-                        amendment: {
-                            price: { before: '30005', after: '30004' },
-                            origQty: { before: '1', after: '1' },
-                            count: 2,
-                        },
-                        priceMatch: 'NONE',
-                    },
-                    {
-                        amendmentId: 5325,
-                        symbol: 'BTCUSDT',
-                        pair: 'BTCUSDT',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629182711787,
-                        amendment: {
-                            price: { before: '30002', after: '30005' },
-                            origQty: { before: '1', after: '1' },
-                            count: 1,
                         },
                         priceMatch: 'NONE',
                     },
@@ -7272,12 +6953,12 @@ describe('TradeApi', () => {
 
         it('should execute queryUmModifyOrderHistory() successfully with optional parameters', async () => {
             const params: QueryUmModifyOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 origClientOrderId: '1',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -7294,34 +6975,6 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
-                        },
-                        priceMatch: 'NONE',
-                    },
-                    {
-                        amendmentId: 5361,
-                        symbol: 'BTCUSDT',
-                        pair: 'BTCUSDT',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629184533946,
-                        amendment: {
-                            price: { before: '30005', after: '30004' },
-                            origQty: { before: '1', after: '1' },
-                            count: 2,
-                        },
-                        priceMatch: 'NONE',
-                    },
-                    {
-                        amendmentId: 5325,
-                        symbol: 'BTCUSDT',
-                        pair: 'BTCUSDT',
-                        orderId: 20072994037,
-                        clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
-                        time: 1629182711787,
-                        amendment: {
-                            price: { before: '30002', after: '30005' },
-                            origQty: { before: '1', after: '1' },
-                            count: 1,
                         },
                         priceMatch: 'NONE',
                     },
@@ -7344,7 +6997,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryUmModifyOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -7356,7 +7009,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryUmModifyOrderHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -7379,7 +7032,7 @@ describe('TradeApi', () => {
     describe('queryUmOrder()', () => {
         it('should execute queryUmOrder() successfully with required parameters only', async () => {
             const params: QueryUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -7423,7 +7076,7 @@ describe('TradeApi', () => {
 
         it('should execute queryUmOrder() successfully with optional parameters', async () => {
             const params: QueryUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 orderId: 1,
                 origClientOrderId: '1',
                 recvWindow: 5000,
@@ -7470,7 +7123,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -7482,7 +7135,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryUmOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -7543,11 +7196,11 @@ describe('TradeApi', () => {
 
         it('should execute queryUsersCmForceOrders() successfully with optional parameters', async () => {
             const params: QueryUsersCmForceOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 autoCloseType: QueryUsersCmForceOrdersAutoCloseTypeEnum.LIQUIDATION,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -7745,11 +7398,11 @@ describe('TradeApi', () => {
 
         it('should execute queryUsersUmForceOrders() successfully with optional parameters', async () => {
             const params: QueryUsersUmForceOrdersRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 autoCloseType: QueryUsersUmForceOrdersAutoCloseTypeEnum.LIQUIDATION,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -7812,7 +7465,7 @@ describe('TradeApi', () => {
     describe('toggleBnbBurnOnUmFuturesTrade()', () => {
         it('should execute toggleBnbBurnOnUmFuturesTrade() successfully with required parameters only', async () => {
             const params: ToggleBnbBurnOnUmFuturesTradeRequest = {
-                feeBurn: 'feeBurn_example',
+                feeBurn: ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum.TRUE,
             };
 
             mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
@@ -7833,7 +7486,7 @@ describe('TradeApi', () => {
 
         it('should execute toggleBnbBurnOnUmFuturesTrade() successfully with optional parameters', async () => {
             const params: ToggleBnbBurnOnUmFuturesTradeRequest = {
-                feeBurn: 'feeBurn_example',
+                feeBurn: ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -7855,7 +7508,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when feeBurn is missing', async () => {
             const _params: ToggleBnbBurnOnUmFuturesTradeRequest = {
-                feeBurn: 'feeBurn_example',
+                feeBurn: ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum.TRUE,
             };
             const params = Object.assign({ ..._params });
             delete params?.feeBurn;
@@ -7867,7 +7520,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ToggleBnbBurnOnUmFuturesTradeRequest = {
-                feeBurn: 'feeBurn_example',
+                feeBurn: ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum.TRUE,
             };
 
             const errorResponse = {
@@ -7892,7 +7545,7 @@ describe('TradeApi', () => {
     describe('umAccountTradeList()', () => {
         it('should execute umAccountTradeList() successfully with required parameters only', async () => {
             const params: UmAccountTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -7932,11 +7585,11 @@ describe('TradeApi', () => {
 
         it('should execute umAccountTradeList() successfully with optional parameters', async () => {
             const params: UmAccountTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 fromId: 1,
-                limit: 100,
+                limit: 500,
                 recvWindow: 5000,
             };
 
@@ -7977,7 +7630,7 @@ describe('TradeApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: UmAccountTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -7989,7 +7642,7 @@ describe('TradeApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: UmAccountTradeListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -8010,10 +7663,7 @@ describe('TradeApi', () => {
     describe('umPositionAdlQuantileEstimation()', () => {
         it('should execute umPositionAdlQuantileEstimation() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([
-                    { symbol: 'ETHUSDT', adlQuantile: { LONG: 3, SHORT: 3, BOTH: 0 } },
-                    { symbol: 'BTCUSDT', adlQuantile: { LONG: 0, SHORT: 0, BOTH: 2 } },
-                ])
+                JSONStringify([{ symbol: 'ETHUSDT', adlQuantile: { LONG: 3, SHORT: 3, BOTH: 0 } }])
             );
 
             const spy = jest.spyOn(client, 'umPositionAdlQuantileEstimation').mockReturnValue(
@@ -8032,15 +7682,12 @@ describe('TradeApi', () => {
 
         it('should execute umPositionAdlQuantileEstimation() successfully with optional parameters', async () => {
             const params: UmPositionAdlQuantileEstimationRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { symbol: 'ETHUSDT', adlQuantile: { LONG: 3, SHORT: 3, BOTH: 0 } },
-                    { symbol: 'BTCUSDT', adlQuantile: { LONG: 0, SHORT: 0, BOTH: 2 } },
-                ])
+                JSONStringify([{ symbol: 'ETHUSDT', adlQuantile: { LONG: 3, SHORT: 3, BOTH: 0 } }])
             );
 
             const spy = jest.spyOn(client, 'umPositionAdlQuantileEstimation').mockReturnValue(

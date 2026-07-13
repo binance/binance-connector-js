@@ -14,7 +14,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function modifyCmOrder() {
     try {
         const response = await client.restAPI.modifyCmOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSD_PERP',
             side: DerivativesTradingPortfolioMarginRestAPI.ModifyCmOrderSideEnum.BUY,
             quantity: 1.0,
             price: 1.0,

@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function cancelMarginAccountOcoOrders() {
     try {
         const response = await client.restAPI.cancelMarginAccountOcoOrders({
-            symbol: 'symbol_example',
+            symbol: 'LTCBTC',
         });
 
         const rateLimits = response.rateLimits!;

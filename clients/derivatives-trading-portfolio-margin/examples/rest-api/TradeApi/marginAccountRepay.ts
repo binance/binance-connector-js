@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function marginAccountRepay() {
     try {
         const response = await client.restAPI.marginAccountRepay({
-            asset: 'asset_example',
+            asset: 'USDT',
             amount: 1.0,
         });
 

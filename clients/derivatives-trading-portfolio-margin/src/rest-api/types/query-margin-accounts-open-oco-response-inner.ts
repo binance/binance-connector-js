@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,49 +25,49 @@ import type { QueryMarginAccountsOpenOcoResponseInnerOrdersInner } from './query
  */
 export interface QueryMarginAccountsOpenOcoResponseInner {
     /**
-     *
+     * Order List ID.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsOpenOcoResponseInner
      */
     orderListId?: number | bigint;
     /**
-     *
+     * Contingency Type.
      * @type {string}
      * @memberof QueryMarginAccountsOpenOcoResponseInner
      */
     contingencyType?: string;
     /**
-     *
+     * List Status Type.
      * @type {string}
      * @memberof QueryMarginAccountsOpenOcoResponseInner
      */
     listStatusType?: string;
     /**
-     *
+     * List Order Status.
      * @type {string}
      * @memberof QueryMarginAccountsOpenOcoResponseInner
      */
     listOrderStatus?: string;
     /**
-     *
+     * List Client Order ID.
      * @type {string}
      * @memberof QueryMarginAccountsOpenOcoResponseInner
      */
     listClientOrderId?: string;
     /**
-     *
+     * Transaction Time.
      * @type {number | bigint}
      * @memberof QueryMarginAccountsOpenOcoResponseInner
      */
     transactionTime?: number | bigint;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryMarginAccountsOpenOcoResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Orders.
      * @type {Array<QueryMarginAccountsOpenOcoResponseInnerOrdersInner>}
      * @memberof QueryMarginAccountsOpenOcoResponseInner
      */

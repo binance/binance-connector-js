@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,37 +25,37 @@ import type { QueryCmModifyOrderHistoryResponseInnerAmendment } from './query-cm
  */
 export interface QueryCmModifyOrderHistoryResponseInner {
     /**
-     *
+     * Order modification ID
      * @type {number | bigint}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */
     amendmentId?: number | bigint;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Pair.
      * @type {string}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */
     pair?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Order modification time
      * @type {number | bigint}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */

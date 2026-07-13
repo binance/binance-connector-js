@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Portfolio Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,13 +16,13 @@
 /**
  *
  * @export
- * @interface Listenkeyexpired
+ * @interface ListenKeyExpired
  */
-export interface Listenkeyexpired {
+export interface ListenKeyExpired {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
-     * @memberof Listenkeyexpired
+     * @memberof ListenKeyExpired
      */
     E?: number | bigint;
 }

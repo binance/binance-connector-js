@@ -1,5 +1,6 @@
 import {
     DerivativesTradingPortfolioMargin,
+    DerivativesTradingPortfolioMarginRestAPI,
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -13,7 +14,9 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function changeCmPositionMode() {
     try {
         const response = await client.restAPI.changeCmPositionMode({
-            dualSidePosition: 'dualSidePosition_example',
+            dualSidePosition:
+                DerivativesTradingPortfolioMarginRestAPI.ChangeCmPositionModeDualSidePositionEnum
+                    .TRUE,
         });
 
         const rateLimits = response.rateLimits!;

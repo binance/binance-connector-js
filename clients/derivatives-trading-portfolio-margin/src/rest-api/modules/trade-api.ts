@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -93,10 +92,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel All CM Open Conditional Orders
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Cancel All CM Open Conditional Orders(TRADE)
-         * @param {string} symbol
+         * Security Type: TRADE
+         *
+         * @summary Cancel All CM Open Conditional Orders (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -134,10 +135,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel all active LIMIT orders on specific symbol
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Cancel All CM Open Orders(TRADE)
-         * @param {string} symbol
+         * Security Type: TRADE
+         *
+         * @summary Cancel All CM Open Orders (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -175,10 +178,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel All UM Algo Open Orders
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: TRADE
          *
          * @summary Cancel All UM Algo Open Orders (TRADE)
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -216,13 +221,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel All UM Open Conditional Orders
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Cancel All UM Open Conditional Orders
-         * @param {string} symbol
+         * Security Type: TRADE
+         *
+         * @summary Cancel All UM Open Conditional Orders (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
-         * @deprecated
          * @throws {RequiredError}
          */
         cancelAllUmOpenConditionalOrders: async (
@@ -258,10 +264,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel all active LIMIT orders on specific symbol
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Cancel All UM Open Orders(TRADE)
-         * @param {string} symbol
+         * Security Type: TRADE
+         *
+         * @summary Cancel All UM Open Orders (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -299,12 +307,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel CM Conditional Order
          *
-         * Either `strategyId` or `newClientStrategyId` must be sent.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Cancel CM Conditional Order(TRADE)
-         * @param {string} symbol
+         * Notes:
+         * - Either `strategyId` or `newClientStrategyId` must be sent.
+         *
+         * @summary Cancel CM Conditional Order (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
          * @param {number | bigint} [recvWindow]
@@ -352,12 +363,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel an active LIMIT order
          *
-         * Either `orderId` or `origClientOrderId` must be sent.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Cancel CM Order(TRADE)
-         * @param {string} symbol
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         *
+         * @summary Cancel CM Order (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {number | bigint} [recvWindow]
@@ -405,10 +419,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel Margin Account All Open Orders on a Symbol
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Cancel Margin Account All Open Orders on a Symbol(TRADE)
-         * @param {string} symbol
+         * Security Type: TRADE
+         *
+         * @summary Cancel Margin Account All Open Orders on a Symbol (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -446,16 +462,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel Margin Account OCO Orders
          *
-         * Additional notes: Canceling an individual leg will cancel the entire OCO
+         * Weight(IP): 2
          *
-         * Weight: 2
+         * Security Type: TRADE
          *
-         * @summary Cancel Margin Account OCO Orders(TRADE)
-         * @param {string} symbol
+         * Notes:
+         * - Additional notes: Canceling an individual leg will cancel the entire OCO
+         *
+         * @summary Cancel Margin Account OCO Orders (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [listClientOrderId] Either `orderListId` or `listClientOrderId` must be provided
-         * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [newClientOrderId] Used to uniquely identify this cancel request.
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -504,16 +523,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel Margin Account Order
          *
-         * Either `orderId` or `origClientOrderId` must be sent.
+         * Weight(IP): 2
          *
-         * Weight: 2
+         * Security Type: TRADE
          *
-         * @summary Cancel Margin Account Order(TRADE)
-         * @param {string} symbol
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         *
+         * @summary Cancel Margin Account Order (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [newClientOrderId] Used to uniquely identify this cancel request.
+         * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -560,15 +582,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Cancel an active UM algo order.
+         * Cancel an active UM algo order
          *
-         * Either `algoId` or `clientAlgoId` must be sent.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - Either `algoId` or `clientAlgoId` must be sent.
          *
          * @summary Cancel UM Algo Order (TRADE)
-         * @param {number | bigint} [algoId]
-         * @param {string} [clientAlgoId]
+         * @param {number | bigint} [algoId] Algo order ID
+         * @param {string} [clientAlgoId] Client algo order ID
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -607,17 +632,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel UM Conditional Order
          *
-         * Either `strategyId` or `newClientStrategyId` must be sent.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Cancel UM Conditional Order
-         * @param {string} symbol
+         * Notes:
+         * - Either `strategyId` or `newClientStrategyId` must be sent.
+         *
+         * @summary Cancel UM Conditional Order (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
          * @param {number | bigint} [recvWindow]
          *
-         * @deprecated
          * @throws {RequiredError}
          */
         cancelUmConditionalOrder: async (
@@ -661,12 +688,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel an active UM LIMIT order
          *
-         * Either `orderId` or `origClientOrderId` must be sent.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Cancel UM Order(TRADE)
-         * @param {string} symbol
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         *
+         * @summary Cancel UM Order (TRADE)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {number | bigint} [recvWindow]
@@ -714,24 +744,28 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get trades for a specific account and CM symbol.
          *
-         * Either `symbol` or `pair` must be sent
-         * `symbol` and `pair` cannot be sent together
-         * `pair` and `fromId` cannot be sent together
-         * `OrderId` can only be sent together with symbol
-         * If a `pair` is sent, tickers for all symbols of the `pair` will be returned
-         * The parameter `fromId` cannot be sent with `startTime` or `endTime`
-         * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
-         * The time between `startTime` and `endTime` cannot be longer than 24 hours.
+         * Weight: - 20 with `symbol`
+         * - 40 with `pair`
          *
-         * Weight: 20 with symbol, 40 with pair
+         * Security Type: USER_DATA
          *
-         * @summary CM Account Trade List(USER_DATA)
+         * Notes:
+         * - Either `symbol` or `pair` must be sent
+         * - `symbol` and `pair` cannot be sent together
+         * - `pair` and `fromId` cannot be sent together
+         * - `OrderId` can only be sent together with symbol
+         * - If a `pair` is sent, tickers for all symbols of the `pair` will be returned
+         * - The parameter `fromId` cannot be sent with `startTime` or `endTime`
+         * - If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
+         * - The time between `startTime` and `endTime` cannot be longer than 24 hours.
+         *
+         * @summary CM Account Trade List (USER_DATA)
          * @param {string} [symbol]
          * @param {string} [pair]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [fromId] Trade ID to fetch from.
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -792,9 +826,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * "HEDGE" as a sign will be returned instead of "BOTH";
          * A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary CM Position ADL Quantile Estimation(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary CM Position ADL Quantile Estimation (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [recvWindow]
          *
@@ -830,9 +866,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Sign TradFi-Perps agreement contract
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Futures TradFi Perps Contract(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Futures TradFi Perps Contract (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -861,7 +899,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get user's BNB Fee Discount for UM Futures (Fee Discount On or Fee Discount Off )
          *
-         * Weight: 30
+         * Weight(IP): 30
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get UM Futures BNB Burn Status (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -892,9 +932,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Apply for a margin loan.
          *
-         * Weight: 100
+         * Weight(IP): 100
          *
-         * @summary Margin Account Borrow(MARGIN)
+         * Security Type: MARGIN
+         *
+         * @summary Margin Account Borrow (MARGIN)
          * @param {string} asset
          * @param {number} amount
          * @param {number | bigint} [recvWindow]
@@ -940,31 +982,34 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Send in a new OCO for a margin account
          *
-         * Price Restrictions:
-         * `SELL`: Limit Price > Last Price > Stop Price
-         * `BUY`: Limit Price < Last Price < Stop Price
-         * Quantity Restrictions:
-         * Both legs must have the same quantity
-         * `ICEBERG` quantities however do not have to be the same.
-         * Order Rate Limit
-         * `OCO` counts as 2 orders against the order rate limit.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Margin Account New OCO(TRADE)
+         * Notes:
+         * - Other Info:
+         * - Price Restrictions:
+         * - `SELL`: Limit Price > Last Price > Stop Price
+         * - `BUY`: Limit Price  * Quantity Restrictions:
+         * - Both legs must have the same quantity
+         * - `ICEBERG` quantities however do not have to be the same.
+         * - Order Rate Limit
+         * - `OCO` counts as 2 orders against the order rate limit.
+         *
+         * @summary Margin Account New OCO (TRADE)
          * @param {string} symbol
-         * @param {MarginAccountNewOcoSideEnum} side
-         * @param {number} quantity Order quantity
+         * @param {MarginAccountNewOcoSideEnum} side See enum definitions: order side
+         * @param {number} quantity
          * @param {number} price
          * @param {number} stopPrice
-         * @param {string} [listClientOrderId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {string} [limitClientOrderId] A unique Id for the limit order
          * @param {number} [limitIcebergQty]
          * @param {string} [stopClientOrderId] A unique Id for the stop loss/stop loss limit leg
          * @param {number} [stopLimitPrice] If provided, stopLimitTimeInForce is required.
          * @param {number} [stopIcebergQty]
          * @param {MarginAccountNewOcoStopLimitTimeInForceEnum} [stopLimitTimeInForce] Valid values are `GTC/FOK/IOC`
-         * @param {MarginAccountNewOcoNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
+         * @param {MarginAccountNewOcoNewOrderRespTypeEnum} [newOrderRespType] Set the response JSON.
          * @param {MarginAccountNewOcoSideEffectTypeEnum} [sideEffectType] NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY; default NO_SIDE_EFFECT.
          * @param {number | bigint} [recvWindow]
          *
@@ -1063,12 +1108,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Repay for a margin loan.
          *
-         * Weight: 100
+         * Weight(IP): 100
          *
-         * @summary Margin Account Repay(MARGIN)
+         * Security Type: MARGIN
+         *
+         * @summary Margin Account Repay (MARGIN)
          * @param {string} asset
          * @param {number} amount
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -1111,18 +1158,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Repay debt for a margin loan.
          *
-         * The repay asset amount cannot exceed 50000 USD equivalent value for a single request.
-         * If `amount` is not sent, all the asset loan will be repaid if having enough specific repay assets.
-         * If `amount` is sent, only the certain amount of the asset loan will be repaid if having enough specific repay assets.
-         * The system will use the same asset to repay the loan first (if have) no matter whether put the asset in `specifyRepayAssets`
+         * Weight(IP): 3000
          *
-         * Weight: 3000
+         * Security Type: TRADE
          *
-         * @summary Margin Account Repay Debt(TRADE)
+         * Notes:
+         * - The repay asset amount cannot exceed 50000 USD equivalent value for a single request.
+         * - If `amount` is not sent, all the asset loan will be repaid if having enough specific repay assets.
+         * - If `amount` is sent, only the certain amount of the asset loan will be repaid if having enough specific repay assets.
+         * - The system will use the same asset to repay the loan first (if have) no matter whether put the asset in `specifyRepayAssets`
+         *
+         * @summary Margin Account Repay Debt (TRADE)
          * @param {string} asset
          * @param {string} [amount]
          * @param {string} [specifyRepayAssets] Specific asset list to repay debt; Can be added in batch, separated by commas
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -1167,16 +1217,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Margin Account Trade List
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - **Note:** * If `fromId` is set, returns orders with id >= `fromId`; otherwise returns recent order history.
+         * - The interval between `startTime` and `endTime` must be less than 24 hours.
          *
          * @summary Margin Account Trade List (USER_DATA)
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades.
-         * @param {number | bigint} [limit] Default 100; max 1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [fromId] Trade ID to fetch from.
+         * @param {number | bigint} [limit] Number of results returned.
+         * @param {number | bigint} [recvWindow] Value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -1233,22 +1289,24 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
          *
-         * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-         * Both `quantity` and `price` must be sent
-         * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-         * However the order will be cancelled by the amendment in the following situations:
-         * when the order is in partially filled status and the new `quantity` <= `executedQty`
-         * When the order is `GTX` and the new price will cause it to be executed immediately
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Modify CM Order(TRADE)
-         * @param {string} symbol
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+         * - Both `quantity` and `price` must be sent
+         * - When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
+         * - However the order will be cancelled by the amendment in the following situations:
+         * - when the order is in partially filled status and the new `quantity`  * When the order is `GTX` and the new price will cause it to be executed immediately
+         *
+         * @summary Modify CM Order (TRADE)
+         * @param {string} symbol Symbol
          * @param {ModifyCmOrderSideEnum} side
          * @param {number} quantity Order quantity
-         * @param {number} price
-         * @param {number | bigint} [orderId]
-         * @param {string} [origClientOrderId]
+         * @param {number} price Order price
+         * @param {number | bigint} [orderId] Order ID
+         * @param {string} [origClientOrderId] Client order ID
          * @param {ModifyCmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {number | bigint} [recvWindow]
          *
@@ -1317,22 +1375,24 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
          *
-         * Either orderId or origClientOrderId must be sent, and the orderId will prevail if both are sent.
-         * Both quantity and price must be sent
-         * When the new quantity or price doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-         * However the order will be cancelled by the amendment in the following situations:
-         * when the order is in partially filled status and the new quantity <= executedQty
-         * When the order is GTX and the new price will cause it to be executed immediately
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Modify UM Order(TRADE)
-         * @param {string} symbol
+         * Notes:
+         * - Either orderId or origClientOrderId must be sent, and the orderId will prevail if both are sent.
+         * - Both quantity and price must be sent
+         * - When the new quantity or price doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
+         * - However the order will be cancelled by the amendment in the following situations:
+         * - when the order is in partially filled status and the new quantity  * When the order is GTX and the new price will cause it to be executed immediately
+         *
+         * @summary Modify UM Order (TRADE)
+         * @param {string} symbol Symbol
          * @param {ModifyUmOrderSideEnum} side
          * @param {number} quantity Order quantity
-         * @param {number} price
-         * @param {number | bigint} [orderId]
-         * @param {string} [origClientOrderId]
+         * @param {number} price Order price
+         * @param {number | bigint} [orderId] Order ID
+         * @param {string} [origClientOrderId] Client order ID
          * @param {ModifyUmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {number | bigint} [recvWindow]
          *
@@ -1401,48 +1461,38 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * New CM Conditional Order
          *
-         * Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
-         * Condition orders will be triggered when:
-         * `STOP`, `STOP_MARKET`:
-         * BUY: "MARK_PRICE"  >= `stopPrice`
-         * SELL: "MARK_PRICE" <= `stopPrice`
-         * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-         * BUY: "MARK_PRICE" <= `stopPrice`
-         * SELL: "MARK_PRICE" >= `stopPrice`
-         * `TRAILING_STOP_MARKET`:
-         * BUY: the lowest mark price after order placed `<= `activationPrice`, and the latest mark price >`= the lowest mark price * (1 + `callbackRate`)
-         * SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
-         * For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
-         * BUY: `activationPrice` should be smaller than latest mark price.
-         * SELL: `activationPrice` should be larger than latest mark price.
-         * Condition orders will be triggered when:
-         * If parameter`priceProtect`is sent as true:
-         * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-         * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-         * `STOP`, `STOP_MARKET`:
-         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-         * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary New CM Conditional Order(TRADE)
-         * @param {string} symbol
-         * @param {NewCmConditionalOrderSideEnum} side
-         * @param {NewCmConditionalOrderStrategyTypeEnum} strategyType "STOP", "STOP_MARKET", "TAKE_PROFIT", "TAKE_PROFIT_MARKET", and "TRAILING_STOP_MARKET"
+         * Notes:
+         * - Additional mandatory parameters based on type:
+         * - Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
+         * - Condition orders will be triggered when:
+         * - `STOP`, `STOP_MARKET`:
+         * - BUY: "MARK_PRICE" >= `stopPrice`
+         * - SELL: "MARK_PRICE" = `stopPrice`
+         * - `TRAILING_STOP_MARKET`:
+         * - BUY: the lowest mark price after order placed ``= the lowest mark price
+         * - (1 + `callbackRate`)
+         * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
+         * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+         *
+         * @summary New CM Conditional Order (TRADE)
+         * @param {string} symbol Symbol
+         * @param {NewCmConditionalOrderSideEnum} side Side
+         * @param {NewCmConditionalOrderStrategyTypeEnum} strategyType
          * @param {NewCmConditionalOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
          * @param {NewCmConditionalOrderTimeInForceEnum} [timeInForce]
          * @param {number} [quantity]
-         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode .
+         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode
          * @param {number} [price]
          * @param {NewCmConditionalOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-         * @param {string} [priceProtect] "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders
-         * @param {string} [newClientStrategyId]
+         * @param {NewCmConditionalOrderPriceProtectEnum} [priceProtect] "true" or "false", default "false". Used with `STOP`/`STOP_MARKET` or `TAKE_PROFIT`/`TAKE_PROFIT_MARKET` orders
+         * @param {string} [newClientStrategyId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
          * @param {number} [stopPrice] Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-         * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the mark price
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+         * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders.
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1457,7 +1507,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             reduceOnly?: string,
             price?: number,
             workingType?: NewCmConditionalOrderWorkingTypeEnum,
-            priceProtect?: string,
+            priceProtect?: NewCmConditionalOrderPriceProtectEnum,
             newClientStrategyId?: string,
             stopPrice?: number,
             activationPrice?: number,
@@ -1536,23 +1586,27 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Place new CM order
          *
-         * If `newOrderRespType` is sent as `RESULT` :
-         * `MARKET` order: the final FILLED result of the order will be return directly.
-         * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary New CM Order(TRADE)
-         * @param {string} symbol
-         * @param {NewCmOrderSideEnum} side
-         * @param {NewCmOrderTypeEnum} type `LIMIT`, `MARKET`
+         * Notes:
+         * - Additional mandatory parameters based on `type`:
+         * - If `newOrderRespType` is sent as `RESULT` :
+         * - `MARKET` order: the final FILLED result of the order will be return directly.
+         * - `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+         *
+         * @summary New CM Order (TRADE)
+         * @param {string} symbol Symbol
+         * @param {NewCmOrderSideEnum} side Side
+         * @param {NewCmOrderTypeEnum} type
          * @param {NewCmOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
          * @param {NewCmOrderTimeInForceEnum} [timeInForce]
-         * @param {number} [quantity]
-         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode .
-         * @param {number} [price]
+         * @param {number} [quantity] Place amount
+         * @param {NewCmOrderReduceOnlyEnum} [reduceOnly] "true" or "false". Cannot be sent in Hedge Mode.
+         * @param {number} [price] Order price
          * @param {NewCmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-         * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
+         * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,32}$`
          * @param {NewCmOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {number | bigint} [recvWindow]
          *
@@ -1565,7 +1619,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             positionSide?: NewCmOrderPositionSideEnum,
             timeInForce?: NewCmOrderTimeInForceEnum,
             quantity?: number,
-            reduceOnly?: string,
+            reduceOnly?: NewCmOrderReduceOnlyEnum,
             price?: number,
             priceMatch?: NewCmOrderPriceMatchEnum,
             newClientOrderId?: string,
@@ -1635,24 +1689,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * New Margin Order
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary New Margin Order(TRADE)
+         * Security Type: TRADE
+         *
+         * @summary New Margin Order (TRADE)
          * @param {string} symbol
          * @param {NewMarginOrderSideEnum} side
-         * @param {NewMarginOrderTypeEnum} type `LIMIT`, `MARKET`
+         * @param {NewMarginOrderTypeEnum} type
          * @param {number} [quantity]
          * @param {number} [quoteOrderQty]
          * @param {number} [price]
-         * @param {number} [stopPrice] Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-         * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {NewMarginOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
+         * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.
+         * @param {NewMarginOrderNewOrderRespTypeEnum} [newOrderRespType] Set the response JSON. ACK, RESULT, or FULL.
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order
-         * @param {NewMarginOrderSideEffectTypeEnum} [sideEffectType] NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY; default NO_SIDE_EFFECT.
+         * @param {NewMarginOrderSideEffectTypeEnum} [sideEffectType]
          * @param {NewMarginOrderTimeInForceEnum} [timeInForce]
          * @param {NewMarginOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
-         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
-         * @param {number | bigint} [recvWindow]
+         * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repaid after the order is cancelled.
+         * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -1745,60 +1801,45 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Place new UM conditional order
          *
-         * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-         * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-         * Condition orders will be triggered when:
+         * Weight(IP): 1
          *
-         * If parameter`priceProtect`is sent as true:
-         * when price reaches the `triggerPrice` , the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-         * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+         * Security Type: TRADE
          *
-         * `STOP`, `STOP_MARKET`:
-         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-         * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-         * `TRAILING_STOP_MARKET`:
-         * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-         * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-         *
-         * For `TRAILING_STOP_MARKET`, if you got such error code.
-         * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-         * means that the parameters you send do not meet the following requirements:
-         * BUY: `activatePrice` should be smaller than latest price.
-         * SELL: `activatePrice` should be larger than latest price.
-         *
-         * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-         *
-         * Weight: 1
+         * Notes:
+         * - Algo order with type `STOP`, parameter `timeInForce` can be sent (default `GTC`).
+         * - Algo order with type `TAKE_PROFIT`, parameter `timeInForce` can be sent (default `GTC`).
+         * - Condition orders will be triggered when price reaches the `triggerPrice`.
+         * - `STOP`, `STOP_MARKET`: BUY: latest price >= `triggerPrice`; SELL: latest price <= `triggerPrice`.
+         * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`: BUY: latest price <= `triggerPrice`; SELL: latest price >= `triggerPrice`.
+         * - `TRAILING_STOP_MARKET`: BUY: lowest price after order placed <= `activatePrice`, and latest price >= lowest price * (1 + `callbackRate`); SELL: highest price after order placed >= `activatePrice`, and latest price <= highest price * (1 - `callbackRate`).
+         * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
          *
          * @summary New UM Algo Order (TRADE)
-         * @param {string} algoType Only support `CONDITIONAL`
+         * @param {NewUmAlgoOrderAlgoTypeEnum} algoType Only support `CONDITIONAL`
          * @param {string} symbol
          * @param {NewUmAlgoOrderSideEnum} side
-         * @param {NewUmAlgoOrderTypeEnum} type `LIMIT`, `MARKET`
+         * @param {NewUmAlgoOrderTypeEnum} type Conditional order type
          * @param {number} quantity Order quantity
-         * @param {NewUmAlgoOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
+         * @param {NewUmAlgoOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode; `LONG` or `SHORT` for Hedge Mode
          * @param {NewUmAlgoOrderTimeInForceEnum} [timeInForce]
-         * @param {number} [price]
-         * @param {number} [triggerPrice]
-         * @param {NewUmAlgoOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-         * @param {NewUmAlgoOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-         * @param {string} [priceProtect] "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders
-         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode .
-         * @param {number} [activatePrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
-         * @param {string} [clientAlgoId]
-         * @param {NewUmAlgoOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
-         * @param {NewUmAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
-         * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
+         * @param {number} [price] Order price
+         * @param {number} [triggerPrice] Trigger price
+         * @param {NewUmAlgoOrderWorkingTypeEnum} [workingType] Trigger price type. Default `CONTRACT_PRICE`
+         * @param {NewUmAlgoOrderPriceMatchEnum} [priceMatch] Can't be passed together with `price`
+         * @param {NewUmAlgoOrderPriceProtectEnum} [priceProtect] Price protection. Default `false`
+         * @param {NewUmAlgoOrderReduceOnlyEnum} [reduceOnly] Cannot be sent in Hedge Mode
+         * @param {number} [activatePrice] Used with `TRAILING_STOP_MARKET`, default as latest price
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET`, min 0.1, max 10 (1 = 1%)
+         * @param {string} [clientAlgoId] Unique id among open orders. Auto-generated if not sent
+         * @param {NewUmAlgoOrderNewOrderRespTypeEnum} [newOrderRespType]
+         * @param {NewUmAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {number | bigint} [goodTillDate] Order cancel time for `GTD` timeInForce, mandatory when timeInForce is `GTD`
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         newUmAlgoOrder: async (
-            algoType: string,
+            algoType: NewUmAlgoOrderAlgoTypeEnum,
             symbol: string,
             side: NewUmAlgoOrderSideEnum,
             type: NewUmAlgoOrderTypeEnum,
@@ -1809,8 +1850,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             triggerPrice?: number,
             workingType?: NewUmAlgoOrderWorkingTypeEnum,
             priceMatch?: NewUmAlgoOrderPriceMatchEnum,
-            priceProtect?: string,
-            reduceOnly?: string,
+            priceProtect?: NewUmAlgoOrderPriceProtectEnum,
+            reduceOnly?: NewUmAlgoOrderReduceOnlyEnum,
             activatePrice?: number,
             callbackRate?: number,
             clientAlgoId?: string,
@@ -1910,56 +1951,45 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Place new UM conditional order
          *
-         * Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
-         * Condition orders will be triggered when:
-         * `STOP`, `STOP_MARKET`:
-         * BUY: "MARK_PRICE"  >= `stopPrice`
-         * SELL: "MARK_PRICE" <= `stopPrice`
-         * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-         * BUY: "MARK_PRICE" <= `stopPrice`
-         * SELL: "MARK_PRICE" >= `stopPrice`
-         * `TRAILING_STOP_MARKET`:
-         * BUY: the lowest mark price after order placed `<= `activationPrice`, and the latest mark price >`= the lowest mark price * (1 + `callbackRate`)
-         * SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
-         * For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
-         * BUY: `activationPrice` should be smaller than latest mark price.
-         * SELL: `activationPrice` should be larger than latest mark price.
-         * Condition orders will be triggered when:
-         * If parameter`priceProtect`is sent as true:
-         * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-         * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-         * `STOP`, `STOP_MARKET`:
-         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-         * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-         * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-         * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary New UM Conditional Order
-         * @param {string} symbol
+         * Notes:
+         * - Additional mandatory parameters based on type:
+         * - Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
+         * - Condition orders will be triggered when:
+         * - `STOP`, `STOP_MARKET`:
+         * - BUY: "MARK_PRICE" >= `stopPrice`
+         * - SELL: "MARK_PRICE" = `stopPrice`
+         * - `TRAILING_STOP_MARKET`:
+         * - BUY: the lowest mark price after order placed ``= the lowest mark price
+         * - (1 + `callbackRate`)
+         * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
+         * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+         * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+         * - In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+         *
+         * @summary New UM Conditional Order (TRADE)
+         * @param {string} symbol Symbol
          * @param {NewUmConditionalOrderSideEnum} side
-         * @param {NewUmConditionalOrderStrategyTypeEnum} strategyType "STOP", "STOP_MARKET", "TAKE_PROFIT", "TAKE_PROFIT_MARKET", and "TRAILING_STOP_MARKET"
+         * @param {NewUmConditionalOrderStrategyTypeEnum} strategyType
          * @param {NewUmConditionalOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
          * @param {NewUmConditionalOrderTimeInForceEnum} [timeInForce]
          * @param {number} [quantity]
-         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode .
+         * @param {NewUmConditionalOrderReduceOnlyEnum} [reduceOnly] "true" or "false". Cannot be sent in Hedge Mode ; cannot be sent with `closePosition`=`true`
          * @param {number} [price]
          * @param {NewUmConditionalOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-         * @param {string} [priceProtect] "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders
-         * @param {string} [newClientStrategyId]
+         * @param {NewUmConditionalOrderPriceProtectEnum} [priceProtect] "true" or "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders
+         * @param {string} [newClientStrategyId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,32}$`
          * @param {number} [stopPrice] Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-         * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the mark price
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+         * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders.
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders.
          * @param {NewUmConditionalOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {NewUmConditionalOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
          * @param {number | bigint} [recvWindow]
          *
-         * @deprecated
          * @throws {RequiredError}
          */
         newUmConditionalOrder: async (
@@ -1969,10 +1999,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             positionSide?: NewUmConditionalOrderPositionSideEnum,
             timeInForce?: NewUmConditionalOrderTimeInForceEnum,
             quantity?: number,
-            reduceOnly?: string,
+            reduceOnly?: NewUmConditionalOrderReduceOnlyEnum,
             price?: number,
             workingType?: NewUmConditionalOrderWorkingTypeEnum,
-            priceProtect?: string,
+            priceProtect?: NewUmConditionalOrderPriceProtectEnum,
             newClientStrategyId?: string,
             stopPrice?: number,
             activationPrice?: number,
@@ -2063,25 +2093,29 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Place new UM order
          *
-         * If `newOrderRespType` is sent as `RESULT` :
-         * `MARKET` order: the final FILLED result of the order will be return directly.
-         * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
-         * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-         * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - Additional mandatory parameters based on type:
+         * - If `newOrderRespType` is sent as `RESULT` :
+         * - `MARKET` order: the final FILLED result of the order will be return directly.
+         * - `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+         * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+         * - In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
          *
          * @summary New UM Order (TRADE)
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          * @param {NewUmOrderSideEnum} side
-         * @param {NewUmOrderTypeEnum} type `LIMIT`, `MARKET`
+         * @param {NewUmOrderTypeEnum} type
          * @param {NewUmOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
-         * @param {NewUmOrderTimeInForceEnum} [timeInForce]
-         * @param {number} [quantity]
-         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode .
-         * @param {number} [price]
-         * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {NewUmOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
+         * @param {NewUmOrderTimeInForceEnum} [timeInForce] Valid values
+         * @param {number} [quantity] Place amount
+         * @param {NewUmOrderReduceOnlyEnum} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode .
+         * @param {number} [price] Order price
+         * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,32}$`
+         * @param {NewUmOrderNewOrderRespTypeEnum} [newOrderRespType] `ACK`, `RESULT`, default `ACK`
          * @param {NewUmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {NewUmOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
@@ -2096,7 +2130,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             positionSide?: NewUmOrderPositionSideEnum,
             timeInForce?: NewUmOrderTimeInForceEnum,
             quantity?: number,
-            reduceOnly?: string,
+            reduceOnly?: NewUmOrderReduceOnlyEnum,
             price?: number,
             newClientOrderId?: string,
             newOrderRespType?: NewUmOrderNewOrderRespTypeEnum,
@@ -2174,20 +2208,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query All CM Conditional Orders
          *
-         * These orders will not be found:
-         * order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
-         * order has NO filled trade, **AND**
-         * created time + 7 days < current time
-         * The query time period must be less than 7 days( default as the recent 7 days).
+         * Weight: - 1 for a single `symbol`
+         * - 40 when `symbol` is omitted
          *
-         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+         * Security Type: USER_DATA
          *
-         * @summary Query All CM Conditional Orders(USER_DATA)
+         * Notes:
+         * - These orders will not be found:
+         * - order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
+         * - order has NO filled trade, **AND**
+         * - created time + 7 days  * The query time period must be less than 7 days( default as the recent 7 days).
+         *
+         * @summary Query All CM Conditional Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [strategyId]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -2238,28 +2275,32 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get all account CM orders; active, canceled, or filled.
          *
-         * Either `symbol` or `pair` must be sent.
-         * If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
-         * These orders will not be found:
-         * order status is `CANCELED` or `EXPIRED`, **AND**
-         * order has NO filled trade, **AND**
-         * created time + 3 days < current time
+         * Weight: - 20 with `symbol`
+         * - 40 with `pair`
          *
-         * Weight: 20 with symbol, 40 with pair
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Either `symbol` or `pair` must be sent.
+         * - If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
+         * - These orders will not be found:
+         * - order status is `CANCELED` or `EXPIRED`, **AND**
+         * - order has NO filled trade, **AND**
+         * - created time + 3 days < current time
          *
          * @summary Query All CM Orders (USER_DATA)
-         * @param {string} symbol
+         * @param {string} [symbol] Symbol
          * @param {string} [pair]
          * @param {number | bigint} [orderId]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllCmOrders: async (
-            symbol: string,
+            symbol?: string,
             pair?: string,
             orderId?: number | bigint,
             startTime?: number | bigint,
@@ -2267,9 +2308,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             limit?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('queryAllCmOrders', 'symbol', symbol);
-
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
@@ -2311,9 +2349,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get all open conditional orders on a symbol. **Careful** when accessing this with no symbol.
          *
-         * If the symbol is not sent, orders for all symbols will be returned in an array.
+         * Weight: - 1 for a single `symbol`
+         * - 40 when `symbol` is omitted
          *
-         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If the symbol is not sent, orders for all symbols will be returned in an array.
          *
          * @summary Query All Current CM Open Conditional Orders (USER_DATA)
          * @param {string} [symbol]
@@ -2353,10 +2395,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * If the symbol is not sent, orders for all symbols will be returned in an array.
          *
-         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-         * Careful when accessing this with no symbol.
+         * Weight: - 1 for a single `symbol`
+         * - 40 when `symbol` is omitted
          *
-         * @summary Query All Current CM Open Orders(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Query All Current CM Open Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {string} [pair]
          * @param {number | bigint} [recvWindow]
@@ -2395,12 +2439,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get all UM open algo orders on a symbol.
+         * Get all UM open algo orders on a symbol. If the symbol is not sent, orders for all symbols will be returned.
          *
-         * If the symbol is not sent, orders for all symbols will be returned in an array.
+         * Weight(IP): 1
          *
-         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-         * Careful when accessing this with no symbol.
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Weight: 1 for a single symbol; 40 when the symbol parameter is omitted.
          *
          * @summary Query All Current UM Open Algo Orders (USER_DATA)
          * @param {string} [algoType]
@@ -2448,16 +2494,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get all open conditional orders on a symbol.
          *
-         * If the symbol is not sent, orders for all symbols will be returned in an array.
+         * Weight: - 1 for a single `symbol`
+         * - 40 when `symbol` is omitted
          *
-         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-         * Careful when accessing this with no symbol.
+         * Security Type: USER_DATA
          *
-         * @summary Query All Current UM Open Conditional Orders
+         * Notes:
+         * - If `symbol` is not provided, conditional open orders for all symbols are returned.
+         *
+         * @summary Query All Current UM Open Conditional Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [recvWindow]
          *
-         * @deprecated
          * @throws {RequiredError}
          */
         queryAllCurrentUmOpenConditionalOrders: async (
@@ -2490,12 +2538,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get all open orders on a symbol.
          *
+         * Weight: - 1 for a single `symbol`
+         * - 40 when `symbol` is omitted
          *
-         * If the symbol is not sent, orders for all symbols will be returned in an array.
+         * Security Type: USER_DATA
          *
-         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+         * Notes:
+         * - If the symbol is not sent, orders for all symbols will be returned in an array.
          *
-         * @summary Query All Current UM Open Orders(USER_DATA)
+         * @summary Query All Current UM Open Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [recvWindow]
          *
@@ -2531,15 +2582,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query All Margin Account Orders
          *
-         * Weight: 100
+         * Weight(IP): 100
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `orderId` is set, returns orders with id >= `orderId`; otherwise returns recent order history.
+         * - For some historical orders, `cummulativeQuoteQty < 0` means the data is unavailable at this time.
          *
          * @summary Query All Margin Account Orders (USER_DATA)
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of results returned.
+         * @param {number | bigint} [recvWindow] Value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -2592,23 +2649,25 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query All UM Conditional Orders
          *
-         * These orders will not be found:
-         * order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
-         * order has NO filled trade, **AND**
-         * created time + 7 days < current time
-         * The query time period must be less than 7 days( default as the recent 7 days).
+         * Weight: - 1 for a single `symbol`
+         * - 40 when `symbol` is omitted
          *
-         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+         * Security Type: USER_DATA
          *
-         * @summary Query All UM Conditional Orders
+         * Notes:
+         * - These orders will not be found:
+         * - order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
+         * - order has NO filled trade, **AND**
+         * - created time + 7 days  * The query time period must be less than 7 days( default as the recent 7 days).
+         *
+         * @summary Query All UM Conditional Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [strategyId]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
-         * @deprecated
          * @throws {RequiredError}
          */
         queryAllUmConditionalOrders: async (
@@ -2656,22 +2715,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         },
         /**
          * Get all account UM orders; active, canceled, or filled.
-         * These orders will not be found:
-         * order status is `CANCELED` or `EXPIRED`, **AND**
-         * order has NO filled trade, **AND**
-         * created time + 3 days < current time
          *
-         * If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
-         * The query time period must be less then 7 days( default as the recent 7 days).
+         * Weight(IP): 5
          *
-         * Weight: 5
+         * Security Type: USER_DATA
          *
-         * @summary Query All UM Orders(USER_DATA)
-         * @param {string} symbol
+         * Notes:
+         * - If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
+         * - The query time period must be less then 7 days( default as the recent 7 days).
+         *
+         * @summary Query All UM Orders (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -2725,18 +2783,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query CM Conditional Order History
          *
+         * Weight(IP): 1
          *
-         * Either `strategyId` or `newClientStrategyId` must be sent.
-         * `NEW` orders will not be found.
-         * These orders will not be found:
-         * order status is `CANCELED` or `EXPIRED`, **AND**
-         * order has NO filled trade, **AND**
-         * created time + 7 days < current time
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - Either `strategyId` or `newClientStrategyId` must be sent.
+         * - `NEW` orders will not be found.
+         * - These orders will not be found:
+         * - order status is `CANCELED` or `EXPIRED`, **AND**
+         * - order has NO filled trade, **AND**
+         * - created time + 7 days < current time
          *
-         * @summary Query CM Conditional Order History(USER_DATA)
-         * @param {string} symbol
+         * @summary Query CM Conditional Order History (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
          * @param {number | bigint} [recvWindow]
@@ -2784,17 +2844,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get order modification history
          *
-         * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Query CM Modify Order History(TRADE)
-         * @param {string} symbol
-         * @param {number | bigint} [orderId]
-         * @param {string} [origClientOrderId]
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+         *
+         * @summary Query CM Modify Order History (TRADE)
+         * @param {string} symbol Symbol
+         * @param {number | bigint} [orderId] Order ID
+         * @param {string} [origClientOrderId] Client order ID
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -2852,16 +2915,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Check an CM order's status.
          *
-         * Either `orderId` or `origClientOrderId` must be sent.
-         * These orders will not be found:
-         * order status is `CANCELED` or `EXPIRED`, **AND**
-         * order has NO filled trade, **AND**
-         * created time + 3 days < current time
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Query CM Order(USER_DATA)
-         * @param {string} symbol
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         * - These orders will not be found:
+         * - order status is `CANCELED` or `EXPIRED`, **AND**
+         * - order has NO filled trade, **AND**
+         * - created time + 3 days < current time
+         *
+         * @summary Query CM Order (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {number | bigint} [recvWindow]
@@ -2909,13 +2975,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Current CM Open Conditional Order
          *
-         * Either `strategyId` or `newClientStrategyId` must be sent.
-         * If the queried order has been triggered, cancelled or expired, the error message "Order does not exist" will be returned.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Query Current CM Open Conditional Order(USER_DATA)
-         * @param {string} symbol
+         * Notes:
+         * - Either `strategyId` or `newClientStrategyId` must be sent.
+         * - If the queried order has been triggered, cancelled or expired, the error message "Order does not exist" will be returned.
+         *
+         * @summary Query Current CM Open Conditional Order (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
          * @param {number | bigint} [recvWindow]
@@ -2963,15 +3032,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query current CM open order
          *
-         * Either `orderId` or `origClientOrderId` must be sent.
-         * If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         * - If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
          *
          * @summary Query Current CM Open Order (USER_DATA)
-         * @param {string} symbol
-         * @param {number | bigint} [orderId]
-         * @param {string} [origClientOrderId]
+         * @param {string} symbol Trading pair.
+         * @param {number | bigint} [orderId] Order ID.
+         * @param {string} [origClientOrderId] User-defined order ID.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -3017,11 +3089,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Current Margin Open Order
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `symbol` is not sent, order records for all symbols are returned.
+         * - When returning all symbols, the request count charged to the rate limiter equals the number of symbols currently trading on the exchange.
          *
          * @summary Query Current Margin Open Order (USER_DATA)
-         * @param {string} symbol
-         * @param {number | bigint} [recvWindow]
+         * @param {string} symbol Symbol
+         * @param {number | bigint} [recvWindow] Value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -3056,20 +3134,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Check an UM algo order's status.
+         * Check an UM algo order's status. Orders will not be found if: status is CANCELED/EXPIRED with no fills and created 3+ days ago; or created 90+ days ago.
          *
-         * These orders will not be found:
-         * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
-         * order create time + 90 days < current time
+         * Weight(IP): 1
          *
-         * Either `algoId` or `clientAlgoId` must be sent.
-         * `algoId` is self-increment for each specific `symbol`
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - Either `algoId` or `clientAlgoId` must be sent. `algoId` is self-increment for each specific `symbol`.
          *
          * @summary Query Current UM Open Algo Order (USER_DATA)
-         * @param {number | bigint} [algoId]
-         * @param {string} [clientAlgoId]
+         * @param {number | bigint} [algoId] Algo order ID
+         * @param {string} [clientAlgoId] Client algo order ID
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -3108,18 +3184,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Current UM Open Conditional Order
          *
-         * Either `strategyId` or `newClientStrategyId` must be sent.
-         * If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Query Current UM Open Conditional Order
-         * @param {string} symbol
+         * Notes:
+         * - Either `strategyId` or `newClientStrategyId` must be sent.
+         * - If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
+         *
+         * @summary Query Current UM Open Conditional Order (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
          * @param {number | bigint} [recvWindow]
          *
-         * @deprecated
          * @throws {RequiredError}
          */
         queryCurrentUmOpenConditionalOrder: async (
@@ -3163,14 +3241,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query current UM open order
          *
+         * Weight(IP): 1
          *
-         * Either `orderId` or `origClientOrderId` must be sent.
-         * If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
+         * Security Type: USER_DATA
          *
-         * Weight: 1
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         * - If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
          *
-         * @summary Query Current UM Open Order(USER_DATA)
-         * @param {string} symbol
+         * @summary Query Current UM Open Order (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {number | bigint} [recvWindow]
@@ -3218,13 +3298,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Margin Account Order
          *
-         * Weight: 10
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         * - For some historical orders, `cummulativeQuoteQty < 0` means the data is unavailable at this time.
          *
          * @summary Query Margin Account Order (USER_DATA)
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -3269,14 +3355,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query all OCO for a specific margin account based on provided optional parameters
          *
-         * Weight: 100
+         * Weight(IP): 100
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Margin Account\'s all OCO (USER_DATA)
-         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades.
+         * @param {number | bigint} [fromId] Trade ID to fetch from.
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of results returned.
+         * @param {number | bigint} [recvWindow] Value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -3322,12 +3410,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Retrieves a specific OCO based on provided optional parameters
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Margin Account\'s OCO (USER_DATA)
          * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
-         * @param {string} [origClientOrderId]
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [origClientOrderId] `orderListId` or `listClientOrderId` must be provided.
+         * @param {number | bigint} [recvWindow] Value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -3365,10 +3455,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query Margin Account's Open OCO
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query Margin Account\'s Open OCO (USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -3394,19 +3486,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get all algo orders; ACTIVE, CANCELED, TRIGGERED or FINISHED .
+         * Get all algo orders: ACTIVE, CANCELED, TRIGGERED or FINISHED.
          *
-         * If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
-         * The query time period must be less then 7 days( default as the recent 7 days).
+         * Weight(IP): 5
          *
-         * Weight: 5
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
+         * - The query time period must be less than 7 days (default as the recent 7 days).
          *
          * @summary Query UM Algo Order History (USER_DATA)
          * @param {string} symbol
-         * @param {number | bigint} [algoId]
-         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [algoId] Only return orders >= this algoId
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 500; max 1000
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -3460,22 +3555,24 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query UM Conditional Order History
          *
-         * Either `strategyId` or `newClientStrategyId` must be sent.
-         * `NEW` orders will not be found.
-         * These orders will not be found:
-         * order status is `CANCELED` or `EXPIRED`, **AND**
-         * order has NO filled trade, **AND**
-         * created time + 7 days < current time
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Query UM Conditional Order History
-         * @param {string} symbol
+         * Notes:
+         * - Either `strategyId` or `newClientStrategyId` must be sent.
+         * - `NEW` orders will not be found.
+         * - These orders will not be found:
+         * - order status is `CANCELED` or `EXPIRED`, **AND**
+         * - order has NO filled trade, **AND**
+         * - created time + 7 days < current time
+         *
+         * @summary Query UM Conditional Order History (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
          * @param {number | bigint} [recvWindow]
          *
-         * @deprecated
          * @throws {RequiredError}
          */
         queryUmConditionalOrderHistory: async (
@@ -3519,17 +3616,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get order modification history
          *
-         * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Query UM Modify Order History(TRADE)
-         * @param {string} symbol
-         * @param {number | bigint} [orderId]
-         * @param {string} [origClientOrderId]
+         * Notes:
+         * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+         *
+         * @summary Query UM Modify Order History (TRADE)
+         * @param {string} symbol Symbol
+         * @param {number | bigint} [orderId] Order ID
+         * @param {string} [origClientOrderId] Client order ID
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -3587,16 +3687,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Check an UM order's status.
          *
-         * These orders will not be found:
-         * Either `orderId` or `origClientOrderId` must be sent.
-         * order status is `CANCELED` or `EXPIRED`, **AND**
-         * order has NO filled trade, **AND**
-         * created time + 3 days < current time
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - These orders will not be found:
+         * - Either `orderId` or `origClientOrderId` must be sent.
+         * - order status is `CANCELED` or `EXPIRED`, **AND**
+         * - order has NO filled trade, **AND**
+         * - created time + 3 days < current time
          *
          * @summary Query UM Order (USER_DATA)
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {number | bigint} [recvWindow]
@@ -3644,19 +3747,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query User's CM Force Orders
          *
-         * If "autoCloseType" is not sent, orders with both of the types will be returned
-         * If "startTime" is not sent, data within 7 days before "endTime" can be queried
-         * Only support querying data in the past 90 days
+         * Weight: - 20 with `symbol`
+         * - 50 without `symbol`
          *
-         * Weight: 20 with symbol, 50 without symbol
+         * Security Type: USER_DATA
          *
-         * @summary Query User\'s CM Force Orders(USER_DATA)
+         * Notes:
+         * - If "autoCloseType" is not sent, orders with both of the types will be returned
+         * - If "startTime" is not sent, data within 7 days before "endTime" can be queried
+         *
+         * @summary Query User\'s CM Force Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {QueryUsersCmForceOrdersAutoCloseTypeEnum} [autoCloseType] `LIQUIDATION` for liquidation orders, `ADL` for ADL orders.
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of results returned.
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -3706,14 +3812,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query user's margin force orders
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
-         * @summary Query User\'s Margin Force Orders(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Query User\'s Margin Force Orders (USER_DATA)
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10 Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Current page number.
+         * @param {number | bigint} [size] Number of results returned.
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -3759,19 +3867,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query User's UM Force Orders
          *
-         * If `autoCloseType` is not sent, orders with both of the types will be returned
-         * If `startTime` is not sent, data within 7 days before `endTime` can be queried
-         * Only support querying data in the past 90 days
+         * Weight: - 20 with `symbol`
+         * - 50 without `symbol`
          *
-         * Weight: 20 with symbol, 50 without symbol
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `autoCloseType` is not sent, orders with both of the types will be returned
+         * - If `startTime` is not sent, data within 7 days before `endTime` can be queried
          *
          * @summary Query User\'s UM Force Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {QueryUsersUmForceOrdersAutoCloseTypeEnum} [autoCloseType] `LIQUIDATION` for liquidation orders, `ADL` for ADL orders.
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [limit] Default 100; max 1000
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [limit] Number of results returned.
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -3821,19 +3932,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Change user's BNB Fee Discount for UM Futures (Fee Discount On or Fee Discount Off ) on ***EVERY symbol***
          *
+         * Weight(IP): 1
          *
-         * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
+         * Security Type: TRADE
          *
-         * Weight: 1
+         * Notes:
+         * - The BNB would not be collected from UM-PM account to the Portfolio Margin account.
          *
          * @summary Toggle BNB Burn On UM Futures Trade (TRADE)
-         * @param {string} feeBurn "true": Fee Discount On; "false": Fee Discount Off
+         * @param {ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum} feeBurn "true": Fee Discount On; "false": Fee Discount Off
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         toggleBnbBurnOnUmFuturesTrade: async (
-            feeBurn: string,
+            feeBurn: ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'feeBurn' is not null or undefined
@@ -3865,19 +3978,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get trades for a specific account and UM symbol.
          *
+         * Weight(IP): 5
          *
-         * If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
-         * The time between `startTime` and `endTime` cannot be longer than 7 days.
-         * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
+         * Security Type: USER_DATA
          *
-         * Weight: 5
+         * Notes:
+         * - If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
+         * - The time between `startTime` and `endTime` cannot be longer than 7 days.
+         * - The parameter `fromId` cannot be sent with `startTime` or `endTime`.
          *
-         * @summary UM Account Trade List(USER_DATA)
-         * @param {string} symbol
+         * @summary UM Account Trade List (USER_DATA)
+         * @param {string} symbol Symbol
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades.
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [fromId] Trade ID to fetch from.
+         * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -3938,9 +4053,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * "HEDGE" as a sign will be returned instead of "BOTH";
          * A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary UM Position ADL Quantile Estimation(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary UM Position ADL Quantile Estimation (USER_DATA)
          * @param {string} [symbol]
          * @param {number | bigint} [recvWindow]
          *
@@ -3984,9 +4101,11 @@ export interface TradeApiInterface {
     /**
      * Cancel All CM Open Conditional Orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel All CM Open Conditional Orders(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel All CM Open Conditional Orders (TRADE)
      * @param {CancelAllCmOpenConditionalOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3998,9 +4117,11 @@ export interface TradeApiInterface {
     /**
      * Cancel all active LIMIT orders on specific symbol
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel All CM Open Orders(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel All CM Open Orders (TRADE)
      * @param {CancelAllCmOpenOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4012,7 +4133,9 @@ export interface TradeApiInterface {
     /**
      * Cancel All UM Algo Open Orders
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel All UM Algo Open Orders (TRADE)
      * @param {CancelAllUmAlgoOpenOrdersRequest} requestParameters Request parameters.
@@ -4026,12 +4149,13 @@ export interface TradeApiInterface {
     /**
      * Cancel All UM Open Conditional Orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel All UM Open Conditional Orders
+     * Security Type: TRADE
+     *
+     * @summary Cancel All UM Open Conditional Orders (TRADE)
      * @param {CancelAllUmOpenConditionalOrdersRequest} requestParameters Request parameters.
      *
-     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
@@ -4041,9 +4165,11 @@ export interface TradeApiInterface {
     /**
      * Cancel all active LIMIT orders on specific symbol
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel All UM Open Orders(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel All UM Open Orders (TRADE)
      * @param {CancelAllUmOpenOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4055,11 +4181,14 @@ export interface TradeApiInterface {
     /**
      * Cancel CM Conditional Order
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel CM Conditional Order(TRADE)
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     *
+     * @summary Cancel CM Conditional Order (TRADE)
      * @param {CancelCmConditionalOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4071,11 +4200,14 @@ export interface TradeApiInterface {
     /**
      * Cancel an active LIMIT order
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel CM Order(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     *
+     * @summary Cancel CM Order (TRADE)
      * @param {CancelCmOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4087,9 +4219,11 @@ export interface TradeApiInterface {
     /**
      * Cancel Margin Account All Open Orders on a Symbol
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Cancel Margin Account All Open Orders on a Symbol(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel Margin Account All Open Orders on a Symbol (TRADE)
      * @param {CancelMarginAccountAllOpenOrdersOnASymbolRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4101,11 +4235,14 @@ export interface TradeApiInterface {
     /**
      * Cancel Margin Account OCO Orders
      *
-     * Additional notes: Canceling an individual leg will cancel the entire OCO
+     * Weight(IP): 2
      *
-     * Weight: 2
+     * Security Type: TRADE
      *
-     * @summary Cancel Margin Account OCO Orders(TRADE)
+     * Notes:
+     * - Additional notes: Canceling an individual leg will cancel the entire OCO
+     *
+     * @summary Cancel Margin Account OCO Orders (TRADE)
      * @param {CancelMarginAccountOcoOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4117,11 +4254,14 @@ export interface TradeApiInterface {
     /**
      * Cancel Margin Account Order
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 2
      *
-     * Weight: 2
+     * Security Type: TRADE
      *
-     * @summary Cancel Margin Account Order(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     *
+     * @summary Cancel Margin Account Order (TRADE)
      * @param {CancelMarginAccountOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4131,11 +4271,14 @@ export interface TradeApiInterface {
         requestParameters: CancelMarginAccountOrderRequest
     ): Promise<RestApiResponse<CancelMarginAccountOrderResponse>>;
     /**
-     * Cancel an active UM algo order.
+     * Cancel an active UM algo order
      *
-     * Either `algoId` or `clientAlgoId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
      *
      * @summary Cancel UM Algo Order (TRADE)
      * @param {CancelUmAlgoOrderRequest} requestParameters Request parameters.
@@ -4149,14 +4292,16 @@ export interface TradeApiInterface {
     /**
      * Cancel UM Conditional Order
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel UM Conditional Order
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     *
+     * @summary Cancel UM Conditional Order (TRADE)
      * @param {CancelUmConditionalOrderRequest} requestParameters Request parameters.
      *
-     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
@@ -4166,11 +4311,14 @@ export interface TradeApiInterface {
     /**
      * Cancel an active UM LIMIT order
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel UM Order(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     *
+     * @summary Cancel UM Order (TRADE)
      * @param {CancelUmOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4182,18 +4330,22 @@ export interface TradeApiInterface {
     /**
      * Get trades for a specific account and CM symbol.
      *
-     * Either `symbol` or `pair` must be sent
-     * `symbol` and `pair` cannot be sent together
-     * `pair` and `fromId` cannot be sent together
-     * `OrderId` can only be sent together with symbol
-     * If a `pair` is sent, tickers for all symbols of the `pair` will be returned
-     * The parameter `fromId` cannot be sent with `startTime` or `endTime`
-     * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
-     * The time between `startTime` and `endTime` cannot be longer than 24 hours.
+     * Weight: - 20 with `symbol`
+     * - 40 with `pair`
      *
-     * Weight: 20 with symbol, 40 with pair
+     * Security Type: USER_DATA
      *
-     * @summary CM Account Trade List(USER_DATA)
+     * Notes:
+     * - Either `symbol` or `pair` must be sent
+     * - `symbol` and `pair` cannot be sent together
+     * - `pair` and `fromId` cannot be sent together
+     * - `OrderId` can only be sent together with symbol
+     * - If a `pair` is sent, tickers for all symbols of the `pair` will be returned
+     * - The parameter `fromId` cannot be sent with `startTime` or `endTime`
+     * - If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
+     * - The time between `startTime` and `endTime` cannot be longer than 24 hours.
+     *
+     * @summary CM Account Trade List (USER_DATA)
      * @param {CmAccountTradeListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4211,9 +4363,11 @@ export interface TradeApiInterface {
      * "HEDGE" as a sign will be returned instead of "BOTH";
      * A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary CM Position ADL Quantile Estimation(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary CM Position ADL Quantile Estimation (USER_DATA)
      * @param {CmPositionAdlQuantileEstimationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4225,9 +4379,11 @@ export interface TradeApiInterface {
     /**
      * Sign TradFi-Perps agreement contract
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures TradFi Perps Contract(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures TradFi Perps Contract (USER_DATA)
      * @param {FuturesTradfiPerpsContractRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4239,7 +4395,9 @@ export interface TradeApiInterface {
     /**
      * Get user's BNB Fee Discount for UM Futures (Fee Discount On or Fee Discount Off )
      *
-     * Weight: 30
+     * Weight(IP): 30
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get UM Futures BNB Burn Status (USER_DATA)
      * @param {GetUmFuturesBnbBurnStatusRequest} requestParameters Request parameters.
@@ -4253,9 +4411,11 @@ export interface TradeApiInterface {
     /**
      * Apply for a margin loan.
      *
-     * Weight: 100
+     * Weight(IP): 100
      *
-     * @summary Margin Account Borrow(MARGIN)
+     * Security Type: MARGIN
+     *
+     * @summary Margin Account Borrow (MARGIN)
      * @param {MarginAccountBorrowRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4267,18 +4427,21 @@ export interface TradeApiInterface {
     /**
      * Send in a new OCO for a margin account
      *
-     * Price Restrictions:
-     * `SELL`: Limit Price > Last Price > Stop Price
-     * `BUY`: Limit Price < Last Price < Stop Price
-     * Quantity Restrictions:
-     * Both legs must have the same quantity
-     * `ICEBERG` quantities however do not have to be the same.
-     * Order Rate Limit
-     * `OCO` counts as 2 orders against the order rate limit.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Margin Account New OCO(TRADE)
+     * Notes:
+     * - Other Info:
+     * - Price Restrictions:
+     * - `SELL`: Limit Price > Last Price > Stop Price
+     * - `BUY`: Limit Price  * Quantity Restrictions:
+     * - Both legs must have the same quantity
+     * - `ICEBERG` quantities however do not have to be the same.
+     * - Order Rate Limit
+     * - `OCO` counts as 2 orders against the order rate limit.
+     *
+     * @summary Margin Account New OCO (TRADE)
      * @param {MarginAccountNewOcoRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4290,9 +4453,11 @@ export interface TradeApiInterface {
     /**
      * Repay for a margin loan.
      *
-     * Weight: 100
+     * Weight(IP): 100
      *
-     * @summary Margin Account Repay(MARGIN)
+     * Security Type: MARGIN
+     *
+     * @summary Margin Account Repay (MARGIN)
      * @param {MarginAccountRepayRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4304,14 +4469,17 @@ export interface TradeApiInterface {
     /**
      * Repay debt for a margin loan.
      *
-     * The repay asset amount cannot exceed 50000 USD equivalent value for a single request.
-     * If `amount` is not sent, all the asset loan will be repaid if having enough specific repay assets.
-     * If `amount` is sent, only the certain amount of the asset loan will be repaid if having enough specific repay assets.
-     * The system will use the same asset to repay the loan first (if have) no matter whether put the asset in `specifyRepayAssets`
+     * Weight(IP): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Margin Account Repay Debt(TRADE)
+     * Notes:
+     * - The repay asset amount cannot exceed 50000 USD equivalent value for a single request.
+     * - If `amount` is not sent, all the asset loan will be repaid if having enough specific repay assets.
+     * - If `amount` is sent, only the certain amount of the asset loan will be repaid if having enough specific repay assets.
+     * - The system will use the same asset to repay the loan first (if have) no matter whether put the asset in `specifyRepayAssets`
+     *
+     * @summary Margin Account Repay Debt (TRADE)
      * @param {MarginAccountRepayDebtRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4323,7 +4491,13 @@ export interface TradeApiInterface {
     /**
      * Margin Account Trade List
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - **Note:** * If `fromId` is set, returns orders with id >= `fromId`; otherwise returns recent order history.
+     * - The interval between `startTime` and `endTime` must be less than 24 hours.
      *
      * @summary Margin Account Trade List (USER_DATA)
      * @param {MarginAccountTradeListRequest} requestParameters Request parameters.
@@ -4337,16 +4511,18 @@ export interface TradeApiInterface {
     /**
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Both `quantity` and `price` must be sent
-     * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-     * However the order will be cancelled by the amendment in the following situations:
-     * when the order is in partially filled status and the new `quantity` <= `executedQty`
-     * When the order is `GTX` and the new price will cause it to be executed immediately
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Modify CM Order(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     * - Both `quantity` and `price` must be sent
+     * - When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
+     * - However the order will be cancelled by the amendment in the following situations:
+     * - when the order is in partially filled status and the new `quantity`  * When the order is `GTX` and the new price will cause it to be executed immediately
+     *
+     * @summary Modify CM Order (TRADE)
      * @param {ModifyCmOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4358,16 +4534,18 @@ export interface TradeApiInterface {
     /**
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
-     * Either orderId or origClientOrderId must be sent, and the orderId will prevail if both are sent.
-     * Both quantity and price must be sent
-     * When the new quantity or price doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-     * However the order will be cancelled by the amendment in the following situations:
-     * when the order is in partially filled status and the new quantity <= executedQty
-     * When the order is GTX and the new price will cause it to be executed immediately
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Modify UM Order(TRADE)
+     * Notes:
+     * - Either orderId or origClientOrderId must be sent, and the orderId will prevail if both are sent.
+     * - Both quantity and price must be sent
+     * - When the new quantity or price doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
+     * - However the order will be cancelled by the amendment in the following situations:
+     * - when the order is in partially filled status and the new quantity  * When the order is GTX and the new price will cause it to be executed immediately
+     *
+     * @summary Modify UM Order (TRADE)
      * @param {ModifyUmOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4379,34 +4557,24 @@ export interface TradeApiInterface {
     /**
      * New CM Conditional Order
      *
-     * Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     * `STOP`, `STOP_MARKET`:
-     * BUY: "MARK_PRICE"  >= `stopPrice`
-     * SELL: "MARK_PRICE" <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: "MARK_PRICE" <= `stopPrice`
-     * SELL: "MARK_PRICE" >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest mark price after order placed `<= `activationPrice`, and the latest mark price >`= the lowest mark price * (1 + `callbackRate`)
-     * SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
-     * For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest mark price.
-     * SELL: `activationPrice` should be larger than latest mark price.
-     * Condition orders will be triggered when:
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary New CM Conditional Order(TRADE)
+     * Notes:
+     * - Additional mandatory parameters based on type:
+     * - Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
+     * - Condition orders will be triggered when:
+     * - `STOP`, `STOP_MARKET`:
+     * - BUY: "MARK_PRICE" >= `stopPrice`
+     * - SELL: "MARK_PRICE" = `stopPrice`
+     * - `TRAILING_STOP_MARKET`:
+     * - BUY: the lowest mark price after order placed ``= the lowest mark price
+     * - (1 + `callbackRate`)
+     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+     *
+     * @summary New CM Conditional Order (TRADE)
      * @param {NewCmConditionalOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4418,13 +4586,17 @@ export interface TradeApiInterface {
     /**
      * Place new CM order
      *
-     * If `newOrderRespType` is sent as `RESULT` :
-     * `MARKET` order: the final FILLED result of the order will be return directly.
-     * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary New CM Order(TRADE)
+     * Notes:
+     * - Additional mandatory parameters based on `type`:
+     * - If `newOrderRespType` is sent as `RESULT` :
+     * - `MARKET` order: the final FILLED result of the order will be return directly.
+     * - `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     *
+     * @summary New CM Order (TRADE)
      * @param {NewCmOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4434,9 +4606,11 @@ export interface TradeApiInterface {
     /**
      * New Margin Order
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary New Margin Order(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary New Margin Order (TRADE)
      * @param {NewMarginOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4448,33 +4622,18 @@ export interface TradeApiInterface {
     /**
      * Place new UM conditional order
      *
-     * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
+     * Weight(IP): 1
      *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `triggerPrice` , the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     * Security Type: TRADE
      *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-     *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activatePrice` should be smaller than latest price.
-     * SELL: `activatePrice` should be larger than latest price.
-     *
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     *
-     * Weight: 1
+     * Notes:
+     * - Algo order with type `STOP`, parameter `timeInForce` can be sent (default `GTC`).
+     * - Algo order with type `TAKE_PROFIT`, parameter `timeInForce` can be sent (default `GTC`).
+     * - Condition orders will be triggered when price reaches the `triggerPrice`.
+     * - `STOP`, `STOP_MARKET`: BUY: latest price >= `triggerPrice`; SELL: latest price <= `triggerPrice`.
+     * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`: BUY: latest price <= `triggerPrice`; SELL: latest price >= `triggerPrice`.
+     * - `TRAILING_STOP_MARKET`: BUY: lowest price after order placed <= `activatePrice`, and latest price >= lowest price * (1 + `callbackRate`); SELL: highest price after order placed >= `activatePrice`, and latest price <= highest price * (1 - `callbackRate`).
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
      *
      * @summary New UM Algo Order (TRADE)
      * @param {NewUmAlgoOrderRequest} requestParameters Request parameters.
@@ -4488,39 +4647,28 @@ export interface TradeApiInterface {
     /**
      * Place new UM conditional order
      *
-     * Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     * `STOP`, `STOP_MARKET`:
-     * BUY: "MARK_PRICE"  >= `stopPrice`
-     * SELL: "MARK_PRICE" <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: "MARK_PRICE" <= `stopPrice`
-     * SELL: "MARK_PRICE" >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest mark price after order placed `<= `activationPrice`, and the latest mark price >`= the lowest mark price * (1 + `callbackRate`)
-     * SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
-     * For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest mark price.
-     * SELL: `activationPrice` should be larger than latest mark price.
-     * Condition orders will be triggered when:
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary New UM Conditional Order
+     * Notes:
+     * - Additional mandatory parameters based on type:
+     * - Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
+     * - Condition orders will be triggered when:
+     * - `STOP`, `STOP_MARKET`:
+     * - BUY: "MARK_PRICE" >= `stopPrice`
+     * - SELL: "MARK_PRICE" = `stopPrice`
+     * - `TRAILING_STOP_MARKET`:
+     * - BUY: the lowest mark price after order placed ``= the lowest mark price
+     * - (1 + `callbackRate`)
+     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * - In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     *
+     * @summary New UM Conditional Order (TRADE)
      * @param {NewUmConditionalOrderRequest} requestParameters Request parameters.
      *
-     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
@@ -4530,13 +4678,17 @@ export interface TradeApiInterface {
     /**
      * Place new UM order
      *
-     * If `newOrderRespType` is sent as `RESULT` :
-     * `MARKET` order: the final FILLED result of the order will be return directly.
-     * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Additional mandatory parameters based on type:
+     * - If `newOrderRespType` is sent as `RESULT` :
+     * - `MARKET` order: the final FILLED result of the order will be return directly.
+     * - `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * - In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
      *
      * @summary New UM Order (TRADE)
      * @param {NewUmOrderRequest} requestParameters Request parameters.
@@ -4548,15 +4700,18 @@ export interface TradeApiInterface {
     /**
      * Query All CM Conditional Orders
      *
-     * These orders will not be found:
-     * order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 7 days < current time
-     * The query time period must be less than 7 days( default as the recent 7 days).
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Security Type: USER_DATA
      *
-     * @summary Query All CM Conditional Orders(USER_DATA)
+     * Notes:
+     * - These orders will not be found:
+     * - order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 7 days  * The query time period must be less than 7 days( default as the recent 7 days).
+     *
+     * @summary Query All CM Conditional Orders (USER_DATA)
      * @param {QueryAllCmConditionalOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4568,14 +4723,18 @@ export interface TradeApiInterface {
     /**
      * Get all account CM orders; active, canceled, or filled.
      *
-     * Either `symbol` or `pair` must be sent.
-     * If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 3 days < current time
+     * Weight: - 20 with `symbol`
+     * - 40 with `pair`
      *
-     * Weight: 20 with symbol, 40 with pair
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `symbol` or `pair` must be sent.
+     * - If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 3 days < current time
      *
      * @summary Query All CM Orders (USER_DATA)
      * @param {QueryAllCmOrdersRequest} requestParameters Request parameters.
@@ -4584,14 +4743,18 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     queryAllCmOrders(
-        requestParameters: QueryAllCmOrdersRequest
+        requestParameters?: QueryAllCmOrdersRequest
     ): Promise<RestApiResponse<QueryAllCmOrdersResponse>>;
     /**
      * Get all open conditional orders on a symbol. **Careful** when accessing this with no symbol.
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
      * @summary Query All Current CM Open Conditional Orders (USER_DATA)
      * @param {QueryAllCurrentCmOpenConditionalOrdersRequest} requestParameters Request parameters.
@@ -4607,10 +4770,12 @@ export interface TradeApiInterface {
      *
      * If the symbol is not sent, orders for all symbols will be returned in an array.
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * @summary Query All Current CM Open Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query All Current CM Open Orders (USER_DATA)
      * @param {QueryAllCurrentCmOpenOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4620,12 +4785,14 @@ export interface TradeApiInterface {
         requestParameters?: QueryAllCurrentCmOpenOrdersRequest
     ): Promise<RestApiResponse<QueryAllCurrentCmOpenOrdersResponse>>;
     /**
-     * Get all UM open algo orders on a symbol.
+     * Get all UM open algo orders on a symbol. If the symbol is not sent, orders for all symbols will be returned.
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Weight(IP): 1
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Weight: 1 for a single symbol; 40 when the symbol parameter is omitted.
      *
      * @summary Query All Current UM Open Algo Orders (USER_DATA)
      * @param {QueryAllCurrentUmOpenAlgoOrdersRequest} requestParameters Request parameters.
@@ -4639,15 +4806,17 @@ export interface TradeApiInterface {
     /**
      * Get all open conditional orders on a symbol.
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     * Security Type: USER_DATA
      *
-     * @summary Query All Current UM Open Conditional Orders
+     * Notes:
+     * - If `symbol` is not provided, conditional open orders for all symbols are returned.
+     *
+     * @summary Query All Current UM Open Conditional Orders (USER_DATA)
      * @param {QueryAllCurrentUmOpenConditionalOrdersRequest} requestParameters Request parameters.
      *
-     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
@@ -4657,12 +4826,15 @@ export interface TradeApiInterface {
     /**
      * Get all open orders on a symbol.
      *
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Security Type: USER_DATA
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Notes:
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
-     * @summary Query All Current UM Open Orders(USER_DATA)
+     * @summary Query All Current UM Open Orders (USER_DATA)
      * @param {QueryAllCurrentUmOpenOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4674,7 +4846,13 @@ export interface TradeApiInterface {
     /**
      * Query All Margin Account Orders
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `orderId` is set, returns orders with id >= `orderId`; otherwise returns recent order history.
+     * - For some historical orders, `cummulativeQuoteQty < 0` means the data is unavailable at this time.
      *
      * @summary Query All Margin Account Orders (USER_DATA)
      * @param {QueryAllMarginAccountOrdersRequest} requestParameters Request parameters.
@@ -4688,18 +4866,20 @@ export interface TradeApiInterface {
     /**
      * Query All UM Conditional Orders
      *
-     * These orders will not be found:
-     * order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 7 days < current time
-     * The query time period must be less than 7 days( default as the recent 7 days).
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Security Type: USER_DATA
      *
-     * @summary Query All UM Conditional Orders
+     * Notes:
+     * - These orders will not be found:
+     * - order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 7 days  * The query time period must be less than 7 days( default as the recent 7 days).
+     *
+     * @summary Query All UM Conditional Orders (USER_DATA)
      * @param {QueryAllUmConditionalOrdersRequest} requestParameters Request parameters.
      *
-     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
@@ -4708,17 +4888,16 @@ export interface TradeApiInterface {
     ): Promise<RestApiResponse<QueryAllUmConditionalOrdersResponse>>;
     /**
      * Get all account UM orders; active, canceled, or filled.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 3 days < current time
      *
-     * If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
-     * The query time period must be less then 7 days( default as the recent 7 days).
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
      *
-     * @summary Query All UM Orders(USER_DATA)
+     * Notes:
+     * - If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
+     * - The query time period must be less then 7 days( default as the recent 7 days).
+     *
+     * @summary Query All UM Orders (USER_DATA)
      * @param {QueryAllUmOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4730,17 +4909,19 @@ export interface TradeApiInterface {
     /**
      * Query CM Conditional Order History
      *
+     * Weight(IP): 1
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
-     * `NEW` orders will not be found.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 7 days < current time
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     * - `NEW` orders will not be found.
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 7 days < current time
      *
-     * @summary Query CM Conditional Order History(USER_DATA)
+     * @summary Query CM Conditional Order History (USER_DATA)
      * @param {QueryCmConditionalOrderHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4752,11 +4933,14 @@ export interface TradeApiInterface {
     /**
      * Get order modification history
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Query CM Modify Order History(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     *
+     * @summary Query CM Modify Order History (TRADE)
      * @param {QueryCmModifyOrderHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4768,15 +4952,18 @@ export interface TradeApiInterface {
     /**
      * Check an CM order's status.
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 3 days < current time
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query CM Order(USER_DATA)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 3 days < current time
+     *
+     * @summary Query CM Order (USER_DATA)
      * @param {QueryCmOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4788,12 +4975,15 @@ export interface TradeApiInterface {
     /**
      * Query Current CM Open Conditional Order
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
-     * If the queried order has been triggered, cancelled or expired, the error message "Order does not exist" will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Current CM Open Conditional Order(USER_DATA)
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     * - If the queried order has been triggered, cancelled or expired, the error message "Order does not exist" will be returned.
+     *
+     * @summary Query Current CM Open Conditional Order (USER_DATA)
      * @param {QueryCurrentCmOpenConditionalOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4805,10 +4995,13 @@ export interface TradeApiInterface {
     /**
      * Query current CM open order
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
      *
      * @summary Query Current CM Open Order (USER_DATA)
      * @param {QueryCurrentCmOpenOrderRequest} requestParameters Request parameters.
@@ -4822,7 +5015,13 @@ export interface TradeApiInterface {
     /**
      * Query Current Margin Open Order
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `symbol` is not sent, order records for all symbols are returned.
+     * - When returning all symbols, the request count charged to the rate limiter equals the number of symbols currently trading on the exchange.
      *
      * @summary Query Current Margin Open Order (USER_DATA)
      * @param {QueryCurrentMarginOpenOrderRequest} requestParameters Request parameters.
@@ -4834,16 +5033,14 @@ export interface TradeApiInterface {
         requestParameters: QueryCurrentMarginOpenOrderRequest
     ): Promise<RestApiResponse<QueryCurrentMarginOpenOrderResponse>>;
     /**
-     * Check an UM algo order's status.
+     * Check an UM algo order's status. Orders will not be found if: status is CANCELED/EXPIRED with no fills and created 3+ days ago; or created 90+ days ago.
      *
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
-     * order create time + 90 days < current time
+     * Weight(IP): 1
      *
-     * Either `algoId` or `clientAlgoId` must be sent.
-     * `algoId` is self-increment for each specific `symbol`
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent. `algoId` is self-increment for each specific `symbol`.
      *
      * @summary Query Current UM Open Algo Order (USER_DATA)
      * @param {QueryCurrentUmOpenAlgoOrderRequest} requestParameters Request parameters.
@@ -4857,15 +5054,17 @@ export interface TradeApiInterface {
     /**
      * Query Current UM Open Conditional Order
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
-     * If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Current UM Open Conditional Order
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     * - If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
+     *
+     * @summary Query Current UM Open Conditional Order (USER_DATA)
      * @param {QueryCurrentUmOpenConditionalOrderRequest} requestParameters Request parameters.
      *
-     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
@@ -4875,13 +5074,15 @@ export interface TradeApiInterface {
     /**
      * Query current UM open order
      *
+     * Weight(IP): 1
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
      *
-     * @summary Query Current UM Open Order(USER_DATA)
+     * @summary Query Current UM Open Order (USER_DATA)
      * @param {QueryCurrentUmOpenOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -4893,7 +5094,13 @@ export interface TradeApiInterface {
     /**
      * Query Margin Account Order
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - For some historical orders, `cummulativeQuoteQty < 0` means the data is unavailable at this time.
      *
      * @summary Query Margin Account Order (USER_DATA)
      * @param {QueryMarginAccountOrderRequest} requestParameters Request parameters.
@@ -4907,7 +5114,9 @@ export interface TradeApiInterface {
     /**
      * Query all OCO for a specific margin account based on provided optional parameters
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s all OCO (USER_DATA)
      * @param {QueryMarginAccountsAllOcoRequest} requestParameters Request parameters.
@@ -4921,7 +5130,9 @@ export interface TradeApiInterface {
     /**
      * Retrieves a specific OCO based on provided optional parameters
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s OCO (USER_DATA)
      * @param {QueryMarginAccountsOcoRequest} requestParameters Request parameters.
@@ -4935,7 +5146,9 @@ export interface TradeApiInterface {
     /**
      * Query Margin Account's Open OCO
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s Open OCO (USER_DATA)
      * @param {QueryMarginAccountsOpenOcoRequest} requestParameters Request parameters.
@@ -4947,12 +5160,15 @@ export interface TradeApiInterface {
         requestParameters?: QueryMarginAccountsOpenOcoRequest
     ): Promise<RestApiResponse<QueryMarginAccountsOpenOcoResponse>>;
     /**
-     * Get all algo orders; ACTIVE, CANCELED, TRIGGERED or FINISHED .
+     * Get all algo orders: ACTIVE, CANCELED, TRIGGERED or FINISHED.
      *
-     * If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
-     * The query time period must be less then 7 days( default as the recent 7 days).
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
+     * - The query time period must be less than 7 days (default as the recent 7 days).
      *
      * @summary Query UM Algo Order History (USER_DATA)
      * @param {QueryUmAlgoOrderHistoryRequest} requestParameters Request parameters.
@@ -4966,19 +5182,21 @@ export interface TradeApiInterface {
     /**
      * Query UM Conditional Order History
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
-     * `NEW` orders will not be found.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 7 days < current time
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query UM Conditional Order History
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     * - `NEW` orders will not be found.
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 7 days < current time
+     *
+     * @summary Query UM Conditional Order History (USER_DATA)
      * @param {QueryUmConditionalOrderHistoryRequest} requestParameters Request parameters.
      *
-     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
@@ -4988,11 +5206,14 @@ export interface TradeApiInterface {
     /**
      * Get order modification history
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Query UM Modify Order History(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     *
+     * @summary Query UM Modify Order History (TRADE)
      * @param {QueryUmModifyOrderHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -5004,13 +5225,16 @@ export interface TradeApiInterface {
     /**
      * Check an UM order's status.
      *
-     * These orders will not be found:
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 3 days < current time
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - These orders will not be found:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 3 days < current time
      *
      * @summary Query UM Order (USER_DATA)
      * @param {QueryUmOrderRequest} requestParameters Request parameters.
@@ -5024,13 +5248,16 @@ export interface TradeApiInterface {
     /**
      * Query User's CM Force Orders
      *
-     * If "autoCloseType" is not sent, orders with both of the types will be returned
-     * If "startTime" is not sent, data within 7 days before "endTime" can be queried
-     * Only support querying data in the past 90 days
+     * Weight: - 20 with `symbol`
+     * - 50 without `symbol`
      *
-     * Weight: 20 with symbol, 50 without symbol
+     * Security Type: USER_DATA
      *
-     * @summary Query User\'s CM Force Orders(USER_DATA)
+     * Notes:
+     * - If "autoCloseType" is not sent, orders with both of the types will be returned
+     * - If "startTime" is not sent, data within 7 days before "endTime" can be queried
+     *
+     * @summary Query User\'s CM Force Orders (USER_DATA)
      * @param {QueryUsersCmForceOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -5042,9 +5269,11 @@ export interface TradeApiInterface {
     /**
      * Query user's margin force orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query User\'s Margin Force Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query User\'s Margin Force Orders (USER_DATA)
      * @param {QueryUsersMarginForceOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -5056,11 +5285,14 @@ export interface TradeApiInterface {
     /**
      * Query User's UM Force Orders
      *
-     * If `autoCloseType` is not sent, orders with both of the types will be returned
-     * If `startTime` is not sent, data within 7 days before `endTime` can be queried
-     * Only support querying data in the past 90 days
+     * Weight: - 20 with `symbol`
+     * - 50 without `symbol`
      *
-     * Weight: 20 with symbol, 50 without symbol
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `autoCloseType` is not sent, orders with both of the types will be returned
+     * - If `startTime` is not sent, data within 7 days before `endTime` can be queried
      *
      * @summary Query User\'s UM Force Orders (USER_DATA)
      * @param {QueryUsersUmForceOrdersRequest} requestParameters Request parameters.
@@ -5074,10 +5306,12 @@ export interface TradeApiInterface {
     /**
      * Change user's BNB Fee Discount for UM Futures (Fee Discount On or Fee Discount Off ) on ***EVERY symbol***
      *
+     * Weight(IP): 1
      *
-     * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - The BNB would not be collected from UM-PM account to the Portfolio Margin account.
      *
      * @summary Toggle BNB Burn On UM Futures Trade (TRADE)
      * @param {ToggleBnbBurnOnUmFuturesTradeRequest} requestParameters Request parameters.
@@ -5091,14 +5325,16 @@ export interface TradeApiInterface {
     /**
      * Get trades for a specific account and UM symbol.
      *
+     * Weight(IP): 5
      *
-     * If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
-     * The time between `startTime` and `endTime` cannot be longer than 7 days.
-     * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
+     * Security Type: USER_DATA
      *
-     * Weight: 5
+     * Notes:
+     * - If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
+     * - The time between `startTime` and `endTime` cannot be longer than 7 days.
+     * - The parameter `fromId` cannot be sent with `startTime` or `endTime`.
      *
-     * @summary UM Account Trade List(USER_DATA)
+     * @summary UM Account Trade List (USER_DATA)
      * @param {UmAccountTradeListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -5117,9 +5353,11 @@ export interface TradeApiInterface {
      * "HEDGE" as a sign will be returned instead of "BOTH";
      * A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary UM Position ADL Quantile Estimation(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary UM Position ADL Quantile Estimation (USER_DATA)
      * @param {UmPositionAdlQuantileEstimationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -5136,7 +5374,7 @@ export interface TradeApiInterface {
  */
 export interface CancelAllCmOpenConditionalOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelAllCmOpenConditionalOrders
      */
@@ -5156,7 +5394,7 @@ export interface CancelAllCmOpenConditionalOrdersRequest {
  */
 export interface CancelAllCmOpenOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelAllCmOpenOrders
      */
@@ -5176,7 +5414,7 @@ export interface CancelAllCmOpenOrdersRequest {
  */
 export interface CancelAllUmAlgoOpenOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelAllUmAlgoOpenOrders
      */
@@ -5196,7 +5434,7 @@ export interface CancelAllUmAlgoOpenOrdersRequest {
  */
 export interface CancelAllUmOpenConditionalOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelAllUmOpenConditionalOrders
      */
@@ -5216,7 +5454,7 @@ export interface CancelAllUmOpenConditionalOrdersRequest {
  */
 export interface CancelAllUmOpenOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelAllUmOpenOrders
      */
@@ -5236,7 +5474,7 @@ export interface CancelAllUmOpenOrdersRequest {
  */
 export interface CancelCmConditionalOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelCmConditionalOrder
      */
@@ -5270,7 +5508,7 @@ export interface CancelCmConditionalOrderRequest {
  */
 export interface CancelCmOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelCmOrder
      */
@@ -5304,7 +5542,7 @@ export interface CancelCmOrderRequest {
  */
 export interface CancelMarginAccountAllOpenOrdersOnASymbolRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelMarginAccountAllOpenOrdersOnASymbol
      */
@@ -5324,7 +5562,7 @@ export interface CancelMarginAccountAllOpenOrdersOnASymbolRequest {
  */
 export interface CancelMarginAccountOcoOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelMarginAccountOcoOrders
      */
@@ -5345,14 +5583,14 @@ export interface CancelMarginAccountOcoOrdersRequest {
     readonly listClientOrderId?: string;
 
     /**
-     * Used to uniquely identify this cancel. Automatically generated by default
+     * Used to uniquely identify this cancel request.
      * @type {string}
      * @memberof TradeApiCancelMarginAccountOcoOrders
      */
     readonly newClientOrderId?: string;
 
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiCancelMarginAccountOcoOrders
      */
@@ -5365,7 +5603,7 @@ export interface CancelMarginAccountOcoOrdersRequest {
  */
 export interface CancelMarginAccountOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelMarginAccountOrder
      */
@@ -5386,14 +5624,14 @@ export interface CancelMarginAccountOrderRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * Used to uniquely identify this cancel. Automatically generated by default
+     * Used to uniquely identify this cancel request.
      * @type {string}
      * @memberof TradeApiCancelMarginAccountOrder
      */
     readonly newClientOrderId?: string;
 
     /**
-     *
+     * The value cannot be greater than `60000`
      * @type {number | bigint}
      * @memberof TradeApiCancelMarginAccountOrder
      */
@@ -5406,14 +5644,14 @@ export interface CancelMarginAccountOrderRequest {
  */
 export interface CancelUmAlgoOrderRequest {
     /**
-     *
+     * Algo order ID
      * @type {number | bigint}
      * @memberof TradeApiCancelUmAlgoOrder
      */
     readonly algoId?: number | bigint;
 
     /**
-     *
+     * Client algo order ID
      * @type {string}
      * @memberof TradeApiCancelUmAlgoOrder
      */
@@ -5433,7 +5671,7 @@ export interface CancelUmAlgoOrderRequest {
  */
 export interface CancelUmConditionalOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelUmConditionalOrder
      */
@@ -5467,7 +5705,7 @@ export interface CancelUmConditionalOrderRequest {
  */
 export interface CancelUmOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiCancelUmOrder
      */
@@ -5529,14 +5767,14 @@ export interface CmAccountTradeListRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Trade id to fetch from. Default gets most recent trades.
+     * Trade ID to fetch from.
      * @type {number | bigint}
      * @memberof TradeApiCmAccountTradeList
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiCmAccountTradeList
      */
@@ -5636,14 +5874,14 @@ export interface MarginAccountNewOcoRequest {
     readonly symbol: string;
 
     /**
-     *
+     * See enum definitions: order side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiMarginAccountNewOco
      */
     readonly side: MarginAccountNewOcoSideEnum;
 
     /**
-     * Order quantity
+     *
      * @type {number}
      * @memberof TradeApiMarginAccountNewOco
      */
@@ -5664,7 +5902,7 @@ export interface MarginAccountNewOcoRequest {
     readonly stopPrice: number;
 
     /**
-     * Either `orderListId` or `listClientOrderId` must be provided
+     * A unique Id for the entire orderList
      * @type {string}
      * @memberof TradeApiMarginAccountNewOco
      */
@@ -5713,7 +5951,7 @@ export interface MarginAccountNewOcoRequest {
     readonly stopLimitTimeInForce?: MarginAccountNewOcoStopLimitTimeInForceEnum;
 
     /**
-     * "ACK", "RESULT", default "ACK"
+     * Set the response JSON.
      * @type {'ACK' | 'RESULT'}
      * @memberof TradeApiMarginAccountNewOco
      */
@@ -5754,7 +5992,7 @@ export interface MarginAccountRepayRequest {
     readonly amount: number;
 
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountRepay
      */
@@ -5788,7 +6026,7 @@ export interface MarginAccountRepayDebtRequest {
     readonly specifyRepayAssets?: string;
 
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountRepayDebt
      */
@@ -5801,7 +6039,7 @@ export interface MarginAccountRepayDebtRequest {
  */
 export interface MarginAccountTradeListRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiMarginAccountTradeList
      */
@@ -5829,21 +6067,21 @@ export interface MarginAccountTradeListRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Trade id to fetch from. Default gets most recent trades.
+     * Trade ID to fetch from.
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
@@ -5856,7 +6094,7 @@ export interface MarginAccountTradeListRequest {
  */
 export interface ModifyCmOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiModifyCmOrder
      */
@@ -5877,21 +6115,21 @@ export interface ModifyCmOrderRequest {
     readonly quantity: number;
 
     /**
-     *
+     * Order price
      * @type {number}
      * @memberof TradeApiModifyCmOrder
      */
     readonly price: number;
 
     /**
-     *
+     * Order ID
      * @type {number | bigint}
      * @memberof TradeApiModifyCmOrder
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Client order ID
      * @type {string}
      * @memberof TradeApiModifyCmOrder
      */
@@ -5899,7 +6137,7 @@ export interface ModifyCmOrderRequest {
 
     /**
      * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiModifyCmOrder
      */
     readonly priceMatch?: ModifyCmOrderPriceMatchEnum;
@@ -5918,7 +6156,7 @@ export interface ModifyCmOrderRequest {
  */
 export interface ModifyUmOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiModifyUmOrder
      */
@@ -5939,21 +6177,21 @@ export interface ModifyUmOrderRequest {
     readonly quantity: number;
 
     /**
-     *
+     * Order price
      * @type {number}
      * @memberof TradeApiModifyUmOrder
      */
     readonly price: number;
 
     /**
-     *
+     * Order ID
      * @type {number | bigint}
      * @memberof TradeApiModifyUmOrder
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Client order ID
      * @type {string}
      * @memberof TradeApiModifyUmOrder
      */
@@ -5961,7 +6199,7 @@ export interface ModifyUmOrderRequest {
 
     /**
      * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiModifyUmOrder
      */
     readonly priceMatch?: ModifyUmOrderPriceMatchEnum;
@@ -5980,22 +6218,22 @@ export interface ModifyUmOrderRequest {
  */
 export interface NewCmConditionalOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiNewCmConditionalOrder
      */
     readonly symbol: string;
 
     /**
-     *
+     * Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiNewCmConditionalOrder
      */
     readonly side: NewCmConditionalOrderSideEnum;
 
     /**
-     * "STOP", "STOP_MARKET", "TAKE_PROFIT", "TAKE_PROFIT_MARKET", and "TRAILING_STOP_MARKET"
-     * @type {'STOP' | 'STOP_MARKET' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
+     *
+     * @type {'STOP' | 'STOP_MARKET' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiNewCmConditionalOrder
      */
     readonly strategyType: NewCmConditionalOrderStrategyTypeEnum;
@@ -6022,7 +6260,7 @@ export interface NewCmConditionalOrderRequest {
     readonly quantity?: number;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode .
+     * "true" or "false". default "false". Cannot be sent in Hedge Mode
      * @type {string}
      * @memberof TradeApiNewCmConditionalOrder
      */
@@ -6037,20 +6275,20 @@ export interface NewCmConditionalOrderRequest {
 
     /**
      * stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-     * @type {'MARK_PRICE'}
+     * @type {'MARK_PRICE' | 'CONTRACT_PRICE'}
      * @memberof TradeApiNewCmConditionalOrder
      */
     readonly workingType?: NewCmConditionalOrderWorkingTypeEnum;
 
     /**
-     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders
-     * @type {string}
+     * "true" or "false", default "false". Used with `STOP`/`STOP_MARKET` or `TAKE_PROFIT`/`TAKE_PROFIT_MARKET` orders
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewCmConditionalOrder
      */
-    readonly priceProtect?: string;
+    readonly priceProtect?: NewCmConditionalOrderPriceProtectEnum;
 
     /**
-     *
+     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
      * @type {string}
      * @memberof TradeApiNewCmConditionalOrder
      */
@@ -6064,14 +6302,14 @@ export interface NewCmConditionalOrderRequest {
     readonly stopPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, default as the mark price
+     * Used with `TRAILING_STOP_MARKET` orders.
      * @type {number}
      * @memberof TradeApiNewCmConditionalOrder
      */
     readonly activationPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+     * Used with `TRAILING_STOP_MARKET` orders.
      * @type {number}
      * @memberof TradeApiNewCmConditionalOrder
      */
@@ -6091,21 +6329,21 @@ export interface NewCmConditionalOrderRequest {
  */
 export interface NewCmOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiNewCmOrder
      */
     readonly symbol: string;
 
     /**
-     *
+     * Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiNewCmOrder
      */
     readonly side: NewCmOrderSideEnum;
 
     /**
-     * `LIMIT`, `MARKET`
+     *
      * @type {'LIMIT' | 'MARKET'}
      * @memberof TradeApiNewCmOrder
      */
@@ -6126,21 +6364,21 @@ export interface NewCmOrderRequest {
     readonly timeInForce?: NewCmOrderTimeInForceEnum;
 
     /**
-     *
+     * Place amount
      * @type {number}
      * @memberof TradeApiNewCmOrder
      */
     readonly quantity?: number;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode .
-     * @type {string}
+     * "true" or "false". Cannot be sent in Hedge Mode.
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewCmOrder
      */
-    readonly reduceOnly?: string;
+    readonly reduceOnly?: NewCmOrderReduceOnlyEnum;
 
     /**
-     *
+     * Order price
      * @type {number}
      * @memberof TradeApiNewCmOrder
      */
@@ -6148,13 +6386,13 @@ export interface NewCmOrderRequest {
 
     /**
      * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiNewCmOrder
      */
     readonly priceMatch?: NewCmOrderPriceMatchEnum;
 
     /**
-     * Used to uniquely identify this cancel. Automatically generated by default
+     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,32}$`
      * @type {string}
      * @memberof TradeApiNewCmOrder
      */
@@ -6195,8 +6433,8 @@ export interface NewMarginOrderRequest {
     readonly side: NewMarginOrderSideEnum;
 
     /**
-     * `LIMIT`, `MARKET`
-     * @type {'LIMIT' | 'MARKET'}
+     *
+     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiNewMarginOrder
      */
     readonly type: NewMarginOrderTypeEnum;
@@ -6223,22 +6461,22 @@ export interface NewMarginOrderRequest {
     readonly price?: number;
 
     /**
-     * Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
      * @type {number}
      * @memberof TradeApiNewMarginOrder
      */
     readonly stopPrice?: number;
 
     /**
-     * Used to uniquely identify this cancel. Automatically generated by default
+     * A unique id among open orders. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiNewMarginOrder
      */
     readonly newClientOrderId?: string;
 
     /**
-     * "ACK", "RESULT", default "ACK"
-     * @type {'ACK' | 'RESULT'}
+     * Set the response JSON. ACK, RESULT, or FULL.
+     * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiNewMarginOrder
      */
     readonly newOrderRespType?: NewMarginOrderNewOrderRespTypeEnum;
@@ -6251,15 +6489,15 @@ export interface NewMarginOrderRequest {
     readonly icebergQty?: number;
 
     /**
-     * NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY; default NO_SIDE_EFFECT.
-     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY' | 'AUTO_REPAY'}
+     *
+     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY' | 'AUTO_REPAY' | 'AUTO_BORROW_REPAY'}
      * @memberof TradeApiNewMarginOrder
      */
     readonly sideEffectType?: NewMarginOrderSideEffectTypeEnum;
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX'}
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiNewMarginOrder
      */
     readonly timeInForce?: NewMarginOrderTimeInForceEnum;
@@ -6272,14 +6510,14 @@ export interface NewMarginOrderRequest {
     readonly selfTradePreventionMode?: NewMarginOrderSelfTradePreventionModeEnum;
 
     /**
-     * Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
+     * Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repaid after the order is cancelled.
      * @type {boolean}
      * @memberof TradeApiNewMarginOrder
      */
     readonly autoRepayAtCancel?: boolean;
 
     /**
-     *
+     * The value cannot be greater than `60000`
      * @type {number | bigint}
      * @memberof TradeApiNewMarginOrder
      */
@@ -6293,10 +6531,10 @@ export interface NewMarginOrderRequest {
 export interface NewUmAlgoOrderRequest {
     /**
      * Only support `CONDITIONAL`
-     * @type {string}
+     * @type {'CONDITIONAL'}
      * @memberof TradeApiNewUmAlgoOrder
      */
-    readonly algoType: string;
+    readonly algoType: NewUmAlgoOrderAlgoTypeEnum;
 
     /**
      *
@@ -6313,8 +6551,8 @@ export interface NewUmAlgoOrderRequest {
     readonly side: NewUmAlgoOrderSideEnum;
 
     /**
-     * `LIMIT`, `MARKET`
-     * @type {'LIMIT' | 'MARKET'}
+     * Conditional order type
+     * @type {'STOP' | 'TAKE_PROFIT' | 'STOP_MARKET' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly type: NewUmAlgoOrderTypeEnum;
@@ -6327,7 +6565,7 @@ export interface NewUmAlgoOrderRequest {
     readonly quantity: number;
 
     /**
-     * Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
+     * Default `BOTH` for One-way Mode; `LONG` or `SHORT` for Hedge Mode
      * @type {'BOTH' | 'LONG' | 'SHORT'}
      * @memberof TradeApiNewUmAlgoOrder
      */
@@ -6335,90 +6573,90 @@ export interface NewUmAlgoOrderRequest {
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX'}
+     * @type {'IOC' | 'GTC' | 'FOK' | 'GTX' | 'GTD'}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly timeInForce?: NewUmAlgoOrderTimeInForceEnum;
 
     /**
-     *
+     * Order price
      * @type {number}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly price?: number;
 
     /**
-     *
+     * Trigger price
      * @type {number}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly triggerPrice?: number;
 
     /**
-     * stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-     * @type {'MARK_PRICE'}
+     * Trigger price type. Default `CONTRACT_PRICE`
+     * @type {'MARK_PRICE' | 'CONTRACT_PRICE'}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly workingType?: NewUmAlgoOrderWorkingTypeEnum;
 
     /**
-     * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * Can't be passed together with `price`
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly priceMatch?: NewUmAlgoOrderPriceMatchEnum;
 
     /**
-     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders
-     * @type {string}
+     * Price protection. Default `false`
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewUmAlgoOrder
      */
-    readonly priceProtect?: string;
+    readonly priceProtect?: NewUmAlgoOrderPriceProtectEnum;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode .
-     * @type {string}
+     * Cannot be sent in Hedge Mode
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewUmAlgoOrder
      */
-    readonly reduceOnly?: string;
+    readonly reduceOnly?: NewUmAlgoOrderReduceOnlyEnum;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
+     * Used with `TRAILING_STOP_MARKET`, default as latest price
      * @type {number}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly activatePrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+     * Used with `TRAILING_STOP_MARKET`, min 0.1, max 10 (1 = 1%)
      * @type {number}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly callbackRate?: number;
 
     /**
-     *
+     * Unique id among open orders. Auto-generated if not sent
      * @type {string}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly clientAlgoId?: string;
 
     /**
-     * "ACK", "RESULT", default "ACK"
+     *
      * @type {'ACK' | 'RESULT'}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly newOrderRespType?: NewUmAlgoOrderNewOrderRespTypeEnum;
 
     /**
-     * `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
      * @memberof TradeApiNewUmAlgoOrder
      */
     readonly selfTradePreventionMode?: NewUmAlgoOrderSelfTradePreventionModeEnum;
 
     /**
-     * order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
+     * Order cancel time for `GTD` timeInForce, mandatory when timeInForce is `GTD`
      * @type {number | bigint}
      * @memberof TradeApiNewUmAlgoOrder
      */
@@ -6438,7 +6676,7 @@ export interface NewUmAlgoOrderRequest {
  */
 export interface NewUmConditionalOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiNewUmConditionalOrder
      */
@@ -6452,8 +6690,8 @@ export interface NewUmConditionalOrderRequest {
     readonly side: NewUmConditionalOrderSideEnum;
 
     /**
-     * "STOP", "STOP_MARKET", "TAKE_PROFIT", "TAKE_PROFIT_MARKET", and "TRAILING_STOP_MARKET"
-     * @type {'STOP' | 'STOP_MARKET' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
+     *
+     * @type {'STOP' | 'STOP_MARKET' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiNewUmConditionalOrder
      */
     readonly strategyType: NewUmConditionalOrderStrategyTypeEnum;
@@ -6467,7 +6705,7 @@ export interface NewUmConditionalOrderRequest {
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX'}
+     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD'}
      * @memberof TradeApiNewUmConditionalOrder
      */
     readonly timeInForce?: NewUmConditionalOrderTimeInForceEnum;
@@ -6480,11 +6718,11 @@ export interface NewUmConditionalOrderRequest {
     readonly quantity?: number;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode .
-     * @type {string}
+     * "true" or "false". Cannot be sent in Hedge Mode ; cannot be sent with `closePosition`=`true`
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewUmConditionalOrder
      */
-    readonly reduceOnly?: string;
+    readonly reduceOnly?: NewUmConditionalOrderReduceOnlyEnum;
 
     /**
      *
@@ -6495,20 +6733,20 @@ export interface NewUmConditionalOrderRequest {
 
     /**
      * stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-     * @type {'MARK_PRICE'}
+     * @type {'MARK_PRICE' | 'CONTRACT_PRICE'}
      * @memberof TradeApiNewUmConditionalOrder
      */
     readonly workingType?: NewUmConditionalOrderWorkingTypeEnum;
 
     /**
-     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders
-     * @type {string}
+     * "true" or "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewUmConditionalOrder
      */
-    readonly priceProtect?: string;
+    readonly priceProtect?: NewUmConditionalOrderPriceProtectEnum;
 
     /**
-     *
+     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,32}$`
      * @type {string}
      * @memberof TradeApiNewUmConditionalOrder
      */
@@ -6522,14 +6760,14 @@ export interface NewUmConditionalOrderRequest {
     readonly stopPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, default as the mark price
+     * Used with `TRAILING_STOP_MARKET` orders.
      * @type {number}
      * @memberof TradeApiNewUmConditionalOrder
      */
     readonly activationPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+     * Used with `TRAILING_STOP_MARKET` orders.
      * @type {number}
      * @memberof TradeApiNewUmConditionalOrder
      */
@@ -6537,7 +6775,7 @@ export interface NewUmConditionalOrderRequest {
 
     /**
      * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiNewUmConditionalOrder
      */
     readonly priceMatch?: NewUmConditionalOrderPriceMatchEnum;
@@ -6570,7 +6808,7 @@ export interface NewUmConditionalOrderRequest {
  */
 export interface NewUmOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiNewUmOrder
      */
@@ -6584,7 +6822,7 @@ export interface NewUmOrderRequest {
     readonly side: NewUmOrderSideEnum;
 
     /**
-     * `LIMIT`, `MARKET`
+     *
      * @type {'LIMIT' | 'MARKET'}
      * @memberof TradeApiNewUmOrder
      */
@@ -6598,14 +6836,14 @@ export interface NewUmOrderRequest {
     readonly positionSide?: NewUmOrderPositionSideEnum;
 
     /**
-     *
-     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX'}
+     * Valid values
+     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD'}
      * @memberof TradeApiNewUmOrder
      */
     readonly timeInForce?: NewUmOrderTimeInForceEnum;
 
     /**
-     *
+     * Place amount
      * @type {number}
      * @memberof TradeApiNewUmOrder
      */
@@ -6613,27 +6851,27 @@ export interface NewUmOrderRequest {
 
     /**
      * "true" or "false". default "false". Cannot be sent in Hedge Mode .
-     * @type {string}
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewUmOrder
      */
-    readonly reduceOnly?: string;
+    readonly reduceOnly?: NewUmOrderReduceOnlyEnum;
 
     /**
-     *
+     * Order price
      * @type {number}
      * @memberof TradeApiNewUmOrder
      */
     readonly price?: number;
 
     /**
-     * Used to uniquely identify this cancel. Automatically generated by default
+     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,32}$`
      * @type {string}
      * @memberof TradeApiNewUmOrder
      */
     readonly newClientOrderId?: string;
 
     /**
-     * "ACK", "RESULT", default "ACK"
+     * `ACK`, `RESULT`, default `ACK`
      * @type {'ACK' | 'RESULT'}
      * @memberof TradeApiNewUmOrder
      */
@@ -6641,7 +6879,7 @@ export interface NewUmOrderRequest {
 
     /**
      * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiNewUmOrder
      */
     readonly priceMatch?: NewUmOrderPriceMatchEnum;
@@ -6702,7 +6940,7 @@ export interface QueryAllCmConditionalOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryAllCmConditionalOrders
      */
@@ -6722,11 +6960,11 @@ export interface QueryAllCmConditionalOrdersRequest {
  */
 export interface QueryAllCmOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryAllCmOrders
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      *
@@ -6757,7 +6995,7 @@ export interface QueryAllCmOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryAllCmOrders
      */
@@ -6898,7 +7136,7 @@ export interface QueryAllCurrentUmOpenOrdersRequest {
  */
 export interface QueryAllMarginAccountOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryAllMarginAccountOrders
      */
@@ -6926,14 +7164,14 @@ export interface QueryAllMarginAccountOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryAllMarginAccountOrders
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryAllMarginAccountOrders
      */
@@ -6974,7 +7212,7 @@ export interface QueryAllUmConditionalOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryAllUmConditionalOrders
      */
@@ -6994,7 +7232,7 @@ export interface QueryAllUmConditionalOrdersRequest {
  */
 export interface QueryAllUmOrdersRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryAllUmOrders
      */
@@ -7022,7 +7260,7 @@ export interface QueryAllUmOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryAllUmOrders
      */
@@ -7042,7 +7280,7 @@ export interface QueryAllUmOrdersRequest {
  */
 export interface QueryCmConditionalOrderHistoryRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryCmConditionalOrderHistory
      */
@@ -7076,21 +7314,21 @@ export interface QueryCmConditionalOrderHistoryRequest {
  */
 export interface QueryCmModifyOrderHistoryRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
     readonly symbol: string;
 
     /**
-     *
+     * Order ID
      * @type {number | bigint}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Client order ID
      * @type {string}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
@@ -7111,7 +7349,7 @@ export interface QueryCmModifyOrderHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
@@ -7131,7 +7369,7 @@ export interface QueryCmModifyOrderHistoryRequest {
  */
 export interface QueryCmOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryCmOrder
      */
@@ -7165,7 +7403,7 @@ export interface QueryCmOrderRequest {
  */
 export interface QueryCurrentCmOpenConditionalOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryCurrentCmOpenConditionalOrder
      */
@@ -7199,21 +7437,21 @@ export interface QueryCurrentCmOpenConditionalOrderRequest {
  */
 export interface QueryCurrentCmOpenOrderRequest {
     /**
-     *
+     * Trading pair.
      * @type {string}
      * @memberof TradeApiQueryCurrentCmOpenOrder
      */
     readonly symbol: string;
 
     /**
-     *
+     * Order ID.
      * @type {number | bigint}
      * @memberof TradeApiQueryCurrentCmOpenOrder
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * User-defined order ID.
      * @type {string}
      * @memberof TradeApiQueryCurrentCmOpenOrder
      */
@@ -7233,14 +7471,14 @@ export interface QueryCurrentCmOpenOrderRequest {
  */
 export interface QueryCurrentMarginOpenOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryCurrentMarginOpenOrder
      */
     readonly symbol: string;
 
     /**
-     *
+     * Value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryCurrentMarginOpenOrder
      */
@@ -7253,14 +7491,14 @@ export interface QueryCurrentMarginOpenOrderRequest {
  */
 export interface QueryCurrentUmOpenAlgoOrderRequest {
     /**
-     *
+     * Algo order ID
      * @type {number | bigint}
      * @memberof TradeApiQueryCurrentUmOpenAlgoOrder
      */
     readonly algoId?: number | bigint;
 
     /**
-     *
+     * Client algo order ID
      * @type {string}
      * @memberof TradeApiQueryCurrentUmOpenAlgoOrder
      */
@@ -7280,7 +7518,7 @@ export interface QueryCurrentUmOpenAlgoOrderRequest {
  */
 export interface QueryCurrentUmOpenConditionalOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryCurrentUmOpenConditionalOrder
      */
@@ -7314,7 +7552,7 @@ export interface QueryCurrentUmOpenConditionalOrderRequest {
  */
 export interface QueryCurrentUmOpenOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryCurrentUmOpenOrder
      */
@@ -7348,7 +7586,7 @@ export interface QueryCurrentUmOpenOrderRequest {
  */
 export interface QueryMarginAccountOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryMarginAccountOrder
      */
@@ -7369,7 +7607,7 @@ export interface QueryMarginAccountOrderRequest {
     readonly origClientOrderId?: string;
 
     /**
-     *
+     * Value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountOrder
      */
@@ -7382,7 +7620,7 @@ export interface QueryMarginAccountOrderRequest {
  */
 export interface QueryMarginAccountsAllOcoRequest {
     /**
-     * Trade id to fetch from. Default gets most recent trades.
+     * Trade ID to fetch from.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
@@ -7403,14 +7641,14 @@ export interface QueryMarginAccountsAllOcoRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * Value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
@@ -7430,14 +7668,14 @@ export interface QueryMarginAccountsOcoRequest {
     readonly orderListId?: number | bigint;
 
     /**
-     *
+     * `orderListId` or `listClientOrderId` must be provided.
      * @type {string}
      * @memberof TradeApiQueryMarginAccountsOco
      */
     readonly origClientOrderId?: string;
 
     /**
-     *
+     * Value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOco
      */
@@ -7450,7 +7688,7 @@ export interface QueryMarginAccountsOcoRequest {
  */
 export interface QueryMarginAccountsOpenOcoRequest {
     /**
-     *
+     * Value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOpenOco
      */
@@ -7470,28 +7708,28 @@ export interface QueryUmAlgoOrderHistoryRequest {
     readonly symbol: string;
 
     /**
-     *
+     * Only return orders >= this algoId
      * @type {number | bigint}
      * @memberof TradeApiQueryUmAlgoOrderHistory
      */
     readonly algoId?: number | bigint;
 
     /**
-     * Timestamp in ms to get funding from INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryUmAlgoOrderHistory
      */
     readonly startTime?: number | bigint;
 
     /**
-     * Timestamp in ms to get funding until INCLUSIVE.
+     *
      * @type {number | bigint}
      * @memberof TradeApiQueryUmAlgoOrderHistory
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Default 500; max 1000
      * @type {number | bigint}
      * @memberof TradeApiQueryUmAlgoOrderHistory
      */
@@ -7511,7 +7749,7 @@ export interface QueryUmAlgoOrderHistoryRequest {
  */
 export interface QueryUmConditionalOrderHistoryRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryUmConditionalOrderHistory
      */
@@ -7545,21 +7783,21 @@ export interface QueryUmConditionalOrderHistoryRequest {
  */
 export interface QueryUmModifyOrderHistoryRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
     readonly symbol: string;
 
     /**
-     *
+     * Order ID
      * @type {number | bigint}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Client order ID
      * @type {string}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
@@ -7580,7 +7818,7 @@ export interface QueryUmModifyOrderHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
@@ -7600,7 +7838,7 @@ export interface QueryUmModifyOrderHistoryRequest {
  */
 export interface QueryUmOrderRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiQueryUmOrder
      */
@@ -7662,14 +7900,14 @@ export interface QueryUsersCmForceOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryUsersCmForceOrders
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryUsersCmForceOrders
      */
@@ -7696,21 +7934,21 @@ export interface QueryUsersMarginForceOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Current page number.
      * @type {number | bigint}
      * @memberof TradeApiQueryUsersMarginForceOrders
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10 Max:100
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryUsersMarginForceOrders
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryUsersMarginForceOrders
      */
@@ -7751,14 +7989,14 @@ export interface QueryUsersUmForceOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryUsersUmForceOrders
      */
     readonly limit?: number | bigint;
 
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof TradeApiQueryUsersUmForceOrders
      */
@@ -7772,10 +8010,10 @@ export interface QueryUsersUmForceOrdersRequest {
 export interface ToggleBnbBurnOnUmFuturesTradeRequest {
     /**
      * "true": Fee Discount On; "false": Fee Discount Off
-     * @type {string}
+     * @type {'true' | 'false'}
      * @memberof TradeApiToggleBnbBurnOnUmFuturesTrade
      */
-    readonly feeBurn: string;
+    readonly feeBurn: ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum;
 
     /**
      *
@@ -7791,7 +8029,7 @@ export interface ToggleBnbBurnOnUmFuturesTradeRequest {
  */
 export interface UmAccountTradeListRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeApiUmAccountTradeList
      */
@@ -7812,14 +8050,14 @@ export interface UmAccountTradeListRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Trade id to fetch from. Default gets most recent trades.
+     * Trade ID to fetch from.
      * @type {number | bigint}
      * @memberof TradeApiUmAccountTradeList
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Number of results returned.
      * @type {number | bigint}
      * @memberof TradeApiUmAccountTradeList
      */
@@ -7869,14 +8107,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel All CM Open Conditional Orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel All CM Open Conditional Orders(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel All CM Open Conditional Orders (TRADE)
      * @param {CancelAllCmOpenConditionalOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAllCmOpenConditionalOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-All-CM-Open-Conditional-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-all-cm-open-conditional-orders Binance API Documentation}
      */
     public async cancelAllCmOpenConditionalOrders(
         requestParameters: CancelAllCmOpenConditionalOrdersRequest
@@ -7901,14 +8141,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel all active LIMIT orders on specific symbol
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel All CM Open Orders(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel All CM Open Orders (TRADE)
      * @param {CancelAllCmOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAllCmOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-All-CM-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-all-cm-open-orders Binance API Documentation}
      */
     public async cancelAllCmOpenOrders(
         requestParameters: CancelAllCmOpenOrdersRequest
@@ -7932,14 +8174,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel All UM Algo Open Orders
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel All UM Algo Open Orders (TRADE)
      * @param {CancelAllUmAlgoOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAllUmAlgoOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-All-UM-Algo-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-all-um-algo-open-orders Binance API Documentation}
      */
     public async cancelAllUmAlgoOpenOrders(
         requestParameters: CancelAllUmAlgoOpenOrdersRequest
@@ -7963,14 +8207,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel All UM Open Conditional Orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel All UM Open Conditional Orders
+     * Security Type: TRADE
+     *
+     * @summary Cancel All UM Open Conditional Orders (TRADE)
      * @param {CancelAllUmOpenConditionalOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAllUmOpenConditionalOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-All-UM-Open-Conditional-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-all-um-open-conditional-orders Binance API Documentation}
      */
     public async cancelAllUmOpenConditionalOrders(
         requestParameters: CancelAllUmOpenConditionalOrdersRequest
@@ -7995,14 +8241,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel all active LIMIT orders on specific symbol
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Cancel All UM Open Orders(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel All UM Open Orders (TRADE)
      * @param {CancelAllUmOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAllUmOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-All-UM-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-all-um-open-orders Binance API Documentation}
      */
     public async cancelAllUmOpenOrders(
         requestParameters: CancelAllUmOpenOrdersRequest
@@ -8026,16 +8274,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel CM Conditional Order
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel CM Conditional Order(TRADE)
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     *
+     * @summary Cancel CM Conditional Order (TRADE)
      * @param {CancelCmConditionalOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelCmConditionalOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-CM-Conditional-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-cm-conditional-order Binance API Documentation}
      */
     public async cancelCmConditionalOrder(
         requestParameters: CancelCmConditionalOrderRequest
@@ -8061,16 +8312,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active LIMIT order
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel CM Order(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     *
+     * @summary Cancel CM Order (TRADE)
      * @param {CancelCmOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelCmOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-CM-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-cm-order Binance API Documentation}
      */
     public async cancelCmOrder(
         requestParameters: CancelCmOrderRequest
@@ -8096,14 +8350,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel Margin Account All Open Orders on a Symbol
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Cancel Margin Account All Open Orders on a Symbol(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Cancel Margin Account All Open Orders on a Symbol (TRADE)
      * @param {CancelMarginAccountAllOpenOrdersOnASymbolRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelMarginAccountAllOpenOrdersOnASymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-Margin-Account-All-Open-Orders-on-a-Symbol Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-margin-account-all-open-orders-on-asymbol Binance API Documentation}
      */
     public async cancelMarginAccountAllOpenOrdersOnASymbol(
         requestParameters: CancelMarginAccountAllOpenOrdersOnASymbolRequest
@@ -8128,16 +8384,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel Margin Account OCO Orders
      *
-     * Additional notes: Canceling an individual leg will cancel the entire OCO
+     * Weight(IP): 2
      *
-     * Weight: 2
+     * Security Type: TRADE
      *
-     * @summary Cancel Margin Account OCO Orders(TRADE)
+     * Notes:
+     * - Additional notes: Canceling an individual leg will cancel the entire OCO
+     *
+     * @summary Cancel Margin Account OCO Orders (TRADE)
      * @param {CancelMarginAccountOcoOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelMarginAccountOcoOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-Margin-Account-OCO-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-margin-account-oco-orders Binance API Documentation}
      */
     public async cancelMarginAccountOcoOrders(
         requestParameters: CancelMarginAccountOcoOrdersRequest
@@ -8164,16 +8423,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel Margin Account Order
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 2
      *
-     * Weight: 2
+     * Security Type: TRADE
      *
-     * @summary Cancel Margin Account Order(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     *
+     * @summary Cancel Margin Account Order (TRADE)
      * @param {CancelMarginAccountOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelMarginAccountOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-Margin-Account-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-margin-account-order Binance API Documentation}
      */
     public async cancelMarginAccountOrder(
         requestParameters: CancelMarginAccountOrderRequest
@@ -8198,18 +8460,21 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Cancel an active UM algo order.
+     * Cancel an active UM algo order
      *
-     * Either `algoId` or `clientAlgoId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
      *
      * @summary Cancel UM Algo Order (TRADE)
      * @param {CancelUmAlgoOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelUmAlgoOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-UM-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-um-algo-order Binance API Documentation}
      */
     public async cancelUmAlgoOrder(
         requestParameters: CancelUmAlgoOrderRequest = {}
@@ -8234,16 +8499,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel UM Conditional Order
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel UM Conditional Order
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     *
+     * @summary Cancel UM Conditional Order (TRADE)
      * @param {CancelUmConditionalOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelUmConditionalOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-UM-Conditional-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-um-conditional-order Binance API Documentation}
      */
     public async cancelUmConditionalOrder(
         requestParameters: CancelUmConditionalOrderRequest
@@ -8269,16 +8537,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active UM LIMIT order
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Cancel UM Order(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     *
+     * @summary Cancel UM Order (TRADE)
      * @param {CancelUmOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelUmOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Cancel-UM-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-um-order Binance API Documentation}
      */
     public async cancelUmOrder(
         requestParameters: CancelUmOrderRequest
@@ -8304,23 +8575,27 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get trades for a specific account and CM symbol.
      *
-     * Either `symbol` or `pair` must be sent
-     * `symbol` and `pair` cannot be sent together
-     * `pair` and `fromId` cannot be sent together
-     * `OrderId` can only be sent together with symbol
-     * If a `pair` is sent, tickers for all symbols of the `pair` will be returned
-     * The parameter `fromId` cannot be sent with `startTime` or `endTime`
-     * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
-     * The time between `startTime` and `endTime` cannot be longer than 24 hours.
+     * Weight: - 20 with `symbol`
+     * - 40 with `pair`
      *
-     * Weight: 20 with symbol, 40 with pair
+     * Security Type: USER_DATA
      *
-     * @summary CM Account Trade List(USER_DATA)
+     * Notes:
+     * - Either `symbol` or `pair` must be sent
+     * - `symbol` and `pair` cannot be sent together
+     * - `pair` and `fromId` cannot be sent together
+     * - `OrderId` can only be sent together with symbol
+     * - If a `pair` is sent, tickers for all symbols of the `pair` will be returned
+     * - The parameter `fromId` cannot be sent with `startTime` or `endTime`
+     * - If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
+     * - The time between `startTime` and `endTime` cannot be longer than 24 hours.
+     *
+     * @summary CM Account Trade List (USER_DATA)
      * @param {CmAccountTradeListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CmAccountTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/CM-Account-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cm-account-trade-list Binance API Documentation}
      */
     public async cmAccountTradeList(
         requestParameters: CmAccountTradeListRequest = {}
@@ -8355,14 +8630,16 @@ export class TradeApi implements TradeApiInterface {
      * "HEDGE" as a sign will be returned instead of "BOTH";
      * A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary CM Position ADL Quantile Estimation(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary CM Position ADL Quantile Estimation (USER_DATA)
      * @param {CmPositionAdlQuantileEstimationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CmPositionAdlQuantileEstimationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/CM-Position-ADL-Quantile-Estimation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cm-position-adl-quantile-estimation Binance API Documentation}
      */
     public async cmPositionAdlQuantileEstimation(
         requestParameters: CmPositionAdlQuantileEstimationRequest = {}
@@ -8387,14 +8664,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Sign TradFi-Perps agreement contract
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures TradFi Perps Contract(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures TradFi Perps Contract (USER_DATA)
      * @param {FuturesTradfiPerpsContractRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FuturesTradfiPerpsContractResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Futures-TradFi-Perps-Contract Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#futures-tradfi-perps-contract Binance API Documentation}
      */
     public async futuresTradfiPerpsContract(
         requestParameters: FuturesTradfiPerpsContractRequest = {}
@@ -8417,14 +8696,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get user's BNB Fee Discount for UM Futures (Fee Discount On or Fee Discount Off )
      *
-     * Weight: 30
+     * Weight(IP): 30
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get UM Futures BNB Burn Status (USER_DATA)
      * @param {GetUmFuturesBnbBurnStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUmFuturesBnbBurnStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Get-UM-Futures-BNB-Burn-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#get-um-futures-bnb-burn-status Binance API Documentation}
      */
     public async getUmFuturesBnbBurnStatus(
         requestParameters: GetUmFuturesBnbBurnStatusRequest = {}
@@ -8447,14 +8728,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Apply for a margin loan.
      *
-     * Weight: 100
+     * Weight(IP): 100
      *
-     * @summary Margin Account Borrow(MARGIN)
+     * Security Type: MARGIN
+     *
+     * @summary Margin Account Borrow (MARGIN)
      * @param {MarginAccountBorrowRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Margin-Account-Borrow Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#margin-account-borrow Binance API Documentation}
      */
     public async marginAccountBorrow(
         requestParameters: MarginAccountBorrowRequest
@@ -8479,23 +8762,26 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send in a new OCO for a margin account
      *
-     * Price Restrictions:
-     * `SELL`: Limit Price > Last Price > Stop Price
-     * `BUY`: Limit Price < Last Price < Stop Price
-     * Quantity Restrictions:
-     * Both legs must have the same quantity
-     * `ICEBERG` quantities however do not have to be the same.
-     * Order Rate Limit
-     * `OCO` counts as 2 orders against the order rate limit.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Margin Account New OCO(TRADE)
+     * Notes:
+     * - Other Info:
+     * - Price Restrictions:
+     * - `SELL`: Limit Price > Last Price > Stop Price
+     * - `BUY`: Limit Price  * Quantity Restrictions:
+     * - Both legs must have the same quantity
+     * - `ICEBERG` quantities however do not have to be the same.
+     * - Order Rate Limit
+     * - `OCO` counts as 2 orders against the order rate limit.
+     *
+     * @summary Margin Account New OCO (TRADE)
      * @param {MarginAccountNewOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountNewOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Margin-Account-New-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#margin-account-new-oco Binance API Documentation}
      */
     public async marginAccountNewOco(
         requestParameters: MarginAccountNewOcoRequest
@@ -8532,14 +8818,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Repay for a margin loan.
      *
-     * Weight: 100
+     * Weight(IP): 100
      *
-     * @summary Margin Account Repay(MARGIN)
+     * Security Type: MARGIN
+     *
+     * @summary Margin Account Repay (MARGIN)
      * @param {MarginAccountRepayRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Margin-Account-Repay Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#margin-account-repay Binance API Documentation}
      */
     public async marginAccountRepay(
         requestParameters: MarginAccountRepayRequest
@@ -8564,19 +8852,22 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Repay debt for a margin loan.
      *
-     * The repay asset amount cannot exceed 50000 USD equivalent value for a single request.
-     * If `amount` is not sent, all the asset loan will be repaid if having enough specific repay assets.
-     * If `amount` is sent, only the certain amount of the asset loan will be repaid if having enough specific repay assets.
-     * The system will use the same asset to repay the loan first (if have) no matter whether put the asset in `specifyRepayAssets`
+     * Weight(IP): 3000
      *
-     * Weight: 3000
+     * Security Type: TRADE
      *
-     * @summary Margin Account Repay Debt(TRADE)
+     * Notes:
+     * - The repay asset amount cannot exceed 50000 USD equivalent value for a single request.
+     * - If `amount` is not sent, all the asset loan will be repaid if having enough specific repay assets.
+     * - If `amount` is sent, only the certain amount of the asset loan will be repaid if having enough specific repay assets.
+     * - The system will use the same asset to repay the loan first (if have) no matter whether put the asset in `specifyRepayAssets`
+     *
+     * @summary Margin Account Repay Debt (TRADE)
      * @param {MarginAccountRepayDebtRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountRepayDebtResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Margin-Account-Repay-Debt Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#margin-account-repay-debt Binance API Documentation}
      */
     public async marginAccountRepayDebt(
         requestParameters: MarginAccountRepayDebtRequest
@@ -8602,14 +8893,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Margin Account Trade List
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - **Note:** * If `fromId` is set, returns orders with id >= `fromId`; otherwise returns recent order history.
+     * - The interval between `startTime` and `endTime` must be less than 24 hours.
      *
      * @summary Margin Account Trade List (USER_DATA)
      * @param {MarginAccountTradeListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginAccountTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Margin-Account-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#margin-account-trade-list Binance API Documentation}
      */
     public async marginAccountTradeList(
         requestParameters: MarginAccountTradeListRequest
@@ -8638,21 +8935,23 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Both `quantity` and `price` must be sent
-     * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-     * However the order will be cancelled by the amendment in the following situations:
-     * when the order is in partially filled status and the new `quantity` <= `executedQty`
-     * When the order is `GTX` and the new price will cause it to be executed immediately
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Modify CM Order(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     * - Both `quantity` and `price` must be sent
+     * - When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
+     * - However the order will be cancelled by the amendment in the following situations:
+     * - when the order is in partially filled status and the new `quantity`  * When the order is `GTX` and the new price will cause it to be executed immediately
+     *
+     * @summary Modify CM Order (TRADE)
      * @param {ModifyCmOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ModifyCmOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Modify-CM-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#modify-cm-order Binance API Documentation}
      */
     public async modifyCmOrder(
         requestParameters: ModifyCmOrderRequest
@@ -8682,21 +8981,23 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
-     * Either orderId or origClientOrderId must be sent, and the orderId will prevail if both are sent.
-     * Both quantity and price must be sent
-     * When the new quantity or price doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-     * However the order will be cancelled by the amendment in the following situations:
-     * when the order is in partially filled status and the new quantity <= executedQty
-     * When the order is GTX and the new price will cause it to be executed immediately
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Modify UM Order(TRADE)
+     * Notes:
+     * - Either orderId or origClientOrderId must be sent, and the orderId will prevail if both are sent.
+     * - Both quantity and price must be sent
+     * - When the new quantity or price doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
+     * - However the order will be cancelled by the amendment in the following situations:
+     * - when the order is in partially filled status and the new quantity  * When the order is GTX and the new price will cause it to be executed immediately
+     *
+     * @summary Modify UM Order (TRADE)
      * @param {ModifyUmOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ModifyUmOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Modify-UM-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#modify-um-order Binance API Documentation}
      */
     public async modifyUmOrder(
         requestParameters: ModifyUmOrderRequest
@@ -8726,39 +9027,29 @@ export class TradeApi implements TradeApiInterface {
     /**
      * New CM Conditional Order
      *
-     * Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     * `STOP`, `STOP_MARKET`:
-     * BUY: "MARK_PRICE"  >= `stopPrice`
-     * SELL: "MARK_PRICE" <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: "MARK_PRICE" <= `stopPrice`
-     * SELL: "MARK_PRICE" >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest mark price after order placed `<= `activationPrice`, and the latest mark price >`= the lowest mark price * (1 + `callbackRate`)
-     * SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
-     * For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest mark price.
-     * SELL: `activationPrice` should be larger than latest mark price.
-     * Condition orders will be triggered when:
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary New CM Conditional Order(TRADE)
+     * Notes:
+     * - Additional mandatory parameters based on type:
+     * - Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
+     * - Condition orders will be triggered when:
+     * - `STOP`, `STOP_MARKET`:
+     * - BUY: "MARK_PRICE" >= `stopPrice`
+     * - SELL: "MARK_PRICE" = `stopPrice`
+     * - `TRAILING_STOP_MARKET`:
+     * - BUY: the lowest mark price after order placed ``= the lowest mark price
+     * - (1 + `callbackRate`)
+     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+     *
+     * @summary New CM Conditional Order (TRADE)
      * @param {NewCmConditionalOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NewCmConditionalOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/New-CM-Conditional-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#new-cm-conditional-order Binance API Documentation}
      */
     public async newCmConditionalOrder(
         requestParameters: NewCmConditionalOrderRequest
@@ -8795,18 +9086,22 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Place new CM order
      *
-     * If `newOrderRespType` is sent as `RESULT` :
-     * `MARKET` order: the final FILLED result of the order will be return directly.
-     * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary New CM Order(TRADE)
+     * Notes:
+     * - Additional mandatory parameters based on `type`:
+     * - If `newOrderRespType` is sent as `RESULT` :
+     * - `MARKET` order: the final FILLED result of the order will be return directly.
+     * - `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     *
+     * @summary New CM Order (TRADE)
      * @param {NewCmOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NewCmOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/New-CM-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#new-cm-order Binance API Documentation}
      */
     public async newCmOrder(
         requestParameters: NewCmOrderRequest
@@ -8840,14 +9135,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * New Margin Order
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary New Margin Order(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary New Margin Order (TRADE)
      * @param {NewMarginOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NewMarginOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/New-Margin-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#new-margin-order Binance API Documentation}
      */
     public async newMarginOrder(
         requestParameters: NewMarginOrderRequest
@@ -8884,40 +9181,25 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Place new UM conditional order
      *
-     * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
+     * Weight(IP): 1
      *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `triggerPrice` , the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     * Security Type: TRADE
      *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-     *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activatePrice` should be smaller than latest price.
-     * SELL: `activatePrice` should be larger than latest price.
-     *
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     *
-     * Weight: 1
+     * Notes:
+     * - Algo order with type `STOP`, parameter `timeInForce` can be sent (default `GTC`).
+     * - Algo order with type `TAKE_PROFIT`, parameter `timeInForce` can be sent (default `GTC`).
+     * - Condition orders will be triggered when price reaches the `triggerPrice`.
+     * - `STOP`, `STOP_MARKET`: BUY: latest price >= `triggerPrice`; SELL: latest price <= `triggerPrice`.
+     * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`: BUY: latest price <= `triggerPrice`; SELL: latest price >= `triggerPrice`.
+     * - `TRAILING_STOP_MARKET`: BUY: lowest price after order placed <= `activatePrice`, and latest price >= lowest price * (1 + `callbackRate`); SELL: highest price after order placed >= `activatePrice`, and latest price <= highest price * (1 - `callbackRate`).
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
      *
      * @summary New UM Algo Order (TRADE)
      * @param {NewUmAlgoOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NewUmAlgoOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/New-UM-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#new-um-algo-order Binance API Documentation}
      */
     public async newUmAlgoOrder(
         requestParameters: NewUmAlgoOrderRequest
@@ -8959,41 +9241,31 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Place new UM conditional order
      *
-     * Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     * `STOP`, `STOP_MARKET`:
-     * BUY: "MARK_PRICE"  >= `stopPrice`
-     * SELL: "MARK_PRICE" <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: "MARK_PRICE" <= `stopPrice`
-     * SELL: "MARK_PRICE" >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest mark price after order placed `<= `activationPrice`, and the latest mark price >`= the lowest mark price * (1 + `callbackRate`)
-     * SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
-     * For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest mark price.
-     * SELL: `activationPrice` should be larger than latest mark price.
-     * Condition orders will be triggered when:
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary New UM Conditional Order
+     * Notes:
+     * - Additional mandatory parameters based on type:
+     * - Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
+     * - Condition orders will be triggered when:
+     * - `STOP`, `STOP_MARKET`:
+     * - BUY: "MARK_PRICE" >= `stopPrice`
+     * - SELL: "MARK_PRICE" = `stopPrice`
+     * - `TRAILING_STOP_MARKET`:
+     * - BUY: the lowest mark price after order placed ``= the lowest mark price
+     * - (1 + `callbackRate`)
+     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * - In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     *
+     * @summary New UM Conditional Order (TRADE)
      * @param {NewUmConditionalOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NewUmConditionalOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/New-UM-Conditional-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#new-um-conditional-order Binance API Documentation}
      */
     public async newUmConditionalOrder(
         requestParameters: NewUmConditionalOrderRequest
@@ -9033,20 +9305,24 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Place new UM order
      *
-     * If `newOrderRespType` is sent as `RESULT` :
-     * `MARKET` order: the final FILLED result of the order will be return directly.
-     * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Additional mandatory parameters based on type:
+     * - If `newOrderRespType` is sent as `RESULT` :
+     * - `MARKET` order: the final FILLED result of the order will be return directly.
+     * - `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * - In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
      *
      * @summary New UM Order (TRADE)
      * @param {NewUmOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NewUmOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/New-UM-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#new-um-order Binance API Documentation}
      */
     public async newUmOrder(
         requestParameters: NewUmOrderRequest
@@ -9082,20 +9358,23 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query All CM Conditional Orders
      *
-     * These orders will not be found:
-     * order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 7 days < current time
-     * The query time period must be less than 7 days( default as the recent 7 days).
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Security Type: USER_DATA
      *
-     * @summary Query All CM Conditional Orders(USER_DATA)
+     * Notes:
+     * - These orders will not be found:
+     * - order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 7 days  * The query time period must be less than 7 days( default as the recent 7 days).
+     *
+     * @summary Query All CM Conditional Orders (USER_DATA)
      * @param {QueryAllCmConditionalOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllCmConditionalOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-CM-Conditional-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-cm-conditional-orders Binance API Documentation}
      */
     public async queryAllCmConditionalOrders(
         requestParameters: QueryAllCmConditionalOrdersRequest = {}
@@ -9123,24 +9402,28 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get all account CM orders; active, canceled, or filled.
      *
-     * Either `symbol` or `pair` must be sent.
-     * If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 3 days < current time
+     * Weight: - 20 with `symbol`
+     * - 40 with `pair`
      *
-     * Weight: 20 with symbol, 40 with pair
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `symbol` or `pair` must be sent.
+     * - If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 3 days < current time
      *
      * @summary Query All CM Orders (USER_DATA)
      * @param {QueryAllCmOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllCmOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-CM-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-cm-orders Binance API Documentation}
      */
     public async queryAllCmOrders(
-        requestParameters: QueryAllCmOrdersRequest
+        requestParameters: QueryAllCmOrdersRequest = {}
     ): Promise<RestApiResponse<QueryAllCmOrdersResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.queryAllCmOrders(
             requestParameters?.symbol,
@@ -9166,16 +9449,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get all open conditional orders on a symbol. **Careful** when accessing this with no symbol.
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
      * @summary Query All Current CM Open Conditional Orders (USER_DATA)
      * @param {QueryAllCurrentCmOpenConditionalOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllCurrentCmOpenConditionalOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-Current-CM-Open-Conditional-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-current-cm-open-conditional-orders Binance API Documentation}
      */
     public async queryAllCurrentCmOpenConditionalOrders(
         requestParameters: QueryAllCurrentCmOpenConditionalOrdersRequest = {}
@@ -9202,15 +9489,17 @@ export class TradeApi implements TradeApiInterface {
      *
      * If the symbol is not sent, orders for all symbols will be returned in an array.
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * @summary Query All Current CM Open Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query All Current CM Open Orders (USER_DATA)
      * @param {QueryAllCurrentCmOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllCurrentCmOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-Current-CM-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-current-cm-open-orders Binance API Documentation}
      */
     public async queryAllCurrentCmOpenOrders(
         requestParameters: QueryAllCurrentCmOpenOrdersRequest = {}
@@ -9233,19 +9522,21 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Get all UM open algo orders on a symbol.
+     * Get all UM open algo orders on a symbol. If the symbol is not sent, orders for all symbols will be returned.
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Weight(IP): 1
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Weight: 1 for a single symbol; 40 when the symbol parameter is omitted.
      *
      * @summary Query All Current UM Open Algo Orders (USER_DATA)
      * @param {QueryAllCurrentUmOpenAlgoOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllCurrentUmOpenAlgoOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-Current-UM-Open-Algo-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-current-um-open-algo-orders Binance API Documentation}
      */
     public async queryAllCurrentUmOpenAlgoOrders(
         requestParameters: QueryAllCurrentUmOpenAlgoOrdersRequest = {}
@@ -9272,17 +9563,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get all open conditional orders on a symbol.
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     * Security Type: USER_DATA
      *
-     * @summary Query All Current UM Open Conditional Orders
+     * Notes:
+     * - If `symbol` is not provided, conditional open orders for all symbols are returned.
+     *
+     * @summary Query All Current UM Open Conditional Orders (USER_DATA)
      * @param {QueryAllCurrentUmOpenConditionalOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllCurrentUmOpenConditionalOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-Current-UM-Open-Conditional-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-current-um-open-conditional-orders Binance API Documentation}
      */
     public async queryAllCurrentUmOpenConditionalOrders(
         requestParameters: QueryAllCurrentUmOpenConditionalOrdersRequest = {}
@@ -9307,17 +9601,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get all open orders on a symbol.
      *
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Security Type: USER_DATA
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Notes:
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
-     * @summary Query All Current UM Open Orders(USER_DATA)
+     * @summary Query All Current UM Open Orders (USER_DATA)
      * @param {QueryAllCurrentUmOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllCurrentUmOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-Current-UM-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-current-um-open-orders Binance API Documentation}
      */
     public async queryAllCurrentUmOpenOrders(
         requestParameters: QueryAllCurrentUmOpenOrdersRequest = {}
@@ -9341,14 +9638,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query All Margin Account Orders
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `orderId` is set, returns orders with id >= `orderId`; otherwise returns recent order history.
+     * - For some historical orders, `cummulativeQuoteQty < 0` means the data is unavailable at this time.
      *
      * @summary Query All Margin Account Orders (USER_DATA)
      * @param {QueryAllMarginAccountOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllMarginAccountOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-Margin-Account-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-margin-account-orders Binance API Documentation}
      */
     public async queryAllMarginAccountOrders(
         requestParameters: QueryAllMarginAccountOrdersRequest
@@ -9376,20 +9679,23 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query All UM Conditional Orders
      *
-     * These orders will not be found:
-     * order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 7 days < current time
-     * The query time period must be less than 7 days( default as the recent 7 days).
+     * Weight: - 1 for a single `symbol`
+     * - 40 when `symbol` is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Security Type: USER_DATA
      *
-     * @summary Query All UM Conditional Orders
+     * Notes:
+     * - These orders will not be found:
+     * - order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 7 days  * The query time period must be less than 7 days( default as the recent 7 days).
+     *
+     * @summary Query All UM Conditional Orders (USER_DATA)
      * @param {QueryAllUmConditionalOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllUmConditionalOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-UM-Conditional-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-um-conditional-orders Binance API Documentation}
      */
     public async queryAllUmConditionalOrders(
         requestParameters: QueryAllUmConditionalOrdersRequest = {}
@@ -9416,22 +9722,21 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Get all account UM orders; active, canceled, or filled.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 3 days < current time
      *
-     * If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
-     * The query time period must be less then 7 days( default as the recent 7 days).
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
      *
-     * @summary Query All UM Orders(USER_DATA)
+     * Notes:
+     * - If `orderId` is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
+     * - The query time period must be less then 7 days( default as the recent 7 days).
+     *
+     * @summary Query All UM Orders (USER_DATA)
      * @param {QueryAllUmOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryAllUmOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-All-UM-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-um-orders Binance API Documentation}
      */
     public async queryAllUmOrders(
         requestParameters: QueryAllUmOrdersRequest
@@ -9459,22 +9764,24 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query CM Conditional Order History
      *
+     * Weight(IP): 1
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
-     * `NEW` orders will not be found.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 7 days < current time
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     * - `NEW` orders will not be found.
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 7 days < current time
      *
-     * @summary Query CM Conditional Order History(USER_DATA)
+     * @summary Query CM Conditional Order History (USER_DATA)
      * @param {QueryCmConditionalOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCmConditionalOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-CM-Conditional-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-cm-conditional-order-history Binance API Documentation}
      */
     public async queryCmConditionalOrderHistory(
         requestParameters: QueryCmConditionalOrderHistoryRequest
@@ -9501,16 +9808,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get order modification history
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Query CM Modify Order History(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     *
+     * @summary Query CM Modify Order History (TRADE)
      * @param {QueryCmModifyOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCmModifyOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-CM-Modify-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-cm-modify-order-history Binance API Documentation}
      */
     public async queryCmModifyOrderHistory(
         requestParameters: QueryCmModifyOrderHistoryRequest
@@ -9539,20 +9849,23 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Check an CM order's status.
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 3 days < current time
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query CM Order(USER_DATA)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 3 days < current time
+     *
+     * @summary Query CM Order (USER_DATA)
      * @param {QueryCmOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCmOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-CM-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-cm-order Binance API Documentation}
      */
     public async queryCmOrder(
         requestParameters: QueryCmOrderRequest
@@ -9578,17 +9891,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Current CM Open Conditional Order
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
-     * If the queried order has been triggered, cancelled or expired, the error message "Order does not exist" will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Current CM Open Conditional Order(USER_DATA)
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     * - If the queried order has been triggered, cancelled or expired, the error message "Order does not exist" will be returned.
+     *
+     * @summary Query Current CM Open Conditional Order (USER_DATA)
      * @param {QueryCurrentCmOpenConditionalOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentCmOpenConditionalOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Current-CM-Open-Conditional-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-current-cm-open-conditional-order Binance API Documentation}
      */
     public async queryCurrentCmOpenConditionalOrder(
         requestParameters: QueryCurrentCmOpenConditionalOrderRequest
@@ -9615,17 +9931,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query current CM open order
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
      *
      * @summary Query Current CM Open Order (USER_DATA)
      * @param {QueryCurrentCmOpenOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentCmOpenOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Current-CM-Open-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-current-cm-open-order Binance API Documentation}
      */
     public async queryCurrentCmOpenOrder(
         requestParameters: QueryCurrentCmOpenOrderRequest
@@ -9651,14 +9970,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Current Margin Open Order
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `symbol` is not sent, order records for all symbols are returned.
+     * - When returning all symbols, the request count charged to the rate limiter equals the number of symbols currently trading on the exchange.
      *
      * @summary Query Current Margin Open Order (USER_DATA)
      * @param {QueryCurrentMarginOpenOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentMarginOpenOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Current-Margin-Open-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-current-margin-open-order Binance API Documentation}
      */
     public async queryCurrentMarginOpenOrder(
         requestParameters: QueryCurrentMarginOpenOrderRequest
@@ -9680,23 +10005,21 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Check an UM algo order's status.
+     * Check an UM algo order's status. Orders will not be found if: status is CANCELED/EXPIRED with no fills and created 3+ days ago; or created 90+ days ago.
      *
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
-     * order create time + 90 days < current time
+     * Weight(IP): 1
      *
-     * Either `algoId` or `clientAlgoId` must be sent.
-     * `algoId` is self-increment for each specific `symbol`
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent. `algoId` is self-increment for each specific `symbol`.
      *
      * @summary Query Current UM Open Algo Order (USER_DATA)
      * @param {QueryCurrentUmOpenAlgoOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentUmOpenAlgoOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Current-UM-Open-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-current-um-open-algo-order Binance API Documentation}
      */
     public async queryCurrentUmOpenAlgoOrder(
         requestParameters: QueryCurrentUmOpenAlgoOrderRequest = {}
@@ -9721,17 +10044,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Current UM Open Conditional Order
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
-     * If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query Current UM Open Conditional Order
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     * - If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
+     *
+     * @summary Query Current UM Open Conditional Order (USER_DATA)
      * @param {QueryCurrentUmOpenConditionalOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentUmOpenConditionalOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Current-UM-Open-Conditional-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-current-um-open-conditional-order Binance API Documentation}
      */
     public async queryCurrentUmOpenConditionalOrder(
         requestParameters: QueryCurrentUmOpenConditionalOrderRequest
@@ -9758,18 +10084,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query current UM open order
      *
+     * Weight(IP): 1
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
      *
-     * @summary Query Current UM Open Order(USER_DATA)
+     * @summary Query Current UM Open Order (USER_DATA)
      * @param {QueryCurrentUmOpenOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryCurrentUmOpenOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Current-UM-Open-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-current-um-open-order Binance API Documentation}
      */
     public async queryCurrentUmOpenOrder(
         requestParameters: QueryCurrentUmOpenOrderRequest
@@ -9795,14 +10123,20 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Margin Account Order
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - For some historical orders, `cummulativeQuoteQty < 0` means the data is unavailable at this time.
      *
      * @summary Query Margin Account Order (USER_DATA)
      * @param {QueryMarginAccountOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Margin-Account-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-margin-account-order Binance API Documentation}
      */
     public async queryMarginAccountOrder(
         requestParameters: QueryMarginAccountOrderRequest
@@ -9828,14 +10162,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query all OCO for a specific margin account based on provided optional parameters
      *
-     * Weight: 100
+     * Weight(IP): 100
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s all OCO (USER_DATA)
      * @param {QueryMarginAccountsAllOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsAllOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Margin-Account-all-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-margin-accounts-all-oco Binance API Documentation}
      */
     public async queryMarginAccountsAllOco(
         requestParameters: QueryMarginAccountsAllOcoRequest = {}
@@ -9862,14 +10198,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Retrieves a specific OCO based on provided optional parameters
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s OCO (USER_DATA)
      * @param {QueryMarginAccountsOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Margin-Account-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-margin-accounts-oco Binance API Documentation}
      */
     public async queryMarginAccountsOco(
         requestParameters: QueryMarginAccountsOcoRequest = {}
@@ -9894,14 +10232,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query Margin Account's Open OCO
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query Margin Account\'s Open OCO (USER_DATA)
      * @param {QueryMarginAccountsOpenOcoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOpenOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Margin-Account-Open-OCO Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-margin-accounts-open-oco Binance API Documentation}
      */
     public async queryMarginAccountsOpenOco(
         requestParameters: QueryMarginAccountsOpenOcoRequest = {}
@@ -9922,19 +10262,22 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Get all algo orders; ACTIVE, CANCELED, TRIGGERED or FINISHED .
+     * Get all algo orders: ACTIVE, CANCELED, TRIGGERED or FINISHED.
      *
-     * If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
-     * The query time period must be less then 7 days( default as the recent 7 days).
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
+     * - The query time period must be less than 7 days (default as the recent 7 days).
      *
      * @summary Query UM Algo Order History (USER_DATA)
      * @param {QueryUmAlgoOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUmAlgoOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-UM-Algo-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-um-algo-order-history Binance API Documentation}
      */
     public async queryUmAlgoOrderHistory(
         requestParameters: QueryUmAlgoOrderHistoryRequest
@@ -9962,21 +10305,24 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query UM Conditional Order History
      *
-     * Either `strategyId` or `newClientStrategyId` must be sent.
-     * `NEW` orders will not be found.
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 7 days < current time
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Query UM Conditional Order History
+     * Notes:
+     * - Either `strategyId` or `newClientStrategyId` must be sent.
+     * - `NEW` orders will not be found.
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 7 days < current time
+     *
+     * @summary Query UM Conditional Order History (USER_DATA)
      * @param {QueryUmConditionalOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUmConditionalOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-UM-Conditional-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-um-conditional-order-history Binance API Documentation}
      */
     public async queryUmConditionalOrderHistory(
         requestParameters: QueryUmConditionalOrderHistoryRequest
@@ -10003,16 +10349,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get order modification history
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Query UM Modify Order History(TRADE)
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     *
+     * @summary Query UM Modify Order History (TRADE)
      * @param {QueryUmModifyOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUmModifyOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-UM-Modify-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-um-modify-order-history Binance API Documentation}
      */
     public async queryUmModifyOrderHistory(
         requestParameters: QueryUmModifyOrderHistoryRequest
@@ -10041,20 +10390,23 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Check an UM order's status.
      *
-     * These orders will not be found:
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * order status is `CANCELED` or `EXPIRED`, **AND**
-     * order has NO filled trade, **AND**
-     * created time + 3 days < current time
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - These orders will not be found:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - order status is `CANCELED` or `EXPIRED`, **AND**
+     * - order has NO filled trade, **AND**
+     * - created time + 3 days < current time
      *
      * @summary Query UM Order (USER_DATA)
      * @param {QueryUmOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUmOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-UM-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-um-order Binance API Documentation}
      */
     public async queryUmOrder(
         requestParameters: QueryUmOrderRequest
@@ -10080,18 +10432,21 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query User's CM Force Orders
      *
-     * If "autoCloseType" is not sent, orders with both of the types will be returned
-     * If "startTime" is not sent, data within 7 days before "endTime" can be queried
-     * Only support querying data in the past 90 days
+     * Weight: - 20 with `symbol`
+     * - 50 without `symbol`
      *
-     * Weight: 20 with symbol, 50 without symbol
+     * Security Type: USER_DATA
      *
-     * @summary Query User\'s CM Force Orders(USER_DATA)
+     * Notes:
+     * - If "autoCloseType" is not sent, orders with both of the types will be returned
+     * - If "startTime" is not sent, data within 7 days before "endTime" can be queried
+     *
+     * @summary Query User\'s CM Force Orders (USER_DATA)
      * @param {QueryUsersCmForceOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUsersCmForceOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Users-CM-Force-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-users-cm-force-orders Binance API Documentation}
      */
     public async queryUsersCmForceOrders(
         requestParameters: QueryUsersCmForceOrdersRequest = {}
@@ -10119,14 +10474,16 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query user's margin force orders
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Query User\'s Margin Force Orders(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Query User\'s Margin Force Orders (USER_DATA)
      * @param {QueryUsersMarginForceOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUsersMarginForceOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Users-Margin-Force-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-users-margin-force-orders Binance API Documentation}
      */
     public async queryUsersMarginForceOrders(
         requestParameters: QueryUsersMarginForceOrdersRequest = {}
@@ -10153,18 +10510,21 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query User's UM Force Orders
      *
-     * If `autoCloseType` is not sent, orders with both of the types will be returned
-     * If `startTime` is not sent, data within 7 days before `endTime` can be queried
-     * Only support querying data in the past 90 days
+     * Weight: - 20 with `symbol`
+     * - 50 without `symbol`
      *
-     * Weight: 20 with symbol, 50 without symbol
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `autoCloseType` is not sent, orders with both of the types will be returned
+     * - If `startTime` is not sent, data within 7 days before `endTime` can be queried
      *
      * @summary Query User\'s UM Force Orders (USER_DATA)
      * @param {QueryUsersUmForceOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUsersUmForceOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Query-Users-UM-Force-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-users-um-force-orders Binance API Documentation}
      */
     public async queryUsersUmForceOrders(
         requestParameters: QueryUsersUmForceOrdersRequest = {}
@@ -10192,17 +10552,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Change user's BNB Fee Discount for UM Futures (Fee Discount On or Fee Discount Off ) on ***EVERY symbol***
      *
+     * Weight(IP): 1
      *
-     * The BNB would not be collected from UM-PM account to the Portfolio Margin account.
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - The BNB would not be collected from UM-PM account to the Portfolio Margin account.
      *
      * @summary Toggle BNB Burn On UM Futures Trade (TRADE)
      * @param {ToggleBnbBurnOnUmFuturesTradeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ToggleBnbBurnOnUmFuturesTradeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/Toggle-BNB-Burn-On-UM-Futures-Trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#toggle-bnb-burn-on-um-futures-trade Binance API Documentation}
      */
     public async toggleBnbBurnOnUmFuturesTrade(
         requestParameters: ToggleBnbBurnOnUmFuturesTradeRequest
@@ -10227,19 +10589,21 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get trades for a specific account and UM symbol.
      *
+     * Weight(IP): 5
      *
-     * If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
-     * The time between `startTime` and `endTime` cannot be longer than 7 days.
-     * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
+     * Security Type: USER_DATA
      *
-     * Weight: 5
+     * Notes:
+     * - If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
+     * - The time between `startTime` and `endTime` cannot be longer than 7 days.
+     * - The parameter `fromId` cannot be sent with `startTime` or `endTime`.
      *
-     * @summary UM Account Trade List(USER_DATA)
+     * @summary UM Account Trade List (USER_DATA)
      * @param {UmAccountTradeListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UmAccountTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/UM-Account-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#um-account-trade-list Binance API Documentation}
      */
     public async umAccountTradeList(
         requestParameters: UmAccountTradeListRequest
@@ -10274,14 +10638,16 @@ export class TradeApi implements TradeApiInterface {
      * "HEDGE" as a sign will be returned instead of "BOTH";
      * A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary UM Position ADL Quantile Estimation(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary UM Position ADL Quantile Estimation (USER_DATA)
      * @param {UmPositionAdlQuantileEstimationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UmPositionAdlQuantileEstimationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/trade/UM-Position-ADL-Quantile-Estimation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#um-position-adl-quantile-estimation Binance API Documentation}
      */
     public async umPositionAdlQuantileEstimation(
         requestParameters: UmPositionAdlQuantileEstimationRequest = {}
@@ -10332,7 +10698,6 @@ export enum ModifyCmOrderSideEnum {
 }
 
 export enum ModifyCmOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -10349,7 +10714,6 @@ export enum ModifyUmOrderSideEnum {
 }
 
 export enum ModifyUmOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -10368,7 +10732,6 @@ export enum NewCmConditionalOrderSideEnum {
 export enum NewCmConditionalOrderStrategyTypeEnum {
     STOP = 'STOP',
     STOP_MARKET = 'STOP_MARKET',
-    LIMIT_MAKER = 'LIMIT_MAKER',
     TAKE_PROFIT = 'TAKE_PROFIT',
     TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET',
     TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET',
@@ -10389,6 +10752,12 @@ export enum NewCmConditionalOrderTimeInForceEnum {
 
 export enum NewCmConditionalOrderWorkingTypeEnum {
     MARK_PRICE = 'MARK_PRICE',
+    CONTRACT_PRICE = 'CONTRACT_PRICE',
+}
+
+export enum NewCmConditionalOrderPriceProtectEnum {
+    TRUE = 'true',
+    FALSE = 'false',
 }
 
 export enum NewCmOrderSideEnum {
@@ -10414,8 +10783,12 @@ export enum NewCmOrderTimeInForceEnum {
     GTX = 'GTX',
 }
 
+export enum NewCmOrderReduceOnlyEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
 export enum NewCmOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -10439,24 +10812,30 @@ export enum NewMarginOrderSideEnum {
 export enum NewMarginOrderTypeEnum {
     LIMIT = 'LIMIT',
     MARKET = 'MARKET',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
 }
 
 export enum NewMarginOrderNewOrderRespTypeEnum {
     ACK = 'ACK',
     RESULT = 'RESULT',
+    FULL = 'FULL',
 }
 
 export enum NewMarginOrderSideEffectTypeEnum {
     NO_SIDE_EFFECT = 'NO_SIDE_EFFECT',
     MARGIN_BUY = 'MARGIN_BUY',
     AUTO_REPAY = 'AUTO_REPAY',
+    AUTO_BORROW_REPAY = 'AUTO_BORROW_REPAY',
 }
 
 export enum NewMarginOrderTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
-    GTX = 'GTX',
 }
 
 export enum NewMarginOrderSelfTradePreventionModeEnum {
@@ -10466,14 +10845,21 @@ export enum NewMarginOrderSelfTradePreventionModeEnum {
     EXPIRE_MAKER = 'EXPIRE_MAKER',
 }
 
+export enum NewUmAlgoOrderAlgoTypeEnum {
+    CONDITIONAL = 'CONDITIONAL',
+}
+
 export enum NewUmAlgoOrderSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
 }
 
 export enum NewUmAlgoOrderTypeEnum {
-    LIMIT = 'LIMIT',
-    MARKET = 'MARKET',
+    STOP = 'STOP',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    STOP_MARKET = 'STOP_MARKET',
+    TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET',
+    TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET',
 }
 
 export enum NewUmAlgoOrderPositionSideEnum {
@@ -10483,18 +10869,19 @@ export enum NewUmAlgoOrderPositionSideEnum {
 }
 
 export enum NewUmAlgoOrderTimeInForceEnum {
-    GTC = 'GTC',
     IOC = 'IOC',
+    GTC = 'GTC',
     FOK = 'FOK',
     GTX = 'GTX',
+    GTD = 'GTD',
 }
 
 export enum NewUmAlgoOrderWorkingTypeEnum {
     MARK_PRICE = 'MARK_PRICE',
+    CONTRACT_PRICE = 'CONTRACT_PRICE',
 }
 
 export enum NewUmAlgoOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -10505,6 +10892,16 @@ export enum NewUmAlgoOrderPriceMatchEnum {
     QUEUE_20 = 'QUEUE_20',
 }
 
+export enum NewUmAlgoOrderPriceProtectEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum NewUmAlgoOrderReduceOnlyEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
 export enum NewUmAlgoOrderNewOrderRespTypeEnum {
     ACK = 'ACK',
     RESULT = 'RESULT',
@@ -10513,8 +10910,8 @@ export enum NewUmAlgoOrderNewOrderRespTypeEnum {
 export enum NewUmAlgoOrderSelfTradePreventionModeEnum {
     NONE = 'NONE',
     EXPIRE_TAKER = 'EXPIRE_TAKER',
-    EXPIRE_BOTH = 'EXPIRE_BOTH',
     EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
 }
 
 export enum NewUmConditionalOrderSideEnum {
@@ -10525,7 +10922,6 @@ export enum NewUmConditionalOrderSideEnum {
 export enum NewUmConditionalOrderStrategyTypeEnum {
     STOP = 'STOP',
     STOP_MARKET = 'STOP_MARKET',
-    LIMIT_MAKER = 'LIMIT_MAKER',
     TAKE_PROFIT = 'TAKE_PROFIT',
     TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET',
     TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET',
@@ -10542,14 +10938,25 @@ export enum NewUmConditionalOrderTimeInForceEnum {
     IOC = 'IOC',
     FOK = 'FOK',
     GTX = 'GTX',
+    GTD = 'GTD',
+}
+
+export enum NewUmConditionalOrderReduceOnlyEnum {
+    TRUE = 'true',
+    FALSE = 'false',
 }
 
 export enum NewUmConditionalOrderWorkingTypeEnum {
     MARK_PRICE = 'MARK_PRICE',
+    CONTRACT_PRICE = 'CONTRACT_PRICE',
+}
+
+export enum NewUmConditionalOrderPriceProtectEnum {
+    TRUE = 'true',
+    FALSE = 'false',
 }
 
 export enum NewUmConditionalOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -10588,6 +10995,12 @@ export enum NewUmOrderTimeInForceEnum {
     IOC = 'IOC',
     FOK = 'FOK',
     GTX = 'GTX',
+    GTD = 'GTD',
+}
+
+export enum NewUmOrderReduceOnlyEnum {
+    TRUE = 'true',
+    FALSE = 'false',
 }
 
 export enum NewUmOrderNewOrderRespTypeEnum {
@@ -10596,7 +11009,6 @@ export enum NewUmOrderNewOrderRespTypeEnum {
 }
 
 export enum NewUmOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -10622,4 +11034,9 @@ export enum QueryUsersCmForceOrdersAutoCloseTypeEnum {
 export enum QueryUsersUmForceOrdersAutoCloseTypeEnum {
     LIQUIDATION = 'LIQUIDATION',
     ADL = 'ADL',
+}
+
+export enum ToggleBnbBurnOnUmFuturesTradeFeeBurnEnum {
+    TRUE = 'true',
+    FALSE = 'false',
 }

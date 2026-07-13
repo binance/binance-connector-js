@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,85 +20,85 @@
  */
 export interface MarginAccountNewOcoResponseOrderReportsInner {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     symbol?: string;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Order List ID.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     orderListId?: number | bigint;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Transact Time.
      * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     transactTime?: number | bigint;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     price?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     origQty?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     executedQty?: string;
     /**
-     *
+     * Cummulative Quote Qty.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     status?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     type?: string;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
     side?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */

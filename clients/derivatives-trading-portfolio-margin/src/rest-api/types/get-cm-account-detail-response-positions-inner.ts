@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,73 +20,73 @@
  */
 export interface GetCmAccountDetailResponsePositionsInner {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     symbol?: string;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     positionAmt?: string;
     /**
-     *
+     * total intial margin required with the latest mark price
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     initialMargin?: string;
     /**
-     *
+     * maintenance margin
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     maintMargin?: string;
     /**
-     *
+     * unrealized profit
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * positions margin required with the latest mark price
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * open orders intial margin required with the latest mark price
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * current initial leverage
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     leverage?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     positionSide?: string;
     /**
-     *
+     * average entry price
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     entryPrice?: string;
     /**
-     *
+     * maximum quantity of base asset
      * @type {string}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
     maxQty?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */

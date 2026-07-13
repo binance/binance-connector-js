@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function queryMarginLoanRecord() {
     try {
         const response = await client.restAPI.queryMarginLoanRecord({
-            asset: 'asset_example',
+            asset: 'USDT',
         });
 
         const rateLimits = response.rateLimits!;

@@ -14,7 +14,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function newCmConditionalOrder() {
     try {
         const response = await client.restAPI.newCmConditionalOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             side: DerivativesTradingPortfolioMarginRestAPI.NewCmConditionalOrderSideEnum.BUY,
             strategyType:
                 DerivativesTradingPortfolioMarginRestAPI.NewCmConditionalOrderStrategyTypeEnum.STOP,

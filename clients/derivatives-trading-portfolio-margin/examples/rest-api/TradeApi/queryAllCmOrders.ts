@@ -12,9 +12,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 
 async function queryAllCmOrders() {
     try {
-        const response = await client.restAPI.queryAllCmOrders({
-            symbol: 'symbol_example',
-        });
+        const response = await client.restAPI.queryAllCmOrders();
 
         const rateLimits = response.rateLimits!;
         console.log('queryAllCmOrders() rate limits:', rateLimits);

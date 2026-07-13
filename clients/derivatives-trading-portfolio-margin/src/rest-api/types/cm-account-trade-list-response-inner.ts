@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,97 +20,97 @@
  */
 export interface CmAccountTradeListResponseInner {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     symbol?: string;
     /**
-     *
+     * ID.
      * @type {number | bigint}
      * @memberof CmAccountTradeListResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof CmAccountTradeListResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Pair.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     pair?: string;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     side?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     price?: string;
     /**
-     *
+     * Qty.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     qty?: string;
     /**
-     *
+     * Realized Pnl.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     realizedPnl?: string;
     /**
-     *
+     * Margin Asset.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     marginAsset?: string;
     /**
-     *
+     * Base Qty.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     baseQty?: string;
     /**
-     *
+     * Commission.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     commission?: string;
     /**
-     *
+     * Commission Asset.
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     commissionAsset?: string;
     /**
-     *
+     * Event time.
      * @type {number | bigint}
      * @memberof CmAccountTradeListResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof CmAccountTradeListResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Buyer.
      * @type {boolean}
      * @memberof CmAccountTradeListResponseInner
      */
     buyer?: boolean;
     /**
-     *
+     * Maker.
      * @type {boolean}
      * @memberof CmAccountTradeListResponseInner
      */

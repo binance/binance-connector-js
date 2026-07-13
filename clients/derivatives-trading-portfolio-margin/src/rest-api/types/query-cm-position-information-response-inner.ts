@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,67 +20,67 @@
  */
 export interface QueryCmPositionInformationResponseInner {
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     symbol?: string;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     positionAmt?: string;
     /**
-     *
+     * average entry price
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     entryPrice?: string;
     /**
-     *
+     * Mark Price.
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     markPrice?: string;
     /**
-     *
+     * Un Realized Profit.
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     unRealizedProfit?: string;
     /**
-     *
+     * Liquidation Price.
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     liquidationPrice?: string;
     /**
-     *
+     * current initial leverage
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     leverage?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof QueryCmPositionInformationResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * maximum quantity of base asset
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */
     maxQty?: string;
     /**
-     *
+     * Notional Value.
      * @type {string}
      * @memberof QueryCmPositionInformationResponseInner
      */

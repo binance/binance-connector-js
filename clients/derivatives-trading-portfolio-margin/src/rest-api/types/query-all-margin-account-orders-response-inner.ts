@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,121 +20,121 @@
  */
 export interface QueryAllMarginAccountOrdersResponseInner {
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Cummulative Quote Qty.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     cummulativeQuoteQty?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Iceberg Qty.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     icebergQty?: string;
     /**
-     *
+     * Is Working.
      * @type {boolean}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     isWorking?: boolean;
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Event time.
      * @type {number | bigint}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Account ID.
      * @type {number | bigint}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     accountId?: number | bigint;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * Prevented Match ID.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */
     preventedMatchId?: string;
     /**
-     *
+     * Prevented Quantity.
      * @type {string}
      * @memberof QueryAllMarginAccountOrdersResponseInner
      */

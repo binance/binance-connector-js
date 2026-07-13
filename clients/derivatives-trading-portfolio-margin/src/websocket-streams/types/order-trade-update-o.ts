@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Portfolio Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,175 +20,175 @@
  */
 export interface OrderTradeUpdateO {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     s?: string;
     /**
-     *
+     * Client Order Id
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     c?: string;
     /**
-     *
+     * Side
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     S?: string;
     /**
-     *
+     * Order Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     o?: string;
     /**
-     *
+     * Time in Force
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     f?: string;
     /**
-     *
+     * Original Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     q?: string;
     /**
-     *
+     * Original Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     p?: string;
     /**
-     *
+     * Average Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     ap?: string;
     /**
-     *
+     * Ignore
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     sp?: string;
     /**
-     *
+     * Execution Type
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     x?: string;
     /**
-     *
+     * Order Status
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     X?: string;
     /**
-     *
+     * Order Id
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     i?: number | bigint;
     /**
-     *
+     * Order Last Filled Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     l?: string;
     /**
-     *
+     * Order Filled Accumulated Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     z?: string;
     /**
-     *
+     * Last Filled Price
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     L?: string;
     /**
-     *
+     * Commission Asset, will not push if no commission
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     N?: string;
     /**
-     *
+     * Commission, will not push if no commission
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     n?: string;
     /**
-     *
+     * Order Trade Time
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     T?: number | bigint;
     /**
-     *
+     * Trade Id
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     t?: number | bigint;
     /**
-     *
+     * Bids Notional
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     b?: string;
     /**
-     *
+     * Ask Notional
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     a?: string;
     /**
-     *
+     * Is this trade the maker side?
      * @type {boolean}
      * @memberof OrderTradeUpdateO
      */
     m?: boolean;
     /**
-     *
+     * Is this reduce only
      * @type {boolean}
      * @memberof OrderTradeUpdateO
      */
     R?: boolean;
     /**
-     *
+     * Position Side
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     ps?: string;
     /**
-     *
+     * Realized Profit of the trade
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     rp?: string;
     /**
-     *
+     * Strategy type, only pushed with conditional order triggered
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     st?: string;
     /**
-     *
+     * StrategyId, only pushed with conditional order triggered
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
     si?: number | bigint;
     /**
-     *
+     * STP mode
      * @type {string}
      * @memberof OrderTradeUpdateO
      */
     V?: string;
     /**
-     *
+     * TIF GTD order auto cancel time
      * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */

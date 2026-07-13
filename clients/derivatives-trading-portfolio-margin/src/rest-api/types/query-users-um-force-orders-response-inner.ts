@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,103 +20,103 @@
  */
 export interface QueryUsersUmForceOrdersResponseInner {
     /**
-     *
+     * Normal orderID after trigger if appliable, only have when the strategy is triggered
      * @type {number | bigint}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * Client Order ID.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Cum Quote.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     cumQuote?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Normal order type after trigger if appliable
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * Event time.
      * @type {number | bigint}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */

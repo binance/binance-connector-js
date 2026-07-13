@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,37 +20,37 @@
  */
 export interface UmNotionalAndLeverageBracketsResponseInnerBracketsInner {
     /**
-     *
+     * Notional bracket
      * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
     bracket?: number | bigint;
     /**
-     *
+     * Max initial leverage for this bracket
      * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
     initialLeverage?: number | bigint;
     /**
-     *
+     * Cap notional of this bracket
      * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
     notionalCap?: number | bigint;
     /**
-     *
+     * Notional threshold of this bracket
      * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
     notionalFloor?: number | bigint;
     /**
-     *
+     * Maintenance ratio for this bracket
      * @type {number}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
     maintMarginRatio?: number;
     /**
-     *
+     * Auxiliary number for quick calculation
      * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -28,7 +27,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Test connectivity to the Rest API.
          *
-         * Weight: 1
+         * Weight(IP): 1
          *
          * @summary Test Connectivity
          *
@@ -62,7 +61,7 @@ export interface MarketDataApiInterface {
     /**
      * Test connectivity to the Rest API.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Test Connectivity
      *
@@ -88,13 +87,13 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Test connectivity to the Rest API.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Test Connectivity
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin/market-data/Test-Connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/market-data#test-connectivity Binance API Documentation}
      */
     public async testConnectivity(): Promise<RestApiResponse<void>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.testConnectivity();

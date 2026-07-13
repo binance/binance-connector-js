@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,18 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AccountApi } from '../../../src/rest-api';
+import {
+    AccountApi,
+    BnbTransferTransferSideEnum,
+    ChangeAutoRepayFuturesStatusAutoRepayEnum,
+    ChangeCmPositionModeDualSidePositionEnum,
+    ChangeUmPositionModeDualSidePositionEnum,
+    GetCmIncomeHistoryIncomeTypeEnum,
+    GetMarginBorrowLoanInterestHistoryArchivedEnum,
+    GetUmIncomeHistoryIncomeTypeEnum,
+    QueryMarginLoanRecordArchivedEnum,
+    QueryMarginRepayRecordArchivedEnum,
+} from '../../../src/rest-api';
 import {
     AccountBalanceRequest,
     AccountInformationRequest,
@@ -157,7 +168,7 @@ describe('AccountApi', () => {
 
         it('should execute accountBalance() successfully with optional parameters', async () => {
             const params: AccountBalanceRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 recvWindow: 5000,
             };
 
@@ -216,8 +227,8 @@ describe('AccountApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     uniMMR: '5167.92171923',
-                    accountEquity: '122607.35137903',
-                    actualEquity: '73.47428058',
+                    accountEquity: '73.47428058',
+                    actualEquity: '122607.35137903',
                     accountInitialMargin: '23.72469206',
                     accountMaintMargin: '23.72469206',
                     accountStatus: 'NORMAL',
@@ -250,8 +261,8 @@ describe('AccountApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     uniMMR: '5167.92171923',
-                    accountEquity: '122607.35137903',
-                    actualEquity: '73.47428058',
+                    accountEquity: '73.47428058',
+                    actualEquity: '122607.35137903',
                     accountInitialMargin: '23.72469206',
                     accountMaintMargin: '23.72469206',
                     accountStatus: 'NORMAL',
@@ -296,7 +307,7 @@ describe('AccountApi', () => {
         it('should execute bnbTransfer() successfully with required parameters only', async () => {
             const params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
             };
 
             mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
@@ -318,7 +329,7 @@ describe('AccountApi', () => {
         it('should execute bnbTransfer() successfully with optional parameters', async () => {
             const params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
                 recvWindow: 5000,
             };
 
@@ -341,7 +352,7 @@ describe('AccountApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -354,7 +365,7 @@ describe('AccountApi', () => {
         it('should throw RequiredError when transferSide is missing', async () => {
             const _params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
             };
             const params = Object.assign({ ..._params });
             delete params?.transferSide;
@@ -367,7 +378,7 @@ describe('AccountApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: BnbTransferRequest = {
                 amount: 1.0,
-                transferSide: 'transferSide_example',
+                transferSide: BnbTransferTransferSideEnum.TO_UM,
             };
 
             const errorResponse = {
@@ -388,7 +399,7 @@ describe('AccountApi', () => {
     describe('changeAutoRepayFuturesStatus()', () => {
         it('should execute changeAutoRepayFuturesStatus() successfully with required parameters only', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: 'true',
+                autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
             };
 
             mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
@@ -409,7 +420,7 @@ describe('AccountApi', () => {
 
         it('should execute changeAutoRepayFuturesStatus() successfully with optional parameters', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: 'true',
+                autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -431,7 +442,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when autoRepay is missing', async () => {
             const _params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: 'true',
+                autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
             };
             const params = Object.assign({ ..._params });
             delete params?.autoRepay;
@@ -443,7 +454,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: 'true',
+                autoRepay: ChangeAutoRepayFuturesStatusAutoRepayEnum.TRUE,
             };
 
             const errorResponse = {
@@ -468,8 +479,8 @@ describe('AccountApi', () => {
     describe('changeCmInitialLeverage()', () => {
         it('should execute changeCmInitialLeverage() successfully with required parameters only', async () => {
             const params: ChangeCmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 21,
             };
 
             mockResponse = JSONParse(
@@ -492,8 +503,8 @@ describe('AccountApi', () => {
 
         it('should execute changeCmInitialLeverage() successfully with optional parameters', async () => {
             const params: ChangeCmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 21,
                 recvWindow: 5000,
             };
 
@@ -517,8 +528,8 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ChangeCmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 21,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -530,8 +541,8 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when leverage is missing', async () => {
             const _params: ChangeCmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 21,
             };
             const params = Object.assign({ ..._params });
             delete params?.leverage;
@@ -543,8 +554,8 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeCmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSD_200925',
+                leverage: 21,
             };
 
             const errorResponse = {
@@ -567,7 +578,7 @@ describe('AccountApi', () => {
     describe('changeCmPositionMode()', () => {
         it('should execute changeCmPositionMode() successfully with required parameters only', async () => {
             const params: ChangeCmPositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: ChangeCmPositionModeDualSidePositionEnum.TRUE,
             };
 
             mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
@@ -588,7 +599,7 @@ describe('AccountApi', () => {
 
         it('should execute changeCmPositionMode() successfully with optional parameters', async () => {
             const params: ChangeCmPositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: ChangeCmPositionModeDualSidePositionEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -610,7 +621,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when dualSidePosition is missing', async () => {
             const _params: ChangeCmPositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: ChangeCmPositionModeDualSidePositionEnum.TRUE,
             };
             const params = Object.assign({ ..._params });
             delete params?.dualSidePosition;
@@ -622,7 +633,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeCmPositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: ChangeCmPositionModeDualSidePositionEnum.TRUE,
             };
 
             const errorResponse = {
@@ -643,8 +654,8 @@ describe('AccountApi', () => {
     describe('changeUmInitialLeverage()', () => {
         it('should execute changeUmInitialLeverage() successfully with required parameters only', async () => {
             const params: ChangeUmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSDT',
+                leverage: 21,
             };
 
             mockResponse = JSONParse(
@@ -667,8 +678,8 @@ describe('AccountApi', () => {
 
         it('should execute changeUmInitialLeverage() successfully with optional parameters', async () => {
             const params: ChangeUmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSDT',
+                leverage: 21,
                 recvWindow: 5000,
             };
 
@@ -692,8 +703,8 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ChangeUmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSDT',
+                leverage: 21,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -705,8 +716,8 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when leverage is missing', async () => {
             const _params: ChangeUmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSDT',
+                leverage: 21,
             };
             const params = Object.assign({ ..._params });
             delete params?.leverage;
@@ -718,8 +729,8 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeUmInitialLeverageRequest = {
-                symbol: 'symbol_example',
-                leverage: 789,
+                symbol: 'BTCUSDT',
+                leverage: 21,
             };
 
             const errorResponse = {
@@ -742,7 +753,7 @@ describe('AccountApi', () => {
     describe('changeUmPositionMode()', () => {
         it('should execute changeUmPositionMode() successfully with required parameters only', async () => {
             const params: ChangeUmPositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: ChangeUmPositionModeDualSidePositionEnum.TRUE,
             };
 
             mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
@@ -763,7 +774,7 @@ describe('AccountApi', () => {
 
         it('should execute changeUmPositionMode() successfully with optional parameters', async () => {
             const params: ChangeUmPositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: ChangeUmPositionModeDualSidePositionEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -785,7 +796,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when dualSidePosition is missing', async () => {
             const _params: ChangeUmPositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: ChangeUmPositionModeDualSidePositionEnum.TRUE,
             };
             const params = Object.assign({ ..._params });
             delete params?.dualSidePosition;
@@ -797,7 +808,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeUmPositionModeRequest = {
-                dualSidePosition: 'dualSidePosition_example',
+                dualSidePosition: ChangeUmPositionModeDualSidePositionEnum.TRUE,
             };
 
             const errorResponse = {
@@ -851,7 +862,7 @@ describe('AccountApi', () => {
 
         it('should execute cmNotionalAndLeverageBrackets() successfully with optional parameters', async () => {
             const params: CmNotionalAndLeverageBracketsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 recvWindow: 5000,
             };
 
@@ -963,7 +974,7 @@ describe('AccountApi', () => {
     describe('fundCollectionByAsset()', () => {
         it('should execute fundCollectionByAsset() successfully with required parameters only', async () => {
             const params: FundCollectionByAssetRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
@@ -984,7 +995,7 @@ describe('AccountApi', () => {
 
         it('should execute fundCollectionByAsset() successfully with optional parameters', async () => {
             const params: FundCollectionByAssetRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 recvWindow: 5000,
             };
 
@@ -1006,7 +1017,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: FundCollectionByAssetRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -1018,7 +1029,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: FundCollectionByAssetRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             const errorResponse = {
@@ -1283,16 +1294,6 @@ describe('AccountApi', () => {
                         tranId: '9689322392',
                         tradeId: '',
                     },
-                    {
-                        symbol: 'BTCUSD_200925',
-                        incomeType: 'COMMISSION',
-                        income: '-0.01000000',
-                        asset: 'BTC',
-                        info: '',
-                        time: 1570636800000,
-                        tranId: '9689322392',
-                        tradeId: '2059192',
-                    },
                 ])
             );
 
@@ -1312,11 +1313,11 @@ describe('AccountApi', () => {
 
         it('should execute getCmIncomeHistory() successfully with optional parameters', async () => {
             const params: GetCmIncomeHistoryRequest = {
-                symbol: 'symbol_example',
-                incomeType: 'incomeType_example',
+                symbol: 'BTCUSD_200925',
+                incomeType: GetCmIncomeHistoryIncomeTypeEnum.TRANSFER,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
+                page: 1,
                 limit: 100,
                 recvWindow: 5000,
             };
@@ -1332,16 +1333,6 @@ describe('AccountApi', () => {
                         time: 1570608000000,
                         tranId: '9689322392',
                         tradeId: '',
-                    },
-                    {
-                        symbol: 'BTCUSD_200925',
-                        incomeType: 'COMMISSION',
-                        income: '-0.01000000',
-                        asset: 'BTC',
-                        info: '',
-                        time: 1570636800000,
-                        tranId: '9689322392',
-                        tradeId: '2059192',
                     },
                 ])
             );
@@ -1741,12 +1732,12 @@ describe('AccountApi', () => {
 
         it('should execute getMarginBorrowLoanInterestHistory() successfully with optional parameters', async () => {
             const params: GetMarginBorrowLoanInterestHistoryRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
                 size: 10,
-                archived: '',
+                archived: GetMarginBorrowLoanInterestHistoryArchivedEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -2092,7 +2083,7 @@ describe('AccountApi', () => {
     describe('getUmFuturesOrderDownloadLinkById()', () => {
         it('should execute getUmFuturesOrderDownloadLinkById() successfully with required parameters only', async () => {
             const params: GetUmFuturesOrderDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             mockResponse = JSONParse(
@@ -2100,10 +2091,10 @@ describe('AccountApi', () => {
                     downloadId: '545923594199212032',
                     status: 'processing',
                     url: '',
-                    s3Link: null,
+                    s3Link: 'null',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -2123,7 +2114,7 @@ describe('AccountApi', () => {
 
         it('should execute getUmFuturesOrderDownloadLinkById() successfully with optional parameters', async () => {
             const params: GetUmFuturesOrderDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
                 recvWindow: 5000,
             };
 
@@ -2132,10 +2123,10 @@ describe('AccountApi', () => {
                     downloadId: '545923594199212032',
                     status: 'processing',
                     url: '',
-                    s3Link: null,
+                    s3Link: 'null',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -2155,7 +2146,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when downloadId is missing', async () => {
             const _params: GetUmFuturesOrderDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
             const params = Object.assign({ ..._params });
             delete params?.downloadId;
@@ -2167,7 +2158,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetUmFuturesOrderDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             const errorResponse = {
@@ -2192,7 +2183,7 @@ describe('AccountApi', () => {
     describe('getUmFuturesTradeDownloadLinkById()', () => {
         it('should execute getUmFuturesTradeDownloadLinkById() successfully with required parameters only', async () => {
             const params: GetUmFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             mockResponse = JSONParse(
@@ -2200,10 +2191,10 @@ describe('AccountApi', () => {
                     downloadId: '545923594199212032',
                     status: 'processing',
                     url: '',
-                    s3Link: null,
+                    s3Link: 'null',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -2223,7 +2214,7 @@ describe('AccountApi', () => {
 
         it('should execute getUmFuturesTradeDownloadLinkById() successfully with optional parameters', async () => {
             const params: GetUmFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
                 recvWindow: 5000,
             };
 
@@ -2232,10 +2223,10 @@ describe('AccountApi', () => {
                     downloadId: '545923594199212032',
                     status: 'processing',
                     url: '',
-                    s3Link: null,
+                    s3Link: 'null',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -2255,7 +2246,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when downloadId is missing', async () => {
             const _params: GetUmFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
             const params = Object.assign({ ..._params });
             delete params?.downloadId;
@@ -2267,7 +2258,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetUmFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             const errorResponse = {
@@ -2300,10 +2291,10 @@ describe('AccountApi', () => {
                     downloadId: '545923594199212032',
                     status: 'processing',
                     url: '',
-                    s3Link: null,
+                    s3Link: 'null',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -2334,10 +2325,10 @@ describe('AccountApi', () => {
                     downloadId: '545923594199212032',
                     status: 'processing',
                     url: '',
-                    s3Link: null,
+                    s3Link: 'null',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -2404,18 +2395,8 @@ describe('AccountApi', () => {
                         asset: 'USDT',
                         info: 'TRANSFER',
                         time: 1570608000000,
-                        tranId: 9689322392,
+                        tranId: '9689322392',
                         tradeId: '',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        incomeType: 'COMMISSION',
-                        income: '-0.01000000',
-                        asset: 'USDT',
-                        info: 'COMMISSION',
-                        time: 1570636800000,
-                        tranId: 9689322392,
-                        tradeId: '2059192',
                     },
                 ])
             );
@@ -2437,10 +2418,10 @@ describe('AccountApi', () => {
         it('should execute getUmIncomeHistory() successfully with optional parameters', async () => {
             const params: GetUmIncomeHistoryRequest = {
                 symbol: 'symbol_example',
-                incomeType: 'incomeType_example',
+                incomeType: GetUmIncomeHistoryIncomeTypeEnum.TRANSFER,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
+                page: 1,
                 limit: 100,
                 recvWindow: 5000,
             };
@@ -2454,18 +2435,8 @@ describe('AccountApi', () => {
                         asset: 'USDT',
                         info: 'TRANSFER',
                         time: 1570608000000,
-                        tranId: 9689322392,
+                        tranId: '9689322392',
                         tradeId: '',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        incomeType: 'COMMISSION',
-                        income: '-0.01000000',
-                        asset: 'USDT',
-                        info: 'COMMISSION',
-                        time: 1570636800000,
-                        tranId: 9689322392,
-                        tradeId: '2059192',
                     },
                 ])
             );
@@ -2503,7 +2474,7 @@ describe('AccountApi', () => {
     describe('getUserCommissionRateForCm()', () => {
         it('should execute getUserCommissionRateForCm() successfully with required parameters only', async () => {
             const params: GetUserCommissionRateForCmRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             mockResponse = JSONParse(
@@ -2530,7 +2501,7 @@ describe('AccountApi', () => {
 
         it('should execute getUserCommissionRateForCm() successfully with optional parameters', async () => {
             const params: GetUserCommissionRateForCmRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
                 recvWindow: 5000,
             };
 
@@ -2558,7 +2529,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: GetUserCommissionRateForCmRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2570,7 +2541,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetUserCommissionRateForCmRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSD_PERP',
             };
 
             const errorResponse = {
@@ -2595,7 +2566,7 @@ describe('AccountApi', () => {
     describe('getUserCommissionRateForUm()', () => {
         it('should execute getUserCommissionRateForUm() successfully with required parameters only', async () => {
             const params: GetUserCommissionRateForUmRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -2622,7 +2593,7 @@ describe('AccountApi', () => {
 
         it('should execute getUserCommissionRateForUm() successfully with optional parameters', async () => {
             const params: GetUserCommissionRateForUmRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -2650,7 +2621,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: GetUserCommissionRateForUmRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2662,7 +2633,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetUserCommissionRateForUmRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -2687,7 +2658,7 @@ describe('AccountApi', () => {
     describe('marginMaxBorrow()', () => {
         it('should execute marginMaxBorrow() successfully with required parameters only', async () => {
             const params: MarginMaxBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             mockResponse = JSONParse(JSONStringify({ amount: '1.69248805', borrowLimit: '60' }));
@@ -2708,7 +2679,7 @@ describe('AccountApi', () => {
 
         it('should execute marginMaxBorrow() successfully with optional parameters', async () => {
             const params: MarginMaxBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 recvWindow: 5000,
             };
 
@@ -2730,7 +2701,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: MarginMaxBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -2742,7 +2713,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarginMaxBorrowRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             const errorResponse = {
@@ -2772,27 +2743,6 @@ describe('AccountApi', () => {
                                 indicator: 'UFR',
                                 value: 0.05,
                                 triggerValue: 0.995,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'IFER',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'GCR',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'DR',
-                                value: 0.99,
-                                triggerValue: 0.99,
                             },
                         ],
                         ACCOUNT: [
@@ -2827,7 +2777,7 @@ describe('AccountApi', () => {
 
         it('should execute portfolioMarginUmTradingQuantitativeRulesIndicators() successfully with optional parameters', async () => {
             const params: PortfolioMarginUmTradingQuantitativeRulesIndicatorsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -2841,27 +2791,6 @@ describe('AccountApi', () => {
                                 indicator: 'UFR',
                                 value: 0.05,
                                 triggerValue: 0.995,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'IFER',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'GCR',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'DR',
-                                value: 0.99,
-                                triggerValue: 0.99,
                             },
                         ],
                         ACCOUNT: [
@@ -2921,40 +2850,14 @@ describe('AccountApi', () => {
                 JSONStringify([
                     {
                         symbol: 'BTCUSD_201225',
-                        positionAmt: '1',
-                        entryPrice: '11707.70000003',
-                        markPrice: '11788.66626667',
-                        unRealizedProfit: '0.00005866',
+                        positionAmt: '0',
+                        entryPrice: '0.0',
+                        markPrice: '0.00000000',
+                        unRealizedProfit: '0.00000000',
                         liquidationPrice: '6170.20509059',
                         leverage: '125',
-                        positionSide: 'LONG',
-                        updateTime: 1627026881327,
-                        maxQty: '50',
-                        notionalValue: '0.00084827',
-                    },
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '1',
-                        entryPrice: '11707.70000003',
-                        markPrice: '11788.66626667',
-                        unRealizedProfit: '0.00005866',
-                        liquidationPrice: '6170.20509059',
-                        leverage: '125',
-                        positionSide: 'LONG',
-                        updateTime: 1627026881327,
-                        maxQty: '50',
-                        notionalValue: '0.00084827',
-                    },
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '1',
-                        entryPrice: '11707.70000003',
-                        markPrice: '11788.66626667',
-                        unRealizedProfit: '0.00005866',
-                        liquidationPrice: '6170.20509059',
-                        leverage: '125',
-                        positionSide: 'LONG',
-                        updateTime: 1627026881327,
+                        positionSide: 'BOTH',
+                        updateTime: 0,
                         maxQty: '50',
                         notionalValue: '0.00084827',
                     },
@@ -2977,8 +2880,8 @@ describe('AccountApi', () => {
 
         it('should execute queryCmPositionInformation() successfully with optional parameters', async () => {
             const params: QueryCmPositionInformationRequest = {
-                marginAsset: 'marginAsset_example',
-                pair: 'pair_example',
+                marginAsset: 'USDT',
+                pair: 'BTCUSD_201225',
                 recvWindow: 5000,
             };
 
@@ -2986,40 +2889,14 @@ describe('AccountApi', () => {
                 JSONStringify([
                     {
                         symbol: 'BTCUSD_201225',
-                        positionAmt: '1',
-                        entryPrice: '11707.70000003',
-                        markPrice: '11788.66626667',
-                        unRealizedProfit: '0.00005866',
+                        positionAmt: '0',
+                        entryPrice: '0.0',
+                        markPrice: '0.00000000',
+                        unRealizedProfit: '0.00000000',
                         liquidationPrice: '6170.20509059',
                         leverage: '125',
-                        positionSide: 'LONG',
-                        updateTime: 1627026881327,
-                        maxQty: '50',
-                        notionalValue: '0.00084827',
-                    },
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '1',
-                        entryPrice: '11707.70000003',
-                        markPrice: '11788.66626667',
-                        unRealizedProfit: '0.00005866',
-                        liquidationPrice: '6170.20509059',
-                        leverage: '125',
-                        positionSide: 'LONG',
-                        updateTime: 1627026881327,
-                        maxQty: '50',
-                        notionalValue: '0.00084827',
-                    },
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '1',
-                        entryPrice: '11707.70000003',
-                        markPrice: '11788.66626667',
-                        unRealizedProfit: '0.00005866',
-                        liquidationPrice: '6170.20509059',
-                        leverage: '125',
-                        positionSide: 'LONG',
-                        updateTime: 1627026881327,
+                        positionSide: 'BOTH',
+                        updateTime: 0,
                         maxQty: '50',
                         notionalValue: '0.00084827',
                     },
@@ -3061,7 +2938,7 @@ describe('AccountApi', () => {
     describe('queryMarginLoanRecord()', () => {
         it('should execute queryMarginLoanRecord() successfully with required parameters only', async () => {
             const params: QueryMarginLoanRecordRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -3095,13 +2972,13 @@ describe('AccountApi', () => {
 
         it('should execute queryMarginLoanRecord() successfully with optional parameters', async () => {
             const params: QueryMarginLoanRecordRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 txId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
                 size: 10,
-                archived: '',
+                archived: QueryMarginLoanRecordArchivedEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -3136,7 +3013,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: QueryMarginLoanRecordRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -3148,7 +3025,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginLoanRecordRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             const errorResponse = {
@@ -3171,7 +3048,7 @@ describe('AccountApi', () => {
     describe('queryMarginMaxWithdraw()', () => {
         it('should execute queryMarginMaxWithdraw() successfully with required parameters only', async () => {
             const params: QueryMarginMaxWithdrawRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             mockResponse = JSONParse(JSONStringify({ amount: '60' }));
@@ -3192,7 +3069,7 @@ describe('AccountApi', () => {
 
         it('should execute queryMarginMaxWithdraw() successfully with optional parameters', async () => {
             const params: QueryMarginMaxWithdrawRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 recvWindow: 5000,
             };
 
@@ -3214,7 +3091,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: QueryMarginMaxWithdrawRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -3226,7 +3103,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginMaxWithdrawRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             const errorResponse = {
@@ -3249,7 +3126,7 @@ describe('AccountApi', () => {
     describe('queryMarginRepayRecord()', () => {
         it('should execute queryMarginRepayRecord() successfully with required parameters only', async () => {
             const params: QueryMarginRepayRecordRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -3285,13 +3162,13 @@ describe('AccountApi', () => {
 
         it('should execute queryMarginRepayRecord() successfully with optional parameters', async () => {
             const params: QueryMarginRepayRecordRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 txId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
                 size: 10,
-                archived: '',
+                archived: QueryMarginRepayRecordArchivedEnum.TRUE,
                 recvWindow: 5000,
             };
 
@@ -3328,7 +3205,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: QueryMarginRepayRecordRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -3340,7 +3217,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryMarginRepayRecordRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
             };
 
             const errorResponse = {
@@ -3392,7 +3269,7 @@ describe('AccountApi', () => {
 
         it('should execute queryPortfolioMarginNegativeBalanceInterestHistory() successfully with optional parameters', async () => {
             const params: QueryPortfolioMarginNegativeBalanceInterestHistoryRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 size: 10,
@@ -3465,32 +3342,6 @@ describe('AccountApi', () => {
                         positionSide: 'BOTH',
                         updateTime: 1625474304765,
                     },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionAmt: '0.001',
-                        entryPrice: '22185.2',
-                        markPrice: '21123.05052574',
-                        unRealizedProfit: '-1.06214947',
-                        liquidationPrice: '6170.20509059',
-                        leverage: '4',
-                        maxNotionalValue: '100000000',
-                        positionSide: 'LONG',
-                        notional: '21.12305052',
-                        updateTime: 1655217461579,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionAmt: '0.000',
-                        entryPrice: '0.0',
-                        markPrice: '21123.05052574',
-                        unRealizedProfit: '0.00000000',
-                        liquidationPrice: '6170.20509059',
-                        leverage: '4',
-                        maxNotionalValue: '100000000',
-                        positionSide: 'SHORT',
-                        notional: '0',
-                        updateTime: 0,
-                    },
                 ])
             );
 
@@ -3510,7 +3361,7 @@ describe('AccountApi', () => {
 
         it('should execute queryUmPositionInformation() successfully with optional parameters', async () => {
             const params: QueryUmPositionInformationRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -3528,32 +3379,6 @@ describe('AccountApi', () => {
                         liquidationPrice: '6170.20509059',
                         positionSide: 'BOTH',
                         updateTime: 1625474304765,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionAmt: '0.001',
-                        entryPrice: '22185.2',
-                        markPrice: '21123.05052574',
-                        unRealizedProfit: '-1.06214947',
-                        liquidationPrice: '6170.20509059',
-                        leverage: '4',
-                        maxNotionalValue: '100000000',
-                        positionSide: 'LONG',
-                        notional: '21.12305052',
-                        updateTime: 1655217461579,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionAmt: '0.000',
-                        entryPrice: '0.0',
-                        markPrice: '21123.05052574',
-                        unRealizedProfit: '0.00000000',
-                        liquidationPrice: '6170.20509059',
-                        leverage: '4',
-                        maxNotionalValue: '100000000',
-                        positionSide: 'SHORT',
-                        notional: '0',
-                        updateTime: 0,
                     },
                 ])
             );
@@ -3605,17 +3430,10 @@ describe('AccountApi', () => {
                             startTime: 1736263046841,
                             endTime: 1736263248179,
                             details: [
-                                { asset: 'ETH', negativeBalance: 18, negativeMaxThreshold: 5 },
-                            ],
-                        },
-                        {
-                            startTime: 1736184913252,
-                            endTime: 1736184965474,
-                            details: [
                                 {
-                                    asset: 'BNB',
+                                    asset: 'ETH',
                                     negativeBalance: 1.10264488,
-                                    negativeMaxThreshold: 0,
+                                    negativeMaxThreshold: 5,
                                 },
                             ],
                         },
@@ -3654,17 +3472,10 @@ describe('AccountApi', () => {
                             startTime: 1736263046841,
                             endTime: 1736263248179,
                             details: [
-                                { asset: 'ETH', negativeBalance: 18, negativeMaxThreshold: 5 },
-                            ],
-                        },
-                        {
-                            startTime: 1736184913252,
-                            endTime: 1736184965474,
-                            details: [
                                 {
-                                    asset: 'BNB',
+                                    asset: 'ETH',
                                     negativeBalance: 1.10264488,
-                                    negativeMaxThreshold: 0,
+                                    negativeMaxThreshold: 5,
                                 },
                             ],
                         },
@@ -3968,7 +3779,7 @@ describe('AccountApi', () => {
 
         it('should execute umFuturesSymbolConfiguration() successfully with optional parameters', async () => {
             const params: UmFuturesSymbolConfigurationRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -4053,7 +3864,7 @@ describe('AccountApi', () => {
 
         it('should execute umNotionalAndLeverageBrackets() successfully with optional parameters', async () => {
             const params: UmNotionalAndLeverageBracketsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ETHUSDT',
                 recvWindow: 5000,
             };
 

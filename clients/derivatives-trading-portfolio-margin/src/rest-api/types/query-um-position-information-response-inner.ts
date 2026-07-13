@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,67 +20,67 @@
  */
 export interface QueryUmPositionInformationResponseInner {
     /**
-     *
+     * average entry price
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     entryPrice?: string;
     /**
-     *
+     * current initial leverage
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     leverage?: string;
     /**
-     *
+     * Mark Price.
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     markPrice?: string;
     /**
-     *
+     * Max Notional Value.
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     maxNotionalValue?: string;
     /**
-     *
+     * position amount
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     positionAmt?: string;
     /**
-     *
+     * Notional.
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     notional?: string;
     /**
-     *
+     * Trade symbol, if existing.
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Un Realized Profit.
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     unRealizedProfit?: string;
     /**
-     *
+     * Liquidation Price.
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     liquidationPrice?: string;
     /**
-     *
+     * BOTH means that it is the position of One-way Mode
      * @type {string}
      * @memberof QueryUmPositionInformationResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof QueryUmPositionInformationResponseInner
      */

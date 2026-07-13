@@ -14,7 +14,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function newUmOrder() {
     try {
         const response = await client.restAPI.newUmOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             side: DerivativesTradingPortfolioMarginRestAPI.NewUmOrderSideEnum.BUY,
             type: DerivativesTradingPortfolioMarginRestAPI.NewUmOrderTypeEnum.LIMIT,
         });

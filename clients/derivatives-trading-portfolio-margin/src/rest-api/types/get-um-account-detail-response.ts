@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,10 +16,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetUmAccountDetailResponsePositionsInner } from './get-um-account-detail-response-positions-inner';
+import type { GetUmAccountDetailResponseAssetsInner } from './get-um-account-detail-response-assets-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetUmAccountDetailV2ResponseAssetsInner } from './get-um-account-detail-v2-response-assets-inner';
+import type { GetUmAccountDetailResponsePositionsInner } from './get-um-account-detail-response-positions-inner';
 
 /**
  *
@@ -28,13 +28,13 @@ import type { GetUmAccountDetailV2ResponseAssetsInner } from './get-um-account-d
  */
 export interface GetUmAccountDetailResponse {
     /**
-     *
-     * @type {Array<GetUmAccountDetailV2ResponseAssetsInner>}
+     * Assets.
+     * @type {Array<GetUmAccountDetailResponseAssetsInner>}
      * @memberof GetUmAccountDetailResponse
      */
-    assets?: Array<GetUmAccountDetailV2ResponseAssetsInner>;
+    assets?: Array<GetUmAccountDetailResponseAssetsInner>;
     /**
-     *
+     * positions of all symbols in the market are returned
      * @type {Array<GetUmAccountDetailResponsePositionsInner>}
      * @memberof GetUmAccountDetailResponse
      */

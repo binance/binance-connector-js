@@ -14,11 +14,12 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function newUmAlgoOrder() {
     try {
         const response = await client.restAPI.newUmAlgoOrder({
-            algoType: 'algoType_example',
-            symbol: 'symbol_example',
-            side: DerivativesTradingPortfolioMarginRestAPI.NewUmAlgoOrderSideEnum.BUY,
-            type: DerivativesTradingPortfolioMarginRestAPI.NewUmAlgoOrderTypeEnum.LIMIT,
-            quantity: 1.0,
+            algoType:
+                DerivativesTradingPortfolioMarginRestAPI.NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
+            symbol: 'BNBUSDT',
+            side: DerivativesTradingPortfolioMarginRestAPI.NewUmAlgoOrderSideEnum.SELL,
+            type: DerivativesTradingPortfolioMarginRestAPI.NewUmAlgoOrderTypeEnum.TAKE_PROFIT,
+            quantity: 0.01,
         });
 
         const rateLimits = response.rateLimits!;

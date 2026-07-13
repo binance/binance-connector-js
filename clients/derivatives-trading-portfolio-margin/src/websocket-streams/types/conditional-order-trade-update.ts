@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Portfolio Margin WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin WebSocket Market Streams
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,19 +25,19 @@ import type { ConditionalOrderTradeUpdateSo } from './conditional-order-trade-up
  */
 export interface ConditionalOrderTradeUpdate {
     /**
-     *
+     * Transaction Time
      * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdate
      */
     T?: number | bigint;
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdate
      */
     E?: number | bigint;
     /**
-     *
+     * Event business unit
      * @type {string}
      * @memberof ConditionalOrderTradeUpdate
      */

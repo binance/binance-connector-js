@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading Portfolio Margin REST API
+ * Portfolio Margin REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin REST API
+ * Access account information, manage margin positions, and trade with Binance Portfolio Margin.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner {
     /**
-     *
+     * Is Locked.
      * @type {boolean}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     isLocked?: boolean;
     /**
-     *
+     * Planned Recover Time.
      * @type {number | bigint}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     plannedRecoverTime?: number | bigint;
     /**
-     *
+     * Indicator.
      * @type {string}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     indicator?: string;
     /**
-     *
+     * Value.
      * @type {number}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     value?: number;
     /**
-     *
+     * Trigger Value.
      * @type {number}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
