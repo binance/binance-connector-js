@@ -12,6 +12,7 @@
 This is a client library for the Binance Alpha API, enabling developers to interact programmatically with Binance Alpha. The library provides tools to access curated early-stage token data, track Alpha project metrics and integrate discovery-focused market information into applications through the REST API:
 
 - [REST API](./src/rest-api/rest-api.ts)
+- [Websocket Stream](./src/websocket-streams/websocket-streams-connection.ts)
 
 ## Table of Contents
 
@@ -19,6 +20,7 @@ This is a client library for the Binance Alpha API, enabling developers to inter
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [REST APIs](#rest-apis)
+- [Websocket Streams](#websocket-streams)
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [Licence](#licence)
@@ -27,6 +29,7 @@ This is a client library for the Binance Alpha API, enabling developers to inter
 
 - REST API Endpoints:
   - `/bapi/defi/v1/*`
+- WebSocket Endpoints: Real-time data streaming.
 - Inclusion of test cases and examples for quick onboarding.
 
 ## Installation
@@ -141,6 +144,93 @@ See the [Error Handling example](./docs/rest-api/error-handling.md) for detailed
 
 If `basePath` is not provided, it defaults to `https://www.binance.com`.
 
+### Websocket Streams
+
+WebSocket Streams provide real-time data feeds for market trades, candlesticks, and more. Use the [websocket-streams](./src/websocket-streams/websocket-streams.ts) module to subscribe to these streams.
+
+```typescript
+import { Alpha, ALPHA_WS_STREAMS_PROD_URL } from '@binance/alpha';
+
+const configurationWebsocketStreams = {
+    wsURL: ALPHA_WS_STREAMS_PROD_URL,
+};
+const client = new Alpha({ configurationWebsocketStreams });
+
+client.websocketStreams
+    .connect()
+    .then((connection) => {
+        const stream = connection.allBookTickerStream();
+        stream.on('message', (data) => console.info(data));
+    })
+    .catch((err) => console.error(err));
+```
+
+More examples are available in the [`examples/websocket-streams`](./examples/websocket-streams/) folder.
+
+#### Configuration Options
+
+The WebSocket Streams API supports the following advanced configuration options:
+
+- `reconnectDelay`: Specify the delay between reconnection attempts (default: 5000 ms).
+- `compression`: Enable or disable compression for WebSocket messages (default: true).
+- `agent`: Customize the WebSocket agent for advanced configurations.
+- `mode`: Choose between `single` and `pool` connection modes.
+  - `single`: A single WebSocket connection.
+  - `pool`: A pool of WebSocket connections.
+- `poolSize`: Define the number of WebSocket connections in pool mode.
+
+##### Reconnect Delay
+
+Specify the delay in milliseconds between WebSocket reconnection attempts for streams. See the [Reconnect Delay example](./docs/websocket-streams/reconnect-delay.md) for detailed usage.
+
+##### Compression
+
+Enable or disable compression for WebSocket Streams messages. See the [Compression example](./docs/websocket-streams/compression.md) for detailed usage.
+
+##### WebSocket Agent
+
+Customize the agent for advanced configurations. See the [WebSocket Agent example](./docs/websocket-streams/agent.md) for detailed usage.
+
+##### Connection Mode
+
+Choose between `single` and `pool` connection modes for WebSocket Streams. The `single` mode uses a single WebSocket connection, while the `pool` mode uses a pool of WebSocket connections. See the [Connection Mode example](./docs/websocket-streams/connection-mode.md) for detailed usage.
+
+##### Certificate Pinning
+
+To enhance security, you can use certificate pinning with the `agent` option in the configuration. This ensures the client only communicates with servers using specific certificates. See the [Certificate Pinning example](./docs/websocket-streams/certificate-pinning.md) for detailed usage.
+
+#### Unsubscribing from Streams
+
+You can unsubscribe from specific WebSocket streams using the `unsubscribe` method. This is useful for managing active subscriptions without closing the connection.
+
+```typescript
+import { Alpha, ALPHA_WS_STREAMS_PROD_URL } from '@binance/alpha';
+
+const configurationWebsocketStreams = {
+    wsURL: ALPHA_WS_STREAMS_PROD_URL,
+};
+const client = new Alpha({ configurationWebsocketStreams });
+
+client.websocketStreams
+    .connect()
+    .then((connection) => {
+        const stream = connection.allBookTickerStream();
+        stream.on('message', (data) => console.info(data));
+
+        setTimeout(() => {
+            stream.unsubscribe();
+            console.log('Unsubscribed from allBookTickerStream stream');
+        }, 10000);
+    })
+    .catch((err) => console.error(err));
+```
+
+If `wsURL` is not provided, it defaults to `wss://nbstream.binance.com/w3w/wsa`.
+
+### Automatic Connection Renewal
+
+The WebSocket connection is automatically renewed for the WebSocket Streams connections, before the 24 hours expiration of the API key. This ensures continuous connectivity.
+
 ## Testing
 
 To run the tests:
@@ -170,6 +260,19 @@ To contribute:
 Please ensure that all tests pass if you're making a direct contribution. Submit a pull request only after discussing and confirming the change.
 
 Thank you for your contributions!
+
+## Disclaimer
+
+This SDK is provided by Binance on an "as is" and "as available" basis for use at your own risk. Binance makes no representations or warranties of any kind, whether express or implied, as to the operation of the SDK, its accuracy, reliability, completeness, or fitness for any particular purpose.
+
+To the fullest extent permitted by law, Binance shall not be liable for any losses, damages, or expenses of any kind arising from or in connection with your use of, or inability to use, this SDK, including but not limited to any financial losses resulting from errors, bugs, interruptions, or inaccuracies in the SDK.
+
+Your use of this SDK to access the Binance Platform is subject to the Binance API Key Terms and the Binance Terms of Use, which shall prevail in the event of any conflict with this disclaimer. You are solely responsible for any orders or transactions executed through the Binance Platform using this SDK.
+
+This SDK is not intended to constitute investment advice or a recommendation to buy, sell, or hold any digital asset. You should independently evaluate and verify all information before acting.
+
+- [Binance Terms of Use](https://www.binance.com/en/terms)
+- [Binance API Key Terms](https://www.binance.com/en/about-legal/terms-binance-api)
 
 ## Licence
 
