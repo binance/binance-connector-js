@@ -83,9 +83,6 @@ export const MARGIN_TRADING_RISK_WS_STREAMS_PROD_URL = 'wss://margin-stream.bina
 // Mining constants
 export const MINING_REST_API_PROD_URL = 'https://api.binance.com';
 
-// NFT constants
-export const NFT_REST_API_PROD_URL = 'https://api.binance.com';
-
 // Pay constants
 export const PAY_REST_API_PROD_URL = 'https://api.binance.com';
 
