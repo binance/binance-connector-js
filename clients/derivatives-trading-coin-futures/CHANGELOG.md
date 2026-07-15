@@ -1,5 +1,55 @@
 # Changelog
 
+## 18.0.0 - 2026-07-15
+
+### Changed (9)
+
+#### REST API
+
+- Modified response for `cancelMultipleOrders()` (`DELETE /dapi/v1/batchOrders`):
+  - items: property `avgPrice` deleted
+  - items: property `cumBase` deleted
+  - items: item property `avgPrice` deleted
+  - items: item property `cumBase` deleted
+
+- Modified response for `placeMultipleOrders()` (`POST /dapi/v1/batchOrders`):
+  - items: property `cumBase` deleted
+  - items: property `avgPrice` deleted
+  - items: item property `cumBase` deleted
+  - items: item property `avgPrice` deleted
+
+- Modified response for `modifyMultipleOrders()` (`PUT /dapi/v1/batchOrders`):
+  - items: property `avgPrice` deleted
+  - items: property `cumBase` deleted
+  - items: item property `avgPrice` deleted
+  - items: item property `cumBase` deleted
+
+- Modified response for `cancelOrder()` (`DELETE /dapi/v1/order`):
+  - property `avgPrice` deleted
+  - property `cumBase` deleted
+
+- Modified response for `newOrder()` (`POST /dapi/v1/order`):
+  - property `avgPrice` deleted
+  - property `cumBase` deleted
+
+- Modified response for `modifyOrder()` (`PUT /dapi/v1/order`):
+  - property `avgPrice` deleted
+  - property `cumBase` deleted
+
+#### WebSocket API
+
+- Modified response for `cancelOrder()` (`order.cancel` method):
+  - `result`: property `avgPrice` deleted
+  - `result`: property `cumBase` deleted
+
+- Modified response for `modifyOrder()` (`order.modify` method):
+  - `result`: property `avgPrice` deleted
+  - `result`: property `cumBase` deleted
+
+- Modified response for `newOrder()` (`order.place` method):
+  - `result`: property `cumBase` deleted
+  - `result`: property `avgPrice` deleted
+
 ## 17.0.0 - 2026-07-13
 
 ### Added (1)

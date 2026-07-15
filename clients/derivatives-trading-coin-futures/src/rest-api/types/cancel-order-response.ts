@@ -20,12 +20,6 @@
  */
 export interface CancelOrderResponse {
     /**
-     * Average execution price. Will be removed after CM migration.
-     * @type {string}
-     * @memberof CancelOrderResponse
-     */
-    avgPrice?: string;
-    /**
      * Client order ID.
      * @type {string}
      * @memberof CancelOrderResponse
@@ -37,12 +31,6 @@ export interface CancelOrderResponse {
      * @memberof CancelOrderResponse
      */
     cumQty?: string;
-    /**
-     * Cumulative base asset amount. Will be removed after CM migration.
-     * @type {string}
-     * @memberof CancelOrderResponse
-     */
-    cumBase?: string;
     /**
      * Executed quantity
      * @type {string}

@@ -511,10 +511,8 @@ describe('TradeApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        avgPrice: '0.0',
                         clientOrderId: 'myOrder1',
                         cumQty: '0',
-                        cumBase: '0',
                         executedQty: '0',
                         orderId: 283194212,
                         origQty: '11',
@@ -568,10 +566,8 @@ describe('TradeApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        avgPrice: '0.0',
                         clientOrderId: 'myOrder1',
                         cumQty: '0',
-                        cumBase: '0',
                         executedQty: '0',
                         orderId: 283194212,
                         origQty: '11',
@@ -654,10 +650,8 @@ describe('TradeApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    avgPrice: '0.0',
                     clientOrderId: 'myOrder1',
                     cumQty: '0',
-                    cumBase: '0',
                     executedQty: '0',
                     orderId: 283194212,
                     origQty: '11',
@@ -707,10 +701,8 @@ describe('TradeApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    avgPrice: '0.0',
                     clientOrderId: 'myOrder1',
                     cumQty: '0',
-                    cumBase: '0',
                     executedQty: '0',
                     orderId: 283194212,
                     origQty: '11',
@@ -1536,11 +1528,9 @@ describe('TradeApi', () => {
                         status: 'NEW',
                         clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
                         price: '30005',
-                        avgPrice: '0.0',
                         origQty: '1',
                         executedQty: '0',
                         cumQty: '0',
-                        cumBase: '0',
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         reduceOnly: false,
@@ -1589,11 +1579,9 @@ describe('TradeApi', () => {
                         status: 'NEW',
                         clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
                         price: '30005',
-                        avgPrice: '0.0',
                         origQty: '1',
                         executedQty: '0',
                         cumQty: '0',
-                        cumBase: '0',
                         timeInForce: 'GTC',
                         type: 'LIMIT',
                         reduceOnly: false,
@@ -1674,11 +1662,9 @@ describe('TradeApi', () => {
                     status: 'NEW',
                     clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
                     price: '30005',
-                    avgPrice: '0.0',
                     origQty: '1',
                     executedQty: '0',
                     cumQty: '0',
-                    cumBase: '0',
                     timeInForce: 'GTC',
                     type: 'LIMIT',
                     reduceOnly: false,
@@ -1729,11 +1715,9 @@ describe('TradeApi', () => {
                     status: 'NEW',
                     clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
                     price: '30005',
-                    avgPrice: '0.0',
                     origQty: '1',
                     executedQty: '0',
                     cumQty: '0',
-                    cumBase: '0',
                     timeInForce: 'GTC',
                     type: 'LIMIT',
                     reduceOnly: false,
@@ -1823,10 +1807,8 @@ describe('TradeApi', () => {
                 JSONStringify({
                     clientOrderId: 'testOrder',
                     cumQty: '0',
-                    cumBase: '0',
                     executedQty: '0',
                     orderId: 22542179,
-                    avgPrice: '0.0',
                     origQty: '10',
                     price: '0',
                     reduceOnly: false,
@@ -1891,10 +1873,8 @@ describe('TradeApi', () => {
                 JSONStringify({
                     clientOrderId: 'testOrder',
                     cumQty: '0',
-                    cumBase: '0',
                     executedQty: '0',
                     orderId: 22542179,
-                    avgPrice: '0.0',
                     origQty: '10',
                     price: '0',
                     reduceOnly: false,
@@ -2007,10 +1987,8 @@ describe('TradeApi', () => {
                     {
                         clientOrderId: 'testOrder',
                         cumQty: '0',
-                        cumBase: '0',
                         executedQty: '0',
                         orderId: 22542179,
-                        avgPrice: '0.0',
                         origQty: '10',
                         price: '0',
                         reduceOnly: false,
@@ -2062,10 +2040,8 @@ describe('TradeApi', () => {
                     {
                         clientOrderId: 'testOrder',
                         cumQty: '0',
-                        cumBase: '0',
                         executedQty: '0',
                         orderId: 22542179,
-                        avgPrice: '0.0',
                         origQty: '10',
                         price: '0',
                         reduceOnly: false,

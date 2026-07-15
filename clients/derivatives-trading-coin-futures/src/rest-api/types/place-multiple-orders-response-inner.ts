@@ -32,12 +32,6 @@ export interface PlaceMultipleOrdersResponseInner {
      */
     cumQty?: string;
     /**
-     * Cumulative base asset amount. Will be removed after CM migration.
-     * @type {string}
-     * @memberof PlaceMultipleOrdersResponseInner
-     */
-    cumBase?: string;
-    /**
      * Executed quantity
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
@@ -49,12 +43,6 @@ export interface PlaceMultipleOrdersResponseInner {
      * @memberof PlaceMultipleOrdersResponseInner
      */
     orderId?: number | bigint;
-    /**
-     * Average execution price. Will be removed after CM migration.
-     * @type {string}
-     * @memberof PlaceMultipleOrdersResponseInner
-     */
-    avgPrice?: string;
     /**
      * Original order quantity
      * @type {string}

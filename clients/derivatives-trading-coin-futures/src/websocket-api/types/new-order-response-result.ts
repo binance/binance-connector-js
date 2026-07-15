@@ -56,12 +56,6 @@ export interface NewOrderResponseResult {
      */
     price?: string;
     /**
-     * Average execution price. Will be removed after CM migration.
-     * @type {string}
-     * @memberof NewOrderResponseResult
-     */
-    avgPrice?: string;
-    /**
      * Original order quantity
      * @type {string}
      * @memberof NewOrderResponseResult
@@ -79,12 +73,6 @@ export interface NewOrderResponseResult {
      * @memberof NewOrderResponseResult
      */
     cumQty?: string;
-    /**
-     * Cumulative base asset amount. Will be removed after CM migration.
-     * @type {string}
-     * @memberof NewOrderResponseResult
-     */
-    cumBase?: string;
     /**
      * Time in force
      * @type {string}

@@ -56,12 +56,6 @@ export interface ModifyMultipleOrdersResponseInner {
      */
     price?: string;
     /**
-     * Average execution price. Will be removed after CM migration.
-     * @type {string}
-     * @memberof ModifyMultipleOrdersResponseInner
-     */
-    avgPrice?: string;
-    /**
      * Original order quantity
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
@@ -79,12 +73,6 @@ export interface ModifyMultipleOrdersResponseInner {
      * @memberof ModifyMultipleOrdersResponseInner
      */
     cumQty?: string;
-    /**
-     * Cumulative base asset amount. Will be removed after CM migration.
-     * @type {string}
-     * @memberof ModifyMultipleOrdersResponseInner
-     */
-    cumBase?: string;
     /**
      * Time in force
      * @type {string}
