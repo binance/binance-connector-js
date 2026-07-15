@@ -32,12 +32,6 @@ export interface NewOrderResponse {
      */
     cumQty?: string;
     /**
-     * Cum Quote. Will be removed after CM migration.
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    cumQuote?: string;
-    /**
      * Executed Qty.
      * @type {string}
      * @memberof NewOrderResponse
@@ -49,12 +43,6 @@ export interface NewOrderResponse {
      * @memberof NewOrderResponse
      */
     orderId?: number | bigint;
-    /**
-     * Avg Price. Will be removed after CM migration.
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    avgPrice?: string;
     /**
      * Orig Qty.
      * @type {string}

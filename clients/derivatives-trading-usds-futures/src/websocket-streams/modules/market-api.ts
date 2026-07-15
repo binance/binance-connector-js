@@ -319,7 +319,7 @@ const MarketApiParamCreator = function () {
          *
          * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
          *
-         * Update Speed: 3000ms or 1000ms
+         * Update Speed: 3s or 1s
          *
          * @summary Mark Price Stream for All market
          * @param {string} [id] Unique WebSocket request ID.
@@ -600,7 +600,7 @@ export interface MarketApiInterface {
      *
      * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
-     * Update Speed: 3000ms or 1000ms
+     * Update Speed: 3s or 1s
      *
      * @summary Mark Price Stream for All market
      * @param {MarkPriceStreamForAllMarketRequest} requestParameters Request parameters.
@@ -1322,7 +1322,7 @@ export class MarketApi implements MarketApiInterface {
      *
      * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
-     * Update Speed: 3000ms or 1000ms
+     * Update Speed: 3s or 1s
      *
      * @summary Mark Price Stream for All market
      * @param {MarkPriceStreamForAllMarketRequest} requestParameters Request parameters.

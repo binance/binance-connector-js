@@ -32,12 +32,6 @@ export interface CancelOrderResponseResult {
      */
     cumQty?: string;
     /**
-     * Cum Quote. Will be removed after CM migration.
-     * @type {string}
-     * @memberof CancelOrderResponseResult
-     */
-    cumQuote?: string;
-    /**
      *
      * @type {string}
      * @memberof CancelOrderResponseResult

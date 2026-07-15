@@ -32,12 +32,6 @@ export interface CancelMultipleOrdersResponseInner {
      */
     cumQty?: string;
     /**
-     * Cum Quote. Will be removed after CM migration.
-     * @type {string}
-     * @memberof CancelMultipleOrdersResponseInner
-     */
-    cumQuote?: string;
-    /**
      * Executed Qty.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner

@@ -56,12 +56,6 @@ export interface ModifyMultipleOrdersResponseInner {
      */
     price?: string;
     /**
-     * Average execution price. Will be removed after CM migration.
-     * @type {string}
-     * @memberof ModifyMultipleOrdersResponseInner
-     */
-    avgPrice?: string;
-    /**
      *
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
@@ -79,12 +73,6 @@ export interface ModifyMultipleOrdersResponseInner {
      * @memberof ModifyMultipleOrdersResponseInner
      */
     cumQty?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersResponseInner
-     */
-    cumBase?: string;
     /**
      *
      * @type {string}

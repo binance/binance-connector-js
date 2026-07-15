@@ -32,12 +32,6 @@ export interface CancelOrderResponse {
      */
     cumQty?: string;
     /**
-     * Cum Quote. Will be removed after CM migration.
-     * @type {string}
-     * @memberof CancelOrderResponse
-     */
-    cumQuote?: string;
-    /**
      * Executed Qty.
      * @type {string}
      * @memberof CancelOrderResponse
@@ -61,12 +55,6 @@ export interface CancelOrderResponse {
      * @memberof CancelOrderResponse
      */
     price?: string;
-    /**
-     * Average execution price. Will be removed after CM migration.
-     * @type {string}
-     * @memberof CancelOrderResponse
-     */
-    avgPrice?: string;
     /**
      * Reduce Only.
      * @type {boolean}

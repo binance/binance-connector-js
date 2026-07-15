@@ -32,12 +32,6 @@ export interface PlaceMultipleOrdersResponseInner {
      */
     cumQty?: string;
     /**
-     * Cum Quote. Will be removed after CM migration.
-     * @type {string}
-     * @memberof PlaceMultipleOrdersResponseInner
-     */
-    cumQuote?: string;
-    /**
      * Executed Qty.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
@@ -49,12 +43,6 @@ export interface PlaceMultipleOrdersResponseInner {
      * @memberof PlaceMultipleOrdersResponseInner
      */
     orderId?: number | bigint;
-    /**
-     * Avg Price. Will be removed after CM migration.
-     * @type {string}
-     * @memberof PlaceMultipleOrdersResponseInner
-     */
-    avgPrice?: string;
     /**
      * Orig Qty.
      * @type {string}
