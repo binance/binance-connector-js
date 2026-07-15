@@ -20,12 +20,6 @@
  */
 export interface CancelCmOrderResponse {
     /**
-     * Avg Price.
-     * @type {string}
-     * @memberof CancelCmOrderResponse
-     */
-    avgPrice?: string;
-    /**
      * Client Order ID.
      * @type {string}
      * @memberof CancelCmOrderResponse
@@ -37,12 +31,6 @@ export interface CancelCmOrderResponse {
      * @memberof CancelCmOrderResponse
      */
     cumQty?: string;
-    /**
-     * Cum Base.
-     * @type {string}
-     * @memberof CancelCmOrderResponse
-     */
-    cumBase?: string;
     /**
      * Executed Qty.
      * @type {string}

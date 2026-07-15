@@ -32,12 +32,6 @@ export interface NewCmOrderResponse {
      */
     cumQty?: string;
     /**
-     * Cum Base.
-     * @type {string}
-     * @memberof NewCmOrderResponse
-     */
-    cumBase?: string;
-    /**
      * Executed Qty.
      * @type {string}
      * @memberof NewCmOrderResponse
@@ -49,12 +43,6 @@ export interface NewCmOrderResponse {
      * @memberof NewCmOrderResponse
      */
     orderId?: number | bigint;
-    /**
-     * Avg Price.
-     * @type {string}
-     * @memberof NewCmOrderResponse
-     */
-    avgPrice?: string;
     /**
      * Orig Qty.
      * @type {string}

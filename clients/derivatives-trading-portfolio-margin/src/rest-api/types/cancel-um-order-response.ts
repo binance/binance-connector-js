@@ -20,12 +20,6 @@
  */
 export interface CancelUmOrderResponse {
     /**
-     * Avg Price.
-     * @type {string}
-     * @memberof CancelUmOrderResponse
-     */
-    avgPrice?: string;
-    /**
      * Client Order ID.
      * @type {string}
      * @memberof CancelUmOrderResponse
@@ -37,12 +31,6 @@ export interface CancelUmOrderResponse {
      * @memberof CancelUmOrderResponse
      */
     cumQty?: string;
-    /**
-     * Cum Quote.
-     * @type {string}
-     * @memberof CancelUmOrderResponse
-     */
-    cumQuote?: string;
     /**
      * Executed Qty.
      * @type {string}
