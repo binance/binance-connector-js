@@ -46,7 +46,6 @@ nvm use 22.12.0
 - [@binance/giftcard](./clients/gift-card/) - Gift Card connector
 - [@binance/margin-trading](./clients/margin-trading/) - Margin Trading connector
 - [@binance/mining](./clients/mining/) - Mining connector
-- **Deprecated**: ~~[@binance/nft](./clients/nft/) - NFT connector~~
 - [@binance/pay](./clients/pay/) - Pay connector
 - [@binance/rebate](./clients/rebate/) - Rebate connector
 - [@binance/simple-earn](./clients/simple-earn/) - Simple Earn connector
@@ -75,6 +74,19 @@ Since this repository contains auto-generated code using OpenAPI Generator, we e
 
 1. Open a GitHub issue to discuss your ideas or report bugs
 2. Allow maintainers to implement necessary changes through the code generation process
+
+## Disclaimer
+
+This SDK is provided by Binance on an "as is" and "as available" basis for use at your own risk. Binance makes no representations or warranties of any kind, whether express or implied, as to the operation of the SDK, its accuracy, reliability, completeness, or fitness for any particular purpose.
+
+To the fullest extent permitted by law, Binance shall not be liable for any losses, damages, or expenses of any kind arising from or in connection with your use of, or inability to use, this SDK, including but not limited to any financial losses resulting from errors, bugs, interruptions, or inaccuracies in the SDK.
+
+Your use of this SDK to access the Binance Platform is subject to the Binance API Key Terms and the Binance Terms of Use, which shall prevail in the event of any conflict with this disclaimer. You are solely responsible for any orders or transactions executed through the Binance Platform using this SDK.
+
+This SDK is not intended to constitute investment advice or a recommendation to buy, sell, or hold any digital asset. You should independently evaluate and verify all information before acting.
+
+- [Binance Terms of Use](https://www.binance.com/en/terms)
+- [Binance API Key Terms](https://www.binance.com/en/about-legal/terms-binance-api)
 
 ## License
 
