@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0 - 2026-07-16
+
+### Changed (1)
+
+- Modified WebSocket Streams `id` type from string to integer.
+
 ## 2.0.0 - 2026-07-13
 
 ### Added (2)

@@ -118,7 +118,7 @@ export class WebsocketStreamsConnection {
      * @param id Optional subscription ID
      * @returns void
      */
-    subscribe(stream: string | string[], id?: string): void {
+    subscribe(stream: string | string[], id?: number): void {
         this.websocketBase.subscribe(stream, id);
     }
 
@@ -129,7 +129,7 @@ export class WebsocketStreamsConnection {
      * @param id Optional unsubscription ID
      * @returns void
      */
-    unsubscribe(stream: string | string[], id?: string): void {
+    unsubscribe(stream: string | string[], id?: number): void {
         this.websocketBase.unsubscribe(stream, id);
     }
 
