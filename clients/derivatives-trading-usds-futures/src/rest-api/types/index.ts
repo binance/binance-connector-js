@@ -183,6 +183,8 @@ export * from './trading-schedule-response-market-schedules-commodity';
 export * from './trading-schedule-response-market-schedules-commoditysessions-inner';
 export * from './trading-schedule-response-market-schedules-equity';
 export * from './trading-schedule-response-market-schedules-equitysessions-inner';
+export * from './trading-schedule-response-market-schedules-hkequity';
+export * from './trading-schedule-response-market-schedules-hkequitysessions-inner';
 export * from './trading-schedule-response-market-schedules-krequity';
 export * from './trading-schedule-response-market-schedules-krequitysessions-inner';
 export * from './user-commission-rate-response';

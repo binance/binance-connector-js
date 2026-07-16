@@ -1,5 +1,14 @@
 # Changelog
 
+## 35.0.0 - 2026-07-16
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `tradingSchedule()` (`GET /fapi/v1/tradingSchedule`):
+  - `marketSchedules`: property `HK_EQUITY` added
+
 ## 34.0.0 - 2026-07-15
 
 ### Changed (9)
