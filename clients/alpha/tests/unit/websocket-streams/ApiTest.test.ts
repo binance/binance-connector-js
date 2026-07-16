@@ -48,7 +48,7 @@ describe('Api', () => {
         it('should execute aggregateTradeStream() successfully', async () => {
             const params: AggregateTradeStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -79,7 +79,7 @@ describe('Api', () => {
 
             const params: AggregateTradeStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -135,7 +135,7 @@ describe('Api', () => {
     describe('allBookTickerStream()', () => {
         it('should execute allBookTickerStream() successfully', async () => {
             const params: AllBookTickerStreamRequest = {
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -164,7 +164,7 @@ describe('Api', () => {
             const websocketStreamApi = new Api(websocketStreamClient);
 
             const params: AllBookTickerStreamRequest = {
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -203,7 +203,7 @@ describe('Api', () => {
     describe('allMiniTickerStream()', () => {
         it('should execute allMiniTickerStream() successfully', async () => {
             const params: AllMiniTickerStreamRequest = {
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -232,7 +232,7 @@ describe('Api', () => {
             const websocketStreamApi = new Api(websocketStreamClient);
 
             const params: AllMiniTickerStreamRequest = {
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -271,7 +271,7 @@ describe('Api', () => {
     describe('allTickerStream()', () => {
         it('should execute allTickerStream() successfully', async () => {
             const params: AllTickerStreamRequest = {
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -309,7 +309,7 @@ describe('Api', () => {
             const websocketStreamApi = new Api(websocketStreamClient);
 
             const params: AllTickerStreamRequest = {
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -357,7 +357,7 @@ describe('Api', () => {
     describe('allTokens24hTickerStream()', () => {
         it('should execute allTokens24hTickerStream() successfully', async () => {
             const params: AllTokens24hTickerStreamRequest = {
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -393,7 +393,7 @@ describe('Api', () => {
             const websocketStreamApi = new Api(websocketStreamClient);
 
             const params: AllTokens24hTickerStreamRequest = {
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -440,7 +440,7 @@ describe('Api', () => {
         it('should execute bookTickerStream() successfully', async () => {
             const params: BookTickerStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -470,7 +470,7 @@ describe('Api', () => {
 
             const params: BookTickerStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -528,7 +528,7 @@ describe('Api', () => {
                 contractAddress: 'G7vQWurMkMMm2dU3iZpXYFTHT9Biio4F4gZCrwFpKNwG',
                 chainId: 'CT_501',
                 interval: ContractKlineStreamIntervalEnum.INTERVAL_1s,
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -563,7 +563,7 @@ describe('Api', () => {
                 contractAddress: 'G7vQWurMkMMm2dU3iZpXYFTHT9Biio4F4gZCrwFpKNwG',
                 chainId: 'CT_501',
                 interval: ContractKlineStreamIntervalEnum.INTERVAL_1s,
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -661,7 +661,7 @@ describe('Api', () => {
             const params: FullDepthStreamRequest = {
                 symbol: 'alpha_116usdt',
                 interval: FullDepthStreamIntervalEnum.INTERVAL_0ms,
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -698,7 +698,7 @@ describe('Api', () => {
             const params: FullDepthStreamRequest = {
                 symbol: 'alpha_116usdt',
                 interval: FullDepthStreamIntervalEnum.INTERVAL_0ms,
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -779,7 +779,7 @@ describe('Api', () => {
             const params: KlineStreamRequest = {
                 symbol: 'alpha_116usdt',
                 interval: KlineStreamIntervalEnum.INTERVAL_1m,
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -823,7 +823,7 @@ describe('Api', () => {
             const params: KlineStreamRequest = {
                 symbol: 'alpha_116usdt',
                 interval: KlineStreamIntervalEnum.INTERVAL_1m,
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -910,7 +910,7 @@ describe('Api', () => {
         it('should execute miniTickerStream() successfully', async () => {
             const params: MiniTickerStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -940,7 +940,7 @@ describe('Api', () => {
 
             const params: MiniTickerStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -998,7 +998,7 @@ describe('Api', () => {
                 symbol: 'alpha_116usdt',
                 levels: PartialDepthStreamLevelsEnum.LEVELS_5,
                 interval: PartialDepthStreamIntervalEnum.INTERVAL_0ms,
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -1036,7 +1036,7 @@ describe('Api', () => {
                 symbol: 'alpha_116usdt',
                 levels: PartialDepthStreamLevelsEnum.LEVELS_5,
                 interval: PartialDepthStreamIntervalEnum.INTERVAL_0ms,
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -1136,7 +1136,7 @@ describe('Api', () => {
         it('should execute tickerStream() successfully', async () => {
             const params: TickerStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -1175,7 +1175,7 @@ describe('Api', () => {
 
             const params: TickerStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -1240,7 +1240,7 @@ describe('Api', () => {
         it('should execute tradeStream() successfully', async () => {
             const params: TradeStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -1269,7 +1269,7 @@ describe('Api', () => {
 
             const params: TradeStreamRequest = {
                 symbol: 'alpha_116usdt',
-                id: '1',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(

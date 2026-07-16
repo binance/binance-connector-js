@@ -41,11 +41,11 @@ const ApiParamCreator = function () {
          *
          * @summary Aggregate Trade Stream
          * @param {string} symbol Symbol to subscribe, in lowercase stream format.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        aggregateTradeStream: (symbol: string, id?: string): string => {
+        aggregateTradeStream: (symbol: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('aggregateTradeStream', 'symbol', symbol);
 
@@ -58,44 +58,44 @@ const ApiParamCreator = function () {
          * Pushes best bid/ask updates for all symbols.
          *
          * @summary All Book Ticker Stream
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        allBookTickerStream: (id?: string): string => {
+        allBookTickerStream: (id?: number): string => {
             return replaceWebsocketStreamsPlaceholders('/!bookTicker'.slice(1), { id });
         },
         /**
          * Pushes mini ticker statistics for all symbols.
          *
          * @summary All Mini Ticker Stream
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        allMiniTickerStream: (id?: string): string => {
+        allMiniTickerStream: (id?: number): string => {
             return replaceWebsocketStreamsPlaceholders('/!miniTicker@arr'.slice(1), { id });
         },
         /**
          * Pushes full ticker statistics for all symbols.
          *
          * @summary All Ticker Stream
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        allTickerStream: (id?: string): string => {
+        allTickerStream: (id?: number): string => {
             return replaceWebsocketStreamsPlaceholders('/!ticker@arr'.slice(1), { id });
         },
         /**
          * Pushes 24h ticker-like metrics for all tokens.
          *
          * @summary All Tokens 24h Ticker Stream
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        allTokens24hTickerStream: (id?: string): string => {
+        allTokens24hTickerStream: (id?: number): string => {
             return replaceWebsocketStreamsPlaceholders('/came@allTokens@ticker24'.slice(1), { id });
         },
         /**
@@ -103,11 +103,11 @@ const ApiParamCreator = function () {
          *
          * @summary Book Ticker Stream
          * @param {string} symbol Symbol to subscribe, in lowercase stream format.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        bookTickerStream: (symbol: string, id?: string): string => {
+        bookTickerStream: (symbol: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('bookTickerStream', 'symbol', symbol);
 
@@ -123,7 +123,7 @@ const ApiParamCreator = function () {
          * @param {string} contractAddress Contract address.
          * @param {string} chainId Chain ID.
          * @param {ContractKlineStreamIntervalEnum} interval Kline interval.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
@@ -131,7 +131,7 @@ const ApiParamCreator = function () {
             contractAddress: string,
             chainId: string,
             interval: ContractKlineStreamIntervalEnum,
-            id?: string
+            id?: number
         ): string => {
             // verify required parameter 'contractAddress' is not null or undefined
             assertParamExists('contractKlineStream', 'contractAddress', contractAddress);
@@ -151,14 +151,14 @@ const ApiParamCreator = function () {
          * @summary Full Depth Stream
          * @param {string} symbol Symbol to subscribe, in lowercase stream format.
          * @param {FullDepthStreamIntervalEnum} interval Update interval.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
         fullDepthStream: (
             symbol: string,
             interval: FullDepthStreamIntervalEnum,
-            id?: string
+            id?: number
         ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('fullDepthStream', 'symbol', symbol);
@@ -177,11 +177,11 @@ const ApiParamCreator = function () {
          * @summary Kline Stream
          * @param {string} symbol Symbol to subscribe, in lowercase stream format.
          * @param {KlineStreamIntervalEnum} interval Kline interval.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        klineStream: (symbol: string, interval: KlineStreamIntervalEnum, id?: string): string => {
+        klineStream: (symbol: string, interval: KlineStreamIntervalEnum, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('klineStream', 'symbol', symbol);
             // verify required parameter 'interval' is not null or undefined
@@ -198,11 +198,11 @@ const ApiParamCreator = function () {
          *
          * @summary Mini Ticker Stream
          * @param {string} symbol Symbol to subscribe, in lowercase stream format.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        miniTickerStream: (symbol: string, id?: string): string => {
+        miniTickerStream: (symbol: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('miniTickerStream', 'symbol', symbol);
 
@@ -218,7 +218,7 @@ const ApiParamCreator = function () {
          * @param {string} symbol Symbol to subscribe, in lowercase stream format.
          * @param {PartialDepthStreamLevelsEnum} levels Depth levels.
          * @param {PartialDepthStreamIntervalEnum} interval Update interval.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
@@ -226,7 +226,7 @@ const ApiParamCreator = function () {
             symbol: string,
             levels: PartialDepthStreamLevelsEnum,
             interval: PartialDepthStreamIntervalEnum,
-            id?: string
+            id?: number
         ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('partialDepthStream', 'symbol', symbol);
@@ -245,11 +245,11 @@ const ApiParamCreator = function () {
          *
          * @summary Ticker Stream
          * @param {string} symbol Symbol to subscribe, in lowercase stream format.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        tickerStream: (symbol: string, id?: string): string => {
+        tickerStream: (symbol: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('tickerStream', 'symbol', symbol);
 
@@ -260,11 +260,11 @@ const ApiParamCreator = function () {
          *
          * @summary Trade Stream
          * @param {string} symbol Symbol to subscribe, in lowercase stream format.
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        tradeStream: (symbol: string, id?: string): string => {
+        tradeStream: (symbol: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('tradeStream', 'symbol', symbol);
 
@@ -469,10 +469,10 @@ export interface AggregateTradeStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiAggregateTradeStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -482,10 +482,10 @@ export interface AggregateTradeStreamRequest {
 export interface AllBookTickerStreamRequest {
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiAllBookTickerStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -495,10 +495,10 @@ export interface AllBookTickerStreamRequest {
 export interface AllMiniTickerStreamRequest {
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiAllMiniTickerStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -508,10 +508,10 @@ export interface AllMiniTickerStreamRequest {
 export interface AllTickerStreamRequest {
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiAllTickerStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -521,10 +521,10 @@ export interface AllTickerStreamRequest {
 export interface AllTokens24hTickerStreamRequest {
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiAllTokens24hTickerStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -541,10 +541,10 @@ export interface BookTickerStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiBookTickerStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -575,10 +575,10 @@ export interface ContractKlineStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiContractKlineStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -602,10 +602,10 @@ export interface FullDepthStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiFullDepthStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -629,10 +629,10 @@ export interface KlineStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiKlineStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -649,10 +649,10 @@ export interface MiniTickerStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiMiniTickerStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -683,10 +683,10 @@ export interface PartialDepthStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiPartialDepthStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -703,10 +703,10 @@ export interface TickerStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiTickerStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -723,10 +723,10 @@ export interface TradeStreamRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof ApiTradeStream
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
