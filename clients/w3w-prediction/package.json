@@ -1,7 +1,7 @@
 {
     "name": "@binance/w3w-prediction",
     "description": "Official Binance W3W Prediction Connector - A lightweight library that provides a convenient interface to Binance's W3W Prediction REST API.",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
@@ -56,7 +56,7 @@
         "typescript-eslint": "^8.24.0"
     },
     "dependencies": {
-        "@binance/common": "^2.4.2",
+        "@binance/common": "2.4.5",
         "axios": "^1.7.4"
     }
 }
