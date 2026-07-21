@@ -21,7 +21,7 @@
     },
     "homepage": "https://github.com/binance/binance-connector-js#readme",
     "devDependencies": {
-        "typedoc": "^0.28.5",
+        "typedoc": "^0.28.20",
         "typedoc-plugin-markdown": "^4.0.0",
         "typedoc-plugin-pages": "^1.0.0"
     },
