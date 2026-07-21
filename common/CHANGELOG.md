@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.5 - 2026-07-21
+
+### Changed (1)
+
+- Resolve security vulnerabilities.
+
 ## 2.4.4 - 2026-07-14
 
 ### Changed (1)
