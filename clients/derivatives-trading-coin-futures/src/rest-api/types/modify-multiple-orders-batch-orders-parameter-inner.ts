@@ -56,6 +56,12 @@ export interface ModifyMultipleOrdersBatchOrdersParameterInner {
      */
     price?: number;
     /**
+     * User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
+     * @type {number | bigint}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
+    modifyId?: number | bigint;
+    /**
      *
      * @type {number | bigint}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner

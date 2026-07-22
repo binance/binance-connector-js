@@ -45,4 +45,10 @@ export interface GetOrderModifyHistoryResponseInnerAmendment {
      * @memberof GetOrderModifyHistoryResponseInnerAmendment
      */
     count?: number | bigint;
+    /**
+     * user-defined modification identifier, only returned if provided in the request
+     * @type {number | bigint}
+     * @memberof GetOrderModifyHistoryResponseInnerAmendment
+     */
+    modifyId?: number | bigint;
 }

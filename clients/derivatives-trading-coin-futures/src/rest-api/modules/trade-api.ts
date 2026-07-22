@@ -843,6 +843,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - Batch modify orders are processed concurrently, and the order of matching is not guaranteed.
          * - The order of returned contents for batch modify orders is the same as the order of the order list.
          * - One order can only be modfied for less than 10000 times
+         * - `modifyId` is an optional user-defined identifier passed through as-is; the server does not validate its uniqueness. If omitted, it is not included in the response.
          *
          * @summary Modify Multiple Orders (TRADE)
          * @param {Array<ModifyMultipleOrdersBatchOrdersParameterInner>} batchOrders order list. Max 5 orders
@@ -904,6 +905,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [quantity] Order quantity, cannot be sent with `closePosition=true`. **After CM migration, this parameter becomes mandatory** (must be sent together with `price`).
          * @param {number} [price] Order price. **After CM migration, this parameter becomes mandatory** (must be sent together with `quantity`).
          * @param {ModifyOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; Can't be passed together with `price`
+         * @param {number | bigint} [modifyId] User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -916,6 +918,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             quantity?: number,
             price?: number,
             priceMatch?: ModifyOrderPriceMatchEnum,
+            modifyId?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -947,6 +950,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (priceMatch !== undefined && priceMatch !== null) {
                 localVarQueryParameter['priceMatch'] = priceMatch;
+            }
+            if (modifyId !== undefined && modifyId !== null) {
+                localVarQueryParameter['modifyId'] = modifyId;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -1762,6 +1768,7 @@ export interface TradeApiInterface {
      * - Batch modify orders are processed concurrently, and the order of matching is not guaranteed.
      * - The order of returned contents for batch modify orders is the same as the order of the order list.
      * - One order can only be modfied for less than 10000 times
+     * - `modifyId` is an optional user-defined identifier passed through as-is; the server does not validate its uniqueness. If omitted, it is not included in the response.
      *
      * @summary Modify Multiple Orders (TRADE)
      * @param {ModifyMultipleOrdersRequest} requestParameters Request parameters.
@@ -2528,6 +2535,13 @@ export interface ModifyOrderRequest {
      * @memberof TradeApiModifyOrder
      */
     readonly priceMatch?: ModifyOrderPriceMatchEnum;
+
+    /**
+     * User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
+     * @type {number | bigint}
+     * @memberof TradeApiModifyOrder
+     */
+    readonly modifyId?: number | bigint;
 
     /**
      *
@@ -3420,6 +3434,7 @@ export class TradeApi implements TradeApiInterface {
      * - Batch modify orders are processed concurrently, and the order of matching is not guaranteed.
      * - The order of returned contents for batch modify orders is the same as the order of the order list.
      * - One order can only be modfied for less than 10000 times
+     * - `modifyId` is an optional user-defined identifier passed through as-is; the server does not validate its uniqueness. If omitted, it is not included in the response.
      *
      * @summary Modify Multiple Orders (TRADE)
      * @param {ModifyMultipleOrdersRequest} requestParameters Request parameters.
@@ -3481,6 +3496,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.quantity,
             requestParameters?.price,
             requestParameters?.priceMatch,
+            requestParameters?.modifyId,
             requestParameters?.recvWindow
         );
         return sendRequest<ModifyOrderResponse>(

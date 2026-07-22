@@ -294,6 +294,7 @@ describe('TradeApi', () => {
                         pair: 'BTCUSD',
                         status: 'NEW',
                         clientOrderId: '5SztZiGFAxgAqw4J9EN9fA',
+                        modifyId: 1,
                         price: '51000',
                         origQty: '1',
                         executedQty: '0',

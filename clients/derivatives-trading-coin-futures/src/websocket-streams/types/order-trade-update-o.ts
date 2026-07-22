@@ -92,6 +92,12 @@ export interface OrderTradeUpdateO {
      */
     i?: number | bigint;
     /**
+     * modifyId, only pushed for AMENDMENT (order modification) events when a modifyId was provided in the request
+     * @type {string}
+     * @memberof OrderTradeUpdateO
+     */
+    M?: string;
+    /**
      * Order Last Filled Quantity
      * @type {string}
      * @memberof OrderTradeUpdateO

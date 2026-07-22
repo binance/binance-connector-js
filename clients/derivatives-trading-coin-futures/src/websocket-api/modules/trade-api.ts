@@ -267,6 +267,13 @@ export interface ModifyOrderRequest {
     readonly priceMatch?: ModifyOrderPriceMatchEnum;
 
     /**
+     * User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
+     * @type {number | bigint}
+     * @memberof TradeApiModifyOrder
+     */
+    readonly modifyId?: number | bigint;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof TradeApiModifyOrder
