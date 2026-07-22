@@ -1308,6 +1308,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number | bigint} [orderId] Order ID
          * @param {string} [origClientOrderId] Client order ID
          * @param {ModifyCmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
+         * @param {number | bigint} [modifyId] User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1320,6 +1321,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             orderId?: number | bigint,
             origClientOrderId?: string,
             priceMatch?: ModifyCmOrderPriceMatchEnum,
+            modifyId?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1355,6 +1357,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (priceMatch !== undefined && priceMatch !== null) {
                 localVarQueryParameter['priceMatch'] = priceMatch;
+            }
+            if (modifyId !== undefined && modifyId !== null) {
+                localVarQueryParameter['modifyId'] = modifyId;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -1394,6 +1399,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number | bigint} [orderId] Order ID
          * @param {string} [origClientOrderId] Client order ID
          * @param {ModifyUmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
+         * @param {number | bigint} [modifyId] User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1406,6 +1412,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             orderId?: number | bigint,
             origClientOrderId?: string,
             priceMatch?: ModifyUmOrderPriceMatchEnum,
+            modifyId?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1441,6 +1448,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (priceMatch !== undefined && priceMatch !== null) {
                 localVarQueryParameter['priceMatch'] = priceMatch;
+            }
+            if (modifyId !== undefined && modifyId !== null) {
+                localVarQueryParameter['modifyId'] = modifyId;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -6143,6 +6153,13 @@ export interface ModifyCmOrderRequest {
     readonly priceMatch?: ModifyCmOrderPriceMatchEnum;
 
     /**
+     * User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
+     * @type {number | bigint}
+     * @memberof TradeApiModifyCmOrder
+     */
+    readonly modifyId?: number | bigint;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof TradeApiModifyCmOrder
@@ -6203,6 +6220,13 @@ export interface ModifyUmOrderRequest {
      * @memberof TradeApiModifyUmOrder
      */
     readonly priceMatch?: ModifyUmOrderPriceMatchEnum;
+
+    /**
+     * User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
+     * @type {number | bigint}
+     * @memberof TradeApiModifyUmOrder
+     */
+    readonly modifyId?: number | bigint;
 
     /**
      *
@@ -8964,6 +8988,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.orderId,
             requestParameters?.origClientOrderId,
             requestParameters?.priceMatch,
+            requestParameters?.modifyId,
             requestParameters?.recvWindow
         );
         return sendRequest<ModifyCmOrderResponse>(
@@ -9010,6 +9035,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.orderId,
             requestParameters?.origClientOrderId,
             requestParameters?.priceMatch,
+            requestParameters?.modifyId,
             requestParameters?.recvWindow
         );
         return sendRequest<ModifyUmOrderResponse>(

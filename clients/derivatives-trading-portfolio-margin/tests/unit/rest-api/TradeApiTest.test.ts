@@ -2557,6 +2557,7 @@ describe('TradeApi', () => {
                     pair: 'BTCUSD',
                     status: 'NEW',
                     clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
+                    modifyId: 1,
                     price: '30005',
                     avgPrice: '0.0',
                     origQty: '1',
@@ -2596,6 +2597,7 @@ describe('TradeApi', () => {
                 orderId: 1,
                 origClientOrderId: '1',
                 priceMatch: ModifyCmOrderPriceMatchEnum.OPPONENT,
+                modifyId: 1,
                 recvWindow: 5000,
             };
 
@@ -2606,6 +2608,7 @@ describe('TradeApi', () => {
                     pair: 'BTCUSD',
                     status: 'NEW',
                     clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
+                    modifyId: 1,
                     price: '30005',
                     avgPrice: '0.0',
                     origQty: '1',
@@ -2734,6 +2737,7 @@ describe('TradeApi', () => {
                     symbol: 'BTCUSDT',
                     status: 'NEW',
                     clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
+                    modifyId: 1,
                     price: '30005',
                     avgPrice: '0.0',
                     origQty: '1',
@@ -2776,6 +2780,7 @@ describe('TradeApi', () => {
                 orderId: 1,
                 origClientOrderId: '1',
                 priceMatch: ModifyUmOrderPriceMatchEnum.OPPONENT,
+                modifyId: 1,
                 recvWindow: 5000,
             };
 
@@ -2785,6 +2790,7 @@ describe('TradeApi', () => {
                     symbol: 'BTCUSDT',
                     status: 'NEW',
                     clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
+                    modifyId: 1,
                     price: '30005',
                     avgPrice: '0.0',
                     origQty: '1',
@@ -5258,6 +5264,7 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
+                            modifyId: 123,
                         },
                     },
                 ])
@@ -5301,6 +5308,7 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
+                            modifyId: 123,
                         },
                     },
                 ])
@@ -6915,6 +6923,7 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
+                            modifyId: 123,
                         },
                         priceMatch: 'NONE',
                     },
@@ -6959,6 +6968,7 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
+                            modifyId: 123,
                         },
                         priceMatch: 'NONE',
                     },

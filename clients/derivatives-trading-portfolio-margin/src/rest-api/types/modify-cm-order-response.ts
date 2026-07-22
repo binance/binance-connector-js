@@ -50,6 +50,12 @@ export interface ModifyCmOrderResponse {
      */
     clientOrderId?: string;
     /**
+     * user-defined modification identifier, only returned if provided in the request
+     * @type {number | bigint}
+     * @memberof ModifyCmOrderResponse
+     */
+    modifyId?: number | bigint;
+    /**
      * Price.
      * @type {string}
      * @memberof ModifyCmOrderResponse

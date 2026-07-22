@@ -45,4 +45,10 @@ export interface QueryCmModifyOrderHistoryResponseInnerAmendment {
      * @memberof QueryCmModifyOrderHistoryResponseInnerAmendment
      */
     count?: number | bigint;
+    /**
+     * user-defined modification identifier, only returned if provided in the request
+     * @type {number | bigint}
+     * @memberof QueryCmModifyOrderHistoryResponseInnerAmendment
+     */
+    modifyId?: number | bigint;
 }
