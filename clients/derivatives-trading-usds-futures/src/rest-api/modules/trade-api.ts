@@ -1121,6 +1121,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {ModifyOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; Can't be passed together with `price`
+         * @param {number | bigint} [modifyId] User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1133,6 +1134,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             orderId?: number | bigint,
             origClientOrderId?: string,
             priceMatch?: ModifyOrderPriceMatchEnum,
+            modifyId?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1168,6 +1170,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (priceMatch !== undefined && priceMatch !== null) {
                 localVarQueryParameter['priceMatch'] = priceMatch;
+            }
+            if (modifyId !== undefined && modifyId !== null) {
+                localVarQueryParameter['modifyId'] = modifyId;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -3526,6 +3531,13 @@ export interface ModifyOrderRequest {
     readonly priceMatch?: ModifyOrderPriceMatchEnum;
 
     /**
+     * User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
+     * @type {number | bigint}
+     * @memberof TradeApiModifyOrder
+     */
+    readonly modifyId?: number | bigint;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof TradeApiModifyOrder
@@ -4986,6 +4998,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.orderId,
             requestParameters?.origClientOrderId,
             requestParameters?.priceMatch,
+            requestParameters?.modifyId,
             requestParameters?.recvWindow
         );
         return sendRequest<ModifyOrderResponse>(

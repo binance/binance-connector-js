@@ -68,6 +68,12 @@ export interface ModifyMultipleOrdersBatchOrdersParameterInner {
      */
     stopPrice?: number;
     /**
+     * User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
+     * @type {number | bigint}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
+    modifyId?: number | bigint;
+    /**
      * Validity window in milliseconds.
      * @type {number | bigint}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner

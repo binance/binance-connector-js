@@ -50,6 +50,12 @@ export interface ModifyMultipleOrdersResponseInner {
      */
     clientOrderId?: string;
     /**
+     * user-defined modification identifier, only returned if provided in the request
+     * @type {number | bigint}
+     * @memberof ModifyMultipleOrdersResponseInner
+     */
+    modifyId?: number | bigint;
+    /**
      *
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner

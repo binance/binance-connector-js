@@ -1665,6 +1665,7 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
+                            modifyId: 123,
                         },
                     },
                 ])
@@ -1708,6 +1709,7 @@ describe('TradeApi', () => {
                             price: { before: '30004', after: '30003.2' },
                             origQty: { before: '1', after: '1' },
                             count: 3,
+                            modifyId: 123,
                         },
                     },
                 ])
@@ -2014,6 +2016,7 @@ describe('TradeApi', () => {
                         pair: 'BTCUSDT',
                         status: 'NEW',
                         clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
+                        modifyId: 1,
                         price: '30005',
                         origQty: '1',
                         executedQty: '0',
@@ -2066,6 +2069,7 @@ describe('TradeApi', () => {
                         pair: 'BTCUSDT',
                         status: 'NEW',
                         clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
+                        modifyId: 1,
                         price: '30005',
                         origQty: '1',
                         executedQty: '0',
@@ -2152,6 +2156,7 @@ describe('TradeApi', () => {
                     pair: 'BTCUSDT',
                     status: 'NEW',
                     clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
+                    modifyId: 1,
                     price: '30005',
                     origQty: '1',
                     executedQty: '0',
@@ -2196,6 +2201,7 @@ describe('TradeApi', () => {
                 orderId: 20072994037,
                 origClientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
                 priceMatch: ModifyOrderPriceMatchEnum.OPPONENT,
+                modifyId: 1,
                 recvWindow: 5000,
             };
 
@@ -2206,6 +2212,7 @@ describe('TradeApi', () => {
                     pair: 'BTCUSDT',
                     status: 'NEW',
                     clientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
+                    modifyId: 1,
                     price: '30005',
                     origQty: '1',
                     executedQty: '0',

@@ -44,6 +44,12 @@ export interface ModifyOrderResponseResult {
      */
     clientOrderId?: string;
     /**
+     * user-defined modification identifier, only returned if provided in the request
+     * @type {number | bigint}
+     * @memberof ModifyOrderResponseResult
+     */
+    modifyId?: number | bigint;
+    /**
      *
      * @type {string}
      * @memberof ModifyOrderResponseResult
