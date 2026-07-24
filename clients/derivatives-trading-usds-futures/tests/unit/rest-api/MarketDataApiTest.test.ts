@@ -835,6 +835,7 @@ describe('MarketDataApi', () => {
                         fundingRate: '-0.03750000',
                         fundingTime: 1570608000000,
                         markPrice: '34287.54619963',
+                        rateType: 'Regular',
                     },
                 ])
             );
@@ -868,6 +869,7 @@ describe('MarketDataApi', () => {
                         fundingRate: '-0.03750000',
                         fundingTime: 1570608000000,
                         markPrice: '34287.54619963',
+                        rateType: 'Regular',
                     },
                 ])
             );

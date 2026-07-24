@@ -1,5 +1,15 @@
 # Changelog
 
+## 37.0.0 - 2026-07-24
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `getFundingRateHistory()` (`GET /fapi/v1/fundingRate`):
+  - items: property `rateType` added
+  - items: item property `rateType` added
+
 ## 36.0.0 - 2026-07-22
 
 ### Changed (7)
