@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { QuerySubAccountApiKeyResponseListInner } from './query-sub-account-api-key-response-list-inner';
+import type { QuerySubAccountApiKeyResponseRowsInner } from './query-sub-account-api-key-response-rows-inner';
 
 /**
  *
@@ -32,8 +32,8 @@ export interface QuerySubAccountApiKeyResponse {
     total?: number | bigint;
     /**
      *
-     * @type {Array<QuerySubAccountApiKeyResponseListInner>}
+     * @type {Array<QuerySubAccountApiKeyResponseRowsInner>}
      * @memberof QuerySubAccountApiKeyResponse
      */
-    list?: Array<QuerySubAccountApiKeyResponseListInner>;
+    rows?: Array<QuerySubAccountApiKeyResponseRowsInner>;
 }

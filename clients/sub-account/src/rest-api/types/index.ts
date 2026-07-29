@@ -64,7 +64,7 @@ export * from './query-managed-sub-account-transfer-log-master-account-investor-
 export * from './query-managed-sub-account-transfer-log-master-account-trading-response';
 export * from './query-managed-sub-account-transfer-log-sub-account-trading-response';
 export * from './query-sub-account-api-key-response';
-export * from './query-sub-account-api-key-response-list-inner';
+export * from './query-sub-account-api-key-response-rows-inner';
 export * from './query-sub-account-assets-asset-management-response';
 export * from './query-sub-account-assets-asset-management-response-balances-inner';
 export * from './query-sub-account-assets-response';

@@ -792,7 +792,7 @@ describe('ApiManagementApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     total: 1,
-                    list: [
+                    rows: [
                         {
                             email: '123@test.com',
                             apiName: 'myKey',
@@ -834,7 +834,7 @@ describe('ApiManagementApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     total: 1,
-                    list: [
+                    rows: [
                         {
                             email: '123@test.com',
                             apiName: 'myKey',

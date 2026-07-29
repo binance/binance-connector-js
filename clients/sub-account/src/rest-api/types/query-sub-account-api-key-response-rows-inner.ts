@@ -16,61 +16,61 @@
 /**
  *
  * @export
- * @interface QuerySubAccountApiKeyResponseListInner
+ * @interface QuerySubAccountApiKeyResponseRowsInner
  */
-export interface QuerySubAccountApiKeyResponseListInner {
+export interface QuerySubAccountApiKeyResponseRowsInner {
     /**
      *
      * @type {string}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     email?: string;
     /**
      *
      * @type {string}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     apiName?: string;
     /**
      *
      * @type {string}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     apikey?: string;
     /**
      *
      * @type {boolean}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     canTrade?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     canMarginLoanRepay?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     canFuturesTrade?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     canUniversalTransfer?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     canVanillaOptions?: boolean;
     /**
      *
      * @type {number | bigint}
-     * @memberof QuerySubAccountApiKeyResponseListInner
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
      */
     timestamp?: number | bigint;
 }
