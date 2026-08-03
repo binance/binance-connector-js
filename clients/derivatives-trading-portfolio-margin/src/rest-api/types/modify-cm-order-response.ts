@@ -62,12 +62,6 @@ export interface ModifyCmOrderResponse {
      */
     price?: string;
     /**
-     * Avg Price.
-     * @type {string}
-     * @memberof ModifyCmOrderResponse
-     */
-    avgPrice?: string;
-    /**
      * Orig Qty.
      * @type {string}
      * @memberof ModifyCmOrderResponse
@@ -85,12 +79,6 @@ export interface ModifyCmOrderResponse {
      * @memberof ModifyCmOrderResponse
      */
     cumQty?: string;
-    /**
-     * Cum Base.
-     * @type {string}
-     * @memberof ModifyCmOrderResponse
-     */
-    cumBase?: string;
     /**
      * Time In Force.
      * @type {string}

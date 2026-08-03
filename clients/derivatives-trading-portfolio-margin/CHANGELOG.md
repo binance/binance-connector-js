@@ -1,5 +1,19 @@
 # Changelog
 
+## 18.0.0 - 2026-08-03
+
+### Changed (2)
+
+#### REST API
+
+- Modified response for `modifyCmOrder()` (`PUT /papi/v1/cm/order`):
+  - property `avgPrice` deleted
+  - property `cumBase` deleted
+
+- Modified response for `modifyUmOrder()` (`PUT /papi/v1/um/order`):
+  - property `cumQuote` deleted
+  - property `avgPrice` deleted
+
 ## 17.0.0 - 2026-07-22
 
 ### Changed (5)

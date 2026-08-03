@@ -56,12 +56,6 @@ export interface ModifyUmOrderResponse {
      */
     price?: string;
     /**
-     * Avg Price.
-     * @type {string}
-     * @memberof ModifyUmOrderResponse
-     */
-    avgPrice?: string;
-    /**
      * Orig Qty.
      * @type {string}
      * @memberof ModifyUmOrderResponse
@@ -79,12 +73,6 @@ export interface ModifyUmOrderResponse {
      * @memberof ModifyUmOrderResponse
      */
     cumQty?: string;
-    /**
-     * Cum Quote.
-     * @type {string}
-     * @memberof ModifyUmOrderResponse
-     */
-    cumQuote?: string;
     /**
      * Time In Force.
      * @type {string}
