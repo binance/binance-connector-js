@@ -22,6 +22,7 @@ export * from './continuous-contract-kline-candlestick-data-item';
 export * from './continuous-contract-kline-candlestick-data-item-inner';
 export * from './continuous-contract-kline-candlestick-data-response';
 export * from './current-all-open-orders-response';
+export * from './current-all-open-orders-response-inner';
 export * from './exchange-information-response';
 export * from './exchange-information-response-rate-limits-inner';
 export * from './exchange-information-response-symbols-inner';

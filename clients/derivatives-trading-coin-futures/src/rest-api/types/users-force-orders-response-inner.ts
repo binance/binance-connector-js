@@ -80,6 +80,12 @@ export interface UsersForceOrdersResponseInner {
      */
     cumBase?: string;
     /**
+     * Cumulative quote asset amount.
+     * @type {string}
+     * @memberof UsersForceOrdersResponseInner
+     */
+    cumQuote?: string;
+    /**
      * Time in force
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
@@ -151,4 +157,10 @@ export interface UsersForceOrdersResponseInner {
      * @memberof UsersForceOrdersResponseInner
      */
     updateTime?: number | bigint;
+    /**
+     * order pre-set auto cancel time for TIF GTD order
+     * @type {number | bigint}
+     * @memberof UsersForceOrdersResponseInner
+     */
+    goodTillDate?: number | bigint;
 }

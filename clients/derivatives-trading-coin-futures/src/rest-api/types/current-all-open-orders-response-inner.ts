@@ -16,175 +16,163 @@
 /**
  *
  * @export
- * @interface AllOrdersResponseInner
+ * @interface CurrentAllOpenOrdersResponseInner
  */
-export interface AllOrdersResponseInner {
+export interface CurrentAllOpenOrdersResponseInner {
     /**
      * Average execution price
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     avgPrice?: string;
     /**
      * Client order ID.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     clientOrderId?: string;
     /**
      * Cumulative base asset amount.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     cumBase?: string;
     /**
-     * Cumulative quote asset amount.
-     * @type {string}
-     * @memberof AllOrdersResponseInner
-     */
-    cumQuote?: string;
-    /**
      * Executed quantity
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     executedQty?: string;
     /**
      * Sub-order ID
      * @type {number | bigint}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
      * Original order quantity
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     origQty?: string;
     /**
      * Original order type.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     origType?: string;
     /**
      * Latest token price.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     price?: string;
     /**
      * Whether the order is reduce-only.
      * @type {boolean}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
      * Trading side
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     side?: string;
     /**
      * Position side
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     positionSide?: string;
     /**
      * Enum：completed，processing
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     status?: string;
     /**
      * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     stopPrice?: string;
     /**
      * if Close-All
      * @type {boolean}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     closePosition?: boolean;
     /**
      * Trading symbol
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     symbol?: string;
     /**
      * Pair
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     pair?: string;
     /**
      * Time
      * @type {number | bigint}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     time?: number | bigint;
     /**
      * Time in force
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     timeInForce?: string;
     /**
      * Order type.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     type?: string;
     /**
      * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     activatePrice?: string;
     /**
      * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     priceRate?: string;
     /**
      * update time
      * @type {number | bigint}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
      * Stop trigger price type.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     workingType?: string;
     /**
      * if conditional order trigger is protected
      * @type {boolean}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
      * price match mode
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     priceMatch?: string;
     /**
      * self trading preventation mode
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     selfTradePreventionMode?: string;
-    /**
-     * order pre-set auto cancel time for TIF GTD order
-     * @type {number | bigint}
-     * @memberof AllOrdersResponseInner
-     */
-    goodTillDate?: number | bigint;
 }

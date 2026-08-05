@@ -1,5 +1,27 @@
 # Changelog
 
+## 20.0.0 - 2026-08-05
+
+### Changed (3)
+
+#### REST API
+
+- Modified response for `allOrders()` (`GET /dapi/v1/allOrders`):
+  - items: property `goodTillDate` added
+  - items: property `cumQuote` added
+  - items: item property `goodTillDate` added
+  - items: item property `cumQuote` added
+
+- Modified response for `usersForceOrders()` (`GET /dapi/v1/forceOrders`):
+  - items: property `cumQuote` added
+  - items: property `goodTillDate` added
+  - items: item property `cumQuote` added
+  - items: item property `goodTillDate` added
+
+- Modified response for `accountTradeList()` (`GET /dapi/v1/userTrades`):
+  - items: property `quoteQty` added
+  - items: item property `quoteQty` added
+
 ## 19.0.0 - 2026-07-22
 
 ### Changed (7)

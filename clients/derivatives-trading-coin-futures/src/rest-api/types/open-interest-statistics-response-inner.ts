@@ -44,7 +44,7 @@ export interface OpenInterestStatisticsResponseInner {
      */
     sumOpenInterestValue?: string;
     /**
-     * Timestamp in milliseconds.
+     * End time of the period, in milliseconds.
      * @type {number | bigint}
      * @memberof OpenInterestStatisticsResponseInner
      */

@@ -111,6 +111,7 @@ describe('TradeApi', () => {
                         realizedPnl: '0',
                         marginAsset: 'BTC',
                         baseQty: '0.01136364',
+                        quoteQty: '100',
                         commission: '0.00000454',
                         commissionAsset: 'BTC',
                         time: 1590743483586,
@@ -160,6 +161,7 @@ describe('TradeApi', () => {
                         realizedPnl: '0',
                         marginAsset: 'BTC',
                         baseQty: '0.01136364',
+                        quoteQty: '100',
                         commission: '0.00000454',
                         commissionAsset: 'BTC',
                         time: 1590743483586,
@@ -208,6 +210,7 @@ describe('TradeApi', () => {
                         avgPrice: '0.0',
                         clientOrderId: 'abc',
                         cumBase: '0',
+                        cumQuote: '0',
                         executedQty: '0',
                         orderId: 1917641,
                         origQty: '0.40',
@@ -222,7 +225,7 @@ describe('TradeApi', () => {
                         symbol: 'BTCUSD_200925',
                         pair: 'BTCUSD',
                         time: 1579276756075,
-                        timeInForce: 'GTC',
+                        timeInForce: 'GTD',
                         type: 'TRAILING_STOP_MARKET',
                         activatePrice: '9020',
                         priceRate: '0.3',
@@ -231,6 +234,7 @@ describe('TradeApi', () => {
                         priceProtect: false,
                         priceMatch: 'NONE',
                         selfTradePreventionMode: 'NONE',
+                        goodTillDate: 1579385751000,
                     },
                 ])
             );
@@ -266,6 +270,7 @@ describe('TradeApi', () => {
                         avgPrice: '0.0',
                         clientOrderId: 'abc',
                         cumBase: '0',
+                        cumQuote: '0',
                         executedQty: '0',
                         orderId: 1917641,
                         origQty: '0.40',
@@ -280,7 +285,7 @@ describe('TradeApi', () => {
                         symbol: 'BTCUSD_200925',
                         pair: 'BTCUSD',
                         time: 1579276756075,
-                        timeInForce: 'GTC',
+                        timeInForce: 'GTD',
                         type: 'TRAILING_STOP_MARKET',
                         activatePrice: '9020',
                         priceRate: '0.3',
@@ -289,6 +294,7 @@ describe('TradeApi', () => {
                         priceProtect: false,
                         priceMatch: 'NONE',
                         selfTradePreventionMode: 'NONE',
+                        goodTillDate: 1579385751000,
                     },
                 ])
             );
@@ -2577,6 +2583,7 @@ describe('TradeApi', () => {
                         origQty: '1',
                         executedQty: '1',
                         cumBase: '0.00882854',
+                        cumQuote: '100',
                         timeInForce: 'IOC',
                         type: 'LIMIT',
                         reduceOnly: false,
@@ -2589,6 +2596,7 @@ describe('TradeApi', () => {
                         origType: 'LIMIT',
                         time: 1596542005019,
                         updateTime: 1596542005050,
+                        goodTillDate: 0,
                     },
                 ])
             );
@@ -2630,6 +2638,7 @@ describe('TradeApi', () => {
                         origQty: '1',
                         executedQty: '1',
                         cumBase: '0.00882854',
+                        cumQuote: '100',
                         timeInForce: 'IOC',
                         type: 'LIMIT',
                         reduceOnly: false,
@@ -2642,6 +2651,7 @@ describe('TradeApi', () => {
                         origType: 'LIMIT',
                         time: 1596542005019,
                         updateTime: 1596542005050,
+                        goodTillDate: 0,
                     },
                 ])
             );

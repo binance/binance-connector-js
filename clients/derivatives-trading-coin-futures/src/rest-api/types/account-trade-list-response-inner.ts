@@ -80,6 +80,12 @@ export interface AccountTradeListResponseInner {
      */
     baseQty?: string;
     /**
+     * Quote asset quantity.
+     * @type {string}
+     * @memberof AccountTradeListResponseInner
+     */
+    quoteQty?: string;
+    /**
      * Transaction Fee (in Crypto)
      * @type {string}
      * @memberof AccountTradeListResponseInner
