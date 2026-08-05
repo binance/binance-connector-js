@@ -62,7 +62,7 @@ export interface BasisResponseInner {
      */
     pair?: string;
     /**
-     *
+     * Start time of the period, in milliseconds.
      * @type {number | bigint}
      * @memberof BasisResponseInner
      */

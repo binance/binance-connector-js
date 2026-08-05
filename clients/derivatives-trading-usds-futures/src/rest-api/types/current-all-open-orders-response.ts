@@ -16,11 +16,11 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AllOrdersResponseInner } from './all-orders-response-inner';
+import type { CurrentAllOpenOrdersResponseInner } from './current-all-open-orders-response-inner';
 
 /**
  *
  * @export
  * @interface CurrentAllOpenOrdersResponse
  */
-export interface CurrentAllOpenOrdersResponse extends Array<AllOrdersResponseInner> {}
+export interface CurrentAllOpenOrdersResponse extends Array<CurrentAllOpenOrdersResponseInner> {}

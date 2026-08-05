@@ -32,6 +32,12 @@ export interface UsersForceOrdersResponseInner {
      */
     symbol?: string;
     /**
+     * Pair.
+     * @type {string}
+     * @memberof UsersForceOrdersResponseInner
+     */
+    pair?: string;
+    /**
      *
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
@@ -73,6 +79,12 @@ export interface UsersForceOrdersResponseInner {
      * @memberof UsersForceOrdersResponseInner
      */
     cumQuote?: string;
+    /**
+     * Cum Base.
+     * @type {string}
+     * @memberof UsersForceOrdersResponseInner
+     */
+    cumBase?: string;
     /**
      *
      * @type {string}

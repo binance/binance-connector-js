@@ -28,67 +28,67 @@ import type { AccountInformationV3ResponsePositionsInner } from './account-infor
  */
 export interface AccountInformationV3Response {
     /**
-     * Total initial margin requirement.
+     * Total initial margin requirement. USDT only in single-asset mode; the sum of USD value of all cross positions/open order initial margin in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalInitialMargin?: string;
     /**
-     * Total maintenance margin requirement.
+     * Total maintenance margin requirement. USDT only in single-asset mode; the sum of USD value of all cross positions maintenance margin in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalMaintMargin?: string;
     /**
-     * Total wallet balance.
+     * Total wallet balance. USDT only in single-asset mode; USD-denominated in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalWalletBalance?: string;
     /**
-     * Total unrealized profit.
+     * Total unrealized profit. USDT only in single-asset mode; USD-denominated in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalUnrealizedProfit?: string;
     /**
-     * Total margin balance.
+     * Total margin balance. USDT only in single-asset mode; USD-denominated in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalMarginBalance?: string;
     /**
-     * Initial margin required for positions.
+     * Initial margin required for positions. USDT only in single-asset mode; the sum of USD value of all cross positions initial margin in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalPositionInitialMargin?: string;
     /**
-     * Initial margin required for open orders.
+     * Initial margin required for open orders. USDT only in single-asset mode; USD-denominated in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalOpenOrderInitialMargin?: string;
     /**
-     * Cross wallet balance.
+     * Cross wallet balance. USDT only in single-asset mode; USD-denominated in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalCrossWalletBalance?: string;
     /**
-     * Unrealized PnL for cross positions.
+     * Unrealized PnL for cross positions. USDT only in single-asset mode; USD-denominated in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalCrossUnPnl?: string;
     /**
-     * Available balance.
+     * Available balance. USDT only in single-asset mode; USD-denominated in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     availableBalance?: string;
     /**
-     * Maximum transferable/withdrawable amount.
+     * Maximum transferable/withdrawable amount. USDT only in single-asset mode; a maximum virtual USD amount in multi-assets mode.
      * @type {string}
      * @memberof AccountInformationV3Response
      */

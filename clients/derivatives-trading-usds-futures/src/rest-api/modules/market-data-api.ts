@@ -818,7 +818,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get older market historical trades.
          *
-         * Weight(IP): 20
+         * Weight(IP): 200
          *
          * Security Type: MARKET_DATA
          *
@@ -1971,7 +1971,7 @@ export interface MarketDataApiInterface {
     /**
      * Get older market historical trades.
      *
-     * Weight(IP): 20
+     * Weight(IP): 200
      *
      * Security Type: MARKET_DATA
      *
@@ -3691,7 +3691,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get older market historical trades.
      *
-     * Weight(IP): 20
+     * Weight(IP): 200
      *
      * Security Type: MARKET_DATA
      *

@@ -74,6 +74,18 @@ export interface AccountTradeListResponseInner {
      */
     quoteQty?: string;
     /**
+     * Base Qty.
+     * @type {string}
+     * @memberof AccountTradeListResponseInner
+     */
+    baseQty?: string;
+    /**
+     * Margin Asset.
+     * @type {string}
+     * @memberof AccountTradeListResponseInner
+     */
+    marginAsset?: string;
+    /**
      * Realized Pnl.
      * @type {string}
      * @memberof AccountTradeListResponseInner
@@ -97,6 +109,12 @@ export interface AccountTradeListResponseInner {
      * @memberof AccountTradeListResponseInner
      */
     symbol?: string;
+    /**
+     * Pair.
+     * @type {string}
+     * @memberof AccountTradeListResponseInner
+     */
+    pair?: string;
     /**
      * Time.
      * @type {number | bigint}

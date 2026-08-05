@@ -16,175 +16,163 @@
 /**
  *
  * @export
- * @interface AllOrdersResponseInner
+ * @interface CurrentAllOpenOrdersResponseInner
  */
-export interface AllOrdersResponseInner {
+export interface CurrentAllOpenOrdersResponseInner {
     /**
      * Avg Price.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     avgPrice?: string;
     /**
      * Client Order Id.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     clientOrderId?: string;
     /**
      * Cum Quote.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     cumQuote?: string;
     /**
-     * Cum Base.
-     * @type {string}
-     * @memberof AllOrdersResponseInner
-     */
-    cumBase?: string;
-    /**
      * Executed Qty.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     executedQty?: string;
     /**
      * Order Id.
      * @type {number | bigint}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
      * Orig Qty.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     origQty?: string;
     /**
      * Orig Type.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     origType?: string;
     /**
      * Price.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     price?: string;
     /**
      * Reduce Only.
      * @type {boolean}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
      * Side.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     side?: string;
     /**
      * Position Side.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     positionSide?: string;
     /**
      * Status.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     status?: string;
     /**
      * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     stopPrice?: string;
     /**
      * if Close-All
      * @type {boolean}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     closePosition?: boolean;
     /**
      * Symbol.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     symbol?: string;
     /**
-     * Pair.
-     * @type {string}
-     * @memberof AllOrdersResponseInner
-     */
-    pair?: string;
-    /**
      * order time
      * @type {number | bigint}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     time?: number | bigint;
     /**
      * Time In Force.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     timeInForce?: string;
     /**
      * Type.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     type?: string;
     /**
      * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     activatePrice?: string;
     /**
      * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     priceRate?: string;
     /**
      * update time
      * @type {number | bigint}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
      * Working Type.
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     workingType?: string;
     /**
      * if conditional order trigger is protected
      * @type {boolean}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
      * price match mode
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     priceMatch?: string;
     /**
      * self trading preventation mode
      * @type {string}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
      * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
-     * @memberof AllOrdersResponseInner
+     * @memberof CurrentAllOpenOrdersResponseInner
      */
     goodTillDate?: number | bigint;
 }

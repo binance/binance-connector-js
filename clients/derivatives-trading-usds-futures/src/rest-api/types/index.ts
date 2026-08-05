@@ -43,6 +43,7 @@ export * from './continuous-contract-kline-candlestick-data-response';
 export * from './current-all-algo-open-orders-response';
 export * from './current-all-algo-open-orders-response-inner';
 export * from './current-all-open-orders-response';
+export * from './current-all-open-orders-response-inner';
 export * from './exchange-information-response';
 export * from './exchange-information-response-assets-inner';
 export * from './exchange-information-response-rate-limits-inner';
