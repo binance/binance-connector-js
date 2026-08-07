@@ -45,4 +45,10 @@ export interface AccountUpdateA {
      * @memberof AccountUpdateA
      */
     P?: Array<AccountUpdateAPInner>;
+    /**
+     * Symbol associated with FUNDING_FEE event
+     * @type {string}
+     * @memberof AccountUpdateA
+     */
+    S?: string;
 }
