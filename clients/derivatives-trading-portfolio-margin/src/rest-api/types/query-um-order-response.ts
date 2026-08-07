@@ -86,7 +86,7 @@ export interface QueryUmOrderResponse {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof QueryUmOrderResponse
      */

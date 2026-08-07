@@ -80,7 +80,7 @@ export interface QueryCmOrderResponse {
      */
     side?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof QueryCmOrderResponse
      */

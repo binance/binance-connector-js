@@ -86,7 +86,7 @@ export interface QueryAllCmOrdersResponseInner {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof QueryAllCmOrdersResponseInner
      */

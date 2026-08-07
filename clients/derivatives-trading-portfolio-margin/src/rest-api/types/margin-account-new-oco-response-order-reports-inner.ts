@@ -74,7 +74,7 @@ export interface MarginAccountNewOcoResponseOrderReportsInner {
      */
     cummulativeQuoteQty?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */

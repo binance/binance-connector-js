@@ -68,7 +68,7 @@ export interface CancelMarginAccountOrderResponse {
      */
     cummulativeQuoteQty?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof CancelMarginAccountOrderResponse
      */

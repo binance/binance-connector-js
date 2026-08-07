@@ -32,7 +32,7 @@ export interface QueryUsersUmForceOrdersResponseInner {
      */
     symbol?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof QueryUsersUmForceOrdersResponseInner
      */

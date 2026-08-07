@@ -74,7 +74,7 @@ export interface CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderRepo
      */
     cummulativeQuoteQty?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */

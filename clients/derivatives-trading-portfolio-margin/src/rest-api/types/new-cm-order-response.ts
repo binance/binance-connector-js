@@ -74,7 +74,7 @@ export interface NewCmOrderResponse {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof NewCmOrderResponse
      */

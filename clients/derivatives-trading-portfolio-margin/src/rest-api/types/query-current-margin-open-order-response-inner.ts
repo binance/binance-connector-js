@@ -74,7 +74,7 @@ export interface QueryCurrentMarginOpenOrderResponseInner {
      */
     side?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof QueryCurrentMarginOpenOrderResponseInner
      */

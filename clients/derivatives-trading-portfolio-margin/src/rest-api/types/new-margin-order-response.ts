@@ -73,7 +73,7 @@ export interface NewMarginOrderResponse {
      */
     cummulativeQuoteQty?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof NewMarginOrderResponse
      */

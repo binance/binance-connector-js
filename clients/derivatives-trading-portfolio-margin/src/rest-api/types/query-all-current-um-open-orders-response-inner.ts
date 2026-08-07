@@ -86,7 +86,7 @@ export interface QueryAllCurrentUmOpenOrdersResponseInner {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */

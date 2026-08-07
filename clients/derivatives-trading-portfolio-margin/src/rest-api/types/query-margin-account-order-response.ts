@@ -74,7 +74,7 @@ export interface QueryMarginAccountOrderResponse {
      */
     side?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof QueryMarginAccountOrderResponse
      */

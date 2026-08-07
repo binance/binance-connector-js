@@ -169,4 +169,10 @@ export interface AlgoOrderUpdateAo {
      * @memberof AlgoOrderUpdateAo
      */
     rm?: string;
+    /**
+     * Is activated or not, only meaningful for trailing order
+     * @type {boolean}
+     * @memberof AlgoOrderUpdateAo
+     */
+    ia?: boolean;
 }
