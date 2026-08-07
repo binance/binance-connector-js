@@ -1,5 +1,11 @@
 # Changelog
 
+## 22.1.0 - 2026-08-07
+
+### Added (1)
+
+- `getSpotAssetTags()` (`GET /sapi/v1/spot/asset/tags`)
+
 ## 22.0.1 - 2026-07-21
 
 ### Changed (2)

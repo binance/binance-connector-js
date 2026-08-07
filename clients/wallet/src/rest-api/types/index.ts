@@ -58,6 +58,8 @@ export * from './get-open-symbol-list-response';
 export * from './get-open-symbol-list-response-inner';
 export * from './get-region-list-response';
 export * from './get-region-list-response-regions-inner';
+export * from './get-spot-asset-tags-response';
+export * from './get-spot-asset-tags-response-inner';
 export * from './get-symbols-delist-schedule-for-spot-response';
 export * from './get-symbols-delist-schedule-for-spot-response-inner';
 export * from './one-click-arrival-deposit-apply-response';

@@ -140,7 +140,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Deposit History (supporting network) (USER_DATA)
          * @param {boolean} [includeSource] return `sourceAddress` field when set to `true`
          * @param {string} [coin]
-         * @param {DepositHistoryStatusEnum} [status] 0: pending, 6: credited but cannot withdraw, 7: Wrong Deposit, 8: Waiting User confirm, 1: success
+         * @param {DepositHistoryStatusEnum} [status] 0: pending, 1: success, 2: rejected, 6: credited but cannot withdraw, 7: Wrong Deposit, 8: Waiting User confirm
          * @param {number | bigint} [startTime] Default: 90 days from current timestamp
          * @param {number | bigint} [endTime] Default: present timestamp
          * @param {number | bigint} [offset]
@@ -770,7 +770,7 @@ export interface DepositHistoryRequest {
     readonly coin?: string;
 
     /**
-     * 0: pending, 6: credited but cannot withdraw, 7: Wrong Deposit, 8: Waiting User confirm, 1: success
+     * 0: pending, 1: success, 2: rejected, 6: credited but cannot withdraw, 7: Wrong Deposit, 8: Waiting User confirm
      * @type {0 | 1 | 2 | 6 | 7 | 8 | bigint}
      * @memberof CapitalApiDepositHistory
      */

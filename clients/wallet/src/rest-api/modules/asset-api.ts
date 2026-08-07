@@ -29,6 +29,7 @@ import type {
     GetAssetsThatCanBeConvertedIntoBnbResponse,
     GetCloudMiningPaymentAndRefundHistoryResponse,
     GetOpenSymbolListResponse,
+    GetSpotAssetTagsResponse,
     QueryUserDelegationHistoryResponse,
     QueryUserUniversalTransferHistoryResponse,
     QueryUserWalletBalanceResponse,
@@ -557,6 +558,39 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Get the tags configured for spot-tradable assets.
+         *
+         * Weight(IP): 100
+         *
+         * Security Type: MARKET_DATA
+         *
+         * @summary Get Spot Asset Tags (MARKET_DATA)
+         * @param {string} [tag] Tag filter. Supports multiple comma-separated tags with OR semantics (an asset is returned if it matches any one tag); leading/trailing whitespace around each tag is ignored. Returns all eligible assets when omitted.
+         *
+         * @throws {RequiredError}
+         */
+        getSpotAssetTags: async (tag?: string): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (tag !== undefined && tag !== null) {
+                localVarQueryParameter['tag'] = tag;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/spot/asset/tags',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Query User Delegation History
          *
          * Weight(IP): 60
@@ -889,7 +923,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * User universal transfer
          *
-         * Weight(UID): 900
+         * Weight(UID): 300
          *
          * Security Type: USER_DATA
          *
@@ -1175,6 +1209,22 @@ export interface AssetApiInterface {
      */
     getOpenSymbolList(): Promise<RestApiResponse<GetOpenSymbolListResponse>>;
     /**
+     * Get the tags configured for spot-tradable assets.
+     *
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Spot Asset Tags (MARKET_DATA)
+     * @param {GetSpotAssetTagsRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetApiInterface
+     */
+    getSpotAssetTags(
+        requestParameters?: GetSpotAssetTagsRequest
+    ): Promise<RestApiResponse<GetSpotAssetTagsResponse>>;
+    /**
      * Query User Delegation History
      *
      * Weight(IP): 60
@@ -1282,7 +1332,7 @@ export interface AssetApiInterface {
     /**
      * User universal transfer
      *
-     * Weight(UID): 900
+     * Weight(UID): 300
      *
      * Security Type: USER_DATA
      *
@@ -1631,6 +1681,19 @@ export interface GetCloudMiningPaymentAndRefundHistoryRequest {
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
     readonly size?: number | bigint;
+}
+
+/**
+ * Request parameters for getSpotAssetTags operation in AssetApi.
+ * @interface GetSpotAssetTagsRequest
+ */
+export interface GetSpotAssetTagsRequest {
+    /**
+     * Tag filter. Supports multiple comma-separated tags with OR semantics (an asset is returned if it matches any one tag); leading/trailing whitespace around each tag is ignored. Returns all eligible assets when omitted.
+     * @type {string}
+     * @memberof AssetApiGetSpotAssetTags
+     */
+    readonly tag?: string;
 }
 
 /**
@@ -2277,6 +2340,38 @@ export class AssetApi implements AssetApiInterface {
     }
 
     /**
+     * Get the tags configured for spot-tradable assets.
+     *
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Spot Asset Tags (MARKET_DATA)
+     * @param {GetSpotAssetTagsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetSpotAssetTagsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#get-spot-asset-tags Binance API Documentation}
+     */
+    public async getSpotAssetTags(
+        requestParameters: GetSpotAssetTagsRequest = {}
+    ): Promise<RestApiResponse<GetSpotAssetTagsResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getSpotAssetTags(
+            requestParameters?.tag
+        );
+        return sendRequest<GetSpotAssetTagsResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
      * Query User Delegation History
      *
      * Weight(IP): 60
@@ -2506,7 +2601,7 @@ export class AssetApi implements AssetApiInterface {
     /**
      * User universal transfer
      *
-     * Weight(UID): 900
+     * Weight(UID): 300
      *
      * Security Type: USER_DATA
      *

@@ -37,6 +37,7 @@ import {
     FundingWalletRequest,
     GetAssetsThatCanBeConvertedIntoBnbRequest,
     GetCloudMiningPaymentAndRefundHistoryRequest,
+    GetSpotAssetTagsRequest,
     QueryUserDelegationHistoryRequest,
     QueryUserUniversalTransferHistoryRequest,
     QueryUserWalletBalanceRequest,
@@ -56,6 +57,7 @@ import type {
     GetAssetsThatCanBeConvertedIntoBnbResponse,
     GetCloudMiningPaymentAndRefundHistoryResponse,
     GetOpenSymbolListResponse,
+    GetSpotAssetTagsResponse,
     QueryUserDelegationHistoryResponse,
     QueryUserUniversalTransferHistoryResponse,
     QueryUserWalletBalanceResponse,
@@ -1026,6 +1028,79 @@ describe('AssetApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'getOpenSymbolList').mockRejectedValueOnce(mockError);
             await expect(client.getOpenSymbolList()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getSpotAssetTags()', () => {
+        it('should execute getSpotAssetTags() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        assetCode: 'BNB',
+                        assetName: 'BNB',
+                        trading: true,
+                        tags: ['Layer1_Layer2', 'BSC'],
+                    },
+                ])
+            );
+
+            const spy = jest.spyOn(client, 'getSpotAssetTags').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetSpotAssetTagsResponse>)
+            );
+            const response = await client.getSpotAssetTags();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getSpotAssetTags() successfully with optional parameters', async () => {
+            const params: GetSpotAssetTagsRequest = {
+                tag: 'Layer1_Layer2,BSC',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        assetCode: 'BNB',
+                        assetName: 'BNB',
+                        trading: true,
+                        tags: ['Layer1_Layer2', 'BSC'],
+                    },
+                ])
+            );
+
+            const spy = jest.spyOn(client, 'getSpotAssetTags').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetSpotAssetTagsResponse>)
+            );
+            const response = await client.getSpotAssetTags(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'getSpotAssetTags').mockRejectedValueOnce(mockError);
+            await expect(client.getSpotAssetTags()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

@@ -37,6 +37,7 @@ import type {
     FundingWalletRequest,
     GetAssetsThatCanBeConvertedIntoBnbRequest,
     GetCloudMiningPaymentAndRefundHistoryRequest,
+    GetSpotAssetTagsRequest,
     QueryUserDelegationHistoryRequest,
     QueryUserUniversalTransferHistoryRequest,
     QueryUserWalletBalanceRequest,
@@ -90,6 +91,7 @@ import type {
     GetAssetsThatCanBeConvertedIntoBnbResponse,
     GetCloudMiningPaymentAndRefundHistoryResponse,
     GetOpenSymbolListResponse,
+    GetSpotAssetTagsResponse,
     QueryUserDelegationHistoryResponse,
     QueryUserUniversalTransferHistoryResponse,
     QueryUserWalletBalanceResponse,
@@ -566,6 +568,26 @@ export class RestAPI {
     }
 
     /**
+     * Get the tags configured for spot-tradable assets.
+     *
+     * Weight(IP): 100
+     *
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Spot Asset Tags (MARKET_DATA)
+     * @param {GetSpotAssetTagsRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetSpotAssetTagsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-wallet/api/rest-api/asset#get-spot-asset-tags Binance API Documentation}
+     */
+    getSpotAssetTags(
+        requestParameters: GetSpotAssetTagsRequest = {}
+    ): Promise<RestApiResponse<GetSpotAssetTagsResponse>> {
+        return this.assetApi.getSpotAssetTags(requestParameters);
+    }
+
+    /**
      * Query User Delegation History
      *
      * Weight(IP): 60
@@ -699,7 +721,7 @@ export class RestAPI {
     /**
      * User universal transfer
      *
-     * Weight(UID): 900
+     * Weight(UID): 300
      *
      * Security Type: USER_DATA
      *
