@@ -74,7 +74,7 @@ export interface PlaceMultipleOrdersResponseInner {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */

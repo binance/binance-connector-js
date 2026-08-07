@@ -38,7 +38,7 @@ export interface UsersForceOrdersResponseInner {
      */
     pair?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof UsersForceOrdersResponseInner
      */

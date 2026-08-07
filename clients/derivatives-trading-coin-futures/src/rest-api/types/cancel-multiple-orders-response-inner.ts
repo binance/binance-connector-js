@@ -74,7 +74,7 @@ export interface CancelMultipleOrdersResponseInner {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */

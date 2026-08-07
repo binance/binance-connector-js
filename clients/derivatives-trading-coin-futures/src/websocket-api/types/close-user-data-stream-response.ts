@@ -31,7 +31,7 @@ export interface CloseUserDataStreamResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof CloseUserDataStreamResponse
      */

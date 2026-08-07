@@ -38,7 +38,7 @@ export interface ModifyOrderResponseResult {
      */
     pair?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof ModifyOrderResponseResult
      */

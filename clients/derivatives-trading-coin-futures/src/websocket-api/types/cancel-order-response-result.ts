@@ -38,7 +38,7 @@ export interface CancelOrderResponseResult {
      */
     pair?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof CancelOrderResponseResult
      */

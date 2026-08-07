@@ -34,7 +34,7 @@ export interface NewOrderResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof NewOrderResponse
      */

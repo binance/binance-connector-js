@@ -74,7 +74,7 @@ export interface CancelOrderResponse {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof CancelOrderResponse
      */

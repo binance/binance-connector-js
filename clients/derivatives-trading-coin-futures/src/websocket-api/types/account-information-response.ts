@@ -34,7 +34,7 @@ export interface AccountInformationResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof AccountInformationResponse
      */

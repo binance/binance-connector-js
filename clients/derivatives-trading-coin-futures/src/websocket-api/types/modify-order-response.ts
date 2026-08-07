@@ -34,7 +34,7 @@ export interface ModifyOrderResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof ModifyOrderResponse
      */

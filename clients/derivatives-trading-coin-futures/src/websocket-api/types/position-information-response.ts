@@ -34,7 +34,7 @@ export interface PositionInformationResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof PositionInformationResponse
      */

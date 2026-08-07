@@ -92,7 +92,7 @@ export interface AllOrdersResponseInner {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */

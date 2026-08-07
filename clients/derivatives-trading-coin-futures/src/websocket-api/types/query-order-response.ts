@@ -34,7 +34,7 @@ export interface QueryOrderResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof QueryOrderResponse
      */

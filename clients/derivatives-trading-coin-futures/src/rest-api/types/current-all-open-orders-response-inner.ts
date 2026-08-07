@@ -86,7 +86,7 @@ export interface CurrentAllOpenOrdersResponseInner {
      */
     positionSide?: string;
     /**
-     * Enum：completed，processing
+     * Status.
      * @type {string}
      * @memberof CurrentAllOpenOrdersResponseInner
      */

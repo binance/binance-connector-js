@@ -34,7 +34,7 @@ export interface StartUserDataStreamResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof StartUserDataStreamResponse
      */

@@ -34,7 +34,7 @@ export interface KeepaliveUserDataStreamResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof KeepaliveUserDataStreamResponse
      */

@@ -34,7 +34,7 @@ export interface CancelOrderResponse {
      */
     id?: string;
     /**
-     * Enum：completed，processing
+     *
      * @type {number | bigint}
      * @memberof CancelOrderResponse
      */

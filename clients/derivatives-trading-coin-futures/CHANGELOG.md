@@ -1,5 +1,17 @@
 # Changelog
 
+## 20.0.1 - 2026-08-07
+
+### Changed (1)
+
+#### WebSocket Streams
+
+- Modified response field `a`:
+  - property `S` added
+  - affected events:
+    - `UserDataStreamEventsResponse`
+    - `accountUpdate`
+
 ## 20.0.0 - 2026-08-05
 
 ### Changed (3)
