@@ -755,12 +755,15 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query User Wallet Balance (USER_DATA)
          * @param {string} [quoteAsset]
+         * @param {boolean} [needBalanceDetail] Whether to return the per-asset balance detail for each wallet. When `false` or omitted, the response is
+         * unchanged from current behavior.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUserWalletBalance: async (
             quoteAsset?: string,
+            needBalanceDetail?: boolean,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -769,6 +772,9 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (quoteAsset !== undefined && quoteAsset !== null) {
                 localVarQueryParameter['quoteAsset'] = quoteAsset;
+            }
+            if (needBalanceDetail !== undefined && needBalanceDetail !== null) {
+                localVarQueryParameter['needBalanceDetail'] = needBalanceDetail;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -1833,6 +1839,14 @@ export interface QueryUserWalletBalanceRequest {
     readonly quoteAsset?: string;
 
     /**
+     * Whether to return the per-asset balance detail for each wallet. When `false` or omitted, the response is
+     * unchanged from current behavior.
+     * @type {boolean}
+     * @memberof AssetApiQueryUserWalletBalance
+     */
+    readonly needBalanceDetail?: boolean;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof AssetApiQueryUserWalletBalance
@@ -2475,6 +2489,7 @@ export class AssetApi implements AssetApiInterface {
     ): Promise<RestApiResponse<QueryUserWalletBalanceResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.queryUserWalletBalance(
             requestParameters?.quoteAsset,
+            requestParameters?.needBalanceDetail,
             requestParameters?.recvWindow
         );
         return sendRequest<QueryUserWalletBalanceResponse>(

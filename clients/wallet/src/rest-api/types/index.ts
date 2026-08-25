@@ -69,6 +69,7 @@ export * from './query-user-universal-transfer-history-response';
 export * from './query-user-universal-transfer-history-response-rows-inner';
 export * from './query-user-wallet-balance-response';
 export * from './query-user-wallet-balance-response-inner';
+export * from './query-user-wallet-balance-response-inner-asset-balances-inner';
 export * from './submit-deposit-questionnaire-response';
 export * from './submit-deposit-questionnaire-travel-rule-response';
 export * from './submit-deposit-questionnaire-v2-response';

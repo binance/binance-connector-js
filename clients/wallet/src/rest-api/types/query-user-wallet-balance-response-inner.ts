@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Wallet REST API
@@ -12,6 +13,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { QueryUserWalletBalanceResponseInnerAssetBalancesInner } from './query-user-wallet-balance-response-inner-asset-balances-inner';
 
 /**
  *
@@ -37,4 +42,10 @@ export interface QueryUserWalletBalanceResponseInner {
      * @memberof QueryUserWalletBalanceResponseInner
      */
     walletName?: string;
+    /**
+     * Per-asset balance detail for this wallet. Only present when `needBalanceDetail=true` is passed; omitted entirely otherwise.
+     * @type {Array<QueryUserWalletBalanceResponseInnerAssetBalancesInner>}
+     * @memberof QueryUserWalletBalanceResponseInner
+     */
+    assetBalances?: Array<QueryUserWalletBalanceResponseInnerAssetBalancesInner>;
 }

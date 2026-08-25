@@ -1368,7 +1368,24 @@ describe('AssetApi', () => {
     describe('queryUserWalletBalance()', () => {
         it('should execute queryUserWalletBalance() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([{ activate: true, balance: '0', walletName: 'Spot' }])
+                JSONStringify([
+                    {
+                        activate: true,
+                        balance: '0',
+                        walletName: 'Spot',
+                        assetBalances: [
+                            {
+                                asset: 'USDT',
+                                assetName: 'TetherUS',
+                                free: '6.238383',
+                                locked: '0',
+                                freeze: '0',
+                                withdrawing: '0',
+                                btcValuation: '6.238383',
+                            },
+                        ],
+                    },
+                ])
             );
 
             const spy = jest.spyOn(client, 'queryUserWalletBalance').mockReturnValue(
@@ -1388,11 +1405,29 @@ describe('AssetApi', () => {
         it('should execute queryUserWalletBalance() successfully with optional parameters', async () => {
             const params: QueryUserWalletBalanceRequest = {
                 quoteAsset: 'BTC',
+                needBalanceDetail: false,
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
-                JSONStringify([{ activate: true, balance: '0', walletName: 'Spot' }])
+                JSONStringify([
+                    {
+                        activate: true,
+                        balance: '0',
+                        walletName: 'Spot',
+                        assetBalances: [
+                            {
+                                asset: 'USDT',
+                                assetName: 'TetherUS',
+                                free: '6.238383',
+                                locked: '0',
+                                freeze: '0',
+                                withdrawing: '0',
+                                btcValuation: '6.238383',
+                            },
+                        ],
+                    },
+                ])
             );
 
             const spy = jest.spyOn(client, 'queryUserWalletBalance').mockReturnValue(

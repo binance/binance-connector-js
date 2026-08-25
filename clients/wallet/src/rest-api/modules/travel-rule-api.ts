@@ -53,6 +53,42 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
          * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
          *
+         **StandardPii**
+         *
+         **For Natural Person**
+         *
+         * - `piiType` (INTEGER, Mandatory): Fix to 0: Natural Person
+         * - `latinNames` (List&lt;PiiName&gt;, Mandatory): In case a person have complicated names or multiple names, this parameter is a list
+         * - `localNames` (List&lt;PiiName&gt;, Optional): In case a person have complicated names or multiple names, this parameter is a list
+         * - `nationality` (STRING, Optional)
+         * - `residenceCountry` (STRING, Mandatory)
+         * - `nationalIdentifier` (STRING, Optional)
+         * - `nationalIdentifierType` (STRING, Optional)
+         * - `nationalIdentifierIssueCountry` (STRING, Optional)
+         * - `dateOfBirth` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended. Providing DOB could greatly reduce false positive rate during risk checking process.
+         * - `placeOfBirth` (STRING, Optional)
+         * - `address` (STRING, Optional)
+         *
+         **For Legal Person**
+         *
+         * - `piiType` (INTEGER, Mandatory): Fix to 1: Legal Person
+         * - `latinName` (STRING, Mandatory): It's company name for Legal Person
+         * - `localName` (STRING, Optional)
+         * - `registrationCountry` (STRING, Mandatory)
+         * - `nationalIdentifier` (STRING, Optional)
+         * - `nationalIdentifierType` (STRING, Optional)
+         * - `nationalIdentifierIssueCountry` (STRING, Optional)
+         * - `registrationDate` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended.
+         * - `address` (STRING, Optional)
+         * - `walletAddress` (STRING, Optional)
+         * - `walletTag` (STRING, Optional)
+         *
+         **PiiName**
+         *
+         * - `firstName` (STRING, Mandatory): Mandatory for Natural person
+         * - `middleName` (STRING, Optional)
+         * - `lastName` (STRING, Optional)
+         *
          * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
          * @param {string} address
          * @param {string} coin
@@ -477,11 +513,47 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
          * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
          *
+         **StandardPii**
+         *
+         **For Natural Person**
+         *
+         * - `piiType` (INTEGER, Mandatory): Fix to 0: Natural Person
+         * - `latinNames` (List&lt;PiiName&gt;, Mandatory): In case a person have complicated names or multiple names, this parameter is a list
+         * - `localNames` (List&lt;PiiName&gt;, Optional): In case a person have complicated names or multiple names, this parameter is a list
+         * - `nationality` (STRING, Optional)
+         * - `residenceCountry` (STRING, Mandatory)
+         * - `nationalIdentifier` (STRING, Optional)
+         * - `nationalIdentifierType` (STRING, Optional)
+         * - `nationalIdentifierIssueCountry` (STRING, Optional)
+         * - `dateOfBirth` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended. Providing DOB could greatly reduce false positive rate during risk checking process.
+         * - `placeOfBirth` (STRING, Optional)
+         * - `address` (STRING, Optional)
+         *
+         **For Legal Person**
+         *
+         * - `piiType` (INTEGER, Mandatory): Fix to 1: Legal Person
+         * - `latinName` (STRING, Mandatory): It's company name for Legal Person
+         * - `localName` (STRING, Optional)
+         * - `registrationCountry` (STRING, Mandatory)
+         * - `nationalIdentifier` (STRING, Optional)
+         * - `nationalIdentifierType` (STRING, Optional)
+         * - `nationalIdentifierIssueCountry` (STRING, Optional)
+         * - `registrationDate` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended.
+         * - `address` (STRING, Optional)
+         * - `walletAddress` (STRING, Optional)
+         * - `walletTag` (STRING, Optional)
+         *
+         **PiiName**
+         *
+         * - `firstName` (STRING, Mandatory): Mandatory for Natural person
+         * - `middleName` (STRING, Optional)
+         * - `lastName` (STRING, Optional)
+         *
          * @summary Submit Deposit Questionnaire Broker (For local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {string} subAccountId External user ID.
          * @param {number | bigint} depositId Wallet deposit ID.
          * @param {string} questionnaire JSON format questionnaire answers.
-         * @param {string} beneficiaryPii JSON format beneficiary Pii.
+         * @param {string} beneficiaryPii JSON format beneficiary Pii, see StandardPii section below
          * @param {string} [network]
          * @param {string} [coin]
          * @param {number} [amount]
@@ -1004,6 +1076,42 @@ export interface TravelRuleApiInterface {
      * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
      * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
+     **StandardPii**
+     *
+     **For Natural Person**
+     *
+     * - `piiType` (INTEGER, Mandatory): Fix to 0: Natural Person
+     * - `latinNames` (List&lt;PiiName&gt;, Mandatory): In case a person have complicated names or multiple names, this parameter is a list
+     * - `localNames` (List&lt;PiiName&gt;, Optional): In case a person have complicated names or multiple names, this parameter is a list
+     * - `nationality` (STRING, Optional)
+     * - `residenceCountry` (STRING, Mandatory)
+     * - `nationalIdentifier` (STRING, Optional)
+     * - `nationalIdentifierType` (STRING, Optional)
+     * - `nationalIdentifierIssueCountry` (STRING, Optional)
+     * - `dateOfBirth` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended. Providing DOB could greatly reduce false positive rate during risk checking process.
+     * - `placeOfBirth` (STRING, Optional)
+     * - `address` (STRING, Optional)
+     *
+     **For Legal Person**
+     *
+     * - `piiType` (INTEGER, Mandatory): Fix to 1: Legal Person
+     * - `latinName` (STRING, Mandatory): It's company name for Legal Person
+     * - `localName` (STRING, Optional)
+     * - `registrationCountry` (STRING, Mandatory)
+     * - `nationalIdentifier` (STRING, Optional)
+     * - `nationalIdentifierType` (STRING, Optional)
+     * - `nationalIdentifierIssueCountry` (STRING, Optional)
+     * - `registrationDate` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended.
+     * - `address` (STRING, Optional)
+     * - `walletAddress` (STRING, Optional)
+     * - `walletTag` (STRING, Optional)
+     *
+     **PiiName**
+     *
+     * - `firstName` (STRING, Mandatory): Mandatory for Natural person
+     * - `middleName` (STRING, Optional)
+     * - `lastName` (STRING, Optional)
+     *
      * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
      * @param {BrokerWithdrawRequest} requestParameters Request parameters.
      *
@@ -1133,6 +1241,42 @@ export interface TravelRuleApiInterface {
      * Notes:
      * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
      * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+     *
+     **StandardPii**
+     *
+     **For Natural Person**
+     *
+     * - `piiType` (INTEGER, Mandatory): Fix to 0: Natural Person
+     * - `latinNames` (List&lt;PiiName&gt;, Mandatory): In case a person have complicated names or multiple names, this parameter is a list
+     * - `localNames` (List&lt;PiiName&gt;, Optional): In case a person have complicated names or multiple names, this parameter is a list
+     * - `nationality` (STRING, Optional)
+     * - `residenceCountry` (STRING, Mandatory)
+     * - `nationalIdentifier` (STRING, Optional)
+     * - `nationalIdentifierType` (STRING, Optional)
+     * - `nationalIdentifierIssueCountry` (STRING, Optional)
+     * - `dateOfBirth` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended. Providing DOB could greatly reduce false positive rate during risk checking process.
+     * - `placeOfBirth` (STRING, Optional)
+     * - `address` (STRING, Optional)
+     *
+     **For Legal Person**
+     *
+     * - `piiType` (INTEGER, Mandatory): Fix to 1: Legal Person
+     * - `latinName` (STRING, Mandatory): It's company name for Legal Person
+     * - `localName` (STRING, Optional)
+     * - `registrationCountry` (STRING, Mandatory)
+     * - `nationalIdentifier` (STRING, Optional)
+     * - `nationalIdentifierType` (STRING, Optional)
+     * - `nationalIdentifierIssueCountry` (STRING, Optional)
+     * - `registrationDate` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended.
+     * - `address` (STRING, Optional)
+     * - `walletAddress` (STRING, Optional)
+     * - `walletTag` (STRING, Optional)
+     *
+     **PiiName**
+     *
+     * - `firstName` (STRING, Mandatory): Mandatory for Natural person
+     * - `middleName` (STRING, Optional)
+     * - `lastName` (STRING, Optional)
      *
      * @summary Submit Deposit Questionnaire Broker (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireRequest} requestParameters Request parameters.
@@ -1596,7 +1740,7 @@ export interface SubmitDepositQuestionnaireRequest {
     readonly questionnaire: string;
 
     /**
-     * JSON format beneficiary Pii.
+     * JSON format beneficiary Pii, see StandardPii section below
      * @type {string}
      * @memberof TravelRuleApiSubmitDepositQuestionnaire
      */
@@ -1970,6 +2114,42 @@ export class TravelRuleApi implements TravelRuleApiInterface {
      * - Questionnaire is different for each local entity, please refer to the `Withdraw Questionnaire Contents` page.
      * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
      *
+     **StandardPii**
+     *
+     **For Natural Person**
+     *
+     * - `piiType` (INTEGER, Mandatory): Fix to 0: Natural Person
+     * - `latinNames` (List&lt;PiiName&gt;, Mandatory): In case a person have complicated names or multiple names, this parameter is a list
+     * - `localNames` (List&lt;PiiName&gt;, Optional): In case a person have complicated names or multiple names, this parameter is a list
+     * - `nationality` (STRING, Optional)
+     * - `residenceCountry` (STRING, Mandatory)
+     * - `nationalIdentifier` (STRING, Optional)
+     * - `nationalIdentifierType` (STRING, Optional)
+     * - `nationalIdentifierIssueCountry` (STRING, Optional)
+     * - `dateOfBirth` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended. Providing DOB could greatly reduce false positive rate during risk checking process.
+     * - `placeOfBirth` (STRING, Optional)
+     * - `address` (STRING, Optional)
+     *
+     **For Legal Person**
+     *
+     * - `piiType` (INTEGER, Mandatory): Fix to 1: Legal Person
+     * - `latinName` (STRING, Mandatory): It's company name for Legal Person
+     * - `localName` (STRING, Optional)
+     * - `registrationCountry` (STRING, Mandatory)
+     * - `nationalIdentifier` (STRING, Optional)
+     * - `nationalIdentifierType` (STRING, Optional)
+     * - `nationalIdentifierIssueCountry` (STRING, Optional)
+     * - `registrationDate` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended.
+     * - `address` (STRING, Optional)
+     * - `walletAddress` (STRING, Optional)
+     * - `walletTag` (STRING, Optional)
+     *
+     **PiiName**
+     *
+     * - `firstName` (STRING, Mandatory): Mandatory for Natural person
+     * - `middleName` (STRING, Optional)
+     * - `lastName` (STRING, Optional)
+     *
      * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
      * @param {BrokerWithdrawRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BrokerWithdrawResponse>>}
@@ -2241,6 +2421,42 @@ export class TravelRuleApi implements TravelRuleApiInterface {
      * Notes:
      * - Questionnaire is different for each local entity, please refer to `Deposit Questionnaire Content` page.
      * - If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`, please try to verify the format of the questionnaire and use URL-encoded format.
+     *
+     **StandardPii**
+     *
+     **For Natural Person**
+     *
+     * - `piiType` (INTEGER, Mandatory): Fix to 0: Natural Person
+     * - `latinNames` (List&lt;PiiName&gt;, Mandatory): In case a person have complicated names or multiple names, this parameter is a list
+     * - `localNames` (List&lt;PiiName&gt;, Optional): In case a person have complicated names or multiple names, this parameter is a list
+     * - `nationality` (STRING, Optional)
+     * - `residenceCountry` (STRING, Mandatory)
+     * - `nationalIdentifier` (STRING, Optional)
+     * - `nationalIdentifierType` (STRING, Optional)
+     * - `nationalIdentifierIssueCountry` (STRING, Optional)
+     * - `dateOfBirth` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended. Providing DOB could greatly reduce false positive rate during risk checking process.
+     * - `placeOfBirth` (STRING, Optional)
+     * - `address` (STRING, Optional)
+     *
+     **For Legal Person**
+     *
+     * - `piiType` (INTEGER, Mandatory): Fix to 1: Legal Person
+     * - `latinName` (STRING, Mandatory): It's company name for Legal Person
+     * - `localName` (STRING, Optional)
+     * - `registrationCountry` (STRING, Mandatory)
+     * - `nationalIdentifier` (STRING, Optional)
+     * - `nationalIdentifierType` (STRING, Optional)
+     * - `nationalIdentifierIssueCountry` (STRING, Optional)
+     * - `registrationDate` (STRING, Optional): yyyy-mm-dd. Not required but strongly recommended.
+     * - `address` (STRING, Optional)
+     * - `walletAddress` (STRING, Optional)
+     * - `walletTag` (STRING, Optional)
+     *
+     **PiiName**
+     *
+     * - `firstName` (STRING, Mandatory): Mandatory for Natural person
+     * - `middleName` (STRING, Optional)
+     * - `lastName` (STRING, Optional)
      *
      * @summary Submit Deposit Questionnaire Broker (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireRequest} requestParameters Request parameters.
