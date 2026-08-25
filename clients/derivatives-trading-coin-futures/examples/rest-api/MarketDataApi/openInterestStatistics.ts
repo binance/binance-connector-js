@@ -15,9 +15,6 @@ async function openInterestStatistics() {
     try {
         const response = await client.restAPI.openInterestStatistics({
             pair: 'BTCUSD',
-            contractType:
-                DerivativesTradingCoinFuturesRestAPI.OpenInterestStatisticsContractTypeEnum
-                    .PERPETUAL,
             period: DerivativesTradingCoinFuturesRestAPI.OpenInterestStatisticsPeriodEnum.PERIOD_5m,
         });
 

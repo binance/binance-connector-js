@@ -24,14 +24,17 @@ import {
     IndexPriceKlineCandlestickDataIntervalEnum,
     KlineCandlestickDataIntervalEnum,
     LongShortRatioPeriodEnum,
+    LongShortRatioContractTypeEnum,
     MarkPriceKlineCandlestickDataIntervalEnum,
-    OpenInterestStatisticsContractTypeEnum,
     OpenInterestStatisticsPeriodEnum,
+    OpenInterestStatisticsContractTypeEnum,
     PremiumIndexKlineDataIntervalEnum,
     TakerBuySellVolumeContractTypeEnum,
     TakerBuySellVolumePeriodEnum,
     TopTraderLongShortRatioAccountsPeriodEnum,
+    TopTraderLongShortRatioAccountsContractTypeEnum,
     TopTraderLongShortRatioPositionsPeriodEnum,
+    TopTraderLongShortRatioPositionsContractTypeEnum,
 } from '../../../src/rest-api';
 import {
     BasisRequest,
@@ -1054,6 +1057,7 @@ describe('MarketDataApi', () => {
             const params: LongShortRatioRequest = {
                 pair: 'pair_example',
                 period: LongShortRatioPeriodEnum.PERIOD_5m,
+                contractType: LongShortRatioContractTypeEnum.PERPETUAL,
                 limit: 30,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -1425,7 +1429,6 @@ describe('MarketDataApi', () => {
         it('should execute openInterestStatistics() successfully with required parameters only', async () => {
             const params: OpenInterestStatisticsRequest = {
                 pair: 'BTCUSD',
-                contractType: OpenInterestStatisticsContractTypeEnum.ALL,
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
 
@@ -1458,8 +1461,8 @@ describe('MarketDataApi', () => {
         it('should execute openInterestStatistics() successfully with optional parameters', async () => {
             const params: OpenInterestStatisticsRequest = {
                 pair: 'BTCUSD',
-                contractType: OpenInterestStatisticsContractTypeEnum.ALL,
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
+                contractType: OpenInterestStatisticsContractTypeEnum.PERPETUAL,
                 limit: 30,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -1494,7 +1497,6 @@ describe('MarketDataApi', () => {
         it('should throw RequiredError when pair is missing', async () => {
             const _params: OpenInterestStatisticsRequest = {
                 pair: 'BTCUSD',
-                contractType: OpenInterestStatisticsContractTypeEnum.ALL,
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -1505,24 +1507,9 @@ describe('MarketDataApi', () => {
             );
         });
 
-        it('should throw RequiredError when contractType is missing', async () => {
-            const _params: OpenInterestStatisticsRequest = {
-                pair: 'BTCUSD',
-                contractType: OpenInterestStatisticsContractTypeEnum.ALL,
-                period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.contractType;
-
-            await expect(client.openInterestStatistics(params)).rejects.toThrow(
-                'Required parameter contractType was null or undefined when calling openInterestStatistics.'
-            );
-        });
-
         it('should throw RequiredError when period is missing', async () => {
             const _params: OpenInterestStatisticsRequest = {
                 pair: 'BTCUSD',
-                contractType: OpenInterestStatisticsContractTypeEnum.ALL,
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -1536,7 +1523,6 @@ describe('MarketDataApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: OpenInterestStatisticsRequest = {
                 pair: 'BTCUSD',
-                contractType: OpenInterestStatisticsContractTypeEnum.ALL,
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
 
@@ -2376,7 +2362,7 @@ describe('MarketDataApi', () => {
     describe('topTraderLongShortRatioAccounts()', () => {
         it('should execute topTraderLongShortRatioAccounts() successfully with required parameters only', async () => {
             const params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                pair: 'BTCUSD',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
 
@@ -2408,8 +2394,9 @@ describe('MarketDataApi', () => {
 
         it('should execute topTraderLongShortRatioAccounts() successfully with optional parameters', async () => {
             const params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                pair: 'BTCUSD',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
+                contractType: TopTraderLongShortRatioAccountsContractTypeEnum.PERPETUAL,
                 limit: 30,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
@@ -2441,22 +2428,22 @@ describe('MarketDataApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
+        it('should throw RequiredError when pair is missing', async () => {
             const _params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                pair: 'BTCUSD',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
-            delete params?.symbol;
+            delete params?.pair;
 
             await expect(client.topTraderLongShortRatioAccounts(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling topTraderLongShortRatioAccounts.'
+                'Required parameter pair was null or undefined when calling topTraderLongShortRatioAccounts.'
             );
         });
 
         it('should throw RequiredError when period is missing', async () => {
             const _params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                pair: 'BTCUSD',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -2469,7 +2456,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                pair: 'BTCUSD',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
 
@@ -2529,6 +2516,7 @@ describe('MarketDataApi', () => {
             const params: TopTraderLongShortRatioPositionsRequest = {
                 pair: 'BTCUSD',
                 period: TopTraderLongShortRatioPositionsPeriodEnum.PERIOD_5m,
+                contractType: TopTraderLongShortRatioPositionsContractTypeEnum.PERPETUAL,
                 limit: 30,
                 startTime: 1623319461670,
                 endTime: 1641782889000,

@@ -589,6 +589,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Long/Short Ratio
          * @param {string} pair BTCUSD
          * @param {LongShortRatioPeriodEnum} period
+         * @param {LongShortRatioContractTypeEnum} [contractType] Contract type filter. If omitted, returns aggregated data across all contract types.
          * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
@@ -598,6 +599,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         longShortRatio: async (
             pair: string,
             period: LongShortRatioPeriodEnum,
+            contractType?: LongShortRatioContractTypeEnum,
             limit?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint
@@ -616,6 +618,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             }
             if (period !== undefined && period !== null) {
                 localVarQueryParameter['period'] = period;
+            }
+            if (contractType !== undefined && contractType !== null) {
+                localVarQueryParameter['contractType'] = contractType;
             }
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
@@ -808,8 +813,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Open Interest Statistics
          * @param {string} pair
-         * @param {OpenInterestStatisticsContractTypeEnum} contractType
          * @param {OpenInterestStatisticsPeriodEnum} period
+         * @param {OpenInterestStatisticsContractTypeEnum} [contractType] Contract type filter. If omitted, returns aggregated data across all contract types.
          * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
@@ -818,16 +823,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         openInterestStatistics: async (
             pair: string,
-            contractType: OpenInterestStatisticsContractTypeEnum,
             period: OpenInterestStatisticsPeriodEnum,
+            contractType?: OpenInterestStatisticsContractTypeEnum,
             limit?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'pair' is not null or undefined
             assertParamExists('openInterestStatistics', 'pair', pair);
-            // verify required parameter 'contractType' is not null or undefined
-            assertParamExists('openInterestStatistics', 'contractType', contractType);
             // verify required parameter 'period' is not null or undefined
             assertParamExists('openInterestStatistics', 'period', period);
 
@@ -1299,8 +1302,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * - Only the data of the latest 30 days is available.
          *
          * @summary Top Trader Long/Short Account Ratio
-         * @param {string} symbol Symbol
+         * @param {string} pair Pair
          * @param {TopTraderLongShortRatioAccountsPeriodEnum} period
+         * @param {TopTraderLongShortRatioAccountsContractTypeEnum} [contractType] Contract type filter. If omitted, returns aggregated data across all contract types.
          * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
@@ -1308,14 +1312,15 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @throws {RequiredError}
          */
         topTraderLongShortRatioAccounts: async (
-            symbol: string,
+            pair: string,
             period: TopTraderLongShortRatioAccountsPeriodEnum,
+            contractType?: TopTraderLongShortRatioAccountsContractTypeEnum,
             limit?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint
         ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('topTraderLongShortRatioAccounts', 'symbol', symbol);
+            // verify required parameter 'pair' is not null or undefined
+            assertParamExists('topTraderLongShortRatioAccounts', 'pair', pair);
             // verify required parameter 'period' is not null or undefined
             assertParamExists('topTraderLongShortRatioAccounts', 'period', period);
 
@@ -1323,11 +1328,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
 
-            if (symbol !== undefined && symbol !== null) {
-                localVarQueryParameter['symbol'] = symbol;
+            if (pair !== undefined && pair !== null) {
+                localVarQueryParameter['pair'] = pair;
             }
             if (period !== undefined && period !== null) {
                 localVarQueryParameter['period'] = period;
+            }
+            if (contractType !== undefined && contractType !== null) {
+                localVarQueryParameter['contractType'] = contractType;
             }
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
@@ -1374,6 +1382,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Top Trader Long/Short Position Ratio
          * @param {string} pair
          * @param {TopTraderLongShortRatioPositionsPeriodEnum} period
+         * @param {TopTraderLongShortRatioPositionsContractTypeEnum} [contractType] Contract type filter. If omitted, returns aggregated data across all contract types.
          * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
@@ -1383,6 +1392,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         topTraderLongShortRatioPositions: async (
             pair: string,
             period: TopTraderLongShortRatioPositionsPeriodEnum,
+            contractType?: TopTraderLongShortRatioPositionsContractTypeEnum,
             limit?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint
@@ -1401,6 +1411,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             }
             if (period !== undefined && period !== null) {
                 localVarQueryParameter['period'] = period;
+            }
+            if (contractType !== undefined && contractType !== null) {
+                localVarQueryParameter['contractType'] = contractType;
             }
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
@@ -2234,6 +2247,13 @@ export interface LongShortRatioRequest {
     readonly period: LongShortRatioPeriodEnum;
 
     /**
+     * Contract type filter. If omitted, returns aggregated data across all contract types.
+     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
+     * @memberof MarketDataApiLongShortRatio
+     */
+    readonly contractType?: LongShortRatioContractTypeEnum;
+
+    /**
      * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof MarketDataApiLongShortRatio
@@ -2350,17 +2370,17 @@ export interface OpenInterestStatisticsRequest {
 
     /**
      *
-     * @type {'ALL' | 'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
-     * @memberof MarketDataApiOpenInterestStatistics
-     */
-    readonly contractType: OpenInterestStatisticsContractTypeEnum;
-
-    /**
-     *
      * @type {'5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '12h' | '1d'}
      * @memberof MarketDataApiOpenInterestStatistics
      */
     readonly period: OpenInterestStatisticsPeriodEnum;
+
+    /**
+     * Contract type filter. If omitted, returns aggregated data across all contract types.
+     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
+     * @memberof MarketDataApiOpenInterestStatistics
+     */
+    readonly contractType?: OpenInterestStatisticsContractTypeEnum;
 
     /**
      * Maximum number of records to return.
@@ -2592,11 +2612,11 @@ export interface Ticker24hrPriceChangeStatisticsRequest {
  */
 export interface TopTraderLongShortRatioAccountsRequest {
     /**
-     * Symbol
+     * Pair
      * @type {string}
      * @memberof MarketDataApiTopTraderLongShortRatioAccounts
      */
-    readonly symbol: string;
+    readonly pair: string;
 
     /**
      *
@@ -2604,6 +2624,13 @@ export interface TopTraderLongShortRatioAccountsRequest {
      * @memberof MarketDataApiTopTraderLongShortRatioAccounts
      */
     readonly period: TopTraderLongShortRatioAccountsPeriodEnum;
+
+    /**
+     * Contract type filter. If omitted, returns aggregated data across all contract types.
+     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
+     * @memberof MarketDataApiTopTraderLongShortRatioAccounts
+     */
+    readonly contractType?: TopTraderLongShortRatioAccountsContractTypeEnum;
 
     /**
      * Maximum number of records to return.
@@ -2645,6 +2672,13 @@ export interface TopTraderLongShortRatioPositionsRequest {
      * @memberof MarketDataApiTopTraderLongShortRatioPositions
      */
     readonly period: TopTraderLongShortRatioPositionsPeriodEnum;
+
+    /**
+     * Contract type filter. If omitted, returns aggregated data across all contract types.
+     * @type {'PERPETUAL' | 'CURRENT_QUARTER' | 'NEXT_QUARTER'}
+     * @memberof MarketDataApiTopTraderLongShortRatioPositions
+     */
+    readonly contractType?: TopTraderLongShortRatioPositionsContractTypeEnum;
 
     /**
      * Maximum number of records to return.
@@ -3072,6 +3106,7 @@ export class MarketDataApi implements MarketDataApiInterface {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.longShortRatio(
             requestParameters?.pair,
             requestParameters?.period,
+            requestParameters?.contractType,
             requestParameters?.limit,
             requestParameters?.startTime,
             requestParameters?.endTime
@@ -3226,8 +3261,8 @@ export class MarketDataApi implements MarketDataApiInterface {
     ): Promise<RestApiResponse<OpenInterestStatisticsResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.openInterestStatistics(
             requestParameters?.pair,
-            requestParameters?.contractType,
             requestParameters?.period,
+            requestParameters?.contractType,
             requestParameters?.limit,
             requestParameters?.startTime,
             requestParameters?.endTime
@@ -3601,8 +3636,9 @@ export class MarketDataApi implements MarketDataApiInterface {
     ): Promise<RestApiResponse<TopTraderLongShortRatioAccountsResponse>> {
         const localVarAxiosArgs =
             await this.localVarAxiosParamCreator.topTraderLongShortRatioAccounts(
-                requestParameters?.symbol,
+                requestParameters?.pair,
                 requestParameters?.period,
+                requestParameters?.contractType,
                 requestParameters?.limit,
                 requestParameters?.startTime,
                 requestParameters?.endTime
@@ -3653,6 +3689,7 @@ export class MarketDataApi implements MarketDataApiInterface {
             await this.localVarAxiosParamCreator.topTraderLongShortRatioPositions(
                 requestParameters?.pair,
                 requestParameters?.period,
+                requestParameters?.contractType,
                 requestParameters?.limit,
                 requestParameters?.startTime,
                 requestParameters?.endTime
@@ -3760,6 +3797,12 @@ export enum LongShortRatioPeriodEnum {
     PERIOD_1d = '1d',
 }
 
+export enum LongShortRatioContractTypeEnum {
+    PERPETUAL = 'PERPETUAL',
+    CURRENT_QUARTER = 'CURRENT_QUARTER',
+    NEXT_QUARTER = 'NEXT_QUARTER',
+}
+
 export enum MarkPriceKlineCandlestickDataIntervalEnum {
     INTERVAL_1m = '1m',
     INTERVAL_3m = '3m',
@@ -3778,13 +3821,6 @@ export enum MarkPriceKlineCandlestickDataIntervalEnum {
     INTERVAL_1M = '1M',
 }
 
-export enum OpenInterestStatisticsContractTypeEnum {
-    ALL = 'ALL',
-    PERPETUAL = 'PERPETUAL',
-    CURRENT_QUARTER = 'CURRENT_QUARTER',
-    NEXT_QUARTER = 'NEXT_QUARTER',
-}
-
 export enum OpenInterestStatisticsPeriodEnum {
     PERIOD_5m = '5m',
     PERIOD_15m = '15m',
@@ -3795,6 +3831,12 @@ export enum OpenInterestStatisticsPeriodEnum {
     PERIOD_6h = '6h',
     PERIOD_12h = '12h',
     PERIOD_1d = '1d',
+}
+
+export enum OpenInterestStatisticsContractTypeEnum {
+    PERPETUAL = 'PERPETUAL',
+    CURRENT_QUARTER = 'CURRENT_QUARTER',
+    NEXT_QUARTER = 'NEXT_QUARTER',
 }
 
 export enum PremiumIndexKlineDataIntervalEnum {
@@ -3846,6 +3888,12 @@ export enum TopTraderLongShortRatioAccountsPeriodEnum {
     PERIOD_1d = '1d',
 }
 
+export enum TopTraderLongShortRatioAccountsContractTypeEnum {
+    PERPETUAL = 'PERPETUAL',
+    CURRENT_QUARTER = 'CURRENT_QUARTER',
+    NEXT_QUARTER = 'NEXT_QUARTER',
+}
+
 export enum TopTraderLongShortRatioPositionsPeriodEnum {
     PERIOD_5m = '5m',
     PERIOD_15m = '15m',
@@ -3856,4 +3904,10 @@ export enum TopTraderLongShortRatioPositionsPeriodEnum {
     PERIOD_6h = '6h',
     PERIOD_12h = '12h',
     PERIOD_1d = '1d',
+}
+
+export enum TopTraderLongShortRatioPositionsContractTypeEnum {
+    PERPETUAL = 'PERPETUAL',
+    CURRENT_QUARTER = 'CURRENT_QUARTER',
+    NEXT_QUARTER = 'NEXT_QUARTER',
 }
