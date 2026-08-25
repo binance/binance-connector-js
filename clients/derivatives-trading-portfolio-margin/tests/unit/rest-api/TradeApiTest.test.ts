@@ -51,6 +51,7 @@ import {
     NewUmAlgoOrderTimeInForceEnum,
     NewUmAlgoOrderWorkingTypeEnum,
     NewUmAlgoOrderPriceMatchEnum,
+    NewUmAlgoOrderClosePositionEnum,
     NewUmAlgoOrderPriceProtectEnum,
     NewUmAlgoOrderReduceOnlyEnum,
     NewUmAlgoOrderNewOrderRespTypeEnum,
@@ -3404,7 +3405,6 @@ describe('TradeApi', () => {
                 symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
                 type: NewUmAlgoOrderTypeEnum.STOP,
-                quantity: 0.01,
             };
 
             mockResponse = JSONParse(
@@ -3424,6 +3424,7 @@ describe('TradeApi', () => {
                     selfTradePreventionMode: 'EXPIRE_MAKER',
                     workingType: 'CONTRACT_PRICE',
                     priceMatch: 'NONE',
+                    closePosition: false,
                     priceProtect: false,
                     reduceOnly: false,
                     activatePrice: '',
@@ -3455,13 +3456,14 @@ describe('TradeApi', () => {
                 symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
                 type: NewUmAlgoOrderTypeEnum.STOP,
-                quantity: 0.01,
                 positionSide: NewUmAlgoOrderPositionSideEnum.BOTH,
                 timeInForce: NewUmAlgoOrderTimeInForceEnum.IOC,
+                quantity: 0.01,
                 price: 750.0,
                 triggerPrice: 750.0,
                 workingType: NewUmAlgoOrderWorkingTypeEnum.MARK_PRICE,
                 priceMatch: NewUmAlgoOrderPriceMatchEnum.OPPONENT,
+                closePosition: NewUmAlgoOrderClosePositionEnum.TRUE,
                 priceProtect: NewUmAlgoOrderPriceProtectEnum.TRUE,
                 reduceOnly: NewUmAlgoOrderReduceOnlyEnum.TRUE,
                 activatePrice: 700,
@@ -3490,6 +3492,7 @@ describe('TradeApi', () => {
                     selfTradePreventionMode: 'EXPIRE_MAKER',
                     workingType: 'CONTRACT_PRICE',
                     priceMatch: 'NONE',
+                    closePosition: false,
                     priceProtect: false,
                     reduceOnly: false,
                     activatePrice: '',
@@ -3521,7 +3524,6 @@ describe('TradeApi', () => {
                 symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
                 type: NewUmAlgoOrderTypeEnum.STOP,
-                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.algoType;
@@ -3537,7 +3539,6 @@ describe('TradeApi', () => {
                 symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
                 type: NewUmAlgoOrderTypeEnum.STOP,
-                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -3553,7 +3554,6 @@ describe('TradeApi', () => {
                 symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
                 type: NewUmAlgoOrderTypeEnum.STOP,
-                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.side;
@@ -3569,7 +3569,6 @@ describe('TradeApi', () => {
                 symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
                 type: NewUmAlgoOrderTypeEnum.STOP,
-                quantity: 0.01,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -3579,29 +3578,12 @@ describe('TradeApi', () => {
             );
         });
 
-        it('should throw RequiredError when quantity is missing', async () => {
-            const _params: NewUmAlgoOrderRequest = {
-                algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
-                symbol: 'BNBUSDT',
-                side: NewUmAlgoOrderSideEnum.BUY,
-                type: NewUmAlgoOrderTypeEnum.STOP,
-                quantity: 0.01,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.quantity;
-
-            await expect(client.newUmAlgoOrder(params)).rejects.toThrow(
-                'Required parameter quantity was null or undefined when calling newUmAlgoOrder.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
             const params: NewUmAlgoOrderRequest = {
                 algoType: NewUmAlgoOrderAlgoTypeEnum.CONDITIONAL,
                 symbol: 'BNBUSDT',
                 side: NewUmAlgoOrderSideEnum.BUY,
                 type: NewUmAlgoOrderTypeEnum.STOP,
-                quantity: 0.01,
             };
 
             const errorResponse = {

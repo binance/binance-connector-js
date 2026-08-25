@@ -19,7 +19,6 @@ async function newUmAlgoOrder() {
             symbol: 'BNBUSDT',
             side: DerivativesTradingPortfolioMarginRestAPI.NewUmAlgoOrderSideEnum.SELL,
             type: DerivativesTradingPortfolioMarginRestAPI.NewUmAlgoOrderTypeEnum.TAKE_PROFIT,
-            quantity: 0.01,
         });
 
         const rateLimits = response.rateLimits!;

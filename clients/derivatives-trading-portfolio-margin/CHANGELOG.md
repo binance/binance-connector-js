@@ -1,5 +1,28 @@
 # Changelog
 
+## 18.1.0 - 2026-08-25
+
+### Changed (6)
+
+- Update `@binance/common` library to version `2.4.6`.
+- Resolve security vulnerabilities.
+
+#### REST API
+
+- Added parameter `closePosition`
+  - affected methods:
+    - `newUmAlgoOrder()` (`POST /papi/v1/um/algo/order`)
+- Modified parameter `quantity`:
+  - required: `true` → `false`
+  - affected methods:
+    - `newUmAlgoOrder()` (`POST /papi/v1/um/algo/order`)
+- Modified response for `newUmAlgoOrder()` (`POST /papi/v1/um/algo/order`):
+  - property `closePosition` added
+
+- Added response field `closePosition`
+  - affected events:
+    - `newUmAlgoOrderResponse`
+
 ## 18.0.2 - 2026-08-24
 
 ### Changed (7)

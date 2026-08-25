@@ -1911,6 +1911,7 @@ export class RestAPI {
      * - `STOP`, `STOP_MARKET`: BUY: latest price >= `triggerPrice`; SELL: latest price <= `triggerPrice`.
      * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`: BUY: latest price <= `triggerPrice`; SELL: latest price >= `triggerPrice`.
      * - `TRAILING_STOP_MARKET`: BUY: lowest price after order placed <= `activatePrice`, and latest price >= lowest price * (1 + `callbackRate`); SELL: highest price after order placed >= `activatePrice`, and latest price <= highest price * (1 - `callbackRate`).
+     * - `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`: follow the same rules for conditional orders; if triggered, close all current long position (if `SELL`) or current short position (if `BUY`); cannot be used with `quantity` parameter; cannot be used with `reduceOnly` parameter; in Hedge Mode, cannot be used with `BUY` orders in `LONG` position side, and cannot be used with `SELL` orders in `SHORT` position side.
      * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
      *
      * @summary New UM Algo Order (TRADE)

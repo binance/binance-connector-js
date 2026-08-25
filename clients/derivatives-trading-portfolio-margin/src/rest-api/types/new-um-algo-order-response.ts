@@ -114,6 +114,12 @@ export interface NewUmAlgoOrderResponse {
      * @type {boolean}
      * @memberof NewUmAlgoOrderResponse
      */
+    closePosition?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof NewUmAlgoOrderResponse
+     */
     priceProtect?: boolean;
     /**
      *
