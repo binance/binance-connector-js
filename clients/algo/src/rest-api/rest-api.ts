@@ -119,6 +119,7 @@ export class RestAPI {
      * Security Type: TRADE
      *
      * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
      * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
      * - Base URL: `https://api.binance.com`
      *
@@ -130,7 +131,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#cancel-algo-order-future-algo Binance API Documentation}
      */
     cancelAlgoOrderFutureAlgo(
-        requestParameters: CancelAlgoOrderFutureAlgoRequest
+        requestParameters: CancelAlgoOrderFutureAlgoRequest = {}
     ): Promise<RestApiResponse<CancelAlgoOrderFutureAlgoResponse>> {
         return this.futureAlgoApi.cancelAlgoOrderFutureAlgo(requestParameters);
     }
@@ -279,6 +280,9 @@ export class RestAPI {
      *
      * Security Type: TRADE
      *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
+     *
      * @summary Cancel Spot Algo Order (TRADE)
      * @param {CancelAlgoOrderSpotAlgoRequest} requestParameters Request parameters.
      *
@@ -287,7 +291,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#cancel-algo-order-spot-algo Binance API Documentation}
      */
     cancelAlgoOrderSpotAlgo(
-        requestParameters: CancelAlgoOrderSpotAlgoRequest
+        requestParameters: CancelAlgoOrderSpotAlgoRequest = {}
     ): Promise<RestApiResponse<CancelAlgoOrderSpotAlgoResponse>> {
         return this.spotAlgoApi.cancelAlgoOrderSpotAlgo(requestParameters);
     }

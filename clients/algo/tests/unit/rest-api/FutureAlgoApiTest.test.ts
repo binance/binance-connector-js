@@ -57,10 +57,6 @@ describe('FutureAlgoApi', () => {
 
     describe('cancelAlgoOrderFutureAlgo()', () => {
         it('should execute cancelAlgoOrderFutureAlgo() successfully with required parameters only', async () => {
-            const params: CancelAlgoOrderFutureAlgoRequest = {
-                algoId: 1,
-            };
-
             mockResponse = JSONParse(
                 JSONStringify({ algoId: 14511, success: true, code: 0, msg: 'OK' })
             );
@@ -73,7 +69,7 @@ describe('FutureAlgoApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<CancelAlgoOrderFutureAlgoResponse>)
             );
-            const response = await client.cancelAlgoOrderFutureAlgo(params);
+            const response = await client.cancelAlgoOrderFutureAlgo();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -82,6 +78,7 @@ describe('FutureAlgoApi', () => {
         it('should execute cancelAlgoOrderFutureAlgo() successfully with optional parameters', async () => {
             const params: CancelAlgoOrderFutureAlgoRequest = {
                 algoId: 1,
+                clientAlgoId: '65ce1630101a480b85915d7e11fd5078',
                 recvWindow: 5000,
             };
 
@@ -103,23 +100,7 @@ describe('FutureAlgoApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when algoId is missing', async () => {
-            const _params: CancelAlgoOrderFutureAlgoRequest = {
-                algoId: 1,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.algoId;
-
-            await expect(client.cancelAlgoOrderFutureAlgo(params)).rejects.toThrow(
-                'Required parameter algoId was null or undefined when calling cancelAlgoOrderFutureAlgo.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: CancelAlgoOrderFutureAlgoRequest = {
-                algoId: 1,
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -132,7 +113,7 @@ describe('FutureAlgoApi', () => {
             const spy = jest
                 .spyOn(client, 'cancelAlgoOrderFutureAlgo')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.cancelAlgoOrderFutureAlgo(params)).rejects.toThrow('ResponseError');
+            await expect(client.cancelAlgoOrderFutureAlgo()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

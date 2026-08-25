@@ -51,10 +51,6 @@ describe('SpotAlgoApi', () => {
 
     describe('cancelAlgoOrderSpotAlgo()', () => {
         it('should execute cancelAlgoOrderSpotAlgo() successfully with required parameters only', async () => {
-            const params: CancelAlgoOrderSpotAlgoRequest = {
-                algoId: 14511,
-            };
-
             mockResponse = JSONParse(
                 JSONStringify({ algoId: 14511, success: true, code: 0, msg: 'OK' })
             );
@@ -67,7 +63,7 @@ describe('SpotAlgoApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<CancelAlgoOrderSpotAlgoResponse>)
             );
-            const response = await client.cancelAlgoOrderSpotAlgo(params);
+            const response = await client.cancelAlgoOrderSpotAlgo();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -76,6 +72,7 @@ describe('SpotAlgoApi', () => {
         it('should execute cancelAlgoOrderSpotAlgo() successfully with optional parameters', async () => {
             const params: CancelAlgoOrderSpotAlgoRequest = {
                 algoId: 14511,
+                clientAlgoId: '65ce1630101a480b85915d7e11fd5078',
                 recvWindow: 5000,
             };
 
@@ -97,23 +94,7 @@ describe('SpotAlgoApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when algoId is missing', async () => {
-            const _params: CancelAlgoOrderSpotAlgoRequest = {
-                algoId: 14511,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.algoId;
-
-            await expect(client.cancelAlgoOrderSpotAlgo(params)).rejects.toThrow(
-                'Required parameter algoId was null or undefined when calling cancelAlgoOrderSpotAlgo.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: CancelAlgoOrderSpotAlgoRequest = {
-                algoId: 14511,
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -126,7 +107,7 @@ describe('SpotAlgoApi', () => {
             const spy = jest
                 .spyOn(client, 'cancelAlgoOrderSpotAlgo')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.cancelAlgoOrderSpotAlgo(params)).rejects.toThrow('ResponseError');
+            await expect(client.cancelAlgoOrderSpotAlgo()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

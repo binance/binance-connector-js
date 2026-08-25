@@ -9,9 +9,7 @@ const client = new Algo({ configurationRestAPI });
 
 async function cancelAlgoOrderFutureAlgo() {
     try {
-        const response = await client.restAPI.cancelAlgoOrderFutureAlgo({
-            algoId: 1,
-        });
+        const response = await client.restAPI.cancelAlgoOrderFutureAlgo();
 
         const rateLimits = response.rateLimits!;
         console.log('cancelAlgoOrderFutureAlgo() rate limits:', rateLimits);

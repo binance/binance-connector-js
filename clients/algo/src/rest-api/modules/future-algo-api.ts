@@ -40,28 +40,31 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Security Type: TRADE
          *
          * Notes:
+         * - Either `algoId` or `clientAlgoId` must be sent.
          * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
          * - Base URL: `https://api.binance.com`
          *
          * @summary Cancel Futures Algo Order (TRADE)
-         * @param {number | bigint} algoId eg. 14511
+         * @param {number | bigint} [algoId] eg. 14511
+         * @param {string} [clientAlgoId] eg. "65ce1630101a480b85915d7e11fd5078"
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         cancelAlgoOrderFutureAlgo: async (
-            algoId: number | bigint,
+            algoId?: number | bigint,
+            clientAlgoId?: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
-            // verify required parameter 'algoId' is not null or undefined
-            assertParamExists('cancelAlgoOrderFutureAlgo', 'algoId', algoId);
-
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algoId !== undefined && algoId !== null) {
                 localVarQueryParameter['algoId'] = algoId;
+            }
+            if (clientAlgoId !== undefined && clientAlgoId !== null) {
+                localVarQueryParameter['clientAlgoId'] = clientAlgoId;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -459,6 +462,7 @@ export interface FutureAlgoApiInterface {
      * Security Type: TRADE
      *
      * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
      * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
      * - Base URL: `https://api.binance.com`
      *
@@ -469,7 +473,7 @@ export interface FutureAlgoApiInterface {
      * @memberof FutureAlgoApiInterface
      */
     cancelAlgoOrderFutureAlgo(
-        requestParameters: CancelAlgoOrderFutureAlgoRequest
+        requestParameters?: CancelAlgoOrderFutureAlgoRequest
     ): Promise<RestApiResponse<CancelAlgoOrderFutureAlgoResponse>>;
     /**
      * Query Current Algo Open Orders
@@ -600,7 +604,14 @@ export interface CancelAlgoOrderFutureAlgoRequest {
      * @type {number | bigint}
      * @memberof FutureAlgoApiCancelAlgoOrderFutureAlgo
      */
-    readonly algoId: number | bigint;
+    readonly algoId?: number | bigint;
+
+    /**
+     * eg. "65ce1630101a480b85915d7e11fd5078"
+     * @type {string}
+     * @memberof FutureAlgoApiCancelAlgoOrderFutureAlgo
+     */
+    readonly clientAlgoId?: string;
 
     /**
      * Request validity window in milliseconds
@@ -877,6 +888,7 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
      * Security Type: TRADE
      *
      * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
      * - You need to enable `Futures Trading Permission` for the API key that requests this endpoint.
      * - Base URL: `https://api.binance.com`
      *
@@ -888,10 +900,11 @@ export class FutureAlgoApi implements FutureAlgoApiInterface {
      * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/future-algo#cancel-algo-order-future-algo Binance API Documentation}
      */
     public async cancelAlgoOrderFutureAlgo(
-        requestParameters: CancelAlgoOrderFutureAlgoRequest
+        requestParameters: CancelAlgoOrderFutureAlgoRequest = {}
     ): Promise<RestApiResponse<CancelAlgoOrderFutureAlgoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.cancelAlgoOrderFutureAlgo(
             requestParameters?.algoId,
+            requestParameters?.clientAlgoId,
             requestParameters?.recvWindow
         );
         return sendRequest<CancelAlgoOrderFutureAlgoResponse>(

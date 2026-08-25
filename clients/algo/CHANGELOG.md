@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.1.0 - 2026-08-25
+
+### Changed (4)
+
+- Added parameter `clientAlgoId`
+  - affected methods:
+    - `cancelAlgoOrderFutureAlgo()` (`DELETE /sapi/v1/algo/futures/order`)
+    - `cancelAlgoOrderSpotAlgo()` (`DELETE /sapi/v1/algo/spot/order`)
+- Modified parameter `algoId`:
+  - required: `true` → `false`
+  - affected methods:
+    - `cancelAlgoOrderFutureAlgo()` (`DELETE /sapi/v1/algo/futures/order`)
+    - `cancelAlgoOrderSpotAlgo()` (`DELETE /sapi/v1/algo/spot/order`)  
+- Update `@binance/common` library to version `2.4.6`.
+- Resolve security vulnerabilities.
+
 ## 4.0.1 - 2026-07-21
 
 ### Changed (2)

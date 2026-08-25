@@ -38,25 +38,30 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: TRADE
          *
+         * Notes:
+         * - Either `algoId` or `clientAlgoId` must be sent.
+         *
          * @summary Cancel Spot Algo Order (TRADE)
-         * @param {number | bigint} algoId
+         * @param {number | bigint} [algoId]
+         * @param {string} [clientAlgoId]
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
         cancelAlgoOrderSpotAlgo: async (
-            algoId: number | bigint,
+            algoId?: number | bigint,
+            clientAlgoId?: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
-            // verify required parameter 'algoId' is not null or undefined
-            assertParamExists('cancelAlgoOrderSpotAlgo', 'algoId', algoId);
-
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algoId !== undefined && algoId !== null) {
                 localVarQueryParameter['algoId'] = algoId;
+            }
+            if (clientAlgoId !== undefined && clientAlgoId !== null) {
+                localVarQueryParameter['clientAlgoId'] = clientAlgoId;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -316,6 +321,9 @@ export interface SpotAlgoApiInterface {
      *
      * Security Type: TRADE
      *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
+     *
      * @summary Cancel Spot Algo Order (TRADE)
      * @param {CancelAlgoOrderSpotAlgoRequest} requestParameters Request parameters.
      *
@@ -323,7 +331,7 @@ export interface SpotAlgoApiInterface {
      * @memberof SpotAlgoApiInterface
      */
     cancelAlgoOrderSpotAlgo(
-        requestParameters: CancelAlgoOrderSpotAlgoRequest
+        requestParameters?: CancelAlgoOrderSpotAlgoRequest
     ): Promise<RestApiResponse<CancelAlgoOrderSpotAlgoResponse>>;
     /**
      * Get all open SPOT TWAP orders
@@ -404,7 +412,14 @@ export interface CancelAlgoOrderSpotAlgoRequest {
      * @type {number | bigint}
      * @memberof SpotAlgoApiCancelAlgoOrderSpotAlgo
      */
-    readonly algoId: number | bigint;
+    readonly algoId?: number | bigint;
+
+    /**
+     *
+     * @type {string}
+     * @memberof SpotAlgoApiCancelAlgoOrderSpotAlgo
+     */
+    readonly clientAlgoId?: string;
 
     /**
      * Request validity window in milliseconds
@@ -586,6 +601,9 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
      *
      * Security Type: TRADE
      *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
+     *
      * @summary Cancel Spot Algo Order (TRADE)
      * @param {CancelAlgoOrderSpotAlgoRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CancelAlgoOrderSpotAlgoResponse>>}
@@ -594,10 +612,11 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
      * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#cancel-algo-order-spot-algo Binance API Documentation}
      */
     public async cancelAlgoOrderSpotAlgo(
-        requestParameters: CancelAlgoOrderSpotAlgoRequest
+        requestParameters: CancelAlgoOrderSpotAlgoRequest = {}
     ): Promise<RestApiResponse<CancelAlgoOrderSpotAlgoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.cancelAlgoOrderSpotAlgo(
             requestParameters?.algoId,
+            requestParameters?.clientAlgoId,
             requestParameters?.recvWindow
         );
         return sendRequest<CancelAlgoOrderSpotAlgoResponse>(
