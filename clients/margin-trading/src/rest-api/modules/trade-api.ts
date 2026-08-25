@@ -3639,7 +3639,7 @@ export interface MarginAccountNewOtoRequest {
 
     /**
      *
-     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY'}
+     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY' | 'AUTO_BORROW_REPAY'}
      * @memberof TradeApiMarginAccountNewOto
      */
     readonly sideEffectType?: MarginAccountNewOtoSideEffectTypeEnum;
@@ -3785,7 +3785,7 @@ export interface MarginAccountNewOtocoRequest {
 
     /**
      *
-     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY'}
+     * @type {'NO_SIDE_EFFECT' | 'MARGIN_BUY' | 'AUTO_BORROW_REPAY'}
      * @memberof TradeApiMarginAccountNewOtoco
      */
     readonly sideEffectType?: MarginAccountNewOtocoSideEffectTypeEnum;
@@ -5949,6 +5949,7 @@ export enum MarginAccountNewOtoNewOrderRespTypeEnum {
 export enum MarginAccountNewOtoSideEffectTypeEnum {
     NO_SIDE_EFFECT = 'NO_SIDE_EFFECT',
     MARGIN_BUY = 'MARGIN_BUY',
+    AUTO_BORROW_REPAY = 'AUTO_BORROW_REPAY',
 }
 
 export enum MarginAccountNewOtoSelfTradePreventionModeEnum {
@@ -5999,6 +6000,7 @@ export enum MarginAccountNewOtocoIsIsolatedEnum {
 export enum MarginAccountNewOtocoSideEffectTypeEnum {
     NO_SIDE_EFFECT = 'NO_SIDE_EFFECT',
     MARGIN_BUY = 'MARGIN_BUY',
+    AUTO_BORROW_REPAY = 'AUTO_BORROW_REPAY',
 }
 
 export enum MarginAccountNewOtocoNewOrderRespTypeEnum {

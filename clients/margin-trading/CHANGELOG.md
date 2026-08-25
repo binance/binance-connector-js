@@ -1,5 +1,17 @@
 # Changelog
 
+## 13.0.2 - 2026-08-13
+
+### Changed (1)
+
+#### REST API
+
+- Modified parameter `sideEffectType`:
+  - enum added: `AUTO_BORROW_REPAY`
+  - affected methods:
+    - `marginAccountNewOto()` (`POST /sapi/v1/margin/order/oto`)
+    - `marginAccountNewOtoco()` (`POST /sapi/v1/margin/order/otoco`)
+
 ## 13.0.1 - 2026-07-21
 
 ### Changed (2)
