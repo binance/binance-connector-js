@@ -17,6 +17,7 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import {
     AssetManagementApi,
+    GetMovePositionHistoryForSubAccountProductTypeEnum,
     MovePositionForSubAccountProductTypeEnum,
     UniversalTransferFromAccountTypeEnum,
     UniversalTransferToAccountTypeEnum,
@@ -744,6 +745,7 @@ describe('AssetManagementApi', () => {
                 symbol: 'BTCUSDT',
                 page: 1,
                 rows: 1,
+                productType: GetMovePositionHistoryForSubAccountProductTypeEnum.UM,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 recvWindow: 5000,

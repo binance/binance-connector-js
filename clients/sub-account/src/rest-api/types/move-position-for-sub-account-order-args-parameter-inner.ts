@@ -32,7 +32,7 @@ export interface MovePositionForSubAccountOrderArgsParameterInner {
      */
     quantity?: number;
     /**
-     *
+     * Required when productType=UM. Optional and ignored when productType=OPTION (the response returns positionSide as null).
      * @type {string}
      * @memberof MovePositionForSubAccountOrderArgsParameterInner
      */

@@ -264,14 +264,15 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Security Type: USER_DATA
          *
          * Notes:
-         * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 1000 records).
+         * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 100 records).
          * - If `startTime` is sent and `endTime` is omitted, records in `[max(startTime, now-90d), now]` are returned.
          * - If `startTime` is omitted and `endTime` is sent, records in `[max(now, endTime-90d), endTime]` are returned.
          *
          * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
          * @param {string} symbol
          * @param {number | bigint} page
-         * @param {number | bigint} rows
+         * @param {number | bigint} rows Max 100.
+         * @param {GetMovePositionHistoryForSubAccountProductTypeEnum} [productType] Default UM.
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [recvWindow]
@@ -282,6 +283,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             symbol: string,
             page: number | bigint,
             rows: number | bigint,
+            productType?: GetMovePositionHistoryForSubAccountProductTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             recvWindow?: number | bigint
@@ -299,6 +301,9 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
+            }
+            if (productType !== undefined && productType !== null) {
+                localVarQueryParameter['productType'] = productType;
             }
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
@@ -707,7 +712,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
          * @param {string} fromUserEmail
          * @param {string} toUserEmail
-         * @param {MovePositionForSubAccountProductTypeEnum} productType
+         * @param {MovePositionForSubAccountProductTypeEnum} productType A single request cannot mix UM and OPTION positions.
          * @param {Array<MovePositionForSubAccountOrderArgsParameterInner>} orderArgs Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING,
          * orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide
          * support BOTH,LONG and SHORT. Each entry should be like
@@ -1562,7 +1567,7 @@ export interface AssetManagementApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 1000 records).
+     * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 100 records).
      * - If `startTime` is sent and `endTime` is omitted, records in `[max(startTime, now-90d), now]` are returned.
      * - If `startTime` is omitted and `endTime` is sent, records in `[max(now, endTime-90d), endTime]` are returned.
      *
@@ -2054,11 +2059,18 @@ export interface GetMovePositionHistoryForSubAccountRequest {
     readonly page: number | bigint;
 
     /**
-     *
+     * Max 100.
      * @type {number | bigint}
      * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
      */
     readonly rows: number | bigint;
+
+    /**
+     * Default UM.
+     * @type {'UM' | 'OPTION'}
+     * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
+     */
+    readonly productType?: GetMovePositionHistoryForSubAccountProductTypeEnum;
 
     /**
      *
@@ -2335,8 +2347,8 @@ export interface MovePositionForSubAccountRequest {
     readonly toUserEmail: string;
 
     /**
-     *
-     * @type {'UM'}
+     * A single request cannot mix UM and OPTION positions.
+     * @type {'UM' | 'OPTION'}
      * @memberof AssetManagementApiMovePositionForSubAccount
      */
     readonly productType: MovePositionForSubAccountProductTypeEnum;
@@ -3005,7 +3017,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 1000 records).
+     * - If `startTime` and `endTime` are both omitted, records from the last 90 days are returned by default (up to 100 records).
      * - If `startTime` is sent and `endTime` is omitted, records in `[max(startTime, now-90d), now]` are returned.
      * - If `startTime` is omitted and `endTime` is sent, records in `[max(now, endTime-90d), endTime]` are returned.
      *
@@ -3024,6 +3036,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
                 requestParameters?.symbol,
                 requestParameters?.page,
                 requestParameters?.rows,
+                requestParameters?.productType,
                 requestParameters?.startTime,
                 requestParameters?.endTime,
                 requestParameters?.recvWindow
@@ -3759,8 +3772,14 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     }
 }
 
+export enum GetMovePositionHistoryForSubAccountProductTypeEnum {
+    UM = 'UM',
+    OPTION = 'OPTION',
+}
+
 export enum MovePositionForSubAccountProductTypeEnum {
     UM = 'UM',
+    OPTION = 'OPTION',
 }
 
 export enum UniversalTransferFromAccountTypeEnum {

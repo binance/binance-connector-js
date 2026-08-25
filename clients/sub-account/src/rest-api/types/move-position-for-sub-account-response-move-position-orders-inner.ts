@@ -62,11 +62,11 @@ export interface MovePositionForSubAccountResponseMovePositionOrdersInner {
      */
     quantity?: string;
     /**
-     *
+     * null when productType=OPTION.
      * @type {string}
      * @memberof MovePositionForSubAccountResponseMovePositionOrdersInner
      */
-    positionSide?: string;
+    positionSide?: string | null;
     /**
      *
      * @type {string}
