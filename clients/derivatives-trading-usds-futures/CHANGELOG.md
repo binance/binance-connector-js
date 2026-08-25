@@ -1,5 +1,19 @@
 # Changelog
 
+## 38.0.3 - 2026-08-25
+
+### Changed (3)
+
+- Update `@binance/common` library to version `2.4.6`.
+- Resolve security vulnerabilities.
+
+#### REST API
+
+- Modified parameter `symbol`:
+  - required: `true` → `false`
+  - affected methods:
+    - `allOrders()` (`GET /fapi/v1/allOrders`)
+
 ## 38.0.2 - 2026-08-17
 
 ### Changed (2)

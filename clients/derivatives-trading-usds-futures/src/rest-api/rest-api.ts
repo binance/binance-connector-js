@@ -1682,7 +1682,9 @@ export class RestAPI {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#all-orders Binance API Documentation}
      */
-    allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>> {
+    allOrders(
+        requestParameters: AllOrdersRequest = {}
+    ): Promise<RestApiResponse<AllOrdersResponse>> {
         return this.tradeApi.allOrders(requestParameters);
     }
 

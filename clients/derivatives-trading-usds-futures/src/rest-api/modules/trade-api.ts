@@ -150,7 +150,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - The query time period must be less then 7 days( default as the recent 7 days).
          *
          * @summary All Orders (USER_DATA)
-         * @param {string} symbol
+         * @param {string} [symbol]
          * @param {number | bigint} [orderId]
          * @param {number | bigint} [startTime] Start time
          * @param {number | bigint} [endTime] End time
@@ -160,16 +160,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @throws {RequiredError}
          */
         allOrders: async (
-            symbol: string,
+            symbol?: string,
             orderId?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint,
             limit?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('allOrders', 'symbol', symbol);
-
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
@@ -2203,7 +2200,7 @@ export interface TradeApiInterface {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
-    allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>>;
+    allOrders(requestParameters?: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>>;
     /**
      * Cancel all open orders of the specified symbol at the end of the specified countdown.
      *
@@ -2951,7 +2948,7 @@ export interface AllOrdersRequest {
      * @type {string}
      * @memberof TradeApiAllOrders
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      *
@@ -4299,7 +4296,7 @@ export class TradeApi implements TradeApiInterface {
      * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#all-orders Binance API Documentation}
      */
     public async allOrders(
-        requestParameters: AllOrdersRequest
+        requestParameters: AllOrdersRequest = {}
     ): Promise<RestApiResponse<AllOrdersResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.allOrders(
             requestParameters?.symbol,

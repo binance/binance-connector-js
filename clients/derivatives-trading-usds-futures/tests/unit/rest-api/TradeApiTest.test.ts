@@ -261,10 +261,6 @@ describe('TradeApi', () => {
 
     describe('allOrders()', () => {
         it('should execute allOrders() successfully with required parameters only', async () => {
-            const params: AllOrdersRequest = {
-                symbol: 'BTCUSDT',
-            };
-
             mockResponse = JSONParse(
                 JSONStringify([
                     {
@@ -308,7 +304,7 @@ describe('TradeApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<AllOrdersResponse>)
             );
-            const response = await client.allOrders(params);
+            const response = await client.allOrders();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -373,23 +369,7 @@ describe('TradeApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: AllOrdersRequest = {
-                symbol: 'BTCUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.allOrders(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling allOrders.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: AllOrdersRequest = {
-                symbol: 'BTCUSDT',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -400,7 +380,7 @@ describe('TradeApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'allOrders').mockRejectedValueOnce(mockError);
-            await expect(client.allOrders(params)).rejects.toThrow('ResponseError');
+            await expect(client.allOrders()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

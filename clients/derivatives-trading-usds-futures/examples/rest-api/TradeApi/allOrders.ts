@@ -12,9 +12,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 
 async function allOrders() {
     try {
-        const response = await client.restAPI.allOrders({
-            symbol: 'BTCUSDT',
-        });
+        const response = await client.restAPI.allOrders();
 
         const rateLimits = response.rateLimits!;
         console.log('allOrders() rate limits:', rateLimits);
