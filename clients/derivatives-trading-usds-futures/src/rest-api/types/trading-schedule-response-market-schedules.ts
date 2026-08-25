@@ -57,4 +57,10 @@ export interface TradingScheduleResponseMarketSchedules {
      * @memberof TradingScheduleResponseMarketSchedules
      */
     HK_EQUITY?: TradingScheduleResponseMarketSchedulesHKEQUITY;
+    /**
+     *
+     * @type {TradingScheduleResponseMarketSchedulesHKEQUITY}
+     * @memberof TradingScheduleResponseMarketSchedules
+     */
+    CN_EQUITY?: TradingScheduleResponseMarketSchedulesHKEQUITY;
 }
