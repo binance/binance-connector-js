@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 /**
  * Prediction Trading REST API
  *
@@ -11,10 +13,22 @@
  * Do not edit the class manually.
  */
 
-export * from './market-data-api';
-export * from './otc-api';
-export * from './position-api';
-export * from './redeem-api';
-export * from './trade-api';
-export * from './transfer-api';
-export * from './wallet-api';
+/**
+ *
+ * @export
+ * @interface CreateOtcBlocktradeResponse
+ */
+export interface CreateOtcBlocktradeResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOtcBlocktradeResponse
+     */
+    orderId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateOtcBlocktradeResponse
+     */
+    secretToken?: string;
+}

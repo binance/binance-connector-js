@@ -35,9 +35,9 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Get Portfolio (USER_DATA)
+         * @summary Get Portfolio (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} [tokenId] Filter by prediction token ID
          * @param {number | bigint} [marketId] Filter by market ID. Must be > 0
@@ -98,9 +98,9 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Get Quota Status (USER_DATA)
+         * @summary Get Quota Status (PREDICTION_TRADE)
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
@@ -131,9 +131,9 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary List Prediction Wallets (USER_DATA)
+         * @summary List Prediction Wallets (PREDICTION_TRADE)
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
@@ -164,9 +164,9 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Query Payment Option Balances (USER_DATA)
+         * @summary Query Payment Option Balances (PREDICTION_TRADE)
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
@@ -205,9 +205,9 @@ export interface WalletApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Get Portfolio (USER_DATA)
+     * @summary Get Portfolio (PREDICTION_TRADE)
      * @param {GetPortfolioRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -221,9 +221,9 @@ export interface WalletApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Get Quota Status (USER_DATA)
+     * @summary Get Quota Status (PREDICTION_TRADE)
      * @param {GetQuotaStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -237,9 +237,9 @@ export interface WalletApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary List Prediction Wallets (USER_DATA)
+     * @summary List Prediction Wallets (PREDICTION_TRADE)
      * @param {ListPredictionWalletsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -253,9 +253,9 @@ export interface WalletApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Payment Option Balances (USER_DATA)
+     * @summary Query Payment Option Balances (PREDICTION_TRADE)
      * @param {QueryPaymentOptionBalancesRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -371,9 +371,9 @@ export class WalletApi implements WalletApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Get Portfolio (USER_DATA)
+     * @summary Get Portfolio (PREDICTION_TRADE)
      * @param {GetPortfolioRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetPortfolioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -408,9 +408,9 @@ export class WalletApi implements WalletApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Get Quota Status (USER_DATA)
+     * @summary Get Quota Status (PREDICTION_TRADE)
      * @param {GetQuotaStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetQuotaStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -440,9 +440,9 @@ export class WalletApi implements WalletApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary List Prediction Wallets (USER_DATA)
+     * @summary List Prediction Wallets (PREDICTION_TRADE)
      * @param {ListPredictionWalletsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ListPredictionWalletsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -472,9 +472,9 @@ export class WalletApi implements WalletApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Payment Option Balances (USER_DATA)
+     * @summary Query Payment Option Balances (PREDICTION_TRADE)
      * @param {QueryPaymentOptionBalancesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPaymentOptionBalancesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}

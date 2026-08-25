@@ -19,6 +19,8 @@ import {
     type RequestArgs,
 } from '@binance/common';
 import type {
+    ApplyMmDepositResponse,
+    ApplyMmWithdrawResponse,
     CreateInboundTransferResponse,
     CreateOutboundTransferResponse,
     QueryTransferListResponse,
@@ -31,15 +33,162 @@ import type {
 const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
+         * Move funds from the user's bound CeDeFi MPC wallet to their CEX account (SPOT/FUNDING) via a contract escrow + credit flow. The maker wallet is resolved server-side by `userId`; the caller does not pass wallet or signature.
+         *
+         * Weight(IP): 200
+         *
+         * Security Type: PREDICTION_TRADE
+         *
+         * Notes:
+         * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+         * - "Note on `fromToken` / `toToken`: typically the same symbol (e.g. both `USDT`). When they differ, the backend may attempt a swap, but cross-symbol conversion is not guaranteed for all pairs — prefer using the same symbol."
+         *
+         * @summary Apply MM Deposit (PREDICTION_TRADE)
+         * @param {string} fromToken Source token symbol (e.g. `USDT`)
+         * @param {string} fromTokenAmount Source token amount in WEI (18 decimals). Example: `1000000000000000000` = 1 USDT
+         * @param {string} toToken Target token symbol (e.g. `USDT`)
+         * @param {ApplyMmDepositAccountTypeEnum} accountType Target CEX account type. Enum: `SPOT`, `FUNDING`
+         * @param {string} [chainId] Chain ID. Default `56` (BSC)
+         *
+         * @throws {RequiredError}
+         */
+        applyMmDeposit: async (
+            fromToken: string,
+            fromTokenAmount: string,
+            toToken: string,
+            accountType: ApplyMmDepositAccountTypeEnum,
+            chainId?: string
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'fromToken' is not null or undefined
+            assertParamExists('applyMmDeposit', 'fromToken', fromToken);
+            // verify required parameter 'fromTokenAmount' is not null or undefined
+            assertParamExists('applyMmDeposit', 'fromTokenAmount', fromTokenAmount);
+            // verify required parameter 'toToken' is not null or undefined
+            assertParamExists('applyMmDeposit', 'toToken', toToken);
+            // verify required parameter 'accountType' is not null or undefined
+            assertParamExists('applyMmDeposit', 'accountType', accountType);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (fromToken !== undefined && fromToken !== null) {
+                localVarQueryParameter['fromToken'] = fromToken;
+            }
+            if (fromTokenAmount !== undefined && fromTokenAmount !== null) {
+                localVarQueryParameter['fromTokenAmount'] = fromTokenAmount;
+            }
+            if (toToken !== undefined && toToken !== null) {
+                localVarQueryParameter['toToken'] = toToken;
+            }
+            if (accountType !== undefined && accountType !== null) {
+                localVarQueryParameter['accountType'] = accountType;
+            }
+            if (chainId !== undefined && chainId !== null) {
+                localVarQueryParameter['chainId'] = chainId;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/w3w/wallet/prediction/deposit/apply',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Withdraw funds from the user's CEX account (SPOT/FUNDING) to their bound CeDeFi MPC wallet address. Unlike `v1/capital/withdraw/apply`, the caller does NOT pass `address`; the backend resolves the user's bound CeDeFi MPC wallet address by `userId` and reuses the existing capital withdraw flow with that address as the target.
+         *
+         * Weight(IP): 200
+         *
+         * Security Type: PREDICTION_TRADE
+         *
+         * Notes:
+         * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+         * - walletType Validation:
+         *
+         * | Value           | Behavior                       |
+         * | --------------- | ------------------------------- |
+         * | `null`          | Allowed — defaults to SPOT      |
+         * | `0`             | Allowed — source = SPOT         |
+         * | `1`             | Allowed — source = FUNDING      |
+         * | Other (e.g. `99`) | Rejected — returns validation error |
+         * - "Note on field naming: this endpoint uses `walletType` (INT `0`/`1`) for the source CEX account, while Apply MM Deposit uses `accountType` (STRING `SPOT`/`FUNDING`) for the target. The difference is intentional: withdraw reuses the existing `v1/capital/withdraw/apply` flow, which inherits that flow's integer `walletType` field."
+         *
+         * @summary Apply MM Withdraw (PREDICTION_TRADE)
+         * @param {string} coin Coin to withdraw (e.g. `USDT`)
+         * @param {string} network Network (e.g. `BEP20`)
+         * @param {string} amount Amount to withdraw (must be > 0)
+         * @param {string} [withdrawOrderId] Client withdraw order id (idempotency key)
+         * @param {ApplyMmWithdrawWalletTypeEnum} [walletType] Source CEX account type. Enum: `0` (SPOT), `1` (FUNDING). Default `0`. Must be `0` or `1`; any other value is rejected
+         * @param {string} [name] Remark for the withdraw
+         *
+         * @throws {RequiredError}
+         */
+        applyMmWithdraw: async (
+            coin: string,
+            network: string,
+            amount: string,
+            withdrawOrderId?: string,
+            walletType?: ApplyMmWithdrawWalletTypeEnum,
+            name?: string
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'coin' is not null or undefined
+            assertParamExists('applyMmWithdraw', 'coin', coin);
+            // verify required parameter 'network' is not null or undefined
+            assertParamExists('applyMmWithdraw', 'network', network);
+            // verify required parameter 'amount' is not null or undefined
+            assertParamExists('applyMmWithdraw', 'amount', amount);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (coin !== undefined && coin !== null) {
+                localVarQueryParameter['coin'] = coin;
+            }
+            if (network !== undefined && network !== null) {
+                localVarQueryParameter['network'] = network;
+            }
+            if (amount !== undefined && amount !== null) {
+                localVarQueryParameter['amount'] = amount;
+            }
+            if (withdrawOrderId !== undefined && withdrawOrderId !== null) {
+                localVarQueryParameter['withdrawOrderId'] = withdrawOrderId;
+            }
+            if (walletType !== undefined && walletType !== null) {
+                localVarQueryParameter['walletType'] = walletType;
+            }
+            if (name !== undefined && name !== null) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/w3w/wallet/prediction/withdraw/apply',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Transfer funds from the prediction wallet back to the user's CEX account (SPOT or FUNDING). Requires SAS authorization.
          *
          * ⚠️ **SAS Authorization Required:** This endpoint enforces SAS (Self-Authorization Service) authorization. If SAS is not enabled for the wallet, the request will be rejected with `-31003 SAS authorization required`. Enable SAS for your wallet before calling this endpoint.
          *
          * Weight(IP): 200
          *
-         * Security Type: TRADE
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Create Inbound Transfer (TRADE)
+         * @summary Create Inbound Transfer (PREDICTION_TRADE)
          * @param {string} walletId Wallet ID
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} fromTokenAmount Transfer amount in wei (18 decimals). Must be > 0. Example: `1000000000000000000` = 1 USDT
@@ -111,9 +260,9 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Weight(IP): 200
          *
-         * Security Type: TRADE
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Create Outbound Transfer (TRADE)
+         * @summary Create Outbound Transfer (PREDICTION_TRADE)
          * @param {string} walletId Wallet ID
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} fromTokenAmount Transfer amount in wei (18 decimals). Must be > 0. Example: `1000000000000000000` = 1 USDT
@@ -192,9 +341,9 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Query Transfer List (USER_DATA)
+         * @summary Query Transfer List (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} startDate Start date. Format: `yyyy-MM-dd`. Must be ≤ `endDate`
          * @param {string} endDate End date. Format: `yyyy-MM-dd`. Must be ≥ `startDate`
@@ -271,9 +420,9 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Query Transfer Status (USER_DATA)
+         * @summary Query Transfer Status (PREDICTION_TRADE)
          * @param {string} transferId Transfer ID returned from outbound/inbound transfer
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
@@ -318,15 +467,63 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
  */
 export interface TransferApiInterface {
     /**
+     * Move funds from the user's bound CeDeFi MPC wallet to their CEX account (SPOT/FUNDING) via a contract escrow + credit flow. The maker wallet is resolved server-side by `userId`; the caller does not pass wallet or signature.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     * - "Note on `fromToken` / `toToken`: typically the same symbol (e.g. both `USDT`). When they differ, the backend may attempt a swap, but cross-symbol conversion is not guaranteed for all pairs — prefer using the same symbol."
+     *
+     * @summary Apply MM Deposit (PREDICTION_TRADE)
+     * @param {ApplyMmDepositRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TransferApiInterface
+     */
+    applyMmDeposit(
+        requestParameters: ApplyMmDepositRequest
+    ): Promise<RestApiResponse<ApplyMmDepositResponse>>;
+    /**
+     * Withdraw funds from the user's CEX account (SPOT/FUNDING) to their bound CeDeFi MPC wallet address. Unlike `v1/capital/withdraw/apply`, the caller does NOT pass `address`; the backend resolves the user's bound CeDeFi MPC wallet address by `userId` and reuses the existing capital withdraw flow with that address as the target.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     * - walletType Validation:
+     *
+     * | Value           | Behavior                       |
+     * | --------------- | ------------------------------- |
+     * | `null`          | Allowed — defaults to SPOT      |
+     * | `0`             | Allowed — source = SPOT         |
+     * | `1`             | Allowed — source = FUNDING      |
+     * | Other (e.g. `99`) | Rejected — returns validation error |
+     * - "Note on field naming: this endpoint uses `walletType` (INT `0`/`1`) for the source CEX account, while Apply MM Deposit uses `accountType` (STRING `SPOT`/`FUNDING`) for the target. The difference is intentional: withdraw reuses the existing `v1/capital/withdraw/apply` flow, which inherits that flow's integer `walletType` field."
+     *
+     * @summary Apply MM Withdraw (PREDICTION_TRADE)
+     * @param {ApplyMmWithdrawRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TransferApiInterface
+     */
+    applyMmWithdraw(
+        requestParameters: ApplyMmWithdrawRequest
+    ): Promise<RestApiResponse<ApplyMmWithdrawResponse>>;
+    /**
      * Transfer funds from the prediction wallet back to the user's CEX account (SPOT or FUNDING). Requires SAS authorization.
      *
      * ⚠️ **SAS Authorization Required:** This endpoint enforces SAS (Self-Authorization Service) authorization. If SAS is not enabled for the wallet, the request will be rejected with `-31003 SAS authorization required`. Enable SAS for your wallet before calling this endpoint.
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Create Inbound Transfer (TRADE)
+     * @summary Create Inbound Transfer (PREDICTION_TRADE)
      * @param {CreateInboundTransferRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -340,9 +537,9 @@ export interface TransferApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Create Outbound Transfer (TRADE)
+     * @summary Create Outbound Transfer (PREDICTION_TRADE)
      * @param {CreateOutboundTransferRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -356,9 +553,9 @@ export interface TransferApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Transfer List (USER_DATA)
+     * @summary Query Transfer List (PREDICTION_TRADE)
      * @param {QueryTransferListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -374,9 +571,9 @@ export interface TransferApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Transfer Status (USER_DATA)
+     * @summary Query Transfer Status (PREDICTION_TRADE)
      * @param {QueryTransferStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -385,6 +582,95 @@ export interface TransferApiInterface {
     queryTransferStatus(
         requestParameters: QueryTransferStatusRequest
     ): Promise<RestApiResponse<QueryTransferStatusResponse>>;
+}
+
+/**
+ * Request parameters for applyMmDeposit operation in TransferApi.
+ * @interface ApplyMmDepositRequest
+ */
+export interface ApplyMmDepositRequest {
+    /**
+     * Source token symbol (e.g. `USDT`)
+     * @type {string}
+     * @memberof TransferApiApplyMmDeposit
+     */
+    readonly fromToken: string;
+
+    /**
+     * Source token amount in WEI (18 decimals). Example: `1000000000000000000` = 1 USDT
+     * @type {string}
+     * @memberof TransferApiApplyMmDeposit
+     */
+    readonly fromTokenAmount: string;
+
+    /**
+     * Target token symbol (e.g. `USDT`)
+     * @type {string}
+     * @memberof TransferApiApplyMmDeposit
+     */
+    readonly toToken: string;
+
+    /**
+     * Target CEX account type. Enum: `SPOT`, `FUNDING`
+     * @type {'SPOT' | 'FUNDING'}
+     * @memberof TransferApiApplyMmDeposit
+     */
+    readonly accountType: ApplyMmDepositAccountTypeEnum;
+
+    /**
+     * Chain ID. Default `56` (BSC)
+     * @type {string}
+     * @memberof TransferApiApplyMmDeposit
+     */
+    readonly chainId?: string;
+}
+
+/**
+ * Request parameters for applyMmWithdraw operation in TransferApi.
+ * @interface ApplyMmWithdrawRequest
+ */
+export interface ApplyMmWithdrawRequest {
+    /**
+     * Coin to withdraw (e.g. `USDT`)
+     * @type {string}
+     * @memberof TransferApiApplyMmWithdraw
+     */
+    readonly coin: string;
+
+    /**
+     * Network (e.g. `BEP20`)
+     * @type {string}
+     * @memberof TransferApiApplyMmWithdraw
+     */
+    readonly network: string;
+
+    /**
+     * Amount to withdraw (must be > 0)
+     * @type {string}
+     * @memberof TransferApiApplyMmWithdraw
+     */
+    readonly amount: string;
+
+    /**
+     * Client withdraw order id (idempotency key)
+     * @type {string}
+     * @memberof TransferApiApplyMmWithdraw
+     */
+    readonly withdrawOrderId?: string;
+
+    /**
+     * Source CEX account type. Enum: `0` (SPOT), `1` (FUNDING). Default `0`. Must be `0` or `1`; any other value is rejected
+     * @type {0 | 1}
+     * @memberof TransferApiApplyMmWithdraw
+     */
+    readonly walletType?: ApplyMmWithdrawWalletTypeEnum;
+
+    /**
+     * Remark for the withdraw
+     * @type {string}
+     * @memberof TransferApiApplyMmWithdraw
+     */
+    readonly name?: string;
 }
 
 /**
@@ -600,15 +886,104 @@ export class TransferApi implements TransferApiInterface {
     }
 
     /**
+     * Move funds from the user's bound CeDeFi MPC wallet to their CEX account (SPOT/FUNDING) via a contract escrow + credit flow. The maker wallet is resolved server-side by `userId`; the caller does not pass wallet or signature.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     * - "Note on `fromToken` / `toToken`: typically the same symbol (e.g. both `USDT`). When they differ, the backend may attempt a swap, but cross-symbol conversion is not guaranteed for all pairs — prefer using the same symbol."
+     *
+     * @summary Apply MM Deposit (PREDICTION_TRADE)
+     * @param {ApplyMmDepositRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<ApplyMmDepositResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TransferApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#apply-mm-deposit Binance API Documentation}
+     */
+    public async applyMmDeposit(
+        requestParameters: ApplyMmDepositRequest
+    ): Promise<RestApiResponse<ApplyMmDepositResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.applyMmDeposit(
+            requestParameters?.fromToken,
+            requestParameters?.fromTokenAmount,
+            requestParameters?.toToken,
+            requestParameters?.accountType,
+            requestParameters?.chainId
+        );
+        return sendRequest<ApplyMmDepositResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Withdraw funds from the user's CEX account (SPOT/FUNDING) to their bound CeDeFi MPC wallet address. Unlike `v1/capital/withdraw/apply`, the caller does NOT pass `address`; the backend resolves the user's bound CeDeFi MPC wallet address by `userId` and reuses the existing capital withdraw flow with that address as the target.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     * - walletType Validation:
+     *
+     * | Value           | Behavior                       |
+     * | --------------- | ------------------------------- |
+     * | `null`          | Allowed — defaults to SPOT      |
+     * | `0`             | Allowed — source = SPOT         |
+     * | `1`             | Allowed — source = FUNDING      |
+     * | Other (e.g. `99`) | Rejected — returns validation error |
+     * - "Note on field naming: this endpoint uses `walletType` (INT `0`/`1`) for the source CEX account, while Apply MM Deposit uses `accountType` (STRING `SPOT`/`FUNDING`) for the target. The difference is intentional: withdraw reuses the existing `v1/capital/withdraw/apply` flow, which inherits that flow's integer `walletType` field."
+     *
+     * @summary Apply MM Withdraw (PREDICTION_TRADE)
+     * @param {ApplyMmWithdrawRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<ApplyMmWithdrawResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TransferApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#apply-mm-withdraw Binance API Documentation}
+     */
+    public async applyMmWithdraw(
+        requestParameters: ApplyMmWithdrawRequest
+    ): Promise<RestApiResponse<ApplyMmWithdrawResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.applyMmWithdraw(
+            requestParameters?.coin,
+            requestParameters?.network,
+            requestParameters?.amount,
+            requestParameters?.withdrawOrderId,
+            requestParameters?.walletType,
+            requestParameters?.name
+        );
+        return sendRequest<ApplyMmWithdrawResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Transfer funds from the prediction wallet back to the user's CEX account (SPOT or FUNDING). Requires SAS authorization.
      *
      * ⚠️ **SAS Authorization Required:** This endpoint enforces SAS (Self-Authorization Service) authorization. If SAS is not enabled for the wallet, the request will be rejected with `-31003 SAS authorization required`. Enable SAS for your wallet before calling this endpoint.
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Create Inbound Transfer (TRADE)
+     * @summary Create Inbound Transfer (PREDICTION_TRADE)
      * @param {CreateInboundTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CreateInboundTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -644,9 +1019,9 @@ export class TransferApi implements TransferApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Create Outbound Transfer (TRADE)
+     * @summary Create Outbound Transfer (PREDICTION_TRADE)
      * @param {CreateOutboundTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CreateOutboundTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -683,9 +1058,9 @@ export class TransferApi implements TransferApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Transfer List (USER_DATA)
+     * @summary Query Transfer List (PREDICTION_TRADE)
      * @param {QueryTransferListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryTransferListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -724,9 +1099,9 @@ export class TransferApi implements TransferApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Transfer Status (USER_DATA)
+     * @summary Query Transfer Status (PREDICTION_TRADE)
      * @param {QueryTransferStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryTransferStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -751,6 +1126,16 @@ export class TransferApi implements TransferApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum ApplyMmDepositAccountTypeEnum {
+    SPOT = 'SPOT',
+    FUNDING = 'FUNDING',
+}
+
+export enum ApplyMmWithdrawWalletTypeEnum {
+    WALLET_TYPE_0 = 0,
+    WALLET_TYPE_1 = 1,
 }
 
 export enum CreateInboundTransferAccountTypeEnum {

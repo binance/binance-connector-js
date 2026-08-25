@@ -17,18 +17,24 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import {
     TransferApi,
+    ApplyMmDepositAccountTypeEnum,
+    ApplyMmWithdrawWalletTypeEnum,
     CreateInboundTransferAccountTypeEnum,
     CreateOutboundTransferAccountTypeEnum,
     CreateOutboundTransferSourceBizEnum,
     QueryTransferListDirectionEnum,
 } from '../../../src/rest-api';
 import {
+    ApplyMmDepositRequest,
+    ApplyMmWithdrawRequest,
     CreateInboundTransferRequest,
     CreateOutboundTransferRequest,
     QueryTransferListRequest,
     QueryTransferStatusRequest,
 } from '../../../src/rest-api';
 import type {
+    ApplyMmDepositResponse,
+    ApplyMmWithdrawResponse,
     CreateInboundTransferResponse,
     CreateOutboundTransferResponse,
     QueryTransferListResponse,
@@ -47,6 +53,271 @@ describe('TransferApi', () => {
             basePath: '',
         });
         client = new TransferApi(config);
+    });
+
+    describe('applyMmDeposit()', () => {
+        it('should execute applyMmDeposit() successfully with required parameters only', async () => {
+            const params: ApplyMmDepositRequest = {
+                fromToken: 'USDT',
+                fromTokenAmount: '1000000000000000000',
+                toToken: 'USDT',
+                accountType: ApplyMmDepositAccountTypeEnum.SPOT,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({ transferId: '26080400000000454343', status: 'PROCESSING' })
+            );
+
+            const spy = jest.spyOn(client, 'applyMmDeposit').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ApplyMmDepositResponse>)
+            );
+            const response = await client.applyMmDeposit(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute applyMmDeposit() successfully with optional parameters', async () => {
+            const params: ApplyMmDepositRequest = {
+                fromToken: 'USDT',
+                fromTokenAmount: '1000000000000000000',
+                toToken: 'USDT',
+                accountType: ApplyMmDepositAccountTypeEnum.SPOT,
+                chainId: '56',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({ transferId: '26080400000000454343', status: 'PROCESSING' })
+            );
+
+            const spy = jest.spyOn(client, 'applyMmDeposit').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ApplyMmDepositResponse>)
+            );
+            const response = await client.applyMmDeposit(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when fromToken is missing', async () => {
+            const _params: ApplyMmDepositRequest = {
+                fromToken: 'USDT',
+                fromTokenAmount: '1000000000000000000',
+                toToken: 'USDT',
+                accountType: ApplyMmDepositAccountTypeEnum.SPOT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.fromToken;
+
+            await expect(client.applyMmDeposit(params)).rejects.toThrow(
+                'Required parameter fromToken was null or undefined when calling applyMmDeposit.'
+            );
+        });
+
+        it('should throw RequiredError when fromTokenAmount is missing', async () => {
+            const _params: ApplyMmDepositRequest = {
+                fromToken: 'USDT',
+                fromTokenAmount: '1000000000000000000',
+                toToken: 'USDT',
+                accountType: ApplyMmDepositAccountTypeEnum.SPOT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.fromTokenAmount;
+
+            await expect(client.applyMmDeposit(params)).rejects.toThrow(
+                'Required parameter fromTokenAmount was null or undefined when calling applyMmDeposit.'
+            );
+        });
+
+        it('should throw RequiredError when toToken is missing', async () => {
+            const _params: ApplyMmDepositRequest = {
+                fromToken: 'USDT',
+                fromTokenAmount: '1000000000000000000',
+                toToken: 'USDT',
+                accountType: ApplyMmDepositAccountTypeEnum.SPOT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.toToken;
+
+            await expect(client.applyMmDeposit(params)).rejects.toThrow(
+                'Required parameter toToken was null or undefined when calling applyMmDeposit.'
+            );
+        });
+
+        it('should throw RequiredError when accountType is missing', async () => {
+            const _params: ApplyMmDepositRequest = {
+                fromToken: 'USDT',
+                fromTokenAmount: '1000000000000000000',
+                toToken: 'USDT',
+                accountType: ApplyMmDepositAccountTypeEnum.SPOT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.accountType;
+
+            await expect(client.applyMmDeposit(params)).rejects.toThrow(
+                'Required parameter accountType was null or undefined when calling applyMmDeposit.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: ApplyMmDepositRequest = {
+                fromToken: 'USDT',
+                fromTokenAmount: '1000000000000000000',
+                toToken: 'USDT',
+                accountType: ApplyMmDepositAccountTypeEnum.SPOT,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'applyMmDeposit').mockRejectedValueOnce(mockError);
+            await expect(client.applyMmDeposit(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('applyMmWithdraw()', () => {
+        it('should execute applyMmWithdraw() successfully with required parameters only', async () => {
+            const params: ApplyMmWithdrawRequest = {
+                coin: 'USDT',
+                network: 'BEP20',
+                amount: '100.00',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '123456789',
+                    walletId: '0ecd3be8e3674b54b1258e24f9c3706b',
+                    walletAddress: '0x2ac3a1fb164da5c4e76f67ae6dbe6be821c000c8',
+                    transferId: '26080400000000454344',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'applyMmWithdraw').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ApplyMmWithdrawResponse>)
+            );
+            const response = await client.applyMmWithdraw(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute applyMmWithdraw() successfully with optional parameters', async () => {
+            const params: ApplyMmWithdrawRequest = {
+                coin: 'USDT',
+                network: 'BEP20',
+                amount: '100.00',
+                withdrawOrderId: 'wd_20260814_001',
+                walletType: ApplyMmWithdrawWalletTypeEnum.WALLET_TYPE_0,
+                name: 'MM withdraw',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '123456789',
+                    walletId: '0ecd3be8e3674b54b1258e24f9c3706b',
+                    walletAddress: '0x2ac3a1fb164da5c4e76f67ae6dbe6be821c000c8',
+                    transferId: '26080400000000454344',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'applyMmWithdraw').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ApplyMmWithdrawResponse>)
+            );
+            const response = await client.applyMmWithdraw(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when coin is missing', async () => {
+            const _params: ApplyMmWithdrawRequest = {
+                coin: 'USDT',
+                network: 'BEP20',
+                amount: '100.00',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.coin;
+
+            await expect(client.applyMmWithdraw(params)).rejects.toThrow(
+                'Required parameter coin was null or undefined when calling applyMmWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when network is missing', async () => {
+            const _params: ApplyMmWithdrawRequest = {
+                coin: 'USDT',
+                network: 'BEP20',
+                amount: '100.00',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.network;
+
+            await expect(client.applyMmWithdraw(params)).rejects.toThrow(
+                'Required parameter network was null or undefined when calling applyMmWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when amount is missing', async () => {
+            const _params: ApplyMmWithdrawRequest = {
+                coin: 'USDT',
+                network: 'BEP20',
+                amount: '100.00',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.amount;
+
+            await expect(client.applyMmWithdraw(params)).rejects.toThrow(
+                'Required parameter amount was null or undefined when calling applyMmWithdraw.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: ApplyMmWithdrawRequest = {
+                coin: 'USDT',
+                network: 'BEP20',
+                amount: '100.00',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'applyMmWithdraw').mockRejectedValueOnce(mockError);
+            await expect(client.applyMmWithdraw(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
     });
 
     describe('createInboundTransfer()', () => {

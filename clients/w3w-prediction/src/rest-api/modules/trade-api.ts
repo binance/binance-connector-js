@@ -45,13 +45,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight(IP): 200
          *
-         * Security Type: TRADE
+         * Security Type: PREDICTION_TRADE
          *
          * Notes:
          * - Use dot notation for nested list fields: `cancelInfoList[0].orderId`, `cancelInfoList[1].orderId`, etc.
          * - `vendor` does not need to be supplied. The server automatically sets the correct vendor (`predict_fun`) for every item in the batch.
          *
-         * @summary Batch Cancel Orders (TRADE)
+         * @summary Batch Cancel Orders (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} walletId Wallet ID
          * @param {Array<BatchCancelOrdersCancelInfoListParameterInner>} [cancelInfoList] List of orders to cancel (index `i` starts from 0)
@@ -99,13 +99,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight(IP): 200
          *
-         * Security Type: TRADE
+         * Security Type: PREDICTION_TRADE
          *
          * Response Notes:
          * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
          * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
          *
-         * @summary Get Quote (TRADE)
+         * @summary Get Quote (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} tokenId Prediction outcome token ID
          * @param {GetQuoteSideEnum} side Trade direction. Enum: `BUY`, `SELL`
@@ -201,7 +201,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight(IP): 200
          *
-         * Security Type: TRADE
+         * Security Type: PREDICTION_TRADE
          *
          * Notes:
          * - Validation rules:
@@ -211,7 +211,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * | `MARKET`  | Must be `FOK` | Not required          |
          * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
          *
-         * @summary Place Order (TRADE)
+         * @summary Place Order (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} walletId Wallet ID
          * @param {string} quoteId Quote ID obtained from `Get Quote`
@@ -304,9 +304,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Query Active Orders (USER_DATA)
+         * @summary Query Active Orders (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {QueryActiveOrdersTradeSideEnum} [tradeSide] Filter by trade side. Enum: `BUY`, `SELL`
          * @param {string} [l1Category] Filter by level-1 category
@@ -372,9 +372,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Query Order History (USER_DATA)
+         * @summary Query Order History (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} [l1Category] Filter by level-1 category
          * @param {QueryOrderHistoryOrderTypeEnum} [orderType] Filter by order type. Enum: `MARKET`, `LIMIT`
@@ -466,13 +466,13 @@ export interface TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Notes:
      * - Use dot notation for nested list fields: `cancelInfoList[0].orderId`, `cancelInfoList[1].orderId`, etc.
      * - `vendor` does not need to be supplied. The server automatically sets the correct vendor (`predict_fun`) for every item in the batch.
      *
-     * @summary Batch Cancel Orders (TRADE)
+     * @summary Batch Cancel Orders (PREDICTION_TRADE)
      * @param {BatchCancelOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -486,13 +486,13 @@ export interface TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
      * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
      *
-     * @summary Get Quote (TRADE)
+     * @summary Get Quote (PREDICTION_TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -504,7 +504,7 @@ export interface TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Notes:
      * - Validation rules:
@@ -514,7 +514,7 @@ export interface TradeApiInterface {
      * | `MARKET`  | Must be `FOK` | Not required          |
      * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
      *
-     * @summary Place Order (TRADE)
+     * @summary Place Order (PREDICTION_TRADE)
      * @param {PlaceOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -526,9 +526,9 @@ export interface TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Active Orders (USER_DATA)
+     * @summary Query Active Orders (PREDICTION_TRADE)
      * @param {QueryActiveOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -542,9 +542,9 @@ export interface TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Order History (USER_DATA)
+     * @summary Query Order History (PREDICTION_TRADE)
      * @param {QueryOrderHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -891,13 +891,13 @@ export class TradeApi implements TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Notes:
      * - Use dot notation for nested list fields: `cancelInfoList[0].orderId`, `cancelInfoList[1].orderId`, etc.
      * - `vendor` does not need to be supplied. The server automatically sets the correct vendor (`predict_fun`) for every item in the batch.
      *
-     * @summary Batch Cancel Orders (TRADE)
+     * @summary Batch Cancel Orders (PREDICTION_TRADE)
      * @param {BatchCancelOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BatchCancelOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -929,13 +929,13 @@ export class TradeApi implements TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
      * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
      *
-     * @summary Get Quote (TRADE)
+     * @summary Get Quote (PREDICTION_TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetQuoteResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -975,7 +975,7 @@ export class TradeApi implements TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Notes:
      * - Validation rules:
@@ -985,7 +985,7 @@ export class TradeApi implements TradeApiInterface {
      * | `MARKET`  | Must be `FOK` | Not required          |
      * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
      *
-     * @summary Place Order (TRADE)
+     * @summary Place Order (PREDICTION_TRADE)
      * @param {PlaceOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<PlaceOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1024,9 +1024,9 @@ export class TradeApi implements TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Active Orders (USER_DATA)
+     * @summary Query Active Orders (PREDICTION_TRADE)
      * @param {QueryActiveOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryActiveOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1062,9 +1062,9 @@ export class TradeApi implements TradeApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Order History (USER_DATA)
+     * @summary Query Order History (PREDICTION_TRADE)
      * @param {QueryOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}

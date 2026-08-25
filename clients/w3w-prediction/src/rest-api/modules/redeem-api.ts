@@ -30,9 +30,9 @@ const RedeemApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Weight(IP): 200
          *
-         * Security Type: TRADE
+         * Security Type: PREDICTION_TRADE
          *
-         * @summary Batch Redeem (TRADE)
+         * @summary Batch Redeem (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} walletId Wallet ID
          * @param {Array<string>} tokenIds List of prediction token IDs to redeem. Not empty. Example: `tokenIds=112233&tokenIds=112234`
@@ -87,7 +87,7 @@ const RedeemApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Weight(IP): 200
          *
-         * Security Type: USER_DATA
+         * Security Type: PREDICTION_TRADE
          *
          * Response Notes:
          * - Status values:
@@ -99,7 +99,7 @@ const RedeemApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * | `FAILED`    | Transaction failed                           |
          * | `NOT_FOUND` | Transaction hash not found                   |
          *
-         * @summary Get Redeem Status (USER_DATA)
+         * @summary Get Redeem Status (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} txHash Redeem transaction hash
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
@@ -155,9 +155,9 @@ export interface RedeemApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Batch Redeem (TRADE)
+     * @summary Batch Redeem (PREDICTION_TRADE)
      * @param {BatchRedeemRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -171,7 +171,7 @@ export interface RedeemApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - Status values:
@@ -183,7 +183,7 @@ export interface RedeemApiInterface {
      * | `FAILED`    | Transaction failed                           |
      * | `NOT_FOUND` | Transaction hash not found                   |
      *
-     * @summary Get Redeem Status (USER_DATA)
+     * @summary Get Redeem Status (PREDICTION_TRADE)
      * @param {GetRedeemStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -273,9 +273,9 @@ export class RedeemApi implements RedeemApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Batch Redeem (TRADE)
+     * @summary Batch Redeem (PREDICTION_TRADE)
      * @param {BatchRedeemRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BatchRedeemResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -308,7 +308,7 @@ export class RedeemApi implements RedeemApiInterface {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - Status values:
@@ -320,7 +320,7 @@ export class RedeemApi implements RedeemApiInterface {
      * | `FAILED`    | Transaction failed                           |
      * | `NOT_FOUND` | Transaction hash not found                   |
      *
-     * @summary Get Redeem Status (USER_DATA)
+     * @summary Get Redeem Status (PREDICTION_TRADE)
      * @param {GetRedeemStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRedeemStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}

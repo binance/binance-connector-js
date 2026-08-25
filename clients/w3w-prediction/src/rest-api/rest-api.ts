@@ -13,6 +13,7 @@
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
 import { MarketDataApi } from './modules/market-data-api';
+import { OtcApi } from './modules/otc-api';
 import { PositionApi } from './modules/position-api';
 import { RedeemApi } from './modules/redeem-api';
 import { TradeApi } from './modules/trade-api';
@@ -26,6 +27,16 @@ import type {
     QueryLastTradePriceRequest,
     QueryOrderBookRequest,
 } from './modules/market-data-api';
+import type {
+    CreateOtcBlocktradeRequest,
+    FulfilOtcBlocktradeRequest,
+    GetOtcBlocktradeDetailRequest,
+    GetOtcBlocktradeEventsRequest,
+    GetOtcReservedBalancesRequest,
+    ListOtcBlocktradesRequest,
+    PreviewOtcBlocktradeRequest,
+    RemoveOtcBlocktradesRequest,
+} from './modules/otc-api';
 import type {
     GetPositionByTokenRequest,
     QueryPnLRequest,
@@ -42,6 +53,8 @@ import type {
     QueryOrderHistoryRequest,
 } from './modules/trade-api';
 import type {
+    ApplyMmDepositRequest,
+    ApplyMmWithdrawRequest,
     CreateInboundTransferRequest,
     CreateOutboundTransferRequest,
     QueryTransferListRequest,
@@ -63,6 +76,16 @@ import type {
     QueryOrderBookResponse,
 } from './types';
 import type {
+    CreateOtcBlocktradeResponse,
+    FulfilOtcBlocktradeResponse,
+    GetOtcBlocktradeDetailResponse,
+    GetOtcBlocktradeEventsResponse,
+    GetOtcReservedBalancesResponse,
+    ListOtcBlocktradesResponse,
+    PreviewOtcBlocktradeResponse,
+    RemoveOtcBlocktradesResponse,
+} from './types';
+import type {
     GetPositionByTokenResponse,
     QueryPnLResponse,
     QueryPositionsResponse,
@@ -78,6 +101,8 @@ import type {
     QueryOrderHistoryResponse,
 } from './types';
 import type {
+    ApplyMmDepositResponse,
+    ApplyMmWithdrawResponse,
     CreateInboundTransferResponse,
     CreateOutboundTransferResponse,
     QueryTransferListResponse,
@@ -93,6 +118,7 @@ import type {
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
     private marketDataApi: MarketDataApi;
+    private otcApi: OtcApi;
     private positionApi: PositionApi;
     private redeemApi: RedeemApi;
     private tradeApi: TradeApi;
@@ -102,6 +128,7 @@ export class RestAPI {
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
         this.marketDataApi = new MarketDataApi(configuration);
+        this.otcApi = new OtcApi(configuration);
         this.positionApi = new PositionApi(configuration);
         this.redeemApi = new RedeemApi(configuration);
         this.tradeApi = new TradeApi(configuration);
@@ -268,13 +295,215 @@ export class RestAPI {
     }
 
     /**
+     * Create an OTC blocktrade as the maker (BID to buy outcome shares with USDT, or ASK to sell outcome shares for USDT). The maker wallet is resolved server-side by `userId`; signing is done server-side via SAS `typedDataSign`. Returns `orderId` and a one-time `secretToken` to share out-of-band with the intended taker.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     * - Side & Amount Rules:
+     *
+     * | side   | makerAmount   | takerAmount   |
+     * | ------ | ------------- | ------------- |
+     * | `BUY`  | USDT (wei)    | shares (wei)  |
+     * | `SELL` | shares (wei)  | USDT (wei)    |
+     * - "Note on `side` encoding: this request uses a string enum (`BUY`/`SELL`). Responses from Get Blocktrade Detail / Preview / List return `side` as an integer and also include a `quoteType` string — both encode the same concept."
+     *
+     * | Request `side` | Response `side` (Integer) | Response `quoteType` |
+     * | --------------- | -------------------------- | ---------------------- |
+     * | `BUY`           | `0`                         | `"Bid"`                |
+     * | `SELL`          | `1`                         | `"Ask"`                |
+     *
+     * @summary Create OTC Blocktrade (PREDICTION_TRADE)
+     * @param {CreateOtcBlocktradeRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<CreateOtcBlocktradeResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/otc#create-otc-blocktrade Binance API Documentation}
+     */
+    createOtcBlocktrade(
+        requestParameters: CreateOtcBlocktradeRequest
+    ): Promise<RestApiResponse<CreateOtcBlocktradeResponse>> {
+        return this.otcApi.createOtcBlocktrade(requestParameters);
+    }
+
+    /**
+     * Fulfil an open maker blocktrade as the taker, using the `secretToken` the maker shared out-of-band. All-or-nothing fill (no partial fill); the taker order is the server-derived symmetric inverse of the maker order.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     *
+     * @summary Fulfil OTC Blocktrade (PREDICTION_TRADE)
+     * @param {FulfilOtcBlocktradeRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<FulfilOtcBlocktradeResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/otc#fulfil-otc-blocktrade Binance API Documentation}
+     */
+    fulfilOtcBlocktrade(
+        requestParameters: FulfilOtcBlocktradeRequest
+    ): Promise<RestApiResponse<FulfilOtcBlocktradeResponse>> {
+        return this.otcApi.fulfilOtcBlocktrade(requestParameters);
+    }
+
+    /**
+     * Query the maker's own blocktrade by `orderId`. Returns full order data including status and `secretToken`.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     *
+     * @summary Get OTC Blocktrade Detail (PREDICTION_TRADE)
+     * @param {GetOtcBlocktradeDetailRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetOtcBlocktradeDetailResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/otc#get-otc-blocktrade-detail Binance API Documentation}
+     */
+    getOtcBlocktradeDetail(
+        requestParameters: GetOtcBlocktradeDetailRequest
+    ): Promise<RestApiResponse<GetOtcBlocktradeDetailResponse>> {
+        return this.otcApi.getOtcBlocktradeDetail(requestParameters);
+    }
+
+    /**
+     * Paginated feed of blocktrade lifecycle and settlement events (CREATE, FULFIL, MATCH_SUBMIT, MATCH_SUCCESS, EXPIRE, FAILED, etc.).
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     *
+     * @summary Get OTC Blocktrade Events (PREDICTION_TRADE)
+     * @param {GetOtcBlocktradeEventsRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetOtcBlocktradeEventsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/otc#get-otc-blocktrade-events Binance API Documentation}
+     */
+    getOtcBlocktradeEvents(
+        requestParameters: GetOtcBlocktradeEventsRequest = {}
+    ): Promise<RestApiResponse<GetOtcBlocktradeEventsResponse>> {
+        return this.otcApi.getOtcBlocktradeEvents(requestParameters);
+    }
+
+    /**
+     * Query PredictFun reserved balances for the caller's bound wallet — these are funds locked by the caller's open OTC blocktrade orders (maker BID locks USDT, maker ASK locks shares). Not tied to a specific blocktrade id; the path nesting under `otc/blocktrade` reflects the cause of the lock, not a per-order query. Returns one entry per requested asset, aligned with the request order. Pass `{type:"USDT"}` for reserved USDT, or `{type:"SHARE", tokenId:"..."}` for a specific outcome token's reserved shares.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     * - AssetQuery:
+     *
+     * | Name    | Type   | Mandatory | Description |
+     * | ------- | ------ | --------- | ----------- |
+     * | type    | STRING | YES       | Asset type. Enum: `USDT`, `SHARE` |
+     * | tokenId | STRING | NO        | Outcome token id (present for `SHARE` entries only) |
+     *
+     * @summary Get OTC Reserved Balances (PREDICTION_TRADE)
+     * @param {GetOtcReservedBalancesRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetOtcReservedBalancesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/otc#get-otc-reserved-balances Binance API Documentation}
+     */
+    getOtcReservedBalances(
+        requestParameters: GetOtcReservedBalancesRequest
+    ): Promise<RestApiResponse<GetOtcReservedBalancesResponse>> {
+        return this.otcApi.getOtcReservedBalances(requestParameters);
+    }
+
+    /**
+     * List the maker's own blocktrades with optional status filter and cursor pagination.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     *
+     * @summary List OTC Blocktrades (PREDICTION_TRADE)
+     * @param {ListOtcBlocktradesRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<ListOtcBlocktradesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/otc#list-otc-blocktrades Binance API Documentation}
+     */
+    listOtcBlocktrades(
+        requestParameters: ListOtcBlocktradesRequest = {}
+    ): Promise<RestApiResponse<ListOtcBlocktradesResponse>> {
+        return this.otcApi.listOtcBlocktrades(requestParameters);
+    }
+
+    /**
+     * Inspect an open blocktrade by `secretToken` (no `orderId` needed). Taker uses this to preview the maker order before fulfilling. Returns the same shape as `Get Blocktrade Detail`, but `orderId` is `null` and `secretToken` is never returned from this endpoint.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     *
+     * @summary Preview OTC Blocktrade (PREDICTION_TRADE)
+     * @param {PreviewOtcBlocktradeRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<PreviewOtcBlocktradeResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/otc#preview-otc-blocktrade Binance API Documentation}
+     */
+    previewOtcBlocktrade(
+        requestParameters: PreviewOtcBlocktradeRequest
+    ): Promise<RestApiResponse<PreviewOtcBlocktradeResponse>> {
+        return this.otcApi.previewOtcBlocktrade(requestParameters);
+    }
+
+    /**
+     * Cancel open or fulfilled-but-unsettled blocktrades. Terminal orders (already `MATCHED`/`CANCELLED`/`EXPIRED`/`FAILED`) are returned in `noop` instead of `removed`.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     *
+     * @summary Remove OTC Blocktrades (PREDICTION_TRADE)
+     * @param {RemoveOtcBlocktradesRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<RemoveOtcBlocktradesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/otc#remove-otc-blocktrades Binance API Documentation}
+     */
+    removeOtcBlocktrades(
+        requestParameters: RemoveOtcBlocktradesRequest
+    ): Promise<RestApiResponse<RemoveOtcBlocktradesResponse>> {
+        return this.otcApi.removeOtcBlocktrades(requestParameters);
+    }
+
+    /**
      * Get the authenticated user's position detail for a specific prediction token.
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Get Position by Token (USER_DATA)
+     * @summary Get Position by Token (PREDICTION_TRADE)
      * @param {GetPositionByTokenRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPositionByTokenResponse>>}
@@ -292,9 +521,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query PnL (USER_DATA)
+     * @summary Query PnL (PREDICTION_TRADE)
      * @param {QueryPnLRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPnLResponse>>}
@@ -310,9 +539,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Positions (USER_DATA)
+     * @summary Query Positions (PREDICTION_TRADE)
      * @param {QueryPositionsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPositionsResponse>>}
@@ -330,9 +559,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Positions by Filter (USER_DATA)
+     * @summary Query Positions by Filter (PREDICTION_TRADE)
      * @param {QueryPositionsByFilterRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPositionsByFilterResponse>>}
@@ -350,9 +579,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Settled Position History (USER_DATA)
+     * @summary Query Settled Position History (PREDICTION_TRADE)
      * @param {QuerySettledPositionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySettledPositionHistoryResponse>>}
@@ -370,9 +599,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Batch Redeem (TRADE)
+     * @summary Batch Redeem (PREDICTION_TRADE)
      * @param {BatchRedeemRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<BatchRedeemResponse>>}
@@ -390,7 +619,7 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - Status values:
@@ -402,7 +631,7 @@ export class RestAPI {
      * | `FAILED`    | Transaction failed                           |
      * | `NOT_FOUND` | Transaction hash not found                   |
      *
-     * @summary Get Redeem Status (USER_DATA)
+     * @summary Get Redeem Status (PREDICTION_TRADE)
      * @param {GetRedeemStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRedeemStatusResponse>>}
@@ -428,13 +657,13 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Notes:
      * - Use dot notation for nested list fields: `cancelInfoList[0].orderId`, `cancelInfoList[1].orderId`, etc.
      * - `vendor` does not need to be supplied. The server automatically sets the correct vendor (`predict_fun`) for every item in the batch.
      *
-     * @summary Batch Cancel Orders (TRADE)
+     * @summary Batch Cancel Orders (PREDICTION_TRADE)
      * @param {BatchCancelOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<BatchCancelOrdersResponse>>}
@@ -452,13 +681,13 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
      * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
      *
-     * @summary Get Quote (TRADE)
+     * @summary Get Quote (PREDICTION_TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetQuoteResponse>>}
@@ -474,7 +703,7 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
      * Notes:
      * - Validation rules:
@@ -484,7 +713,7 @@ export class RestAPI {
      * | `MARKET`  | Must be `FOK` | Not required          |
      * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
      *
-     * @summary Place Order (TRADE)
+     * @summary Place Order (PREDICTION_TRADE)
      * @param {PlaceOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PlaceOrderResponse>>}
@@ -500,9 +729,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Active Orders (USER_DATA)
+     * @summary Query Active Orders (PREDICTION_TRADE)
      * @param {QueryActiveOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryActiveOrdersResponse>>}
@@ -520,9 +749,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Order History (USER_DATA)
+     * @summary Query Order History (PREDICTION_TRADE)
      * @param {QueryOrderHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryOrderHistoryResponse>>}
@@ -536,15 +765,71 @@ export class RestAPI {
     }
 
     /**
+     * Move funds from the user's bound CeDeFi MPC wallet to their CEX account (SPOT/FUNDING) via a contract escrow + credit flow. The maker wallet is resolved server-side by `userId`; the caller does not pass wallet or signature.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     * - "Note on `fromToken` / `toToken`: typically the same symbol (e.g. both `USDT`). When they differ, the backend may attempt a swap, but cross-symbol conversion is not guaranteed for all pairs — prefer using the same symbol."
+     *
+     * @summary Apply MM Deposit (PREDICTION_TRADE)
+     * @param {ApplyMmDepositRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<ApplyMmDepositResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#apply-mm-deposit Binance API Documentation}
+     */
+    applyMmDeposit(
+        requestParameters: ApplyMmDepositRequest
+    ): Promise<RestApiResponse<ApplyMmDepositResponse>> {
+        return this.transferApi.applyMmDeposit(requestParameters);
+    }
+
+    /**
+     * Withdraw funds from the user's CEX account (SPOT/FUNDING) to their bound CeDeFi MPC wallet address. Unlike `v1/capital/withdraw/apply`, the caller does NOT pass `address`; the backend resolves the user's bound CeDeFi MPC wallet address by `userId` and reuses the existing capital withdraw flow with that address as the target.
+     *
+     * Weight(IP): 200
+     *
+     * Security Type: PREDICTION_TRADE
+     *
+     * Notes:
+     * - Restricted to authorized market makers. Requests from unauthorized accounts are rejected — contact BD to request access.
+     * - walletType Validation:
+     *
+     * | Value           | Behavior                       |
+     * | --------------- | ------------------------------- |
+     * | `null`          | Allowed — defaults to SPOT      |
+     * | `0`             | Allowed — source = SPOT         |
+     * | `1`             | Allowed — source = FUNDING      |
+     * | Other (e.g. `99`) | Rejected — returns validation error |
+     * - "Note on field naming: this endpoint uses `walletType` (INT `0`/`1`) for the source CEX account, while Apply MM Deposit uses `accountType` (STRING `SPOT`/`FUNDING`) for the target. The difference is intentional: withdraw reuses the existing `v1/capital/withdraw/apply` flow, which inherits that flow's integer `walletType` field."
+     *
+     * @summary Apply MM Withdraw (PREDICTION_TRADE)
+     * @param {ApplyMmWithdrawRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<ApplyMmWithdrawResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#apply-mm-withdraw Binance API Documentation}
+     */
+    applyMmWithdraw(
+        requestParameters: ApplyMmWithdrawRequest
+    ): Promise<RestApiResponse<ApplyMmWithdrawResponse>> {
+        return this.transferApi.applyMmWithdraw(requestParameters);
+    }
+
+    /**
      * Transfer funds from the prediction wallet back to the user's CEX account (SPOT or FUNDING). Requires SAS authorization.
      *
      * ⚠️ **SAS Authorization Required:** This endpoint enforces SAS (Self-Authorization Service) authorization. If SAS is not enabled for the wallet, the request will be rejected with `-31003 SAS authorization required`. Enable SAS for your wallet before calling this endpoint.
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Create Inbound Transfer (TRADE)
+     * @summary Create Inbound Transfer (PREDICTION_TRADE)
      * @param {CreateInboundTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CreateInboundTransferResponse>>}
@@ -562,9 +847,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: TRADE
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Create Outbound Transfer (TRADE)
+     * @summary Create Outbound Transfer (PREDICTION_TRADE)
      * @param {CreateOutboundTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CreateOutboundTransferResponse>>}
@@ -582,9 +867,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Transfer List (USER_DATA)
+     * @summary Query Transfer List (PREDICTION_TRADE)
      * @param {QueryTransferListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryTransferListResponse>>}
@@ -604,9 +889,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Transfer Status (USER_DATA)
+     * @summary Query Transfer Status (PREDICTION_TRADE)
      * @param {QueryTransferStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryTransferStatusResponse>>}
@@ -624,9 +909,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Get Portfolio (USER_DATA)
+     * @summary Get Portfolio (PREDICTION_TRADE)
      * @param {GetPortfolioRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPortfolioResponse>>}
@@ -644,9 +929,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Get Quota Status (USER_DATA)
+     * @summary Get Quota Status (PREDICTION_TRADE)
      * @param {GetQuotaStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetQuotaStatusResponse>>}
@@ -664,9 +949,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary List Prediction Wallets (USER_DATA)
+     * @summary List Prediction Wallets (PREDICTION_TRADE)
      * @param {ListPredictionWalletsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ListPredictionWalletsResponse>>}
@@ -684,9 +969,9 @@ export class RestAPI {
      *
      * Weight(IP): 200
      *
-     * Security Type: USER_DATA
+     * Security Type: PREDICTION_TRADE
      *
-     * @summary Query Payment Option Balances (USER_DATA)
+     * @summary Query Payment Option Balances (PREDICTION_TRADE)
      * @param {QueryPaymentOptionBalancesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPaymentOptionBalancesResponse>>}
