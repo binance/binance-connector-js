@@ -180,6 +180,13 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - `-3045 INSUFFICIENT_INVENTORY`: returned when system borrowable inventory is below the requested amount, or when inventory is severely insufficient (all borrow requests rejected regardless of size). Monitor system asset availability and adjust borrow strategy accordingly.
+         * - `-3006 EXCEED_MAX_BORROWABLE`: borrow amount exceeds your current max borrowable limit. Query `GET /sapi/v1/margin/maxBorrowable` and adjust the request.
+         * - `-3012 ASSET_ADMIN_BAN_BORROW`: this asset does not currently support borrowing. Query `GET /sapi/v1/margin/allAssets` for asset borrow availability.
+         * - `-3015 REPAY_EXCEED_LIABILITY`: returned in two scenarios — (1) repay amount exceeds your outstanding liability, or (2) the remaining unpaid debt after this repayment would fall below Binance's minimum threshold. Adjust the repay amount accordingly.
+         * - `-3007 HAS_PENDING_TRANSACTION`: a borrow/repay transaction is already in progress on this account. Requests are processed in submission order across all assets, and an in-flight request briefly blocks subsequent ones. Typical processing time is ~100ms; space consecutive requests by at least 100ms. Auto-repay orders can also fail silently for this reason — verify outstanding liability after an auto-repay executes.
+         *
          * @summary Margin account borrow/repay (USER_DATA)
          * @param {string} asset
          * @param {MarginAccountBorrowRepayIsIsolatedEnum} isIsolated `TRUE` for Isolated Margin, `FALSE` for Cross Margin
@@ -518,6 +525,13 @@ export interface BorrowRepayApiInterface {
      * Weight(UID): 1500
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `-3045 INSUFFICIENT_INVENTORY`: returned when system borrowable inventory is below the requested amount, or when inventory is severely insufficient (all borrow requests rejected regardless of size). Monitor system asset availability and adjust borrow strategy accordingly.
+     * - `-3006 EXCEED_MAX_BORROWABLE`: borrow amount exceeds your current max borrowable limit. Query `GET /sapi/v1/margin/maxBorrowable` and adjust the request.
+     * - `-3012 ASSET_ADMIN_BAN_BORROW`: this asset does not currently support borrowing. Query `GET /sapi/v1/margin/allAssets` for asset borrow availability.
+     * - `-3015 REPAY_EXCEED_LIABILITY`: returned in two scenarios — (1) repay amount exceeds your outstanding liability, or (2) the remaining unpaid debt after this repayment would fall below Binance's minimum threshold. Adjust the repay amount accordingly.
+     * - `-3007 HAS_PENDING_TRANSACTION`: a borrow/repay transaction is already in progress on this account. Requests are processed in submission order across all assets, and an in-flight request briefly blocks subsequent ones. Typical processing time is ~100ms; space consecutive requests by at least 100ms. Auto-repay orders can also fail silently for this reason — verify outstanding liability after an auto-repay executes.
      *
      * @summary Margin account borrow/repay (USER_DATA)
      * @param {MarginAccountBorrowRepayRequest} requestParameters Request parameters.
@@ -974,6 +988,13 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
      * Weight(UID): 1500
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `-3045 INSUFFICIENT_INVENTORY`: returned when system borrowable inventory is below the requested amount, or when inventory is severely insufficient (all borrow requests rejected regardless of size). Monitor system asset availability and adjust borrow strategy accordingly.
+     * - `-3006 EXCEED_MAX_BORROWABLE`: borrow amount exceeds your current max borrowable limit. Query `GET /sapi/v1/margin/maxBorrowable` and adjust the request.
+     * - `-3012 ASSET_ADMIN_BAN_BORROW`: this asset does not currently support borrowing. Query `GET /sapi/v1/margin/allAssets` for asset borrow availability.
+     * - `-3015 REPAY_EXCEED_LIABILITY`: returned in two scenarios — (1) repay amount exceeds your outstanding liability, or (2) the remaining unpaid debt after this repayment would fall below Binance's minimum threshold. Adjust the repay amount accordingly.
+     * - `-3007 HAS_PENDING_TRANSACTION`: a borrow/repay transaction is already in progress on this account. Requests are processed in submission order across all assets, and an in-flight request briefly blocks subsequent ones. Typical processing time is ~100ms; space consecutive requests by at least 100ms. Auto-repay orders can also fail silently for this reason — verify outstanding liability after an auto-repay executes.
      *
      * @summary Margin account borrow/repay (USER_DATA)
      * @param {MarginAccountBorrowRepayRequest} requestParameters Request parameters.

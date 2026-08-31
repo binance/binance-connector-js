@@ -73,12 +73,6 @@ export interface QueryCrossMarginAccountDetailsResponse {
      */
     TotalCollateralValueInUSDT?: string;
     /**
-     * total Open Order Loss In USDT.
-     * @type {string}
-     * @memberof QueryCrossMarginAccountDetailsResponse
-     */
-    totalOpenOrderLossInUSDT?: string;
-    /**
      * trade Enabled.
      * @type {boolean}
      * @memberof QueryCrossMarginAccountDetailsResponse
