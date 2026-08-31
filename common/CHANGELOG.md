@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.7 - 2026-08-31
+
+### Added (1)
+
+- Added `STOCKS_REST_API_PROD_URL` and `STOCKS_WS_STREAMS_PROD_URL` constants for Stocks REST API and WebSocket Streams production URLs.
+
 ## 2.4.6 - 2026-08-25
 
 ### Changed (1)

@@ -108,6 +108,10 @@ export const SPOT_WS_STREAMS_MARKET_URL = 'wss://data-stream.binance.vision';
 // Staking constants
 export const STAKING_REST_API_PROD_URL = 'https://api.binance.com';
 
+// Stocks constants
+export const STOCKS_REST_API_PROD_URL = 'https://api.binance.com';
+export const STOCKS_WS_STREAMS_PROD_URL = 'wss://nbstream.binance.com/equity';
+
 // Sub Account constants
 export const SUB_ACCOUNT_REST_API_PROD_URL = 'https://api.binance.com';
 
