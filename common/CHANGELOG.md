@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.8 - 2026-09-03
+
+### Changed (1)
+
+- Resolve security vulnerabilities.
+
 ## 2.4.7 - 2026-08-31
 
 ### Added (1)
