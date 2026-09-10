@@ -1,5 +1,6 @@
 import {
     DerivativesTradingUsdsFutures,
+    DerivativesTradingUsdsFuturesWebsocketAPI,
     DERIVATIVES_TRADING_USDS_FUTURES_WS_API_PROD_URL,
 } from '../../../src';
 
@@ -11,7 +12,7 @@ const configurationWebsocketAPI = {
 const client = new DerivativesTradingUsdsFutures({ configurationWebsocketAPI });
 
 async function queryOrder() {
-    let connection;
+    let connection: DerivativesTradingUsdsFuturesWebsocketAPI.WebsocketAPIConnection | undefined;
 
     try {
         connection = await client.websocketAPI.connect();
