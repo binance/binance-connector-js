@@ -68,13 +68,13 @@ export interface AccountTradeListResponseInner {
      */
     qty?: string;
     /**
-     * Quote Qty.
+     * Quote asset quantity. Populated for USDⓈ-M symbols; returns \"0\" for COIN-M symbols.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     quoteQty?: string;
     /**
-     * Base Qty.
+     * Base asset quantity. Populated for COIN-M symbols; returns \"0\" for USDⓈ-M symbols.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */

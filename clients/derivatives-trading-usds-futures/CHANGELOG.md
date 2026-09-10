@@ -1,5 +1,16 @@
 # Changelog
 
+## 38.0.5 - 2026-09-10
+
+### Changed (1)
+
+#### REST API
+
+- Modified parameter `incomeType`:
+  - enum added: `SPECIAL_FUNDING_FEE`
+  - affected methods:
+    - `getIncomeHistory()` (`GET /fapi/v1/income`)
+
 ## 38.0.4 - 2026-09-03
 
 ### Changed (2)

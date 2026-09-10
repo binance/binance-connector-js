@@ -71,7 +71,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - If `startTime` and `endTime` are both not sent, then the last 7 days' data will be returned.
          * - The time between `startTime` and `endTime` cannot be longer than 7 days.
          * - The parameter `fromId` cannot be sent with `startTime` or `endTime`.
-         * - Only support querying trade in the past 6 months
+         * - Only support querying trade in the past 3 months
          *
          * @summary Account Trade List (USER_DATA)
          * @param {string} symbol
@@ -2168,7 +2168,7 @@ export interface TradeApiInterface {
      * - If `startTime` and `endTime` are both not sent, then the last 7 days' data will be returned.
      * - The time between `startTime` and `endTime` cannot be longer than 7 days.
      * - The parameter `fromId` cannot be sent with `startTime` or `endTime`.
-     * - Only support querying trade in the past 6 months
+     * - Only support querying trade in the past 3 months
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
@@ -4240,7 +4240,7 @@ export class TradeApi implements TradeApiInterface {
      * - If `startTime` and `endTime` are both not sent, then the last 7 days' data will be returned.
      * - The time between `startTime` and `endTime` cannot be longer than 7 days.
      * - The parameter `fromId` cannot be sent with `startTime` or `endTime`.
-     * - Only support querying trade in the past 6 months
+     * - Only support querying trade in the past 3 months
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
