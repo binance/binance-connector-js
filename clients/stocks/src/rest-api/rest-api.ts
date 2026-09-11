@@ -404,13 +404,28 @@ export class RestAPI {
     }
 
     /**
-     * Place a new equity order. Supports all combinations of `LIMIT` / `MARKET` × `BUY` / `SELL`. For `LIMIT BUY` orders the commission fee is automatically computed and reserved by the server at placement time — callers submit `price` and `quantity` only, no `fee` field is required.
+     * Place a new equity order. Supports all combinations of `LIMIT` /
+     * `MARKET` × `BUY` / `SELL`. For `LIMIT BUY` orders the commission fee is
+     * automatically computed and reserved by the server at placement time —
+     * callers submit `price` and `quantity` only, no `fee` field is required.
+     *
      *
      **Field combination matrix**
      *
-     * | Side | OrderType | Required | Forbidden | | ---- | --------- | -------- | --------- | | BUY | LIMIT | `price`, `quantity`, `tradingSession` | `notional` | | BUY | MARKET | `notional` | `price`, `quantity`, `tradingSession` | | SELL | LIMIT | `price`, `quantity`, `tradingSession` | `notional` | | SELL | MARKET | `quantity` | `price`, `notional`, `tradingSession` |
      *
-     **Fractional shares**: when `quantity` has a decimal component, or an order is placed by `notional`, it is treated as a fractional-share order. A fractional-share `GTC` order must be paired with `tradingSession = EXTENDED` or `24H`.
+     * | Side | OrderType | Required | Forbidden |
+     * | ---- | --------- | -------- | --------- |
+     * | BUY | LIMIT | `price`, `quantity`, `tradingSession` | `notional` |
+     * | BUY | MARKET | `notional` | `price`, `quantity`, `tradingSession` |
+     * | SELL | LIMIT | `price`, `quantity`, `tradingSession` | `notional` |
+     * | SELL | MARKET | `quantity` | `price`, `notional`, `tradingSession` |
+     *
+     *
+     **Fractional shares**: when `quantity` has a decimal component, or an
+     * order is placed by `notional`, it is treated as a fractional-share
+     * order. A fractional-share `GTC` order must be paired with
+     * `tradingSession = EXTENDED` or `24H`.
+     *
      *
      * Rate limit: 200 requests / min (UID).
      *

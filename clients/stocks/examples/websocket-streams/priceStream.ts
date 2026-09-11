@@ -1,4 +1,4 @@
-import { Stocks, STOCKS_WS_STREAMS_PROD_URL } from '../../src';
+import { Stocks, StocksWebsocketStreams, STOCKS_WS_STREAMS_PROD_URL } from '../../src';
 
 const configurationWebsocketStreams = {
     wsURL: process.env.WS_STREAMS_URL ?? STOCKS_WS_STREAMS_PROD_URL,
@@ -6,7 +6,7 @@ const configurationWebsocketStreams = {
 const client = new Stocks({ configurationWebsocketStreams });
 
 async function priceStream() {
-    let connection;
+    let connection: StocksWebsocketStreams.WebsocketStreamsConnection | undefined;
 
     try {
         connection = await client.websocketStreams.connect();
