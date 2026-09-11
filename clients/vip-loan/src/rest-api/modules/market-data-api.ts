@@ -38,6 +38,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - Rate limit: 5 requests per second per account.
+         *
          * @summary Get Borrow Interest Rate (USER_DATA)
          * @param {string} loanCoin Max 10 assets, Multiple split by ","
          * @param {number | bigint} [recvWindow]
@@ -81,6 +84,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - Rate limit: 1 request per second per account.
+         *
          * @summary Get Collateral Asset Data (USER_DATA)
          * @param {string} [collateralCoin]
          * @param {number | bigint} [recvWindow]
@@ -120,6 +126,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight(IP): 400
          *
          * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Rate limit: 1 request per second per account.
          *
          * @summary Get Loanable Assets Data (USER_DATA)
          * @param {string} [loanCoin]
@@ -302,6 +311,9 @@ export interface MarketDataApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 5 requests per second per account.
+     *
      * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
      *
@@ -318,6 +330,9 @@ export interface MarketDataApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
+     *
      * @summary Get Collateral Asset Data (USER_DATA)
      * @param {GetCollateralAssetDataRequest} requestParameters Request parameters.
      *
@@ -333,6 +348,9 @@ export interface MarketDataApiInterface {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Loanable Assets Data (USER_DATA)
      * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.
@@ -558,6 +576,9 @@ export class MarketDataApi implements MarketDataApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 5 requests per second per account.
+     *
      * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBorrowInterestRateResponse>>}
@@ -591,6 +612,9 @@ export class MarketDataApi implements MarketDataApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
+     *
      * @summary Get Collateral Asset Data (USER_DATA)
      * @param {GetCollateralAssetDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCollateralAssetDataResponse>>}
@@ -623,6 +647,9 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Loanable Assets Data (USER_DATA)
      * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.

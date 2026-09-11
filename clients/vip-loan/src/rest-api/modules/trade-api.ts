@@ -42,6 +42,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - Only master account applications are supported.
          * - `loanAccountId` and `collateralAccountId` must be under the same master account.
          * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+         * - Rate limit: 1 request per 2 seconds per account.
          *
          * @summary VIP Loan Borrow (TRADE)
          * @param {number | bigint} loanAccountId
@@ -213,6 +214,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Security Type: TRADE
          *
+         * Notes:
+         * - Rate limit: 1 request per second per account.
+         *
          * @summary VIP Loan Renew (TRADE)
          * @param {number | bigint} orderId
          * @param {number | bigint} loanTerm 30/60 days
@@ -326,6 +330,7 @@ export interface TradeApiInterface {
      * - Only master account applications are supported.
      * - `loanAccountId` and `collateralAccountId` must be under the same master account.
      * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     * - Rate limit: 1 request per 2 seconds per account.
      *
      * @summary VIP Loan Borrow (TRADE)
      * @param {VipLoanBorrowRequest} requestParameters Request parameters.
@@ -362,6 +367,9 @@ export interface TradeApiInterface {
      * Weight(UID): 6000
      *
      * Security Type: TRADE
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary VIP Loan Renew (TRADE)
      * @param {VipLoanRenewRequest} requestParameters Request parameters.
@@ -593,6 +601,7 @@ export class TradeApi implements TradeApiInterface {
      * - Only master account applications are supported.
      * - `loanAccountId` and `collateralAccountId` must be under the same master account.
      * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     * - Rate limit: 1 request per 2 seconds per account.
      *
      * @summary VIP Loan Borrow (TRADE)
      * @param {VipLoanBorrowRequest} requestParameters Request parameters.
@@ -675,6 +684,9 @@ export class TradeApi implements TradeApiInterface {
      * Weight(UID): 6000
      *
      * Security Type: TRADE
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary VIP Loan Renew (TRADE)
      * @param {VipLoanRenewRequest} requestParameters Request parameters.

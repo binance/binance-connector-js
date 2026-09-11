@@ -131,6 +131,9 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 5 requests per second per account.
+     *
      * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
      *
@@ -151,6 +154,9 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
+     *
      * @summary Get Collateral Asset Data (USER_DATA)
      * @param {GetCollateralAssetDataRequest} requestParameters Request parameters.
      *
@@ -170,6 +176,9 @@ export class RestAPI {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Loanable Assets Data (USER_DATA)
      * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.
@@ -241,6 +250,7 @@ export class RestAPI {
      * - Only master account applications are supported.
      * - `loanAccountId` and `collateralAccountId` must be under the same master account.
      * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     * - Rate limit: 1 request per 2 seconds per account.
      *
      * @summary VIP Loan Borrow (TRADE)
      * @param {VipLoanBorrowRequest} requestParameters Request parameters.
@@ -285,6 +295,9 @@ export class RestAPI {
      * Weight(UID): 6000
      *
      * Security Type: TRADE
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary VIP Loan Renew (TRADE)
      * @param {VipLoanRenewRequest} requestParameters Request parameters.
@@ -353,6 +366,7 @@ export class RestAPI {
      * Notes:
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 90 days.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Accrued Interest (USER_DATA)
      * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
@@ -373,6 +387,9 @@ export class RestAPI {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Ongoing Orders (USER_DATA)
      * @param {GetVIPLoanOngoingOrdersRequest} requestParameters Request parameters.
@@ -417,6 +434,9 @@ export class RestAPI {
      * Weight(UID): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.
