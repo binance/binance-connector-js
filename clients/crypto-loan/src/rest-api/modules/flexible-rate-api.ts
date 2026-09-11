@@ -45,6 +45,9 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - Rate limit: 1 request per second per account.
+         *
          * @summary Check Collateral Flexible Repay Rate (USER_DATA)
          * @param {string} loanCoin
          * @param {string} collateralCoin
@@ -97,6 +100,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          *
          * Notes:
          * - API key needs Spot & Margin Trading permission for this endpoint.
+         * - Rate limit: 1 request per second per loan position (account + loan coin + collateral coin combination).
          *
          * @summary Flexible Loan Adjust LTV (TRADE)
          * @param {string} loanCoin
@@ -165,6 +169,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * Notes:
          * - This endpoint is available for both master and sub-accounts.
          * - You can customize LTV by entering `loanAmount` and `collateralAmount`.
+         * - Rate limit: 1 request per second per account.
          *
          * @summary Flexible Loan Borrow (TRADE)
          * @param {string} loanCoin
@@ -228,6 +233,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          *
          * Notes:
          * - `repayAmount` is mandatory even when `fullRepayment = FALSE`.
+         * - Rate limit: 1 request per second per loan position (account + loan coin + collateral coin combination).
          *
          * @summary Flexible Loan Repay (TRADE)
          * @param {string} loanCoin
@@ -302,6 +308,9 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - Rate limit: 1 request per second per account.
+         *
          * @summary Get Flexible Loan Assets Data (USER_DATA)
          * @param {string} [loanCoin]
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
@@ -345,6 +354,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * Notes:
          * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
          * - The max interval between `startTime` and `endTime` is 180 days.
+         * - Rate limit: 5 requests per second per account.
          *
          * @summary Get Flexible Loan Borrow History (USER_DATA)
          * @param {string} [loanCoin]
@@ -411,6 +421,9 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * Weight(IP): 400
          *
          * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Rate limit: 1 request per second per account.
          *
          * @summary Get Flexible Loan Collateral Assets Data (USER_DATA)
          * @param {string} [collateralCoin]
@@ -522,6 +535,9 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - Rate limit: 1 request per second per account.
+         *
          * @summary Get Flexible Loan Liquidation History (USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
@@ -590,6 +606,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * Notes:
          * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
          * - The max interval between `startTime` and `endTime` is 180 days.
+         * - Rate limit: 5 requests per second per account.
          *
          * @summary Get Flexible Loan LTV Adjustment History (USER_DATA)
          * @param {string} [loanCoin]
@@ -656,6 +673,9 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - Rate limit: 10 requests per second per account.
+         *
          * @summary Get Flexible Loan Ongoing Orders (USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
@@ -714,6 +734,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * Notes:
          * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
          * - The max interval between `startTime` and `endTime` is 180 days.
+         * - Rate limit: 5 requests per second per account.
          *
          * @summary Get Flexible Loan Repayment History (USER_DATA)
          * @param {string} [loanCoin]
@@ -788,6 +809,9 @@ export interface FlexibleRateApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
+     *
      * @summary Check Collateral Flexible Repay Rate (USER_DATA)
      * @param {CheckCollateralRepayRateRequest} requestParameters Request parameters.
      *
@@ -806,6 +830,7 @@ export interface FlexibleRateApiInterface {
      *
      * Notes:
      * - API key needs Spot & Margin Trading permission for this endpoint.
+     * - Rate limit: 1 request per second per loan position (account + loan coin + collateral coin combination).
      *
      * @summary Flexible Loan Adjust LTV (TRADE)
      * @param {FlexibleLoanAdjustLtvRequest} requestParameters Request parameters.
@@ -826,6 +851,7 @@ export interface FlexibleRateApiInterface {
      * Notes:
      * - This endpoint is available for both master and sub-accounts.
      * - You can customize LTV by entering `loanAmount` and `collateralAmount`.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Flexible Loan Borrow (TRADE)
      * @param {FlexibleLoanBorrowRequest} requestParameters Request parameters.
@@ -845,6 +871,7 @@ export interface FlexibleRateApiInterface {
      *
      * Notes:
      * - `repayAmount` is mandatory even when `fullRepayment = FALSE`.
+     * - Rate limit: 1 request per second per loan position (account + loan coin + collateral coin combination).
      *
      * @summary Flexible Loan Repay (TRADE)
      * @param {FlexibleLoanRepayRequest} requestParameters Request parameters.
@@ -861,6 +888,9 @@ export interface FlexibleRateApiInterface {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Flexible Loan Assets Data (USER_DATA)
      * @param {GetFlexibleLoanAssetsDataRequest} requestParameters Request parameters.
@@ -881,6 +911,7 @@ export interface FlexibleRateApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
      * - The max interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Get Flexible Loan Borrow History (USER_DATA)
      * @param {GetFlexibleLoanBorrowHistoryRequest} requestParameters Request parameters.
@@ -898,6 +929,9 @@ export interface FlexibleRateApiInterface {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Flexible Loan Collateral Assets Data (USER_DATA)
      * @param {GetFlexibleLoanCollateralAssetsDataRequest} requestParameters Request parameters.
@@ -936,6 +970,9 @@ export interface FlexibleRateApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
+     *
      * @summary Get Flexible Loan Liquidation History (USER_DATA)
      * @param {GetFlexibleLoanLiquidationHistoryRequest} requestParameters Request parameters.
      *
@@ -955,6 +992,7 @@ export interface FlexibleRateApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
      * - The max interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Get Flexible Loan LTV Adjustment History (USER_DATA)
      * @param {GetFlexibleLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
@@ -971,6 +1009,9 @@ export interface FlexibleRateApiInterface {
      * Weight(IP): 300
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 10 requests per second per account.
      *
      * @summary Get Flexible Loan Ongoing Orders (USER_DATA)
      * @param {GetFlexibleLoanOngoingOrdersRequest} requestParameters Request parameters.
@@ -991,6 +1032,7 @@ export interface FlexibleRateApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
      * - The max interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Get Flexible Loan Repayment History (USER_DATA)
      * @param {GetFlexibleLoanRepaymentHistoryRequest} requestParameters Request parameters.
@@ -1537,6 +1579,9 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
+     *
      * @summary Check Collateral Flexible Repay Rate (USER_DATA)
      * @param {CheckCollateralRepayRateRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CheckCollateralRepayRateResponse>>}
@@ -1573,6 +1618,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      *
      * Notes:
      * - API key needs Spot & Margin Trading permission for this endpoint.
+     * - Rate limit: 1 request per second per loan position (account + loan coin + collateral coin combination).
      *
      * @summary Flexible Loan Adjust LTV (TRADE)
      * @param {FlexibleLoanAdjustLtvRequest} requestParameters Request parameters.
@@ -1613,6 +1659,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      * Notes:
      * - This endpoint is available for both master and sub-accounts.
      * - You can customize LTV by entering `loanAmount` and `collateralAmount`.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Flexible Loan Borrow (TRADE)
      * @param {FlexibleLoanBorrowRequest} requestParameters Request parameters.
@@ -1652,6 +1699,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      *
      * Notes:
      * - `repayAmount` is mandatory even when `fullRepayment = FALSE`.
+     * - Rate limit: 1 request per second per loan position (account + loan coin + collateral coin combination).
      *
      * @summary Flexible Loan Repay (TRADE)
      * @param {FlexibleLoanRepayRequest} requestParameters Request parameters.
@@ -1691,6 +1739,9 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
+     *
      * @summary Get Flexible Loan Assets Data (USER_DATA)
      * @param {GetFlexibleLoanAssetsDataRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanAssetsDataResponse>>}
@@ -1727,6 +1778,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
      * - The max interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Get Flexible Loan Borrow History (USER_DATA)
      * @param {GetFlexibleLoanBorrowHistoryRequest} requestParameters Request parameters.
@@ -1766,6 +1818,9 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Flexible Loan Collateral Assets Data (USER_DATA)
      * @param {GetFlexibleLoanCollateralAssetsDataRequest} requestParameters Request parameters.
@@ -1844,6 +1899,9 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
+     *
      * @summary Get Flexible Loan Liquidation History (USER_DATA)
      * @param {GetFlexibleLoanLiquidationHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanLiquidationHistoryResponse>>}
@@ -1886,6 +1944,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
      * - The max interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Get Flexible Loan LTV Adjustment History (USER_DATA)
      * @param {GetFlexibleLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
@@ -1926,6 +1985,9 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - Rate limit: 10 requests per second per account.
+     *
      * @summary Get Flexible Loan Ongoing Orders (USER_DATA)
      * @param {GetFlexibleLoanOngoingOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleLoanOngoingOrdersResponse>>}
@@ -1965,6 +2027,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
      * - The max interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Get Flexible Loan Repayment History (USER_DATA)
      * @param {GetFlexibleLoanRepaymentHistoryRequest} requestParameters Request parameters.
