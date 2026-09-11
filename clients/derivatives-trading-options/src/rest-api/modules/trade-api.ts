@@ -107,7 +107,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel all active orders on specified underlying.
          *
-         * Weight(IP): 1
+         * Weight(IP): 5
          *
          * Security Type: TRADE
          *
@@ -150,7 +150,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel all active order on a symbol.
          *
-         * Weight(IP): 5
+         * Weight(IP): 1
          *
          * Security Type: TRADE
          *
@@ -304,6 +304,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         },
         /**
          * Send a new order.
+         *
+         * Weight(IP): 0
          *
          * Security Type: TRADE
          *
@@ -831,7 +833,7 @@ export interface TradeApiInterface {
     /**
      * Cancel all active orders on specified underlying.
      *
-     * Weight(IP): 1
+     * Weight(IP): 5
      *
      * Security Type: TRADE
      *
@@ -847,7 +849,7 @@ export interface TradeApiInterface {
     /**
      * Cancel all active order on a symbol.
      *
-     * Weight(IP): 5
+     * Weight(IP): 1
      *
      * Security Type: TRADE
      *
@@ -900,6 +902,8 @@ export interface TradeApiInterface {
     ): Promise<RestApiResponse<CancelOptionOrderResponse>>;
     /**
      * Send a new order.
+     *
+     * Weight(IP): 0
      *
      * Security Type: TRADE
      *
@@ -1601,7 +1605,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel all active orders on specified underlying.
      *
-     * Weight(IP): 1
+     * Weight(IP): 5
      *
      * Security Type: TRADE
      *
@@ -1635,7 +1639,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel all active order on a symbol.
      *
-     * Weight(IP): 5
+     * Weight(IP): 1
      *
      * Security Type: TRADE
      *
@@ -1744,6 +1748,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Send a new order.
+     *
+     * Weight(IP): 0
      *
      * Security Type: TRADE
      *

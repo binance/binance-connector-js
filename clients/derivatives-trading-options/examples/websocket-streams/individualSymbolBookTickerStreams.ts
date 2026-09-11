@@ -1,5 +1,6 @@
 import {
     DerivativesTradingOptions,
+    DerivativesTradingOptionsWebsocketStreams,
     DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_PROD_URL,
 } from '../../src';
 
@@ -9,7 +10,9 @@ const configurationWebsocketStreams = {
 const client = new DerivativesTradingOptions({ configurationWebsocketStreams });
 
 async function individualSymbolBookTickerStreams() {
-    let connection;
+    let connection:
+        | DerivativesTradingOptionsWebsocketStreams.WebsocketStreamsConnection
+        | undefined;
 
     try {
         connection = await client.websocketStreams.connect();
