@@ -12,7 +12,7 @@ const configurationWebsocketAPI = {
 const client = new DerivativesTradingCoinFutures({ configurationWebsocketAPI });
 
 async function newOrder() {
-    let connection;
+    let connection: DerivativesTradingCoinFuturesWebsocketAPI.WebsocketAPIConnection | undefined;
 
     try {
         connection = await client.websocketAPI.connect();

@@ -10,7 +10,9 @@ const configurationWebsocketStreams = {
 const client = new DerivativesTradingUsdsFutures({ configurationWebsocketStreams });
 
 async function individualSymbolTickerStreams() {
-    let connection: DerivativesTradingUsdsFuturesWebsocketStreams.WebsocketStreamsConnection | undefined;
+    let connection:
+        | DerivativesTradingUsdsFuturesWebsocketStreams.WebsocketStreamsConnection
+        | undefined;
 
     try {
         connection = await client.websocketStreams.connect();

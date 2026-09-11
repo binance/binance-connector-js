@@ -454,7 +454,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * 24 hour rolling window price change statistics.
          *
-         * Weight(IP): 5
+         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
          *
          * @summary 24hr Ticker Price Change Statistics
          * @param {string} [symbol] Option trading pair
@@ -645,7 +645,7 @@ export interface MarketDataApiInterface {
     /**
      * 24 hour rolling window price change statistics.
      *
-     * Weight(IP): 5
+     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
      *
      * @summary 24hr Ticker Price Change Statistics
      * @param {Ticker24hrPriceChangeStatisticsRequest} requestParameters Request parameters.
@@ -1205,7 +1205,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * 24 hour rolling window price change statistics.
      *
-     * Weight(IP): 5
+     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
      *
      * @summary 24hr Ticker Price Change Statistics
      * @param {Ticker24hrPriceChangeStatisticsRequest} requestParameters Request parameters.

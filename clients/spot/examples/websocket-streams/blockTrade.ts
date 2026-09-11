@@ -1,4 +1,4 @@
-import { Spot, SPOT_WS_STREAMS_PROD_URL } from '../../src';
+import { Spot, SpotWebsocketStreams, SPOT_WS_STREAMS_PROD_URL } from '../../src';
 
 const configurationWebsocketStreams = {
     wsURL: process.env.WS_STREAMS_URL ?? SPOT_WS_STREAMS_PROD_URL,
@@ -6,7 +6,7 @@ const configurationWebsocketStreams = {
 const client = new Spot({ configurationWebsocketStreams });
 
 async function blockTrade() {
-    let connection;
+    let connection: SpotWebsocketStreams.WebsocketStreamsConnection | undefined;
 
     try {
         connection = await client.websocketStreams.connect();

@@ -1,4 +1,4 @@
-import { Spot, SPOT_WS_API_PROD_URL } from '../../../src';
+import { Spot, SpotWebsocketAPI, SPOT_WS_API_PROD_URL } from '../../../src';
 
 const configurationWebsocketAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -8,7 +8,7 @@ const configurationWebsocketAPI = {
 const client = new Spot({ configurationWebsocketAPI });
 
 async function executionRules() {
-    let connection;
+    let connection: SpotWebsocketAPI.WebsocketAPIConnection | undefined;
 
     try {
         connection = await client.websocketAPI.connect();

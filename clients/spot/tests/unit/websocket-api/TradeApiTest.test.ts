@@ -2214,6 +2214,7 @@ describe('TradeApi', () => {
                         listOrderStatus: 'EXECUTING',
                         listClientOrderId: 'KA4EBjGnzvSwSCQsDdTrlf',
                         transactionTime: 1712544395981,
+                        symbol: 'LTCBNB',
                         orders: [
                             {
                                 symbol: 'LTCBNB',
@@ -2452,6 +2453,7 @@ describe('TradeApi', () => {
                         listOrderStatus: 'EXECUTING',
                         listClientOrderId: 'GaeJHjZPasPItFj4x7Mqm6',
                         transactionTime: 1712544408537,
+                        symbol: 'LTCBNB',
                         orders: [
                             {
                                 symbol: 'LTCBNB',

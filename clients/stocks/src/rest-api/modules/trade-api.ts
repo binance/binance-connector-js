@@ -343,13 +343,28 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Place a new equity order. Supports all combinations of `LIMIT` / `MARKET` × `BUY` / `SELL`. For `LIMIT BUY` orders the commission fee is automatically computed and reserved by the server at placement time — callers submit `price` and `quantity` only, no `fee` field is required.
+         * Place a new equity order. Supports all combinations of `LIMIT` /
+         * `MARKET` × `BUY` / `SELL`. For `LIMIT BUY` orders the commission fee is
+         * automatically computed and reserved by the server at placement time —
+         * callers submit `price` and `quantity` only, no `fee` field is required.
+         *
          *
          **Field combination matrix**
          *
-         * | Side | OrderType | Required | Forbidden | | ---- | --------- | -------- | --------- | | BUY | LIMIT | `price`, `quantity`, `tradingSession` | `notional` | | BUY | MARKET | `notional` | `price`, `quantity`, `tradingSession` | | SELL | LIMIT | `price`, `quantity`, `tradingSession` | `notional` | | SELL | MARKET | `quantity` | `price`, `notional`, `tradingSession` |
          *
-         **Fractional shares**: when `quantity` has a decimal component, or an order is placed by `notional`, it is treated as a fractional-share order. A fractional-share `GTC` order must be paired with `tradingSession = EXTENDED` or `24H`.
+         * | Side | OrderType | Required | Forbidden |
+         * | ---- | --------- | -------- | --------- |
+         * | BUY | LIMIT | `price`, `quantity`, `tradingSession` | `notional` |
+         * | BUY | MARKET | `notional` | `price`, `quantity`, `tradingSession` |
+         * | SELL | LIMIT | `price`, `quantity`, `tradingSession` | `notional` |
+         * | SELL | MARKET | `quantity` | `price`, `notional`, `tradingSession` |
+         *
+         *
+         **Fractional shares**: when `quantity` has a decimal component, or an
+         * order is placed by `notional`, it is treated as a fractional-share
+         * order. A fractional-share `GTC` order must be paired with
+         * `tradingSession = EXTENDED` or `24H`.
+         *
          *
          * Rate limit: 200 requests / min (UID).
          *
@@ -358,7 +373,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Security Type: TRADE
          *
          * @summary Place Equity Order (TRADE)
-         * @param {string} symbol US stock ticker, e.g. `AAPL`, `TSLA`. Must be a symbol with tokenization enabled — check via `/market/tokenized-assets`.
+         * @param {string} symbol US stock ticker, e.g. `AAPL`, `TSLA`. Must be a tradable US-equity symbol — verify via `/sapi/v1/equity/market/exchangeInfo`. Tokenization enablement (verifiable via `/sapi/v1/equity/market/tokenized-assets`) is *not* required; non-tokenized symbols are accepted and settle as traditional underlying-equity trades. The `tokenize` parameter only takes effect on tokenization-enabled symbols and is silently ignored otherwise.
          * @param {PlaceEquityOrderSideEnum} side `BUY` / `SELL`.
          * @param {PlaceEquityOrderOrderTypeEnum} orderType `MARKET` / `LIMIT`.
          * @param {string} [quoteAsset] Quote asset. Defaults to `USDC`; must be within the server's allowed set.
@@ -369,7 +384,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {PlaceEquityOrderTradingSessionEnum} [tradingSession] `RTH` / `EXTENDED` / `24H`. **Required** for `LIMIT`; **forbidden** for `MARKET`.
          * @param {PlaceEquityOrderWalletTypeEnum} [walletType] Payment wallet for `BUY` orders: `CARD` (default) / `MAIN`. `SELL` orders always settle to `CARD`.
          * @param {string} [clientOrderId] Client-supplied order id. Format `^[a-zA-Z0-9-_]{32,36}$`. Auto-generated when omitted.
-         * @param {boolean} [tokenize] Whether to tokenize the purchased stock asset upon settlement. Default `true`. Set to `false` to receive the underlying equity directly instead of a tokenized asset.
+         * @param {boolean} [tokenize] Whether to tokenize the purchased stock asset upon settlement. Default `true`. Only takes effect when the symbol is tokenization-enabled (check via `/market/tokenized-assets`); silently ignored for non-tokenized symbols, which always settle as traditional underlying-equity trades.
          * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`.
          *
          * @throws {RequiredError}
@@ -557,13 +572,28 @@ export interface TradeApiInterface {
         requestParameters: EquityTradeHistoryRequest
     ): Promise<RestApiResponse<EquityTradeHistoryResponse>>;
     /**
-     * Place a new equity order. Supports all combinations of `LIMIT` / `MARKET` × `BUY` / `SELL`. For `LIMIT BUY` orders the commission fee is automatically computed and reserved by the server at placement time — callers submit `price` and `quantity` only, no `fee` field is required.
+     * Place a new equity order. Supports all combinations of `LIMIT` /
+     * `MARKET` × `BUY` / `SELL`. For `LIMIT BUY` orders the commission fee is
+     * automatically computed and reserved by the server at placement time —
+     * callers submit `price` and `quantity` only, no `fee` field is required.
+     *
      *
      **Field combination matrix**
      *
-     * | Side | OrderType | Required | Forbidden | | ---- | --------- | -------- | --------- | | BUY | LIMIT | `price`, `quantity`, `tradingSession` | `notional` | | BUY | MARKET | `notional` | `price`, `quantity`, `tradingSession` | | SELL | LIMIT | `price`, `quantity`, `tradingSession` | `notional` | | SELL | MARKET | `quantity` | `price`, `notional`, `tradingSession` |
      *
-     **Fractional shares**: when `quantity` has a decimal component, or an order is placed by `notional`, it is treated as a fractional-share order. A fractional-share `GTC` order must be paired with `tradingSession = EXTENDED` or `24H`.
+     * | Side | OrderType | Required | Forbidden |
+     * | ---- | --------- | -------- | --------- |
+     * | BUY | LIMIT | `price`, `quantity`, `tradingSession` | `notional` |
+     * | BUY | MARKET | `notional` | `price`, `quantity`, `tradingSession` |
+     * | SELL | LIMIT | `price`, `quantity`, `tradingSession` | `notional` |
+     * | SELL | MARKET | `quantity` | `price`, `notional`, `tradingSession` |
+     *
+     *
+     **Fractional shares**: when `quantity` has a decimal component, or an
+     * order is placed by `notional`, it is treated as a fractional-share
+     * order. A fractional-share `GTC` order must be paired with
+     * `tradingSession = EXTENDED` or `24H`.
+     *
      *
      * Rate limit: 200 requests / min (UID).
      *
@@ -792,7 +822,7 @@ export interface EquityTradeHistoryRequest {
  */
 export interface PlaceEquityOrderRequest {
     /**
-     * US stock ticker, e.g. `AAPL`, `TSLA`. Must be a symbol with tokenization enabled — check via `/market/tokenized-assets`.
+     * US stock ticker, e.g. `AAPL`, `TSLA`. Must be a tradable US-equity symbol — verify via `/sapi/v1/equity/market/exchangeInfo`. Tokenization enablement (verifiable via `/sapi/v1/equity/market/tokenized-assets`) is *not* required; non-tokenized symbols are accepted and settle as traditional underlying-equity trades. The `tokenize` parameter only takes effect on tokenization-enabled symbols and is silently ignored otherwise.
      * @type {string}
      * @memberof TradeApiPlaceEquityOrder
      */
@@ -869,7 +899,7 @@ export interface PlaceEquityOrderRequest {
     readonly clientOrderId?: string;
 
     /**
-     * Whether to tokenize the purchased stock asset upon settlement. Default `true`. Set to `false` to receive the underlying equity directly instead of a tokenized asset.
+     * Whether to tokenize the purchased stock asset upon settlement. Default `true`. Only takes effect when the symbol is tokenization-enabled (check via `/market/tokenized-assets`); silently ignored for non-tokenized symbols, which always settle as traditional underlying-equity trades.
      * @type {boolean}
      * @memberof TradeApiPlaceEquityOrder
      */
@@ -1107,13 +1137,28 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Place a new equity order. Supports all combinations of `LIMIT` / `MARKET` × `BUY` / `SELL`. For `LIMIT BUY` orders the commission fee is automatically computed and reserved by the server at placement time — callers submit `price` and `quantity` only, no `fee` field is required.
+     * Place a new equity order. Supports all combinations of `LIMIT` /
+     * `MARKET` × `BUY` / `SELL`. For `LIMIT BUY` orders the commission fee is
+     * automatically computed and reserved by the server at placement time —
+     * callers submit `price` and `quantity` only, no `fee` field is required.
+     *
      *
      **Field combination matrix**
      *
-     * | Side | OrderType | Required | Forbidden | | ---- | --------- | -------- | --------- | | BUY | LIMIT | `price`, `quantity`, `tradingSession` | `notional` | | BUY | MARKET | `notional` | `price`, `quantity`, `tradingSession` | | SELL | LIMIT | `price`, `quantity`, `tradingSession` | `notional` | | SELL | MARKET | `quantity` | `price`, `notional`, `tradingSession` |
      *
-     **Fractional shares**: when `quantity` has a decimal component, or an order is placed by `notional`, it is treated as a fractional-share order. A fractional-share `GTC` order must be paired with `tradingSession = EXTENDED` or `24H`.
+     * | Side | OrderType | Required | Forbidden |
+     * | ---- | --------- | -------- | --------- |
+     * | BUY | LIMIT | `price`, `quantity`, `tradingSession` | `notional` |
+     * | BUY | MARKET | `notional` | `price`, `quantity`, `tradingSession` |
+     * | SELL | LIMIT | `price`, `quantity`, `tradingSession` | `notional` |
+     * | SELL | MARKET | `quantity` | `price`, `notional`, `tradingSession` |
+     *
+     *
+     **Fractional shares**: when `quantity` has a decimal component, or an
+     * order is placed by `notional`, it is treated as a fractional-share
+     * order. A fractional-share `GTC` order must be paired with
+     * `tradingSession = EXTENDED` or `24H`.
+     *
      *
      * Rate limit: 200 requests / min (UID).
      *

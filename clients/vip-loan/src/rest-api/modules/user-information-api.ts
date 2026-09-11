@@ -89,6 +89,7 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Notes:
          * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
          * - The maximum interval between `startTime` and `endTime` is 90 days.
+         * - Rate limit: 1 request per second per account.
          *
          * @summary Get VIP Loan Accrued Interest (USER_DATA)
          * @param {number | bigint} [orderId]
@@ -154,6 +155,9 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Weight(IP): 400
          *
          * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Rate limit: 1 request per second per account.
          *
          * @summary Get VIP Loan Ongoing Orders (USER_DATA)
          * @param {number | bigint} [orderId]
@@ -289,6 +293,9 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - Rate limit: 5 requests per second per account.
+         *
          * @summary Query Application Status (USER_DATA)
          * @param {number | bigint} [current] Current page number, starting from 1.
          * @param {number | bigint} [limit]
@@ -365,6 +372,7 @@ export interface UserInformationApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 90 days.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Accrued Interest (USER_DATA)
      * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
@@ -381,6 +389,9 @@ export interface UserInformationApiInterface {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Ongoing Orders (USER_DATA)
      * @param {GetVIPLoanOngoingOrdersRequest} requestParameters Request parameters.
@@ -417,6 +428,9 @@ export interface UserInformationApiInterface {
      * Weight(UID): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.
@@ -710,6 +724,7 @@ export class UserInformationApi implements UserInformationApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 90 days.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Accrued Interest (USER_DATA)
      * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
@@ -748,6 +763,9 @@ export class UserInformationApi implements UserInformationApiInterface {
      * Weight(IP): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Ongoing Orders (USER_DATA)
      * @param {GetVIPLoanOngoingOrdersRequest} requestParameters Request parameters.
@@ -828,6 +846,9 @@ export class UserInformationApi implements UserInformationApiInterface {
      * Weight(UID): 400
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Rate limit: 5 requests per second per account.
      *
      * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.
