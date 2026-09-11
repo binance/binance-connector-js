@@ -8,7 +8,7 @@ const configurationWebsocketAPI = {
 const client = new Spot({ configurationWebsocketAPI });
 
 async function orderListPlace() {
-    let connection;
+    let connection: SpotWebsocketAPI.WebsocketAPIConnection | undefined;
 
     try {
         connection = await client.websocketAPI.connect();

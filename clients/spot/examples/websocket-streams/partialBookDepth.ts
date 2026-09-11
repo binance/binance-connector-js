@@ -6,7 +6,7 @@ const configurationWebsocketStreams = {
 const client = new Spot({ configurationWebsocketStreams });
 
 async function partialBookDepth() {
-    let connection;
+    let connection: SpotWebsocketStreams.WebsocketStreamsConnection | undefined;
 
     try {
         connection = await client.websocketStreams.connect();
