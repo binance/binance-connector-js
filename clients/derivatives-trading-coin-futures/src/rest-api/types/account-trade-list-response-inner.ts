@@ -74,13 +74,13 @@ export interface AccountTradeListResponseInner {
      */
     marginAsset?: string;
     /**
-     * Base asset quantity.
+     * Base asset quantity. Populated for COIN-M symbols; returns \"0\" for USDⓈ-M symbols.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     baseQty?: string;
     /**
-     * Quote asset quantity.
+     * Quote asset quantity. Populated for USDⓈ-M symbols; returns \"0\" for COIN-M symbols.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */

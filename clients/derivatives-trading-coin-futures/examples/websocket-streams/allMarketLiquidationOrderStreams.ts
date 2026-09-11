@@ -1,5 +1,6 @@
 import {
     DerivativesTradingCoinFutures,
+    DerivativesTradingCoinFuturesWebsocketStreams,
     DERIVATIVES_TRADING_COIN_FUTURES_WS_STREAMS_PROD_URL,
 } from '../../src';
 
@@ -9,7 +10,9 @@ const configurationWebsocketStreams = {
 const client = new DerivativesTradingCoinFutures({ configurationWebsocketStreams });
 
 async function allMarketLiquidationOrderStreams() {
-    let connection;
+    let connection:
+        | DerivativesTradingCoinFuturesWebsocketStreams.WebsocketStreamsConnection
+        | undefined;
 
     try {
         connection = await client.websocketStreams.connect();

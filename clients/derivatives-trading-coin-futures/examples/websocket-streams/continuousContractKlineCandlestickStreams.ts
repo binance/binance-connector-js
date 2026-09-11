@@ -10,7 +10,9 @@ const configurationWebsocketStreams = {
 const client = new DerivativesTradingCoinFutures({ configurationWebsocketStreams });
 
 async function continuousContractKlineCandlestickStreams() {
-    let connection;
+    let connection:
+        | DerivativesTradingCoinFuturesWebsocketStreams.WebsocketStreamsConnection
+        | undefined;
 
     try {
         connection = await client.websocketStreams.connect();

@@ -1,5 +1,6 @@
 import {
     DerivativesTradingCoinFutures,
+    DerivativesTradingCoinFuturesWebsocketAPI,
     DERIVATIVES_TRADING_COIN_FUTURES_WS_API_PROD_URL,
 } from '../../../src';
 
@@ -11,7 +12,7 @@ const configurationWebsocketAPI = {
 const client = new DerivativesTradingCoinFutures({ configurationWebsocketAPI });
 
 async function accountInformation() {
-    let connection;
+    let connection: DerivativesTradingCoinFuturesWebsocketAPI.WebsocketAPIConnection | undefined;
 
     try {
         connection = await client.websocketAPI.connect();
