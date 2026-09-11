@@ -6,7 +6,7 @@ const configurationWebsocketStreams = {
 const client = new Alpha({ configurationWebsocketStreams });
 
 async function contractKlineStream() {
-    let connection;
+    let connection: AlphaWebsocketStreams.WebsocketStreamsConnection | undefined;
 
     try {
         connection = await client.websocketStreams.connect();

@@ -1,4 +1,4 @@
-import { Alpha, ALPHA_WS_STREAMS_PROD_URL } from '../../src';
+import { Alpha, AlphaWebsocketStreams, ALPHA_WS_STREAMS_PROD_URL } from '../../src';
 
 const configurationWebsocketStreams = {
     wsURL: process.env.WS_STREAMS_URL ?? ALPHA_WS_STREAMS_PROD_URL,
@@ -6,7 +6,7 @@ const configurationWebsocketStreams = {
 const client = new Alpha({ configurationWebsocketStreams });
 
 async function aggregateTradeStream() {
-    let connection;
+    let connection: AlphaWebsocketStreams.WebsocketStreamsConnection | undefined;
 
     try {
         connection = await client.websocketStreams.connect();
