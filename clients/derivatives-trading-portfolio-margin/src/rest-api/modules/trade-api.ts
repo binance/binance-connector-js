@@ -3850,6 +3850,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query user's margin force orders
          *
+         * > **Note:** Portfolio Margin accounts liquidated through the [Risk-Based Liquidation Adjustment](https://www.binance.com/en/support/faq/detail/662268636eb44b71af55c6c6a597d481) flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: [Query Cross Isolated Margin Capital Flow](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-isolated-margin-capital-flow).
+         *
          * Weight(IP): 1
          *
          * Security Type: USER_DATA
@@ -5331,6 +5333,8 @@ export interface TradeApiInterface {
     ): Promise<RestApiResponse<QueryUsersCmForceOrdersResponse>>;
     /**
      * Query user's margin force orders
+     *
+     * > **Note:** Portfolio Margin accounts liquidated through the [Risk-Based Liquidation Adjustment](https://www.binance.com/en/support/faq/detail/662268636eb44b71af55c6c6a597d481) flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: [Query Cross Isolated Margin Capital Flow](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-isolated-margin-capital-flow).
      *
      * Weight(IP): 1
      *
@@ -10578,6 +10582,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Query user's margin force orders
+     *
+     * > **Note:** Portfolio Margin accounts liquidated through the [Risk-Based Liquidation Adjustment](https://www.binance.com/en/support/faq/detail/662268636eb44b71af55c6c6a597d481) flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: [Query Cross Isolated Margin Capital Flow](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-isolated-margin-capital-flow).
      *
      * Weight(IP): 1
      *
