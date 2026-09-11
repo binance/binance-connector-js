@@ -500,7 +500,7 @@ export class RestAPI {
     }
 
     /**
-     * Set the margin call level for a Portfolio Margin account. When the account's uniMMR drops to the specified level, a notification will be sent via email and SMS.
+     * Set the margin call level for a Portfolio Margin account. When the account's uniMMR drops to the specified level, a notification will be sent via email and push/inbox.
      *
      * Weight(IP): 1500
      *
