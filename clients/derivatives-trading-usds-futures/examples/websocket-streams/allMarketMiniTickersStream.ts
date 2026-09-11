@@ -1,5 +1,6 @@
 import {
     DerivativesTradingUsdsFutures,
+    DerivativesTradingUsdsFuturesWebsocketStreams,
     DERIVATIVES_TRADING_USDS_FUTURES_WS_STREAMS_PROD_URL,
 } from '../../src';
 
@@ -9,7 +10,9 @@ const configurationWebsocketStreams = {
 const client = new DerivativesTradingUsdsFutures({ configurationWebsocketStreams });
 
 async function allMarketMiniTickersStream() {
-    let connection;
+    let connection:
+        | DerivativesTradingUsdsFuturesWebsocketStreams.WebsocketStreamsConnection
+        | undefined;
 
     try {
         connection = await client.websocketStreams.connect();
