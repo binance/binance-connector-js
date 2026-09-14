@@ -66,7 +66,6 @@ import type {
     CancelAllCmOpenConditionalOrdersRequest,
     CancelAllCmOpenOrdersRequest,
     CancelAllUmAlgoOpenOrdersRequest,
-    CancelAllUmOpenConditionalOrdersRequest,
     CancelAllUmOpenOrdersRequest,
     CancelCmConditionalOrderRequest,
     CancelCmOrderRequest,
@@ -74,7 +73,6 @@ import type {
     CancelMarginAccountOcoOrdersRequest,
     CancelMarginAccountOrderRequest,
     CancelUmAlgoOrderRequest,
-    CancelUmConditionalOrderRequest,
     CancelUmOrderRequest,
     CmAccountTradeListRequest,
     CmPositionAdlQuantileEstimationRequest,
@@ -91,17 +89,14 @@ import type {
     NewCmOrderRequest,
     NewMarginOrderRequest,
     NewUmAlgoOrderRequest,
-    NewUmConditionalOrderRequest,
     NewUmOrderRequest,
     QueryAllCmConditionalOrdersRequest,
     QueryAllCmOrdersRequest,
     QueryAllCurrentCmOpenConditionalOrdersRequest,
     QueryAllCurrentCmOpenOrdersRequest,
     QueryAllCurrentUmOpenAlgoOrdersRequest,
-    QueryAllCurrentUmOpenConditionalOrdersRequest,
     QueryAllCurrentUmOpenOrdersRequest,
     QueryAllMarginAccountOrdersRequest,
-    QueryAllUmConditionalOrdersRequest,
     QueryAllUmOrdersRequest,
     QueryCmConditionalOrderHistoryRequest,
     QueryCmModifyOrderHistoryRequest,
@@ -110,14 +105,12 @@ import type {
     QueryCurrentCmOpenOrderRequest,
     QueryCurrentMarginOpenOrderRequest,
     QueryCurrentUmOpenAlgoOrderRequest,
-    QueryCurrentUmOpenConditionalOrderRequest,
     QueryCurrentUmOpenOrderRequest,
     QueryMarginAccountOrderRequest,
     QueryMarginAccountsAllOcoRequest,
     QueryMarginAccountsOcoRequest,
     QueryMarginAccountsOpenOcoRequest,
     QueryUmAlgoOrderHistoryRequest,
-    QueryUmConditionalOrderHistoryRequest,
     QueryUmModifyOrderHistoryRequest,
     QueryUmOrderRequest,
     QueryUsersCmForceOrdersRequest,
@@ -178,7 +171,6 @@ import type {
     CancelAllCmOpenConditionalOrdersResponse,
     CancelAllCmOpenOrdersResponse,
     CancelAllUmAlgoOpenOrdersResponse,
-    CancelAllUmOpenConditionalOrdersResponse,
     CancelAllUmOpenOrdersResponse,
     CancelCmConditionalOrderResponse,
     CancelCmOrderResponse,
@@ -186,7 +178,6 @@ import type {
     CancelMarginAccountOcoOrdersResponse,
     CancelMarginAccountOrderResponse,
     CancelUmAlgoOrderResponse,
-    CancelUmConditionalOrderResponse,
     CancelUmOrderResponse,
     CmAccountTradeListResponse,
     CmPositionAdlQuantileEstimationResponse,
@@ -203,17 +194,14 @@ import type {
     NewCmOrderResponse,
     NewMarginOrderResponse,
     NewUmAlgoOrderResponse,
-    NewUmConditionalOrderResponse,
     NewUmOrderResponse,
     QueryAllCmConditionalOrdersResponse,
     QueryAllCmOrdersResponse,
     QueryAllCurrentCmOpenConditionalOrdersResponse,
     QueryAllCurrentCmOpenOrdersResponse,
     QueryAllCurrentUmOpenAlgoOrdersResponse,
-    QueryAllCurrentUmOpenConditionalOrdersResponse,
     QueryAllCurrentUmOpenOrdersResponse,
     QueryAllMarginAccountOrdersResponse,
-    QueryAllUmConditionalOrdersResponse,
     QueryAllUmOrdersResponse,
     QueryCmConditionalOrderHistoryResponse,
     QueryCmModifyOrderHistoryResponse,
@@ -222,14 +210,12 @@ import type {
     QueryCurrentCmOpenOrderResponse,
     QueryCurrentMarginOpenOrderResponse,
     QueryCurrentUmOpenAlgoOrderResponse,
-    QueryCurrentUmOpenConditionalOrderResponse,
     QueryCurrentUmOpenOrderResponse,
     QueryMarginAccountOrderResponse,
     QueryMarginAccountsAllOcoResponse,
     QueryMarginAccountsOcoResponse,
     QueryMarginAccountsOpenOcoResponse,
     QueryUmAlgoOrderHistoryResponse,
-    QueryUmConditionalOrderHistoryResponse,
     QueryUmModifyOrderHistoryResponse,
     QueryUmOrderResponse,
     QueryUsersCmForceOrdersResponse,
@@ -1322,28 +1308,6 @@ export class RestAPI {
     }
 
     /**
-     * Cancel All UM Open Conditional Orders
-     *
-     * > **Deprecated:** This endpoint has returned HTTP 404 since 2026-04-28 and is no longer available. Use `DELETE /papi/v1/um/algo/allOpenOrders` instead. Field changes: `strategyId` -> `algoId`, `newClientStrategyId` -> `clientAlgoId`, `strategyStatus` -> `algoStatus`, `stopPrice` -> `triggerPrice`, `activationPrice` -> `activatePrice` (TRAILING_STOP_MARKET orders). `algoType` is a new fixed-value field (`CONDITIONAL`), not a rename of `strategyType` -- the order type now lives in `type` (request) / `orderType` (response).
-     *
-     * Weight(IP): 1
-     *
-     * Security Type: TRADE
-     *
-     * @summary Cancel All UM Open Conditional Orders - Deprecated (TRADE)
-     * @param {CancelAllUmOpenConditionalOrdersRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<CancelAllUmOpenConditionalOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-all-um-open-conditional-orders Binance API Documentation}
-     */
-    cancelAllUmOpenConditionalOrders(
-        requestParameters: CancelAllUmOpenConditionalOrdersRequest
-    ): Promise<RestApiResponse<CancelAllUmOpenConditionalOrdersResponse>> {
-        return this.tradeApi.cancelAllUmOpenConditionalOrders(requestParameters);
-    }
-
-    /**
      * Cancel all active LIMIT orders on specific symbol
      *
      * Weight(IP): 1
@@ -1496,31 +1460,6 @@ export class RestAPI {
         requestParameters: CancelUmAlgoOrderRequest = {}
     ): Promise<RestApiResponse<CancelUmAlgoOrderResponse>> {
         return this.tradeApi.cancelUmAlgoOrder(requestParameters);
-    }
-
-    /**
-     * Cancel UM Conditional Order
-     *
-     * > **Deprecated:** This endpoint has returned HTTP 404 since 2026-04-28 and is no longer available. Use `DELETE /papi/v1/um/algo/order` instead. Field changes: `strategyId` -> `algoId`, `newClientStrategyId` -> `clientAlgoId`, `strategyStatus` -> `algoStatus`, `stopPrice` -> `triggerPrice`, `activationPrice` -> `activatePrice` (TRAILING_STOP_MARKET orders). `algoType` is a new fixed-value field (`CONDITIONAL`), not a rename of `strategyType` -- the order type now lives in `type` (request) / `orderType` (response).
-     *
-     * Weight(IP): 1
-     *
-     * Security Type: TRADE
-     *
-     * Notes:
-     * - Either `strategyId` or `newClientStrategyId` must be sent.
-     *
-     * @summary Cancel UM Conditional Order - Deprecated (TRADE)
-     * @param {CancelUmConditionalOrderRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<CancelUmConditionalOrderResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#cancel-um-conditional-order Binance API Documentation}
-     */
-    cancelUmConditionalOrder(
-        requestParameters: CancelUmConditionalOrderRequest
-    ): Promise<RestApiResponse<CancelUmConditionalOrderResponse>> {
-        return this.tradeApi.cancelUmConditionalOrder(requestParameters);
     }
 
     /**
@@ -1928,43 +1867,6 @@ export class RestAPI {
     }
 
     /**
-     * Place new UM conditional order
-     *
-     * > **Deprecated:** This endpoint has returned HTTP 404 since 2026-04-28 and is no longer available. Use `POST /papi/v1/um/algo/order` instead. Field changes: `strategyId` -> `algoId`, `newClientStrategyId` -> `clientAlgoId`, `strategyStatus` -> `algoStatus`, `stopPrice` -> `triggerPrice`, `activationPrice` -> `activatePrice` (TRAILING_STOP_MARKET orders). `algoType` is a new fixed-value field (`CONDITIONAL`), not a rename of `strategyType` -- the order type now lives in `type` (request) / `orderType` (response).
-     *
-     * Weight(IP): 1
-     *
-     * Security Type: TRADE
-     *
-     * Notes:
-     * - Additional mandatory parameters based on type:
-     * - Order with type `STOP/TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
-     * - Condition orders will be triggered when:
-     * - `STOP`, `STOP_MARKET`:
-     * - BUY: "MARK_PRICE" >= `stopPrice`
-     * - SELL: "MARK_PRICE" = `stopPrice`
-     * - `TRAILING_STOP_MARKET`:
-     * - BUY: the lowest mark price after order placed ``= the lowest mark price
-     * - (1 + `callbackRate`)
-     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
-     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
-     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * - In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
-     *
-     * @summary New UM Conditional Order - Deprecated (TRADE)
-     * @param {NewUmConditionalOrderRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<NewUmConditionalOrderResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#new-um-conditional-order Binance API Documentation}
-     */
-    newUmConditionalOrder(
-        requestParameters: NewUmConditionalOrderRequest
-    ): Promise<RestApiResponse<NewUmConditionalOrderResponse>> {
-        return this.tradeApi.newUmConditionalOrder(requestParameters);
-    }
-
-    /**
      * Place new UM order
      *
      * Weight(IP): 1
@@ -2117,32 +2019,6 @@ export class RestAPI {
     }
 
     /**
-     * Get all open conditional orders on a symbol.
-     *
-     * > **Deprecated:** This endpoint has returned HTTP 404 since 2026-04-28 and is no longer available. Use `GET /papi/v1/um/algo/openAlgoOrders` instead. Field changes: `strategyId` -> `algoId`, `newClientStrategyId` -> `clientAlgoId`, `strategyStatus` -> `algoStatus`, `stopPrice` -> `triggerPrice`, `activationPrice` -> `activatePrice` (TRAILING_STOP_MARKET orders). `algoType` is a new fixed-value field (`CONDITIONAL`), not a rename of `strategyType` -- the order type now lives in `type` (request) / `orderType` (response).
-     *
-     * Weight: - 1 for a single `symbol`
-     * - 40 when `symbol` is omitted
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - If `symbol` is not provided, conditional open orders for all symbols are returned.
-     *
-     * @summary Query All Current UM Open Conditional Orders - Deprecated (USER_DATA)
-     * @param {QueryAllCurrentUmOpenConditionalOrdersRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<QueryAllCurrentUmOpenConditionalOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-current-um-open-conditional-orders Binance API Documentation}
-     */
-    queryAllCurrentUmOpenConditionalOrders(
-        requestParameters: QueryAllCurrentUmOpenConditionalOrdersRequest = {}
-    ): Promise<RestApiResponse<QueryAllCurrentUmOpenConditionalOrdersResponse>> {
-        return this.tradeApi.queryAllCurrentUmOpenConditionalOrders(requestParameters);
-    }
-
-    /**
      * Get all open orders on a symbol.
      *
      * Weight: - 1 for a single `symbol`
@@ -2188,35 +2064,6 @@ export class RestAPI {
         requestParameters: QueryAllMarginAccountOrdersRequest
     ): Promise<RestApiResponse<QueryAllMarginAccountOrdersResponse>> {
         return this.tradeApi.queryAllMarginAccountOrders(requestParameters);
-    }
-
-    /**
-     * Query All UM Conditional Orders
-     *
-     * > **Deprecated:** This endpoint has returned HTTP 404 since 2026-04-28 and is no longer available. Use `GET /papi/v1/um/algo/allAlgoOrders` instead. Field changes: `strategyId` -> `algoId`, `newClientStrategyId` -> `clientAlgoId`, `strategyStatus` -> `algoStatus`, `stopPrice` -> `triggerPrice`, `activationPrice` -> `activatePrice` (TRAILING_STOP_MARKET orders). `algoType` is a new fixed-value field (`CONDITIONAL`), not a rename of `strategyType` -- the order type now lives in `type` (request) / `orderType` (response).
-     *
-     * Weight: - 1 for a single `symbol`
-     * - 40 when `symbol` is omitted
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - These orders will not be found:
-     * - order strategyStatus is `CANCELED` or `EXPIRED`, **AND**
-     * - order has NO filled trade, **AND**
-     * - created time + 7 days  * The query time period must be less than 7 days( default as the recent 7 days).
-     *
-     * @summary Query All UM Conditional Orders - Deprecated (USER_DATA)
-     * @param {QueryAllUmConditionalOrdersRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<QueryAllUmConditionalOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-all-um-conditional-orders Binance API Documentation}
-     */
-    queryAllUmConditionalOrders(
-        requestParameters: QueryAllUmConditionalOrdersRequest = {}
-    ): Promise<RestApiResponse<QueryAllUmConditionalOrdersResponse>> {
-        return this.tradeApi.queryAllUmConditionalOrders(requestParameters);
     }
 
     /**
@@ -2417,32 +2264,6 @@ export class RestAPI {
     }
 
     /**
-     * Query Current UM Open Conditional Order
-     *
-     * > **Deprecated:** This endpoint has returned HTTP 404 since 2026-04-28 and is no longer available. Use `GET /papi/v1/um/algo/algoOrder` instead. Field changes: `strategyId` -> `algoId`, `newClientStrategyId` -> `clientAlgoId`, `strategyStatus` -> `algoStatus`, `stopPrice` -> `triggerPrice`, `activationPrice` -> `activatePrice` (TRAILING_STOP_MARKET orders). `algoType` is a new fixed-value field (`CONDITIONAL`), not a rename of `strategyType` -- the order type now lives in `type` (request) / `orderType` (response).
-     *
-     * Weight(IP): 1
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - Either `strategyId` or `newClientStrategyId` must be sent.
-     * - If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
-     *
-     * @summary Query Current UM Open Conditional Order - Deprecated (USER_DATA)
-     * @param {QueryCurrentUmOpenConditionalOrderRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<QueryCurrentUmOpenConditionalOrderResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-current-um-open-conditional-order Binance API Documentation}
-     */
-    queryCurrentUmOpenConditionalOrder(
-        requestParameters: QueryCurrentUmOpenConditionalOrderRequest
-    ): Promise<RestApiResponse<QueryCurrentUmOpenConditionalOrderResponse>> {
-        return this.tradeApi.queryCurrentUmOpenConditionalOrder(requestParameters);
-    }
-
-    /**
      * Query current UM open order
      *
      * Weight(IP): 1
@@ -2572,36 +2393,6 @@ export class RestAPI {
         requestParameters: QueryUmAlgoOrderHistoryRequest
     ): Promise<RestApiResponse<QueryUmAlgoOrderHistoryResponse>> {
         return this.tradeApi.queryUmAlgoOrderHistory(requestParameters);
-    }
-
-    /**
-     * Query UM Conditional Order History
-     *
-     * > **Deprecated:** This endpoint has returned HTTP 404 since 2026-04-28 and is no longer available. Use `GET /papi/v1/um/algo/allAlgoOrders` instead. Field changes: `strategyId` -> `algoId`, `newClientStrategyId` -> `clientAlgoId`, `strategyStatus` -> `algoStatus`, `stopPrice` -> `triggerPrice`, `activationPrice` -> `activatePrice` (TRAILING_STOP_MARKET orders). `algoType` is a new fixed-value field (`CONDITIONAL`), not a rename of `strategyType` -- the order type now lives in `type` (request) / `orderType` (response).
-     *
-     * Weight(IP): 1
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - Either `strategyId` or `newClientStrategyId` must be sent.
-     * - `NEW` orders will not be found.
-     * - These orders will not be found:
-     * - order status is `CANCELED` or `EXPIRED`, **AND**
-     * - order has NO filled trade, **AND**
-     * - created time + 7 days < current time
-     *
-     * @summary Query UM Conditional Order History - Deprecated (USER_DATA)
-     * @param {QueryUmConditionalOrderHistoryRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<QueryUmConditionalOrderHistoryResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/trade#query-um-conditional-order-history Binance API Documentation}
-     */
-    queryUmConditionalOrderHistory(
-        requestParameters: QueryUmConditionalOrderHistoryRequest
-    ): Promise<RestApiResponse<QueryUmConditionalOrderHistoryResponse>> {
-        return this.tradeApi.queryUmConditionalOrderHistory(requestParameters);
     }
 
     /**

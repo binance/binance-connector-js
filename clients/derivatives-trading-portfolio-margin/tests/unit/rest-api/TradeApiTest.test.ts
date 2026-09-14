@@ -56,15 +56,6 @@ import {
     NewUmAlgoOrderReduceOnlyEnum,
     NewUmAlgoOrderNewOrderRespTypeEnum,
     NewUmAlgoOrderSelfTradePreventionModeEnum,
-    NewUmConditionalOrderSideEnum,
-    NewUmConditionalOrderStrategyTypeEnum,
-    NewUmConditionalOrderPositionSideEnum,
-    NewUmConditionalOrderTimeInForceEnum,
-    NewUmConditionalOrderReduceOnlyEnum,
-    NewUmConditionalOrderWorkingTypeEnum,
-    NewUmConditionalOrderPriceProtectEnum,
-    NewUmConditionalOrderPriceMatchEnum,
-    NewUmConditionalOrderSelfTradePreventionModeEnum,
     NewUmOrderSideEnum,
     NewUmOrderTypeEnum,
     NewUmOrderPositionSideEnum,
@@ -81,7 +72,6 @@ import {
     CancelAllCmOpenConditionalOrdersRequest,
     CancelAllCmOpenOrdersRequest,
     CancelAllUmAlgoOpenOrdersRequest,
-    CancelAllUmOpenConditionalOrdersRequest,
     CancelAllUmOpenOrdersRequest,
     CancelCmConditionalOrderRequest,
     CancelCmOrderRequest,
@@ -89,7 +79,6 @@ import {
     CancelMarginAccountOcoOrdersRequest,
     CancelMarginAccountOrderRequest,
     CancelUmAlgoOrderRequest,
-    CancelUmConditionalOrderRequest,
     CancelUmOrderRequest,
     CmAccountTradeListRequest,
     CmPositionAdlQuantileEstimationRequest,
@@ -106,17 +95,14 @@ import {
     NewCmOrderRequest,
     NewMarginOrderRequest,
     NewUmAlgoOrderRequest,
-    NewUmConditionalOrderRequest,
     NewUmOrderRequest,
     QueryAllCmConditionalOrdersRequest,
     QueryAllCmOrdersRequest,
     QueryAllCurrentCmOpenConditionalOrdersRequest,
     QueryAllCurrentCmOpenOrdersRequest,
     QueryAllCurrentUmOpenAlgoOrdersRequest,
-    QueryAllCurrentUmOpenConditionalOrdersRequest,
     QueryAllCurrentUmOpenOrdersRequest,
     QueryAllMarginAccountOrdersRequest,
-    QueryAllUmConditionalOrdersRequest,
     QueryAllUmOrdersRequest,
     QueryCmConditionalOrderHistoryRequest,
     QueryCmModifyOrderHistoryRequest,
@@ -125,14 +111,12 @@ import {
     QueryCurrentCmOpenOrderRequest,
     QueryCurrentMarginOpenOrderRequest,
     QueryCurrentUmOpenAlgoOrderRequest,
-    QueryCurrentUmOpenConditionalOrderRequest,
     QueryCurrentUmOpenOrderRequest,
     QueryMarginAccountOrderRequest,
     QueryMarginAccountsAllOcoRequest,
     QueryMarginAccountsOcoRequest,
     QueryMarginAccountsOpenOcoRequest,
     QueryUmAlgoOrderHistoryRequest,
-    QueryUmConditionalOrderHistoryRequest,
     QueryUmModifyOrderHistoryRequest,
     QueryUmOrderRequest,
     QueryUsersCmForceOrdersRequest,
@@ -146,7 +130,6 @@ import type {
     CancelAllCmOpenConditionalOrdersResponse,
     CancelAllCmOpenOrdersResponse,
     CancelAllUmAlgoOpenOrdersResponse,
-    CancelAllUmOpenConditionalOrdersResponse,
     CancelAllUmOpenOrdersResponse,
     CancelCmConditionalOrderResponse,
     CancelCmOrderResponse,
@@ -154,7 +137,6 @@ import type {
     CancelMarginAccountOcoOrdersResponse,
     CancelMarginAccountOrderResponse,
     CancelUmAlgoOrderResponse,
-    CancelUmConditionalOrderResponse,
     CancelUmOrderResponse,
     CmAccountTradeListResponse,
     CmPositionAdlQuantileEstimationResponse,
@@ -171,17 +153,14 @@ import type {
     NewCmOrderResponse,
     NewMarginOrderResponse,
     NewUmAlgoOrderResponse,
-    NewUmConditionalOrderResponse,
     NewUmOrderResponse,
     QueryAllCmConditionalOrdersResponse,
     QueryAllCmOrdersResponse,
     QueryAllCurrentCmOpenConditionalOrdersResponse,
     QueryAllCurrentCmOpenOrdersResponse,
     QueryAllCurrentUmOpenAlgoOrdersResponse,
-    QueryAllCurrentUmOpenConditionalOrdersResponse,
     QueryAllCurrentUmOpenOrdersResponse,
     QueryAllMarginAccountOrdersResponse,
-    QueryAllUmConditionalOrdersResponse,
     QueryAllUmOrdersResponse,
     QueryCmConditionalOrderHistoryResponse,
     QueryCmModifyOrderHistoryResponse,
@@ -190,14 +169,12 @@ import type {
     QueryCurrentCmOpenOrderResponse,
     QueryCurrentMarginOpenOrderResponse,
     QueryCurrentUmOpenAlgoOrderResponse,
-    QueryCurrentUmOpenConditionalOrderResponse,
     QueryCurrentUmOpenOrderResponse,
     QueryMarginAccountOrderResponse,
     QueryMarginAccountsAllOcoResponse,
     QueryMarginAccountsOcoResponse,
     QueryMarginAccountsOpenOcoResponse,
     QueryUmAlgoOrderHistoryResponse,
-    QueryUmConditionalOrderHistoryResponse,
     QueryUmModifyOrderHistoryResponse,
     QueryUmOrderResponse,
     QueryUsersCmForceOrdersResponse,
@@ -472,96 +449,6 @@ describe('TradeApi', () => {
                 .spyOn(client, 'cancelAllUmAlgoOpenOrders')
                 .mockRejectedValueOnce(mockError);
             await expect(client.cancelAllUmAlgoOpenOrders(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('cancelAllUmOpenConditionalOrders()', () => {
-        it('should execute cancelAllUmOpenConditionalOrders() successfully with required parameters only', async () => {
-            const params: CancelAllUmOpenConditionalOrdersRequest = {
-                symbol: 'BTCUSDT',
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    code: '200',
-                    msg: 'The operation of cancel all conditional open order is done.',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'cancelAllUmOpenConditionalOrders').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<CancelAllUmOpenConditionalOrdersResponse>)
-            );
-            const response = await client.cancelAllUmOpenConditionalOrders(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute cancelAllUmOpenConditionalOrders() successfully with optional parameters', async () => {
-            const params: CancelAllUmOpenConditionalOrdersRequest = {
-                symbol: 'BTCUSDT',
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    code: '200',
-                    msg: 'The operation of cancel all conditional open order is done.',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'cancelAllUmOpenConditionalOrders').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<CancelAllUmOpenConditionalOrdersResponse>)
-            );
-            const response = await client.cancelAllUmOpenConditionalOrders(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: CancelAllUmOpenConditionalOrdersRequest = {
-                symbol: 'BTCUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.cancelAllUmOpenConditionalOrders(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling cancelAllUmOpenConditionalOrders.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: CancelAllUmOpenConditionalOrdersRequest = {
-                symbol: 'BTCUSDT',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'cancelAllUmOpenConditionalOrders')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.cancelAllUmOpenConditionalOrders(params)).rejects.toThrow(
-                'ResponseError'
-            );
             spy.mockRestore();
         });
     });
@@ -1375,134 +1262,6 @@ describe('TradeApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'cancelUmAlgoOrder').mockRejectedValueOnce(mockError);
             await expect(client.cancelUmAlgoOrder()).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('cancelUmConditionalOrder()', () => {
-        it('should execute cancelUmConditionalOrder() successfully with required parameters only', async () => {
-            const params: CancelUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    newClientStrategyId: 'myOrder1',
-                    strategyId: 123445,
-                    strategyStatus: 'CANCELED',
-                    strategyType: 'TRAILING_STOP_MARKET',
-                    origQty: '11',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    stopPrice: '9300',
-                    symbol: 'BTCUSDT',
-                    timeInForce: 'GTC',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    bookTime: 1566818724710,
-                    updateTime: 1566818724722,
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                    priceMatch: 'NONE',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'cancelUmConditionalOrder').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<CancelUmConditionalOrderResponse>)
-            );
-            const response = await client.cancelUmConditionalOrder(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute cancelUmConditionalOrder() successfully with optional parameters', async () => {
-            const params: CancelUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-                strategyId: 1,
-                newClientStrategyId: '1',
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    newClientStrategyId: 'myOrder1',
-                    strategyId: 123445,
-                    strategyStatus: 'CANCELED',
-                    strategyType: 'TRAILING_STOP_MARKET',
-                    origQty: '11',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    stopPrice: '9300',
-                    symbol: 'BTCUSDT',
-                    timeInForce: 'GTC',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    bookTime: 1566818724710,
-                    updateTime: 1566818724722,
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                    priceMatch: 'NONE',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'cancelUmConditionalOrder').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<CancelUmConditionalOrderResponse>)
-            );
-            const response = await client.cancelUmConditionalOrder(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: CancelUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.cancelUmConditionalOrder(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling cancelUmConditionalOrder.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: CancelUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'cancelUmConditionalOrder')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.cancelUmConditionalOrder(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -3601,182 +3360,6 @@ describe('TradeApi', () => {
         });
     });
 
-    describe('newUmConditionalOrder()', () => {
-        it('should execute newUmConditionalOrder() successfully with required parameters only', async () => {
-            const params: NewUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-                side: NewUmConditionalOrderSideEnum.BUY,
-                strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    newClientStrategyId: 'testOrder',
-                    strategyId: 123445,
-                    strategyStatus: 'NEW',
-                    strategyType: 'TRAILING_STOP_MARKET',
-                    origQty: '10',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    stopPrice: '9300',
-                    symbol: 'BTCUSDT',
-                    timeInForce: 'GTD',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    bookTime: 1566818724710,
-                    updateTime: 1566818724722,
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 1693207680000,
-                    priceMatch: 'NONE',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'newUmConditionalOrder').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<NewUmConditionalOrderResponse>)
-            );
-            const response = await client.newUmConditionalOrder(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute newUmConditionalOrder() successfully with optional parameters', async () => {
-            const params: NewUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-                side: NewUmConditionalOrderSideEnum.BUY,
-                strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
-                positionSide: NewUmConditionalOrderPositionSideEnum.BOTH,
-                timeInForce: NewUmConditionalOrderTimeInForceEnum.GTC,
-                quantity: 1.0,
-                reduceOnly: NewUmConditionalOrderReduceOnlyEnum.TRUE,
-                price: 1.0,
-                workingType: NewUmConditionalOrderWorkingTypeEnum.MARK_PRICE,
-                priceProtect: NewUmConditionalOrderPriceProtectEnum.TRUE,
-                newClientStrategyId: '1',
-                stopPrice: 1.0,
-                activationPrice: 1.0,
-                callbackRate: 1.0,
-                priceMatch: NewUmConditionalOrderPriceMatchEnum.OPPONENT,
-                selfTradePreventionMode: NewUmConditionalOrderSelfTradePreventionModeEnum.NONE,
-                goodTillDate: 1770736694138,
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    newClientStrategyId: 'testOrder',
-                    strategyId: 123445,
-                    strategyStatus: 'NEW',
-                    strategyType: 'TRAILING_STOP_MARKET',
-                    origQty: '10',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    stopPrice: '9300',
-                    symbol: 'BTCUSDT',
-                    timeInForce: 'GTD',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    bookTime: 1566818724710,
-                    updateTime: 1566818724722,
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 1693207680000,
-                    priceMatch: 'NONE',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'newUmConditionalOrder').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<NewUmConditionalOrderResponse>)
-            );
-            const response = await client.newUmConditionalOrder(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: NewUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-                side: NewUmConditionalOrderSideEnum.BUY,
-                strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.newUmConditionalOrder(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling newUmConditionalOrder.'
-            );
-        });
-
-        it('should throw RequiredError when side is missing', async () => {
-            const _params: NewUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-                side: NewUmConditionalOrderSideEnum.BUY,
-                strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.side;
-
-            await expect(client.newUmConditionalOrder(params)).rejects.toThrow(
-                'Required parameter side was null or undefined when calling newUmConditionalOrder.'
-            );
-        });
-
-        it('should throw RequiredError when strategyType is missing', async () => {
-            const _params: NewUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-                side: NewUmConditionalOrderSideEnum.BUY,
-                strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.strategyType;
-
-            await expect(client.newUmConditionalOrder(params)).rejects.toThrow(
-                'Required parameter strategyType was null or undefined when calling newUmConditionalOrder.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: NewUmConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-                side: NewUmConditionalOrderSideEnum.BUY,
-                strategyType: NewUmConditionalOrderStrategyTypeEnum.STOP,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'newUmConditionalOrder')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.newUmConditionalOrder(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
     describe('newUmOrder()', () => {
         it('should execute newUmOrder() successfully with required parameters only', async () => {
             const params: NewUmOrderRequest = {
@@ -4483,118 +4066,6 @@ describe('TradeApi', () => {
         });
     });
 
-    describe('queryAllCurrentUmOpenConditionalOrders()', () => {
-        it('should execute queryAllCurrentUmOpenConditionalOrders() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        newClientStrategyId: 'abc',
-                        strategyId: 123445,
-                        strategyStatus: 'NEW',
-                        strategyType: 'TRAILING_STOP_MARKET',
-                        origQty: '0.40',
-                        price: '0',
-                        reduceOnly: false,
-                        side: 'BUY',
-                        positionSide: 'SHORT',
-                        stopPrice: '9300',
-                        symbol: 'BTCUSDT',
-                        bookTime: 1566818724710,
-                        updateTime: 1566818724722,
-                        timeInForce: 'GTC',
-                        activatePrice: '9020',
-                        priceRate: '0.3',
-                        selfTradePreventionMode: 'NONE',
-                        goodTillDate: 0,
-                        priceMatch: 'NONE',
-                    },
-                ])
-            );
-
-            const spy = jest
-                .spyOn(client, 'queryAllCurrentUmOpenConditionalOrders')
-                .mockReturnValue(
-                    Promise.resolve({
-                        data: () => Promise.resolve(mockResponse),
-                        status: 200,
-                        headers: {},
-                        rateLimits: [],
-                    } as RestApiResponse<QueryAllCurrentUmOpenConditionalOrdersResponse>)
-                );
-            const response = await client.queryAllCurrentUmOpenConditionalOrders();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute queryAllCurrentUmOpenConditionalOrders() successfully with optional parameters', async () => {
-            const params: QueryAllCurrentUmOpenConditionalOrdersRequest = {
-                symbol: 'BTCUSDT',
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        newClientStrategyId: 'abc',
-                        strategyId: 123445,
-                        strategyStatus: 'NEW',
-                        strategyType: 'TRAILING_STOP_MARKET',
-                        origQty: '0.40',
-                        price: '0',
-                        reduceOnly: false,
-                        side: 'BUY',
-                        positionSide: 'SHORT',
-                        stopPrice: '9300',
-                        symbol: 'BTCUSDT',
-                        bookTime: 1566818724710,
-                        updateTime: 1566818724722,
-                        timeInForce: 'GTC',
-                        activatePrice: '9020',
-                        priceRate: '0.3',
-                        selfTradePreventionMode: 'NONE',
-                        goodTillDate: 0,
-                        priceMatch: 'NONE',
-                    },
-                ])
-            );
-
-            const spy = jest
-                .spyOn(client, 'queryAllCurrentUmOpenConditionalOrders')
-                .mockReturnValue(
-                    Promise.resolve({
-                        data: () => Promise.resolve(mockResponse),
-                        status: 200,
-                        headers: {},
-                        rateLimits: [],
-                    } as RestApiResponse<QueryAllCurrentUmOpenConditionalOrdersResponse>)
-                );
-            const response = await client.queryAllCurrentUmOpenConditionalOrders(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'queryAllCurrentUmOpenConditionalOrders')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.queryAllCurrentUmOpenConditionalOrders()).rejects.toThrow(
-                'ResponseError'
-            );
-            spy.mockRestore();
-        });
-    });
-
     describe('queryAllCurrentUmOpenOrders()', () => {
         it('should execute queryAllCurrentUmOpenOrders() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
@@ -4833,124 +4304,6 @@ describe('TradeApi', () => {
             await expect(client.queryAllMarginAccountOrders(params)).rejects.toThrow(
                 'ResponseError'
             );
-            spy.mockRestore();
-        });
-    });
-
-    describe('queryAllUmConditionalOrders()', () => {
-        it('should execute queryAllUmConditionalOrders() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        newClientStrategyId: 'abc',
-                        strategyId: 123445,
-                        strategyStatus: 'TRIGGERED',
-                        strategyType: 'TRAILING_STOP_MARKET',
-                        origQty: '0.40',
-                        price: '0',
-                        reduceOnly: false,
-                        side: 'BUY',
-                        positionSide: 'SHORT',
-                        stopPrice: '9300',
-                        symbol: 'BTCUSDT',
-                        orderId: 12132343435,
-                        status: 'NEW',
-                        bookTime: 1566818724710,
-                        updateTime: 1566818724722,
-                        triggerTime: 1566818724750,
-                        timeInForce: 'GTC',
-                        type: 'MARKET',
-                        activatePrice: '9020',
-                        priceRate: '0.3',
-                        selfTradePreventionMode: 'NONE',
-                        goodTillDate: 0,
-                        priceMatch: 'NONE',
-                    },
-                ])
-            );
-
-            const spy = jest.spyOn(client, 'queryAllUmConditionalOrders').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<QueryAllUmConditionalOrdersResponse>)
-            );
-            const response = await client.queryAllUmConditionalOrders();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute queryAllUmConditionalOrders() successfully with optional parameters', async () => {
-            const params: QueryAllUmConditionalOrdersRequest = {
-                symbol: 'BTCUSDT',
-                strategyId: 1,
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-                limit: 500,
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        newClientStrategyId: 'abc',
-                        strategyId: 123445,
-                        strategyStatus: 'TRIGGERED',
-                        strategyType: 'TRAILING_STOP_MARKET',
-                        origQty: '0.40',
-                        price: '0',
-                        reduceOnly: false,
-                        side: 'BUY',
-                        positionSide: 'SHORT',
-                        stopPrice: '9300',
-                        symbol: 'BTCUSDT',
-                        orderId: 12132343435,
-                        status: 'NEW',
-                        bookTime: 1566818724710,
-                        updateTime: 1566818724722,
-                        triggerTime: 1566818724750,
-                        timeInForce: 'GTC',
-                        type: 'MARKET',
-                        activatePrice: '9020',
-                        priceRate: '0.3',
-                        selfTradePreventionMode: 'NONE',
-                        goodTillDate: 0,
-                        priceMatch: 'NONE',
-                    },
-                ])
-            );
-
-            const spy = jest.spyOn(client, 'queryAllUmConditionalOrders').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<QueryAllUmConditionalOrdersResponse>)
-            );
-            const response = await client.queryAllUmConditionalOrders(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'queryAllUmConditionalOrders')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.queryAllUmConditionalOrders()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -5945,132 +5298,6 @@ describe('TradeApi', () => {
         });
     });
 
-    describe('queryCurrentUmOpenConditionalOrder()', () => {
-        it('should execute queryCurrentUmOpenConditionalOrder() successfully with required parameters only', async () => {
-            const params: QueryCurrentUmOpenConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    newClientStrategyId: 'abc',
-                    strategyId: 123445,
-                    strategyStatus: 'NEW',
-                    strategyType: 'TRAILING_STOP_MARKET',
-                    origQty: '0.40',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    stopPrice: '9300',
-                    symbol: 'BTCUSDT',
-                    bookTime: 1566818724710,
-                    updateTime: 1566818724722,
-                    timeInForce: 'GTC',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                    priceMatch: 'NONE',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'queryCurrentUmOpenConditionalOrder').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<QueryCurrentUmOpenConditionalOrderResponse>)
-            );
-            const response = await client.queryCurrentUmOpenConditionalOrder(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute queryCurrentUmOpenConditionalOrder() successfully with optional parameters', async () => {
-            const params: QueryCurrentUmOpenConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-                strategyId: 1,
-                newClientStrategyId: '1',
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    newClientStrategyId: 'abc',
-                    strategyId: 123445,
-                    strategyStatus: 'NEW',
-                    strategyType: 'TRAILING_STOP_MARKET',
-                    origQty: '0.40',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    stopPrice: '9300',
-                    symbol: 'BTCUSDT',
-                    bookTime: 1566818724710,
-                    updateTime: 1566818724722,
-                    timeInForce: 'GTC',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                    priceMatch: 'NONE',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'queryCurrentUmOpenConditionalOrder').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<QueryCurrentUmOpenConditionalOrderResponse>)
-            );
-            const response = await client.queryCurrentUmOpenConditionalOrder(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: QueryCurrentUmOpenConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.queryCurrentUmOpenConditionalOrder(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling queryCurrentUmOpenConditionalOrder.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: QueryCurrentUmOpenConditionalOrderRequest = {
-                symbol: 'BTCUSDT',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'queryCurrentUmOpenConditionalOrder')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.queryCurrentUmOpenConditionalOrder(params)).rejects.toThrow(
-                'ResponseError'
-            );
-            spy.mockRestore();
-        });
-    });
-
     describe('queryCurrentUmOpenOrder()', () => {
         it('should execute queryCurrentUmOpenOrder() successfully with required parameters only', async () => {
             const params: QueryCurrentUmOpenOrderRequest = {
@@ -6738,142 +5965,6 @@ describe('TradeApi', () => {
                 .spyOn(client, 'queryUmAlgoOrderHistory')
                 .mockRejectedValueOnce(mockError);
             await expect(client.queryUmAlgoOrderHistory(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('queryUmConditionalOrderHistory()', () => {
-        it('should execute queryUmConditionalOrderHistory() successfully with required parameters only', async () => {
-            const params: QueryUmConditionalOrderHistoryRequest = {
-                symbol: 'BTCUSDT',
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    newClientStrategyId: 'abc',
-                    strategyId: 123445,
-                    strategyStatus: 'TRIGGERED',
-                    strategyType: 'TRAILING_STOP_MARKET',
-                    origQty: '0.40',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    stopPrice: '9300',
-                    symbol: 'BTCUSDT',
-                    orderId: 12132343435,
-                    status: 'NEW',
-                    bookTime: 1566818724710,
-                    updateTime: 1566818724722,
-                    triggerTime: 1566818724750,
-                    timeInForce: 'GTC',
-                    type: 'MARKET',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                })
-            );
-
-            const spy = jest.spyOn(client, 'queryUmConditionalOrderHistory').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<QueryUmConditionalOrderHistoryResponse>)
-            );
-            const response = await client.queryUmConditionalOrderHistory(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute queryUmConditionalOrderHistory() successfully with optional parameters', async () => {
-            const params: QueryUmConditionalOrderHistoryRequest = {
-                symbol: 'BTCUSDT',
-                strategyId: 1,
-                newClientStrategyId: '1',
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    newClientStrategyId: 'abc',
-                    strategyId: 123445,
-                    strategyStatus: 'TRIGGERED',
-                    strategyType: 'TRAILING_STOP_MARKET',
-                    origQty: '0.40',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    stopPrice: '9300',
-                    symbol: 'BTCUSDT',
-                    orderId: 12132343435,
-                    status: 'NEW',
-                    bookTime: 1566818724710,
-                    updateTime: 1566818724722,
-                    triggerTime: 1566818724750,
-                    timeInForce: 'GTC',
-                    type: 'MARKET',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                })
-            );
-
-            const spy = jest.spyOn(client, 'queryUmConditionalOrderHistory').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<QueryUmConditionalOrderHistoryResponse>)
-            );
-            const response = await client.queryUmConditionalOrderHistory(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: QueryUmConditionalOrderHistoryRequest = {
-                symbol: 'BTCUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.queryUmConditionalOrderHistory(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling queryUmConditionalOrderHistory.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: QueryUmConditionalOrderHistoryRequest = {
-                symbol: 'BTCUSDT',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'queryUmConditionalOrderHistory')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.queryUmConditionalOrderHistory(params)).rejects.toThrow(
-                'ResponseError'
-            );
             spy.mockRestore();
         });
     });
