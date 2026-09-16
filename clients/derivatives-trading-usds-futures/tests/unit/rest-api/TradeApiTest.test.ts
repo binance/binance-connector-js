@@ -20,6 +20,7 @@ import {
     ChangeMarginTypeMarginTypeEnum,
     ModifyOrderSideEnum,
     ModifyOrderPriceMatchEnum,
+    ModifyOrderReduceOnlyEnum,
     NewAlgoOrderAlgoTypeEnum,
     NewAlgoOrderSideEnum,
     NewAlgoOrderTypeEnum,
@@ -2192,6 +2193,7 @@ describe('TradeApi', () => {
                 origClientOrderId: 'LJ9R4QZDihCaS8UAOOLpgW',
                 priceMatch: ModifyOrderPriceMatchEnum.OPPONENT,
                 modifyId: 1,
+                reduceOnly: ModifyOrderReduceOnlyEnum.TRUE,
                 recvWindow: 5000,
             };
 

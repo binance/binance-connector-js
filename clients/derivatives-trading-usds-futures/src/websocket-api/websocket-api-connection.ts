@@ -393,6 +393,12 @@ export class WebsocketAPIConnection {
      *
      * - One order can only be modfied for less than 10000 times
      *
+     * - `reduceOnly` behavior:
+     * - `false` or omitted: behave as today — `min_notional` is enforced on the modified order.
+     * - `true` and the original order's `reduceOnly` attribute is also `true` (consistent): the `min_notional` check is skipped on the modified order, matching placement semantics.
+     * - `true` but the original order's `reduceOnly` attribute is `false` (inconsistent): the modify request is rejected with error code `-5047`, "The original order is not a reduce-only order".
+     * - `reduceOnly` is used purely for validation — passing `true` does not change the original order's `reduceOnly` attribute; that flag remains whatever it was set to at placement time.
+     *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
      *

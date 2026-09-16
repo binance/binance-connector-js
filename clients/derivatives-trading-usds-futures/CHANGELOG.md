@@ -1,5 +1,20 @@
 # Changelog
 
+## 38.1.0 - 2026-09-16
+
+### Changed (2)
+
+#### REST API
+
+- Added parameter `reduceOnly`
+  - affected methods:
+    - `modifyOrder()` (`PUT /fapi/v1/order`)
+#### WebSocket API
+
+- Added parameter `reduceOnly`
+  - affected methods:
+    - `modifyOrder()` (`order.modify` method)
+
 ## 38.0.6 - 2026-09-11
 
 ### Changed (2)

@@ -1109,6 +1109,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - when the order is in partially filled status and the new `quantity` <= `executedQty`
          * - When the order is `GTX` and the new price will cause it to be executed immediately
          * - One order can only be modfied for less than 10000 times
+         * - `reduceOnly` behavior:
+         * - `false` or omitted: behave as today — `min_notional` is enforced on the modified order.
+         * - `true` and the original order's `reduceOnly` attribute is also `true` (consistent): the `min_notional` check is skipped on the modified order, matching placement semantics.
+         * - `true` but the original order's `reduceOnly` attribute is `false` (inconsistent): the modify request is rejected with error code `-5047`, "The original order is not a reduce-only order".
+         * - `reduceOnly` is used purely for validation — passing `true` does not change the original order's `reduceOnly` attribute; that flag remains whatever it was set to at placement time.
          *
          * @summary Modify Order (TRADE)
          * @param {string} symbol
@@ -1119,6 +1124,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [origClientOrderId]
          * @param {ModifyOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; Can't be passed together with `price`
          * @param {number | bigint} [modifyId] User-defined modification identifier, returned as-is in the response. Optional; not validated for uniqueness.
+         * @param {ModifyOrderReduceOnlyEnum} [reduceOnly] See notes below for behavior.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -1132,6 +1138,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             origClientOrderId?: string,
             priceMatch?: ModifyOrderPriceMatchEnum,
             modifyId?: number | bigint,
+            reduceOnly?: ModifyOrderReduceOnlyEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1170,6 +1177,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (modifyId !== undefined && modifyId !== null) {
                 localVarQueryParameter['modifyId'] = modifyId;
+            }
+            if (reduceOnly !== undefined && reduceOnly !== null) {
+                localVarQueryParameter['reduceOnly'] = reduceOnly;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -1242,7 +1252,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders
          * @param {string} [clientAlgoId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
          * @param {NewAlgoOrderNewOrderRespTypeEnum} [newOrderRespType]
-         * @param {NewAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers / `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+         * @param {NewAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`: expire taker order when STP triggers / `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers; default `NONE`
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
          * @param {number | bigint} [recvWindow]
          *
@@ -1395,7 +1405,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {NewOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; Can't be passed together with `price`
-         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `EXPIRE_MAKER`
+         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers; default `EXPIRE_MAKER`
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
          * @param {number | bigint} [recvWindow]
          *
@@ -1973,7 +1983,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {TestOrderPriceProtectEnum} [priceProtect]
          * @param {TestOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {TestOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; Can't be passed together with `price`
-         * @param {TestOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+         * @param {TestOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`: No STP / `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers; default `NONE`
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
          * @param {number | bigint} [recvWindow]
          *
@@ -2548,6 +2558,11 @@ export interface TradeApiInterface {
      * - when the order is in partially filled status and the new `quantity` <= `executedQty`
      * - When the order is `GTX` and the new price will cause it to be executed immediately
      * - One order can only be modfied for less than 10000 times
+     * - `reduceOnly` behavior:
+     * - `false` or omitted: behave as today — `min_notional` is enforced on the modified order.
+     * - `true` and the original order's `reduceOnly` attribute is also `true` (consistent): the `min_notional` check is skipped on the modified order, matching placement semantics.
+     * - `true` but the original order's `reduceOnly` attribute is `false` (inconsistent): the modify request is rejected with error code `-5047`, "The original order is not a reduce-only order".
+     * - `reduceOnly` is used purely for validation — passing `true` does not change the original order's `reduceOnly` attribute; that flag remains whatever it was set to at placement time.
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
@@ -3535,6 +3550,13 @@ export interface ModifyOrderRequest {
     readonly modifyId?: number | bigint;
 
     /**
+     * See notes below for behavior.
+     * @type {'true' | 'false'}
+     * @memberof TradeApiModifyOrder
+     */
+    readonly reduceOnly?: ModifyOrderReduceOnlyEnum;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof TradeApiModifyOrder
@@ -3674,7 +3696,7 @@ export interface NewAlgoOrderRequest {
     readonly newOrderRespType?: NewAlgoOrderNewOrderRespTypeEnum;
 
     /**
-     * `EXPIRE_TAKER`:expire taker order when STP triggers / `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+     * `EXPIRE_TAKER`: expire taker order when STP triggers / `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers; default `NONE`
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -3778,7 +3800,7 @@ export interface NewOrderRequest {
     readonly priceMatch?: NewOrderPriceMatchEnum;
 
     /**
-     * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `EXPIRE_MAKER`
+     * `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers; default `EXPIRE_MAKER`
      * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewOrder
      */
@@ -4147,7 +4169,7 @@ export interface TestOrderRequest {
     readonly priceMatch?: TestOrderPriceMatchEnum;
 
     /**
-     * `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+     * `NONE`: No STP / `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers; default `NONE`
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiTestOrder
      */
@@ -4976,6 +4998,11 @@ export class TradeApi implements TradeApiInterface {
      * - when the order is in partially filled status and the new `quantity` <= `executedQty`
      * - When the order is `GTX` and the new price will cause it to be executed immediately
      * - One order can only be modfied for less than 10000 times
+     * - `reduceOnly` behavior:
+     * - `false` or omitted: behave as today — `min_notional` is enforced on the modified order.
+     * - `true` and the original order's `reduceOnly` attribute is also `true` (consistent): the `min_notional` check is skipped on the modified order, matching placement semantics.
+     * - `true` but the original order's `reduceOnly` attribute is `false` (inconsistent): the modify request is rejected with error code `-5047`, "The original order is not a reduce-only order".
+     * - `reduceOnly` is used purely for validation — passing `true` does not change the original order's `reduceOnly` attribute; that flag remains whatever it was set to at placement time.
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
@@ -4996,6 +5023,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.origClientOrderId,
             requestParameters?.priceMatch,
             requestParameters?.modifyId,
+            requestParameters?.reduceOnly,
             requestParameters?.recvWindow
         );
         return sendRequest<ModifyOrderResponse>(
@@ -5626,6 +5654,11 @@ export enum ModifyOrderPriceMatchEnum {
     QUEUE_5 = 'QUEUE_5',
     QUEUE_10 = 'QUEUE_10',
     QUEUE_20 = 'QUEUE_20',
+}
+
+export enum ModifyOrderReduceOnlyEnum {
+    TRUE = 'true',
+    FALSE = 'false',
 }
 
 export enum NewAlgoOrderAlgoTypeEnum {

@@ -86,7 +86,7 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
      */
     priceMatch?: PlaceMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum;
     /**
-     * EXPIRE_TAKER:expire taker order when STP triggers/ EXPIRE_MAKER:expire taker order when STP triggers/ EXPIRE_BOTH:expire both orders when STP triggers; default NONE
+     * EXPIRE_TAKER: expire taker order when STP triggers/ EXPIRE_MAKER: expire taker order when STP triggers/ EXPIRE_BOTH: expire both orders when STP triggers; default NONE
      * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
