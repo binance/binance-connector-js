@@ -337,7 +337,7 @@ const MarketApiParamCreator = function () {
             });
         },
         /**
-         * Trading session information for the underlying assets of TradFi Perpetual contracts, covering the U.S. equity market, Korean equity market, Hong Kong equity market, China equity market, and the commodity market, is updated every second. Trading session information for different underlying markets is pushed in separate messages.
+         * Trading session information for the underlying assets of TradFi Perpetual contracts, covering the U.S. equity market, Korean equity market, Hong Kong equity market, China equity market, the commodity market, and the FX market, is updated every second. Trading session information for different underlying markets is pushed in separate messages.
          *
          **Event type:**
          *
@@ -346,6 +346,7 @@ const MarketApiParamCreator = function () {
          * - `KR_EquityUpdate`: Session types for the Korean equity market include "REGULAR" and "NO_TRADING".
          * - `HK_EquityUpdate`: Session types for the Hong Kong equity market include "REGULAR" and "NO_TRADING".
          * - `CN_EquityUpdate`: Session types for the China equity market include "REGULAR" and "NO_TRADING".
+         * - `FXUpdate`: Session types for the FX market include "REGULAR" and "NO_TRADING".
          *
          * Update Speed: 1s
          *
@@ -616,7 +617,7 @@ export interface MarketApiInterface {
     ): WebsocketStream<MarkPriceStreamForAllMarketResponse>;
 
     /**
-     * Trading session information for the underlying assets of TradFi Perpetual contracts, covering the U.S. equity market, Korean equity market, Hong Kong equity market, China equity market, and the commodity market, is updated every second. Trading session information for different underlying markets is pushed in separate messages.
+     * Trading session information for the underlying assets of TradFi Perpetual contracts, covering the U.S. equity market, Korean equity market, Hong Kong equity market, China equity market, the commodity market, and the FX market, is updated every second. Trading session information for different underlying markets is pushed in separate messages.
      *
      **Event type:**
      *
@@ -625,6 +626,7 @@ export interface MarketApiInterface {
      * - `KR_EquityUpdate`: Session types for the Korean equity market include "REGULAR" and "NO_TRADING".
      * - `HK_EquityUpdate`: Session types for the Hong Kong equity market include "REGULAR" and "NO_TRADING".
      * - `CN_EquityUpdate`: Session types for the China equity market include "REGULAR" and "NO_TRADING".
+     * - `FXUpdate`: Session types for the FX market include "REGULAR" and "NO_TRADING".
      *
      * Update Speed: 1s
      *
@@ -1352,7 +1354,7 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * Trading session information for the underlying assets of TradFi Perpetual contracts, covering the U.S. equity market, Korean equity market, Hong Kong equity market, China equity market, and the commodity market, is updated every second. Trading session information for different underlying markets is pushed in separate messages.
+     * Trading session information for the underlying assets of TradFi Perpetual contracts, covering the U.S. equity market, Korean equity market, Hong Kong equity market, China equity market, the commodity market, and the FX market, is updated every second. Trading session information for different underlying markets is pushed in separate messages.
      *
      **Event type:**
      *
@@ -1361,6 +1363,7 @@ export class MarketApi implements MarketApiInterface {
      * - `KR_EquityUpdate`: Session types for the Korean equity market include "REGULAR" and "NO_TRADING".
      * - `HK_EquityUpdate`: Session types for the Hong Kong equity market include "REGULAR" and "NO_TRADING".
      * - `CN_EquityUpdate`: Session types for the China equity market include "REGULAR" and "NO_TRADING".
+     * - `FXUpdate`: Session types for the FX market include "REGULAR" and "NO_TRADING".
      *
      * Update Speed: 1s
      *

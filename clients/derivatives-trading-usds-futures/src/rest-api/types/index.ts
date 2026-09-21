@@ -184,6 +184,8 @@ export * from './trading-schedule-response-market-schedules-commodity';
 export * from './trading-schedule-response-market-schedules-commoditysessions-inner';
 export * from './trading-schedule-response-market-schedules-equity';
 export * from './trading-schedule-response-market-schedules-equitysessions-inner';
+export * from './trading-schedule-response-market-schedules-fx';
+export * from './trading-schedule-response-market-schedules-fxsessions-inner';
 export * from './trading-schedule-response-market-schedules-hkequity';
 export * from './trading-schedule-response-market-schedules-hkequitysessions-inner';
 export * from './trading-schedule-response-market-schedules-krequity';

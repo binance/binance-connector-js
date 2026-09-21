@@ -20,7 +20,7 @@
  */
 export interface TradingSessionStreamResponse {
     /**
-     * Event type, can also be CommodityUpdate, KR_EquityUpdate, HK_EquityUpdate or CN_EquityUpdate
+     * Event type, can also be CommodityUpdate, KR_EquityUpdate, HK_EquityUpdate, CN_EquityUpdate or FXUpdate
      * @type {string}
      * @memberof TradingSessionStreamResponse
      */
