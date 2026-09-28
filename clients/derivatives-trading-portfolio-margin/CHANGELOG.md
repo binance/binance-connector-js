@@ -1,5 +1,21 @@
 # Changelog
 
+## 20.0.0 - 2026-09-28
+
+### Changed (4)
+
+#### REST API
+
+- Modified parameter `incomeType`:
+  - enum removed: `AUTO_EXCHANGE`
+  - affected methods:
+    - `getUmIncomeHistory()` (`GET /papi/v1/um/income`)
+- Modified response for `accountBalance()` (`GET /papi/v1/balance`):
+  - oneOf modified
+
+- Modified response schema `accountBalanceResponse`:
+  - oneOf modified
+
 ## 19.0.0 - 2026-09-14
 
 ### Changed (7)

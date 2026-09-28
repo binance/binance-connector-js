@@ -136,8 +136,8 @@ describe('AccountApi', () => {
                 JSONStringify([
                     {
                         asset: 'USDT',
-                        totalWalletBalance: '122607.35137903',
-                        crossMarginAsset: '92.27530794',
+                        totalWalletBalance: '126.72469206',
+                        crossMarginAsset: '103.00000000',
                         crossMarginBorrowed: '10.00000000',
                         crossMarginFree: '100.00000000',
                         crossMarginInterest: '0.72469206',
@@ -176,8 +176,8 @@ describe('AccountApi', () => {
                 JSONStringify([
                     {
                         asset: 'USDT',
-                        totalWalletBalance: '122607.35137903',
-                        crossMarginAsset: '92.27530794',
+                        totalWalletBalance: '126.72469206',
+                        crossMarginAsset: '103.00000000',
                         crossMarginBorrowed: '10.00000000',
                         crossMarginFree: '100.00000000',
                         crossMarginInterest: '0.72469206',

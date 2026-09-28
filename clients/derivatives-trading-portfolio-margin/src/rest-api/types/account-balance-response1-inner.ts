@@ -32,7 +32,7 @@ export interface AccountBalanceResponse1Inner {
      */
     totalWalletBalance?: string;
     /**
-     * Cross Margin Asset.
+     * Cross Margin Asset. Equal to crossMarginFree + crossMarginLocked.
      * @type {string}
      * @memberof AccountBalanceResponse1Inner
      */
