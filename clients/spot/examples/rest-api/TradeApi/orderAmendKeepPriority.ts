@@ -11,7 +11,7 @@ async function orderAmendKeepPriority() {
     try {
         const response = await client.restAPI.orderAmendKeepPriority({
             symbol: 'BNBUSDT',
-            newQty: 1,
+            newQty: 5,
         });
 
         const rateLimits = response.rateLimits!;

@@ -37,7 +37,7 @@ export interface OrderPlaceResponseResult {
      */
     orderId?: number | bigint;
     /**
-     *
+     * always -1 for singular orders
      * @type {number | bigint}
      * @memberof OrderPlaceResponseResult
      */
@@ -211,7 +211,7 @@ export interface OrderPlaceResponseResult {
      */
     expiryReason?: string;
     /**
-     *
+     * FULL response is identical to RESULT response, with the same optional fields based on the order type and parameters. FULL response additionally includes the list of trades which immediately filled the order.
      * @type {Array<OrderPlaceResponseResultFillsInner>}
      * @memberof OrderPlaceResponseResult
      */

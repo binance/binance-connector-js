@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Spot WebSocket API
@@ -16,39 +17,18 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReferencePriceResponseResult } from './reference-price-response-result';
+import type { ReferencePriceResponse1 } from './reference-price-response1';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ReferencePriceResponse2 } from './reference-price-response2';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ReferencePriceResponse2Result } from './reference-price-response2-result';
 
 /**
- *
- * @export
- * @interface ReferencePriceResponse
+ * @type ReferencePriceResponse
  */
-export interface ReferencePriceResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof ReferencePriceResponse
-     */
-    id?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof ReferencePriceResponse
-     */
-    status?: number | bigint;
-    /**
-     *
-     * @type {ReferencePriceResponseResult}
-     * @memberof ReferencePriceResponse
-     */
-    result?: ReferencePriceResponseResult;
-    /**
-     *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
-     * @memberof ReferencePriceResponse
-     */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
-}
+export type ReferencePriceResponse = ReferencePriceResponse1 | ReferencePriceResponse2;

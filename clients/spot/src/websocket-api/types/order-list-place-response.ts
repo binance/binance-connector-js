@@ -16,10 +16,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { OrderListPlaceResponseResult } from './order-list-place-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListPlaceResponseResult } from './order-list-place-response-result';
+import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
 
 /**
  *
@@ -47,8 +47,8 @@ export interface OrderListPlaceResponse {
     result?: OrderListPlaceResponseResult;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<PingResponseRateLimitsInner>}
      * @memberof OrderListPlaceResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<PingResponseRateLimitsInner>;
 }

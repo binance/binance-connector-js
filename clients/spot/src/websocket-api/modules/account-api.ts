@@ -192,8 +192,8 @@ export interface AccountApiInterface {
     ): Promise<WebsocketApiResponse<MyAllocationsResponse>>;
 
     /**
-     * Retrieves the list of [filters](/products/spot/filters) relevant to an account on a given symbol. This is the only method
-     * that shows if an account has [`MAX_ASSET`](/products/spot/filters#max_asset) filters applied to it.
+     * Retrieves the list of filters relevant to an account on a given symbol. This is the only method
+     * that shows if an account has `MAX_ASSET` filters applied to it.
      *
      * Weight(IP): 40
      *
@@ -254,7 +254,7 @@ export interface AccountApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * Data Source: Memory => Database
+     **Data Source:** Memory => Database
      *
      * Notes:
      * - If `fromId` is specified, return trades with trade ID >= `fromId`.
@@ -314,7 +314,10 @@ export interface AccountApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * Data Source: Memory => Database
+     **Data Source:** Memory => Database
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Current open orders (USER_DATA)
      * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
@@ -391,6 +394,9 @@ export interface AccountApiInterface {
      *
      * For some historical orders the `cummulativeQuoteQty` response field may be negative,
      * meaning the data is not available at this time.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Query order (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
@@ -1154,8 +1160,8 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Retrieves the list of [filters](/products/spot/filters) relevant to an account on a given symbol. This is the only method
-     * that shows if an account has [`MAX_ASSET`](/products/spot/filters#max_asset) filters applied to it.
+     * Retrieves the list of filters relevant to an account on a given symbol. This is the only method
+     * that shows if an account has `MAX_ASSET` filters applied to it.
      *
      * Weight(IP): 40
      *
@@ -1228,7 +1234,7 @@ export class AccountApi implements AccountApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * Data Source: Memory => Database
+     **Data Source:** Memory => Database
      *
      * Notes:
      * - If `fromId` is specified, return trades with trade ID >= `fromId`.
@@ -1302,7 +1308,10 @@ export class AccountApi implements AccountApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * Data Source: Memory => Database
+     **Data Source:** Memory => Database
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Current open orders (USER_DATA)
      * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
@@ -1397,6 +1406,9 @@ export class AccountApi implements AccountApiInterface {
      *
      * For some historical orders the `cummulativeQuoteQty` response field may be negative,
      * meaning the data is not available at this time.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Query order (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.

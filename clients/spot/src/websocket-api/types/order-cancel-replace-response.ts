@@ -16,13 +16,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { OrderCancelReplaceResponseResult } from './order-cancel-replace-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderCancelReplaceResponseResult } from './order-cancel-replace-response-result';
+import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
 
 /**
- *
+ * If both cancel and placement succeed, you get the following response with `\"status\": 200`:
  * @export
  * @interface OrderCancelReplaceResponse
  */
@@ -47,8 +47,8 @@ export interface OrderCancelReplaceResponse {
     result?: OrderCancelReplaceResponseResult;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<PingResponseRateLimitsInner>}
      * @memberof OrderCancelReplaceResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<PingResponseRateLimitsInner>;
 }

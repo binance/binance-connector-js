@@ -16,13 +16,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { TickerResponse2RateLimitsInner } from './ticker-response2-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TickerResponse2ResultInner } from './ticker-response2-result-inner';
 
 /**
- *
+ * If more than one symbol is requested, response returns an array:
  * @export
  * @interface TickerResponse2
  */
@@ -47,8 +47,8 @@ export interface TickerResponse2 {
     result?: Array<TickerResponse2ResultInner>;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<TickerResponse2RateLimitsInner>}
      * @memberof TickerResponse2
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<TickerResponse2RateLimitsInner>;
 }

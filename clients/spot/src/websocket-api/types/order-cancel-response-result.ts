@@ -34,7 +34,7 @@ export interface OrderCancelResponseResult {
      */
     symbol?: string;
     /**
-     *
+     * clientOrderId that was canceled
      * @type {string}
      * @memberof OrderCancelResponseResult
      */
@@ -46,13 +46,13 @@ export interface OrderCancelResponseResult {
      */
     orderId?: number | bigint;
     /**
-     *
+     * set only for legs of an order list
      * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
     orderListId?: number | bigint;
     /**
-     *
+     * newClientOrderId from request
      * @type {string}
      * @memberof OrderCancelResponseResult
      */
@@ -118,31 +118,31 @@ export interface OrderCancelResponseResult {
      */
     side?: string;
     /**
-     * Appears for STOP_LOSS, TAKE_PROFIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT orders.
+     * present only if stopPrice set for the order
      * @type {string}
      * @memberof OrderCancelResponseResult
      */
     stopPrice?: string;
     /**
-     * Delta price change required before order activation.
+     * present only if trailingDelta set for the order
      * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
     trailingDelta?: number | bigint;
     /**
-     * Appears only if the parameter icebergQty was sent in the request.
+     * present only if icebergQty set for the order
      * @type {string}
      * @memberof OrderCancelResponseResult
      */
     icebergQty?: string;
     /**
-     * Appears only if the strategyId parameter was provided upon order placement.
+     * present only if strategyId set for the order
      * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
     strategyId?: number | bigint;
     /**
-     * Appears only if the strategyType parameter was provided upon order placement.
+     * present only if strategyType set for the order
      * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
@@ -250,7 +250,7 @@ export interface OrderCancelResponseResult {
      */
     orders?: Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>;
     /**
-     *
+     * order list order\'s status format is the same as for individual orders.
      * @type {Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>}
      * @memberof OrderCancelResponseResult
      */

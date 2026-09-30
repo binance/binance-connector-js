@@ -51,17 +51,17 @@ export interface UserDataStreamApiInterface {
      * Subscribe to the User Data Stream in the current WebSocket connection.
      *
      **Notes:**
-     * - This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to [`session.logon`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-logon).
-     * - To check the subscription status, use [`session.status`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-status), see the `userDataStream` flag indicating you have have an active subscription.
-     * - User Data Stream events are available in both JSON and [SBE](/products/spot/faqs/sbe_faq) sessions.
-     * - Please refer to [User Data Streams](/products/spot/user-data-stream) for the event format details.
+     * - This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to `session.logon`.
+     * - To check the subscription status, use `session.status`, see the `userDataStream` flag indicating you have an active subscription.
+     * - User Data Stream events are available in both JSON and SBE sessions.
+     * - Please refer to User Data Streams for the event format details.
      * - For SBE, only SBE schema 2:1 or later is supported.
      *
      * Weight(IP): 2
      *
-     * Security Type: NONE
+     * Security Type: USER_STREAM
      *
-     * @summary Subscribe to User Data Stream
+     * @summary Subscribe to User Data Stream (USER_STREAM)
      * @param {UserDataStreamSubscribeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<UserDataStreamSubscribeResponse>}
@@ -97,7 +97,7 @@ export interface UserDataStreamApiInterface {
      *
      * Weight(IP): 2
      *
-     * @summary WebSocket Unsubscribe from User Data Stream
+     * @summary Unsubscribe from User Data Stream
      * @param {UserDataStreamUnsubscribeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<UserDataStreamUnsubscribeResponse>}
@@ -218,17 +218,17 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      * Subscribe to the User Data Stream in the current WebSocket connection.
      *
      **Notes:**
-     * - This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to [`session.logon`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-logon).
-     * - To check the subscription status, use [`session.status`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-status), see the `userDataStream` flag indicating you have have an active subscription.
-     * - User Data Stream events are available in both JSON and [SBE](/products/spot/faqs/sbe_faq) sessions.
-     * - Please refer to [User Data Streams](/products/spot/user-data-stream) for the event format details.
+     * - This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to `session.logon`.
+     * - To check the subscription status, use `session.status`, see the `userDataStream` flag indicating you have an active subscription.
+     * - User Data Stream events are available in both JSON and SBE sessions.
+     * - Please refer to User Data Streams for the event format details.
      * - For SBE, only SBE schema 2:1 or later is supported.
      *
      * Weight(IP): 2
      *
-     * Security Type: NONE
+     * Security Type: USER_STREAM
      *
-     * @summary Subscribe to User Data Stream
+     * @summary Subscribe to User Data Stream (USER_STREAM)
      * @param {UserDataStreamSubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamSubscribeResponse>}
      * @memberof UserDataStreamApi
@@ -240,7 +240,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
         return this.websocketBase.sendMessage<UserDataStreamSubscribeResponse>(
             '/userDataStream.subscribe'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: false }
+            { isSigned: false, withApiKey: true }
         );
     }
 
@@ -276,7 +276,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      *
      * Weight(IP): 2
      *
-     * @summary WebSocket Unsubscribe from User Data Stream
+     * @summary Unsubscribe from User Data Stream
      * @param {UserDataStreamUnsubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamUnsubscribeResponse>}
      * @memberof UserDataStreamApi

@@ -16,10 +16,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { OpenOrdersCancelAllResponseResultInner } from './open-orders-cancel-all-response-result-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OpenOrdersCancelAllResponseResultInner } from './open-orders-cancel-all-response-result-inner';
+import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
 
 /**
  *
@@ -47,8 +47,8 @@ export interface OpenOrdersCancelAllResponse {
     result?: Array<OpenOrdersCancelAllResponseResultInner>;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<PingResponseRateLimitsInner>}
      * @memberof OpenOrdersCancelAllResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<PingResponseRateLimitsInner>;
 }

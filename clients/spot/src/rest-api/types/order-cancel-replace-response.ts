@@ -22,7 +22,7 @@ import type { OrderCancelReplaceResponseCancelResponse } from './order-cancel-re
 import type { OrderCancelReplaceResponseNewOrderResponse } from './order-cancel-replace-response-new-order-response';
 
 /**
- *
+ * Both the cancel and the new order placement succeeded, and the account has not exceeded its unfilled order count:
  * @export
  * @interface OrderCancelReplaceResponse
  */

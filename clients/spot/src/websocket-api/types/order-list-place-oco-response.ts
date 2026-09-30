@@ -16,10 +16,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { OrderListPlaceOcoResponseResult } from './order-list-place-oco-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListPlaceOcoResponseResult } from './order-list-place-oco-response-result';
+import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
 
 /**
  *
@@ -47,8 +47,8 @@ export interface OrderListPlaceOcoResponse {
     result?: OrderListPlaceOcoResponseResult;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<PingResponseRateLimitsInner>}
      * @memberof OrderListPlaceOcoResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<PingResponseRateLimitsInner>;
 }

@@ -26,7 +26,7 @@ export interface OrderCancelReplaceResponseCancelResponse {
      */
     symbol?: string;
     /**
-     *
+     * cancelOrigClientOrderId from request
      * @type {string}
      * @memberof OrderCancelReplaceResponseCancelResponse
      */
@@ -44,7 +44,7 @@ export interface OrderCancelReplaceResponseCancelResponse {
      */
     orderListId?: number | bigint;
     /**
-     *
+     * cancelNewClientOrderId from request
      * @type {string}
      * @memberof OrderCancelReplaceResponseCancelResponse
      */

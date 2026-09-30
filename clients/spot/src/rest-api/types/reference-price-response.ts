@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Spot REST API
@@ -13,28 +14,14 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ReferencePriceResponse1 } from './reference-price-response1';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ReferencePriceResponse2 } from './reference-price-response2';
+
 /**
- *
- * @export
- * @interface ReferencePriceResponse
+ * @type ReferencePriceResponse
  */
-export interface ReferencePriceResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof ReferencePriceResponse
-     */
-    symbol?: string;
-    /**
-     * Reference price. Can be `null` if no reference price is set.
-     * @type {string}
-     * @memberof ReferencePriceResponse
-     */
-    referencePrice?: string;
-    /**
-     * Timestamp when reference price was valid.
-     * @type {number | bigint}
-     * @memberof ReferencePriceResponse
-     */
-    timestamp?: number | bigint;
-}
+export type ReferencePriceResponse = ReferencePriceResponse1 | ReferencePriceResponse2;

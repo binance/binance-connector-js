@@ -255,6 +255,9 @@ export class RestAPI {
      * - If `startTime` and/or `endTime` provided, `orderId` is not required.
      * - The time between `startTime` and `endTime` can't be longer than 24 hours.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary All orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      *
@@ -301,6 +304,9 @@ export class RestAPI {
      *
      * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Current open orders (USER_DATA)
      * @param {GetOpenOrdersRequest} requestParameters Request parameters.
      *
@@ -327,6 +333,9 @@ export class RestAPI {
      * - Either `orderId` or `origClientOrderId` must be sent.
      * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
      * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Query order (USER_DATA)
      * @param {GetOrderRequest} requestParameters Request parameters.
@@ -631,6 +640,9 @@ export class RestAPI {
      *
      * Security Type: NONE
      *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary Test connectivity
      *
      * @returns {Promise<RestApiResponse<void>>}
@@ -647,6 +659,9 @@ export class RestAPI {
      * Weight(IP): 1
      *
      * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Check server time
      *
@@ -759,7 +774,7 @@ export class RestAPI {
      * Security Type: MARKET_DATA
      *
      * Notes:
-     * - Data Source: Database
+     **Data Source:** Database
      *
      * @summary Historical Block Trades (MARKET_DATA)
      * @param {HistoricalBlockTradesRequest} requestParameters Request parameters.
@@ -849,6 +864,15 @@ export class RestAPI {
      *
      * Notes:
      **Data Source:** Memory
+     *
+     * If the symbol has never had a reference price set, the request is rejected with:
+     *
+     * ```json
+     * {
+     * "code": -2043,
+     * "msg": "This symbol doesn't have a reference price."
+     * }
+     * ```
      *
      * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.
@@ -1130,7 +1154,28 @@ export class RestAPI {
      *
      * - Either `orderId` or `origClientOrderId` must be sent.
      * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
+     *
+     * Response Notes:
+     **Notes:**
+     * - The payload above does not show all fields that can appear in the order response. Please refer to Conditional fields in Order Responses.
      * - The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
+     *
+     **Regarding `cancelRestrictions`**
+     *
+     * If the `cancelRestrictions` value is not any of the supported values, the error will be:
+     * ```json
+     * {
+     * "code": -1145,
+     * "msg": "Invalid cancelRestrictions"
+     * }
+     * ```
+     * If the order did not pass the conditions for `cancelRestrictions`, the error will be:
+     * ```json
+     * {
+     * "code": -2011,
+     * "msg": "Order was not canceled due to cancel restrictions."
+     * }
+     * ```
      *
      * @summary Cancel order (TRADE)
      * @param {DeleteOrderRequest} requestParameters Request parameters.
@@ -1198,8 +1243,8 @@ export class RestAPI {
      * `TAKE_PROFIT_LIMIT` | `timeInForce`, `quantity`, `price`, `stopPrice` or `trailingDelta` |
      * `LIMIT_MAKER` | `quantity`, `price`| This is a `LIMIT` order that will be rejected if the order immediately matches and trades as a taker. <br/> This is also known as a POST-ONLY order.
      *
-     *
      * Notes on using parameters for Pegged Orders:
+     *
      * These parameters are allowed for `LIMIT`, `LIMIT_MAKER`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_LIMIT` orders.
      * If `pegPriceType` is specified, `price` becomes optional. Otherwise, it is still mandatory.
      * `pegPriceType=PRIMARY_PEG` means the primary peg, that is the best price on the same side of the order book as your order.
@@ -1240,6 +1285,9 @@ export class RestAPI {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Order Amend Keep Priority (TRADE)
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
@@ -1440,7 +1488,9 @@ export class RestAPI {
      * </tbody>
      * </table>
      *
+     * Response Notes:
      **Notes:**
+     * - The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      * - The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
      *
      * @summary Cancel an Existing Order and Send a New Order (TRADE)
@@ -1494,7 +1544,7 @@ export class RestAPI {
     }
 
     /**
-     * Place an [OPO](/products/spot/faqs/opo).
+     * Place an OPO.
      *
      * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS`` filter and `MAX_NUM_ORDERS`` filter.
      *
@@ -1506,6 +1556,9 @@ export class RestAPI {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary New Order List - OPO (TRADE)
      * @param {OrderListOpoRequest} requestParameters Request parameters.
@@ -1521,7 +1574,7 @@ export class RestAPI {
     }
 
     /**
-     * Place an [OPOCO](/products/spot/faqs/opo).
+     * Place an OPOCO.
      *
      * Weight(IP): 1
      *
@@ -1531,6 +1584,9 @@ export class RestAPI {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary New Order List - OPOCO (TRADE)
      * @param {OrderListOpocoRequest} requestParameters Request parameters.
@@ -1575,6 +1631,9 @@ export class RestAPI {
      * |`pendingType` = `STOP_LOSS` or `TAKE_PROFIT`           |`pendingStopPrice` and/or `pendingTrailingDelta`|
      * |`pendingType` = `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`|`pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce`|
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary New Order list - OTO (TRADE)
      * @param {OrderListOtoRequest} requestParameters Request parameters.
      *
@@ -1593,9 +1652,9 @@ export class RestAPI {
      *
      * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
      * - The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-     * - The behavior of the working order is the same as the [OTO](#order-list-oto).
+     * - The behavior of the working order is the same as the OTO.
      * - OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * - The rules of the pending above and pending below follow the same rules as the [Order list OCO](#order-list-oco).
+     * - The rules of the pending above and pending below follow the same rules as the Order list OCO.
      * - OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      *
      * Weight(IP): 1
@@ -1620,6 +1679,9 @@ export class RestAPI {
      * |`pendingBelowType`= `LIMIT_MAKER`                                |`pendingBelowPrice`          |
      * |`pendingBelowType= STOP_LOSS/TAKE_PROFIT`         |`pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`|
      * |`pendingBelowType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT` |`pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce`|
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary New Order list - OTOCO (TRADE)
      * @param {OrderListOtocoRequest} requestParameters Request parameters.
@@ -1697,7 +1759,7 @@ export class RestAPI {
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [SOR FAQ](/products/spot/faqs/sor_faq) to learn more.
+     * Read SOR FAQ to learn more.
      *
      * Weight(IP): 1
      *

@@ -114,6 +114,8 @@ export * from './rate-limit-order-response-inner';
 export * from './rate-limits';
 export * from './reference-price-calculation-response';
 export * from './reference-price-response';
+export * from './reference-price-response1';
+export * from './reference-price-response2';
 export * from './sor-order-response';
 export * from './sor-order-response-fills-inner';
 export * from './sor-order-test-response';

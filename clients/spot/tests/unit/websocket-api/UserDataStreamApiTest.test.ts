@@ -83,7 +83,7 @@ describe('UserDataStreamApi', () => {
                 JSONStringify({
                     id: 'd3df5a22-88ea-4fe0-9f4e-0fcea5d418b7',
                     status: 200,
-                    result: [{ subscriptionId: 0 }],
+                    result: [{ subscriptionId: 0 }, { subscriptionId: 1 }],
                 })
             );
             mockResponse.id = randomString();
@@ -258,7 +258,7 @@ describe('UserDataStreamApi', () => {
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/userDataStream.subscribe'.slice(1),
                         expect.any(Object),
-                        { isSigned: false, withApiKey: false }
+                        { isSigned: false, withApiKey: true }
                     );
                     resolveTest(true);
                 } catch (error) {

@@ -253,7 +253,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * Security Type: MARKET_DATA
          *
          * Notes:
-         * - Data Source: Database
+         **Data Source:** Database
          *
          * @summary Historical Block Trades (MARKET_DATA)
          * @param {string} symbol
@@ -448,6 +448,15 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Notes:
          **Data Source:** Memory
+         *
+         * If the symbol has never had a reference price set, the request is rejected with:
+         *
+         * ```json
+         * {
+         * "code": -2043,
+         * "msg": "This symbol doesn't have a reference price."
+         * }
+         * ```
          *
          * @summary Query Reference Price
          * @param {string} symbol
@@ -1046,7 +1055,7 @@ export interface MarketApiInterface {
      * Security Type: MARKET_DATA
      *
      * Notes:
-     * - Data Source: Database
+     **Data Source:** Database
      *
      * @summary Historical Block Trades (MARKET_DATA)
      * @param {HistoricalBlockTradesRequest} requestParameters Request parameters.
@@ -1124,6 +1133,15 @@ export interface MarketApiInterface {
      *
      * Notes:
      **Data Source:** Memory
+     *
+     * If the symbol has never had a reference price set, the request is rejected with:
+     *
+     * ```json
+     * {
+     * "code": -2043,
+     * "msg": "This symbol doesn't have a reference price."
+     * }
+     * ```
      *
      * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.
@@ -1989,7 +2007,7 @@ export class MarketApi implements MarketApiInterface {
      * Security Type: MARKET_DATA
      *
      * Notes:
-     * - Data Source: Database
+     **Data Source:** Database
      *
      * @summary Historical Block Trades (MARKET_DATA)
      * @param {HistoricalBlockTradesRequest} requestParameters Request parameters.
@@ -2126,6 +2144,15 @@ export class MarketApi implements MarketApiInterface {
      *
      * Notes:
      **Data Source:** Memory
+     *
+     * If the symbol has never had a reference price set, the request is rejected with:
+     *
+     * ```json
+     * {
+     * "code": -2043,
+     * "msg": "This symbol doesn't have a reference price."
+     * }
+     * ```
      *
      * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.

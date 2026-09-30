@@ -14,7 +14,7 @@
  */
 
 /**
- *
+ * Standard commission rates on trades from the order.
  * @export
  * @interface OrderTestResponseResultStandardCommissionForOrder
  */

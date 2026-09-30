@@ -144,7 +144,7 @@ export interface ExecutionReport {
      * @type {string}
      * @memberof ExecutionReport
      */
-    N?: string;
+    N?: string | null;
     /**
      * Transaction time
      * @type {number | bigint}

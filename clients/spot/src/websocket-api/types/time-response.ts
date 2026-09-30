@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TimeResponseResult } from './time-response-result';
@@ -47,8 +47,8 @@ export interface TimeResponse {
     result?: TimeResponseResult;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<PingResponseRateLimitsInner>}
      * @memberof TimeResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<PingResponseRateLimitsInner>;
 }

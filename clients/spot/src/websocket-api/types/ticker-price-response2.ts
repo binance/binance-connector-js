@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { OrderAmendmentsResponseRateLimitsInner } from './order-amendments-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TickerPriceResponse2ResultInner } from './ticker-price-response2-result-inner';
@@ -47,8 +47,8 @@ export interface TickerPriceResponse2 {
     result?: Array<TickerPriceResponse2ResultInner>;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<OrderAmendmentsResponseRateLimitsInner>}
      * @memberof TickerPriceResponse2
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<OrderAmendmentsResponseRateLimitsInner>;
 }

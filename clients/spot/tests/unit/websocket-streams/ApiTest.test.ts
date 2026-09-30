@@ -61,6 +61,8 @@ describe('Api', () => {
                     E: 1672515782136,
                     s: 'BNBBTC',
                     a: 12345,
+                    p: '0.001',
+                    q: '100',
                     f: 100,
                     l: 105,
                     T: 1672515782136,
@@ -91,6 +93,8 @@ describe('Api', () => {
                     E: 1672515782136,
                     s: 'BNBBTC',
                     a: 12345,
+                    p: '0.001',
+                    q: '100',
                     f: 100,
                     l: 105,
                     T: 1672515782136,
@@ -147,6 +151,15 @@ describe('Api', () => {
                         e: '1hTicker',
                         E: 1672515782136,
                         s: 'BNBBTC',
+                        p: '0.0015',
+                        P: '250.00',
+                        o: '0.0010',
+                        h: '0.0025',
+                        l: '0.0010',
+                        c: '0.0025',
+                        w: '0.0018',
+                        v: '10000',
+                        q: '18',
                         O: 0,
                         C: 1675216573749,
                         F: 0,
@@ -178,6 +191,15 @@ describe('Api', () => {
                         e: '1hTicker',
                         E: 1672515782136,
                         s: 'BNBBTC',
+                        p: '0.0015',
+                        P: '250.00',
+                        o: '0.0010',
+                        h: '0.0025',
+                        l: '0.0010',
+                        c: '0.0025',
+                        w: '0.0018',
+                        v: '10000',
+                        q: '18',
                         O: 0,
                         C: 1675216573749,
                         F: 0,
@@ -229,7 +251,19 @@ describe('Api', () => {
             };
 
             const mockResponse = JSONParse(
-                JSONStringify([{ e: '24hrMiniTicker', E: 1672515782136, s: 'BNBBTC' }])
+                JSONStringify([
+                    {
+                        e: '24hrMiniTicker',
+                        E: 1672515782136,
+                        s: 'BNBBTC',
+                        c: '0.0025',
+                        o: '0.0010',
+                        h: '0.0025',
+                        l: '0.0010',
+                        v: '10000',
+                        q: '18',
+                    },
+                ])
             );
 
             mockSubscription(
@@ -248,7 +282,19 @@ describe('Api', () => {
             };
 
             const mockResponse = JSONParse(
-                JSONStringify([{ e: '24hrMiniTicker', E: 1672515782136, s: 'BNBBTC' }])
+                JSONStringify([
+                    {
+                        e: '24hrMiniTicker',
+                        E: 1672515782136,
+                        s: 'BNBBTC',
+                        c: '0.0025',
+                        o: '0.0010',
+                        h: '0.0025',
+                        l: '0.0010',
+                        v: '10000',
+                        q: '18',
+                    },
+                ])
             );
 
             const stream = websocketStreamApi.allMiniTicker(params);
@@ -283,6 +329,7 @@ describe('Api', () => {
                     E: 1693907033000,
                     s: 'BTCUSDT',
                     i: '5m',
+                    w: '25776.86000000',
                     T: 1693907032213,
                 })
             );
@@ -309,6 +356,7 @@ describe('Api', () => {
                     E: 1693907033000,
                     s: 'BTCUSDT',
                     i: '5m',
+                    w: '25776.86000000',
                     T: 1693907032213,
                 })
             );
@@ -439,7 +487,16 @@ describe('Api', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = JSONParse(JSONStringify({ u: 400900217, s: 'BNBUSDT' }));
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    u: 400900217,
+                    s: 'BNBUSDT',
+                    b: '25.35190000',
+                    B: '31.21000000',
+                    a: '25.36520000',
+                    A: '40.66000000',
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@bookTicker'.slice(1), params as unknown as Record<string, BookTickerRequest>)}`,
@@ -457,7 +514,16 @@ describe('Api', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = JSONParse(JSONStringify({ u: 400900217, s: 'BNBUSDT' }));
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    u: 400900217,
+                    s: 'BNBUSDT',
+                    b: '25.35190000',
+                    B: '31.21000000',
+                    a: '25.36520000',
+                    A: '40.66000000',
+                })
+            );
 
             const stream = websocketStreamApi.bookTicker(params);
             const mockCallback = jest.fn(() => {});
@@ -598,8 +664,17 @@ describe('Api', () => {
                         i: '1m',
                         f: 100,
                         L: 200,
+                        o: '0.0010',
+                        c: '0.0020',
+                        h: '0.0025',
+                        l: '0.0015',
+                        v: '1000',
                         n: 100,
                         x: false,
+                        q: '1.0000',
+                        V: '500',
+                        Q: '0.500',
+                        B: '123456',
                     },
                 })
             );
@@ -633,8 +708,17 @@ describe('Api', () => {
                         i: '1m',
                         f: 100,
                         L: 200,
+                        o: '0.0010',
+                        c: '0.0020',
+                        h: '0.0025',
+                        l: '0.0015',
+                        v: '1000',
                         n: 100,
                         x: false,
+                        q: '1.0000',
+                        V: '500',
+                        Q: '0.500',
+                        B: '123456',
                     },
                 })
             );
@@ -712,8 +796,17 @@ describe('Api', () => {
                         i: '1m',
                         f: 100,
                         L: 200,
+                        o: '0.0010',
+                        c: '0.0020',
+                        h: '0.0025',
+                        l: '0.0015',
+                        v: '1000',
                         n: 100,
                         x: false,
+                        q: '1.0000',
+                        V: '500',
+                        Q: '0.500',
+                        B: '123456',
                     },
                 })
             );
@@ -747,8 +840,17 @@ describe('Api', () => {
                         i: '1m',
                         f: 100,
                         L: 200,
+                        o: '0.0010',
+                        c: '0.0020',
+                        h: '0.0025',
+                        l: '0.0015',
+                        v: '1000',
                         n: 100,
                         x: false,
+                        q: '1.0000',
+                        V: '500',
+                        Q: '0.500',
+                        B: '123456',
                     },
                 })
             );
@@ -814,7 +916,17 @@ describe('Api', () => {
             };
 
             const mockResponse = JSONParse(
-                JSONStringify({ e: '24hrMiniTicker', E: 1672515782136, s: 'BNBBTC' })
+                JSONStringify({
+                    e: '24hrMiniTicker',
+                    E: 1672515782136,
+                    s: 'BNBBTC',
+                    c: '0.0025',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    v: '10000',
+                    q: '18',
+                })
             );
 
             mockSubscription(
@@ -834,7 +946,17 @@ describe('Api', () => {
             };
 
             const mockResponse = JSONParse(
-                JSONStringify({ e: '24hrMiniTicker', E: 1672515782136, s: 'BNBBTC' })
+                JSONStringify({
+                    e: '24hrMiniTicker',
+                    E: 1672515782136,
+                    s: 'BNBBTC',
+                    c: '0.0025',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    v: '10000',
+                    q: '18',
+                })
             );
 
             const stream = websocketStreamApi.miniTicker(params);
@@ -1047,6 +1169,15 @@ describe('Api', () => {
                     e: '1hTicker',
                     E: 1672515782136,
                     s: 'BNBBTC',
+                    p: '0.0015',
+                    P: '250.00',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    c: '0.0025',
+                    w: '0.0018',
+                    v: '10000',
+                    q: '18',
                     O: 0,
                     C: 1675216573749,
                     F: 0,
@@ -1077,6 +1208,15 @@ describe('Api', () => {
                     e: '1hTicker',
                     E: 1672515782136,
                     s: 'BNBBTC',
+                    p: '0.0015',
+                    P: '250.00',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    c: '0.0025',
+                    w: '0.0018',
+                    v: '10000',
+                    q: '18',
                     O: 0,
                     C: 1675216573749,
                     F: 0,
@@ -1150,6 +1290,21 @@ describe('Api', () => {
                     e: '24hrTicker',
                     E: 1672515782136,
                     s: 'BNBBTC',
+                    p: '0.0015',
+                    P: '250.00',
+                    w: '0.0018',
+                    x: '0.0009',
+                    c: '0.0025',
+                    Q: '10',
+                    b: '0.0024',
+                    B: '10',
+                    a: '0.0026',
+                    A: '100',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    v: '10000',
+                    q: '18',
                     O: 0,
                     C: 1675216573749,
                     F: 0,
@@ -1179,6 +1334,21 @@ describe('Api', () => {
                     e: '24hrTicker',
                     E: 1672515782136,
                     s: 'BNBBTC',
+                    p: '0.0015',
+                    P: '250.00',
+                    w: '0.0018',
+                    x: '0.0009',
+                    c: '0.0025',
+                    Q: '10',
+                    b: '0.0024',
+                    B: '10',
+                    a: '0.0026',
+                    A: '100',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    v: '10000',
+                    q: '18',
                     O: 0,
                     C: 1675216573749,
                     F: 0,
@@ -1235,6 +1405,8 @@ describe('Api', () => {
                     E: 1672515782136,
                     s: 'BNBBTC',
                     t: 12345,
+                    p: '0.001',
+                    q: '100',
                     T: 1672515782136,
                     m: true,
                     M: true,
@@ -1263,6 +1435,8 @@ describe('Api', () => {
                     E: 1672515782136,
                     s: 'BNBBTC',
                     t: 12345,
+                    p: '0.001',
+                    q: '100',
                     T: 1672515782136,
                     m: true,
                     M: true,

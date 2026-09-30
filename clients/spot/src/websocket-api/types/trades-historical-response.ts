@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { TradesHistoricalResponseRateLimitsInner } from './trades-historical-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TradesHistoricalResponseResultInner } from './trades-historical-response-result-inner';
@@ -47,8 +47,8 @@ export interface TradesHistoricalResponse {
     result?: Array<TradesHistoricalResponseResultInner>;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<TradesHistoricalResponseRateLimitsInner>}
      * @memberof TradesHistoricalResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<TradesHistoricalResponseRateLimitsInner>;
 }

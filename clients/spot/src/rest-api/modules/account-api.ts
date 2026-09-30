@@ -155,6 +155,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * - If `startTime` and/or `endTime` provided, `orderId` is not required.
          * - The time between `startTime` and `endTime` can't be longer than 24 hours.
          *
+         * Response Notes:
+         **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+         *
          * @summary All orders (USER_DATA)
          * @param {string} symbol
          * @param {number | bigint} [orderId]
@@ -266,6 +269,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * - If the symbol is not sent, orders for all symbols will be returned in an array.
          *
+         * Response Notes:
+         **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+         *
          * @summary Current open orders (USER_DATA)
          * @param {string} [symbol]
          * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -309,6 +315,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * - Either `orderId` or `origClientOrderId` must be sent.
          * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
          * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+         *
+         * Response Notes:
+         **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
          *
          * @summary Query order (USER_DATA)
          * @param {string} symbol
@@ -893,6 +902,9 @@ export interface AccountApiInterface {
      * - If `startTime` and/or `endTime` provided, `orderId` is not required.
      * - The time between `startTime` and `endTime` can't be longer than 24 hours.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary All orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      *
@@ -929,6 +941,9 @@ export interface AccountApiInterface {
      *
      * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Current open orders (USER_DATA)
      * @param {GetOpenOrdersRequest} requestParameters Request parameters.
      *
@@ -951,6 +966,9 @@ export interface AccountApiInterface {
      * - Either `orderId` or `origClientOrderId` must be sent.
      * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
      * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Query order (USER_DATA)
      * @param {GetOrderRequest} requestParameters Request parameters.
@@ -1701,6 +1719,9 @@ export class AccountApi implements AccountApiInterface {
      * - If `startTime` and/or `endTime` provided, `orderId` is not required.
      * - The time between `startTime` and `endTime` can't be longer than 24 hours.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary All orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
@@ -1779,6 +1800,9 @@ export class AccountApi implements AccountApiInterface {
      *
      * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Current open orders (USER_DATA)
      * @param {GetOpenOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOpenOrdersResponse>>}
@@ -1818,6 +1842,9 @@ export class AccountApi implements AccountApiInterface {
      * - Either `orderId` or `origClientOrderId` must be sent.
      * - If both `orderId` and `origClientOrderId` are provided, the `orderId` is searched first, then the `origClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
      * - For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Query order (USER_DATA)
      * @param {GetOrderRequest} requestParameters Request parameters.

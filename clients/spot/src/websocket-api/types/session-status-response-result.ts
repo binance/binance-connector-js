@@ -20,13 +20,13 @@
  */
 export interface SessionStatusResponseResult {
     /**
-     *
+     * `null` if the connection is not authenticated.
      * @type {string}
      * @memberof SessionStatusResponseResult
      */
     apiKey?: string;
     /**
-     *
+     * `null` if the connection is not authenticated.
      * @type {number | bigint}
      * @memberof SessionStatusResponseResult
      */

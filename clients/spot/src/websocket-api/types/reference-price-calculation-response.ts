@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ReferencePriceCalculationResponseResult } from './reference-price-calculation-response-result';
@@ -47,8 +47,8 @@ export interface ReferencePriceCalculationResponse {
     result?: ReferencePriceCalculationResponseResult;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<AvgPriceResponseRateLimitsInner>}
      * @memberof ReferencePriceCalculationResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<AvgPriceResponseRateLimitsInner>;
 }

@@ -14,7 +14,7 @@
  */
 
 /**
- *
+ * Discount on standard commissions when paying in BNB.
  * @export
  * @interface OrderTestResponseResultDiscount
  */
@@ -38,7 +38,7 @@ export interface OrderTestResponseResultDiscount {
      */
     discountAsset?: string;
     /**
-     *
+     * Standard commission is reduced by this rate when paying commission in BNB.
      * @type {string}
      * @memberof OrderTestResponseResultDiscount
      */

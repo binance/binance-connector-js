@@ -92,7 +92,24 @@ describe('GeneralApi', () => {
                                 interval: 'MINUTE',
                                 intervalNum: 1,
                                 limit: 6000,
-                                count: 321,
+                            },
+                            {
+                                rateLimitType: 'ORDERS',
+                                interval: 'SECOND',
+                                intervalNum: 10,
+                                limit: 50,
+                            },
+                            {
+                                rateLimitType: 'ORDERS',
+                                interval: 'DAY',
+                                intervalNum: 1,
+                                limit: 160000,
+                            },
+                            {
+                                rateLimitType: 'CONNECTIONS',
+                                interval: 'MINUTE',
+                                intervalNum: 5,
+                                limit: 300,
                             },
                         ],
                         exchangeFilters: [
@@ -109,7 +126,13 @@ describe('GeneralApi', () => {
                                 quoteAssetPrecision: 8,
                                 baseCommissionPrecision: 8,
                                 quoteCommissionPrecision: 8,
-                                orderTypes: ['LIMIT'],
+                                orderTypes: [
+                                    'LIMIT',
+                                    'LIMIT_MAKER',
+                                    'MARKET',
+                                    'STOP_LOSS_LIMIT',
+                                    'TAKE_PROFIT_LIMIT',
+                                ],
                                 icebergAllowed: true,
                                 ocoAllowed: true,
                                 otoAllowed: true,
@@ -124,20 +147,34 @@ describe('GeneralApi', () => {
                                 filters: [
                                     {
                                         filterType: 'PRICE_FILTER',
-                                        priceExponent: 8,
                                         minPrice: '0.00000100',
                                         maxPrice: '100000.00000000',
                                         tickSize: '0.00000100',
                                     },
+                                    {
+                                        filterType: 'LOT_SIZE',
+                                        minQty: '0.00100000',
+                                        maxQty: '100000.00000000',
+                                        stepSize: '0.00100000',
+                                    },
                                 ],
                                 permissions: ['SPOT'],
-                                permissionSets: [['SPOT']],
+                                permissionSets: [['SPOT', 'MARGIN', 'TRD_GRP_004']],
                                 defaultSelfTradePreventionMode: 'NONE',
                                 allowedSelfTradePreventionModes: ['NONE'],
                             },
                         ],
-                        sors: [{ baseAsset: 'BTC', symbols: ['BTCUSDT'] }],
+                        sors: [{ baseAsset: 'BTC', symbols: ['BTCUSDT', 'BTCUSDC'] }],
                     },
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 20,
+                        },
+                    ],
                 })
             );
             mockResponse.id = randomString();
@@ -461,7 +498,7 @@ describe('GeneralApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 321,
+                            count: 1,
                         },
                     ],
                 })
@@ -616,7 +653,7 @@ describe('GeneralApi', () => {
                             interval: 'MINUTE',
                             intervalNum: 1,
                             limit: 6000,
-                            count: 321,
+                            count: 1,
                         },
                     ],
                 })

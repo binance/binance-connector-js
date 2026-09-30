@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TickerBookResponse1Result } from './ticker-book-response1-result';
@@ -47,8 +47,8 @@ export interface TickerBookResponse1 {
     result?: TickerBookResponse1Result;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<AvgPriceResponseRateLimitsInner>}
      * @memberof TickerBookResponse1
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<AvgPriceResponseRateLimitsInner>;
 }

@@ -469,7 +469,10 @@ describe('AccountApi', () => {
                     preventSor: false,
                     updateTime: 123456789,
                     accountType: 'SPOT',
-                    balances: [{ asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' }],
+                    balances: [
+                        { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
+                        { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
+                    ],
                     permissions: ['SPOT'],
                     uid: 354937868,
                 })
@@ -515,7 +518,10 @@ describe('AccountApi', () => {
                     preventSor: false,
                     updateTime: 123456789,
                     accountType: 'SPOT',
-                    balances: [{ asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' }],
+                    balances: [
+                        { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
+                        { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
+                    ],
                     permissions: ['SPOT'],
                     uid: 354937868,
                 })
@@ -846,6 +852,7 @@ describe('AccountApi', () => {
                     symbol: 'LTCBTC',
                     orders: [
                         { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
+                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
                     ],
                 })
             );
@@ -882,6 +889,7 @@ describe('AccountApi', () => {
                     symbol: 'LTCBTC',
                     orders: [
                         { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
+                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
                     ],
                 })
             );
@@ -1420,6 +1428,11 @@ describe('AccountApi', () => {
                                 orderId: 4,
                                 clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
                             },
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 5,
+                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
+                            },
                         ],
                     },
                 ])
@@ -1459,6 +1472,11 @@ describe('AccountApi', () => {
                                 symbol: 'LTCBTC',
                                 orderId: 4,
                                 clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
+                            },
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 5,
+                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
                             },
                         ],
                     },

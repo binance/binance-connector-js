@@ -151,7 +151,7 @@ export interface ExchangeInfoResponseSymbolsInner {
      */
     isMarginTradingAllowed?: boolean;
     /**
-     *
+     * Symbol filters are explained on the \"Filters\" page: All symbol filters are optional.
      * @type {Array<SymbolFilters>}
      * @memberof ExchangeInfoResponseSymbolsInner
      */

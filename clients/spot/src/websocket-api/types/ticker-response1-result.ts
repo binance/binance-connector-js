@@ -98,7 +98,7 @@ export interface TickerResponse1Result {
      */
     firstId?: number | bigint;
     /**
-     *
+     * Last trade ID
      * @type {number | bigint}
      * @memberof TickerResponse1Result
      */

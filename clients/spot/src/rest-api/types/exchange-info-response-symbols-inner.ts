@@ -55,7 +55,7 @@ export interface ExchangeInfoResponseSymbolsInner {
      */
     quoteAsset?: string;
     /**
-     *
+     * will be removed in future api versions (v4+)
      * @type {number | bigint}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
@@ -151,7 +151,7 @@ export interface ExchangeInfoResponseSymbolsInner {
      */
     isMarginTradingAllowed?: boolean;
     /**
-     *
+     * Symbol filters are explained on the \"Filters\" page: All symbol filters are optional.
      * @type {Array<MyFiltersResponseSymbolFiltersInner>}
      * @memberof ExchangeInfoResponseSymbolsInner
      */

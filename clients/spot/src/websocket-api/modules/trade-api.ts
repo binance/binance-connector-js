@@ -47,6 +47,9 @@ export interface TradeApiInterface {
      * Notes:
      **Data Source:** Matching Engine
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Cancel open orders (TRADE)
      * @param {OpenOrdersCancelAllRequest} requestParameters Request parameters.
      *
@@ -62,7 +65,7 @@ export interface TradeApiInterface {
      *
      * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [Order Amend Keep Priority FAQ](/products/spot/faqs/order_amend_keep_priority) to learn more.
+     * Read Order Amend Keep Priority FAQ to learn more.
      *
      * Weight(IP): 4
      *
@@ -72,6 +75,9 @@ export interface TradeApiInterface {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Order Amend Keep Priority (TRADE)
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
@@ -103,6 +109,26 @@ export interface TradeApiInterface {
      *
      * The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
+     **Regarding `cancelRestrictions`**
+     *
+     * If the `cancelRestrictions` value is not any of the supported values, the error will be:
+     * ```json
+     * {
+     * "code": -1145,
+     * "msg": "Invalid cancelRestrictions"
+     * }
+     * ```
+     * If the order did not pass the conditions for `cancelRestrictions`, the error will be:
+     * ```json
+     * {
+     * "code": -2011,
+     * "msg": "Order was not canceled due to cancel restrictions."
+     * }
+     * ```
+     *
      * @summary Cancel order (TRADE)
      * @param {OrderCancelRequest} requestParameters Request parameters.
      *
@@ -116,7 +142,7 @@ export interface TradeApiInterface {
     /**
      * * Cancel an existing order and immediately place a new order instead of the canceled one.
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
-     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.
      *
      * Weight(IP): 1
      *
@@ -127,7 +153,7 @@ export interface TradeApiInterface {
      * Notes:
      **Data Source:** Matching Engine
      *
-     * Similar to the [`order.place`](#order-place) request,
+     * Similar to the `order.place` request,
      * additional mandatory parameters (*) are determined by the new order `type`.
      *
      * Available `cancelReplaceMode` options:
@@ -325,9 +351,12 @@ export interface TradeApiInterface {
      *
      * If new order placement is not attempted, your order count is still incremented.
      *
-     * Like [`order.cancel`](#order-cancel), if you cancel an individual order from an order list, the entire order list is canceled.
+     * Like `order.cancel`, if you cancel an individual order from an order list, the entire order list is canceled.
      *
      * The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Cancel and replace order (TRADE)
      * @param {OrderCancelReplaceRequest} requestParameters Request parameters.
@@ -353,7 +382,7 @@ export interface TradeApiInterface {
      *
      * If both `orderListId` and `listClientOrderId` parameters are provided, the `orderListId` is searched first, then the `listClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
      *
-     * Canceling an individual order with [`order.cancel`](#order-cancel) will cancel the entire order list as well.
+     * Canceling an individual order with `order.cancel` will cancel the entire order list as well.
      *
      * @summary Cancel Order list (TRADE)
      * @param {OrderListCancelRequest} requestParameters Request parameters.
@@ -457,7 +486,7 @@ export interface TradeApiInterface {
     ): Promise<WebsocketApiResponse<OrderListPlaceOcoResponse>>;
 
     /**
-     * Place an [OPO](/products/spot/faqs/opo).
+     * Place an OPO.
      *
      * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
      *
@@ -470,6 +499,9 @@ export interface TradeApiInterface {
      * Notes:
      **Data Source:** Matching Engine
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary OPO (TRADE)
      * @param {OrderListPlaceOpoRequest} requestParameters Request parameters.
      *
@@ -481,7 +513,7 @@ export interface TradeApiInterface {
     ): Promise<WebsocketApiResponse<OrderListPlaceOpoResponse>>;
 
     /**
-     * Place an [OPOCO](/products/spot/faqs/opo).
+     * Place an OPOCO.
      *
      * Weight(IP): 1
      *
@@ -491,6 +523,9 @@ export interface TradeApiInterface {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary OPOCO (TRADE)
      * @param {OrderListPlaceOpocoRequest} requestParameters Request parameters.
@@ -543,6 +578,9 @@ export interface TradeApiInterface {
      * |`pendingType` = `STOP_LOSS` or `TAKE_PROFIT`           |`pendingStopPrice` and/or `pendingTrailingDelta`|
      * |`pendingType` =`STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`|`pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce`|
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Place new Order list - OTO (TRADE)
      * @param {OrderListPlaceOtoRequest} requestParameters Request parameters.
      *
@@ -558,9 +596,9 @@ export interface TradeApiInterface {
      *
      * An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-     * The behavior of the working order is the same as the [OTO](#order-list-place-oto).
+     * The behavior of the working order is the same as the OTO.
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#order-list-place-oco).
+     * The rules of the pending above and pending below follow the same rules as the Order list OCO.
      * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      *
      * Weight(IP): 1
@@ -586,6 +624,9 @@ export interface TradeApiInterface {
      * `pendingBelowType= STOP_LOSS/TAKE_PROFIT`         |`pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`|
      * |`pendingBelowType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT`|`pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce`|
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Place new Order list - OTOCO (TRADE)
      * @param {OrderListPlaceOtocoRequest} requestParameters Request parameters.
      *
@@ -610,7 +651,7 @@ export interface TradeApiInterface {
      * Notes:
      **Data Source:** Matching Engine
      *
-     * <a id="order-type">Certain parameters (*)</a> become mandatory based on the order `type`:
+     * Certain parameters (*) become mandatory based on the order `type`:
      *
      * <table>
      * <thead>
@@ -793,7 +834,6 @@ export interface TradeApiInterface {
      * </tbody>
      * </table>
      *
-     * <a id="pegged-orders-info"></a>
      * Notes on using parameters for Pegged Orders:
      *
      * These parameters are allowed for `LIMIT`, `LIMIT_MAKER`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_LIMIT` orders.
@@ -801,8 +841,6 @@ export interface TradeApiInterface {
      * `pegPriceType=PRIMARY_PEG` means the primary peg, that is the best price on the same side of the order book as your order.
      * `pegPriceType=MARKET_PEG` means the market peg, that is the best price on the opposite side of the order book from your order.
      * Use `pegOffsetType` and `pegOffsetValue` to request a price level other than the best one. These parameters must be specified together.
-     *
-     * <a id="timeInForce"></a>
      *
      * Available `timeInForce` options,
      * setting how long the order should be active before expiration:
@@ -828,7 +866,7 @@ export interface TradeApiInterface {
      * `stopPrice` must be above market price: `STOP_LOSS BUY`, `TAKE_PROFIT SELL`
      * `stopPrice` must be below market price: `STOP_LOSS SELL`, `TAKE_PROFIT BUY`
      *
-     * `MARKET` orders using `quoteOrderQty` follow [`LOT_SIZE`](/products/spot/filters#lot_size) filter rules.
+     * `MARKET` orders using `quoteOrderQty` follow `LOT_SIZE` filter rules.
      *
      * The order will execute a quantity that has notional value as close as possible to requested `quoteOrderQty`.
      *
@@ -873,7 +911,7 @@ export interface TradeApiInterface {
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [SOR FAQ](/products/spot/faqs/sor_faq) to learn more.
+     * Read SOR FAQ to learn more.
      *
      * Weight(IP): 1
      *
@@ -1044,7 +1082,7 @@ export interface OrderCancelRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * Supported values: <br>`ONLY_NEW` - Cancel will succeed if the order status is `NEW`.<br> `ONLY_PARTIALLY_FILLED` - Cancel will succeed if order status is `PARTIALLY_FILLED`.
+     * Supported values: <br>`ONLY_NEW` - Cancel will succeed if the order status is `NEW`.<br> `ONLY_PARTIALLY_FILLED` - Cancel will succeed if order status is `PARTIALLY_FILLED`. For more information please refer to Regarding `cancelRestrictions`.
      * @type {'ONLY_NEW' | 'ONLY_PARTIALLY_FILLED'}
      * @memberof TradeApiOrderCancel
      */
@@ -1078,14 +1116,14 @@ export interface OrderCancelReplaceRequest {
     readonly cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum;
 
     /**
-     * Please see [Enums](/products/spot/enums#side) for supported values.
+     * Please see Enums for supported values.
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly side: OrderCancelReplaceSideEnum;
 
     /**
-     * Please see [Enums](/products/spot/enums#ordertypes) for supported values.
+     * Please see Enums for supported values.
      * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -1120,7 +1158,7 @@ export interface OrderCancelReplaceRequest {
     readonly cancelNewClientOrderId?: string;
 
     /**
-     * Please see [Enums](/products/spot/enums#timeinforce) for supported values.
+     * Please see Enums for supported values.
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -1169,7 +1207,7 @@ export interface OrderCancelReplaceRequest {
     readonly stopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](/products/spot/faqs/trailing-stop-faq)
+     * See Trailing Stop order FAQ
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -1197,14 +1235,14 @@ export interface OrderCancelReplaceRequest {
     readonly strategyType?: number;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/products/spot/enums#stpmodes).
+     * The allowed enums is dependent on what is configured on the symbol. The possible supported values are: STP Modes.
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly selfTradePreventionMode?: OrderCancelReplaceSelfTradePreventionModeEnum;
 
     /**
-     * Supported values: <br>`ONLY_NEW` - Cancel will succeed if the order status is `NEW`.<br> `ONLY_PARTIALLY_FILLED` - Cancel will succeed if order status is `PARTIALLY_FILLED`.
+     * Supported values: <br>`ONLY_NEW` - Cancel will succeed if the order status is `NEW`.<br> `ONLY_PARTIALLY_FILLED` - Cancel will succeed if order status is `PARTIALLY_FILLED`. For more information please refer to Regarding `cancelRestrictions`.
      * @type {'ONLY_NEW' | 'ONLY_PARTIALLY_FILLED'}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -1307,7 +1345,7 @@ export interface OrderListPlaceRequest {
     readonly symbol: string;
 
     /**
-     * Please see [Enums](/products/spot/enums#side) for supported values.
+     * Please see Enums for supported values.
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlace
      */
@@ -1426,14 +1464,14 @@ export interface OrderListPlaceRequest {
     readonly stopStrategyType?: number;
 
     /**
-     * Format of the JSON response. Supported values: [Order Response Type](/products/spot/enums#orderresponsetype)
+     * Format of the JSON response. Supported values: Order Response Type
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiOrderListPlace
      */
     readonly newOrderRespType?: OrderListPlaceNewOrderRespTypeEnum;
 
     /**
-     * The allowed values are dependent on what is configured on the symbol. Supported values: [STP Modes](/products/spot/enums#stpmodes)
+     * The allowed values are dependent on what is configured on the symbol. Supported values: STP Modes
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiOrderListPlace
      */
@@ -1530,7 +1568,7 @@ export interface OrderListPlaceOcoRequest {
     readonly aboveStopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](/products/spot/faqs/trailing-stop-faq)
+     * See Trailing Stop order FAQ
      * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1558,7 +1596,7 @@ export interface OrderListPlaceOcoRequest {
     readonly aboveStrategyType?: number;
 
     /**
-     * `PRIMARY_PEG` or `MARKET_PEG`. See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * `PRIMARY_PEG` or `MARKET_PEG`. See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1607,7 +1645,7 @@ export interface OrderListPlaceOcoRequest {
     readonly belowStopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](/products/spot/faqs/trailing-stop-faq)
+     * See Trailing Stop order FAQ
      * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1635,7 +1673,7 @@ export interface OrderListPlaceOcoRequest {
     readonly belowStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1663,7 +1701,7 @@ export interface OrderListPlaceOcoRequest {
     readonly newOrderRespType?: OrderListPlaceOcoNewOrderRespTypeEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/products/spot/enums#stpmodes)
+     * The allowed enums is dependent on what is configured on the symbol. Supported values: STP Modes
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1697,7 +1735,7 @@ export interface OrderListPlaceOpoRequest {
     readonly workingType: OrderListPlaceOpoWorkingTypeEnum;
 
     /**
-     * Supported values: [Order Side](/products/spot/enums#side)
+     * Supported values: Order Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlaceOpo
      */
@@ -1718,14 +1756,14 @@ export interface OrderListPlaceOpoRequest {
     readonly workingQuantity: number;
 
     /**
-     * Supported values: [Order Types](/products/spot/enums#ordertypes). Note that `MARKET` orders using `quoteOrderQty` are not supported.
+     * Supported values: Order Types. Note that `MARKET` orders using `quoteOrderQty` are not supported.
      * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiOrderListPlaceOpo
      */
     readonly pendingType: OrderListPlaceOpoPendingTypeEnum;
 
     /**
-     * Supported values: [Order Side](/products/spot/enums#side)
+     * Supported values: Order Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlaceOpo
      */
@@ -1746,14 +1784,14 @@ export interface OrderListPlaceOpoRequest {
     readonly listClientOrderId?: string;
 
     /**
-     * Format of the JSON response. Supported values: [Order Response Type](/products/spot/enums#orderresponsetype)
+     * Format of the JSON response. Supported values: Order Response Type
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiOrderListPlaceOpo
      */
     readonly newOrderRespType?: OrderListPlaceOpoNewOrderRespTypeEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/products/spot/enums#stpmodes)
+     * The allowed enums is dependent on what is configured on the symbol. Supported values: STP Modes
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiOrderListPlaceOpo
      */
@@ -1774,7 +1812,7 @@ export interface OrderListPlaceOpoRequest {
     readonly workingIcebergQty?: number;
 
     /**
-     * Supported values: [Time In Force](/products/spot/enums#timeinforce)
+     * Supported values: Time In Force
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListPlaceOpo
      */
@@ -1795,7 +1833,7 @@ export interface OrderListPlaceOpoRequest {
     readonly workingStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOpo
      */
@@ -1851,7 +1889,7 @@ export interface OrderListPlaceOpoRequest {
     readonly pendingIcebergQty?: number;
 
     /**
-     * Supported values: [Time In Force](/products/spot/enums#timeinforce)
+     * Supported values: Time In Force
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListPlaceOpo
      */
@@ -1872,7 +1910,7 @@ export interface OrderListPlaceOpoRequest {
     readonly pendingStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOpo
      */
@@ -1920,7 +1958,7 @@ export interface OrderListPlaceOpocoRequest {
     readonly workingType: OrderListPlaceOpocoWorkingTypeEnum;
 
     /**
-     * Supported values: [Order Side](/products/spot/enums#side)
+     * Supported values: Order Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -1941,7 +1979,7 @@ export interface OrderListPlaceOpocoRequest {
     readonly workingQuantity: number;
 
     /**
-     * Supported values: [Order Side](/products/spot/enums#side)
+     * Supported values: Order Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -1962,21 +2000,21 @@ export interface OrderListPlaceOpocoRequest {
     readonly id?: string;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same `listClientOrderId` is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `workingClientOrderId` and the `pendingClientOrderId`.
+     * Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same `listClientOrderId` is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOpoco
      */
     readonly listClientOrderId?: string;
 
     /**
-     * Format of the JSON response. Supported values: [Order Response Type](/products/spot/enums#orderresponsetype)
+     * Format of the JSON response. Supported values: Order Response Type
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
     readonly newOrderRespType?: OrderListPlaceOpocoNewOrderRespTypeEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/products/spot/enums#stpmodes)
+     * The allowed enums is dependent on what is configured on the symbol. Supported values: STP Modes
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -1997,7 +2035,7 @@ export interface OrderListPlaceOpocoRequest {
     readonly workingIcebergQty?: number;
 
     /**
-     * Supported values: [Time In Force](/products/spot/enums#timeinforce)
+     * Supported values: Time In Force
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -2018,21 +2056,21 @@ export interface OrderListPlaceOpocoRequest {
     readonly workingStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
     readonly workingPegPriceType?: OrderListPlaceOpocoWorkingPegPriceTypeEnum;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRICE_LEVEL'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
     readonly workingPegOffsetType?: OrderListPlaceOpocoWorkingPegOffsetTypeEnum;
 
     /**
-     * Price level for pegging (max: 100). See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * Price level for pegging (max: 100). See Pegged Orders
      * @type {number}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -2060,7 +2098,7 @@ export interface OrderListPlaceOpocoRequest {
     readonly pendingAboveStopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](/products/spot/faqs/trailing-stop-faq)
+     * See Trailing Stop order FAQ
      * @type {number}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -2095,21 +2133,21 @@ export interface OrderListPlaceOpocoRequest {
     readonly pendingAboveStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
     readonly pendingAbovePegPriceType?: OrderListPlaceOpocoPendingAbovePegPriceTypeEnum;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRICE_LEVEL'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
     readonly pendingAbovePegOffsetType?: OrderListPlaceOpocoPendingAbovePegOffsetTypeEnum;
 
     /**
-     * Price level for pegging (max: 100). See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * Price level for pegging (max: 100). See Pegged Orders
      * @type {number}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -2144,7 +2182,7 @@ export interface OrderListPlaceOpocoRequest {
     readonly pendingBelowStopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](/products/spot/faqs/trailing-stop-faq)
+     * See Trailing Stop order FAQ
      * @type {number}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -2158,7 +2196,7 @@ export interface OrderListPlaceOpocoRequest {
     readonly pendingBelowIcebergQty?: number;
 
     /**
-     * Supported values: [Time In Force](/products/spot/enums#timeinforce)
+     * Supported values: Time In Force
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -2179,7 +2217,7 @@ export interface OrderListPlaceOpocoRequest {
     readonly pendingBelowStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -2227,7 +2265,7 @@ export interface OrderListPlaceOtoRequest {
     readonly workingType: OrderListPlaceOtoWorkingTypeEnum;
 
     /**
-     * Supported values: [Order Side](/products/spot/enums#side)
+     * Supported values: Order Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -2248,14 +2286,14 @@ export interface OrderListPlaceOtoRequest {
     readonly workingQuantity: number;
 
     /**
-     * Supported values: [Order Types](/products/spot/enums#ordertypes). Note that `MARKET` orders using `quoteOrderQty` are not supported.
+     * Supported values: Order Types. Note that `MARKET` orders using `quoteOrderQty` are not supported.
      * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiOrderListPlaceOto
      */
     readonly pendingType: OrderListPlaceOtoPendingTypeEnum;
 
     /**
-     * Supported values: [Order Side](/products/spot/enums#side)
+     * Supported values: Order Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -2283,14 +2321,14 @@ export interface OrderListPlaceOtoRequest {
     readonly listClientOrderId?: string;
 
     /**
-     * Format of the JSON response. Supported values: [Order Response Type](/products/spot/enums#orderresponsetype)
+     * Format of the JSON response. Supported values: Order Response Type
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiOrderListPlaceOto
      */
     readonly newOrderRespType?: OrderListPlaceOtoNewOrderRespTypeEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/products/spot/enums#stpmodes)
+     * The allowed enums is dependent on what is configured on the symbol. Supported values: STP Modes
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -2311,7 +2349,7 @@ export interface OrderListPlaceOtoRequest {
     readonly workingIcebergQty?: number;
 
     /**
-     * Supported values: [Time In Force](/products/spot/enums#timeinforce)
+     * Supported values: Time In Force
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -2332,7 +2370,7 @@ export interface OrderListPlaceOtoRequest {
     readonly workingStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -2388,7 +2426,7 @@ export interface OrderListPlaceOtoRequest {
     readonly pendingIcebergQty?: number;
 
     /**
-     * Supported values: [Time In Force](/products/spot/enums#timeinforce)
+     * Supported values: Time In Force
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -2416,7 +2454,7 @@ export interface OrderListPlaceOtoRequest {
     readonly pendingPegOffsetType?: OrderListPlaceOtoPendingPegOffsetTypeEnum;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -2457,7 +2495,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingType: OrderListPlaceOtocoWorkingTypeEnum;
 
     /**
-     * Supported values: [Order Side](/products/spot/enums#side)
+     * Supported values: Order Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2478,7 +2516,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingQuantity: number;
 
     /**
-     * Supported values: [Order Side](/products/spot/enums#side)
+     * Supported values: Order Side
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2506,21 +2544,21 @@ export interface OrderListPlaceOtocoRequest {
     readonly id?: string;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same `listClientOrderId` is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `workingClientOrderId` and the `pendingClientOrderId`.
+     * Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same `listClientOrderId` is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly listClientOrderId?: string;
 
     /**
-     * Format of the JSON response. Supported values: [Order Response Type](/products/spot/enums#orderresponsetype)
+     * Format of the JSON response. Supported values: Order Response Type
      * @type {'ACK' | 'RESULT' | 'FULL'}
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly newOrderRespType?: OrderListPlaceOtocoNewOrderRespTypeEnum;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/products/spot/enums#stpmodes)
+     * The allowed enums is dependent on what is configured on the symbol. Supported values: STP Modes
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2541,7 +2579,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingIcebergQty?: number;
 
     /**
-     * Supported values: [Time In Force](/products/spot/enums#timeinforce)
+     * Supported values: Time In Force
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2562,7 +2600,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2604,7 +2642,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingAboveStopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](/products/spot/faqs/trailing-stop-faq)
+     * See Trailing Stop order FAQ
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2639,7 +2677,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingAboveStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2688,7 +2726,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingBelowStopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](/products/spot/faqs/trailing-stop-faq)
+     * See Trailing Stop order FAQ
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2723,7 +2761,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingBelowStrategyType?: number;
 
     /**
-     * See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -2764,14 +2802,14 @@ export interface OrderPlaceRequest {
     readonly symbol: string;
 
     /**
-     * Please see [Enums](/products/spot/enums#side) for supported values.
+     * Please see Enums for supported values.
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderPlace
      */
     readonly side: OrderPlaceSideEnum;
 
     /**
-     * Please see [Enums](/products/spot/enums#ordertypes) for supported values.
+     * Please see Enums for supported values.
      * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiOrderPlace
      */
@@ -2785,7 +2823,7 @@ export interface OrderPlaceRequest {
     readonly id?: string;
 
     /**
-     * Please see [Enums](/products/spot/enums#timeinforce) for supported values.
+     * Please see Enums for supported values.
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderPlace
      */
@@ -2910,14 +2948,14 @@ export interface OrderTestRequest {
     readonly symbol: string;
 
     /**
-     * Please see [Enums](/products/spot/enums#side) for supported values.
+     * Please see Enums for supported values.
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderTest
      */
     readonly side: OrderTestSideEnum;
 
     /**
-     * Please see [Enums](/products/spot/enums#ordertypes) for supported values.
+     * Please see Enums for supported values.
      * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiOrderTest
      */
@@ -2931,14 +2969,14 @@ export interface OrderTestRequest {
     readonly id?: string;
 
     /**
-     * Default: `false` <br> See [Commissions FAQ](/products/spot/faqs/commission_faq#test-order-diferences) to learn more.
+     * Default: `false` <br> See Commissions FAQ to learn more.
      * @type {boolean}
      * @memberof TradeApiOrderTest
      */
     readonly computeCommissionRates?: boolean;
 
     /**
-     * Please see [Enums](/products/spot/enums#timeinforce) for supported values.
+     * Please see Enums for supported values.
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderTest
      */
@@ -2987,7 +3025,7 @@ export interface OrderTestRequest {
     readonly stopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](/products/spot/faqs/trailing-stop-faq)
+     * See Trailing Stop order FAQ
      * @type {number}
      * @memberof TradeApiOrderTest
      */
@@ -3015,28 +3053,28 @@ export interface OrderTestRequest {
     readonly strategyType?: number;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/products/spot/enums#stpmodes)
+     * The allowed enums is dependent on what is configured on the symbol. Supported values: STP Modes
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiOrderTest
      */
     readonly selfTradePreventionMode?: OrderTestSelfTradePreventionModeEnum;
 
     /**
-     * `PRIMARY_PEG` or `MARKET_PEG`. See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * `PRIMARY_PEG` or `MARKET_PEG`. See Pegged Orders
      * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
      * @memberof TradeApiOrderTest
      */
     readonly pegPriceType?: OrderTestPegPriceTypeEnum;
 
     /**
-     * Price level for pegging (max: 100). See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * Price level for pegging (max: 100). See Pegged Orders
      * @type {number}
      * @memberof TradeApiOrderTest
      */
     readonly pegOffsetValue?: number;
 
     /**
-     * Only `PRICE_LEVEL` is supported. See [Pegged Orders](/products/spot/faqs/pegged_orders)
+     * Only `PRICE_LEVEL` is supported. See Pegged Orders
      * @type {'PRICE_LEVEL'}
      * @memberof TradeApiOrderTest
      */
@@ -3140,7 +3178,7 @@ export interface SorOrderPlaceRequest {
     readonly strategyType?: number;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/products/spot/enums#stpmodes).
+     * The allowed enums is dependent on what is configured on the symbol. The possible supported values are: STP Modes.
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiSorOrderPlace
      */
@@ -3167,14 +3205,14 @@ export interface SorOrderTestRequest {
     readonly symbol: string;
 
     /**
-     * Please see [Enums](/products/spot/enums#side) for supported values.
+     * Please see Enums for supported values.
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiSorOrderTest
      */
     readonly side: SorOrderTestSideEnum;
 
     /**
-     * Please see [Enums](/products/spot/enums#ordertypes) for supported values.
+     * Please see Enums for supported values.
      * @type {'MARKET' | 'LIMIT'}
      * @memberof TradeApiSorOrderTest
      */
@@ -3202,7 +3240,7 @@ export interface SorOrderTestRequest {
     readonly computeCommissionRates?: boolean;
 
     /**
-     * Please see [Enums](/products/spot/enums#timeinforce) for supported values.
+     * Please see Enums for supported values.
      * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiSorOrderTest
      */
@@ -3251,7 +3289,7 @@ export interface SorOrderTestRequest {
     readonly strategyType?: number;
 
     /**
-     * The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/products/spot/enums#stpmodes)
+     * The allowed enums is dependent on what is configured on the symbol. Supported values: STP Modes
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'TRANSFER'}
      * @memberof TradeApiSorOrderTest
      */
@@ -3288,6 +3326,9 @@ export class TradeApi implements TradeApiInterface {
      * Notes:
      **Data Source:** Matching Engine
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Cancel open orders (TRADE)
      * @param {OpenOrdersCancelAllRequest} requestParameters Request parameters.
      * @returns {Promise<OpenOrdersCancelAllResponse>}
@@ -3309,7 +3350,7 @@ export class TradeApi implements TradeApiInterface {
      *
      * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [Order Amend Keep Priority FAQ](/products/spot/faqs/order_amend_keep_priority) to learn more.
+     * Read Order Amend Keep Priority FAQ to learn more.
      *
      * Weight(IP): 4
      *
@@ -3319,6 +3360,9 @@ export class TradeApi implements TradeApiInterface {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Order Amend Keep Priority (TRADE)
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
@@ -3356,6 +3400,26 @@ export class TradeApi implements TradeApiInterface {
      *
      * The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
+     **Regarding `cancelRestrictions`**
+     *
+     * If the `cancelRestrictions` value is not any of the supported values, the error will be:
+     * ```json
+     * {
+     * "code": -1145,
+     * "msg": "Invalid cancelRestrictions"
+     * }
+     * ```
+     * If the order did not pass the conditions for `cancelRestrictions`, the error will be:
+     * ```json
+     * {
+     * "code": -2011,
+     * "msg": "Order was not canceled due to cancel restrictions."
+     * }
+     * ```
+     *
      * @summary Cancel order (TRADE)
      * @param {OrderCancelRequest} requestParameters Request parameters.
      * @returns {Promise<OrderCancelResponse>}
@@ -3375,7 +3439,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * * Cancel an existing order and immediately place a new order instead of the canceled one.
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
-     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.
      *
      * Weight(IP): 1
      *
@@ -3386,7 +3450,7 @@ export class TradeApi implements TradeApiInterface {
      * Notes:
      **Data Source:** Matching Engine
      *
-     * Similar to the [`order.place`](#order-place) request,
+     * Similar to the `order.place` request,
      * additional mandatory parameters (*) are determined by the new order `type`.
      *
      * Available `cancelReplaceMode` options:
@@ -3584,9 +3648,12 @@ export class TradeApi implements TradeApiInterface {
      *
      * If new order placement is not attempted, your order count is still incremented.
      *
-     * Like [`order.cancel`](#order-cancel), if you cancel an individual order from an order list, the entire order list is canceled.
+     * Like `order.cancel`, if you cancel an individual order from an order list, the entire order list is canceled.
      *
      * The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Cancel and replace order (TRADE)
      * @param {OrderCancelReplaceRequest} requestParameters Request parameters.
@@ -3618,7 +3685,7 @@ export class TradeApi implements TradeApiInterface {
      *
      * If both `orderListId` and `listClientOrderId` parameters are provided, the `orderListId` is searched first, then the `listClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
      *
-     * Canceling an individual order with [`order.cancel`](#order-cancel) will cancel the entire order list as well.
+     * Canceling an individual order with `order.cancel` will cancel the entire order list as well.
      *
      * @summary Cancel Order list (TRADE)
      * @param {OrderListCancelRequest} requestParameters Request parameters.
@@ -3740,7 +3807,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Place an [OPO](/products/spot/faqs/opo).
+     * Place an OPO.
      *
      * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
      *
@@ -3752,6 +3819,9 @@ export class TradeApi implements TradeApiInterface {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary OPO (TRADE)
      * @param {OrderListPlaceOpoRequest} requestParameters Request parameters.
@@ -3770,7 +3840,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Place an [OPOCO](/products/spot/faqs/opo).
+     * Place an OPOCO.
      *
      * Weight(IP): 1
      *
@@ -3780,6 +3850,9 @@ export class TradeApi implements TradeApiInterface {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary OPOCO (TRADE)
      * @param {OrderListPlaceOpocoRequest} requestParameters Request parameters.
@@ -3838,6 +3911,9 @@ export class TradeApi implements TradeApiInterface {
      * |`pendingType` = `STOP_LOSS` or `TAKE_PROFIT`           |`pendingStopPrice` and/or `pendingTrailingDelta`|
      * |`pendingType` =`STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`|`pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce`|
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Place new Order list - OTO (TRADE)
      * @param {OrderListPlaceOtoRequest} requestParameters Request parameters.
      * @returns {Promise<OrderListPlaceOtoResponse>}
@@ -3859,9 +3935,9 @@ export class TradeApi implements TradeApiInterface {
      *
      * An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-     * The behavior of the working order is the same as the [OTO](#order-list-place-oto).
+     * The behavior of the working order is the same as the OTO.
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#order-list-place-oco).
+     * The rules of the pending above and pending below follow the same rules as the Order list OCO.
      * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      *
      * Weight(IP): 1
@@ -3886,6 +3962,9 @@ export class TradeApi implements TradeApiInterface {
      * |`pendingBelowType`= `LIMIT_MAKER`                                |`pendingBelowPrice`          |
      * `pendingBelowType= STOP_LOSS/TAKE_PROFIT`         |`pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`|
      * |`pendingBelowType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT`|`pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce`|
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Place new Order list - OTOCO (TRADE)
      * @param {OrderListPlaceOtocoRequest} requestParameters Request parameters.
@@ -3917,7 +3996,7 @@ export class TradeApi implements TradeApiInterface {
      * Notes:
      **Data Source:** Matching Engine
      *
-     * <a id="order-type">Certain parameters (*)</a> become mandatory based on the order `type`:
+     * Certain parameters (*) become mandatory based on the order `type`:
      *
      * <table>
      * <thead>
@@ -4100,7 +4179,6 @@ export class TradeApi implements TradeApiInterface {
      * </tbody>
      * </table>
      *
-     * <a id="pegged-orders-info"></a>
      * Notes on using parameters for Pegged Orders:
      *
      * These parameters are allowed for `LIMIT`, `LIMIT_MAKER`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_LIMIT` orders.
@@ -4108,8 +4186,6 @@ export class TradeApi implements TradeApiInterface {
      * `pegPriceType=PRIMARY_PEG` means the primary peg, that is the best price on the same side of the order book as your order.
      * `pegPriceType=MARKET_PEG` means the market peg, that is the best price on the opposite side of the order book from your order.
      * Use `pegOffsetType` and `pegOffsetValue` to request a price level other than the best one. These parameters must be specified together.
-     *
-     * <a id="timeInForce"></a>
      *
      * Available `timeInForce` options,
      * setting how long the order should be active before expiration:
@@ -4135,7 +4211,7 @@ export class TradeApi implements TradeApiInterface {
      * `stopPrice` must be above market price: `STOP_LOSS BUY`, `TAKE_PROFIT SELL`
      * `stopPrice` must be below market price: `STOP_LOSS SELL`, `TAKE_PROFIT BUY`
      *
-     * `MARKET` orders using `quoteOrderQty` follow [`LOT_SIZE`](/products/spot/filters#lot_size) filter rules.
+     * `MARKET` orders using `quoteOrderQty` follow `LOT_SIZE` filter rules.
      *
      * The order will execute a quantity that has notional value as close as possible to requested `quoteOrderQty`.
      *
@@ -4192,7 +4268,7 @@ export class TradeApi implements TradeApiInterface {
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [SOR FAQ](/products/spot/faqs/sor_faq) to learn more.
+     * Read SOR FAQ to learn more.
      *
      * Weight(IP): 1
      *

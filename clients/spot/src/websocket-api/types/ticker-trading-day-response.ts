@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Spot WebSocket API
@@ -16,39 +17,18 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { TickerResponse2RateLimitsInner } from './ticker-response2-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerTradingDayResponseResultInner } from './ticker-trading-day-response-result-inner';
+import type { TickerTradingDayResponse1 } from './ticker-trading-day-response1';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerTradingDayResponse2 } from './ticker-trading-day-response2';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerTradingDayResponse2ResultInner } from './ticker-trading-day-response2-result-inner';
 
 /**
- *
- * @export
- * @interface TickerTradingDayResponse
+ * @type TickerTradingDayResponse
  */
-export interface TickerTradingDayResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof TickerTradingDayResponse
-     */
-    id?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof TickerTradingDayResponse
-     */
-    status?: number | bigint;
-    /**
-     *
-     * @type {Array<TickerTradingDayResponseResultInner>}
-     * @memberof TickerTradingDayResponse
-     */
-    result?: Array<TickerTradingDayResponseResultInner>;
-    /**
-     *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
-     * @memberof TickerTradingDayResponse
-     */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
-}
+export type TickerTradingDayResponse = TickerTradingDayResponse1 | TickerTradingDayResponse2;

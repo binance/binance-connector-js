@@ -46,13 +46,13 @@ export interface ExchangeInfoResponse {
      */
     serverTime?: number | bigint;
     /**
-     *
+     * Global rate limits. See \"Rate limits\" section.
      * @type {Array<RateLimits>}
      * @memberof ExchangeInfoResponse
      */
     rateLimits?: Array<RateLimits>;
     /**
-     *
+     * Exchange filters are explained on the \"Filters\" page: All exchange filters are optional.
      * @type {Array<ExchangeFilters>}
      * @memberof ExchangeInfoResponse
      */
@@ -64,7 +64,7 @@ export interface ExchangeInfoResponse {
      */
     symbols?: Array<ExchangeInfoResponseSymbolsInner>;
     /**
-     *
+     * Optional field. Present only when SOR is available.
      * @type {Array<ExchangeInfoResponseSorsInner>}
      * @memberof ExchangeInfoResponse
      */

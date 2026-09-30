@@ -161,6 +161,9 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * Security Type: NONE
          *
+         * Notes:
+         **Data Source:** Memory
+         *
          * @summary Test connectivity
          *
          * @throws {RequiredError}
@@ -188,6 +191,9 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight(IP): 1
          *
          * Security Type: NONE
+         *
+         * Notes:
+         **Data Source:** Memory
          *
          * @summary Check server time
          *
@@ -283,6 +289,9 @@ export interface GeneralApiInterface {
      *
      * Security Type: NONE
      *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary Test connectivity
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -295,6 +304,9 @@ export interface GeneralApiInterface {
      * Weight(IP): 1
      *
      * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Check server time
      *
@@ -492,6 +504,9 @@ export class GeneralApi implements GeneralApiInterface {
      *
      * Security Type: NONE
      *
+     * Notes:
+     **Data Source:** Memory
+     *
      * @summary Test connectivity
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -518,6 +533,9 @@ export class GeneralApi implements GeneralApiInterface {
      * Weight(IP): 1
      *
      * Security Type: NONE
+     *
+     * Notes:
+     **Data Source:** Memory
      *
      * @summary Check server time
      * @returns {Promise<RestApiResponse<TimeResponse>>}

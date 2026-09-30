@@ -14,7 +14,7 @@
  */
 
 /**
- *
+ * Format is identical to \"order.cancel\" format. Some fields are optional and are included only for orders that set them.
  * @export
  * @interface OrderCancelReplaceResponseResultCancelResponse
  */
@@ -26,7 +26,7 @@ export interface OrderCancelReplaceResponseResultCancelResponse {
      */
     symbol?: string;
     /**
-     *
+     * cancelOrigClientOrderId from request
      * @type {string}
      * @memberof OrderCancelReplaceResponseResultCancelResponse
      */
@@ -44,7 +44,7 @@ export interface OrderCancelReplaceResponseResultCancelResponse {
      */
     orderListId?: number | bigint;
     /**
-     *
+     * cancelNewClientOrderId from request
      * @type {string}
      * @memberof OrderCancelReplaceResponseResultCancelResponse
      */

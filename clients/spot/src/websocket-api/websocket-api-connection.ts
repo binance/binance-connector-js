@@ -415,8 +415,8 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Retrieves the list of [filters](/products/spot/filters) relevant to an account on a given symbol. This is the only method
-     * that shows if an account has [`MAX_ASSET`](/products/spot/filters#max_asset) filters applied to it.
+     * Retrieves the list of filters relevant to an account on a given symbol. This is the only method
+     * that shows if an account has `MAX_ASSET` filters applied to it.
      *
      * Weight(IP): 40
      *
@@ -481,7 +481,7 @@ export class WebsocketAPIConnection {
      * Security Type: USER_DATA
      *
      * Notes:
-     * Data Source: Memory => Database
+     **Data Source:** Memory => Database
      *
      * Notes:
      * - If `fromId` is specified, return trades with trade ID >= `fromId`.
@@ -545,7 +545,10 @@ export class WebsocketAPIConnection {
      * Security Type: USER_DATA
      *
      * Notes:
-     * Data Source: Memory => Database
+     **Data Source:** Memory => Database
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Current open orders (USER_DATA)
      * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
@@ -628,6 +631,9 @@ export class WebsocketAPIConnection {
      *
      * For some historical orders the `cummulativeQuoteQty` response field may be negative,
      * meaning the data is not available at this time.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Query order (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
@@ -854,7 +860,7 @@ export class WebsocketAPIConnection {
      * Security Type: NONE
      *
      * Notes:
-     * - Data Source: Database
+     **Data Source:** Database
      *
      * @summary Historical Block Trades
      * @param {BlockTradesHistoricalRequest} requestParameters Request parameters.
@@ -877,7 +883,7 @@ export class WebsocketAPIConnection {
      * `<symbol>@depth<levels>`
      * `<symbol>@depth`
      *
-     * You can use `depth` request together with `<symbol>@depth` streams to [maintain a local order book](/products/spot/web-socket-streams#how-to-manage-a-local-order-book-correctly).
+     * You can use `depth` request together with `<symbol>@depth` streams to maintain a local order book.
      *
      * Weight: Adjusted based on the limit:
      *
@@ -911,7 +917,7 @@ export class WebsocketAPIConnection {
      * If you need access to real-time kline updates, please consider using WebSocket Streams:
      * `<symbol>@kline_<interval>`
      *
-     * If you need historical kline data, please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#klines).
+     * If you need historical kline data, please consider using data.binance.vision.
      *
      * Weight(IP): 2
      *
@@ -960,6 +966,15 @@ export class WebsocketAPIConnection {
      *
      * Notes:
      **Data Source:** Memory
+     *
+     * If the symbol has never had a reference price set, the request is rejected with:
+     *
+     * ```json
+     * {
+     * "code": -2043,
+     * "msg": "This symbol doesn't have a reference price."
+     * }
+     * ```
      *
      * @summary Query Reference Price
      * @param {ReferencePriceRequest} requestParameters Request parameters.
@@ -1237,7 +1252,7 @@ export class WebsocketAPIConnection {
      *
      * `<symbol>@aggTrade`
      *
-     * If you need historical aggregate trade data, please consider using [data.binance.vision](https://github.com/binance/binance-public-data/#aggtrades).
+     * If you need historical aggregate trade data, please consider using data.binance.vision.
      *
      * Weight(IP): 4
      *
@@ -1356,6 +1371,9 @@ export class WebsocketAPIConnection {
      * Notes:
      **Data Source:** Matching Engine
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Cancel open orders (TRADE)
      * @param {OpenOrdersCancelAllRequest} requestParameters Request parameters.
      *
@@ -1373,7 +1391,7 @@ export class WebsocketAPIConnection {
      *
      * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [Order Amend Keep Priority FAQ](/products/spot/faqs/order_amend_keep_priority) to learn more.
+     * Read Order Amend Keep Priority FAQ to learn more.
      *
      * Weight(IP): 4
      *
@@ -1383,6 +1401,9 @@ export class WebsocketAPIConnection {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Order Amend Keep Priority (TRADE)
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
@@ -1416,6 +1437,26 @@ export class WebsocketAPIConnection {
      *
      * The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
+     **Regarding `cancelRestrictions`**
+     *
+     * If the `cancelRestrictions` value is not any of the supported values, the error will be:
+     * ```json
+     * {
+     * "code": -1145,
+     * "msg": "Invalid cancelRestrictions"
+     * }
+     * ```
+     * If the order did not pass the conditions for `cancelRestrictions`, the error will be:
+     * ```json
+     * {
+     * "code": -2011,
+     * "msg": "Order was not canceled due to cancel restrictions."
+     * }
+     * ```
+     *
      * @summary Cancel order (TRADE)
      * @param {OrderCancelRequest} requestParameters Request parameters.
      *
@@ -1431,7 +1472,7 @@ export class WebsocketAPIConnection {
     /**
      * * Cancel an existing order and immediately place a new order instead of the canceled one.
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
-     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.
      *
      * Weight(IP): 1
      *
@@ -1442,7 +1483,7 @@ export class WebsocketAPIConnection {
      * Notes:
      **Data Source:** Matching Engine
      *
-     * Similar to the [`order.place`](#order-place) request,
+     * Similar to the `order.place` request,
      * additional mandatory parameters (*) are determined by the new order `type`.
      *
      * Available `cancelReplaceMode` options:
@@ -1640,9 +1681,12 @@ export class WebsocketAPIConnection {
      *
      * If new order placement is not attempted, your order count is still incremented.
      *
-     * Like [`order.cancel`](#order-cancel), if you cancel an individual order from an order list, the entire order list is canceled.
+     * Like `order.cancel`, if you cancel an individual order from an order list, the entire order list is canceled.
      *
      * The performance for canceling an order (single cancel or as part of a cancel-replace) is always better when only `orderId` is sent. Sending `origClientOrderId` or both `orderId` + `origClientOrderId` will be slower.
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Cancel and replace order (TRADE)
      * @param {OrderCancelReplaceRequest} requestParameters Request parameters.
@@ -1670,7 +1714,7 @@ export class WebsocketAPIConnection {
      *
      * If both `orderListId` and `listClientOrderId` parameters are provided, the `orderListId` is searched first, then the `listClientOrderId` from that result is checked against that order. If both conditions are not met the request will be rejected.
      *
-     * Canceling an individual order with [`order.cancel`](#order-cancel) will cancel the entire order list as well.
+     * Canceling an individual order with `order.cancel` will cancel the entire order list as well.
      *
      * @summary Cancel Order list (TRADE)
      * @param {OrderListCancelRequest} requestParameters Request parameters.
@@ -1780,7 +1824,7 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Place an [OPO](/products/spot/faqs/opo).
+     * Place an OPO.
      *
      * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
      *
@@ -1792,6 +1836,9 @@ export class WebsocketAPIConnection {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary OPO (TRADE)
      * @param {OrderListPlaceOpoRequest} requestParameters Request parameters.
@@ -1806,7 +1853,7 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Place an [OPOCO](/products/spot/faqs/opo).
+     * Place an OPOCO.
      *
      * Weight(IP): 1
      *
@@ -1816,6 +1863,9 @@ export class WebsocketAPIConnection {
      *
      * Notes:
      **Data Source:** Matching Engine
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary OPOCO (TRADE)
      * @param {OrderListPlaceOpocoRequest} requestParameters Request parameters.
@@ -1870,6 +1920,9 @@ export class WebsocketAPIConnection {
      * |`pendingType` = `STOP_LOSS` or `TAKE_PROFIT`           |`pendingStopPrice` and/or `pendingTrailingDelta`|
      * |`pendingType` =`STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`|`pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce`|
      *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
+     *
      * @summary Place new Order list - OTO (TRADE)
      * @param {OrderListPlaceOtoRequest} requestParameters Request parameters.
      *
@@ -1887,9 +1940,9 @@ export class WebsocketAPIConnection {
      *
      * An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
-     * The behavior of the working order is the same as the [OTO](#order-list-place-oto).
+     * The behavior of the working order is the same as the OTO.
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#order-list-place-oco).
+     * The rules of the pending above and pending below follow the same rules as the Order list OCO.
      * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      *
      * Weight(IP): 1
@@ -1914,6 +1967,9 @@ export class WebsocketAPIConnection {
      * |`pendingBelowType`= `LIMIT_MAKER`                                |`pendingBelowPrice`          |
      * `pendingBelowType= STOP_LOSS/TAKE_PROFIT`         |`pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`|
      * |`pendingBelowType=STOP_LOSS_LIMIT/TAKE_PROFIT_LIMIT`|`pendingBelowPrice`, `pendingBelowStopPrice` and/or `pendingBelowTrailingDelta`, `pendingBelowTimeInForce`|
+     *
+     * Response Notes:
+     **Note:** The payload above does not show all fields that can appear. Please refer to Conditional fields in Order Responses.
      *
      * @summary Place new Order list - OTOCO (TRADE)
      * @param {OrderListPlaceOtocoRequest} requestParameters Request parameters.
@@ -1941,7 +1997,7 @@ export class WebsocketAPIConnection {
      * Notes:
      **Data Source:** Matching Engine
      *
-     * <a id="order-type">Certain parameters (*)</a> become mandatory based on the order `type`:
+     * Certain parameters (*) become mandatory based on the order `type`:
      *
      * <table>
      * <thead>
@@ -2124,7 +2180,6 @@ export class WebsocketAPIConnection {
      * </tbody>
      * </table>
      *
-     * <a id="pegged-orders-info"></a>
      * Notes on using parameters for Pegged Orders:
      *
      * These parameters are allowed for `LIMIT`, `LIMIT_MAKER`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_LIMIT` orders.
@@ -2132,8 +2187,6 @@ export class WebsocketAPIConnection {
      * `pegPriceType=PRIMARY_PEG` means the primary peg, that is the best price on the same side of the order book as your order.
      * `pegPriceType=MARKET_PEG` means the market peg, that is the best price on the opposite side of the order book from your order.
      * Use `pegOffsetType` and `pegOffsetValue` to request a price level other than the best one. These parameters must be specified together.
-     *
-     * <a id="timeInForce"></a>
      *
      * Available `timeInForce` options,
      * setting how long the order should be active before expiration:
@@ -2159,7 +2212,7 @@ export class WebsocketAPIConnection {
      * `stopPrice` must be above market price: `STOP_LOSS BUY`, `TAKE_PROFIT SELL`
      * `stopPrice` must be below market price: `STOP_LOSS SELL`, `TAKE_PROFIT BUY`
      *
-     * `MARKET` orders using `quoteOrderQty` follow [`LOT_SIZE`](/products/spot/filters#lot_size) filter rules.
+     * `MARKET` orders using `quoteOrderQty` follow `LOT_SIZE` filter rules.
      *
      * The order will execute a quantity that has notional value as close as possible to requested `quoteOrderQty`.
      *
@@ -2208,7 +2261,7 @@ export class WebsocketAPIConnection {
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      *
-     * Read [SOR FAQ](/products/spot/faqs/sor_faq) to learn more.
+     * Read SOR FAQ to learn more.
      *
      * Weight(IP): 1
      *
@@ -2287,17 +2340,17 @@ export class WebsocketAPIConnection {
      * Subscribe to the User Data Stream in the current WebSocket connection.
      *
      **Notes:**
-     * - This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to [`session.logon`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-logon).
-     * - To check the subscription status, use [`session.status`](/catalog/core-trading-spot-trading/api/ws-api/auth#session-status), see the `userDataStream` flag indicating you have have an active subscription.
-     * - User Data Stream events are available in both JSON and [SBE](/products/spot/faqs/sbe_faq) sessions.
-     * - Please refer to [User Data Streams](/products/spot/user-data-stream) for the event format details.
+     * - This method requires an authenticated WebSocket connection using Ed25519 keys. Please refer to `session.logon`.
+     * - To check the subscription status, use `session.status`, see the `userDataStream` flag indicating you have an active subscription.
+     * - User Data Stream events are available in both JSON and SBE sessions.
+     * - Please refer to User Data Streams for the event format details.
      * - For SBE, only SBE schema 2:1 or later is supported.
      *
      * Weight(IP): 2
      *
-     * Security Type: NONE
+     * Security Type: USER_STREAM
      *
-     * @summary Subscribe to User Data Stream
+     * @summary Subscribe to User Data Stream (USER_STREAM)
      * @param {UserDataStreamSubscribeRequest} requestParameters Request parameters.
      * @param {string} [id] Optional custom stream identifier.
      *
@@ -2371,7 +2424,7 @@ export class WebsocketAPIConnection {
      *
      * Weight(IP): 2
      *
-     * @summary WebSocket Unsubscribe from User Data Stream
+     * @summary Unsubscribe from User Data Stream
      * @param {UserDataStreamUnsubscribeRequest} requestParameters Request parameters.
      *
      * @returns Promise<WebsocketApiResponse<UserDataStreamUnsubscribeResponse>>

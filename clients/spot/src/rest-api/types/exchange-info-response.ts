@@ -52,7 +52,7 @@ export interface ExchangeInfoResponse {
      */
     rateLimits?: Array<MyFiltersResponseRateLimitsInner>;
     /**
-     *
+     * Exchange filters are explained on the \"Filters\" page: All exchange filters are optional.
      * @type {Array<MyFiltersResponseExchangeFiltersInner>}
      * @memberof ExchangeInfoResponse
      */
@@ -64,7 +64,7 @@ export interface ExchangeInfoResponse {
      */
     symbols?: Array<ExchangeInfoResponseSymbolsInner>;
     /**
-     * Optional. Present only when SOR is available.
+     * Optional field. Present only when SOR is available.
      * @type {Array<ExchangeInfoResponseSorsInner>}
      * @memberof ExchangeInfoResponse
      */

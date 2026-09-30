@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface ReferencePriceResponseResult
+ * @interface OrderAmendmentsResponseRateLimitsInner
  */
-export interface ReferencePriceResponseResult {
+export interface OrderAmendmentsResponseRateLimitsInner {
     /**
      *
      * @type {string}
-     * @memberof ReferencePriceResponseResult
+     * @memberof OrderAmendmentsResponseRateLimitsInner
      */
-    symbol?: string;
+    rateLimitType?: string;
     /**
      *
      * @type {string}
-     * @memberof ReferencePriceResponseResult
+     * @memberof OrderAmendmentsResponseRateLimitsInner
      */
-    referencePrice?: string;
-    /**
-     * Timestamp when the reference price was valid
-     * @type {number | bigint}
-     * @memberof ReferencePriceResponseResult
-     */
-    timestamp?: number | bigint;
+    interval?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof ReferencePriceResponseResult
+     * @memberof OrderAmendmentsResponseRateLimitsInner
      */
-    code?: number | bigint;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {string}
-     * @memberof ReferencePriceResponseResult
+     * @type {number | bigint}
+     * @memberof OrderAmendmentsResponseRateLimitsInner
      */
-    msg?: string;
+    limit?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof OrderAmendmentsResponseRateLimitsInner
+     */
+    count?: number | bigint;
 }

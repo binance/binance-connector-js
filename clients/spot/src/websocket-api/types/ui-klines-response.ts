@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { KlinesResponseResultInnerInner } from './klines-response-result-inner-inner';
@@ -47,8 +47,8 @@ export interface UiKlinesResponse {
     result?: Array<Array<KlinesResponseResultInnerInner>>;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {Array<AvgPriceResponseRateLimitsInner>}
      * @memberof UiKlinesResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: Array<AvgPriceResponseRateLimitsInner>;
 }

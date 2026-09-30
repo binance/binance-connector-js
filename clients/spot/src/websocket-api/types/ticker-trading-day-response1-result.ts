@@ -16,97 +16,97 @@
 /**
  *
  * @export
- * @interface TickerTradingDayResponseResultInner
+ * @interface TickerTradingDayResponse1Result
  */
-export interface TickerTradingDayResponseResultInner {
+export interface TickerTradingDayResponse1Result {
     /**
      *
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     symbol?: string;
     /**
      * Absolute price change
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     priceChange?: string;
     /**
      * Relative price change in percent
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     priceChangePercent?: string;
     /**
      * quoteVolume / volume
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     weightedAvgPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     openPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     highPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     lowPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     lastPrice?: string;
     /**
      * Volume in base asset
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     volume?: string;
     /**
      * Volume in quote asset
      * @type {string}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     quoteVolume?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     openTime?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     closeTime?: number | bigint;
     /**
      * Trade ID of the first trade in the interval
      * @type {number | bigint}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     firstId?: number | bigint;
     /**
      * Trade ID of the last trade in the interval
      * @type {number | bigint}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     lastId?: number | bigint;
     /**
      * Number of trades in the interval
      * @type {number | bigint}
-     * @memberof TickerTradingDayResponseResultInner
+     * @memberof TickerTradingDayResponse1Result
      */
     count?: number | bigint;
 }

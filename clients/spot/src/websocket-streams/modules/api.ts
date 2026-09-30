@@ -225,8 +225,9 @@ const ApiParamCreator = function () {
          * Supported intervals: See Kline/Candlestick chart intervals
          *
          **UTC+8 timezone offset:**
-         * - Kline intervals open and close in the UTC+8 timezone. For example the 1d klines will open at the beginning of the UTC+8 day, and close at the end of the UTC+8 day.
-         * - Note that E (event time), t (start time) and T (close time) in the payload are Unix timestamps, which are always interpreted in UTC.
+         *
+         * - Kline intervals open and close in the `UTC+8` timezone. For example the `1d` klines will open at the beginning of the `UTC+8` day, and close at the end of the `UTC+8` day.
+         * - Note that `E` (event time), `t` (start time) and `T` (close time) in the payload are Unix timestamps, which are always interpreted in UTC.
          *
          * Update Speed: 1000ms for `1s`, 2000ms for the other intervals
          *
@@ -270,11 +271,11 @@ const ApiParamCreator = function () {
             });
         },
         /**
-         * Top **\<levels\>** bids and asks, pushed every second.
+         * Top **\<levels\>** bids and asks, pushed every second. Valid **\<levels\>** are 5, 10, or 20.
          *
          * Update Speed: 1000ms or 100ms
          *
-         * @summary WebSocket Partial Book Depth Streams
+         * @summary Partial Book Depth Streams
          * @param {string} symbol Symbol to query
          * @param {PartialBookDepthLevelsEnum} levels
          * @param {string} [id] Unique WebSocket request ID.
@@ -323,7 +324,7 @@ const ApiParamCreator = function () {
          * multiple windows.
          *
          **Note:** This stream is different from the `<symbol>@ticker` stream. The open time `"O"` always starts on a minute, while the closing time `"C"` is the current time
-         * of the update. As such, the effective window might be up to 59999ms wider than `<window_size>`.
+         * of the update. As such, the effective window might be up to 59999ms wider than `<windowSize>`.
          *
          * Update Speed: 1000ms
          *
@@ -530,8 +531,9 @@ export interface ApiInterface {
      * Supported intervals: See Kline/Candlestick chart intervals
      *
      **UTC+8 timezone offset:**
-     * - Kline intervals open and close in the UTC+8 timezone. For example the 1d klines will open at the beginning of the UTC+8 day, and close at the end of the UTC+8 day.
-     * - Note that E (event time), t (start time) and T (close time) in the payload are Unix timestamps, which are always interpreted in UTC.
+     *
+     * - Kline intervals open and close in the `UTC+8` timezone. For example the `1d` klines will open at the beginning of the `UTC+8` day, and close at the end of the `UTC+8` day.
+     * - Note that `E` (event time), `t` (start time) and `T` (close time) in the payload are Unix timestamps, which are always interpreted in UTC.
      *
      * Update Speed: 1000ms for `1s`, 2000ms for the other intervals
      *
@@ -560,11 +562,11 @@ export interface ApiInterface {
     miniTicker(requestParameters: MiniTickerRequest): WebsocketStream<MiniTickerResponse>;
 
     /**
-     * Top **\<levels\>** bids and asks, pushed every second.
+     * Top **\<levels\>** bids and asks, pushed every second. Valid **\<levels\>** are 5, 10, or 20.
      *
      * Update Speed: 1000ms or 100ms
      *
-     * @summary WebSocket Partial Book Depth Streams
+     * @summary Partial Book Depth Streams
      * @param {PartialBookDepthRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<PartialBookDepthResponse>}
@@ -596,7 +598,7 @@ export interface ApiInterface {
      * multiple windows.
      *
      **Note:** This stream is different from the `<symbol>@ticker` stream. The open time `"O"` always starts on a minute, while the closing time `"C"` is the current time
-     * of the update. As such, the effective window might be up to 59999ms wider than `<window_size>`.
+     * of the update. As such, the effective window might be up to 59999ms wider than `<windowSize>`.
      *
      * Update Speed: 1000ms
      *
@@ -1218,8 +1220,9 @@ export class Api implements ApiInterface {
      * Supported intervals: See Kline/Candlestick chart intervals
      *
      **UTC+8 timezone offset:**
-     * - Kline intervals open and close in the UTC+8 timezone. For example the 1d klines will open at the beginning of the UTC+8 day, and close at the end of the UTC+8 day.
-     * - Note that E (event time), t (start time) and T (close time) in the payload are Unix timestamps, which are always interpreted in UTC.
+     *
+     * - Kline intervals open and close in the `UTC+8` timezone. For example the `1d` klines will open at the beginning of the `UTC+8` day, and close at the end of the `UTC+8` day.
+     * - Note that `E` (event time), `t` (start time) and `T` (close time) in the payload are Unix timestamps, which are always interpreted in UTC.
      *
      * Update Speed: 1000ms for `1s`, 2000ms for the other intervals
      *
@@ -1273,11 +1276,11 @@ export class Api implements ApiInterface {
     }
 
     /**
-     * Top **\<levels\>** bids and asks, pushed every second.
+     * Top **\<levels\>** bids and asks, pushed every second. Valid **\<levels\>** are 5, 10, or 20.
      *
      * Update Speed: 1000ms or 100ms
      *
-     * @summary WebSocket Partial Book Depth Streams
+     * @summary Partial Book Depth Streams
      * @param {PartialBookDepthRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<PartialBookDepthResponse>}
      * @throws {RequiredError}
@@ -1333,7 +1336,7 @@ export class Api implements ApiInterface {
      * multiple windows.
      *
      **Note:** This stream is different from the `<symbol>@ticker` stream. The open time `"O"` always starts on a minute, while the closing time `"C"` is the current time
-     * of the update. As such, the effective window might be up to 59999ms wider than `<window_size>`.
+     * of the update. As such, the effective window might be up to 59999ms wider than `<windowSize>`.
      *
      * Update Speed: 1000ms
      *

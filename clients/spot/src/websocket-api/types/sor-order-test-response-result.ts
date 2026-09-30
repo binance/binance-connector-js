@@ -20,6 +20,9 @@ import type { OrderTestResponseResultDiscount } from './order-test-response-resu
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OrderTestResponseResultStandardCommissionForOrder } from './order-test-response-result-standard-commission-for-order';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderTestResponseResultTaxCommissionForOrder } from './order-test-response-result-tax-commission-for-order';
 
 /**
  *
@@ -35,10 +38,10 @@ export interface SorOrderTestResponseResult {
     standardCommissionForOrder?: OrderTestResponseResultStandardCommissionForOrder;
     /**
      *
-     * @type {OrderTestResponseResultStandardCommissionForOrder}
+     * @type {OrderTestResponseResultTaxCommissionForOrder}
      * @memberof SorOrderTestResponseResult
      */
-    taxCommissionForOrder?: OrderTestResponseResultStandardCommissionForOrder;
+    taxCommissionForOrder?: OrderTestResponseResultTaxCommissionForOrder;
     /**
      *
      * @type {OrderTestResponseResultDiscount}
