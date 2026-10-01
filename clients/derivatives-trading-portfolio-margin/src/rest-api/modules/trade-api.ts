@@ -1886,7 +1886,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,32}$`
          * @param {NewUmOrderNewOrderRespTypeEnum} [newOrderRespType] `ACK`, `RESULT`, default `ACK`
          * @param {NewUmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-         * @param {NewUmOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`: No STP / `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers
+         * @param {NewUmOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
          * @param {number | bigint} [recvWindow]
          *
@@ -3352,7 +3352,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query user's margin force orders
          *
-         * > **Note:** Portfolio Margin accounts liquidated through the [Risk-Based Liquidation Adjustment](https://www.binance.com/en/support/faq/detail/662268636eb44b71af55c6c6a597d481) flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: [Query Cross Isolated Margin Capital Flow](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-isolated-margin-capital-flow).
+         * > **Note:** Portfolio Margin accounts liquidated through the Risk-Based Liquidation Adjustment flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: Query Cross Isolated Margin Capital Flow.
          *
          * Weight(IP): 1
          *
@@ -4662,7 +4662,7 @@ export interface TradeApiInterface {
     /**
      * Query user's margin force orders
      *
-     * > **Note:** Portfolio Margin accounts liquidated through the [Risk-Based Liquidation Adjustment](https://www.binance.com/en/support/faq/detail/662268636eb44b71af55c6c6a597d481) flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: [Query Cross Isolated Margin Capital Flow](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-isolated-margin-capital-flow).
+     * > **Note:** Portfolio Margin accounts liquidated through the Risk-Based Liquidation Adjustment flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: Query Cross Isolated Margin Capital Flow.
      *
      * Weight(IP): 1
      *
@@ -6115,8 +6115,8 @@ export interface NewUmOrderRequest {
     readonly priceMatch?: NewUmOrderPriceMatchEnum;
 
     /**
-     * `NONE`: No STP / `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
+     * `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers
+     * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewUmOrder
      */
     readonly selfTradePreventionMode?: NewUmOrderSelfTradePreventionModeEnum;
@@ -9273,7 +9273,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Query user's margin force orders
      *
-     * > **Note:** Portfolio Margin accounts liquidated through the [Risk-Based Liquidation Adjustment](https://www.binance.com/en/support/faq/detail/662268636eb44b71af55c6c6a597d481) flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: [Query Cross Isolated Margin Capital Flow](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/account#query-cross-isolated-margin-capital-flow).
+     * > **Note:** Portfolio Margin accounts liquidated through the Risk-Based Liquidation Adjustment flow will not have any order or trade records returned by this endpoint. Query the capital flow endpoint instead: Query Cross Isolated Margin Capital Flow.
      *
      * Weight(IP): 1
      *
@@ -9766,7 +9766,6 @@ export enum NewUmOrderPriceMatchEnum {
 }
 
 export enum NewUmOrderSelfTradePreventionModeEnum {
-    NONE = 'NONE',
     EXPIRE_TAKER = 'EXPIRE_TAKER',
     EXPIRE_BOTH = 'EXPIRE_BOTH',
     EXPIRE_MAKER = 'EXPIRE_MAKER',
