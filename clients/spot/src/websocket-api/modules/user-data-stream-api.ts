@@ -240,7 +240,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
         return this.websocketBase.sendMessage<UserDataStreamSubscribeResponse>(
             '/userDataStream.subscribe'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: true }
+            { isSigned: false, withApiKey: false }
         );
     }
 

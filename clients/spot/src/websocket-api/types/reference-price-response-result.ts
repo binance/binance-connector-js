@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Spot WebSocket API
@@ -17,25 +16,37 @@
 /**
  *
  * @export
- * @interface ReferencePriceResponse2Result
+ * @interface ReferencePriceResponseResult
  */
-export interface ReferencePriceResponse2Result {
+export interface ReferencePriceResponseResult {
     /**
      *
      * @type {string}
-     * @memberof ReferencePriceResponse2Result
+     * @memberof ReferencePriceResponseResult
      */
     symbol?: string;
     /**
      *
-     * @type {any}
-     * @memberof ReferencePriceResponse2Result
+     * @type {string}
+     * @memberof ReferencePriceResponseResult
      */
-    referencePrice?: any;
+    referencePrice?: string | null;
     /**
      * Timestamp when the reference price was valid
      * @type {number | bigint}
-     * @memberof ReferencePriceResponse2Result
+     * @memberof ReferencePriceResponseResult
      */
     timestamp?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof ReferencePriceResponseResult
+     */
+    code?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof ReferencePriceResponseResult
+     */
+    msg?: string;
 }

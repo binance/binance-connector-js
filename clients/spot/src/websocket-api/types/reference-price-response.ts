@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Spot WebSocket API
@@ -20,15 +19,36 @@
 import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReferencePriceResponse1 } from './reference-price-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ReferencePriceResponse2 } from './reference-price-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ReferencePriceResponse2Result } from './reference-price-response2-result';
+import type { ReferencePriceResponseResult } from './reference-price-response-result';
 
 /**
- * @type ReferencePriceResponse
+ *
+ * @export
+ * @interface ReferencePriceResponse
  */
-export type ReferencePriceResponse = ReferencePriceResponse1 | ReferencePriceResponse2;
+export interface ReferencePriceResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof ReferencePriceResponse
+     */
+    id?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof ReferencePriceResponse
+     */
+    status?: number | bigint;
+    /**
+     *
+     * @type {ReferencePriceResponseResult}
+     * @memberof ReferencePriceResponse
+     */
+    result?: ReferencePriceResponseResult;
+    /**
+     *
+     * @type {Array<AvgPriceResponseRateLimitsInner>}
+     * @memberof ReferencePriceResponse
+     */
+    rateLimits?: Array<AvgPriceResponseRateLimitsInner>;
+}
