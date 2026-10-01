@@ -92,6 +92,7 @@ import {
     QueryMarginAccountsOcoRequest,
     QueryMarginAccountsOpenOcoRequest,
     QueryMarginAccountsOpenOrdersRequest,
+    QueryMarginAccountsOpenOtootocoOrderListsRequest,
     QueryMarginAccountsOrderRequest,
     QueryMarginAccountsTradeListRequest,
     QueryPreventedMatchesRequest,
@@ -121,6 +122,7 @@ import type {
     QueryMarginAccountsOcoResponse,
     QueryMarginAccountsOpenOcoResponse,
     QueryMarginAccountsOpenOrdersResponse,
+    QueryMarginAccountsOpenOtootocoOrderListsResponse,
     QueryMarginAccountsOrderResponse,
     QueryMarginAccountsTradeListResponse,
     QueryPreventedMatchesResponse,
@@ -3242,6 +3244,110 @@ describe('TradeApi', () => {
                 .spyOn(client, 'queryMarginAccountsOpenOrders')
                 .mockRejectedValueOnce(mockError);
             await expect(client.queryMarginAccountsOpenOrders()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('queryMarginAccountsOpenOtootocoOrderLists()', () => {
+        it('should execute queryMarginAccountsOpenOtootocoOrderLists() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderListId: 24867326110,
+                        contingencyType: 'OTOCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'web_6324e98951224f96b8a24f312abe5067',
+                        transactionTime: 1790063061632,
+                        symbol: 'ASTERUSDT',
+                        orders: [
+                            {
+                                symbol: 'ASTERUSDT',
+                                orderId: 499470863,
+                                status: 'NEW',
+                                clientOrderId: 'web_f8890794e27b42a1a2ef6b5aef79a949',
+                            },
+                        ],
+                    },
+                ])
+            );
+
+            const spy = jest
+                .spyOn(client, 'queryMarginAccountsOpenOtootocoOrderLists')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<QueryMarginAccountsOpenOtootocoOrderListsResponse>)
+                );
+            const response = await client.queryMarginAccountsOpenOtootocoOrderLists();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute queryMarginAccountsOpenOtootocoOrderLists() successfully with optional parameters', async () => {
+            const params: QueryMarginAccountsOpenOtootocoOrderListsRequest = {
+                symbol: 'ASTERUSDT',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderListId: 24867326110,
+                        contingencyType: 'OTOCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'web_6324e98951224f96b8a24f312abe5067',
+                        transactionTime: 1790063061632,
+                        symbol: 'ASTERUSDT',
+                        orders: [
+                            {
+                                symbol: 'ASTERUSDT',
+                                orderId: 499470863,
+                                status: 'NEW',
+                                clientOrderId: 'web_f8890794e27b42a1a2ef6b5aef79a949',
+                            },
+                        ],
+                    },
+                ])
+            );
+
+            const spy = jest
+                .spyOn(client, 'queryMarginAccountsOpenOtootocoOrderLists')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<QueryMarginAccountsOpenOtootocoOrderListsResponse>)
+                );
+            const response = await client.queryMarginAccountsOpenOtootocoOrderLists(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'queryMarginAccountsOpenOtootocoOrderLists')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.queryMarginAccountsOpenOtootocoOrderLists()).rejects.toThrow(
+                'ResponseError'
+            );
             spy.mockRestore();
         });
     });

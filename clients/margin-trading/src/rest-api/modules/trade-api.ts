@@ -40,6 +40,7 @@ import type {
     QueryMarginAccountsOcoResponse,
     QueryMarginAccountsOpenOcoResponse,
     QueryMarginAccountsOpenOrdersResponse,
+    QueryMarginAccountsOpenOtootocoOrderListsResponse,
     QueryMarginAccountsOrderResponse,
     QueryMarginAccountsTradeListResponse,
     QueryPreventedMatchesResponse,
@@ -55,12 +56,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * **Eligibility**
          *
-         * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 7 or higher.
+         * - Binance Margin offers low-latency trading through a special key, available exclusively to users with VIP level 7 or higher.
          * - If you are VIP level 6 or below, please contact your VIP manager for eligibility criterias.
          * - All new Margin Special Key users are required to read, understand, and agree to the Margin Special Key Supplemental Product Terms at the master account level before creating a Margin Special Key.
          * - Once signed at the master account level, the agreement applies to all sub-accounts. The master account and all sub-accounts (Cross Margin Classic and Portfolio Margin Pro) are authorized to create a Margin Special Key and are subject to the LiquidationLoan policy.
          *
-         * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+         * For more information, please refer to FAQ.
          *
          **Supported Products:**
          *
@@ -78,7 +79,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * HMAC
          * RSA
          *
-         * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
+         * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below FAQ .
          *
          **How to use the Margin Special Key**
          * - Use the below `sapi` endpoint to create your margin special API Key.
@@ -86,7 +87,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - For accessing the Isolated Margin account(s), pass the relevant `symbol` parameter in the API Key creation request.
          * - Use the generated API Key (and Secret key, if applicable) to perform margin trading and listenKey generation via **Spot** REST API (`https://api.binance.com/api/v3/*`) endpoints.
          *
-         * Read [REST API](/products/spot/rest-api#signed-trade-and-user_data-endpoint-security) or [WebSocket API](/products/spot/web-socket-api#request-security) documentation to learn how to use different API keys
+         * Read REST API or WebSocket API documentation to learn how to use different API keys
          *
          * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
          *
@@ -283,7 +284,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * 2. All pre-execution margin checks (including Open-order-loss calculation) will revert to standard mode.
          * 3. A cooldown period (default: 24 hours) will be enforced, during which the account will not be permitted to create new Margin Special API Keys.
          *
-         * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+         * For more information, please refer to FAQ.
          *
          **Preconditions:**
          *
@@ -1177,7 +1178,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Post a new OTOCO order for margin account：
          *
-         *
          * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list
          * comprised of 3 orders.
          *
@@ -1187,7 +1187,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - OTOCO has 2 pending orders (pending above and pending below), forming
          * an OCO pair. The pending orders are only placed on the order book when
          * the working order gets **fully filled**.
-         * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-oco).
+         * - The rules of the pending above and pending below follow the same rules as the Order List OCO.
          * - OTOCOs add **3 orders** against the unfilled order count,
          * `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
          *
@@ -1876,6 +1876,52 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Retrieves all open OTO / OTOCO order lists of the margin account.
+         *
+         *
+         * Notes:
+         * - The returned list contains order lists whose `listOrderStatus` is `EXECUTING`, i.e. at least one order of the list is still open (`NEW` / `PARTIALLY_FILLED`).
+         * - For OTO, the `orders` array contains 2 orders: the working order and the pending order.
+         * - For OTOCO, the `orders` array contains 3 orders: the working order and the two pending orders (pending above / pending below).
+         *
+         * Weight(UID): 10
+         *
+         * Security Type: USER_DATA
+         *
+         * @summary Query Margin Account\'s Open OTO/OTOCO Order Lists (USER_DATA)
+         * @param {string} [symbol]
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        queryMarginAccountsOpenOtootocoOrderLists: async (
+            symbol?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/oto/openOrderList',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Query Margin Account's Order
          *
          * Weight(IP): 10
@@ -2241,12 +2287,12 @@ export interface TradeApiInterface {
     /**
      * **Eligibility**
      *
-     * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 7 or higher.
+     * - Binance Margin offers low-latency trading through a special key, available exclusively to users with VIP level 7 or higher.
      * - If you are VIP level 6 or below, please contact your VIP manager for eligibility criterias.
      * - All new Margin Special Key users are required to read, understand, and agree to the Margin Special Key Supplemental Product Terms at the master account level before creating a Margin Special Key.
      * - Once signed at the master account level, the agreement applies to all sub-accounts. The master account and all sub-accounts (Cross Margin Classic and Portfolio Margin Pro) are authorized to create a Margin Special Key and are subject to the LiquidationLoan policy.
      *
-     * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+     * For more information, please refer to FAQ.
      *
      **Supported Products:**
      *
@@ -2264,7 +2310,7 @@ export interface TradeApiInterface {
      * HMAC
      * RSA
      *
-     * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
+     * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below FAQ .
      *
      **How to use the Margin Special Key**
      * - Use the below `sapi` endpoint to create your margin special API Key.
@@ -2272,7 +2318,7 @@ export interface TradeApiInterface {
      * - For accessing the Isolated Margin account(s), pass the relevant `symbol` parameter in the API Key creation request.
      * - Use the generated API Key (and Secret key, if applicable) to perform margin trading and listenKey generation via **Spot** REST API (`https://api.binance.com/api/v3/*`) endpoints.
      *
-     * Read [REST API](/products/spot/rest-api#signed-trade-and-user_data-endpoint-security) or [WebSocket API](/products/spot/web-socket-api#request-security) documentation to learn how to use different API keys
+     * Read REST API or WebSocket API documentation to learn how to use different API keys
      *
      * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
      *
@@ -2356,7 +2402,7 @@ export interface TradeApiInterface {
      * 2. All pre-execution margin checks (including Open-order-loss calculation) will revert to standard mode.
      * 3. A cooldown period (default: 24 hours) will be enforced, during which the account will not be permitted to create new Margin Special API Keys.
      *
-     * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+     * For more information, please refer to FAQ.
      *
      **Preconditions:**
      *
@@ -2597,7 +2643,6 @@ export interface TradeApiInterface {
     /**
      * Post a new OTOCO order for margin account：
      *
-     *
      * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list
      * comprised of 3 orders.
      *
@@ -2607,7 +2652,7 @@ export interface TradeApiInterface {
      * - OTOCO has 2 pending orders (pending above and pending below), forming
      * an OCO pair. The pending orders are only placed on the order book when
      * the working order gets **fully filled**.
-     * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-oco).
+     * - The rules of the pending above and pending below follow the same rules as the Order List OCO.
      * - OTOCOs add **3 orders** against the unfilled order count,
      * `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
      *
@@ -2799,6 +2844,28 @@ export interface TradeApiInterface {
     queryMarginAccountsOpenOrders(
         requestParameters?: QueryMarginAccountsOpenOrdersRequest
     ): Promise<RestApiResponse<QueryMarginAccountsOpenOrdersResponse>>;
+    /**
+     * Retrieves all open OTO / OTOCO order lists of the margin account.
+     *
+     *
+     * Notes:
+     * - The returned list contains order lists whose `listOrderStatus` is `EXECUTING`, i.e. at least one order of the list is still open (`NEW` / `PARTIALLY_FILLED`).
+     * - For OTO, the `orders` array contains 2 orders: the working order and the pending order.
+     * - For OTOCO, the `orders` array contains 3 orders: the working order and the two pending orders (pending above / pending below).
+     *
+     * Weight(UID): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Margin Account\'s Open OTO/OTOCO Order Lists (USER_DATA)
+     * @param {QueryMarginAccountsOpenOtootocoOrderListsRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    queryMarginAccountsOpenOtootocoOrderLists(
+        requestParameters?: QueryMarginAccountsOpenOtootocoOrderListsRequest
+    ): Promise<RestApiResponse<QueryMarginAccountsOpenOtootocoOrderListsResponse>>;
     /**
      * Query Margin Account's Order
      *
@@ -4259,6 +4326,26 @@ export interface QueryMarginAccountsOpenOrdersRequest {
 }
 
 /**
+ * Request parameters for queryMarginAccountsOpenOtootocoOrderLists operation in TradeApi.
+ * @interface QueryMarginAccountsOpenOtootocoOrderListsRequest
+ */
+export interface QueryMarginAccountsOpenOtootocoOrderListsRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiQueryMarginAccountsOpenOtootocoOrderLists
+     */
+    readonly symbol?: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryMarginAccountsOpenOtootocoOrderLists
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for queryMarginAccountsOrder operation in TradeApi.
  * @interface QueryMarginAccountsOrderRequest
  */
@@ -4485,12 +4572,12 @@ export class TradeApi implements TradeApiInterface {
     /**
      * **Eligibility**
      *
-     * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 7 or higher.
+     * - Binance Margin offers low-latency trading through a special key, available exclusively to users with VIP level 7 or higher.
      * - If you are VIP level 6 or below, please contact your VIP manager for eligibility criterias.
      * - All new Margin Special Key users are required to read, understand, and agree to the Margin Special Key Supplemental Product Terms at the master account level before creating a Margin Special Key.
      * - Once signed at the master account level, the agreement applies to all sub-accounts. The master account and all sub-accounts (Cross Margin Classic and Portfolio Margin Pro) are authorized to create a Margin Special Key and are subject to the LiquidationLoan policy.
      *
-     * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+     * For more information, please refer to FAQ.
      *
      **Supported Products:**
      *
@@ -4508,7 +4595,7 @@ export class TradeApi implements TradeApiInterface {
      * HMAC
      * RSA
      *
-     * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
+     * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below FAQ .
      *
      **How to use the Margin Special Key**
      * - Use the below `sapi` endpoint to create your margin special API Key.
@@ -4516,7 +4603,7 @@ export class TradeApi implements TradeApiInterface {
      * - For accessing the Isolated Margin account(s), pass the relevant `symbol` parameter in the API Key creation request.
      * - Use the generated API Key (and Secret key, if applicable) to perform margin trading and listenKey generation via **Spot** REST API (`https://api.binance.com/api/v3/*`) endpoints.
      *
-     * Read [REST API](/products/spot/rest-api#signed-trade-and-user_data-endpoint-security) or [WebSocket API](/products/spot/web-socket-api#request-security) documentation to learn how to use different API keys
+     * Read REST API or WebSocket API documentation to learn how to use different API keys
      *
      * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
      *
@@ -4659,7 +4746,7 @@ export class TradeApi implements TradeApiInterface {
      * 2. All pre-execution margin checks (including Open-order-loss calculation) will revert to standard mode.
      * 3. A cooldown period (default: 24 hours) will be enforced, during which the account will not be permitted to create new Margin Special API Keys.
      *
-     * For more information, please refer to [FAQ](https://www.binance.com/en/support/faq/detail/3208663e900d4d2e9fec4140e1832f4e).
+     * For more information, please refer to FAQ.
      *
      **Preconditions:**
      *
@@ -5157,7 +5244,6 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Post a new OTOCO order for margin account：
      *
-     *
      * - An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list
      * comprised of 3 orders.
      *
@@ -5167,7 +5253,7 @@ export class TradeApi implements TradeApiInterface {
      * - OTOCO has 2 pending orders (pending above and pending below), forming
      * an OCO pair. The pending orders are only placed on the order book when
      * the working order gets **fully filled**.
-     * - The rules of the pending above and pending below follow the same rules as the [Order List OCO](https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#margin-account-new-oco).
+     * - The rules of the pending above and pending below follow the same rules as the Order List OCO.
      * - OTOCOs add **3 orders** against the unfilled order count,
      * `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
      *
@@ -5568,6 +5654,46 @@ export class TradeApi implements TradeApiInterface {
                 requestParameters?.recvWindow
             );
         return sendRequest<QueryMarginAccountsOpenOrdersResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Retrieves all open OTO / OTOCO order lists of the margin account.
+     *
+     *
+     * Notes:
+     * - The returned list contains order lists whose `listOrderStatus` is `EXECUTING`, i.e. at least one order of the list is still open (`NEW` / `PARTIALLY_FILLED`).
+     * - For OTO, the `orders` array contains 2 orders: the working order and the pending order.
+     * - For OTOCO, the `orders` array contains 3 orders: the working order and the two pending orders (pending above / pending below).
+     *
+     * Weight(UID): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * @summary Query Margin Account\'s Open OTO/OTOCO Order Lists (USER_DATA)
+     * @param {QueryMarginAccountsOpenOtootocoOrderListsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QueryMarginAccountsOpenOtootocoOrderListsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/trade#query-margin-accounts-open-otootoco-order-lists Binance API Documentation}
+     */
+    public async queryMarginAccountsOpenOtootocoOrderLists(
+        requestParameters: QueryMarginAccountsOpenOtootocoOrderListsRequest = {}
+    ): Promise<RestApiResponse<QueryMarginAccountsOpenOtootocoOrderListsResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.queryMarginAccountsOpenOtootocoOrderLists(
+                requestParameters?.symbol,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<QueryMarginAccountsOpenOtootocoOrderListsResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

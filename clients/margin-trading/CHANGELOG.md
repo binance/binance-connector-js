@@ -1,5 +1,19 @@
 # Changelog
 
+## 13.1.0 - 2026-10-01
+
+### Added (1)
+
+#### REST API
+
+- `queryMarginAccountsOpenOtootocoOrderLists()` (`GET /sapi/v1/margin/oto/openOrderList`)
+
+### Changed (1)
+
+#### REST API
+
+- Added response schema `queryMarginAccountsOpenOtootocoOrderListsResponse`
+
 ## 13.0.6 - 2026-09-11
 
 ### Changed (2)

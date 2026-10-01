@@ -405,7 +405,7 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          *
          * Notes:
          * - If isolatedSymbol is not sent, crossed margin data will be sent.
-         * - `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
+         * - `borrowLimit` is also available from https://www.binance.com/en/margin-fee
          *
          * @summary Query Max Borrow (USER_DATA)
          * @param {string} asset
@@ -594,7 +594,7 @@ export interface BorrowRepayApiInterface {
      *
      * Notes:
      * - If isolatedSymbol is not sent, crossed margin data will be sent.
-     * - `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
+     * - `borrowLimit` is also available from https://www.binance.com/en/margin-fee
      *
      * @summary Query Max Borrow (USER_DATA)
      * @param {QueryMaxBorrowRequest} requestParameters Request parameters.
@@ -1124,7 +1124,7 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
      *
      * Notes:
      * - If isolatedSymbol is not sent, crossed margin data will be sent.
-     * - `borrowLimit` is also available from [https://www.binance.com/en/margin-fee](https://www.binance.com/en/margin-fee)
+     * - `borrowLimit` is also available from https://www.binance.com/en/margin-fee
      *
      * @summary Query Max Borrow (USER_DATA)
      * @param {QueryMaxBorrowRequest} requestParameters Request parameters.

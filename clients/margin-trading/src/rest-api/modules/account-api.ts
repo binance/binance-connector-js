@@ -45,7 +45,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Security Type: USER_DATA
          *
          * Notes:
-         * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
+         * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to the FAQ.
          *
          * @summary Adjust cross margin max leverage (USER_DATA)
          * @param {number | bigint} maxLeverage Can only adjust 3 , 5 or 10，Example: maxLeverage = 5 or 3 for Cross Margin Classic; maxLeverage=10 for Cross Margin Pro 10x leverage or 20x if compliance allows.
@@ -545,7 +545,7 @@ export interface AccountApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
+     * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to the FAQ.
      *
      * @summary Adjust cross margin max leverage (USER_DATA)
      * @param {AdjustCrossMarginMaxLeverageRequest} requestParameters Request parameters.
@@ -1009,7 +1009,7 @@ export class AccountApi implements AccountApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to [the FAQ](https://www.binance.com/en/support/faq/how-to-activate-the-cross-margin-pro-mode-on-binance-e27786da05e743a694b8c625b3bc475d).
+     * - The margin level need higher than the initial risk ratio of adjusted leverage, the initial risk ratio of 3x is 1.5 , the initial risk ratio of 5x is 1.25; The detail conditions on how to switch between Cross Margin Classic and Cross Margin Pro can refer to the FAQ.
      *
      * @summary Adjust cross margin max leverage (USER_DATA)
      * @param {AdjustCrossMarginMaxLeverageRequest} requestParameters Request parameters.
