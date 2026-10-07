@@ -1,7 +1,7 @@
 /**
  * Dual Investment REST API
  *
- * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies. The auto-compound setting is no longer managed via API — it must be toggled by the user in the Binance Web UI.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -17,7 +17,6 @@ import { TradeApi } from './modules/trade-api';
 
 import type { GetDualInvestmentProductListRequest } from './modules/market-data-api';
 import type {
-    ChangeAutoCompoundStatusRequest,
     CheckDualInvestmentAccountsRequest,
     GetDualInvestmentPositionsRequest,
     SubscribeDualInvestmentProductsRequest,
@@ -25,7 +24,6 @@ import type {
 
 import type { GetDualInvestmentProductListResponse } from './types';
 import type {
-    ChangeAutoCompoundStatusResponse,
     CheckDualInvestmentAccountsResponse,
     GetDualInvestmentPositionsResponse,
     SubscribeDualInvestmentProductsResponse,
@@ -111,29 +109,6 @@ export class RestAPI {
         requestParameters: GetDualInvestmentProductListRequest
     ): Promise<RestApiResponse<GetDualInvestmentProductListResponse>> {
         return this.marketDataApi.getDualInvestmentProductList(requestParameters);
-    }
-
-    /**
-     * Change Auto-Compound status
-     *
-     * Weight(IP): 1
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - 15:31 ~ 16:00 UTC+8: This function is disabled.
-     *
-     * @summary Change Auto-Compound status (USER_DATA)
-     * @param {ChangeAutoCompoundStatusRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#change-auto-compound-status Binance API Documentation}
-     */
-    changeAutoCompoundStatus(
-        requestParameters: ChangeAutoCompoundStatusRequest
-    ): Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>> {
-        return this.tradeApi.changeAutoCompoundStatus(requestParameters);
     }
 
     /**

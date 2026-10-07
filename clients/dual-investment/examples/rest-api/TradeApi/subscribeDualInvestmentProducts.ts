@@ -1,8 +1,4 @@
-import {
-    DualInvestment,
-    DualInvestmentRestAPI,
-    DUAL_INVESTMENT_REST_API_PROD_URL,
-} from '../../../src';
+import { DualInvestment, DUAL_INVESTMENT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -17,8 +13,6 @@ async function subscribeDualInvestmentProducts() {
             id: '741590',
             orderId: '8257205859',
             depositAmount: 1,
-            autoCompoundPlan:
-                DualInvestmentRestAPI.SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,7 +1,7 @@
 /**
  * Dual Investment REST API
  *
- * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies. The auto-compound setting is no longer managed via API — it must be toggled by the user in the Binance Web UI.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -19,7 +19,6 @@ import {
     type RequestArgs,
 } from '@binance/common';
 import type {
-    ChangeAutoCompoundStatusResponse,
     CheckDualInvestmentAccountsResponse,
     GetDualInvestmentPositionsResponse,
     SubscribeDualInvestmentProductsResponse,
@@ -30,59 +29,6 @@ import type {
  */
 const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
-        /**
-         * Change Auto-Compound status
-         *
-         * Weight(IP): 1
-         *
-         * Security Type: USER_DATA
-         *
-         * Notes:
-         * - 15:31 ~ 16:00 UTC+8: This function is disabled.
-         *
-         * @summary Change Auto-Compound status (USER_DATA)
-         * @param {string} positionId Get positionId from `/sapi/v1/dci/product/positions`
-         * @param {ChangeAutoCompoundStatusAutoCompoundPlanEnum} autoCompoundPlan `NONE`: switch off the plan, `STANDARD`: standard plan, `ADVANCED`: advanced plan
-         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
-         *
-         * @throws {RequiredError}
-         */
-        changeAutoCompoundStatus: async (
-            positionId: string,
-            autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum,
-            recvWindow?: number | bigint
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'positionId' is not null or undefined
-            assertParamExists('changeAutoCompoundStatus', 'positionId', positionId);
-            // verify required parameter 'autoCompoundPlan' is not null or undefined
-            assertParamExists('changeAutoCompoundStatus', 'autoCompoundPlan', autoCompoundPlan);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-            const localVarBodyParameter: Record<string, unknown> = {};
-            const localVarHeaderParameter: Record<string, unknown> = {};
-
-            if (positionId !== undefined && positionId !== null) {
-                localVarQueryParameter['positionId'] = positionId;
-            }
-            if (autoCompoundPlan !== undefined && autoCompoundPlan !== null) {
-                localVarQueryParameter['autoCompoundPlan'] = autoCompoundPlan;
-            }
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/dci/product/auto_compound/edit-status',
-                method: 'POST',
-                queryParams: localVarQueryParameter,
-                bodyParams: localVarBodyParameter,
-                headerParams: localVarHeaderParameter,
-                timeUnit: _timeUnit,
-            };
-        },
         /**
          * Check Dual Investment accounts
          *
@@ -185,7 +131,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} id get id from `/sapi/v1/dci/product/list`
          * @param {string} orderId get orderId from `/sapi/v1/dci/product/list`
          * @param {number} depositAmount the amount for subscribing
-         * @param {SubscribeDualInvestmentProductsAutoCompoundPlanEnum} autoCompoundPlan `NONE`: switch off the plan, `STANDARD`: standard plan, `ADVANCED`: advanced plan
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
@@ -194,7 +139,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             id: string,
             orderId: string,
             depositAmount: number,
-            autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
@@ -203,12 +147,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('subscribeDualInvestmentProducts', 'orderId', orderId);
             // verify required parameter 'depositAmount' is not null or undefined
             assertParamExists('subscribeDualInvestmentProducts', 'depositAmount', depositAmount);
-            // verify required parameter 'autoCompoundPlan' is not null or undefined
-            assertParamExists(
-                'subscribeDualInvestmentProducts',
-                'autoCompoundPlan',
-                autoCompoundPlan
-            );
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
@@ -222,9 +160,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (depositAmount !== undefined && depositAmount !== null) {
                 localVarQueryParameter['depositAmount'] = depositAmount;
-            }
-            if (autoCompoundPlan !== undefined && autoCompoundPlan !== null) {
-                localVarQueryParameter['autoCompoundPlan'] = autoCompoundPlan;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -250,25 +185,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
  * @interface TradeApi
  */
 export interface TradeApiInterface {
-    /**
-     * Change Auto-Compound status
-     *
-     * Weight(IP): 1
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - 15:31 ~ 16:00 UTC+8: This function is disabled.
-     *
-     * @summary Change Auto-Compound status (USER_DATA)
-     * @param {ChangeAutoCompoundStatusRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApiInterface
-     */
-    changeAutoCompoundStatus(
-        requestParameters: ChangeAutoCompoundStatusRequest
-    ): Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>>;
     /**
      * Check Dual Investment accounts
      *
@@ -322,33 +238,6 @@ export interface TradeApiInterface {
     subscribeDualInvestmentProducts(
         requestParameters: SubscribeDualInvestmentProductsRequest
     ): Promise<RestApiResponse<SubscribeDualInvestmentProductsResponse>>;
-}
-
-/**
- * Request parameters for changeAutoCompoundStatus operation in TradeApi.
- * @interface ChangeAutoCompoundStatusRequest
- */
-export interface ChangeAutoCompoundStatusRequest {
-    /**
-     * Get positionId from `/sapi/v1/dci/product/positions`
-     * @type {string}
-     * @memberof TradeApiChangeAutoCompoundStatus
-     */
-    readonly positionId: string;
-
-    /**
-     * `NONE`: switch off the plan, `STANDARD`: standard plan, `ADVANCED`: advanced plan
-     * @type {'NONE' | 'STANDARD' | 'ADVANCED'}
-     * @memberof TradeApiChangeAutoCompoundStatus
-     */
-    readonly autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum;
-
-    /**
-     * Request validity window in milliseconds
-     * @type {number | bigint}
-     * @memberof TradeApiChangeAutoCompoundStatus
-     */
-    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -428,13 +317,6 @@ export interface SubscribeDualInvestmentProductsRequest {
     readonly depositAmount: number;
 
     /**
-     * `NONE`: switch off the plan, `STANDARD`: standard plan, `ADVANCED`: advanced plan
-     * @type {'NONE' | 'STANDARD' | 'ADVANCED'}
-     * @memberof TradeApiSubscribeDualInvestmentProducts
-     */
-    readonly autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum;
-
-    /**
      * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof TradeApiSubscribeDualInvestmentProducts
@@ -453,43 +335,6 @@ export class TradeApi implements TradeApiInterface {
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
         this.localVarAxiosParamCreator = TradeApiAxiosParamCreator(configuration);
-    }
-
-    /**
-     * Change Auto-Compound status
-     *
-     * Weight(IP): 1
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - 15:31 ~ 16:00 UTC+8: This function is disabled.
-     *
-     * @summary Change Auto-Compound status (USER_DATA)
-     * @param {ChangeAutoCompoundStatusRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-dual-investment/api/rest-api/trade#change-auto-compound-status Binance API Documentation}
-     */
-    public async changeAutoCompoundStatus(
-        requestParameters: ChangeAutoCompoundStatusRequest
-    ): Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.changeAutoCompoundStatus(
-            requestParameters?.positionId,
-            requestParameters?.autoCompoundPlan,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<ChangeAutoCompoundStatusResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.queryParams,
-            localVarAxiosArgs.bodyParams,
-            localVarAxiosArgs.headerParams,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
     }
 
     /**
@@ -586,7 +431,6 @@ export class TradeApi implements TradeApiInterface {
                 requestParameters?.id,
                 requestParameters?.orderId,
                 requestParameters?.depositAmount,
-                requestParameters?.autoCompoundPlan,
                 requestParameters?.recvWindow
             );
         return sendRequest<SubscribeDualInvestmentProductsResponse>(
@@ -602,12 +446,6 @@ export class TradeApi implements TradeApiInterface {
     }
 }
 
-export enum ChangeAutoCompoundStatusAutoCompoundPlanEnum {
-    NONE = 'NONE',
-    STANDARD = 'STANDARD',
-    ADVANCED = 'ADVANCED',
-}
-
 export enum GetDualInvestmentPositionsStatusEnum {
     PENDING = 'PENDING',
     PURCHASE_SUCCESS = 'PURCHASE_SUCCESS',
@@ -616,10 +454,4 @@ export enum GetDualInvestmentPositionsStatusEnum {
     REFUNDING = 'REFUNDING',
     REFUND_SUCCESS = 'REFUND_SUCCESS',
     SETTLING = 'SETTLING',
-}
-
-export enum SubscribeDualInvestmentProductsAutoCompoundPlanEnum {
-    NONE = 'NONE',
-    STANDARD = 'STANDARD',
-    ADVANCED = 'ADVANCED',
 }

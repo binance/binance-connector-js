@@ -1,7 +1,7 @@
 /**
  * Dual Investment REST API
  *
- * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies.
+ * Query products, request quotes, and subscribe to Advanced Earn Dual Investment strategies. The auto-compound setting is no longer managed via API — it must be toggled by the user in the Binance Web UI.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,20 +15,13 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
+import { TradeApi, GetDualInvestmentPositionsStatusEnum } from '../../../src/rest-api';
 import {
-    TradeApi,
-    ChangeAutoCompoundStatusAutoCompoundPlanEnum,
-    GetDualInvestmentPositionsStatusEnum,
-    SubscribeDualInvestmentProductsAutoCompoundPlanEnum,
-} from '../../../src/rest-api';
-import {
-    ChangeAutoCompoundStatusRequest,
     CheckDualInvestmentAccountsRequest,
     GetDualInvestmentPositionsRequest,
     SubscribeDualInvestmentProductsRequest,
 } from '../../../src/rest-api';
 import type {
-    ChangeAutoCompoundStatusResponse,
     CheckDualInvestmentAccountsResponse,
     GetDualInvestmentPositionsResponse,
     SubscribeDualInvestmentProductsResponse,
@@ -46,105 +39,6 @@ describe('TradeApi', () => {
             basePath: '',
         });
         client = new TradeApi(config);
-    });
-
-    describe('changeAutoCompoundStatus()', () => {
-        it('should execute changeAutoCompoundStatus() successfully with required parameters only', async () => {
-            const params: ChangeAutoCompoundStatusRequest = {
-                positionId: '741590',
-                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({ positionId: '123456789', autoCompoundPlan: 'ADVANCED' })
-            );
-
-            const spy = jest.spyOn(client, 'changeAutoCompoundStatus').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<ChangeAutoCompoundStatusResponse>)
-            );
-            const response = await client.changeAutoCompoundStatus(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute changeAutoCompoundStatus() successfully with optional parameters', async () => {
-            const params: ChangeAutoCompoundStatusRequest = {
-                positionId: '741590',
-                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({ positionId: '123456789', autoCompoundPlan: 'ADVANCED' })
-            );
-
-            const spy = jest.spyOn(client, 'changeAutoCompoundStatus').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<ChangeAutoCompoundStatusResponse>)
-            );
-            const response = await client.changeAutoCompoundStatus(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when positionId is missing', async () => {
-            const _params: ChangeAutoCompoundStatusRequest = {
-                positionId: '741590',
-                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.positionId;
-
-            await expect(client.changeAutoCompoundStatus(params)).rejects.toThrow(
-                'Required parameter positionId was null or undefined when calling changeAutoCompoundStatus.'
-            );
-        });
-
-        it('should throw RequiredError when autoCompoundPlan is missing', async () => {
-            const _params: ChangeAutoCompoundStatusRequest = {
-                positionId: '741590',
-                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.autoCompoundPlan;
-
-            await expect(client.changeAutoCompoundStatus(params)).rejects.toThrow(
-                'Required parameter autoCompoundPlan was null or undefined when calling changeAutoCompoundStatus.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: ChangeAutoCompoundStatusRequest = {
-                positionId: '741590',
-                autoCompoundPlan: ChangeAutoCompoundStatusAutoCompoundPlanEnum.NONE,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'changeAutoCompoundStatus')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.changeAutoCompoundStatus(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
     });
 
     describe('checkDualInvestmentAccounts()', () => {
@@ -318,7 +212,6 @@ describe('TradeApi', () => {
                 id: '741590',
                 orderId: '8257205859',
                 depositAmount: 1,
-                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
 
             mockResponse = JSONParse(
@@ -358,7 +251,6 @@ describe('TradeApi', () => {
                 id: '741590',
                 orderId: '8257205859',
                 depositAmount: 1,
-                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
                 recvWindow: 5000,
             };
 
@@ -399,7 +291,6 @@ describe('TradeApi', () => {
                 id: '741590',
                 orderId: '8257205859',
                 depositAmount: 1,
-                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
             const params = Object.assign({ ..._params });
             delete params?.id;
@@ -414,7 +305,6 @@ describe('TradeApi', () => {
                 id: '741590',
                 orderId: '8257205859',
                 depositAmount: 1,
-                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
             const params = Object.assign({ ..._params });
             delete params?.orderId;
@@ -429,7 +319,6 @@ describe('TradeApi', () => {
                 id: '741590',
                 orderId: '8257205859',
                 depositAmount: 1,
-                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
             const params = Object.assign({ ..._params });
             delete params?.depositAmount;
@@ -439,27 +328,11 @@ describe('TradeApi', () => {
             );
         });
 
-        it('should throw RequiredError when autoCompoundPlan is missing', async () => {
-            const _params: SubscribeDualInvestmentProductsRequest = {
-                id: '741590',
-                orderId: '8257205859',
-                depositAmount: 1,
-                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.autoCompoundPlan;
-
-            await expect(client.subscribeDualInvestmentProducts(params)).rejects.toThrow(
-                'Required parameter autoCompoundPlan was null or undefined when calling subscribeDualInvestmentProducts.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
             const params: SubscribeDualInvestmentProductsRequest = {
                 id: '741590',
                 orderId: '8257205859',
                 depositAmount: 1,
-                autoCompoundPlan: SubscribeDualInvestmentProductsAutoCompoundPlanEnum.NONE,
             };
 
             const errorResponse = {

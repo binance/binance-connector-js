@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.0.0 - 2026-10-07
+
+### Changed (2)
+
+- Deleted parameter `autoCompoundPlan`
+  - affected methods:
+    - `subscribeDualInvestmentProducts()` (`POST /sapi/v1/dci/product/subscribe`)
+- Removed response schema `changeAutoCompoundStatusResponse`
+
+### Removed (1)
+
+- `changeAutoCompoundStatus()` (`POST /sapi/v1/dci/product/auto_compound/edit-status`)
+
 ## 5.0.5 - 2026-10-02
 
 ### Changed (2)
