@@ -36,6 +36,18 @@ export interface GetVIPLoanRepaymentHistoryResponseRowsInner {
      * @type {string}
      * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
      */
+    repayPrincipal?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
+     */
+    repayInterest?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetVIPLoanRepaymentHistoryResponseRowsInner
+     */
     collateralCoin?: string;
     /**
      * Repayment status (`Repaid`, `Repaying`, `Failed`).

@@ -250,6 +250,8 @@ export class RestAPI {
      * - Only master account applications are supported.
      * - `loanAccountId` and `collateralAccountId` must be under the same master account.
      * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
+     * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `USDT-Earn`) to `collateralCoin` together with its Spot asset (e.g. `USDT,USDT-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
      * - Rate limit: 1 request per 2 seconds per account.
      *
      * @summary VIP Loan Borrow (TRADE)
@@ -275,6 +277,8 @@ export class RestAPI {
      * Notes:
      * - **Rate limit:** 2 requests per second per account.
      * - When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
+     * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `BNB-Earn`) to `collateralCoin` together with its Spot asset (e.g. `BNB,BNB-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
      *
      * @summary VIP Loan Fixed Rate Borrow (TRADE)
      * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.

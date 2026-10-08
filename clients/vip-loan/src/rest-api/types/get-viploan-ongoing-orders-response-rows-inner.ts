@@ -56,7 +56,7 @@ export interface GetVIPLoanOngoingOrdersResponseRowsInner {
      */
     collateralAccountId?: string;
     /**
-     *
+     * Includes `<ASSET>-Earn` entries when a Simple Earn Flexible position is pledged.
      * @type {string}
      * @memberof GetVIPLoanOngoingOrdersResponseRowsInner
      */

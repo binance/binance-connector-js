@@ -50,7 +50,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
             };
 
@@ -62,7 +62,7 @@ describe('TradeApi', () => {
                     isFlexibleRate: 'Yes',
                     loanAmount: '100.55',
                     collateralAccountId: '12345678,12345678,12345678',
-                    collateralCoin: 'BUSD,USDT,ETH',
+                    collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                     loanTerm: '30',
                 })
             );
@@ -87,7 +87,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
                 loanTerm: 30,
                 recvWindow: 5000,
@@ -101,7 +101,7 @@ describe('TradeApi', () => {
                     isFlexibleRate: 'Yes',
                     loanAmount: '100.55',
                     collateralAccountId: '12345678,12345678,12345678',
-                    collateralCoin: 'BUSD,USDT,ETH',
+                    collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                     loanTerm: '30',
                 })
             );
@@ -126,7 +126,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
             };
             const params = Object.assign({ ..._params });
@@ -143,7 +143,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
             };
             const params = Object.assign({ ..._params });
@@ -160,7 +160,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
             };
             const params = Object.assign({ ..._params });
@@ -177,7 +177,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
             };
             const params = Object.assign({ ..._params });
@@ -194,7 +194,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
             };
             const params = Object.assign({ ..._params });
@@ -211,7 +211,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
             };
             const params = Object.assign({ ..._params });
@@ -228,7 +228,7 @@ describe('TradeApi', () => {
                 loanCoin: 'BTC',
                 loanAmount: 1.0,
                 collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
+                collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
                 isFlexibleRate: true,
             };
 
@@ -254,7 +254,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
             };
 
@@ -263,7 +263,7 @@ describe('TradeApi', () => {
                     borrowCoin: 'BUSD',
                     borrowAmount: '100.5',
                     actualReceivedAmount: '98.75',
-                    collateralCoin: 'BNB,ETH,BTC',
+                    collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                     collateralAccountId: '12345,67890,13579',
                     borrowInterestRate: '0.01501231',
                     duration: '30Days',
@@ -293,7 +293,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
                 autoRepay: true,
                 recvWindow: 5000,
@@ -304,7 +304,7 @@ describe('TradeApi', () => {
                     borrowCoin: 'BUSD',
                     borrowAmount: '100.5',
                     actualReceivedAmount: '98.75',
-                    collateralCoin: 'BNB,ETH,BTC',
+                    collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                     collateralAccountId: '12345,67890,13579',
                     borrowInterestRate: '0.01501231',
                     duration: '30Days',
@@ -334,7 +334,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
             };
             const params = Object.assign({ ..._params });
@@ -351,7 +351,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
             };
             const params = Object.assign({ ..._params });
@@ -368,7 +368,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
             };
             const params = Object.assign({ ..._params });
@@ -385,7 +385,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
             };
             const params = Object.assign({ ..._params });
@@ -402,7 +402,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
             };
             const params = Object.assign({ ..._params });
@@ -419,7 +419,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
             };
             const params = Object.assign({ ..._params });
@@ -436,7 +436,7 @@ describe('TradeApi', () => {
                 borrowCoin: 'BUSD',
                 loanTerm: 30,
                 borrowUid: 12345678,
-                collateralCoin: 'BNB,ETH,BTC',
+                collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
                 collateralAccountId: '12345,67890,13579',
             };
 

@@ -14,7 +14,7 @@ async function vipLoanBorrow() {
             loanCoin: 'BTC',
             loanAmount: 1.0,
             collateralAccountId: '12345678,12345678,12345678',
-            collateralCoin: 'BUSD,USDT,ETH',
+            collateralCoin: 'BUSD,USDT,USDT-Earn,ETH',
             isFlexibleRate: true,
         });
 

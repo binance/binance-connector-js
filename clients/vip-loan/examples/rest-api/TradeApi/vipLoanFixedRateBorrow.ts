@@ -14,7 +14,7 @@ async function vipLoanFixedRateBorrow() {
             borrowCoin: 'BUSD',
             loanTerm: 30,
             borrowUid: 12345678,
-            collateralCoin: 'BNB,ETH,BTC',
+            collateralCoin: 'BNB,BNB-Earn,ETH,BTC',
             collateralAccountId: '12345,67890,13579',
         });
 

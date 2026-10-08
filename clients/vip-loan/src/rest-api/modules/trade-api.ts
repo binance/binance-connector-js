@@ -42,6 +42,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - Only master account applications are supported.
          * - `loanAccountId` and `collateralAccountId` must be under the same master account.
          * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+         * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
+         * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `USDT-Earn`) to `collateralCoin` together with its Spot asset (e.g. `USDT,USDT-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
          * - Rate limit: 1 request per 2 seconds per account.
          *
          * @summary VIP Loan Borrow (TRADE)
@@ -49,7 +51,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} loanCoin
          * @param {number} loanAmount
          * @param {string} collateralAccountId Collateral account ID(s). Multiple split by `,`
-         * @param {string} collateralCoin
+         * @param {string} collateralCoin Collateral coin(s), multiple separated by `,`. Use `<ASSET>-Earn` for a Simple Earn Flexible position; it must be sent together with its Spot asset, e.g. `USDT,USDT-Earn`.
          * @param {boolean} isFlexibleRate TRUE: flexible rate; FALSE: fixed rate
          * @param {number | bigint} [loanTerm] Mandatory for fixed rate. Optional for flexible rate. e.g. 30/60 days
          * @param {number | bigint} [recvWindow]
@@ -130,13 +132,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Notes:
          * - **Rate limit:** 2 requests per second per account.
          * - When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+         * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
+         * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `BNB-Earn`) to `collateralCoin` together with its Spot asset (e.g. `BNB,BNB-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
          *
          * @summary VIP Loan Fixed Rate Borrow (TRADE)
          * @param {string} supplyRequest Supply request string, positional encoding (no key). Multiple entries separated by `;`, fields separated by `:`, order: `<requestId>:<interestRate>:<amount>`. Example: `1212:0.12:100;3434:0.13:50`
          * @param {string} borrowCoin Borrow coin
          * @param {number | bigint} loanTerm Loan term in days
          * @param {number | bigint} borrowUid Borrow receiving account UID
-         * @param {string} collateralCoin Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
+         * @param {string} collateralCoin Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire Spot balance of the coin; for `<ASSET>-Earn`, the Simple Earn Flexible position of the asset). `<ASSET>-Earn` must be sent together with its Spot asset, e.g. `BNB,BNB-Earn`.
          * @param {string} collateralAccountId Collateral account ID(s), multiple separated by `,`
          * @param {boolean} [autoRepay] Default: `true`. `true`: auto repay at expiration; `false`: auto-convert to flexible (floating rate) at expiration
          * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
@@ -330,6 +334,8 @@ export interface TradeApiInterface {
      * - Only master account applications are supported.
      * - `loanAccountId` and `collateralAccountId` must be under the same master account.
      * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
+     * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `USDT-Earn`) to `collateralCoin` together with its Spot asset (e.g. `USDT,USDT-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
      * - Rate limit: 1 request per 2 seconds per account.
      *
      * @summary VIP Loan Borrow (TRADE)
@@ -351,6 +357,8 @@ export interface TradeApiInterface {
      * Notes:
      * - **Rate limit:** 2 requests per second per account.
      * - When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
+     * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `BNB-Earn`) to `collateralCoin` together with its Spot asset (e.g. `BNB,BNB-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
      *
      * @summary VIP Loan Fixed Rate Borrow (TRADE)
      * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.
@@ -432,7 +440,7 @@ export interface VipLoanBorrowRequest {
     readonly collateralAccountId: string;
 
     /**
-     *
+     * Collateral coin(s), multiple separated by `,`. Use `<ASSET>-Earn` for a Simple Earn Flexible position; it must be sent together with its Spot asset, e.g. `USDT,USDT-Earn`.
      * @type {string}
      * @memberof TradeApiVipLoanBorrow
      */
@@ -494,7 +502,7 @@ export interface VipLoanFixedRateBorrowRequest {
     readonly borrowUid: number | bigint;
 
     /**
-     * Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
+     * Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire Spot balance of the coin; for `<ASSET>-Earn`, the Simple Earn Flexible position of the asset). `<ASSET>-Earn` must be sent together with its Spot asset, e.g. `BNB,BNB-Earn`.
      * @type {string}
      * @memberof TradeApiVipLoanFixedRateBorrow
      */
@@ -601,6 +609,8 @@ export class TradeApi implements TradeApiInterface {
      * - Only master account applications are supported.
      * - `loanAccountId` and `collateralAccountId` must be under the same master account.
      * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
+     * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
+     * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `USDT-Earn`) to `collateralCoin` together with its Spot asset (e.g. `USDT,USDT-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
      * - Rate limit: 1 request per 2 seconds per account.
      *
      * @summary VIP Loan Borrow (TRADE)
@@ -645,6 +655,8 @@ export class TradeApi implements TradeApiInterface {
      * Notes:
      * - **Rate limit:** 2 requests per second per account.
      * - When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
+     * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `BNB-Earn`) to `collateralCoin` together with its Spot asset (e.g. `BNB,BNB-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
      *
      * @summary VIP Loan Fixed Rate Borrow (TRADE)
      * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.
