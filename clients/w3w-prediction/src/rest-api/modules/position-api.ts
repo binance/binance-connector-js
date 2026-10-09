@@ -34,7 +34,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Get the authenticated user's position detail for a specific prediction token.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -84,7 +84,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Query profit and loss records for the authenticated user's prediction positions. When `tokenId` is provided, returns a single record in `pnl`; otherwise returns a list in `pnlList`.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -147,7 +147,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Get the authenticated user's prediction token positions with portfolio summary and tab-based filtering.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -205,7 +205,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Get prediction positions filtered by wallet address and/or market topic ID. Both parameters are optional.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -250,9 +250,12 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
         /**
          * Get the authenticated user's settled (resolved) prediction position history with optional filters.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
+         *
+         * Response Notes:
+         * - There is no separate cancelled, invalid or refunded status. A resolved market pays each outcome by its payout ratio, which can be fractional, for example `0.5` for each of two outcomes. This is not a refund of the purchase cost. Use `finalOutcome`, `isWinner`, `claimAmount` and `redeemStatus` together with your own claim records, and Get Market Detail for `outcomes[].winner`.
          *
          * @summary Query Settled Position History (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
@@ -331,7 +334,7 @@ export interface PositionApiInterface {
     /**
      * Get the authenticated user's position detail for a specific prediction token.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -347,7 +350,7 @@ export interface PositionApiInterface {
     /**
      * Query profit and loss records for the authenticated user's prediction positions. When `tokenId` is provided, returns a single record in `pnl`; otherwise returns a list in `pnlList`.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -361,7 +364,7 @@ export interface PositionApiInterface {
     /**
      * Get the authenticated user's prediction token positions with portfolio summary and tab-based filtering.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -377,7 +380,7 @@ export interface PositionApiInterface {
     /**
      * Get prediction positions filtered by wallet address and/or market topic ID. Both parameters are optional.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -393,9 +396,12 @@ export interface PositionApiInterface {
     /**
      * Get the authenticated user's settled (resolved) prediction position history with optional filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
+     *
+     * Response Notes:
+     * - There is no separate cancelled, invalid or refunded status. A resolved market pays each outcome by its payout ratio, which can be fractional, for example `0.5` for each of two outcomes. This is not a refund of the purchase cost. Use `finalOutcome`, `isWinner`, `claimAmount` and `redeemStatus` together with your own claim records, and Get Market Detail for `outcomes[].winner`.
      *
      * @summary Query Settled Position History (PREDICTION_TRADE)
      * @param {QuerySettledPositionHistoryRequest} requestParameters Request parameters.
@@ -629,7 +635,7 @@ export class PositionApi implements PositionApiInterface {
     /**
      * Get the authenticated user's position detail for a specific prediction token.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -663,7 +669,7 @@ export class PositionApi implements PositionApiInterface {
     /**
      * Query profit and loss records for the authenticated user's prediction positions. When `tokenId` is provided, returns a single record in `pnl`; otherwise returns a list in `pnlList`.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -700,7 +706,7 @@ export class PositionApi implements PositionApiInterface {
     /**
      * Get the authenticated user's prediction token positions with portfolio summary and tab-based filtering.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -736,7 +742,7 @@ export class PositionApi implements PositionApiInterface {
     /**
      * Get prediction positions filtered by wallet address and/or market topic ID. Both parameters are optional.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -770,9 +776,12 @@ export class PositionApi implements PositionApiInterface {
     /**
      * Get the authenticated user's settled (resolved) prediction position history with optional filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
+     *
+     * Response Notes:
+     * - There is no separate cancelled, invalid or refunded status. A resolved market pays each outcome by its payout ratio, which can be fractional, for example `0.5` for each of two outcomes. This is not a refund of the purchase cost. Use `finalOutcome`, `isWinner`, `claimAmount` and `redeemStatus` together with your own claim records, and Get Market Detail for `outcomes[].winner`.
      *
      * @summary Query Settled Position History (PREDICTION_TRADE)
      * @param {QuerySettledPositionHistoryRequest} requestParameters Request parameters.

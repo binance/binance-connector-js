@@ -43,7 +43,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - **Java:** use `HttpURLConnection` and write the raw body bytes directly.
          * - **Go:** use `strings.NewReader` with a hand-built body instead of `url.Values.Encode()`.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -97,22 +97,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get a price quote for a prediction order. The returned `quoteId` must be used in the subsequent Place Order request.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
          * Response Notes:
          * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
-         * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
+         * - **Minimum order amount:** The minimum order amount is set by the server and the upstream market rules and may change, so no fixed value is documented. `BUY` orders are checked by amount (`amountIn`) and `SELL` orders by share quantity, for both `MARKET` and `LIMIT` orders. If the `amountIn` of a `BUY` order is below the minimum, the server returns `-9000` with the message `Your order amount is too small`. A successful quote does not guarantee that the order is accepted or filled, so check the error message and the final order status.
          *
          * @summary Get Quote (PREDICTION_TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} tokenId Prediction outcome token ID
          * @param {GetQuoteSideEnum} side Trade direction. Enum: `BUY`, `SELL`
-         * @param {string} amountIn Input amount in wei (18 decimals). Must be > 0. For `MARKET` orders, minimum is approximately 1.5 USDT (varies by market depth). Example: `1000000000000000000` = 1 USDT
+         * @param {string} amountIn Input amount in wei (18 decimals). Must be > 0. The minimum is set by the server and may change, see the response notes. Example: `1000000000000000000` = 1 USDT
          * @param {GetQuoteOrderTypeEnum} orderType Order type. Enum: `MARKET`, `LIMIT`
          * @param {number} slippageBps Slippage tolerance in basis points. Range 1–10000
-         * @param {string} [priceLimit] Limit price. Required when `orderType=LIMIT`. Must be > 0
+         * @param {string} [priceLimit] Limit price. Required when `orderType=LIMIT`. Must be > 0. A price that is not on the price tick of the market (see `decimalPrecision` in Get Market Detail) is truncated down instead of being rejected, unless the result is 0
          * @param {string} [chainId] Chain ID. Default `56` (BSC)
          * @param {number} [feeRateBps] Fee rate in basis points. Default `200`, range 1–10000
          * @param {GetQuoteFundingSourceEnum} [fundingSource] Funding source. Enum: `MPC`, `CEX`. Default `MPC`
@@ -199,7 +199,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Place a prediction order using a previously obtained quote. Requires SAS authorization.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -212,15 +212,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
          *
          * @summary Place Order (PREDICTION_TRADE)
-         * @param {string} walletAddress User's prediction wallet address
+         * @param {string} walletAddress User's prediction wallet address. Must be a valid address owned by the calling UID — a well-formed address not owned by the UID and a malformed (non-address) value both return the same generic `-3026`. An empty string instead returns `-1102` naming the field.
          * @param {string} walletId Wallet ID
          * @param {string} quoteId Quote ID obtained from `Get Quote`
          * @param {string} timeInForce Must match `orderType`: `FOK` for `MARKET`, `GTC` for `LIMIT`
-         * @param {PlaceOrderAccountTypeEnum} accountType Payment account type. Enum: `SPOT`, `FUNDING`
-         * @param {PlaceOrderOrderTypeEnum} orderType Order type. Enum: `MARKET`, `LIMIT`
+         * @param {PlaceOrderAccountTypeEnum} accountType Payment account type. Enum: `SPOT`, `FUNDING`. This only determines the settlement/reference account — it does not control which balance is debited. See `fundingSource` below for that.
+         * @param {PlaceOrderOrderTypeEnum} orderType Order type. Enum: `MARKET`, `LIMIT` only. Do not combine with `timeInForce` (e.g. `LIMIT_GTC` is not a valid value) — set `timeInForce` separately per the Validation Rules table below.
          * @param {number} slippageBps Slippage tolerance in basis points. Range 1–10000
-         * @param {string} [priceLimit] Limit price. Required when `orderType=LIMIT`. Must be > 0
-         * @param {PlaceOrderFundingSourceEnum} [fundingSource] Funding source. Enum: `MPC`, `CEX`. Default `MPC`
+         * @param {string} [priceLimit] Limit price. Required when `orderType=LIMIT`, must be > 0. Omitting it when `orderType=LIMIT` returns a generic `-3026` (no field name in the message).
+         * @param {PlaceOrderFundingSourceEnum} [fundingSource] Funding source. Enum: `MPC`, `CEX`. Default `MPC`. This determines which balance is actually debited, independent of `accountType`.
          * @param {string} [fundTransferAmount] Auto-transfer amount before order (wei). Must be > 0 if provided
          *
          * @throws {RequiredError}
@@ -302,7 +302,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get active (open) prediction orders for the authenticated user.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -370,7 +370,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get historical prediction orders (all statuses) for the authenticated user, with optional filters.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -464,7 +464,7 @@ export interface TradeApiInterface {
      * - **Java:** use `HttpURLConnection` and write the raw body bytes directly.
      * - **Go:** use `strings.NewReader` with a hand-built body instead of `url.Values.Encode()`.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -484,13 +484,13 @@ export interface TradeApiInterface {
     /**
      * Get a price quote for a prediction order. The returned `quoteId` must be used in the subsequent Place Order request.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
-     * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
+     * - **Minimum order amount:** The minimum order amount is set by the server and the upstream market rules and may change, so no fixed value is documented. `BUY` orders are checked by amount (`amountIn`) and `SELL` orders by share quantity, for both `MARKET` and `LIMIT` orders. If the `amountIn` of a `BUY` order is below the minimum, the server returns `-9000` with the message `Your order amount is too small`. A successful quote does not guarantee that the order is accepted or filled, so check the error message and the final order status.
      *
      * @summary Get Quote (PREDICTION_TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
@@ -502,7 +502,7 @@ export interface TradeApiInterface {
     /**
      * Place a prediction order using a previously obtained quote. Requires SAS authorization.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -524,7 +524,7 @@ export interface TradeApiInterface {
     /**
      * Get active (open) prediction orders for the authenticated user.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -540,7 +540,7 @@ export interface TradeApiInterface {
     /**
      * Get historical prediction orders (all statuses) for the authenticated user, with optional filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -609,7 +609,7 @@ export interface GetQuoteRequest {
     readonly side: GetQuoteSideEnum;
 
     /**
-     * Input amount in wei (18 decimals). Must be > 0. For `MARKET` orders, minimum is approximately 1.5 USDT (varies by market depth). Example: `1000000000000000000` = 1 USDT
+     * Input amount in wei (18 decimals). Must be > 0. The minimum is set by the server and may change, see the response notes. Example: `1000000000000000000` = 1 USDT
      * @type {string}
      * @memberof TradeApiGetQuote
      */
@@ -630,7 +630,7 @@ export interface GetQuoteRequest {
     readonly slippageBps: number;
 
     /**
-     * Limit price. Required when `orderType=LIMIT`. Must be > 0
+     * Limit price. Required when `orderType=LIMIT`. Must be > 0. A price that is not on the price tick of the market (see `decimalPrecision` in Get Market Detail) is truncated down instead of being rejected, unless the result is 0
      * @type {string}
      * @memberof TradeApiGetQuote
      */
@@ -671,7 +671,7 @@ export interface GetQuoteRequest {
  */
 export interface PlaceOrderRequest {
     /**
-     * User's prediction wallet address
+     * User's prediction wallet address. Must be a valid address owned by the calling UID — a well-formed address not owned by the UID and a malformed (non-address) value both return the same generic `-3026`. An empty string instead returns `-1102` naming the field.
      * @type {string}
      * @memberof TradeApiPlaceOrder
      */
@@ -699,14 +699,14 @@ export interface PlaceOrderRequest {
     readonly timeInForce: string;
 
     /**
-     * Payment account type. Enum: `SPOT`, `FUNDING`
+     * Payment account type. Enum: `SPOT`, `FUNDING`. This only determines the settlement/reference account — it does not control which balance is debited. See `fundingSource` below for that.
      * @type {'SPOT' | 'FUNDING'}
      * @memberof TradeApiPlaceOrder
      */
     readonly accountType: PlaceOrderAccountTypeEnum;
 
     /**
-     * Order type. Enum: `MARKET`, `LIMIT`
+     * Order type. Enum: `MARKET`, `LIMIT` only. Do not combine with `timeInForce` (e.g. `LIMIT_GTC` is not a valid value) — set `timeInForce` separately per the Validation Rules table below.
      * @type {'MARKET' | 'LIMIT'}
      * @memberof TradeApiPlaceOrder
      */
@@ -720,14 +720,14 @@ export interface PlaceOrderRequest {
     readonly slippageBps: number;
 
     /**
-     * Limit price. Required when `orderType=LIMIT`. Must be > 0
+     * Limit price. Required when `orderType=LIMIT`, must be > 0. Omitting it when `orderType=LIMIT` returns a generic `-3026` (no field name in the message).
      * @type {string}
      * @memberof TradeApiPlaceOrder
      */
     readonly priceLimit?: string;
 
     /**
-     * Funding source. Enum: `MPC`, `CEX`. Default `MPC`
+     * Funding source. Enum: `MPC`, `CEX`. Default `MPC`. This determines which balance is actually debited, independent of `accountType`.
      * @type {'MPC' | 'CEX'}
      * @memberof TradeApiPlaceOrder
      */
@@ -889,7 +889,7 @@ export class TradeApi implements TradeApiInterface {
      * - **Java:** use `HttpURLConnection` and write the raw body bytes directly.
      * - **Go:** use `strings.NewReader` with a hand-built body instead of `url.Values.Encode()`.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -927,13 +927,13 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get a price quote for a prediction order. The returned `quoteId` must be used in the subsequent Place Order request.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
-     * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
+     * - **Minimum order amount:** The minimum order amount is set by the server and the upstream market rules and may change, so no fixed value is documented. `BUY` orders are checked by amount (`amountIn`) and `SELL` orders by share quantity, for both `MARKET` and `LIMIT` orders. If the `amountIn` of a `BUY` order is below the minimum, the server returns `-9000` with the message `Your order amount is too small`. A successful quote does not guarantee that the order is accepted or filled, so check the error message and the final order status.
      *
      * @summary Get Quote (PREDICTION_TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
@@ -973,7 +973,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Place a prediction order using a previously obtained quote. Requires SAS authorization.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -1022,7 +1022,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get active (open) prediction orders for the authenticated user.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -1060,7 +1060,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get historical prediction orders (all statuses) for the authenticated user, with optional filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *

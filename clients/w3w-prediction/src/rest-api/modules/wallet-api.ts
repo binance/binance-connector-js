@@ -33,7 +33,7 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Get the authenticated user's prediction portfolio overview including active positions count, aggregated PnL, and full position list.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -96,7 +96,7 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Query the current user's daily trading quota limit and remaining allowance for prediction markets.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -129,7 +129,7 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Get all prediction wallets registered for the authenticated user.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -162,7 +162,7 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Get available balances for each payment option that can be used for prediction trading.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -203,7 +203,7 @@ export interface WalletApiInterface {
     /**
      * Get the authenticated user's prediction portfolio overview including active positions count, aggregated PnL, and full position list.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -219,7 +219,7 @@ export interface WalletApiInterface {
     /**
      * Query the current user's daily trading quota limit and remaining allowance for prediction markets.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -235,7 +235,7 @@ export interface WalletApiInterface {
     /**
      * Get all prediction wallets registered for the authenticated user.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -251,7 +251,7 @@ export interface WalletApiInterface {
     /**
      * Get available balances for each payment option that can be used for prediction trading.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -369,7 +369,7 @@ export class WalletApi implements WalletApiInterface {
     /**
      * Get the authenticated user's prediction portfolio overview including active positions count, aggregated PnL, and full position list.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -406,7 +406,7 @@ export class WalletApi implements WalletApiInterface {
     /**
      * Query the current user's daily trading quota limit and remaining allowance for prediction markets.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -438,7 +438,7 @@ export class WalletApi implements WalletApiInterface {
     /**
      * Get all prediction wallets registered for the authenticated user.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -470,7 +470,7 @@ export class WalletApi implements WalletApiInterface {
     /**
      * Get available balances for each payment option that can be used for prediction trading.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *

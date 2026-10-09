@@ -28,7 +28,7 @@ const RedeemApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Redeem one or more settled prediction tokens on-chain to claim winnings. Requires SAS authorization.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -85,7 +85,7 @@ const RedeemApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         /**
          * Query the on-chain transaction status of a previously submitted redeem request.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * Security Type: PREDICTION_TRADE
          *
@@ -153,7 +153,7 @@ export interface RedeemApiInterface {
     /**
      * Redeem one or more settled prediction tokens on-chain to claim winnings. Requires SAS authorization.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -169,7 +169,7 @@ export interface RedeemApiInterface {
     /**
      * Query the on-chain transaction status of a previously submitted redeem request.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -271,7 +271,7 @@ export class RedeemApi implements RedeemApiInterface {
     /**
      * Redeem one or more settled prediction tokens on-chain to claim winnings. Requires SAS authorization.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -306,7 +306,7 @@ export class RedeemApi implements RedeemApiInterface {
     /**
      * Query the on-chain transaction status of a previously submitted redeem request.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *

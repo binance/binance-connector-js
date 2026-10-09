@@ -49,4 +49,10 @@ export interface GetMarketDetailResponseMarketsInnerOutcomesInner {
      * @memberof GetMarketDetailResponseMarketsInnerOutcomesInner
      */
     tokenId?: string;
+    /**
+     * Whether this outcome won. Returned only after the market is resolved. More than one outcome can be `true` when the payout is split
+     * @type {boolean}
+     * @memberof GetMarketDetailResponseMarketsInnerOutcomesInner
+     */
+    winner?: boolean;
 }

@@ -192,7 +192,12 @@ export class RestAPI {
     /**
      * Get full details for a specific prediction market topic, including variant data and timeline.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
+     *
+     * Response Notes:
+     * - `status` is a case-sensitive string. `REGISTERED`: registered and not yet resolved, this value alone does not guarantee that trading is available. `RESOLVED`: the outcome has been determined, it does not mean that the user has already claimed the payout. `PAUSED`: trading is temporarily suspended and may resume. `CLOSED`: closed for display, for example the end time has passed or the market was removed, it does not guarantee that trading is closed.
+     * - `markets[].tradingStatus` shows whether new orders may be attempted. `OPEN`: new orders may be attempted, this is the only value that allows new orders. `MATCHING_NOT_ENABLED`: order matching is not enabled. `CANCEL_ONLY`: only cancellation is allowed. `CLOSED`: trading has stopped. Use `markets[].tradingStatus`, not `status`, to decide whether to place an order, because a market whose `status` is `CLOSED` can still have `tradingStatus` `OPEN`. A topic can contain several markets and an order is placed on one market, so only the `tradingStatus` of that market matters. A successful quote does not guarantee that an order is accepted or filled.
+     * - `outcomes[].winner` is returned only after the market is resolved. There is no separate cancelled, invalid or refunded status. A resolved market can pay more than one outcome, in that case several outcomes have `winner` set to `true` and `price` is the settled value per share, for example `0.5` for each of two outcomes.
      *
      * @summary Get Market Detail
      * @param {GetMarketDetailRequest} requestParameters Request parameters.
@@ -210,7 +215,7 @@ export class RestAPI {
     /**
      * Get all available prediction market categories (L1 and L2).
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary List Prediction Categories
      *
@@ -225,7 +230,10 @@ export class RestAPI {
     /**
      * Get a paginated list of prediction market topics, with optional category and sort filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
+     *
+     * Response Notes:
+     * - For the values of `status` and `markets[].tradingStatus`, see Get Market Detail.
      *
      * @summary List Prediction Markets
      * @param {ListPredictionMarketsRequest} requestParameters Request parameters.
@@ -243,7 +251,7 @@ export class RestAPI {
     /**
      * Semantic search for prediction market topics by keyword.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Market Search
      * @param {MarketSearchRequest} requestParameters Request parameters.
@@ -261,7 +269,7 @@ export class RestAPI {
     /**
      * Get the most recent trade price for a prediction market.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Query Last Trade Price
      * @param {QueryLastTradePriceRequest} requestParameters Request parameters.
@@ -279,7 +287,7 @@ export class RestAPI {
     /**
      * Get the current order book (bids and asks) for a specific prediction market outcome token.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Query Order Book
      * @param {QueryOrderBookRequest} requestParameters Request parameters.
@@ -499,7 +507,7 @@ export class RestAPI {
     /**
      * Get the authenticated user's position detail for a specific prediction token.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -519,7 +527,7 @@ export class RestAPI {
     /**
      * Query profit and loss records for the authenticated user's prediction positions. When `tokenId` is provided, returns a single record in `pnl`; otherwise returns a list in `pnlList`.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -537,7 +545,7 @@ export class RestAPI {
     /**
      * Get the authenticated user's prediction token positions with portfolio summary and tab-based filtering.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -557,7 +565,7 @@ export class RestAPI {
     /**
      * Get prediction positions filtered by wallet address and/or market topic ID. Both parameters are optional.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -577,9 +585,12 @@ export class RestAPI {
     /**
      * Get the authenticated user's settled (resolved) prediction position history with optional filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
+     *
+     * Response Notes:
+     * - There is no separate cancelled, invalid or refunded status. A resolved market pays each outcome by its payout ratio, which can be fractional, for example `0.5` for each of two outcomes. This is not a refund of the purchase cost. Use `finalOutcome`, `isWinner`, `claimAmount` and `redeemStatus` together with your own claim records, and Get Market Detail for `outcomes[].winner`.
      *
      * @summary Query Settled Position History (PREDICTION_TRADE)
      * @param {QuerySettledPositionHistoryRequest} requestParameters Request parameters.
@@ -597,7 +608,7 @@ export class RestAPI {
     /**
      * Redeem one or more settled prediction tokens on-chain to claim winnings. Requires SAS authorization.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -617,7 +628,7 @@ export class RestAPI {
     /**
      * Query the on-chain transaction status of a previously submitted redeem request.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -655,7 +666,7 @@ export class RestAPI {
      * - **Java:** use `HttpURLConnection` and write the raw body bytes directly.
      * - **Go:** use `strings.NewReader` with a hand-built body instead of `url.Values.Encode()`.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -679,13 +690,13 @@ export class RestAPI {
     /**
      * Get a price quote for a prediction order. The returned `quoteId` must be used in the subsequent Place Order request.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
      * Response Notes:
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
-     * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
+     * - **Minimum order amount:** The minimum order amount is set by the server and the upstream market rules and may change, so no fixed value is documented. `BUY` orders are checked by amount (`amountIn`) and `SELL` orders by share quantity, for both `MARKET` and `LIMIT` orders. If the `amountIn` of a `BUY` order is below the minimum, the server returns `-9000` with the message `Your order amount is too small`. A successful quote does not guarantee that the order is accepted or filled, so check the error message and the final order status.
      *
      * @summary Get Quote (PREDICTION_TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
@@ -701,7 +712,7 @@ export class RestAPI {
     /**
      * Place a prediction order using a previously obtained quote. Requires SAS authorization.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -727,7 +738,7 @@ export class RestAPI {
     /**
      * Get active (open) prediction orders for the authenticated user.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -747,7 +758,7 @@ export class RestAPI {
     /**
      * Get historical prediction orders (all statuses) for the authenticated user, with optional filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -767,7 +778,7 @@ export class RestAPI {
     /**
      * Move funds from the user's bound CeDeFi MPC wallet to their CEX account (SPOT/FUNDING) via a contract escrow + credit flow. The maker wallet is resolved server-side by `userId`; the caller does not pass wallet or signature.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -791,7 +802,7 @@ export class RestAPI {
     /**
      * Withdraw funds from the user's CEX account (SPOT/FUNDING) to their bound CeDeFi MPC wallet address. Unlike `v1/capital/withdraw/apply`, the caller does NOT pass `address`; the backend resolves the user's bound CeDeFi MPC wallet address by `userId` and reuses the existing capital withdraw flow with that address as the target.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -825,7 +836,7 @@ export class RestAPI {
      *
      * ⚠️ **SAS Authorization Required:** This endpoint enforces SAS (Self-Authorization Service) authorization. If SAS is not enabled for the wallet, the request will be rejected with `-31003 SAS authorization required`. Enable SAS for your wallet before calling this endpoint.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -845,7 +856,7 @@ export class RestAPI {
     /**
      * Transfer funds from the user's CEX account (SPOT or FUNDING) into the prediction wallet. Requires SAS authorization.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -865,7 +876,7 @@ export class RestAPI {
     /**
      * Get the authenticated user's prediction wallet transfer history within a date range.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -887,7 +898,7 @@ export class RestAPI {
      *
      **`status` values:** Terminal states are `COMPLETED` and `FAILED`. Intermediate states are `PROCESSING` and `PENDING`. **Do not** poll for `SUCCESS` — it is not a valid terminal state.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -907,7 +918,7 @@ export class RestAPI {
     /**
      * Get the authenticated user's prediction portfolio overview including active positions count, aggregated PnL, and full position list.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -927,7 +938,7 @@ export class RestAPI {
     /**
      * Query the current user's daily trading quota limit and remaining allowance for prediction markets.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -947,7 +958,7 @@ export class RestAPI {
     /**
      * Get all prediction wallets registered for the authenticated user.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *
@@ -967,7 +978,7 @@ export class RestAPI {
     /**
      * Get available balances for each payment option that can be used for prediction trading.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * Security Type: PREDICTION_TRADE
      *

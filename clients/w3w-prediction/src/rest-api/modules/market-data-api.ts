@@ -35,7 +35,12 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get full details for a specific prediction market topic, including variant data and timeline.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
+         *
+         * Response Notes:
+         * - `status` is a case-sensitive string. `REGISTERED`: registered and not yet resolved, this value alone does not guarantee that trading is available. `RESOLVED`: the outcome has been determined, it does not mean that the user has already claimed the payout. `PAUSED`: trading is temporarily suspended and may resume. `CLOSED`: closed for display, for example the end time has passed or the market was removed, it does not guarantee that trading is closed.
+         * - `markets[].tradingStatus` shows whether new orders may be attempted. `OPEN`: new orders may be attempted, this is the only value that allows new orders. `MATCHING_NOT_ENABLED`: order matching is not enabled. `CANCEL_ONLY`: only cancellation is allowed. `CLOSED`: trading has stopped. Use `markets[].tradingStatus`, not `status`, to decide whether to place an order, because a market whose `status` is `CLOSED` can still have `tradingStatus` `OPEN`. A topic can contain several markets and an order is placed on one market, so only the `tradingStatus` of that market matters. A successful quote does not guarantee that an order is accepted or filled.
+         * - `outcomes[].winner` is returned only after the market is resolved. There is no separate cancelled, invalid or refunded status. A resolved market can pay more than one outcome, in that case several outcomes have `winner` set to `true` and `price` is the settled value per share, for example `0.5` for each of two outcomes.
          *
          * @summary Get Market Detail
          * @param {number | bigint} marketTopicId Market topic ID. Must be > 0
@@ -69,7 +74,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get all available prediction market categories (L1 and L2).
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * @summary List Prediction Categories
          *
@@ -95,7 +100,10 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get a paginated list of prediction market topics, with optional category and sort filters.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
+         *
+         * Response Notes:
+         * - For the values of `status` and `markets[].tradingStatus`, see Get Market Detail.
          *
          * @summary List Prediction Markets
          * @param {string} [l1Category] Level-1 category filter
@@ -153,7 +161,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Semantic search for prediction market topics by keyword.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * @summary Market Search
          * @param {string} query Search keyword. Not blank
@@ -191,7 +199,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get the most recent trade price for a prediction market.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * @summary Query Last Trade Price
          * @param {number | bigint} marketId Market ID. Must be > 0
@@ -225,7 +233,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get the current order book (bids and asks) for a specific prediction market outcome token.
          *
-         * Weight(IP): 200
+         * Weight(IP): 1
          *
          * @summary Query Order Book
          * @param {string} vendor Vendor identifier (e.g. `predict_fun`)
@@ -283,7 +291,12 @@ export interface MarketDataApiInterface {
     /**
      * Get full details for a specific prediction market topic, including variant data and timeline.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
+     *
+     * Response Notes:
+     * - `status` is a case-sensitive string. `REGISTERED`: registered and not yet resolved, this value alone does not guarantee that trading is available. `RESOLVED`: the outcome has been determined, it does not mean that the user has already claimed the payout. `PAUSED`: trading is temporarily suspended and may resume. `CLOSED`: closed for display, for example the end time has passed or the market was removed, it does not guarantee that trading is closed.
+     * - `markets[].tradingStatus` shows whether new orders may be attempted. `OPEN`: new orders may be attempted, this is the only value that allows new orders. `MATCHING_NOT_ENABLED`: order matching is not enabled. `CANCEL_ONLY`: only cancellation is allowed. `CLOSED`: trading has stopped. Use `markets[].tradingStatus`, not `status`, to decide whether to place an order, because a market whose `status` is `CLOSED` can still have `tradingStatus` `OPEN`. A topic can contain several markets and an order is placed on one market, so only the `tradingStatus` of that market matters. A successful quote does not guarantee that an order is accepted or filled.
+     * - `outcomes[].winner` is returned only after the market is resolved. There is no separate cancelled, invalid or refunded status. A resolved market can pay more than one outcome, in that case several outcomes have `winner` set to `true` and `price` is the settled value per share, for example `0.5` for each of two outcomes.
      *
      * @summary Get Market Detail
      * @param {GetMarketDetailRequest} requestParameters Request parameters.
@@ -297,7 +310,7 @@ export interface MarketDataApiInterface {
     /**
      * Get all available prediction market categories (L1 and L2).
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary List Prediction Categories
      *
@@ -308,7 +321,10 @@ export interface MarketDataApiInterface {
     /**
      * Get a paginated list of prediction market topics, with optional category and sort filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
+     *
+     * Response Notes:
+     * - For the values of `status` and `markets[].tradingStatus`, see Get Market Detail.
      *
      * @summary List Prediction Markets
      * @param {ListPredictionMarketsRequest} requestParameters Request parameters.
@@ -322,7 +338,7 @@ export interface MarketDataApiInterface {
     /**
      * Semantic search for prediction market topics by keyword.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Market Search
      * @param {MarketSearchRequest} requestParameters Request parameters.
@@ -336,7 +352,7 @@ export interface MarketDataApiInterface {
     /**
      * Get the most recent trade price for a prediction market.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Query Last Trade Price
      * @param {QueryLastTradePriceRequest} requestParameters Request parameters.
@@ -350,7 +366,7 @@ export interface MarketDataApiInterface {
     /**
      * Get the current order book (bids and asks) for a specific prediction market outcome token.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Query Order Book
      * @param {QueryOrderBookRequest} requestParameters Request parameters.
@@ -500,7 +516,12 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get full details for a specific prediction market topic, including variant data and timeline.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
+     *
+     * Response Notes:
+     * - `status` is a case-sensitive string. `REGISTERED`: registered and not yet resolved, this value alone does not guarantee that trading is available. `RESOLVED`: the outcome has been determined, it does not mean that the user has already claimed the payout. `PAUSED`: trading is temporarily suspended and may resume. `CLOSED`: closed for display, for example the end time has passed or the market was removed, it does not guarantee that trading is closed.
+     * - `markets[].tradingStatus` shows whether new orders may be attempted. `OPEN`: new orders may be attempted, this is the only value that allows new orders. `MATCHING_NOT_ENABLED`: order matching is not enabled. `CANCEL_ONLY`: only cancellation is allowed. `CLOSED`: trading has stopped. Use `markets[].tradingStatus`, not `status`, to decide whether to place an order, because a market whose `status` is `CLOSED` can still have `tradingStatus` `OPEN`. A topic can contain several markets and an order is placed on one market, so only the `tradingStatus` of that market matters. A successful quote does not guarantee that an order is accepted or filled.
+     * - `outcomes[].winner` is returned only after the market is resolved. There is no separate cancelled, invalid or refunded status. A resolved market can pay more than one outcome, in that case several outcomes have `winner` set to `true` and `price` is the settled value per share, for example `0.5` for each of two outcomes.
      *
      * @summary Get Market Detail
      * @param {GetMarketDetailRequest} requestParameters Request parameters.
@@ -530,7 +551,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get all available prediction market categories (L1 and L2).
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary List Prediction Categories
      * @returns {Promise<RestApiResponse<ListPredictionCategoriesResponse>>}
@@ -557,7 +578,10 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get a paginated list of prediction market topics, with optional category and sort filters.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
+     *
+     * Response Notes:
+     * - For the values of `status` and `markets[].tradingStatus`, see Get Market Detail.
      *
      * @summary List Prediction Markets
      * @param {ListPredictionMarketsRequest} requestParameters Request parameters.
@@ -592,7 +616,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Semantic search for prediction market topics by keyword.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Market Search
      * @param {MarketSearchRequest} requestParameters Request parameters.
@@ -623,7 +647,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get the most recent trade price for a prediction market.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Query Last Trade Price
      * @param {QueryLastTradePriceRequest} requestParameters Request parameters.
@@ -653,7 +677,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get the current order book (bids and asks) for a specific prediction market outcome token.
      *
-     * Weight(IP): 200
+     * Weight(IP): 1
      *
      * @summary Query Order Book
      * @param {QueryOrderBookRequest} requestParameters Request parameters.
