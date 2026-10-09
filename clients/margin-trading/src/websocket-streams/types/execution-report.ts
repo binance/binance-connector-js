@@ -219,34 +219,34 @@ export interface ExecutionReport {
     V?: string;
     /**
      * Trailing Delta; This is only visible if the order was a trailing stop order.
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ExecutionReport
      */
-    d?: string;
+    d?: number | bigint;
     /**
      * Trailing Time
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ExecutionReport
      */
-    D?: string;
+    D?: number | bigint;
     /**
      * Strategy Id
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ExecutionReport
      */
-    j?: string;
+    j?: number | bigint;
     /**
      * Strategy Type
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ExecutionReport
      */
-    J?: string;
+    J?: number | bigint;
     /**
      * Prevented Match Id
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ExecutionReport
      */
-    v?: string;
+    v?: number | bigint;
     /**
      * Prevented Quantity
      * @type {string}
@@ -261,16 +261,16 @@ export interface ExecutionReport {
     B?: string;
     /**
      * Trade Group Id
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ExecutionReport
      */
-    u?: string;
+    u?: number | bigint;
     /**
      * Counter Order Id
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ExecutionReport
      */
-    U?: string;
+    U?: number | bigint;
     /**
      * Counter Symbol
      * @type {string}
@@ -303,10 +303,10 @@ export interface ExecutionReport {
     b?: string;
     /**
      * Allocation ID
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ExecutionReport
      */
-    a?: string;
+    a?: number | bigint;
     /**
      * Working Floor
      * @type {string}

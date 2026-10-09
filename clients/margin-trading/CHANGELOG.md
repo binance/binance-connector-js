@@ -1,5 +1,52 @@
 # Changelog
 
+## 13.1.2 - 2026-10-09
+
+### Changed (8)
+
+#### WebSocket Streams
+
+- Modified response field `D`:
+  - type `string` → `integer`
+  - affected events:
+    - `TradeDataStreamEventsResponse`
+    - `executionReport`
+- Modified response field `J`:
+  - type `string` → `integer`
+  - affected events:
+    - `TradeDataStreamEventsResponse`
+    - `executionReport`
+- Modified response field `U`:
+  - type `string` → `integer`
+  - affected events:
+    - `TradeDataStreamEventsResponse`
+    - `executionReport`
+- Modified response field `a`:
+  - type `string` → `integer`
+  - affected events:
+    - `TradeDataStreamEventsResponse`
+    - `executionReport`
+- Modified response field `d`:
+  - type `string` → `integer`
+  - affected events:
+    - `TradeDataStreamEventsResponse`
+    - `executionReport`
+- Modified response field `j`:
+  - type `string` → `integer`
+  - affected events:
+    - `TradeDataStreamEventsResponse`
+    - `executionReport`
+- Modified response field `u`:
+  - type `string` → `integer`
+  - affected events:
+    - `TradeDataStreamEventsResponse`
+    - `executionReport`
+- Modified response field `v`:
+  - type `string` → `integer`
+  - affected events:
+    - `TradeDataStreamEventsResponse`
+    - `executionReport`
+
 ## 13.1.1 - 2026-10-02
 
 ### Changed (2)
