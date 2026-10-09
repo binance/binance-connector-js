@@ -86,7 +86,7 @@ export interface PlaceMultipleOrdersOrdersParameterInner {
      */
     isMmp?: boolean;
     /**
-     * EXPIRE_TAKER:expire taker order when STP triggers/ EXPIRE_MAKER:expire maker order when STP triggers/ EXPIRE_BOTH:expire both orders when STP triggers; Default EXPIRE_MAKER
+     * EXPIRE_TAKER: expire taker order when STP triggers/ EXPIRE_MAKER: expire maker order when STP triggers/ EXPIRE_BOTH: expire both orders when STP triggers; Default EXPIRE_MAKER
      * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */

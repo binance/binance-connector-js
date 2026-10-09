@@ -129,7 +129,7 @@ const PublicApiParamCreator = function () {
             );
         },
         /**
-         * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[btcusdt@optionTrade](wss://fstream.binance.com/public/stream?streams=btcusdt@optionTrade)
+         * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.btcusdt@optionTrade
          *
          * Update Speed: 50ms
          *
@@ -219,7 +219,7 @@ export interface PublicApiInterface {
     ): WebsocketStream<PartialBookDepthStreamsResponse>;
 
     /**
-     * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[btcusdt@optionTrade](wss://fstream.binance.com/public/stream?streams=btcusdt@optionTrade)
+     * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.btcusdt@optionTrade
      *
      * Update Speed: 50ms
      *
@@ -492,7 +492,7 @@ export class PublicApi implements PublicApiInterface {
     }
 
     /**
-     * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[btcusdt@optionTrade](wss://fstream.binance.com/public/stream?streams=btcusdt@optionTrade)
+     * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.btcusdt@optionTrade
      *
      * Update Speed: 50ms
      *

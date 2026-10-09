@@ -83,7 +83,7 @@ const MarketApiParamCreator = function () {
             return replaceWebsocketStreamsPlaceholders('/!optionSymbol'.slice(1), { id });
         },
         /**
-         * Option open interest for specific underlying asset on specific expiration date. E.g.[ethusdt@openInterest@221125](wss://fstream.binance.com/market/stream?streams=ethusdt@openInterest@221125)
+         * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@openInterest@221125
          *
          * Update Speed: 60s
          *
@@ -106,7 +106,7 @@ const MarketApiParamCreator = function () {
             );
         },
         /**
-         * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
+         * The mark price for all option symbols on specific underlying asset. E.g.btcusdt@optionMarkPrice
          *
          * Update Speed: 1000ms
          *
@@ -180,7 +180,7 @@ export interface MarketApiInterface {
     newSymbolInfo(requestParameters?: NewSymbolInfoRequest): WebsocketStream<NewSymbolInfoResponse>;
 
     /**
-     * Option open interest for specific underlying asset on specific expiration date. E.g.[ethusdt@openInterest@221125](wss://fstream.binance.com/market/stream?streams=ethusdt@openInterest@221125)
+     * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@openInterest@221125
      *
      * Update Speed: 60s
      *
@@ -194,7 +194,7 @@ export interface MarketApiInterface {
     openInterest(requestParameters: OpenInterestRequest): WebsocketStream<OpenInterestResponse>;
 
     /**
-     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
+     * The mark price for all option symbols on specific underlying asset. E.g.btcusdt@optionMarkPrice
      *
      * Update Speed: 1000ms
      *
@@ -404,7 +404,7 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * Option open interest for specific underlying asset on specific expiration date. E.g.[ethusdt@openInterest@221125](wss://fstream.binance.com/market/stream?streams=ethusdt@openInterest@221125)
+     * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@openInterest@221125
      *
      * Update Speed: 60s
      *
@@ -433,7 +433,7 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
+     * The mark price for all option symbols on specific underlying asset. E.g.btcusdt@optionMarkPrice
      *
      * Update Speed: 1000ms
      *

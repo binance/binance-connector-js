@@ -215,7 +215,7 @@ export class WebsocketStreamsConnection {
     }
 
     /**
-     * Option open interest for specific underlying asset on specific expiration date. E.g.[ethusdt@openInterest@221125](wss://fstream.binance.com/market/stream?streams=ethusdt@openInterest@221125)
+     * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@openInterest@221125
      *
      * Update Speed: 60s
      *
@@ -231,7 +231,7 @@ export class WebsocketStreamsConnection {
     }
 
     /**
-     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
+     * The mark price for all option symbols on specific underlying asset. E.g.btcusdt@optionMarkPrice
      *
      * Update Speed: 1000ms
      *
@@ -319,7 +319,7 @@ export class WebsocketStreamsConnection {
     }
 
     /**
-     * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[btcusdt@optionTrade](wss://fstream.binance.com/public/stream?streams=btcusdt@optionTrade)
+     * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.btcusdt@optionTrade
      *
      * Update Speed: 50ms
      *

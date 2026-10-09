@@ -38,6 +38,12 @@ export interface AccountFundingFlowResponseInner {
      */
     amount?: string;
     /**
+     * Option symbol the record relates to. Returned only for contract-related types (e.g. `CONTRACT`, `FEE`, `EXERCISE_PNL`, `EXERCISE_FEE`); omitted for other types such as `TRANSFER`. Older records may not include this field.
+     * @type {string}
+     * @memberof AccountFundingFlowResponseInner
+     */
+    symbol?: string;
+    /**
      * type (fees)
      * @type {string}
      * @memberof AccountFundingFlowResponseInner

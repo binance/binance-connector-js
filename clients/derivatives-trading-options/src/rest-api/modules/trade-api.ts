@@ -42,7 +42,7 @@ import type {
 const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
-         * Get trades for a specific account and symbol.
+         * Get trades for a specific account and symbol. Only supports querying trades in the past 3 months; a `startTime`/`endTime` outside that window returns `-6073 SEARCH_WINDOW_RESTRICTED`.
          *
          * Weight(IP): 5
          *
@@ -815,7 +815,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
  */
 export interface TradeApiInterface {
     /**
-     * Get trades for a specific account and symbol.
+     * Get trades for a specific account and symbol. Only supports querying trades in the past 3 months; a `startTime`/`endTime` outside that window returns `-6073 SEARCH_WINDOW_RESTRICTED`.
      *
      * Weight(IP): 5
      *
@@ -1566,7 +1566,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Get trades for a specific account and symbol.
+     * Get trades for a specific account and symbol. Only supports querying trades in the past 3 months; a `startTime`/`endTime` outside that window returns `-6073 SEARCH_WINDOW_RESTRICTED`.
      *
      * Weight(IP): 5
      *
