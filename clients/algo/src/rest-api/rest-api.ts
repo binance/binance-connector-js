@@ -29,6 +29,7 @@ import type {
     QueryHistoricalAlgoOrdersSpotAlgoRequest,
     QuerySubOrdersSpotAlgoRequest,
     TimeWeightedAveragePriceSpotAlgoRequest,
+    VolumeParticipationRequest,
 } from './modules/spot-algo-api';
 
 import type {
@@ -45,6 +46,7 @@ import type {
     QueryHistoricalAlgoOrdersSpotAlgoResponse,
     QuerySubOrdersSpotAlgoResponse,
     TimeWeightedAveragePriceSpotAlgoResponse,
+    VolumeParticipationResponse,
 } from './types';
 
 export class RestAPI {
@@ -274,7 +276,7 @@ export class RestAPI {
     }
 
     /**
-     * Cancel an open TWAP order
+     * Cancel an open TWAP or VP algo order
      *
      * Weight(IP): 1
      *
@@ -297,7 +299,7 @@ export class RestAPI {
     }
 
     /**
-     * Get all open SPOT TWAP orders
+     * Get all open Spot TWAP and VP algo orders
      *
      * Weight(IP): 1
      *
@@ -317,7 +319,7 @@ export class RestAPI {
     }
 
     /**
-     * Get all historical SPOT TWAP orders
+     * Get all historical Spot TWAP and VP algo orders
      *
      * Weight(IP): 1
      *
@@ -377,5 +379,32 @@ export class RestAPI {
         requestParameters: TimeWeightedAveragePriceSpotAlgoRequest
     ): Promise<RestApiResponse<TimeWeightedAveragePriceSpotAlgoResponse>> {
         return this.spotAlgoApi.timeWeightedAveragePriceSpotAlgo(requestParameters);
+    }
+
+    /**
+     * Place a new spot VP (Volume Participation) order with Algo service. A VP order automatically slices the total quantity over time, targeting a percentage of the market volume.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - VP orders do not accept `price` or `timeInForce`; pricing is determined algorithmically based on market volume.
+     * - `urgency` controls the participation rate: LOW = passive, MEDIUM = neutral, HIGH = aggressive.
+     * - Receiving `"success": true` does not guarantee execution; use the query order endpoints (`GET /sapi/v1/algo/spot/openOrders` or `GET /sapi/v1/algo/spot/historicalOrders`) to check the final status.
+     * - You need to enable the `Spot Trading` permission for the API key requesting this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Volume Participation (VP) New Order (TRADE)
+     * @param {VolumeParticipationRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<VolumeParticipationResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#volume-participation Binance API Documentation}
+     */
+    volumeParticipation(
+        requestParameters: VolumeParticipationRequest
+    ): Promise<RestApiResponse<VolumeParticipationResponse>> {
+        return this.spotAlgoApi.volumeParticipation(requestParameters);
     }
 }

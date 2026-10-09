@@ -14,3 +14,4 @@ export * from './query-sub-orders-spot-algo-response';
 export * from './time-weighted-average-price-future-algo-response';
 export * from './time-weighted-average-price-spot-algo-response';
 export * from './volume-participation-future-algo-response';
+export * from './volume-participation-response';

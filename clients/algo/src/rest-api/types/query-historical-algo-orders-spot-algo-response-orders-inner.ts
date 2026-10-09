@@ -97,4 +97,10 @@ export interface QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner {
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
      */
     urgency?: string;
+    /**
+     * Order duration in seconds. Only returned for TWAP orders
+     * @type {number | bigint}
+     * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner
+     */
+    duration?: number | bigint;
 }

@@ -24,6 +24,7 @@ import type {
     QueryHistoricalAlgoOrdersSpotAlgoResponse,
     QuerySubOrdersSpotAlgoResponse,
     TimeWeightedAveragePriceSpotAlgoResponse,
+    VolumeParticipationResponse,
 } from '../types';
 
 /**
@@ -32,7 +33,7 @@ import type {
 const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
-         * Cancel an open TWAP order
+         * Cancel an open TWAP or VP algo order
          *
          * Weight(IP): 1
          *
@@ -80,7 +81,7 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             };
         },
         /**
-         * Get all open SPOT TWAP orders
+         * Get all open Spot TWAP and VP algo orders
          *
          * Weight(IP): 1
          *
@@ -115,7 +116,7 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             };
         },
         /**
-         * Get all historical SPOT TWAP orders
+         * Get all historical Spot TWAP and VP algo orders
          *
          * Weight(IP): 1
          *
@@ -306,6 +307,91 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
                 timeUnit: _timeUnit,
             };
         },
+        /**
+         * Place a new spot VP (Volume Participation) order with Algo service. A VP order automatically slices the total quantity over time, targeting a percentage of the market volume.
+         *
+         * Weight(UID): 3000
+         *
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - VP orders do not accept `price` or `timeInForce`; pricing is determined algorithmically based on market volume.
+         * - `urgency` controls the participation rate: LOW = passive, MEDIUM = neutral, HIGH = aggressive.
+         * - Receiving `"success": true` does not guarantee execution; use the query order endpoints (`GET /sapi/v1/algo/spot/openOrders` or `GET /sapi/v1/algo/spot/historicalOrders`) to check the final status.
+         * - You need to enable the `Spot Trading` permission for the API key requesting this endpoint.
+         * - Base URL: `https://api.binance.com`
+         *
+         * @summary Volume Participation (VP) New Order (TRADE)
+         * @param {string} symbol Trading symbol eg. BTCUSDT
+         * @param {VolumeParticipationSideEnum} side Trading side ( BUY or SELL )
+         * @param {number} quantity Total order quantity in base asset; The notional must be at least the equivalent of 1,000 USDT, and the
+         * maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if your
+         * order is above the maximum notional per order.
+         * @param {VolumeParticipationUrgencyEnum} urgency Represent the relative speed of the current execution; ENUM: LOW, MEDIUM, HIGH
+         * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters). If it is not sent, we will give
+         * default value. Must be unique across all open Algo orders.
+         * @param {number | bigint} [vpTimeLimit] Max allowed duration in seconds (minimum 300, maximum 86400). If it is not sent, 86400 is used and the
+         * order runs until fully filled or cancelled.
+         * @param {number | bigint} [recvWindow] Cannot be greater than 60000
+         *
+         * @throws {RequiredError}
+         */
+        volumeParticipation: async (
+            symbol: string,
+            side: VolumeParticipationSideEnum,
+            quantity: number,
+            urgency: VolumeParticipationUrgencyEnum,
+            clientAlgoId?: string,
+            vpTimeLimit?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('volumeParticipation', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('volumeParticipation', 'side', side);
+            // verify required parameter 'quantity' is not null or undefined
+            assertParamExists('volumeParticipation', 'quantity', quantity);
+            // verify required parameter 'urgency' is not null or undefined
+            assertParamExists('volumeParticipation', 'urgency', urgency);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+            if (side !== undefined && side !== null) {
+                localVarQueryParameter['side'] = side;
+            }
+            if (quantity !== undefined && quantity !== null) {
+                localVarQueryParameter['quantity'] = quantity;
+            }
+            if (urgency !== undefined && urgency !== null) {
+                localVarQueryParameter['urgency'] = urgency;
+            }
+            if (clientAlgoId !== undefined && clientAlgoId !== null) {
+                localVarQueryParameter['clientAlgoId'] = clientAlgoId;
+            }
+            if (vpTimeLimit !== undefined && vpTimeLimit !== null) {
+                localVarQueryParameter['vpTimeLimit'] = vpTimeLimit;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/algo/spot/newOrderVp',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
     };
 };
 
@@ -315,7 +401,7 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
  */
 export interface SpotAlgoApiInterface {
     /**
-     * Cancel an open TWAP order
+     * Cancel an open TWAP or VP algo order
      *
      * Weight(IP): 1
      *
@@ -334,7 +420,7 @@ export interface SpotAlgoApiInterface {
         requestParameters?: CancelAlgoOrderSpotAlgoRequest
     ): Promise<RestApiResponse<CancelAlgoOrderSpotAlgoResponse>>;
     /**
-     * Get all open SPOT TWAP orders
+     * Get all open Spot TWAP and VP algo orders
      *
      * Weight(IP): 1
      *
@@ -350,7 +436,7 @@ export interface SpotAlgoApiInterface {
         requestParameters?: QueryCurrentAlgoOpenOrdersSpotAlgoRequest
     ): Promise<RestApiResponse<QueryCurrentAlgoOpenOrdersSpotAlgoResponse>>;
     /**
-     * Get all historical SPOT TWAP orders
+     * Get all historical Spot TWAP and VP algo orders
      *
      * Weight(IP): 1
      *
@@ -400,6 +486,29 @@ export interface SpotAlgoApiInterface {
     timeWeightedAveragePriceSpotAlgo(
         requestParameters: TimeWeightedAveragePriceSpotAlgoRequest
     ): Promise<RestApiResponse<TimeWeightedAveragePriceSpotAlgoResponse>>;
+    /**
+     * Place a new spot VP (Volume Participation) order with Algo service. A VP order automatically slices the total quantity over time, targeting a percentage of the market volume.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - VP orders do not accept `price` or `timeInForce`; pricing is determined algorithmically based on market volume.
+     * - `urgency` controls the participation rate: LOW = passive, MEDIUM = neutral, HIGH = aggressive.
+     * - Receiving `"success": true` does not guarantee execution; use the query order endpoints (`GET /sapi/v1/algo/spot/openOrders` or `GET /sapi/v1/algo/spot/historicalOrders`) to check the final status.
+     * - You need to enable the `Spot Trading` permission for the API key requesting this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Volume Participation (VP) New Order (TRADE)
+     * @param {VolumeParticipationRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof SpotAlgoApiInterface
+     */
+    volumeParticipation(
+        requestParameters: VolumeParticipationRequest
+    ): Promise<RestApiResponse<VolumeParticipationResponse>>;
 }
 
 /**
@@ -582,6 +691,65 @@ export interface TimeWeightedAveragePriceSpotAlgoRequest {
 }
 
 /**
+ * Request parameters for volumeParticipation operation in SpotAlgoApi.
+ * @interface VolumeParticipationRequest
+ */
+export interface VolumeParticipationRequest {
+    /**
+     * Trading symbol eg. BTCUSDT
+     * @type {string}
+     * @memberof SpotAlgoApiVolumeParticipation
+     */
+    readonly symbol: string;
+
+    /**
+     * Trading side ( BUY or SELL )
+     * @type {'BUY' | 'SELL'}
+     * @memberof SpotAlgoApiVolumeParticipation
+     */
+    readonly side: VolumeParticipationSideEnum;
+
+    /**
+     * Total order quantity in base asset; The notional must be at least the equivalent of 1,000 USDT, and the
+     * maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if your
+     * order is above the maximum notional per order.
+     * @type {number}
+     * @memberof SpotAlgoApiVolumeParticipation
+     */
+    readonly quantity: number;
+
+    /**
+     * Represent the relative speed of the current execution; ENUM: LOW, MEDIUM, HIGH
+     * @type {'LOW' | 'MEDIUM' | 'HIGH'}
+     * @memberof SpotAlgoApiVolumeParticipation
+     */
+    readonly urgency: VolumeParticipationUrgencyEnum;
+
+    /**
+     * A unique id among Algo orders (length should be 32 characters). If it is not sent, we will give
+     * default value. Must be unique across all open Algo orders.
+     * @type {string}
+     * @memberof SpotAlgoApiVolumeParticipation
+     */
+    readonly clientAlgoId?: string;
+
+    /**
+     * Max allowed duration in seconds (minimum 300, maximum 86400). If it is not sent, 86400 is used and the
+     * order runs until fully filled or cancelled.
+     * @type {number | bigint}
+     * @memberof SpotAlgoApiVolumeParticipation
+     */
+    readonly vpTimeLimit?: number | bigint;
+
+    /**
+     * Cannot be greater than 60000
+     * @type {number | bigint}
+     * @memberof SpotAlgoApiVolumeParticipation
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * SpotAlgoApi - object-oriented interface
  * @class SpotAlgoApi
  */
@@ -595,7 +763,7 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
     }
 
     /**
-     * Cancel an open TWAP order
+     * Cancel an open TWAP or VP algo order
      *
      * Weight(IP): 1
      *
@@ -632,7 +800,7 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
     }
 
     /**
-     * Get all open SPOT TWAP orders
+     * Get all open Spot TWAP and VP algo orders
      *
      * Weight(IP): 1
      *
@@ -665,7 +833,7 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
     }
 
     /**
-     * Get all historical SPOT TWAP orders
+     * Get all historical Spot TWAP and VP algo orders
      *
      * Weight(IP): 1
      *
@@ -778,6 +946,51 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
             { isSigned: true }
         );
     }
+
+    /**
+     * Place a new spot VP (Volume Participation) order with Algo service. A VP order automatically slices the total quantity over time, targeting a percentage of the market volume.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - VP orders do not accept `price` or `timeInForce`; pricing is determined algorithmically based on market volume.
+     * - `urgency` controls the participation rate: LOW = passive, MEDIUM = neutral, HIGH = aggressive.
+     * - Receiving `"success": true` does not guarantee execution; use the query order endpoints (`GET /sapi/v1/algo/spot/openOrders` or `GET /sapi/v1/algo/spot/historicalOrders`) to check the final status.
+     * - You need to enable the `Spot Trading` permission for the API key requesting this endpoint.
+     * - Base URL: `https://api.binance.com`
+     *
+     * @summary Volume Participation (VP) New Order (TRADE)
+     * @param {VolumeParticipationRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<VolumeParticipationResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof SpotAlgoApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-algo-trading/api/rest-api/spot-algo#volume-participation Binance API Documentation}
+     */
+    public async volumeParticipation(
+        requestParameters: VolumeParticipationRequest
+    ): Promise<RestApiResponse<VolumeParticipationResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.volumeParticipation(
+            requestParameters?.symbol,
+            requestParameters?.side,
+            requestParameters?.quantity,
+            requestParameters?.urgency,
+            requestParameters?.clientAlgoId,
+            requestParameters?.vpTimeLimit,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<VolumeParticipationResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
 }
 
 export enum QueryHistoricalAlgoOrdersSpotAlgoSideEnum {
@@ -788,4 +1001,15 @@ export enum QueryHistoricalAlgoOrdersSpotAlgoSideEnum {
 export enum TimeWeightedAveragePriceSpotAlgoSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
+}
+
+export enum VolumeParticipationSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum VolumeParticipationUrgencyEnum {
+    LOW = 'LOW',
+    MEDIUM = 'MEDIUM',
+    HIGH = 'HIGH',
 }

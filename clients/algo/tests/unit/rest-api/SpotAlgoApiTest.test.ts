@@ -19,6 +19,8 @@ import {
     SpotAlgoApi,
     QueryHistoricalAlgoOrdersSpotAlgoSideEnum,
     TimeWeightedAveragePriceSpotAlgoSideEnum,
+    VolumeParticipationSideEnum,
+    VolumeParticipationUrgencyEnum,
 } from '../../../src/rest-api';
 import {
     CancelAlgoOrderSpotAlgoRequest,
@@ -26,6 +28,7 @@ import {
     QueryHistoricalAlgoOrdersSpotAlgoRequest,
     QuerySubOrdersSpotAlgoRequest,
     TimeWeightedAveragePriceSpotAlgoRequest,
+    VolumeParticipationRequest,
 } from '../../../src/rest-api';
 import type {
     CancelAlgoOrderSpotAlgoResponse,
@@ -33,6 +36,7 @@ import type {
     QueryHistoricalAlgoOrdersSpotAlgoResponse,
     QuerySubOrdersSpotAlgoResponse,
     TimeWeightedAveragePriceSpotAlgoResponse,
+    VolumeParticipationResponse,
 } from '../../../src/rest-api/types';
 
 describe('SpotAlgoApi', () => {
@@ -130,8 +134,9 @@ describe('SpotAlgoApi', () => {
                             bookTime: 1649756817004,
                             endTime: 0,
                             algoStatus: 'WORKING',
-                            algoType: 'VP',
+                            algoType: 'TWAP',
                             urgency: 'LOW',
+                            duration: 86400,
                         },
                     ],
                 })
@@ -172,8 +177,9 @@ describe('SpotAlgoApi', () => {
                             bookTime: 1649756817004,
                             endTime: 0,
                             algoStatus: 'WORKING',
-                            algoType: 'VP',
+                            algoType: 'TWAP',
                             urgency: 'LOW',
+                            duration: 86400,
                         },
                     ],
                 })
@@ -231,8 +237,9 @@ describe('SpotAlgoApi', () => {
                             bookTime: 1649757019503,
                             endTime: 1649757088101,
                             algoStatus: 'CANCELLED',
-                            algoType: 'VP',
+                            algoType: 'TWAP',
                             urgency: 'LOW',
+                            duration: 86400,
                         },
                     ],
                 })
@@ -279,8 +286,9 @@ describe('SpotAlgoApi', () => {
                             bookTime: 1649757019503,
                             endTime: 1649757088101,
                             algoStatus: 'CANCELLED',
-                            algoType: 'VP',
+                            algoType: 'TWAP',
                             urgency: 'LOW',
+                            duration: 86400,
                         },
                     ],
                 })
@@ -596,6 +604,155 @@ describe('SpotAlgoApi', () => {
             await expect(client.timeWeightedAveragePriceSpotAlgo(params)).rejects.toThrow(
                 'ResponseError'
             );
+            spy.mockRestore();
+        });
+    });
+
+    describe('volumeParticipation()', () => {
+        it('should execute volumeParticipation() successfully with required parameters only', async () => {
+            const params: VolumeParticipationRequest = {
+                symbol: 'BTCUSDT',
+                side: VolumeParticipationSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationUrgencyEnum.LOW,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    clientAlgoId: '65ce1630101a480b85915d7e11fd5078',
+                    success: true,
+                    code: 0,
+                    msg: 'OK',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'volumeParticipation').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<VolumeParticipationResponse>)
+            );
+            const response = await client.volumeParticipation(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute volumeParticipation() successfully with optional parameters', async () => {
+            const params: VolumeParticipationRequest = {
+                symbol: 'BTCUSDT',
+                side: VolumeParticipationSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationUrgencyEnum.LOW,
+                clientAlgoId: '1',
+                vpTimeLimit: 5000,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    clientAlgoId: '65ce1630101a480b85915d7e11fd5078',
+                    success: true,
+                    code: 0,
+                    msg: 'OK',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'volumeParticipation').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<VolumeParticipationResponse>)
+            );
+            const response = await client.volumeParticipation(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: VolumeParticipationRequest = {
+                symbol: 'BTCUSDT',
+                side: VolumeParticipationSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationUrgencyEnum.LOW,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.volumeParticipation(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling volumeParticipation.'
+            );
+        });
+
+        it('should throw RequiredError when side is missing', async () => {
+            const _params: VolumeParticipationRequest = {
+                symbol: 'BTCUSDT',
+                side: VolumeParticipationSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationUrgencyEnum.LOW,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.side;
+
+            await expect(client.volumeParticipation(params)).rejects.toThrow(
+                'Required parameter side was null or undefined when calling volumeParticipation.'
+            );
+        });
+
+        it('should throw RequiredError when quantity is missing', async () => {
+            const _params: VolumeParticipationRequest = {
+                symbol: 'BTCUSDT',
+                side: VolumeParticipationSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationUrgencyEnum.LOW,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.quantity;
+
+            await expect(client.volumeParticipation(params)).rejects.toThrow(
+                'Required parameter quantity was null or undefined when calling volumeParticipation.'
+            );
+        });
+
+        it('should throw RequiredError when urgency is missing', async () => {
+            const _params: VolumeParticipationRequest = {
+                symbol: 'BTCUSDT',
+                side: VolumeParticipationSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationUrgencyEnum.LOW,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.urgency;
+
+            await expect(client.volumeParticipation(params)).rejects.toThrow(
+                'Required parameter urgency was null or undefined when calling volumeParticipation.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: VolumeParticipationRequest = {
+                symbol: 'BTCUSDT',
+                side: VolumeParticipationSideEnum.BUY,
+                quantity: 1,
+                urgency: VolumeParticipationUrgencyEnum.LOW,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'volumeParticipation').mockRejectedValueOnce(mockError);
+            await expect(client.volumeParticipation(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

@@ -272,7 +272,9 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} symbol Trading symbol eg. BTCUSDT
          * @param {TimeWeightedAveragePriceFutureAlgoSideEnum} side Trading side ( BUY or SELL )
          * @param {number} quantity Quantity of base asset; The notional (`quantity` * `mark price(base asset)`) must be more than the
-         * equivalent of 1,000 USDT and less than the equivalent of 1,000,000 USDT
+         * equivalent of 1,000 USDT, and the maximum notional varies by symbol: up to 50,000,000 USDT for
+         * BTCUSDT perpetual, up to 25,000,000 USDT for ETHUSDT perpetual, and up to 5,000,000 USDT for
+         * other symbols
          * @param {number | bigint} duration Duration for TWAP orders in seconds
          * @param {TimeWeightedAveragePriceFutureAlgoPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
          * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give
@@ -370,7 +372,9 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} symbol Trading symbol eg. BTCUSDT
          * @param {VolumeParticipationFutureAlgoSideEnum} side Trading side ( BUY or SELL )
          * @param {number} quantity Quantity of base asset; The notional (`quantity` * `mark price(base asset)`) must be more than the
-         * equivalent of 10,000 USDT and less than the equivalent of 1,000,000 USDT
+         * equivalent of 10,000 USDT, and the maximum notional varies by symbol: up to 50,000,000 USDT for
+         * BTCUSDT perpetual, up to 25,000,000 USDT for ETHUSDT perpetual, and up to 5,000,000 USDT for
+         * other symbols
          * @param {VolumeParticipationFutureAlgoUrgencyEnum} urgency Represent the relative speed of the current execution; ENUM: LOW, MEDIUM, HIGH
          * @param {VolumeParticipationFutureAlgoPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
          * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give
@@ -744,7 +748,9 @@ export interface TimeWeightedAveragePriceFutureAlgoRequest {
 
     /**
      * Quantity of base asset; The notional (`quantity` * `mark price(base asset)`) must be more than the
-     * equivalent of 1,000 USDT and less than the equivalent of 1,000,000 USDT
+     * equivalent of 1,000 USDT, and the maximum notional varies by symbol: up to 50,000,000 USDT for
+     * BTCUSDT perpetual, up to 25,000,000 USDT for ETHUSDT perpetual, and up to 5,000,000 USDT for
+     * other symbols
      * @type {number}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
@@ -816,7 +822,9 @@ export interface VolumeParticipationFutureAlgoRequest {
 
     /**
      * Quantity of base asset; The notional (`quantity` * `mark price(base asset)`) must be more than the
-     * equivalent of 10,000 USDT and less than the equivalent of 1,000,000 USDT
+     * equivalent of 10,000 USDT, and the maximum notional varies by symbol: up to 50,000,000 USDT for
+     * BTCUSDT perpetual, up to 25,000,000 USDT for ETHUSDT perpetual, and up to 5,000,000 USDT for
+     * other symbols
      * @type {number}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
