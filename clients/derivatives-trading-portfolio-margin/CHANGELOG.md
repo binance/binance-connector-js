@@ -1,5 +1,21 @@
 # Changelog
 
+## 21.1.0 - 2026-10-15
+
+### Changed (4)
+
+- Update `@binance/common` library to version `2.5.0`.
+- Resolve security vulnerabilities.
+
+#### REST API
+
+- Added parameter `amount`
+  - affected methods:
+    - `fundCollectionByAsset()` (`POST /papi/v1/asset-collection`)
+- Added parameter `futureType`
+  - affected methods:
+    - `fundCollectionByAsset()` (`POST /papi/v1/asset-collection`)
+
 ## 21.0.1 - 2026-10-02
 
 ### Changed (2)

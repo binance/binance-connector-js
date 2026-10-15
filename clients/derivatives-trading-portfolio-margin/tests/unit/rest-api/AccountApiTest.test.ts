@@ -21,6 +21,7 @@ import {
     ChangeAutoRepayFuturesStatusAutoRepayEnum,
     ChangeCmPositionModeDualSidePositionEnum,
     ChangeUmPositionModeDualSidePositionEnum,
+    FundCollectionByAssetFutureTypeEnum,
     GetCmIncomeHistoryIncomeTypeEnum,
     GetMarginBorrowLoanInterestHistoryArchivedEnum,
     GetUmIncomeHistoryIncomeTypeEnum,
@@ -996,6 +997,8 @@ describe('AccountApi', () => {
         it('should execute fundCollectionByAsset() successfully with optional parameters', async () => {
             const params: FundCollectionByAssetRequest = {
                 asset: 'BTC',
+                amount: 10,
+                futureType: FundCollectionByAssetFutureTypeEnum.UM,
                 recvWindow: 5000,
             };
 
