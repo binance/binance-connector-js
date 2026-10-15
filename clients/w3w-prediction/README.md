@@ -9,9 +9,10 @@
 [![Docs](https://img.shields.io/badge/docs-online-blue?style=flat-square)](https://binance.github.io/binance-connector-js/modules/_binance_w3w-prediction.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is a client library for the Binance W3W Prediction API, enabling developers to interact programmatically with Binance's W3W Prediction trading platform. The library provides tools to place and manage prediction market orders, query positions and transfer funds through the REST API:
+This is a client library for the Binance W3W Prediction API, enabling developers to interact programmatically with Binance's W3W Prediction trading platform. The library provides tools to place and manage prediction market orders, query positions and transfer funds through the REST API, and to receive real-time order book quotes and trading, claim, transfer and market resolution events through the WebSocket Streams:
 
 - [REST API](./src/rest-api/rest-api.ts)
+- [WebSocket Streams](./src/websocket-streams/websocket-streams.ts)
 
 ## Table of Contents
 
@@ -19,6 +20,7 @@ This is a client library for the Binance W3W Prediction API, enabling developers
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [REST APIs](#rest-apis)
+- [Websocket Streams](#websocket-streams)
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [Licence](#licence)
@@ -27,6 +29,7 @@ This is a client library for the Binance W3W Prediction API, enabling developers
 
 - REST API Endpoints:
   - `/sapi/v1/w3w/wallet/prediction/*`
+- WebSocket Endpoints: Real-time data streaming.
 - Inclusion of test cases and examples for quick onboarding.
 
 ## Installation
@@ -141,6 +144,107 @@ See the [Error Handling example](./docs/rest-api/error-handling.md) for detailed
 
 If `basePath` is not provided, it defaults to `https://api.binance.com`.
 
+### Websocket Streams
+
+WebSocket Streams provide real-time push notifications for prediction market order books and per-user trading, claim, transfer and market resolution events. Use the [websocket-streams](./src/websocket-streams/websocket-streams.ts) module to subscribe to these streams.
+
+These streams are signed, so an API key and secret (or a private key) are required.
+
+```typescript
+import { W3WPrediction, W3W_PREDICTION_WS_STREAMS_PROD_URL } from '@binance/w3w-prediction';
+
+const configurationWebsocketStreams = {
+    apiKey: 'your-api-key',
+    apiSecret: 'your-api-secret',
+    wsURL: W3W_PREDICTION_WS_STREAMS_PROD_URL,
+};
+const client = new W3WPrediction({ configurationWebsocketStreams });
+
+client.websocketStreams
+    .connect()
+    .then((connection) => {
+        const stream = connection.predictionOrderBookByMarketId({ marketId: '8859231' });
+        stream.on('message', (data) => console.info(data));
+    })
+    .catch((err) => console.error(err));
+```
+
+More examples are available in the [`examples/websocket-streams`](./examples/websocket-streams/) folder.
+
+#### Configuration Options
+
+The WebSocket Streams API supports the following advanced configuration options:
+
+- `apiKey`: Your Binance API key (required). It is sent in the `X-MBX-APIKEY` header on connection.
+- `apiSecret`: Your Binance API secret, used to sign the connection URL with HMAC-SHA256.
+- `privateKey`: RSA or ED25519 private key, used instead of `apiSecret` to sign the connection URL.
+- `privateKeyPassphrase`: Passphrase for the private key, if encrypted.
+- `reconnectDelay`: Specify the delay between reconnection attempts (default: 5000 ms).
+- `compression`: Enable or disable compression for WebSocket messages (default: true).
+- `agent`: Customize the WebSocket agent for advanced configurations.
+- `mode`: Choose between `single` and `pool` connection modes.
+  - `single`: A single WebSocket connection.
+  - `pool`: A pool of WebSocket connections.
+- `poolSize`: Define the number of WebSocket connections in pool mode.
+
+##### Key Pair Based Authentication
+
+Sign the connection URL with an `RSA` or `ED25519` private key instead of an API secret. See the [Key Pair Based Authentication example](./docs/websocket-streams/key-pair-authentication.md) for detailed usage.
+
+##### Reconnect Delay
+
+Specify the delay in milliseconds between WebSocket reconnection attempts for streams. See the [Reconnect Delay example](./docs/websocket-streams/reconnect-delay.md) for detailed usage.
+
+##### Compression
+
+Enable or disable compression for WebSocket Streams messages. See the [Compression example](./docs/websocket-streams/compression.md) for detailed usage.
+
+##### WebSocket Agent
+
+Customize the agent for advanced configurations. See the [WebSocket Agent example](./docs/websocket-streams/agent.md) for detailed usage.
+
+##### Connection Mode
+
+Choose between `single` and `pool` connection modes for WebSocket Streams. The `single` mode uses a single WebSocket connection, while the `pool` mode uses a pool of WebSocket connections. See the [Connection Mode example](./docs/websocket-streams/connection-mode.md) for detailed usage.
+
+##### Certificate Pinning
+
+To enhance security, you can use certificate pinning with the `agent` option in the configuration. This ensures the client only communicates with servers using specific certificates. See the [Certificate Pinning example](./docs/websocket-streams/certificate-pinning.md) for detailed usage.
+
+#### Unsubscribing from Streams
+
+You can unsubscribe from specific WebSocket streams using the `unsubscribe` method. This is useful for managing active subscriptions without closing the connection.
+
+```typescript
+import { W3WPrediction, W3W_PREDICTION_WS_STREAMS_PROD_URL } from '@binance/w3w-prediction';
+
+const configurationWebsocketStreams = {
+    apiKey: 'your-api-key',
+    apiSecret: 'your-api-secret',
+    wsURL: W3W_PREDICTION_WS_STREAMS_PROD_URL,
+};
+const client = new W3WPrediction({ configurationWebsocketStreams });
+
+client.websocketStreams
+    .connect()
+    .then((connection) => {
+        const stream = connection.predictionOrderBookByMarketId({ marketId: '8859231' });
+        stream.on('message', (data) => console.info(data));
+
+        setTimeout(() => {
+            stream.unsubscribe();
+            console.log('Unsubscribed from predictionOrderBookByMarketId stream');
+        }, 10000);
+    })
+    .catch((err) => console.error(err));
+```
+
+If `wsURL` is not provided, it defaults to `wss://api.binance.com/sapi/wss`.
+
+### Automatic Connection Renewal
+
+The WebSocket connection is automatically renewed for the WebSocket Streams connections, before the 24 hours expiration of the API key. This ensures continuous connectivity. Active streams are re-subscribed automatically after every reconnection or renewal.
+
 ## Testing
 
 To run the tests:
@@ -154,6 +258,7 @@ npm run test
 The tests cover:
 
 - REST API endpoints
+- WebSocket Streams
 - Error handling and edge cases
 
 ## Contributing

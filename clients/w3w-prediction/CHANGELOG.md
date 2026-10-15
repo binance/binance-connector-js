@@ -1,5 +1,32 @@
 # Changelog
 
+## 2.2.0 - 2026-10-15
+
+### Added (15)
+
+#### WebSocket Streams
+
+- `batchClaimPartiallySucceeded()` (`web3_prediction_pm_claim_partial_success` stream)
+- `fundTransferFailed()` (`web3_prediction_pm_transfer_fail` stream)
+- `fundTransferSucceeded()` (`web3_prediction_pm_transfer_success` stream)
+- `limitOrderFullyFilled()` (`web3_prediction_pm_limit_order_filled` stream)
+- `limitOrderPartiallyFilled()` (`web3_prediction_pm_limit_order_partial_fill` stream)
+- `limitOrderSubmissionFailed()` (`web3_prediction_pm_limit_submit_fail` stream)
+- `limitOrderSubmittedSuccessfully()` (`web3_prediction_pm_limit_submit_success` stream)
+- `marketBuyOrderFailed()` (`web3_prediction_pm_market_buy_fail` stream)
+- `marketBuyOrderFullyFilled()` (`web3_prediction_pm_market_buy_success` stream)
+- `marketResolutionNotification()` (`web3_prediction_pm_market_close` stream)
+- `marketSellOrderFailedExpired()` (`web3_prediction_pm_market_sell_fail` stream)
+- `marketSellOrderFullyFilled()` (`web3_prediction_pm_market_sell_success` stream)
+- `predictionOrderBookByMarketId()` (`web3_prediction_orderbook_<marketId>` stream)
+- `rewardClaimFailed()` (`web3_prediction_pm_claim_fail` stream)
+- `rewardClaimSucceeded()` (`web3_prediction_pm_claim_success` stream)
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.5.0`.
+- Resolve security vulnerabilities.
+
 ## 2.1.5 - 2026-10-09
 
 ### Changed (2)
