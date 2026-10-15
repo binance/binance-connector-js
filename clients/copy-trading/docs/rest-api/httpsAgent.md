@@ -21,3 +21,6 @@ client.restAPI
     .then((data: CopyTradingRestAPI.GetFuturesLeadTraderStatusResponse) => console.log(data))
     .catch((err) => console.error(err));
 ```
+
+For proxies that require an HTTPS CONNECT tunnel, see
+[HTTPS CONNECT tunneling](./proxy.md#https-connect-tunneling).
