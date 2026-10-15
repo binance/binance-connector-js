@@ -521,7 +521,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Change Initial Leverage (TRADE)
          * @param {string} symbol
-         * @param {number | bigint} leverage target initial leverage
+         * @param {number | bigint} leverage Target initial leverage. The maximum is symbol-specific: use `initialLeverage` of bracket 1 from `GET /fapi/v1/leverageBracket`.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -3176,7 +3176,7 @@ export interface ChangeInitialLeverageRequest {
     readonly symbol: string;
 
     /**
-     * target initial leverage
+     * Target initial leverage. The maximum is symbol-specific: use `initialLeverage` of bracket 1 from `GET /fapi/v1/leverageBracket`.
      * @type {number | bigint}
      * @memberof TradeApiChangeInitialLeverage
      */

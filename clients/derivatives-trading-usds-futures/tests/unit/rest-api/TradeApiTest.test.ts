@@ -291,7 +291,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 0,
                     },
                 ])
@@ -350,7 +350,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 0,
                     },
                 ])
@@ -745,7 +745,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 0,
                         code: -2011,
                         msg: 'Unknown order sent.',
@@ -800,7 +800,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 0,
                         code: -2011,
                         msg: 'Unknown order sent.',
@@ -884,7 +884,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 0,
                 })
             );
@@ -935,7 +935,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 0,
                 })
             );
@@ -1491,7 +1491,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 0,
                     },
                 ])
@@ -1544,7 +1544,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 0,
                     },
                 ])
@@ -2023,7 +2023,7 @@ describe('TradeApi', () => {
                         priceProtect: false,
                         origType: 'LIMIT',
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 0,
                         updateTime: 1629182711600,
                         code: -2022,
@@ -2076,7 +2076,7 @@ describe('TradeApi', () => {
                         priceProtect: false,
                         origType: 'LIMIT',
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 0,
                         updateTime: 1629182711600,
                         code: -2022,
@@ -2163,7 +2163,7 @@ describe('TradeApi', () => {
                     priceProtect: false,
                     origType: 'LIMIT',
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 0,
                     updateTime: 1629182711600,
                 })
@@ -2220,7 +2220,7 @@ describe('TradeApi', () => {
                     priceProtect: false,
                     origType: 'LIMIT',
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 0,
                     updateTime: 1629182711600,
                 })
@@ -2558,7 +2558,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 1693207680000,
                 })
             );
@@ -2617,7 +2617,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 1693207680000,
                 })
             );
@@ -2729,7 +2729,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 1693207680000,
                         code: -2022,
                         msg: 'ReduceOnly Order is rejected.',
@@ -2780,7 +2780,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 1693207680000,
                         code: -2022,
                         msg: 'ReduceOnly Order is rejected.',
@@ -3401,7 +3401,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 0,
                 })
             );
@@ -3454,7 +3454,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 0,
                 })
             );
@@ -3539,7 +3539,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 0,
                 })
             );
@@ -3592,7 +3592,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 0,
                 })
             );
@@ -3677,7 +3677,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 1693207680000,
                 })
             );
@@ -3746,7 +3746,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     goodTillDate: 1693207680000,
                 })
             );

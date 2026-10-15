@@ -390,7 +390,7 @@ export class RestAPI {
     }
 
     /**
-     * Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
+     * Futures trading quantitative rules indicators, for more information on this, please refer to the Futures Trading Quantitative Rules
      *
      * Weight: - **1** for a single symbol
      * - **10** when the symbol parameter is omitted
@@ -1217,6 +1217,7 @@ export class RestAPI {
      * - If startTime and endTime are not sent, the most recent data is returned.
      * - Only the data of the latest 1 month is available.
      * - IP rate limit 1000 requests/5min
+     * - A period with no trades has no record and is omitted from the response. Such gaps are expected and are not backfilled.
      *
      * @summary Open Interest Statistics
      * @param {OpenInterestStatisticsRequest} requestParameters Request parameters.

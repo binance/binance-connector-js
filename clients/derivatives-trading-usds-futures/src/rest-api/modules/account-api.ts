@@ -213,7 +213,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
+         * Futures trading quantitative rules indicators, for more information on this, please refer to the Futures Trading Quantitative Rules
          *
          * Weight: - **1** for a single symbol
          * - **10** when the symbol parameter is omitted
@@ -674,7 +674,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {GetIncomeHistoryIncomeTypeEnum} [incomeType] Income type.
          * @param {number | bigint} [startTime] Timestamp in milliseconds (inclusive start).
          * @param {number | bigint} [endTime] Timestamp in milliseconds (inclusive end).
-         * @param {number | bigint} [page] Pagination page number.
          * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [recvWindow]
          *
@@ -685,7 +684,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             incomeType?: GetIncomeHistoryIncomeTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
-            page?: number | bigint,
             limit?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -704,9 +702,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             }
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
-            }
-            if (page !== undefined && page !== null) {
-                localVarQueryParameter['page'] = page;
             }
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
@@ -1015,7 +1010,7 @@ export interface AccountApiInterface {
         requestParameters?: FuturesAccountConfigurationRequest
     ): Promise<RestApiResponse<FuturesAccountConfigurationResponse>>;
     /**
-     * Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
+     * Futures trading quantitative rules indicators, for more information on this, please refer to the Futures Trading Quantitative Rules
      *
      * Weight: - **1** for a single symbol
      * - **10** when the symbol parameter is omitted
@@ -1599,13 +1594,6 @@ export interface GetIncomeHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Pagination page number.
-     * @type {number | bigint}
-     * @memberof AccountApiGetIncomeHistory
-     */
-    readonly page?: number | bigint;
-
-    /**
      * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
@@ -1887,7 +1875,7 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
+     * Futures trading quantitative rules indicators, for more information on this, please refer to the Futures Trading Quantitative Rules
      *
      * Weight: - **1** for a single symbol
      * - **10** when the symbol parameter is omitted
@@ -2273,7 +2261,6 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.incomeType,
             requestParameters?.startTime,
             requestParameters?.endTime,
-            requestParameters?.page,
             requestParameters?.limit,
             requestParameters?.recvWindow
         );

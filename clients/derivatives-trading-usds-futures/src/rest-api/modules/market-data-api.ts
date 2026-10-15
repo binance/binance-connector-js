@@ -910,6 +910,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * - If startTime and endTime are not sent, the most recent data is returned.
          * - Only the data of the latest 1 month is available.
          * - IP rate limit 1000 requests/5min
+         * - A period with no trades has no record and is omitted from the response. Such gaps are expected and are not backfilled.
          *
          * @summary Open Interest Statistics
          * @param {string} symbol
@@ -2013,6 +2014,7 @@ export interface MarketDataApiInterface {
      * - If startTime and endTime are not sent, the most recent data is returned.
      * - Only the data of the latest 1 month is available.
      * - IP rate limit 1000 requests/5min
+     * - A period with no trades has no record and is omitted from the response. Such gaps are expected and are not backfilled.
      *
      * @summary Open Interest Statistics
      * @param {OpenInterestStatisticsRequest} requestParameters Request parameters.
@@ -3769,6 +3771,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * - If startTime and endTime are not sent, the most recent data is returned.
      * - Only the data of the latest 1 month is available.
      * - IP rate limit 1000 requests/5min
+     * - A period with no trades has no record and is omitted from the response. Such gaps are expected and are not backfilled.
      *
      * @summary Open Interest Statistics
      * @param {OpenInterestStatisticsRequest} requestParameters Request parameters.
