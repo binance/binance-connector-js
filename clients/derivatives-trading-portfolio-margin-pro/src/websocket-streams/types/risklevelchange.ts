@@ -32,7 +32,7 @@ export interface Risklevelchange {
      */
     u?: string;
     /**
-     * Risk level: MARGIN_CALL, REDUCE_ONLY, FORCE_LIQUIDATION
+     * Risk level: NORMAL, MARGIN_CALL, REDUCE_ONLY, FORCE_LIQUIDATION
      * @type {string}
      * @memberof Risklevelchange
      */

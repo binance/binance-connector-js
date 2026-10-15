@@ -224,12 +224,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Fund Collection by Asset (USER_DATA)
          * @param {string} asset
+         * @param {number} [amount] Amount to collect. When provided, `futureType` is required.
+         * @param {FundCollectionByAssetFutureTypeEnum} [futureType] Target wallet for the collection. `OPTION` is for SPAN only. Cannot be sent without `amount`. `amount` and `futureType` must be provided together. If neither is provided, existing behavior is unchanged (query all wallets + transfer).
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         fundCollectionByAsset: async (
             asset: string,
+            amount?: number,
+            futureType?: FundCollectionByAssetFutureTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
@@ -241,6 +245,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
+            }
+            if (amount !== undefined && amount !== null) {
+                localVarQueryParameter['amount'] = amount;
+            }
+            if (futureType !== undefined && futureType !== null) {
+                localVarQueryParameter['futureType'] = futureType;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -1343,6 +1353,20 @@ export interface FundCollectionByAssetRequest {
     readonly asset: string;
 
     /**
+     * Amount to collect. When provided, `futureType` is required.
+     * @type {number}
+     * @memberof AccountApiFundCollectionByAsset
+     */
+    readonly amount?: number;
+
+    /**
+     * Target wallet for the collection. `OPTION` is for SPAN only. Cannot be sent without `amount`. `amount` and `futureType` must be provided together. If neither is provided, existing behavior is unchanged (query all wallets + transfer).
+     * @type {'UM' | 'CM' | 'OPTION'}
+     * @memberof AccountApiFundCollectionByAsset
+     */
+    readonly futureType?: FundCollectionByAssetFutureTypeEnum;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof AccountApiFundCollectionByAsset
@@ -1844,6 +1868,8 @@ export class AccountApi implements AccountApiInterface {
     ): Promise<RestApiResponse<FundCollectionByAssetResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.fundCollectionByAsset(
             requestParameters?.asset,
+            requestParameters?.amount,
+            requestParameters?.futureType,
             requestParameters?.recvWindow
         );
         return sendRequest<FundCollectionByAssetResponse>(
@@ -2386,6 +2412,12 @@ export enum BnbTransferTransferSideEnum {
 export enum ChangeAutoRepayFuturesStatusAutoRepayEnum {
     TRUE = 'true',
     FALSE = 'false',
+}
+
+export enum FundCollectionByAssetFutureTypeEnum {
+    UM = 'UM',
+    CM = 'CM',
+    OPTION = 'OPTION',
 }
 
 export enum GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum {

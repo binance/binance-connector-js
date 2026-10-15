@@ -19,6 +19,7 @@ import {
     AccountApi,
     BnbTransferTransferSideEnum,
     ChangeAutoRepayFuturesStatusAutoRepayEnum,
+    FundCollectionByAssetFutureTypeEnum,
     GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum,
     PortfolioMarginProBankruptcyLoanRepayFromEnum,
     RepayFuturesNegativeBalanceFromEnum,
@@ -395,6 +396,8 @@ describe('AccountApi', () => {
         it('should execute fundCollectionByAsset() successfully with optional parameters', async () => {
             const params: FundCollectionByAssetRequest = {
                 asset: 'USDT',
+                amount: 10,
+                futureType: FundCollectionByAssetFutureTypeEnum.UM,
                 recvWindow: 5000,
             };
 

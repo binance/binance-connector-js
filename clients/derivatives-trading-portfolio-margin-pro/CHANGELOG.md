@@ -1,5 +1,26 @@
 # Changelog
 
+## 15.1.0 - 2026-10-15
+
+### Changed (6)
+
+- Update `@binance/common` library to version `2.5.0`.
+- Resolve security vulnerabilities.
+
+#### REST API
+
+- Added parameter `amount`
+  - affected methods:
+    - `fundCollectionByAsset()` (`POST /sapi/v1/portfolio/asset-collection`)
+- Added parameter `futureType`
+  - affected methods:
+    - `fundCollectionByAsset()` (`POST /sapi/v1/portfolio/asset-collection`)
+
+#### WebSocket Streams
+
+- Modified response schema `UserDataStreamEventsResponse`:
+  - oneOf modified
+
 ## 15.0.5 - 2026-10-02
 
 ### Changed (2)
