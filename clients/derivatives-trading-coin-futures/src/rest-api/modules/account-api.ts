@@ -466,7 +466,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {GetIncomeHistoryIncomeTypeEnum} [incomeType] Income type.
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [page] Page number
          * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [recvWindow]
          *
@@ -477,7 +476,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             incomeType?: GetIncomeHistoryIncomeTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
-            page?: number | bigint,
             limit?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -496,9 +494,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             }
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
-            }
-            if (page !== undefined && page !== null) {
-                localVarQueryParameter['page'] = page;
             }
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
@@ -1117,13 +1112,6 @@ export interface GetIncomeHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Page number
-     * @type {number | bigint}
-     * @memberof AccountApiGetIncomeHistory
-     */
-    readonly page?: number | bigint;
-
-    /**
      * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
@@ -1569,7 +1557,6 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.incomeType,
             requestParameters?.startTime,
             requestParameters?.endTime,
-            requestParameters?.page,
             requestParameters?.limit,
             requestParameters?.recvWindow
         );

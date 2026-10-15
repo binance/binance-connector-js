@@ -1037,9 +1037,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {NewOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order;
          * Can't be passed together with `price`
-         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/
-         * `EXPIRE_MAKER`:expire taker order when STP triggers/
-         * `EXPIRE_BOTH`:expire both orders when STP triggers
+         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`: expire taker order when STP triggers/
+         * `EXPIRE_MAKER`: expire taker order when STP triggers/
+         * `EXPIRE_BOTH`: expire both orders when STP triggers
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -2685,9 +2685,9 @@ export interface NewOrderRequest {
     readonly priceMatch?: NewOrderPriceMatchEnum;
 
     /**
-     * `EXPIRE_TAKER`:expire taker order when STP triggers/
-     * `EXPIRE_MAKER`:expire taker order when STP triggers/
-     * `EXPIRE_BOTH`:expire both orders when STP triggers
+     * `EXPIRE_TAKER`: expire taker order when STP triggers/
+     * `EXPIRE_MAKER`: expire taker order when STP triggers/
+     * `EXPIRE_BOTH`: expire both orders when STP triggers
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewOrder
      */

@@ -413,7 +413,7 @@ export interface NewOrderRequest {
     readonly priceMatch?: NewOrderPriceMatchEnum;
 
     /**
-     * `NONE`: No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
+     * `NONE`: No STP / `EXPIRE_TAKER`: expire taker order when STP triggers/ `EXPIRE_MAKER`: expire taker order when STP triggers/ `EXPIRE_BOTH`: expire both orders when STP triggers
      * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewOrder
      */

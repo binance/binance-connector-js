@@ -1,5 +1,18 @@
 # Changelog
 
+## 22.0.0 - 2026-10-15
+
+### Changed (3)
+
+- Update `@binance/common` library to version `2.5.0`.
+- Resolve security vulnerabilities.
+
+#### REST API
+
+- Deleted parameter `page`
+  - affected methods:
+    - `getIncomeHistory()` (`GET /dapi/v1/income`)
+
 ## 21.0.4 - 2026-10-02
 
 ### Changed (2)

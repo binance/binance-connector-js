@@ -233,7 +233,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 1579385751000,
                     },
                 ])
@@ -293,7 +293,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         goodTillDate: 1579385751000,
                     },
                 ])
@@ -539,7 +539,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         updateTime: 1571110484038,
                         code: -2011,
                         msg: 'Unknown order sent.',
@@ -594,7 +594,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         updateTime: 1571110484038,
                         code: -2011,
                         msg: 'Unknown order sent.',
@@ -679,7 +679,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -730,7 +730,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -1078,7 +1078,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
             );
@@ -1132,7 +1132,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
             );
@@ -1551,7 +1551,7 @@ describe('TradeApi', () => {
                         priceProtect: false,
                         origType: 'LIMIT',
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         updateTime: 1629182711600,
                         code: -2022,
                         msg: 'ReduceOnly Order is rejected.',
@@ -1603,7 +1603,7 @@ describe('TradeApi', () => {
                         priceProtect: false,
                         origType: 'LIMIT',
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         updateTime: 1629182711600,
                         code: -2022,
                         msg: 'ReduceOnly Order is rejected.',
@@ -1687,7 +1687,7 @@ describe('TradeApi', () => {
                     priceProtect: false,
                     origType: 'LIMIT',
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     updateTime: 1629182711600,
                 })
             );
@@ -1742,7 +1742,7 @@ describe('TradeApi', () => {
                     priceProtect: false,
                     origType: 'LIMIT',
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                     updateTime: 1629182711600,
                 })
             );
@@ -1841,7 +1841,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -1907,7 +1907,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -2021,7 +2021,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         code: -2022,
                         msg: 'ReduceOnly Order is rejected.',
                     },
@@ -2074,7 +2074,7 @@ describe('TradeApi', () => {
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
                         priceMatch: 'NONE',
-                        selfTradePreventionMode: 'NONE',
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                         code: -2022,
                         msg: 'ReduceOnly Order is rejected.',
                     },
@@ -2327,7 +2327,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -2380,7 +2380,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -2465,7 +2465,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -2518,7 +2518,7 @@ describe('TradeApi', () => {
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
                     priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 

@@ -1010,7 +1010,6 @@ describe('AccountApi', () => {
                 incomeType: GetIncomeHistoryIncomeTypeEnum.TRANSFER,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 1,
                 limit: 30,
                 recvWindow: 5000,
             };
