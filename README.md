@@ -33,6 +33,7 @@ nvm use 22.12.0
 - [@binance/algo](./clients/algo/) - Algo Trading connector
 - [@binance/alpha](./clients/alpha/) - Alpha connector
 - [@binance/c2c](./clients/c2c/) - C2C connector
+- [@binance/cms](./clients/cms/) - CMS (Announcements) connector
 - [@binance/convert](./clients/convert/) - Convert connector
 - [@binance/copy-trading](./clients/copy-trading/) - Copy Trading connector
 - [@binance/crypto-loan](./clients/crypto-loan/) - Crypto Loan connector
