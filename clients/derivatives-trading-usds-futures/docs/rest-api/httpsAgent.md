@@ -21,3 +21,6 @@ client.restAPI
     .then((data) => console.log(data))
     .catch((err) => console.error(err));
 ```
+
+For an HTTP or HTTPS proxy that requires a CONNECT tunnel, see the
+[HTTPS CONNECT proxy example](./proxy.md#https-connect-proxies).
