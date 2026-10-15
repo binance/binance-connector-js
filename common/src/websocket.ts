@@ -13,6 +13,8 @@ import {
     buildWebsocketAPIMessage,
     normalizeStreamId,
     redactMessage,
+    getSignature,
+    getTimestamp,
 } from '.';
 
 export class WebsocketEventEmitter {
@@ -492,10 +494,22 @@ export class WebsocketCommon extends WebsocketEventEmitter {
             perMessageDeflate: this.configuration?.compression,
             agent: this.configuration?.agent,
         };
-        if (this.configuration.userAgent)
-            wsClientOptions.headers = { 'User-Agent': this.configuration.userAgent };
+        const headers: Record<string, string> = {
+            ...(this.configuration.userAgent && { 'User-Agent': this.configuration.userAgent }),
+            ...this.getConnectionHeaders(),
+        };
+        if (Object.keys(headers).length > 0) wsClientOptions.headers = headers;
 
         return new WebSocketClient(url, wsClientOptions);
+    }
+
+    /**
+     * Returns additional HTTP headers to be sent on the WebSocket handshake.
+     * Derived classes can override this to inject authentication headers.
+     * @returns A record of header names and values.
+     */
+    protected getConnectionHeaders(): Record<string, string> {
+        return {};
     }
 
     /**
@@ -944,11 +958,14 @@ export class WebsocketAPIBase extends WebsocketCommon {
 }
 
 export class WebsocketStreamsBase extends WebsocketCommon {
+    private static readonly SIGNED_STREAMS_PING_INTERVAL = 30 * 1000;
+    private static readonly SIGNED_STREAMS_RECV_WINDOW = 30000;
     private streamConnectionMap: Map<string, WebsocketConnection> = new Map();
     protected urlPaths: string[];
     protected configuration: ConfigurationWebsocketStreams;
     protected wsURL: string;
     streamIdIsStrictlyNumber?: boolean = false;
+    signedStreams?: boolean = false;
     streamCallbackMap: Map<string, Set<(data: unknown) => void>> = new Map();
     logger: Logger = Logger.getInstance();
 
@@ -1004,6 +1021,8 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * @returns The formatted WebSocket URL with the provided streams.
      */
     private prepareURL(streams: string[] = [], urlPath?: string): string {
+        if (this.signedStreams) return this.prepareSignedURL();
+
         let url = `${urlPath ? `${this.wsURL}/${urlPath}` : this.wsURL}/stream?streams=${streams.join('/')}`;
 
         if (this.configuration?.timeUnit) {
@@ -1019,6 +1038,59 @@ export class WebsocketStreamsBase extends WebsocketCommon {
     }
 
     /**
+     * Builds a signed WebSocket URL for signed streams.
+     * The query string `random=<random>&recvWindow=<recvWindow>&timestamp=<timestamp>` is signed
+     * using the configured API secret or private key, and the signature is appended to the URL.
+     * A new signature (with a fresh timestamp) is generated every time this method is called,
+     * so reconnections and renewals always use a valid URL.
+     * @returns The signed WebSocket URL.
+     */
+    private prepareSignedURL(): string {
+        const params = {
+            random: randomString(),
+            recvWindow: WebsocketStreamsBase.SIGNED_STREAMS_RECV_WINDOW,
+            timestamp: getTimestamp(),
+        };
+        const signature = getSignature(this.configuration, params);
+        const query = `random=${params.random}&recvWindow=${params.recvWindow}&timestamp=${params.timestamp}`;
+        const separator = this.wsURL.includes('?') ? '&' : '?';
+
+        return `${this.wsURL}${separator}${query}&signature=${encodeURIComponent(signature)}`;
+    }
+
+    /**
+     * Ensures that the configuration contains the credentials required by signed streams.
+     * @throws Error if the API key or the signing credentials are missing.
+     */
+    private assertSignedStreamsCredentials(): void {
+        if (!this.configuration?.apiKey)
+            throw new Error('\'apiKey\' is required for signed websocket streams.');
+        if (!this.configuration?.apiSecret && !this.configuration?.privateKey)
+            throw new Error(
+                'Either \'apiSecret\' or \'privateKey\' must be provided for signed websocket streams.'
+            );
+    }
+
+    /**
+     * Returns the additional handshake headers. For signed streams the `X-MBX-APIKEY` header is added.
+     * @returns A record of header names and values.
+     */
+    protected getConnectionHeaders(): Record<string, string> {
+        if (this.signedStreams && this.configuration?.apiKey)
+            return { 'X-MBX-APIKEY': this.configuration.apiKey };
+        return {};
+    }
+
+    /**
+     * Strips the optional `urlPath::` prefix from a stream key.
+     * @param key - The stream key.
+     * @returns The stream name.
+     */
+    private streamFromKey(key: string): string {
+        return key.includes('::') ? key.split('::').slice(1).join('::') : key;
+    }
+
+    /**
      * Formats the WebSocket URL with stream and configuration parameters to be used for reconnection.
      * @param url - The base WebSocket URL.
      * @param targetConnection - The target WebSocket connection.
@@ -1027,7 +1099,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
     protected getReconnectURL(url: string, targetConnection: WebsocketConnection): string {
         const streams = Array.from(this.streamConnectionMap.keys())
             .filter((stream) => this.streamConnectionMap.get(stream) === targetConnection)
-            .map((key) => (key.includes('::') ? key.split('::').slice(1).join('::') : key));
+            .map((key) => this.streamFromKey(key));
 
         return this.prepareURL(streams, targetConnection?.urlPath);
     }
@@ -1075,6 +1147,15 @@ export class WebsocketStreamsBase extends WebsocketCommon {
         streams: string[],
         id?: number | string
     ): void {
+        if (this.signedStreams) {
+            // A single command with `|`-joined topics keeps within the 5 messages/second limit.
+            if (streams.length === 0) return;
+            const payload = { command: 'SUBSCRIBE', value: streams.join('|') };
+            this.logger.debug('SUBSCRIBE', payload);
+            this.send(JSON.stringify(payload), undefined, false, 0, connection);
+            return;
+        }
+
         const payload = {
             method: 'SUBSCRIBE',
             params: streams,
@@ -1090,10 +1171,37 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * @param connection The WebSocket connection to process.
      */
     private processPendingSubscriptions(connection: WebsocketConnection): void {
-        if (connection.pendingSubscriptions && connection.pendingSubscriptions.length > 0) {
+        let streams = connection.pendingSubscriptions ?? [];
+
+        // Signed streams cannot carry the subscribed streams in the connection URL,
+        // so after a (re)connection or renewal all the streams assigned to this
+        // connection have to be subscribed again.
+        if (this.signedStreams) {
+            const assignedStreams = Array.from(this.streamConnectionMap.entries())
+                .filter(([, assignedConnection]) => assignedConnection === connection)
+                .map(([key]) => this.streamFromKey(key));
+            streams = Array.from(new Set([...streams, ...assignedStreams]));
+        }
+
+        if (streams.length > 0) {
             this.logger.info('Processing queued subscriptions for connection');
-            this.sendSubscriptionPayload(connection, connection.pendingSubscriptions);
+            this.sendSubscriptionPayload(connection, streams);
             connection.pendingSubscriptions = [];
+        }
+    }
+
+    /**
+     * Parses the payload of a signed stream message.
+     * Signed streams deliver `data` as a JSON-encoded string, so it is parsed when possible.
+     * @param data - The raw `data` field of the message.
+     * @returns The parsed payload.
+     */
+    private parseSignedStreamData(data: unknown): unknown {
+        if (typeof data !== 'string') return data;
+        try {
+            return JSONParse(data);
+        } catch {
+            return data;
         }
     }
 
@@ -1108,15 +1216,24 @@ export class WebsocketStreamsBase extends WebsocketCommon {
     protected onMessage(data: string, connection: WebsocketConnection): void {
         try {
             const parsedData = JSONParse(data);
-            const streamName = parsedData?.stream;
+
+            if (this.signedStreams && parsedData?.type === 'COMMAND') {
+                if (parsedData?.data === 'SUCCESS')
+                    this.logger.debug(`${parsedData?.subType} command succeeded`, parsedData);
+                else this.logger.warn(`${parsedData?.subType} command failed`, parsedData);
+            }
+
+            const streamName =
+                parsedData?.stream ?? (this.signedStreams ? parsedData?.topic : undefined);
 
             if (streamName) {
                 const key = this.streamKey(streamName, connection?.urlPath);
+                const payload = this.signedStreams
+                    ? this.parseSignedStreamData(parsedData.data)
+                    : parsedData.data;
 
                 if (this.streamCallbackMap.has(key)) {
-                    this.streamCallbackMap
-                        .get(key)
-                        ?.forEach((callback) => callback(parsedData.data));
+                    this.streamCallbackMap.get(key)?.forEach((callback) => callback(payload));
                 }
             }
         } catch (error) {
@@ -1138,8 +1255,41 @@ export class WebsocketStreamsBase extends WebsocketCommon {
         targetConnection: WebsocketConnection,
         oldWSConnection: WebSocketClient
     ): void {
-        this.processPendingSubscriptions(targetConnection);
+        if (!this.signedStreams) {
+            this.processPendingSubscriptions(targetConnection);
+            super.onOpen(url, targetConnection, oldWSConnection);
+            return;
+        }
+
+        // For signed streams the base handler runs first so that the reconnection
+        // flags are cleared before the streams are (re)subscribed on this connection.
         super.onOpen(url, targetConnection, oldWSConnection);
+        if (!this.isConnectionReady(targetConnection)) return;
+        this.processPendingSubscriptions(targetConnection);
+        this.scheduleSignedStreamsPing(targetConnection);
+    }
+
+    /**
+     * Signed streams require the client to send a PING frame every 30 seconds,
+     * otherwise the server closes the connection. The timer is bound to the
+     * underlying WebSocket client and is cleared automatically on cleanup.
+     * @param connection - The WebSocket connection to keep alive.
+     */
+    private scheduleSignedStreamsPing(connection: WebsocketConnection): void {
+        const ws = connection.ws;
+        if (!ws) return;
+
+        this.scheduleTimer(
+            ws,
+            () => {
+                if (ws.readyState === WebSocketClient.OPEN) {
+                    ws.ping(Buffer.alloc(0));
+                    this.logger.debug(`PING sent to connection with id ${connection.id}`);
+                }
+            },
+            WebsocketStreamsBase.SIGNED_STREAMS_PING_INTERVAL,
+            'interval'
+        );
     }
 
     /**
@@ -1161,6 +1311,14 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      */
     connect(stream: string | string[] = []): Promise<void> {
         const streams = Array.isArray(stream) ? stream : [stream];
+
+        if (this.signedStreams) {
+            try {
+                this.assertSignedStreamsCredentials();
+            } catch (err) {
+                return Promise.reject(err);
+            }
+        }
 
         return new Promise((resolve, reject) => {
             const timeout = setTimeout(() => {
@@ -1184,7 +1342,11 @@ export class WebsocketStreamsBase extends WebsocketCommon {
                     : [this.connectPool(this.prepareURL(streams))];
 
             Promise.all(connections)
-                .then(() => resolve())
+                .then(() => {
+                    // Signed streams are not part of the URL, they have to be subscribed explicitly.
+                    if (this.signedStreams && streams.length > 0) this.subscribe(streams);
+                    resolve();
+                })
                 .catch((error) => reject(error))
                 .finally(() => clearTimeout(timeout));
         });
@@ -1239,6 +1401,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      */
     unsubscribe(stream: string | string[], id?: number | string, urlPath?: string): void {
         const streams = Array.isArray(stream) ? stream : [stream];
+        const signedUnsubscriptions = new Map<WebsocketConnection, string[]>();
 
         streams.forEach((stream) => {
             const key = this.streamKey(stream, urlPath);
@@ -1249,17 +1412,30 @@ export class WebsocketStreamsBase extends WebsocketCommon {
             }
 
             if (!this.streamCallbackMap.has(key) || this.streamCallbackMap.get(key)?.size === 0) {
-                const payload = {
-                    method: 'UNSUBSCRIBE',
-                    params: [stream],
-                    id: normalizeStreamId(id, this.streamIdIsStrictlyNumber),
-                };
-                this.logger.debug('UNSUBSCRIBE', payload);
-                this.send(JSON.stringify(payload), undefined, false, 0, connection);
+                if (this.signedStreams) {
+                    const pending = signedUnsubscriptions.get(connection) ?? [];
+                    pending.push(stream);
+                    signedUnsubscriptions.set(connection, pending);
+                } else {
+                    const payload = {
+                        method: 'UNSUBSCRIBE',
+                        params: [stream],
+                        id: normalizeStreamId(id, this.streamIdIsStrictlyNumber),
+                    };
+                    this.logger.debug('UNSUBSCRIBE', payload);
+                    this.send(JSON.stringify(payload), undefined, false, 0, connection);
+                }
 
                 this.streamConnectionMap.delete(key);
                 this.streamCallbackMap.delete(key);
             }
+        });
+
+        // A single command per connection with `|`-joined topics keeps within the 5 messages/second limit.
+        signedUnsubscriptions.forEach((pending, connection) => {
+            const payload = { command: 'UNSUBSCRIBE', value: pending.join('|') };
+            this.logger.debug('UNSUBSCRIBE', payload);
+            this.send(JSON.stringify(payload), undefined, false, 0, connection);
         });
     }
 

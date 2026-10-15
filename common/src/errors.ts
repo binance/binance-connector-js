@@ -108,12 +108,18 @@ export class ServerError extends Error {
 /**
  * Represents an error that occurs when a network error occurs.
  * @param msg - An optional error message.
+ * @param transportCode - An optional transport-level error code reported by the HTTP client
+ * (e.g. `ECONNREFUSED`, `ENOTFOUND`, `ECONNABORTED`, `ETIMEDOUT`). This is distinct from the
+ * numeric Binance API error `code` exposed by other error classes.
  */
 export class NetworkError extends Error {
-    constructor(msg?: string) {
+    public transportCode?: string;
+
+    constructor(msg?: string, transportCode?: string) {
         super(msg || 'A network error occurred.');
         Object.setPrototypeOf(this, NetworkError.prototype);
         this.name = 'NetworkError';
+        this.transportCode = transportCode;
     }
 }
 

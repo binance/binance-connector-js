@@ -258,6 +258,30 @@ export class ConfigurationWebsocketStreams {
      */
     wsURL?: string;
     /**
+     * The API key used for authentication (signed websocket streams only).
+     * @type {string}
+     * @memberof ConfigurationWebsocketStreams
+     */
+    apiKey?: string;
+    /**
+     * The API secret used for HMAC signing (signed websocket streams only).
+     * @type {string}
+     * @memberof ConfigurationWebsocketStreams
+     */
+    apiSecret?: string;
+    /**
+     * private key used for RSA / ED25519 signing (signed websocket streams only)
+     * @type {string | Buffer}
+     * @memberof ConfigurationWebsocketStreams
+     */
+    privateKey?: string | Buffer;
+    /**
+     * private key passphrase (signed websocket streams only)
+     * @type {string}
+     * @memberof ConfigurationWebsocketStreams
+     */
+    privateKeyPassphrase?: string;
+    /**
      * reconnction delay
      * @default 5000
      * @type {number}
@@ -308,6 +332,10 @@ export class ConfigurationWebsocketStreams {
 
     constructor(param: ConfigurationWebsocketStreams = {}) {
         this.wsURL = param.wsURL;
+        this.apiKey = param.apiKey;
+        this.apiSecret = param.apiSecret;
+        this.privateKey = param.privateKey;
+        this.privateKeyPassphrase = param.privateKeyPassphrase;
         this.reconnectDelay = param.reconnectDelay ?? 5000;
         this.compression = param.compression ?? true;
         this.agent = param.agent ?? false;

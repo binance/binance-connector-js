@@ -14,6 +14,7 @@ import {
     Logger,
     delay,
     normalizeStreamId,
+    clearSignerCache,
 } from '../src';
 
 jest.mock('ws');
@@ -3763,6 +3764,265 @@ describe('WebsocketStreamsBase', () => {
             expect(wsStreams.isSubscribed('')).toBe(false);
             expect(wsStreams.isSubscribed(null as never)).toBe(false);
             expect(wsStreams.isSubscribed(undefined as never)).toBe(false);
+        });
+    });
+});
+
+describe('WebsocketStreamsBase (signed streams)', () => {
+    let wsStreams: WebsocketStreamsBase;
+    let mockLogger: jest.Mocked<Logger>;
+    let connection: WebsocketConnection;
+    let mockWs: jest.Mocked<WebSocketClient> & EventEmitter;
+    const apiSecret = 'test-api-secret';
+
+    beforeEach(() => {
+        jest.restoreAllMocks();
+        clearSignerCache();
+        jest.useFakeTimers();
+
+        mockLogger = {
+            info: jest.fn(),
+            error: jest.fn(),
+            warn: jest.fn(),
+            debug: jest.fn(),
+            getInstance: jest.fn().mockReturnThis(),
+        } as unknown as jest.Mocked<Logger>;
+
+        (Logger.getInstance as jest.MockedFunction<typeof Logger.getInstance>).mockReturnValue(
+            mockLogger
+        );
+
+        mockWs = createMockWebSocket(WebSocketClient.OPEN);
+        (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+            () => mockWs
+        );
+
+        connection = {
+            id: 'signed-connection',
+            ws: mockWs,
+            closeInitiated: false,
+            reconnectionPending: false,
+            renewalPending: false,
+            pendingRequests: new Map(),
+            pendingSubscriptions: [],
+        };
+
+        wsStreams = new WebsocketStreamsBase(
+            new ConfigurationWebsocketStreams({
+                wsURL: 'wss://api.binance.com/sapi/wss',
+                apiKey: 'test-api-key',
+                apiSecret,
+            }),
+            [connection]
+        );
+        wsStreams.signedStreams = true;
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
+        jest.clearAllTimers();
+        jest.useRealTimers();
+    });
+
+    describe('prepareURL()', () => {
+        it('should build a signed URL without the /stream suffix', () => {
+            const url: string = wsStreams['prepareURL'](['ignored_stream']);
+            const parsed = new URL(url);
+
+            expect(`${parsed.origin}${parsed.pathname}`).toBe('wss://api.binance.com/sapi/wss');
+            expect(parsed.searchParams.get('streams')).toBeNull();
+            expect(parsed.searchParams.get('random')).toBeTruthy();
+            expect(parsed.searchParams.get('recvWindow')).toBe('30000');
+            expect(parsed.searchParams.get('timestamp')).toMatch(/^\d+$/);
+
+            const query = `random=${parsed.searchParams.get('random')}&recvWindow=30000&timestamp=${parsed.searchParams.get('timestamp')}`;
+            const expectedSignature = crypto
+                .createHmac('sha256', apiSecret)
+                .update(query)
+                .digest('hex');
+            expect(parsed.searchParams.get('signature')).toBe(expectedSignature);
+        });
+
+        it('should generate a fresh timestamp on every call', () => {
+            const first = new URL(wsStreams['prepareURL']()).searchParams;
+            jest.advanceTimersByTime(1000);
+            const second = new URL(wsStreams['prepareURL']()).searchParams;
+            expect(first.get('timestamp')).not.toBe(second.get('timestamp'));
+        });
+    });
+
+    describe('createWebSocket()', () => {
+        it('should send the X-MBX-APIKEY header on the handshake', () => {
+            wsStreams['configuration'].userAgent = 'test-agent';
+            wsStreams['createWebSocket']('wss://api.binance.com/sapi/wss');
+
+            expect(WebSocketClient).toHaveBeenCalledWith(
+                'wss://api.binance.com/sapi/wss',
+                expect.objectContaining({
+                    headers: { 'User-Agent': 'test-agent', 'X-MBX-APIKEY': 'test-api-key' },
+                })
+            );
+        });
+
+        it('should not send the X-MBX-APIKEY header for unsigned streams', () => {
+            wsStreams.signedStreams = false;
+            wsStreams['createWebSocket']('wss://test.com');
+
+            const options = (WebSocketClient as unknown as jest.Mock).mock.calls[0][1] as {
+                headers?: Record<string, string>;
+            };
+            expect(options.headers?.['X-MBX-APIKEY']).toBeUndefined();
+        });
+    });
+
+    describe('connect()', () => {
+        it('should reject when the API key is missing', async () => {
+            wsStreams['configuration'].apiKey = undefined;
+            await expect(wsStreams.connect()).rejects.toThrow(
+                '\'apiKey\' is required for signed websocket streams.'
+            );
+        });
+
+        it('should reject when neither apiSecret nor privateKey are provided', async () => {
+            wsStreams['configuration'].apiSecret = undefined;
+            await expect(wsStreams.connect()).rejects.toThrow(
+                'Either \'apiSecret\' or \'privateKey\' must be provided for signed websocket streams.'
+            );
+        });
+    });
+
+    describe('subscribe() / unsubscribe()', () => {
+        it('should send a single { command, value } SUBSCRIBE payload with |-joined streams', () => {
+            wsStreams.subscribe(['com_announcement_en', 'web3_prediction_orderbook_data']);
+
+            expect(mockWs.send).toHaveBeenCalledTimes(1);
+            expect(JSONParse(mockWs.send.mock.calls[0][0] as string)).toEqual({
+                command: 'SUBSCRIBE',
+                value: 'com_announcement_en|web3_prediction_orderbook_data',
+            });
+        });
+
+        it('should send a single |-joined UNSUBSCRIBE payload for multiple streams', () => {
+            wsStreams.subscribe(['a_topic', 'b_topic']);
+            mockWs.send.mockClear();
+
+            wsStreams.unsubscribe(['a_topic', 'b_topic']);
+
+            expect(mockWs.send).toHaveBeenCalledTimes(1);
+            expect(JSONParse(mockWs.send.mock.calls[0][0] as string)).toEqual({
+                command: 'UNSUBSCRIBE',
+                value: 'a_topic|b_topic',
+            });
+        });
+
+        it('should send a { command, value } UNSUBSCRIBE payload', () => {
+            wsStreams.subscribe('com_announcement_en');
+            mockWs.send.mockClear();
+
+            wsStreams.unsubscribe('com_announcement_en');
+
+            expect(mockWs.send).toHaveBeenCalledTimes(1);
+            expect(JSONParse(mockWs.send.mock.calls[0][0] as string)).toEqual({
+                command: 'UNSUBSCRIBE',
+                value: 'com_announcement_en',
+            });
+        });
+    });
+
+    describe('onMessage()', () => {
+        it('should route messages by topic and parse JSON-encoded string data', () => {
+            const cb = jest.fn();
+            wsStreams.streamCallbackMap.set('com_announcement_en', new Set([cb]));
+
+            const data = { catalogId: 161, title: 'Notice of...' };
+            const msg = JSON.stringify({
+                type: 'DATA',
+                topic: 'com_announcement_en',
+                data: JSON.stringify(data),
+            });
+
+            wsStreams['onMessage'](msg, connection);
+
+            expect(cb).toHaveBeenCalledWith(data);
+        });
+
+        it('should pass object data through unchanged', () => {
+            const cb = jest.fn();
+            wsStreams.streamCallbackMap.set('web3_prediction_orderbook_data', new Set([cb]));
+
+            wsStreams['onMessage'](
+                JSON.stringify({
+                    type: 'DATA',
+                    topic: 'web3_prediction_orderbook_data',
+                    data: { marketId: 1 },
+                }),
+                connection
+            );
+
+            expect(cb).toHaveBeenCalledWith({ marketId: 1 });
+        });
+
+        it('should not invoke stream callbacks for COMMAND responses', () => {
+            const cb = jest.fn();
+            wsStreams.streamCallbackMap.set('com_announcement_en', new Set([cb]));
+
+            wsStreams['onMessage'](
+                JSON.stringify({
+                    type: 'COMMAND',
+                    data: 'SUCCESS',
+                    subType: 'SUBSCRIBE',
+                    code: '00000000',
+                }),
+                connection
+            );
+
+            expect(cb).not.toHaveBeenCalled();
+            expect(mockLogger.warn).not.toHaveBeenCalled();
+        });
+
+        it('should warn on failed COMMAND responses', () => {
+            wsStreams['onMessage'](
+                JSON.stringify({ type: 'COMMAND', data: 'FAIL', subType: 'SUBSCRIBE' }),
+                connection
+            );
+
+            expect(mockLogger.warn).toHaveBeenCalled();
+        });
+    });
+
+    describe('onOpen()', () => {
+        it('should re-subscribe every stream assigned to the connection', () => {
+            wsStreams['streamConnectionMap'].set('com_announcement_en', connection);
+            connection.pendingSubscriptions = ['web3_prediction_orderbook_data'];
+
+            wsStreams['onOpen']('wss://api.binance.com/sapi/wss', connection, mockWs);
+
+            expect(mockWs.send).toHaveBeenCalledTimes(1);
+            const { value } = JSONParse(mockWs.send.mock.calls[0][0] as string) as {
+                value: string;
+            };
+            expect(value.split('|').sort()).toEqual(
+                ['com_announcement_en', 'web3_prediction_orderbook_data'].sort()
+            );
+            expect(connection.pendingSubscriptions).toEqual([]);
+        });
+
+        it('should send a PING frame every 30 seconds', () => {
+            wsStreams['onOpen']('wss://api.binance.com/sapi/wss', connection, mockWs);
+
+            expect(mockWs.ping).not.toHaveBeenCalled();
+            jest.advanceTimersByTime(30000);
+            expect(mockWs.ping).toHaveBeenCalledTimes(1);
+            jest.advanceTimersByTime(30000);
+            expect(mockWs.ping).toHaveBeenCalledTimes(2);
+        });
+
+        it('should not schedule PINGs for unsigned streams', () => {
+            wsStreams.signedStreams = false;
+            wsStreams['onOpen']('wss://test.com', connection, mockWs);
+
+            jest.advanceTimersByTime(60000);
+            expect(mockWs.ping).not.toHaveBeenCalled();
         });
     });
 });

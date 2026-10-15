@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { inspect } from 'util';
 import axios, { AxiosError } from 'axios';
 import { JSONParse } from 'json-with-bigint';
 import * as utils from '../src/utils';
@@ -24,12 +25,16 @@ import {
     ConfigurationWebsocketAPI,
     WebsocketSendMsgOptions,
     Logger,
+    NetworkError,
+    getTransportCode,
 } from '../src';
 import { fail } from 'assert';
 
 jest.mock('../src/logger');
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
+// `axios` is auto-mocked above, so use the real AxiosError to build realistic transport failures.
+const RealAxiosError = jest.requireActual<typeof import('axios')>('axios').AxiosError;
 
 const restConfiguration = new ConfigurationRestAPI({
     apiKey: 'test-api-key',
@@ -561,6 +566,24 @@ describe('Utility Functions', () => {
         });
     });
 
+    describe('getTransportCode()', () => {
+        it('should return the code of an AxiosError', () => {
+            expect(getTransportCode(new RealAxiosError('x', 'ENOTFOUND'))).toBe('ENOTFOUND');
+            expect(getTransportCode(new RealAxiosError('x', 'ERR_NETWORK'))).toBe('ERR_NETWORK');
+        });
+
+        it('should return undefined for missing, non-string or malformed codes', () => {
+            expect(getTransportCode(undefined)).toBeUndefined();
+            expect(getTransportCode(null)).toBeUndefined();
+            expect(getTransportCode('ECONNREFUSED')).toBeUndefined();
+            expect(getTransportCode(new Error('x'))).toBeUndefined();
+            expect(getTransportCode({ code: -1021 })).toBeUndefined();
+            expect(getTransportCode({ code: '' })).toBeUndefined();
+            expect(getTransportCode({ code: 'apiKey=secret' })).toBeUndefined();
+            expect(getTransportCode({ code: 'E'.repeat(65) })).toBeUndefined();
+        });
+    });
+
     describe('shouldRetryRequest()', () => {
         it('should return true for a 5xx response error with a retriable method', () => {
             const error: AxiosError = {
@@ -811,6 +834,25 @@ describe('Utility Functions', () => {
             expect(mockAxios.request).toHaveBeenCalledTimes(3);
         });
 
+        it('should throw NetworkError when retries are exhausted on network failures', async () => {
+            restConfiguration.retries = 3;
+            restConfiguration.backoff = 0;
+
+            mockAxios.request.mockRejectedValue({ code: 'ECONNREFUSED' });
+
+            const requestArgs = { url: '/test', options: { method: 'GET' } };
+
+            const error = await httpRequestFunction(requestArgs, restConfiguration).catch((e) => e);
+
+            expect(error).toBeInstanceOf(NetworkError);
+            expect(error).toBeInstanceOf(Error);
+            expect(error.name).toBe('NetworkError');
+            expect(error.message).toBe('Request failed after 3 retries');
+            expect(error.transportCode).toBe('ECONNREFUSED');
+            expect(error.cause).toBeUndefined();
+            expect(mockAxios.request).toHaveBeenCalledTimes(3);
+        });
+
         it('should throw BadRequestError for HTTP 400', async () => {
             const mockError = {
                 response: {
@@ -915,6 +957,97 @@ describe('Utility Functions', () => {
             await expect(httpRequestFunction(requestArgs)).rejects.toThrow(
                 'Network error or request timeout.'
             );
+        });
+
+        describe('transport error codes', () => {
+            const codes = ['ECONNREFUSED', 'ENOTFOUND', 'ECONNABORTED', 'ETIMEDOUT'];
+            const requestArgs = { url: '/test', options: { method: 'GET' } };
+
+            for (const code of codes) {
+                it(`should preserve ${code} on NetworkError without retries`, async () => {
+                    mockAxios.request.mockRejectedValue(
+                        new RealAxiosError(`fixture: ${code}`, code)
+                    );
+
+                    const error = await httpRequestFunction(requestArgs, {
+                        ...restConfiguration,
+                        retries: 0,
+                    } as ConfigurationRestAPI).catch((e) => e);
+
+                    expect(error).toBeInstanceOf(NetworkError);
+                    expect(error.message).toBe('Network error or request timeout.');
+                    expect(error.transportCode).toBe(code);
+                    expect(error.code).toBeUndefined();
+                    expect(mockAxios.request).toHaveBeenCalledTimes(1);
+                });
+
+                it(`should preserve ${code} on NetworkError after retries`, async () => {
+                    mockAxios.request.mockRejectedValue(
+                        new RealAxiosError(`fixture: ${code}`, code)
+                    );
+
+                    const error = await httpRequestFunction(requestArgs, {
+                        ...restConfiguration,
+                        retries: 3,
+                        backoff: 0,
+                    } as ConfigurationRestAPI).catch((e) => e);
+
+                    expect(error).toBeInstanceOf(NetworkError);
+                    expect(error.message).toBe('Request failed after 3 retries');
+                    expect(error.transportCode).toBe(code);
+                    expect(error.code).toBeUndefined();
+                    expect(mockAxios.request).toHaveBeenCalledTimes(3);
+                });
+            }
+
+            it('should leave transportCode undefined when no code is available', async () => {
+                mockAxios.request.mockRejectedValue(new Error('boom'));
+
+                const error = await httpRequestFunction(requestArgs, {
+                    ...restConfiguration,
+                    retries: 0,
+                } as ConfigurationRestAPI).catch((e) => e);
+
+                expect(error).toBeInstanceOf(NetworkError);
+                expect(error.transportCode).toBeUndefined();
+            });
+
+            it('should not retain request config, headers or signed URLs', async () => {
+                const original = new RealAxiosError('fixture: refused', 'ECONNREFUSED', {
+                    headers: { 'X-MBX-APIKEY': 'FAKE_API_KEY_FOR_TEST_ONLY' },
+                    url: 'https://example.invalid/?signature=FAKE_SIGNATURE_FOR_TEST_ONLY',
+                } as never);
+                mockAxios.request.mockRejectedValue(original);
+
+                const error = await httpRequestFunction(requestArgs, {
+                    ...restConfiguration,
+                    retries: 0,
+                } as ConfigurationRestAPI).catch((e) => e);
+
+                const dump =
+                    inspect(error, { depth: 10, showHidden: true }) + JSON.stringify(error);
+                expect(dump).not.toContain('FAKE_API_KEY_FOR_TEST_ONLY');
+                expect(dump).not.toContain('FAKE_SIGNATURE_FOR_TEST_ONLY');
+                expect(error.cause).toBeUndefined();
+                expect(error.config).toBeUndefined();
+                expect(error.transportCode).toBe('ECONNREFUSED');
+            });
+
+            it('should not affect HTTP error mapping', async () => {
+                mockAxios.request.mockRejectedValue({
+                    code: 'ERR_BAD_REQUEST',
+                    response: { status: 400, data: JSON.stringify({ code: -1100, msg: 'bad' }) },
+                });
+
+                const error = await httpRequestFunction(requestArgs, {
+                    ...restConfiguration,
+                    retries: 0,
+                } as ConfigurationRestAPI).catch((e) => e);
+
+                expect(error.name).toBe('BadRequestError');
+                expect(error.code).toBe(-1100);
+                expect(error.transportCode).toBeUndefined();
+            });
         });
 
         it('should not attempt to parse error data if it is not a string (undefined)', async () => {

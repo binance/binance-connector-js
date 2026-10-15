@@ -429,6 +429,20 @@ export function normalizeScientificNumbers<T>(obj: T): ScientificToString<T> {
 }
 
 /**
+ * Extracts a transport-level error code (e.g. `ECONNREFUSED`) from an error thrown by the HTTP client.
+ *
+ * Only the code string is returned; the original error (which may hold request config, headers
+ * and signed URLs) is never retained. Values that do not look like an error code are ignored.
+ *
+ * @param error The error object to inspect.
+ * @returns The transport error code, or `undefined` if none is available.
+ */
+export const getTransportCode = function (error: unknown): string | undefined {
+    const code = (error as { code?: unknown } | null | undefined)?.code;
+    return typeof code === 'string' && /^[A-Z][A-Z0-9_]{0,63}$/.test(code) ? code : undefined;
+};
+
+/**
  * Determines whether a request should be retried based on the provided error.
  *
  * This function checks the HTTP method, response status, and number of retries left to determine if a request should be retried.
@@ -559,9 +573,17 @@ export const httpRequestFunction = async function <T>(
                         throw new ConnectorClientError(errorMsg, errorCode);
                     }
                 } else {
+                    const transportCode = getTransportCode(axiosError);
                     if (retries > 0 && attempt >= retries)
-                        lastError = new Error(`Request failed after ${retries} retries`);
-                    else lastError = new NetworkError('Network error or request timeout.');
+                        lastError = new NetworkError(
+                            `Request failed after ${retries} retries`,
+                            transportCode
+                        );
+                    else
+                        lastError = new NetworkError(
+                            'Network error or request timeout.',
+                            transportCode
+                        );
 
                     break;
                 }

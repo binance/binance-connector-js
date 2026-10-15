@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.5.0 - 2026-10-15
+
+### Added (3)
+
+- Added support for signed WebSocket Streams via new `apiKey`, `apiSecret`, `privateKey` and `privateKeyPassphrase` options on `ConfigurationWebsocketStreams`.
+- Added `CMS_WS_STREAMS_PROD_URL` and `W3W_PREDICTION_WS_STREAMS_PROD_URL` constants for CMS and W3W Prediction WebSocket Streams production URLs.
+- Added optional `transportCode` field on `NetworkError` exposing the HTTP client's transport error code (e.g. `ECONNREFUSED`, `ENOTFOUND`, `ECONNABORTED`) for REST requests that fail without a response. Only the code string is kept; request config, headers and signed URLs are not retained.
+
+### Changed (1)
+
+- REST requests that exhaust their retries on network failures now throw `NetworkError` (previously a plain `Error`). The message `Request failed after N retries` is unchanged.
+
 ## 2.4.10 - 2026-10-02
 
 ### Changed (1)

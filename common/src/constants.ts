@@ -16,6 +16,9 @@ export const ALPHA_WS_STREAMS_PROD_URL = 'wss://nbstream.binance.com/w3w/wsa';
 // C2C constants
 export const C2C_REST_API_PROD_URL = 'https://api.binance.com';
 
+// CMS constants
+export const CMS_WS_STREAMS_PROD_URL = 'wss://api.binance.com/sapi/wss';
+
 // Convert constants
 export const CONVERT_REST_API_PROD_URL = 'https://api.binance.com';
 
@@ -120,6 +123,7 @@ export const VIP_LOAN_REST_API_PROD_URL = 'https://api.binance.com';
 
 // W3W Prediction constants
 export const W3W_PREDICTION_REST_API_PROD_URL = 'https://api.binance.com';
+export const W3W_PREDICTION_WS_STREAMS_PROD_URL = 'wss://api.binance.com/sapi/wss';
 
 // Wallet constants
 export const WALLET_REST_API_PROD_URL = 'https://api.binance.com';
