@@ -219,7 +219,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
          * @param {string} email
-         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} futuresType 1: USDT-margined Futures，2: Coin-margined Futures
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -636,7 +636,7 @@ export interface GetFuturesPositionRiskOfSubAccountV2Request {
     readonly email: string;
 
     /**
-     * 1:USDT-margined Futures，2: Coin-margined Futures
+     * 1: USDT-margined Futures，2: Coin-margined Futures
      * @type {number | bigint}
      * @memberof AccountManagementApiGetFuturesPositionRiskOfSubAccountV2
      */

@@ -419,7 +419,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * allocation and account application, while delegating trades to a professional trading team.
          *
          * Please refer to
-         * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+         * link
          *
          * Weight(IP): 1
          *
@@ -522,7 +522,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * asset allocation and account application, while delegating trades to a professional trading team.
          *
          * Please refer to
-         * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+         * link
          *
          * Weight(UID): 60
          *
@@ -905,7 +905,7 @@ export interface ManagedSubAccountApiInterface {
      * allocation and account application, while delegating trades to a professional trading team.
      *
      * Please refer to
-     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * link
      *
      * Weight(IP): 1
      *
@@ -928,7 +928,7 @@ export interface ManagedSubAccountApiInterface {
      * asset allocation and account application, while delegating trades to a professional trading team.
      *
      * Please refer to
-     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * link
      *
      * Weight(UID): 60
      *
@@ -1686,7 +1686,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      * allocation and account application, while delegating trades to a professional trading team.
      *
      * Please refer to
-     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * link
      *
      * Weight(IP): 1
      *
@@ -1732,7 +1732,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      * asset allocation and account application, while delegating trades to a professional trading team.
      *
      * Please refer to
-     * [link](https://www.binance.com/en/support/faq/how-to-get-started-with-managed-sub-account-functions-and-frequently-asked-questions-0594748722704383a7c369046e489459)
+     * link
      *
      * Weight(UID): 60
      *

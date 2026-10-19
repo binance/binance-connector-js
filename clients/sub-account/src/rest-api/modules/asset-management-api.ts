@@ -66,7 +66,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {number} amount The amount to be transferred
          * @param {number | bigint} type 1: transfer from subaccount's spot account to its USDT-margined futures account 2: transfer from
          * subaccount's USDT-margined futures account to its spot account 3: transfer from subaccount's spot
-         * account to its COIN-margined futures account 4:transfer from subaccount's COIN-margined futures
+         * account to its COIN-margined futures account 4: transfer from subaccount's COIN-margined futures
          * account to its spot account
          * @param {number | bigint} [recvWindow]
          *
@@ -172,7 +172,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
          * @param {string} email
-         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} futuresType 1: USDT-margined Futures，2: Coin-margined Futures
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -537,7 +537,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Security Type: USER_DATA
          *
          * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
-         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} futuresType 1: USDT-margined Futures，2: Coin-margined Futures
          * @param {number | bigint} [page]
          * @param {number | bigint} [limit]
          * @param {number | bigint} [recvWindow]
@@ -867,7 +867,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
          * @param {string} email
-         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} futuresType 1: USDT-margined Futures，2: Coin-margined Futures
          * @param {number | bigint} [startTime] Cannot be earlier than 1 month ago
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [page]
@@ -1141,7 +1141,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
          * @param {string} fromEmail Sender email
          * @param {string} toEmail Recipient email
-         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} futuresType 1: USDT-margined Futures，2: Coin-margined Futures
          * @param {string} asset
          * @param {number} amount
          * @param {number | bigint} [recvWindow]
@@ -1957,7 +1957,7 @@ export interface FuturesTransferForSubAccountRequest {
     /**
      * 1: transfer from subaccount's spot account to its USDT-margined futures account 2: transfer from
      * subaccount's USDT-margined futures account to its spot account 3: transfer from subaccount's spot
-     * account to its COIN-margined futures account 4:transfer from subaccount's COIN-margined futures
+     * account to its COIN-margined futures account 4: transfer from subaccount's COIN-margined futures
      * account to its spot account
      * @type {number | bigint}
      * @memberof AssetManagementApiFuturesTransferForSubAccount
@@ -2005,7 +2005,7 @@ export interface GetDetailOnSubAccountsFuturesAccountV2Request {
     readonly email: string;
 
     /**
-     * 1:USDT-margined Futures，2: Coin-margined Futures
+     * 1: USDT-margined Futures，2: Coin-margined Futures
      * @type {number | bigint}
      * @memberof AssetManagementApiGetDetailOnSubAccountsFuturesAccountV2
      */
@@ -2244,7 +2244,7 @@ export interface GetSummaryOfSubAccountsFuturesAccountRequest {
  */
 export interface GetSummaryOfSubAccountsFuturesAccountV2Request {
     /**
-     * 1:USDT-margined Futures，2: Coin-margined Futures
+     * 1: USDT-margined Futures，2: Coin-margined Futures
      * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccountV2
      */
@@ -2427,7 +2427,7 @@ export interface QuerySubAccountFuturesAssetTransferHistoryRequest {
     readonly email: string;
 
     /**
-     * 1:USDT-margined Futures，2: Coin-margined Futures
+     * 1: USDT-margined Futures，2: Coin-margined Futures
      * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
@@ -2640,7 +2640,7 @@ export interface SubAccountFuturesAssetTransferRequest {
     readonly toEmail: string;
 
     /**
-     * 1:USDT-margined Futures，2: Coin-margined Futures
+     * 1: USDT-margined Futures，2: Coin-margined Futures
      * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountFuturesAssetTransfer
      */
