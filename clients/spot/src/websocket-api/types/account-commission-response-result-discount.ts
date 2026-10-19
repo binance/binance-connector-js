@@ -38,7 +38,7 @@ export interface AccountCommissionResponseResultDiscount {
      */
     discountAsset?: string;
     /**
-     * Standard commission is reduced by this rate when paying commission in BNB.
+     * Multiplier applied to the standard commission when paying commission in BNB (e.g. 0.75 = 75% of the standard commission is charged).
      * @type {string}
      * @memberof AccountCommissionResponseResultDiscount
      */
