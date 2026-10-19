@@ -39,11 +39,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * 100 USDT before redemption, and will be redeemable to BTC equivalent to 100 USDT upon redemption.
          *
          * Once successfully created, the amount of baseToken (e.g. USDT) in the fixed-value gift card along with the fee
-         * would be deducted from your funding wallet.
+         * would be deducted from your Spot wallet.
          * To get started with, please make sure:
          * You have a Binance account
          * You have passed KYB
-         * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance funding wallet
+         * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance Spot wallet
          * You need Enable Withdrawals for the API Key which requests this endpoint.
          *
          * Weight(IP): 1
@@ -107,7 +107,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * To get started with, please make sure:
          * You have a Binance account
          * You have passed KYB
-         * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance funding wallet
+         * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance Spot wallet
          * You need `Enable Withdrawals` for the API Key which requests this endpoint.
          *
          * Weight(IP): 1
@@ -238,7 +238,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * This API is for redeeming a Binance Gift Card. Once redeemed, the coins will be deposited in your funding wallet.
+         * This API is for redeeming a Binance Gift Card. Once redeemed, the coins will be deposited in your Spot wallet.
          *
          * Weight(IP): 1
          *
@@ -361,11 +361,11 @@ export interface MarketDataApiInterface {
      * 100 USDT before redemption, and will be redeemable to BTC equivalent to 100 USDT upon redemption.
      *
      * Once successfully created, the amount of baseToken (e.g. USDT) in the fixed-value gift card along with the fee
-     * would be deducted from your funding wallet.
+     * would be deducted from your Spot wallet.
      * To get started with, please make sure:
      * You have a Binance account
      * You have passed KYB
-     * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance funding wallet
+     * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance Spot wallet
      * You need Enable Withdrawals for the API Key which requests this endpoint.
      *
      * Weight(IP): 1
@@ -387,7 +387,7 @@ export interface MarketDataApiInterface {
      * To get started with, please make sure:
      * You have a Binance account
      * You have passed KYB
-     * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance funding wallet
+     * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance Spot wallet
      * You need `Enable Withdrawals` for the API Key which requests this endpoint.
      *
      * Weight(IP): 1
@@ -440,7 +440,7 @@ export interface MarketDataApiInterface {
         requestParameters: FetchTokenLimitRequest
     ): Promise<RestApiResponse<FetchTokenLimitResponse>>;
     /**
-     * This API is for redeeming a Binance Gift Card. Once redeemed, the coins will be deposited in your funding wallet.
+     * This API is for redeeming a Binance Gift Card. Once redeemed, the coins will be deposited in your Spot wallet.
      *
      * Weight(IP): 1
      *
@@ -653,11 +653,11 @@ export class MarketDataApi implements MarketDataApiInterface {
      * 100 USDT before redemption, and will be redeemable to BTC equivalent to 100 USDT upon redemption.
      *
      * Once successfully created, the amount of baseToken (e.g. USDT) in the fixed-value gift card along with the fee
-     * would be deducted from your funding wallet.
+     * would be deducted from your Spot wallet.
      * To get started with, please make sure:
      * You have a Binance account
      * You have passed KYB
-     * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance funding wallet
+     * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance Spot wallet
      * You need Enable Withdrawals for the API Key which requests this endpoint.
      *
      * Weight(IP): 1
@@ -698,7 +698,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * To get started with, please make sure:
      * You have a Binance account
      * You have passed KYB
-     * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance funding wallet
+     * You have a sufﬁcient balance(Gift Card amount and fee amount) in your Binance Spot wallet
      * You need `Enable Withdrawals` for the API Key which requests this endpoint.
      *
      * Weight(IP): 1
@@ -802,7 +802,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * This API is for redeeming a Binance Gift Card. Once redeemed, the coins will be deposited in your funding wallet.
+     * This API is for redeeming a Binance Gift Card. Once redeemed, the coins will be deposited in your Spot wallet.
      *
      * Weight(IP): 1
      *
