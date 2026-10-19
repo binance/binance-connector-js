@@ -45,6 +45,7 @@ export class WebsocketStreams {
             ...(poolSize && { poolSize }),
         });
         websocketBase.streamIdIsStrictlyNumber = true;
+
         const websocketStreamsConnection = new WebsocketStreamsConnection(websocketBase);
         await websocketBase.connect(stream);
         return websocketStreamsConnection;
