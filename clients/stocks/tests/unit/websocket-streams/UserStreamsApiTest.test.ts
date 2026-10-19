@@ -16,7 +16,7 @@ import { JSONParse, JSONStringify } from 'json-with-bigint';
 import {
     ConfigurationWebsocketStreams,
     WebsocketStreamsBase,
-    replaceWebsocketStreamsPlaceholders,
+    replaceWebsocketStreamsPlaceholdersPreserveCase,
 } from '@binance/common';
 import { OrderReportStreamRequest } from '../../../src/websocket-streams';
 import { UserStreamsApi } from '../../../src/websocket-streams';
@@ -56,7 +56,7 @@ describe('UserStreamsApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<listenKey>@orderReport'.slice(1), params as unknown as Record<string, OrderReportStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholdersPreserveCase('/<listenKey>@orderReport'.slice(1), params as unknown as Record<string, OrderReportStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -102,7 +102,7 @@ describe('UserStreamsApi', () => {
 
             websocketStreamClient['onMessage'](
                 JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
+                    stream: replaceWebsocketStreamsPlaceholdersPreserveCase(
                         '/<listenKey>@orderReport'.slice(1),
                         params as unknown as Record<string, OrderReportStreamRequest>
                     ),

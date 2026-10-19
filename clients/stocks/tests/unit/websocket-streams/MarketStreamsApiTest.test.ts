@@ -16,7 +16,7 @@ import { JSONParse, JSONStringify } from 'json-with-bigint';
 import {
     ConfigurationWebsocketStreams,
     WebsocketStreamsBase,
-    replaceWebsocketStreamsPlaceholders,
+    replaceWebsocketStreamsPlaceholdersPreserveCase,
 } from '@binance/common';
 import {
     CalendarStreamRequest,
@@ -46,7 +46,7 @@ describe('MarketStreamsApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/calendar'.slice(1), params as unknown as Record<string, CalendarStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholdersPreserveCase('/calendar'.slice(1), params as unknown as Record<string, CalendarStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -75,7 +75,7 @@ describe('MarketStreamsApi', () => {
 
             websocketStreamClient['onMessage'](
                 JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
+                    stream: replaceWebsocketStreamsPlaceholdersPreserveCase(
                         '/calendar'.slice(1),
                         params as unknown as Record<string, CalendarStreamRequest>
                     ),
@@ -119,7 +119,7 @@ describe('MarketStreamsApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@kline_<interval>'.slice(1), params as unknown as Record<string, KlineStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholdersPreserveCase('/<symbol>@kline_<interval>'.slice(1), params as unknown as Record<string, KlineStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -163,7 +163,7 @@ describe('MarketStreamsApi', () => {
 
             websocketStreamClient['onMessage'](
                 JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
+                    stream: replaceWebsocketStreamsPlaceholdersPreserveCase(
                         '/<symbol>@kline_<interval>'.slice(1),
                         params as unknown as Record<string, KlineStreamRequest>
                     ),
@@ -234,7 +234,7 @@ describe('MarketStreamsApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/price'.slice(1), params as unknown as Record<string, PriceStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholdersPreserveCase('/price'.slice(1), params as unknown as Record<string, PriceStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -271,7 +271,7 @@ describe('MarketStreamsApi', () => {
 
             websocketStreamClient['onMessage'](
                 JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
+                    stream: replaceWebsocketStreamsPlaceholdersPreserveCase(
                         '/price'.slice(1),
                         params as unknown as Record<string, PriceStreamRequest>
                     ),
@@ -305,7 +305,7 @@ describe('MarketStreamsApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@quote'.slice(1), params as unknown as Record<string, QuoteStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholdersPreserveCase('/<symbol>@quote'.slice(1), params as unknown as Record<string, QuoteStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -339,7 +339,7 @@ describe('MarketStreamsApi', () => {
 
             websocketStreamClient['onMessage'](
                 JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
+                    stream: replaceWebsocketStreamsPlaceholdersPreserveCase(
                         '/<symbol>@quote'.slice(1),
                         params as unknown as Record<string, QuoteStreamRequest>
                     ),
@@ -386,7 +386,7 @@ describe('MarketStreamsApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@tradability'.slice(1), params as unknown as Record<string, TradabilityStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholdersPreserveCase('/<symbol>@tradability'.slice(1), params as unknown as Record<string, TradabilityStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -417,7 +417,7 @@ describe('MarketStreamsApi', () => {
 
             websocketStreamClient['onMessage'](
                 JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
+                    stream: replaceWebsocketStreamsPlaceholdersPreserveCase(
                         '/<symbol>@tradability'.slice(1),
                         params as unknown as Record<string, TradabilityStreamRequest>
                     ),
@@ -467,7 +467,7 @@ describe('MarketStreamsApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@tradingStatus'.slice(1), params as unknown as Record<string, TradingStatusStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholdersPreserveCase('/<symbol>@tradingStatus'.slice(1), params as unknown as Record<string, TradingStatusStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -501,7 +501,7 @@ describe('MarketStreamsApi', () => {
 
             websocketStreamClient['onMessage'](
                 JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
+                    stream: replaceWebsocketStreamsPlaceholdersPreserveCase(
                         '/<symbol>@tradingStatus'.slice(1),
                         params as unknown as Record<string, TradingStatusStreamRequest>
                     ),

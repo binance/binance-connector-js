@@ -15,7 +15,7 @@ import {
     WebsocketStreamsBase,
     WebsocketStream,
     assertParamExists,
-    replaceWebsocketStreamsPlaceholders,
+    replaceWebsocketStreamsPlaceholdersPreserveCase,
     createStreamHandler,
 } from '@binance/common';
 import type { OrderReportStreamResponse } from '../types';
@@ -35,10 +35,10 @@ const UserStreamsApiParamCreator = function () {
             // verify required parameter 'listenKey' is not null or undefined
             assertParamExists('orderReportStream', 'listenKey', listenKey);
 
-            return replaceWebsocketStreamsPlaceholders('/<listenKey>@orderReport'.slice(1), {
-                listenKey,
-                id,
-            });
+            return replaceWebsocketStreamsPlaceholdersPreserveCase(
+                '/<listenKey>@orderReport'.slice(1),
+                { listenKey, id }
+            );
         },
     };
 };
