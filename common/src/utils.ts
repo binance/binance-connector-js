@@ -787,6 +787,30 @@ export function replaceWebsocketStreamsPlaceholders(
     str: string,
     variables: Record<string, unknown>
 ): string {
+    return replaceWebsocketStreamsPlaceholdersImpl(str, variables, true);
+}
+
+/**
+ * Replaces placeholders in the format <field> with corresponding values from the provided variables object,
+ * without changing the case of any value. Same as `replaceWebsocketStreamsPlaceholders`, except that `<symbol>`
+ * and `<windowSize>` values are kept as given.
+ *
+ * @param {string} str - The input string containing placeholders.
+ * @param {Object} variables - An object where keys correspond to placeholder names and values are the replacements.
+ * @returns {string} - The resulting string with placeholders replaced by their corresponding values.
+ */
+export function replaceWebsocketStreamsPlaceholdersPreserveCase(
+    str: string,
+    variables: Record<string, unknown>
+): string {
+    return replaceWebsocketStreamsPlaceholdersImpl(str, variables, false);
+}
+
+function replaceWebsocketStreamsPlaceholdersImpl(
+    str: string,
+    variables: Record<string, unknown>,
+    lowercaseValues: boolean
+): string {
     const normalizedVariables = Object.keys(variables).reduce(
         (acc, key) => {
             const normalizedKey = key.toLowerCase().replace(/[-_]/g, '');
@@ -808,7 +832,7 @@ export function replaceWebsocketStreamsPlaceholders(
             switch (normalizedFieldName) {
             case 'symbol':
             case 'windowsize':
-                return (value as string).toLowerCase();
+                return lowercaseValues ? (value as string).toLowerCase() : (value as string);
             case 'updatespeed':
                 return `@${value}`;
             default:

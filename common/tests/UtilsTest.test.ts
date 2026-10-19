@@ -1410,6 +1410,72 @@ describe('Utility Functions', () => {
         });
     });
 
+    describe('replaceWebsocketStreamsPlaceholdersPreserveCase', () => {
+        it('should keep the case of a <symbol> value', () => {
+            const result = utils.replaceWebsocketStreamsPlaceholdersPreserveCase('<symbol>@quote', {
+                symbol: 'AAPL',
+            });
+            expect(result).toBe('AAPL@quote');
+        });
+
+        it('should keep the case of every value with multiple placeholders', () => {
+            const result = utils.replaceWebsocketStreamsPlaceholdersPreserveCase(
+                '<symbol>@kline_<interval>',
+                { symbol: 'AAPL', interval: '1M' }
+            );
+            expect(result).toBe('AAPL@kline_1M');
+        });
+
+        it('should keep the case of a <listenKey> value', () => {
+            const result = utils.replaceWebsocketStreamsPlaceholdersPreserveCase(
+                '<listenKey>@orderReport',
+                { listenKey: 'AbCdEf123' }
+            );
+            expect(result).toBe('AbCdEf123@orderReport');
+        });
+
+        it('should keep the case of a <windowSize> value', () => {
+            const result = utils.replaceWebsocketStreamsPlaceholdersPreserveCase('<windowSize>', {
+                windowSize: '1H',
+            });
+            expect(result).toBe('1H');
+        });
+
+        it('should keep the "@" prefix handling for <updateSpeed>', () => {
+            expect(
+                utils.replaceWebsocketStreamsPlaceholdersPreserveCase('stream@<updateSpeed>', {
+                    updateSpeed: '200',
+                })
+            ).toBe('stream@200');
+            expect(
+                utils.replaceWebsocketStreamsPlaceholdersPreserveCase('stream@<updateSpeed>', {})
+            ).toBe('stream');
+        });
+
+        it('should leave static streams unchanged and drop missing values', () => {
+            expect(utils.replaceWebsocketStreamsPlaceholdersPreserveCase('price', {})).toBe(
+                'price'
+            );
+            expect(utils.replaceWebsocketStreamsPlaceholdersPreserveCase('<symbol>', {})).toBe('');
+        });
+
+        it('should match the default function apart from value case', () => {
+            const input = '<symbol>@depth<levels>@<updateSpeed>';
+            const variables = { symbol: 'BTCUSDT', levels: '10', updateSpeed: '100' };
+            expect(
+                utils
+                    .replaceWebsocketStreamsPlaceholdersPreserveCase(input, variables)
+                    .toLowerCase()
+            ).toBe(utils.replaceWebsocketStreamsPlaceholders(input, variables));
+        });
+
+        it('should not change the default function, which still lowercases <symbol>', () => {
+            expect(
+                utils.replaceWebsocketStreamsPlaceholders('<symbol>@ticker', { symbol: 'BTCUSDT' })
+            ).toBe('btcusdt@ticker');
+        });
+    });
+
     describe('replaceWebsocketStreamsPlaceholders', () => {
         it('should replace <symbol> with a lowercased symbol value', () => {
             const result = replaceWebsocketStreamsPlaceholders('/<symbol>', { symbol: 'BTCUSDT' });

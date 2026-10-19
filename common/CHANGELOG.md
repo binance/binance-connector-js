@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.1 - 2026-10-19
+
+### Added (1)
+
+- Added `replaceWebsocketStreamsPlaceholdersPreserveCase()`, which builds a stream name without lowercasing any value.
+
 ## 2.5.0 - 2026-10-15
 
 ### Added (3)
