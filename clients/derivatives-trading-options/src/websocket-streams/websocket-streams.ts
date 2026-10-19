@@ -49,6 +49,7 @@ export class WebsocketStreams {
             ['market', 'public', 'private']
         );
         websocketBase.streamIdIsStrictlyNumber = true;
+
         const websocketStreamsConnection = new WebsocketStreamsConnection(websocketBase);
         await websocketBase.connect(stream);
         return websocketStreamsConnection;
