@@ -1,5 +1,18 @@
 # Changelog
 
+## 39.0.1 - 2026-10-19
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.5.1`.
+
+#### REST API
+
+- Modified parameter `interval`:
+  - enum added: `1s`
+  - affected methods:
+    - `continuousContractKlineCandlestickData()` (`GET /fapi/v1/continuousKlines`)
+
 ## 39.0.0 - 2026-10-15
 
 ### Changed (3)

@@ -20,7 +20,7 @@ async function continuousContractKlineCandlestickData() {
                     .ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
             interval:
                 DerivativesTradingUsdsFuturesRestAPI
-                    .ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
+                    .ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
         });
 
         const rateLimits = response.rateLimits!;

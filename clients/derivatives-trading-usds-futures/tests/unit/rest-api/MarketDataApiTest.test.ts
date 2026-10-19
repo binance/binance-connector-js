@@ -617,7 +617,7 @@ describe('MarketDataApi', () => {
             const params: ContinuousContractKlineCandlestickDataRequest = {
                 pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
             };
 
             mockResponse = JSONParse(JSONStringify([[1607444700000]]));
@@ -642,7 +642,7 @@ describe('MarketDataApi', () => {
             const params: ContinuousContractKlineCandlestickDataRequest = {
                 pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 limit: 50,
@@ -670,7 +670,7 @@ describe('MarketDataApi', () => {
             const _params: ContinuousContractKlineCandlestickDataRequest = {
                 pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.pair;
@@ -684,7 +684,7 @@ describe('MarketDataApi', () => {
             const _params: ContinuousContractKlineCandlestickDataRequest = {
                 pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.contractType;
@@ -698,7 +698,7 @@ describe('MarketDataApi', () => {
             const _params: ContinuousContractKlineCandlestickDataRequest = {
                 pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -712,7 +712,7 @@ describe('MarketDataApi', () => {
             const params: ContinuousContractKlineCandlestickDataRequest = {
                 pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
             };
 
             const errorResponse = {
