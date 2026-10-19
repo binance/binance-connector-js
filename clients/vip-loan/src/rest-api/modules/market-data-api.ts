@@ -39,7 +39,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Security Type: USER_DATA
          *
          * Notes:
-         * - Rate limit: 5 requests per second per account.
+         * - Rate limit: 1 request per second per account.
          *
          * @summary Get Borrow Interest Rate (USER_DATA)
          * @param {string} loanCoin Max 10 assets, Multiple split by ","
@@ -179,6 +179,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
          * - The maximum interval between `startTime` and `endTime` is 180 days.
          * - Time is based on UTC+0.
+         * - Rate limit: 1 request per second per account.
          *
          * @summary Get VIP Loan Interest Rate History (USER_DATA)
          * @param {string} coin
@@ -312,7 +313,7 @@ export interface MarketDataApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - Rate limit: 5 requests per second per account.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
@@ -372,6 +373,7 @@ export interface MarketDataApiInterface {
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 180 days.
      * - Time is based on UTC+0.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Interest Rate History (USER_DATA)
      * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.
@@ -577,7 +579,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - Rate limit: 5 requests per second per account.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
@@ -689,6 +691,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 180 days.
      * - Time is based on UTC+0.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Interest Rate History (USER_DATA)
      * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.

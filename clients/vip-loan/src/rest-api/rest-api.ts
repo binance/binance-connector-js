@@ -132,7 +132,7 @@ export class RestAPI {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - Rate limit: 5 requests per second per account.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get Borrow Interest Rate (USER_DATA)
      * @param {GetBorrowInterestRateRequest} requestParameters Request parameters.
@@ -204,6 +204,7 @@ export class RestAPI {
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 180 days.
      * - Time is based on UTC+0.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Get VIP Loan Interest Rate History (USER_DATA)
      * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.
@@ -252,7 +253,7 @@ export class RestAPI {
      * - `loanTerm` is mandatory if the user chooses a fixed rate (`isFlexibleRate = FALSE`).
      * - Every coin in `collateralCoin` is pledged from every account in `collateralAccountId`.
      * - To pledge a Simple Earn Flexible position, add `<ASSET>-Earn` (e.g. `USDT-Earn`) to `collateralCoin` together with its Spot asset (e.g. `USDT,USDT-Earn`). Sending `<ASSET>-Earn` without its Spot asset returns `-10213`.
-     * - Rate limit: 1 request per 2 seconds per account.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary VIP Loan Borrow (TRADE)
      * @param {VipLoanBorrowRequest} requestParameters Request parameters.
@@ -322,6 +323,9 @@ export class RestAPI {
      * Weight(UID): 6000
      *
      * Security Type: TRADE
+     *
+     * Notes:
+     * - Rate limit: 1 request per second per account.
      *
      * @summary VIP Loan Repay (TRADE)
      * @param {VipLoanRepayRequest} requestParameters Request parameters.
@@ -418,6 +422,7 @@ export class RestAPI {
      * Notes:
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 1 request per second per account, shared with repayment history queries on the Binance website.
      *
      * @summary Get VIP Loan Repayment History (USER_DATA)
      * @param {GetVIPLoanRepaymentHistoryRequest} requestParameters Request parameters.
@@ -440,7 +445,7 @@ export class RestAPI {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - Rate limit: 5 requests per second per account.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.

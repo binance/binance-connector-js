@@ -227,6 +227,7 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Notes:
          * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
          * - The maximum interval between `startTime` and `endTime` is 180 days.
+         * - Rate limit: 1 request per second per account, shared with repayment history queries on the Binance website.
          *
          * @summary Get VIP Loan Repayment History (USER_DATA)
          * @param {number | bigint} [orderId]
@@ -294,7 +295,7 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Security Type: USER_DATA
          *
          * Notes:
-         * - Rate limit: 5 requests per second per account.
+         * - Rate limit: 1 request per second per account.
          *
          * @summary Query Application Status (USER_DATA)
          * @param {number | bigint} [current] Current page number, starting from 1.
@@ -412,6 +413,7 @@ export interface UserInformationApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 1 request per second per account, shared with repayment history queries on the Binance website.
      *
      * @summary Get VIP Loan Repayment History (USER_DATA)
      * @param {GetVIPLoanRepaymentHistoryRequest} requestParameters Request parameters.
@@ -430,7 +432,7 @@ export interface UserInformationApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - Rate limit: 5 requests per second per account.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.
@@ -808,6 +810,7 @@ export class UserInformationApi implements UserInformationApiInterface {
      * Notes:
      * - If `startTime` and `endTime` are not sent, recent 90-day data is returned.
      * - The maximum interval between `startTime` and `endTime` is 180 days.
+     * - Rate limit: 1 request per second per account, shared with repayment history queries on the Binance website.
      *
      * @summary Get VIP Loan Repayment History (USER_DATA)
      * @param {GetVIPLoanRepaymentHistoryRequest} requestParameters Request parameters.
@@ -848,7 +851,7 @@ export class UserInformationApi implements UserInformationApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - Rate limit: 5 requests per second per account.
+     * - Rate limit: 1 request per second per account.
      *
      * @summary Query Application Status (USER_DATA)
      * @param {QueryApplicationStatusRequest} requestParameters Request parameters.
