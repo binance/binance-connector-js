@@ -50,7 +50,7 @@ export interface GetCountryListResponseCountriesInner {
      */
     withdrawalAllowed?: boolean;
     /**
-     * Whether this country has region-level restrictions.
+     * Whether this country has region-level restrictions. Always `false` for the BR entity, which does not collect region/city.
      * @type {boolean}
      * @memberof GetCountryListResponseCountriesInner
      */

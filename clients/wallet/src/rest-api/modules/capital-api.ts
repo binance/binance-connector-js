@@ -469,7 +469,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} [coin]
          * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for
          * query.
-         * @param {number | bigint} [status] 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
+         * @param {number | bigint} [status] 0(0: Email Sent, 2: Awaiting Approval 3: Rejected 4: Processing 6: Completed)
          * @param {number | bigint} [offset] Default: 0
          * @param {number | bigint} [limit]
          * @param {string} [idList] id list returned in the response of POST `/sapi/v1/capital/withdraw/apply`, separated by `,`
@@ -973,7 +973,7 @@ export interface WithdrawHistoryRequest {
     readonly withdrawOrderId?: string;
 
     /**
-     * 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
+     * 0(0: Email Sent, 2: Awaiting Approval 3: Rejected 4: Processing 6: Completed)
      * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */

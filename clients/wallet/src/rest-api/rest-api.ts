@@ -1162,7 +1162,7 @@ export class RestAPI {
     }
 
     /**
-     * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
+     * Query the active country list for travel rule questionnaires. Currently supports AU and BR entities.
      *
      * Weight(IP): 1
      *

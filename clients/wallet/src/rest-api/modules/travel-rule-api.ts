@@ -236,7 +236,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} [tranId] Comma(,) separated list of wallet tran Ids.
          * @param {string} [network]
          * @param {string} [coin]
-         * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
+         * @param {number | bigint} [travelRuleStatus] 0: Completed,1: Pending,2: Failed
          * @param {boolean} [pendingQuestionnaire] true: Only return records that pending deposit questionnaire. false/not provided: return all records.
          * @param {number | bigint} [startTime] Default: 90 days from current timestamp
          * @param {number | bigint} [endTime] Default: present timestamp
@@ -425,7 +425,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
+         * Query the active country list for travel rule questionnaires. Currently supports AU and BR entities.
          *
          * Weight(IP): 1
          *
@@ -784,7 +784,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * query.
          * @param {string} [network]
          * @param {string} [coin]
-         * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
+         * @param {number | bigint} [travelRuleStatus] 0: Completed,1: Pending,2: Failed
          * @param {number | bigint} [offset]
          * @param {number | bigint} [limit]
          * @param {number | bigint} [startTime] Default: 90 days from current timestamp
@@ -881,7 +881,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * query.
          * @param {string} [network]
          * @param {string} [coin]
-         * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
+         * @param {number | bigint} [travelRuleStatus] 0: Completed,1: Pending,2: Failed
          * @param {number | bigint} [offset]
          * @param {number | bigint} [limit]
          * @param {number | bigint} [startTime] Default: 90 days from current timestamp
@@ -1198,7 +1198,7 @@ export interface TravelRuleApiInterface {
         requestParameters?: FetchAddressVerificationListRequest
     ): Promise<RestApiResponse<FetchAddressVerificationListResponse>>;
     /**
-     * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
+     * Query the active country list for travel rule questionnaires. Currently supports AU and BR entities.
      *
      * Weight(IP): 1
      *
@@ -1556,7 +1556,7 @@ export interface DepositHistoryTravelRuleRequest {
     readonly coin?: string;
 
     /**
-     * 0:Completed,1:Pending,2:Failed
+     * 0: Completed,1: Pending,2: Failed
      * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
@@ -1877,7 +1877,7 @@ export interface WithdrawHistoryV1Request {
     readonly coin?: string;
 
     /**
-     * 0:Completed,1:Pending,2:Failed
+     * 0: Completed,1: Pending,2: Failed
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
@@ -1961,7 +1961,7 @@ export interface WithdrawHistoryV2Request {
     readonly coin?: string;
 
     /**
-     * 0:Completed,1:Pending,2:Failed
+     * 0: Completed,1: Pending,2: Failed
      * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
@@ -2345,7 +2345,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     }
 
     /**
-     * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
+     * Query the active country list for travel rule questionnaires. Currently supports AU and BR entities.
      *
      * Weight(IP): 1
      *
