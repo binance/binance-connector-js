@@ -111,3 +111,4 @@ export * from './query-special-key-list-response';
 export * from './query-special-key-list-response-inner';
 export * from './query-special-key-response';
 export * from './start-user-data-stream-response';
+export * from './start-user-data-stream-v2-response';

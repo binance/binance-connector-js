@@ -18,7 +18,7 @@ import {
     sendRequest,
     type RequestArgs,
 } from '@binance/common';
-import type { StartUserDataStreamResponse } from '../types';
+import type { StartUserDataStreamResponse, StartUserDataStreamV2Response } from '../types';
 
 /**
  * UserDataStreamApi - axios parameter creator
@@ -46,6 +46,34 @@ const UserDataStreamApiAxiosParamCreator = function (configuration: Configuratio
 
             return {
                 endpoint: '/sapi/v1/margin/listen-key',
+                method: 'DELETE',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Close out a user data stream.
+         *
+         * Weight(IP): 1
+         *
+         * Security Type: USER_STREAM
+         *
+         * @summary Close User Data Stream V2 (USER_STREAM)
+         *
+         * @throws {RequiredError}
+         */
+        closeUserDataStreamV2: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/margin/listen-key',
                 method: 'DELETE',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -90,6 +118,42 @@ const UserDataStreamApiAxiosParamCreator = function (configuration: Configuratio
             };
         },
         /**
+         * Keepalive a user data stream to prevent a time out.
+         *
+         * Weight(IP): 1
+         *
+         * Security Type: USER_STREAM
+         *
+         * @summary Keepalive User Data Stream V2 (USER_STREAM)
+         * @param {string} listenKey
+         *
+         * @throws {RequiredError}
+         */
+        keepaliveUserDataStreamV2: async (listenKey: string): Promise<RequestArgs> => {
+            // verify required parameter 'listenKey' is not null or undefined
+            assertParamExists('keepaliveUserDataStreamV2', 'listenKey', listenKey);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (listenKey !== undefined && listenKey !== null) {
+                localVarQueryParameter['listenKey'] = listenKey;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/margin/listen-key',
+                method: 'PUT',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Start a new user data stream.
          *
          * Weight(UID): 1
@@ -110,6 +174,34 @@ const UserDataStreamApiAxiosParamCreator = function (configuration: Configuratio
 
             return {
                 endpoint: '/sapi/v1/margin/listen-key',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Start a new user data stream.
+         *
+         * Weight(IP): 1
+         *
+         * Security Type: USER_STREAM
+         *
+         * @summary Start User Data Stream V2 (USER_STREAM)
+         *
+         * @throws {RequiredError}
+         */
+        startUserDataStreamV2: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/margin/listen-key',
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -139,6 +231,19 @@ export interface UserDataStreamApiInterface {
      */
     closeUserDataStream(): Promise<RestApiResponse<void>>;
     /**
+     * Close out a user data stream.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Close User Data Stream V2 (USER_STREAM)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserDataStreamApiInterface
+     */
+    closeUserDataStreamV2(): Promise<RestApiResponse<void>>;
+    /**
      * Keepalive a user data stream to prevent a time out.
      *
      * Weight(UID): 1
@@ -155,6 +260,22 @@ export interface UserDataStreamApiInterface {
         requestParameters: KeepaliveUserDataStreamRequest
     ): Promise<RestApiResponse<void>>;
     /**
+     * Keepalive a user data stream to prevent a time out.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Keepalive User Data Stream V2 (USER_STREAM)
+     * @param {KeepaliveUserDataStreamV2Request} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserDataStreamApiInterface
+     */
+    keepaliveUserDataStreamV2(
+        requestParameters: KeepaliveUserDataStreamV2Request
+    ): Promise<RestApiResponse<void>>;
+    /**
      * Start a new user data stream.
      *
      * Weight(UID): 1
@@ -167,6 +288,19 @@ export interface UserDataStreamApiInterface {
      * @memberof UserDataStreamApiInterface
      */
     startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>>;
+    /**
+     * Start a new user data stream.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Start User Data Stream V2 (USER_STREAM)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserDataStreamApiInterface
+     */
+    startUserDataStreamV2(): Promise<RestApiResponse<StartUserDataStreamV2Response>>;
 }
 
 /**
@@ -178,6 +312,19 @@ export interface KeepaliveUserDataStreamRequest {
      *
      * @type {string}
      * @memberof UserDataStreamApiKeepaliveUserDataStream
+     */
+    readonly listenKey: string;
+}
+
+/**
+ * Request parameters for keepaliveUserDataStreamV2 operation in UserDataStreamApi.
+ * @interface KeepaliveUserDataStreamV2Request
+ */
+export interface KeepaliveUserDataStreamV2Request {
+    /**
+     *
+     * @type {string}
+     * @memberof UserDataStreamApiKeepaliveUserDataStreamV2
      */
     readonly listenKey: string;
 }
@@ -223,6 +370,33 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
     }
 
     /**
+     * Close out a user data stream.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Close User Data Stream V2 (USER_STREAM)
+     * @returns {Promise<RestApiResponse<void>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserDataStreamApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#close-user-data-stream-v2 Binance API Documentation}
+     */
+    public async closeUserDataStreamV2(): Promise<RestApiResponse<void>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.closeUserDataStreamV2();
+        return sendRequest<void>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
      * Keepalive a user data stream to prevent a time out.
      *
      * Weight(UID): 1
@@ -255,6 +429,38 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
     }
 
     /**
+     * Keepalive a user data stream to prevent a time out.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Keepalive User Data Stream V2 (USER_STREAM)
+     * @param {KeepaliveUserDataStreamV2Request} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<void>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserDataStreamApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#keepalive-user-data-stream-v2 Binance API Documentation}
+     */
+    public async keepaliveUserDataStreamV2(
+        requestParameters: KeepaliveUserDataStreamV2Request
+    ): Promise<RestApiResponse<void>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.keepaliveUserDataStreamV2(
+            requestParameters?.listenKey
+        );
+        return sendRequest<void>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
      * Start a new user data stream.
      *
      * Weight(UID): 1
@@ -270,6 +476,33 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
     public async startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.startUserDataStream();
         return sendRequest<StartUserDataStreamResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Start a new user data stream.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Start User Data Stream V2 (USER_STREAM)
+     * @returns {Promise<RestApiResponse<StartUserDataStreamV2Response>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserDataStreamApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#start-user-data-stream-v2 Binance API Documentation}
+     */
+    public async startUserDataStreamV2(): Promise<RestApiResponse<StartUserDataStreamV2Response>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.startUserDataStreamV2();
+        return sendRequest<StartUserDataStreamV2Response>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

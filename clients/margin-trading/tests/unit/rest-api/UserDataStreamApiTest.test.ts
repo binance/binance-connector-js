@@ -16,8 +16,14 @@ import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { UserDataStreamApi } from '../../../src/rest-api';
-import { KeepaliveUserDataStreamRequest } from '../../../src/rest-api';
-import type { StartUserDataStreamResponse } from '../../../src/rest-api/types';
+import {
+    KeepaliveUserDataStreamRequest,
+    KeepaliveUserDataStreamV2Request,
+} from '../../../src/rest-api';
+import type {
+    StartUserDataStreamResponse,
+    StartUserDataStreamV2Response,
+} from '../../../src/rest-api/types';
 
 describe('UserDataStreamApi', () => {
     let client: UserDataStreamApi;
@@ -61,6 +67,40 @@ describe('UserDataStreamApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'closeUserDataStream').mockRejectedValueOnce(mockError);
             await expect(client.closeUserDataStream()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('closeUserDataStreamV2()', () => {
+        it('should execute closeUserDataStreamV2() successfully with required parameters only', async () => {
+            const spy = jest.spyOn(client, 'closeUserDataStreamV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<void>)
+            );
+            const response = await client.closeUserDataStreamV2();
+
+            await expect(response.data()).resolves.toBeUndefined();
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'closeUserDataStreamV2')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.closeUserDataStreamV2()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -138,6 +178,79 @@ describe('UserDataStreamApi', () => {
         });
     });
 
+    describe('keepaliveUserDataStreamV2()', () => {
+        it('should execute keepaliveUserDataStreamV2() successfully with required parameters only', async () => {
+            const params: KeepaliveUserDataStreamV2Request = {
+                listenKey: 'listenKey_example',
+            };
+
+            const spy = jest.spyOn(client, 'keepaliveUserDataStreamV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<void>)
+            );
+            const response = await client.keepaliveUserDataStreamV2(params);
+
+            await expect(response.data()).resolves.toBeUndefined();
+            spy.mockRestore();
+        });
+
+        it('should execute keepaliveUserDataStreamV2() successfully with optional parameters', async () => {
+            const params: KeepaliveUserDataStreamV2Request = {
+                listenKey: 'listenKey_example',
+            };
+
+            const spy = jest.spyOn(client, 'keepaliveUserDataStreamV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<void>)
+            );
+            const response = await client.keepaliveUserDataStreamV2(params);
+
+            await expect(response.data()).resolves.toBeUndefined();
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when listenKey is missing', async () => {
+            const _params: KeepaliveUserDataStreamV2Request = {
+                listenKey: 'listenKey_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.listenKey;
+
+            await expect(client.keepaliveUserDataStreamV2(params)).rejects.toThrow(
+                'Required parameter listenKey was null or undefined when calling keepaliveUserDataStreamV2.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: KeepaliveUserDataStreamV2Request = {
+                listenKey: 'listenKey_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'keepaliveUserDataStreamV2')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.keepaliveUserDataStreamV2(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('startUserDataStream()', () => {
         it('should execute startUserDataStream() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
@@ -170,6 +283,44 @@ describe('UserDataStreamApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'startUserDataStream').mockRejectedValueOnce(mockError);
             await expect(client.startUserDataStream()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('startUserDataStreamV2()', () => {
+        it('should execute startUserDataStreamV2() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({ listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhd' })
+            );
+
+            const spy = jest.spyOn(client, 'startUserDataStreamV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<StartUserDataStreamV2Response>)
+            );
+            const response = await client.startUserDataStreamV2();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'startUserDataStreamV2')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.startUserDataStreamV2()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

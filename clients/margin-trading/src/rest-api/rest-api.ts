@@ -87,7 +87,10 @@ import type {
     GetCrossMarginTransferHistoryRequest,
     QueryMaxTransferOutAmountRequest,
 } from './modules/transfer-api';
-import type { KeepaliveUserDataStreamRequest } from './modules/user-data-stream-api';
+import type {
+    KeepaliveUserDataStreamRequest,
+    KeepaliveUserDataStreamV2Request,
+} from './modules/user-data-stream-api';
 
 import type {
     AdjustCrossMarginMaxLeverageResponse,
@@ -158,7 +161,7 @@ import type {
     GetCrossMarginTransferHistoryResponse,
     QueryMaxTransferOutAmountResponse,
 } from './types';
-import type { StartUserDataStreamResponse } from './types';
+import type { StartUserDataStreamResponse, StartUserDataStreamV2Response } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
@@ -1830,6 +1833,23 @@ export class RestAPI {
     }
 
     /**
+     * Close out a user data stream.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Close User Data Stream V2 (USER_STREAM)
+     *
+     * @returns {Promise<RestApiResponse<void>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#close-user-data-stream-v2 Binance API Documentation}
+     */
+    closeUserDataStreamV2(): Promise<RestApiResponse<void>> {
+        return this.userDataStreamApi.closeUserDataStreamV2();
+    }
+
+    /**
      * Keepalive a user data stream to prevent a time out.
      *
      * Weight(UID): 1
@@ -1850,6 +1870,26 @@ export class RestAPI {
     }
 
     /**
+     * Keepalive a user data stream to prevent a time out.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Keepalive User Data Stream V2 (USER_STREAM)
+     * @param {KeepaliveUserDataStreamV2Request} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<void>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#keepalive-user-data-stream-v2 Binance API Documentation}
+     */
+    keepaliveUserDataStreamV2(
+        requestParameters: KeepaliveUserDataStreamV2Request
+    ): Promise<RestApiResponse<void>> {
+        return this.userDataStreamApi.keepaliveUserDataStreamV2(requestParameters);
+    }
+
+    /**
      * Start a new user data stream.
      *
      * Weight(UID): 1
@@ -1864,5 +1904,22 @@ export class RestAPI {
      */
     startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>> {
         return this.userDataStreamApi.startUserDataStream();
+    }
+
+    /**
+     * Start a new user data stream.
+     *
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
+     *
+     * @summary Start User Data Stream V2 (USER_STREAM)
+     *
+     * @returns {Promise<RestApiResponse<StartUserDataStreamV2Response>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-margin-trading/api/rest-api/user-data-stream#start-user-data-stream-v2 Binance API Documentation}
+     */
+    startUserDataStreamV2(): Promise<RestApiResponse<StartUserDataStreamV2Response>> {
+        return this.userDataStreamApi.startUserDataStreamV2();
     }
 }
