@@ -345,7 +345,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
-         * Get Flexible Loan Borrow History. It can be used to check history before 2024-02-27 08:00.
+         * Get Flexible Loan Borrow History.
          *
          * Weight(IP): 400
          *
@@ -597,7 +597,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
-         * Get Flexible Loan LTV Adjustment History. It can be used to check history before 2024-02-27 08:00.
+         * Get Flexible Loan LTV Adjustment History.
          *
          * Weight(UID): 400
          *
@@ -725,7 +725,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
-         * Get Flexible Loan Repayment History. It can be used to check history before 2024-02-27 08:00.
+         * Get Flexible Loan Repayment History.
          *
          * Weight(IP): 400
          *
@@ -902,7 +902,7 @@ export interface FlexibleRateApiInterface {
         requestParameters?: GetFlexibleLoanAssetsDataRequest
     ): Promise<RestApiResponse<GetFlexibleLoanAssetsDataResponse>>;
     /**
-     * Get Flexible Loan Borrow History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan Borrow History.
      *
      * Weight(IP): 400
      *
@@ -983,7 +983,7 @@ export interface FlexibleRateApiInterface {
         requestParameters?: GetFlexibleLoanLiquidationHistoryRequest
     ): Promise<RestApiResponse<GetFlexibleLoanLiquidationHistoryResponse>>;
     /**
-     * Get Flexible Loan LTV Adjustment History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan LTV Adjustment History.
      *
      * Weight(UID): 400
      *
@@ -1023,7 +1023,7 @@ export interface FlexibleRateApiInterface {
         requestParameters?: GetFlexibleLoanOngoingOrdersRequest
     ): Promise<RestApiResponse<GetFlexibleLoanOngoingOrdersResponse>>;
     /**
-     * Get Flexible Loan Repayment History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan Repayment History.
      *
      * Weight(IP): 400
      *
@@ -1769,7 +1769,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
-     * Get Flexible Loan Borrow History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan Borrow History.
      *
      * Weight(IP): 400
      *
@@ -1935,7 +1935,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
-     * Get Flexible Loan LTV Adjustment History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan LTV Adjustment History.
      *
      * Weight(UID): 400
      *
@@ -2018,7 +2018,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
     }
 
     /**
-     * Get Flexible Loan Repayment History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan Repayment History.
      *
      * Weight(IP): 400
      *

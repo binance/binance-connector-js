@@ -12,4 +12,3 @@
  */
 
 export * from './flexible-rate-api';
-export * from './stable-rate-api';

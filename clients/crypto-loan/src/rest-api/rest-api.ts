@@ -13,7 +13,6 @@
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
 import { FlexibleRateApi } from './modules/flexible-rate-api';
-import { StableRateApi } from './modules/stable-rate-api';
 
 import type {
     CheckCollateralRepayRateRequest,
@@ -29,12 +28,6 @@ import type {
     GetFlexibleLoanOngoingOrdersRequest,
     GetFlexibleLoanRepaymentHistoryRequest,
 } from './modules/flexible-rate-api';
-import type {
-    GetCryptoLoansIncomeHistoryRequest,
-    GetLoanBorrowHistoryRequest,
-    GetLoanLtvAdjustmentHistoryRequest,
-    GetLoanRepaymentHistoryRequest,
-} from './modules/stable-rate-api';
 
 import type {
     CheckCollateralRepayRateResponse,
@@ -50,22 +43,14 @@ import type {
     GetFlexibleLoanOngoingOrdersResponse,
     GetFlexibleLoanRepaymentHistoryResponse,
 } from './types';
-import type {
-    GetCryptoLoansIncomeHistoryResponse,
-    GetLoanBorrowHistoryResponse,
-    GetLoanLtvAdjustmentHistoryResponse,
-    GetLoanRepaymentHistoryResponse,
-} from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
     private flexibleRateApi: FlexibleRateApi;
-    private stableRateApi: StableRateApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
         this.flexibleRateApi = new FlexibleRateApi(configuration);
-        this.stableRateApi = new StableRateApi(configuration);
     }
 
     /**
@@ -241,7 +226,7 @@ export class RestAPI {
     }
 
     /**
-     * Get Flexible Loan Borrow History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan Borrow History.
      *
      * Weight(IP): 400
      *
@@ -338,7 +323,7 @@ export class RestAPI {
     }
 
     /**
-     * Get Flexible Loan LTV Adjustment History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan LTV Adjustment History.
      *
      * Weight(UID): 400
      *
@@ -386,7 +371,7 @@ export class RestAPI {
     }
 
     /**
-     * Get Flexible Loan Repayment History. It can be used to check history before 2024-02-27 08:00.
+     * Get Flexible Loan Repayment History.
      *
      * Weight(IP): 400
      *
@@ -408,101 +393,5 @@ export class RestAPI {
         requestParameters: GetFlexibleLoanRepaymentHistoryRequest = {}
     ): Promise<RestApiResponse<GetFlexibleLoanRepaymentHistoryResponse>> {
         return this.flexibleRateApi.getFlexibleLoanRepaymentHistory(requestParameters);
-    }
-
-    /**
-     * Get Crypto Loans Income History
-     *
-     * Weight(UID): 6000
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - If `startTime` and `endTime` are both omitted, the most recent 7 days of data are returned.
-     * - The maximum interval between `startTime` and `endTime` is 30 days.
-     *
-     * @summary Get Crypto Loans Income History (USER_DATA)
-     * @param {GetCryptoLoansIncomeHistoryRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<GetCryptoLoansIncomeHistoryResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-crypto-loans-income-history Binance API Documentation}
-     */
-    getCryptoLoansIncomeHistory(
-        requestParameters: GetCryptoLoansIncomeHistoryRequest = {}
-    ): Promise<RestApiResponse<GetCryptoLoansIncomeHistoryResponse>> {
-        return this.stableRateApi.getCryptoLoansIncomeHistory(requestParameters);
-    }
-
-    /**
-     * Get Loan Borrow History
-     *
-     * Weight(IP): 400
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
-     * - The max interval between `startTime` and `endTime` is 180 days.
-     *
-     * @summary Get Loan Borrow History (USER_DATA)
-     * @param {GetLoanBorrowHistoryRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<GetLoanBorrowHistoryResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-borrow-history Binance API Documentation}
-     */
-    getLoanBorrowHistory(
-        requestParameters: GetLoanBorrowHistoryRequest = {}
-    ): Promise<RestApiResponse<GetLoanBorrowHistoryResponse>> {
-        return this.stableRateApi.getLoanBorrowHistory(requestParameters);
-    }
-
-    /**
-     * Get Loan LTV Adjustment History
-     *
-     * Weight(IP): 400
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
-     * - The max interval between `startTime` and `endTime` is 180 days.
-     *
-     * @summary Get Loan LTV Adjustment History (USER_DATA)
-     * @param {GetLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<GetLoanLtvAdjustmentHistoryResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-ltv-adjustment-history Binance API Documentation}
-     */
-    getLoanLtvAdjustmentHistory(
-        requestParameters: GetLoanLtvAdjustmentHistoryRequest = {}
-    ): Promise<RestApiResponse<GetLoanLtvAdjustmentHistoryResponse>> {
-        return this.stableRateApi.getLoanLtvAdjustmentHistory(requestParameters);
-    }
-
-    /**
-     * Get Loan Repayment History
-     *
-     * Weight(IP): 400
-     *
-     * Security Type: USER_DATA
-     *
-     * Notes:
-     * - If `startTime` and `endTime` are not sent, the recent 90-day data is returned.
-     * - The max interval between `startTime` and `endTime` is 180 days.
-     *
-     * @summary Get Loan Repayment History (USER_DATA)
-     * @param {GetLoanRepaymentHistoryRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<GetLoanRepaymentHistoryResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-crypto-loan/api/rest-api/stable-rate#get-loan-repayment-history Binance API Documentation}
-     */
-    getLoanRepaymentHistory(
-        requestParameters: GetLoanRepaymentHistoryRequest = {}
-    ): Promise<RestApiResponse<GetLoanRepaymentHistoryResponse>> {
-        return this.stableRateApi.getLoanRepaymentHistory(requestParameters);
     }
 }

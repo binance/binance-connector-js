@@ -1,5 +1,21 @@
 # Changelog
 
+## 11.0.0 - 2026-10-22
+
+### Changed (4)
+
+- Removed response schema `getLoanRepaymentHistoryResponse`
+- Removed response schema `getLoanBorrowHistoryResponse`
+- Removed response schema `getLoanLtvAdjustmentHistoryResponse`
+- Removed response schema `getCryptoLoansIncomeHistoryResponse`
+
+### Removed (4)
+
+- `getCryptoLoansIncomeHistory()` (`GET /sapi/v1/loan/income`)
+- `getLoanBorrowHistory()` (`GET /sapi/v1/loan/borrow/history`)
+- `getLoanLtvAdjustmentHistory()` (`GET /sapi/v1/loan/ltv/adjustment/history`)
+- `getLoanRepaymentHistory()` (`GET /sapi/v1/loan/repay/history`)
+
 ## 10.0.7 - 2026-10-19
 
 ### Changed (1)
