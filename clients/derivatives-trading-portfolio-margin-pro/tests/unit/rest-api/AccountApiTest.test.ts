@@ -21,8 +21,6 @@ import {
     ChangeAutoRepayFuturesStatusAutoRepayEnum,
     FundCollectionByAssetFutureTypeEnum,
     GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum,
-    PortfolioMarginProBankruptcyLoanRepayFromEnum,
-    RepayFuturesNegativeBalanceFromEnum,
     SwitchDeltaModeDeltaEnabledEnum,
     TransferLdusdtRwusdForPortfolioMarginAssetEnum,
     TransferLdusdtRwusdForPortfolioMarginTransferTypeEnum,
@@ -1012,7 +1010,6 @@ describe('AccountApi', () => {
 
         it('should execute portfolioMarginProBankruptcyLoanRepay() successfully with optional parameters', async () => {
             const params: PortfolioMarginProBankruptcyLoanRepayRequest = {
-                from: PortfolioMarginProBankruptcyLoanRepayFromEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -1300,7 +1297,6 @@ describe('AccountApi', () => {
 
         it('should execute repayFuturesNegativeBalance() successfully with optional parameters', async () => {
             const params: RepayFuturesNegativeBalanceRequest = {
-                from: RepayFuturesNegativeBalanceFromEnum.SPOT,
                 recvWindow: 5000,
             };
 

@@ -394,6 +394,7 @@ export class RestAPI {
      *
      * Notes:
      * - Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     * - USDT is taken from the Spot account and transferred to the Cross Margin account to repay the loan.
      *
      * @summary Portfolio Margin Pro Bankruptcy Loan Repay (TRADE)
      * @param {PortfolioMarginProBankruptcyLoanRepayRequest} requestParameters Request parameters.
@@ -485,6 +486,9 @@ export class RestAPI {
      * Weight(IP): 1500
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The negative balance is repaid from the Cross Margin account.
      *
      * @summary Repay futures Negative Balance (USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.

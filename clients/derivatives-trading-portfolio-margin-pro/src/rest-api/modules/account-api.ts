@@ -540,24 +540,20 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * Notes:
          * - Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+         * - USDT is taken from the Spot account and transferred to the Cross Margin account to repay the loan.
          *
          * @summary Portfolio Margin Pro Bankruptcy Loan Repay (TRADE)
-         * @param {PortfolioMarginProBankruptcyLoanRepayFromEnum} [from]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         portfolioMarginProBankruptcyLoanRepay: async (
-            from?: PortfolioMarginProBankruptcyLoanRepayFromEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
 
-            if (from !== undefined && from !== null) {
-                localVarQueryParameter['from'] = from;
-            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -735,23 +731,19 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * Security Type: USER_DATA
          *
+         * Notes:
+         * - The negative balance is repaid from the Cross Margin account.
+         *
          * @summary Repay futures Negative Balance (USER_DATA)
-         * @param {RepayFuturesNegativeBalanceFromEnum} [from]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        repayFuturesNegativeBalance: async (
-            from?: RepayFuturesNegativeBalanceFromEnum,
-            recvWindow?: number | bigint
-        ): Promise<RequestArgs> => {
+        repayFuturesNegativeBalance: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
 
-            if (from !== undefined && from !== null) {
-                localVarQueryParameter['from'] = from;
-            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1134,6 +1126,7 @@ export interface AccountApiInterface {
      *
      * Notes:
      * - Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     * - USDT is taken from the Spot account and transferred to the Cross Margin account to repay the loan.
      *
      * @summary Portfolio Margin Pro Bankruptcy Loan Repay (TRADE)
      * @param {PortfolioMarginProBankruptcyLoanRepayRequest} requestParameters Request parameters.
@@ -1207,6 +1200,9 @@ export interface AccountApiInterface {
      * Weight(IP): 1500
      *
      * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The negative balance is repaid from the Cross Margin account.
      *
      * @summary Repay futures Negative Balance (USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.
@@ -1493,13 +1489,6 @@ export interface GetTransferableEarnAssetBalanceForPortfolioMarginRequest {
 export interface PortfolioMarginProBankruptcyLoanRepayRequest {
     /**
      *
-     * @type {'SPOT' | 'MARGIN'}
-     * @memberof AccountApiPortfolioMarginProBankruptcyLoanRepay
-     */
-    readonly from?: PortfolioMarginProBankruptcyLoanRepayFromEnum;
-
-    /**
-     *
      * @type {number | bigint}
      * @memberof AccountApiPortfolioMarginProBankruptcyLoanRepay
      */
@@ -1606,13 +1595,6 @@ export interface QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest {
  * @interface RepayFuturesNegativeBalanceRequest
  */
 export interface RepayFuturesNegativeBalanceRequest {
-    /**
-     *
-     * @type {'SPOT' | 'MARGIN'}
-     * @memberof AccountApiRepayFuturesNegativeBalance
-     */
-    readonly from?: RepayFuturesNegativeBalanceFromEnum;
-
     /**
      *
      * @type {number | bigint}
@@ -2124,6 +2106,7 @@ export class AccountApi implements AccountApiInterface {
      *
      * Notes:
      * - Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
+     * - USDT is taken from the Spot account and transferred to the Cross Margin account to repay the loan.
      *
      * @summary Portfolio Margin Pro Bankruptcy Loan Repay (TRADE)
      * @param {PortfolioMarginProBankruptcyLoanRepayRequest} requestParameters Request parameters.
@@ -2137,7 +2120,6 @@ export class AccountApi implements AccountApiInterface {
     ): Promise<RestApiResponse<PortfolioMarginProBankruptcyLoanRepayResponse>> {
         const localVarAxiosArgs =
             await this.localVarAxiosParamCreator.portfolioMarginProBankruptcyLoanRepay(
-                requestParameters?.from,
                 requestParameters?.recvWindow
             );
         return sendRequest<PortfolioMarginProBankruptcyLoanRepayResponse>(
@@ -2275,6 +2257,9 @@ export class AccountApi implements AccountApiInterface {
      *
      * Security Type: USER_DATA
      *
+     * Notes:
+     * - The negative balance is repaid from the Cross Margin account.
+     *
      * @summary Repay futures Negative Balance (USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>>}
@@ -2286,7 +2271,6 @@ export class AccountApi implements AccountApiInterface {
         requestParameters: RepayFuturesNegativeBalanceRequest = {}
     ): Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.repayFuturesNegativeBalance(
-            requestParameters?.from,
             requestParameters?.recvWindow
         );
         return sendRequest<RepayFuturesNegativeBalanceResponse>(
@@ -2423,16 +2407,6 @@ export enum FundCollectionByAssetFutureTypeEnum {
 export enum GetTransferableEarnAssetBalanceForPortfolioMarginTransferTypeEnum {
     EARN_TO_FUTURE = 'EARN_TO_FUTURE',
     FUTURE_TO_EARN = 'FUTURE_TO_EARN',
-}
-
-export enum PortfolioMarginProBankruptcyLoanRepayFromEnum {
-    SPOT = 'SPOT',
-    MARGIN = 'MARGIN',
-}
-
-export enum RepayFuturesNegativeBalanceFromEnum {
-    SPOT = 'SPOT',
-    MARGIN = 'MARGIN',
 }
 
 export enum SwitchDeltaModeDeltaEnabledEnum {
