@@ -673,7 +673,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {GetCmIncomeHistoryIncomeTypeEnum} [incomeType]
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [page]
          * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
@@ -684,7 +683,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             incomeType?: GetCmIncomeHistoryIncomeTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
-            page?: number | bigint,
             limit?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -703,9 +701,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             }
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
-            }
-            if (page !== undefined && page !== null) {
-                localVarQueryParameter['page'] = page;
             }
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
@@ -1225,7 +1220,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {GetUmIncomeHistoryIncomeTypeEnum} [incomeType] Income type.
          * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
          * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number | bigint} [page] Page number.
          * @param {number | bigint} [limit] Number of results returned.
          * @param {number | bigint} [recvWindow]
          *
@@ -1236,7 +1230,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             incomeType?: GetUmIncomeHistoryIncomeTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
-            page?: number | bigint,
             limit?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -1255,9 +1248,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             }
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
-            }
-            if (page !== undefined && page !== null) {
-                localVarQueryParameter['page'] = page;
             }
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
@@ -3133,13 +3123,6 @@ export interface GetCmIncomeHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     *
-     * @type {number | bigint}
-     * @memberof AccountApiGetCmIncomeHistory
-     */
-    readonly page?: number | bigint;
-
-    /**
      * Number of results returned.
      * @type {number | bigint}
      * @memberof AccountApiGetCmIncomeHistory
@@ -3421,13 +3404,6 @@ export interface GetUmIncomeHistoryRequest {
      * @memberof AccountApiGetUmIncomeHistory
      */
     readonly endTime?: number | bigint;
-
-    /**
-     * Page number.
-     * @type {number | bigint}
-     * @memberof AccountApiGetUmIncomeHistory
-     */
-    readonly page?: number | bigint;
 
     /**
      * Number of results returned.
@@ -4376,7 +4352,6 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.incomeType,
             requestParameters?.startTime,
             requestParameters?.endTime,
-            requestParameters?.page,
             requestParameters?.limit,
             requestParameters?.recvWindow
         );
@@ -4796,7 +4771,6 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.incomeType,
             requestParameters?.startTime,
             requestParameters?.endTime,
-            requestParameters?.page,
             requestParameters?.limit,
             requestParameters?.recvWindow
         );

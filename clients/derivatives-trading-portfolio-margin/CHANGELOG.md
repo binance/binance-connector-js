@@ -1,5 +1,16 @@
 # Changelog
 
+## 22.0.0 - 2026-10-22
+
+### Changed (1)
+
+#### REST API
+
+- Deleted parameter `page`
+  - affected methods:
+    - `getCmIncomeHistory()` (`GET /papi/v1/cm/income`)
+    - `getUmIncomeHistory()` (`GET /papi/v1/um/income`)
+
 ## 21.1.1 - 2026-10-19
 
 ### Changed (1)
