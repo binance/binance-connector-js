@@ -69,6 +69,18 @@ export interface CreateSubAccountApiKeyResponse {
     canVanillaOptions?: boolean;
     /**
      *
+     * @type {boolean}
+     * @memberof CreateSubAccountApiKeyResponse
+     */
+    canFixApiTrading?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof CreateSubAccountApiKeyResponse
+     */
+    canFixApiReading?: boolean;
+    /**
+     *
      * @type {number | bigint}
      * @memberof CreateSubAccountApiKeyResponse
      */

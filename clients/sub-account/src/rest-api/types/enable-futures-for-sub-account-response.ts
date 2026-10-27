@@ -26,7 +26,7 @@ export interface EnableFuturesForSubAccountResponse {
      */
     email?: string;
     /**
-     *
+     * true or false
      * @type {boolean}
      * @memberof EnableFuturesForSubAccountResponse
      */

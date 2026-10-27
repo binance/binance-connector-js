@@ -21,6 +21,7 @@ import {
 import type {
     AddIpRestrictionForSubAccountApiKeyResponse,
     CreateSubAccountApiKeyResponse,
+    CreateSubAccountApiKeyV2Response,
     DeleteIpListForASubAccountApiKeyResponse,
     GetIpRestrictionForASubAccountApiKeyResponse,
     ModifySubAccountApiKeyPermissionResponse,
@@ -123,6 +124,8 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          * @param {boolean} [canFuturesTrade] Futures trading permission, default false
          * @param {boolean} [canUniversalTransfer] Universal transfer permission, default false
          * @param {boolean} [canVanillaOptions] Vanilla options permission, default false
+         * @param {boolean} [canFixApiTrading] FIX API Trading permission. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+         * @param {boolean} [canFixApiReading] FIX API Reading permission. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
          * @param {string} [ipAddress] Required when status=2. IP address list, max 500 chars
          * @param {string} [thirdPartyName] Required when status=3. Third-party name
          * @param {string} [publicKey] Ed25519 public key (optional, for Ed25519 type API Key)
@@ -139,6 +142,8 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             canFuturesTrade?: boolean,
             canUniversalTransfer?: boolean,
             canVanillaOptions?: boolean,
+            canFixApiTrading?: boolean,
+            canFixApiReading?: boolean,
             ipAddress?: string,
             thirdPartyName?: string,
             publicKey?: string,
@@ -179,6 +184,12 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             if (canVanillaOptions !== undefined && canVanillaOptions !== null) {
                 localVarQueryParameter['canVanillaOptions'] = canVanillaOptions;
             }
+            if (canFixApiTrading !== undefined && canFixApiTrading !== null) {
+                localVarQueryParameter['canFixApiTrading'] = canFixApiTrading;
+            }
+            if (canFixApiReading !== undefined && canFixApiReading !== null) {
+                localVarQueryParameter['canFixApiReading'] = canFixApiReading;
+            }
             if (ipAddress !== undefined && ipAddress !== null) {
                 localVarQueryParameter['ipAddress'] = ipAddress;
             }
@@ -197,6 +208,120 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
 
             return {
                 endpoint: '/sapi/v1/sub-account/subAccountApi',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Create a new API Key for a sub-account.
+         *
+         * Weight(UID): 3000
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - `status=2` requires `ipAddress`
+         * - `status=3` requires `thirdPartyName`
+         * - Asset Sub Account is not supported
+         * - The caller must pass the KYC IP restriction check
+         * - `publicKey` is rejected if passed in the URL query string. The example sends it in the request body with `--data-urlencode`
+         *
+         * @summary Create Sub-account API Key V2 (For Master Account) (USER_DATA)
+         * @param {string} email Sub-account email
+         * @param {string} apiName API Key name
+         * @param {number | bigint} status IP restriction status. 1 = unrestricted, 2 = restricted to trusted IPs, 3 = third-party IP restriction
+         * @param {boolean} [canTrade] Spot & Margin trading permission, default false
+         * @param {boolean} [canMarginLoanRepay] Margin borrow/repay permission, default false
+         * @param {boolean} [canFuturesTrade] Futures trading permission, default false
+         * @param {boolean} [canUniversalTransfer] Universal transfer permission, default false
+         * @param {boolean} [canVanillaOptions] Vanilla options permission, default false
+         * @param {boolean} [canFixApiTrading] FIX API Trading permission. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+         * @param {boolean} [canFixApiReading] FIX API Reading permission. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+         * @param {string} [ipAddress] Required when status=2. IP address list, max 500 chars
+         * @param {string} [thirdPartyName] Required when status=3. Third-party name
+         * @param {string} [publicKey] RSA or Ed25519 public key (optional). Must be sent in the request body; it is rejected if passed in the URL query string
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        createSubAccountApiKeyV2: async (
+            email: string,
+            apiName: string,
+            status: number | bigint,
+            canTrade?: boolean,
+            canMarginLoanRepay?: boolean,
+            canFuturesTrade?: boolean,
+            canUniversalTransfer?: boolean,
+            canVanillaOptions?: boolean,
+            canFixApiTrading?: boolean,
+            canFixApiReading?: boolean,
+            ipAddress?: string,
+            thirdPartyName?: string,
+            publicKey?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('createSubAccountApiKeyV2', 'email', email);
+            // verify required parameter 'apiName' is not null or undefined
+            assertParamExists('createSubAccountApiKeyV2', 'apiName', apiName);
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('createSubAccountApiKeyV2', 'status', status);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (email !== undefined && email !== null) {
+                localVarQueryParameter['email'] = email;
+            }
+            if (apiName !== undefined && apiName !== null) {
+                localVarQueryParameter['apiName'] = apiName;
+            }
+            if (status !== undefined && status !== null) {
+                localVarQueryParameter['status'] = status;
+            }
+            if (canTrade !== undefined && canTrade !== null) {
+                localVarQueryParameter['canTrade'] = canTrade;
+            }
+            if (canMarginLoanRepay !== undefined && canMarginLoanRepay !== null) {
+                localVarQueryParameter['canMarginLoanRepay'] = canMarginLoanRepay;
+            }
+            if (canFuturesTrade !== undefined && canFuturesTrade !== null) {
+                localVarQueryParameter['canFuturesTrade'] = canFuturesTrade;
+            }
+            if (canUniversalTransfer !== undefined && canUniversalTransfer !== null) {
+                localVarQueryParameter['canUniversalTransfer'] = canUniversalTransfer;
+            }
+            if (canVanillaOptions !== undefined && canVanillaOptions !== null) {
+                localVarQueryParameter['canVanillaOptions'] = canVanillaOptions;
+            }
+            if (canFixApiTrading !== undefined && canFixApiTrading !== null) {
+                localVarQueryParameter['canFixApiTrading'] = canFixApiTrading;
+            }
+            if (canFixApiReading !== undefined && canFixApiReading !== null) {
+                localVarQueryParameter['canFixApiReading'] = canFixApiReading;
+            }
+            if (ipAddress !== undefined && ipAddress !== null) {
+                localVarQueryParameter['ipAddress'] = ipAddress;
+            }
+            if (thirdPartyName !== undefined && thirdPartyName !== null) {
+                localVarQueryParameter['thirdPartyName'] = thirdPartyName;
+            }
+            if (publicKey !== undefined && publicKey !== null) {
+                localVarQueryParameter['publicKey'] = publicKey;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/sub-account/subAccountApi',
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -396,6 +521,8 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          * @param {boolean} [canFuturesTrade] Futures trading permission
          * @param {boolean} [canUniversalTransfer] Universal transfer permission
          * @param {boolean} [canVanillaOptions] Vanilla options permission
+         * @param {boolean} [canFixApiTrading] FIX API Trading permission. If omitted, the existing value is unchanged. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+         * @param {boolean} [canFixApiReading] FIX API Reading permission. If omitted, the existing value is unchanged. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -408,6 +535,8 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             canFuturesTrade?: boolean,
             canUniversalTransfer?: boolean,
             canVanillaOptions?: boolean,
+            canFixApiTrading?: boolean,
+            canFixApiReading?: boolean,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
@@ -443,6 +572,12 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             }
             if (canVanillaOptions !== undefined && canVanillaOptions !== null) {
                 localVarQueryParameter['canVanillaOptions'] = canVanillaOptions;
+            }
+            if (canFixApiTrading !== undefined && canFixApiTrading !== null) {
+                localVarQueryParameter['canFixApiTrading'] = canFixApiTrading;
+            }
+            if (canFixApiReading !== undefined && canFixApiReading !== null) {
+                localVarQueryParameter['canFixApiReading'] = canFixApiReading;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -567,6 +702,29 @@ export interface ApiManagementApiInterface {
     createSubAccountApiKey(
         requestParameters: CreateSubAccountApiKeyRequest
     ): Promise<RestApiResponse<CreateSubAccountApiKeyResponse>>;
+    /**
+     * Create a new API Key for a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `status=2` requires `ipAddress`
+     * - `status=3` requires `thirdPartyName`
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     * - `publicKey` is rejected if passed in the URL query string. The example sends it in the request body with `--data-urlencode`
+     *
+     * @summary Create Sub-account API Key V2 (For Master Account) (USER_DATA)
+     * @param {CreateSubAccountApiKeyV2Request} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApiInterface
+     */
+    createSubAccountApiKeyV2(
+        requestParameters: CreateSubAccountApiKeyV2Request
+    ): Promise<RestApiResponse<CreateSubAccountApiKeyV2Response>>;
     /**
      * Delete IP List For a Sub-account API Key
      *
@@ -764,6 +922,20 @@ export interface CreateSubAccountApiKeyRequest {
     readonly canVanillaOptions?: boolean;
 
     /**
+     * FIX API Trading permission. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly canFixApiTrading?: boolean;
+
+    /**
+     * FIX API Reading permission. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly canFixApiReading?: boolean;
+
+    /**
      * Required when status=2. IP address list, max 500 chars
      * @type {string}
      * @memberof ApiManagementApiCreateSubAccountApiKey
@@ -788,6 +960,110 @@ export interface CreateSubAccountApiKeyRequest {
      *
      * @type {number | bigint}
      * @memberof ApiManagementApiCreateSubAccountApiKey
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for createSubAccountApiKeyV2 operation in ApiManagementApi.
+ * @interface CreateSubAccountApiKeyV2Request
+ */
+export interface CreateSubAccountApiKeyV2Request {
+    /**
+     * Sub-account email
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly email: string;
+
+    /**
+     * API Key name
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly apiName: string;
+
+    /**
+     * IP restriction status. 1 = unrestricted, 2 = restricted to trusted IPs, 3 = third-party IP restriction
+     * @type {number | bigint}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly status: number | bigint;
+
+    /**
+     * Spot & Margin trading permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly canTrade?: boolean;
+
+    /**
+     * Margin borrow/repay permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly canMarginLoanRepay?: boolean;
+
+    /**
+     * Futures trading permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly canFuturesTrade?: boolean;
+
+    /**
+     * Universal transfer permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly canUniversalTransfer?: boolean;
+
+    /**
+     * Vanilla options permission, default false
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly canVanillaOptions?: boolean;
+
+    /**
+     * FIX API Trading permission. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly canFixApiTrading?: boolean;
+
+    /**
+     * FIX API Reading permission. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+     * @type {boolean}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly canFixApiReading?: boolean;
+
+    /**
+     * Required when status=2. IP address list, max 500 chars
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly ipAddress?: string;
+
+    /**
+     * Required when status=3. Third-party name
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly thirdPartyName?: string;
+
+    /**
+     * RSA or Ed25519 public key (optional). Must be sent in the request body; it is rejected if passed in the URL query string
+     * @type {string}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
+     */
+    readonly publicKey?: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof ApiManagementApiCreateSubAccountApiKeyV2
      */
     readonly recvWindow?: number | bigint;
 }
@@ -935,6 +1211,20 @@ export interface ModifySubAccountApiKeyPermissionRequest {
     readonly canVanillaOptions?: boolean;
 
     /**
+     * FIX API Trading permission. If omitted, the existing value is unchanged. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+     * @type {boolean}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly canFixApiTrading?: boolean;
+
+    /**
+     * FIX API Reading permission. If omitted, the existing value is unchanged. Only supported for API Keys using an Ed25519 public key. Setting it to `true` for any other key type returns `-9000` `Unsupported operation`
+     * @type {boolean}
+     * @memberof ApiManagementApiModifySubAccountApiKeyPermission
+     */
+    readonly canFixApiReading?: boolean;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof ApiManagementApiModifySubAccountApiKeyPermission
@@ -1068,12 +1358,66 @@ export class ApiManagementApi implements ApiManagementApiInterface {
             requestParameters?.canFuturesTrade,
             requestParameters?.canUniversalTransfer,
             requestParameters?.canVanillaOptions,
+            requestParameters?.canFixApiTrading,
+            requestParameters?.canFixApiReading,
             requestParameters?.ipAddress,
             requestParameters?.thirdPartyName,
             requestParameters?.publicKey,
             requestParameters?.recvWindow
         );
         return sendRequest<CreateSubAccountApiKeyResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Create a new API Key for a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `status=2` requires `ipAddress`
+     * - `status=3` requires `thirdPartyName`
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     * - `publicKey` is rejected if passed in the URL query string. The example sends it in the request body with `--data-urlencode`
+     *
+     * @summary Create Sub-account API Key V2 (For Master Account) (USER_DATA)
+     * @param {CreateSubAccountApiKeyV2Request} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<CreateSubAccountApiKeyV2Response>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof ApiManagementApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#create-sub-account-api-key-v2 Binance API Documentation}
+     */
+    public async createSubAccountApiKeyV2(
+        requestParameters: CreateSubAccountApiKeyV2Request
+    ): Promise<RestApiResponse<CreateSubAccountApiKeyV2Response>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.createSubAccountApiKeyV2(
+            requestParameters?.email,
+            requestParameters?.apiName,
+            requestParameters?.status,
+            requestParameters?.canTrade,
+            requestParameters?.canMarginLoanRepay,
+            requestParameters?.canFuturesTrade,
+            requestParameters?.canUniversalTransfer,
+            requestParameters?.canVanillaOptions,
+            requestParameters?.canFixApiTrading,
+            requestParameters?.canFixApiReading,
+            requestParameters?.ipAddress,
+            requestParameters?.thirdPartyName,
+            requestParameters?.publicKey,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<CreateSubAccountApiKeyV2Response>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -1228,6 +1572,8 @@ export class ApiManagementApi implements ApiManagementApiInterface {
                 requestParameters?.canFuturesTrade,
                 requestParameters?.canUniversalTransfer,
                 requestParameters?.canVanillaOptions,
+                requestParameters?.canFixApiTrading,
+                requestParameters?.canFixApiReading,
                 requestParameters?.recvWindow
             );
         return sendRequest<ModifySubAccountApiKeyPermissionResponse>(

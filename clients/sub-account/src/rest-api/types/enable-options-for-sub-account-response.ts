@@ -26,7 +26,7 @@ export interface EnableOptionsForSubAccountResponse {
      */
     email?: string;
     /**
-     *
+     * true or false
      * @type {boolean}
      * @memberof EnableOptionsForSubAccountResponse
      */

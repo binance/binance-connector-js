@@ -26,13 +26,13 @@ export interface GetFuturesPositionRiskOfSubAccountResponseInner {
      */
     entryPrice?: string;
     /**
-     *
+     * current initial leverage
      * @type {string}
      * @memberof GetFuturesPositionRiskOfSubAccountResponseInner
      */
     leverage?: string;
     /**
-     *
+     * notional value limit of current initial leverage
      * @type {string}
      * @memberof GetFuturesPositionRiskOfSubAccountResponseInner
      */

@@ -20,43 +20,43 @@
  */
 export interface GetSubAccountsStatusOnMarginOrFuturesResponseInner {
     /**
-     *
+     * user email
      * @type {string}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */
     email?: string;
     /**
-     *
+     * true or false
      * @type {boolean}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */
     isSubUserEnabled?: boolean;
     /**
-     *
+     * true or false
      * @type {boolean}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */
     isUserActive?: boolean;
     /**
-     *
+     * sub account create time
      * @type {number | bigint}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */
     insertTime?: number | bigint;
     /**
-     *
+     * true or false for margin
      * @type {boolean}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */
     isMarginEnabled?: boolean;
     /**
-     *
+     * true or false for futures.
      * @type {boolean}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */
     isFutureEnabled?: boolean;
     /**
-     *
+     * user mobile number
      * @type {number | bigint}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */

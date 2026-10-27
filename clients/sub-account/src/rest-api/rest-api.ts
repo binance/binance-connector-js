@@ -30,6 +30,7 @@ import type {
 import type {
     AddIpRestrictionForSubAccountApiKeyRequest,
     CreateSubAccountApiKeyRequest,
+    CreateSubAccountApiKeyV2Request,
     DeleteIpListForASubAccountApiKeyRequest,
     DeleteSubAccountApiKeyRequest,
     GetIpRestrictionForASubAccountApiKeyRequest,
@@ -88,6 +89,7 @@ import type {
 import type {
     AddIpRestrictionForSubAccountApiKeyResponse,
     CreateSubAccountApiKeyResponse,
+    CreateSubAccountApiKeyV2Response,
     DeleteIpListForASubAccountApiKeyResponse,
     GetIpRestrictionForASubAccountApiKeyResponse,
     ModifySubAccountApiKeyPermissionResponse,
@@ -414,6 +416,33 @@ export class RestAPI {
         requestParameters: CreateSubAccountApiKeyRequest
     ): Promise<RestApiResponse<CreateSubAccountApiKeyResponse>> {
         return this.apiManagementApi.createSubAccountApiKey(requestParameters);
+    }
+
+    /**
+     * Create a new API Key for a sub-account.
+     *
+     * Weight(UID): 3000
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - `status=2` requires `ipAddress`
+     * - `status=3` requires `thirdPartyName`
+     * - Asset Sub Account is not supported
+     * - The caller must pass the KYC IP restriction check
+     * - `publicKey` is rejected if passed in the URL query string. The example sends it in the request body with `--data-urlencode`
+     *
+     * @summary Create Sub-account API Key V2 (For Master Account) (USER_DATA)
+     * @param {CreateSubAccountApiKeyV2Request} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<CreateSubAccountApiKeyV2Response>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/vip-and-institutional-sub-account/api/rest-api/api-management#create-sub-account-api-key-v2 Binance API Documentation}
+     */
+    createSubAccountApiKeyV2(
+        requestParameters: CreateSubAccountApiKeyV2Request
+    ): Promise<RestApiResponse<CreateSubAccountApiKeyV2Response>> {
+        return this.apiManagementApi.createSubAccountApiKeyV2(requestParameters);
     }
 
     /**

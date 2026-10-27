@@ -20,19 +20,19 @@
  */
 export interface GetDetailOnSubAccountsMarginAccountResponseMarginTradeCoeffVo {
     /**
-     *
+     * Liquidation margin ratio
      * @type {string}
      * @memberof GetDetailOnSubAccountsMarginAccountResponseMarginTradeCoeffVo
      */
     forceLiquidationBar?: string;
     /**
-     *
+     * Margin call margin ratio
      * @type {string}
      * @memberof GetDetailOnSubAccountsMarginAccountResponseMarginTradeCoeffVo
      */
     marginCallBar?: string;
     /**
-     *
+     * Initial margin ratio
      * @type {string}
      * @memberof GetDetailOnSubAccountsMarginAccountResponseMarginTradeCoeffVo
      */

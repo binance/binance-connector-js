@@ -44,7 +44,7 @@ export interface QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPosit
      */
     symbol?: string;
     /**
-     *
+     * Only show the value at the time of opening the position
      * @type {string}
      * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */

@@ -63,6 +63,18 @@ export interface ModifySubAccountApiKeyPermissionResponse {
     canVanillaOptions?: boolean;
     /**
      *
+     * @type {boolean}
+     * @memberof ModifySubAccountApiKeyPermissionResponse
+     */
+    canFixApiTrading?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ModifySubAccountApiKeyPermissionResponse
+     */
+    canFixApiReading?: boolean;
+    /**
+     *
      * @type {number | bigint}
      * @memberof ModifySubAccountApiKeyPermissionResponse
      */

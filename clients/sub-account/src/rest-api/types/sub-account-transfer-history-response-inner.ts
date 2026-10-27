@@ -32,7 +32,7 @@ export interface SubAccountTransferHistoryResponseInner {
      */
     email?: string;
     /**
-     *
+     * 1 for transfer in, 2 for transfer out
      * @type {number | bigint}
      * @memberof SubAccountTransferHistoryResponseInner
      */
@@ -62,7 +62,7 @@ export interface SubAccountTransferHistoryResponseInner {
      */
     toAccountType?: string;
     /**
-     *
+     * status: PROCESS / SUCCESS / FAILURE
      * @type {string}
      * @memberof SubAccountTransferHistoryResponseInner
      */

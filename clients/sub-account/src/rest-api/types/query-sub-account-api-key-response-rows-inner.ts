@@ -69,6 +69,18 @@ export interface QuerySubAccountApiKeyResponseRowsInner {
     canVanillaOptions?: boolean;
     /**
      *
+     * @type {boolean}
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
+     */
+    canFixApiTrading?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof QuerySubAccountApiKeyResponseRowsInner
+     */
+    canFixApiReading?: boolean;
+    /**
+     *
      * @type {number | bigint}
      * @memberof QuerySubAccountApiKeyResponseRowsInner
      */

@@ -1,6 +1,7 @@
 export * from './add-ip-restriction-for-sub-account-api-key-response';
 export * from './create-avirtual-sub-account-response';
 export * from './create-sub-account-api-key-response';
+export * from './create-sub-account-api-key-v2-response';
 export * from './delete-ip-list-for-asub-account-api-key-response';
 export * from './deposit-assets-into-the-managed-sub-account-response';
 export * from './enable-futures-for-sub-account-response';

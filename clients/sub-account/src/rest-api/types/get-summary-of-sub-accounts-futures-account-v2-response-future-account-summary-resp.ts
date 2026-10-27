@@ -67,7 +67,7 @@ export interface GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSum
      */
     totalWalletBalance?: string;
     /**
-     *
+     * The sum of BUSD and USDT
      * @type {string}
      * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */

@@ -19,6 +19,7 @@ import { ApiManagementApi } from '../../../src/rest-api';
 import {
     AddIpRestrictionForSubAccountApiKeyRequest,
     CreateSubAccountApiKeyRequest,
+    CreateSubAccountApiKeyV2Request,
     DeleteIpListForASubAccountApiKeyRequest,
     DeleteSubAccountApiKeyRequest,
     GetIpRestrictionForASubAccountApiKeyRequest,
@@ -28,6 +29,7 @@ import {
 import type {
     AddIpRestrictionForSubAccountApiKeyResponse,
     CreateSubAccountApiKeyResponse,
+    CreateSubAccountApiKeyV2Response,
     DeleteIpListForASubAccountApiKeyResponse,
     GetIpRestrictionForASubAccountApiKeyResponse,
     ModifySubAccountApiKeyPermissionResponse,
@@ -197,6 +199,8 @@ describe('ApiManagementApi', () => {
                     canFuturesTrade: false,
                     canUniversalTransfer: false,
                     canVanillaOptions: false,
+                    canFixApiTrading: true,
+                    canFixApiReading: false,
                     status: 2,
                     ipList: ['69.210.67.14'],
                 })
@@ -226,6 +230,8 @@ describe('ApiManagementApi', () => {
                 canFuturesTrade: false,
                 canUniversalTransfer: false,
                 canVanillaOptions: false,
+                canFixApiTrading: true,
+                canFixApiReading: false,
                 ipAddress: '69.210.67.14',
                 thirdPartyName: 'thirdParty',
                 publicKey: '',
@@ -242,6 +248,8 @@ describe('ApiManagementApi', () => {
                     canFuturesTrade: false,
                     canUniversalTransfer: false,
                     canVanillaOptions: false,
+                    canFixApiTrading: true,
+                    canFixApiReading: false,
                     status: 2,
                     ipList: ['69.210.67.14'],
                 })
@@ -323,6 +331,161 @@ describe('ApiManagementApi', () => {
                 .spyOn(client, 'createSubAccountApiKey')
                 .mockRejectedValueOnce(mockError);
             await expect(client.createSubAccountApiKey(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('createSubAccountApiKeyV2()', () => {
+        it('should execute createSubAccountApiKeyV2() successfully with required parameters only', async () => {
+            const params: CreateSubAccountApiKeyV2Request = {
+                email: '123@test.com',
+                apiName: 'my-fix-api',
+                status: 2,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    apiName: 'myKey',
+                    apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
+                    secretKey: 'NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j',
+                    canTrade: true,
+                    canMarginLoanRepay: false,
+                    canFuturesTrade: false,
+                    canUniversalTransfer: false,
+                    canVanillaOptions: false,
+                    canFixApiTrading: true,
+                    canFixApiReading: false,
+                    status: 2,
+                    ipList: ['69.210.67.14'],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'createSubAccountApiKeyV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<CreateSubAccountApiKeyV2Response>)
+            );
+            const response = await client.createSubAccountApiKeyV2(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute createSubAccountApiKeyV2() successfully with optional parameters', async () => {
+            const params: CreateSubAccountApiKeyV2Request = {
+                email: '123@test.com',
+                apiName: 'my-fix-api',
+                status: 2,
+                canTrade: true,
+                canMarginLoanRepay: false,
+                canFuturesTrade: false,
+                canUniversalTransfer: false,
+                canVanillaOptions: false,
+                canFixApiTrading: true,
+                canFixApiReading: true,
+                ipAddress: '1.2.3.4',
+                thirdPartyName: 'thirdParty',
+                publicKey:
+                    '-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAptEM59ao3nOD2baduIA830qZU4k4mqfvv7PwHVAfZhg=\n-----END PUBLIC KEY-----',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    apiName: 'myKey',
+                    apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
+                    secretKey: 'NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j',
+                    canTrade: true,
+                    canMarginLoanRepay: false,
+                    canFuturesTrade: false,
+                    canUniversalTransfer: false,
+                    canVanillaOptions: false,
+                    canFixApiTrading: true,
+                    canFixApiReading: false,
+                    status: 2,
+                    ipList: ['69.210.67.14'],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'createSubAccountApiKeyV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<CreateSubAccountApiKeyV2Response>)
+            );
+            const response = await client.createSubAccountApiKeyV2(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when email is missing', async () => {
+            const _params: CreateSubAccountApiKeyV2Request = {
+                email: '123@test.com',
+                apiName: 'my-fix-api',
+                status: 2,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.email;
+
+            await expect(client.createSubAccountApiKeyV2(params)).rejects.toThrow(
+                'Required parameter email was null or undefined when calling createSubAccountApiKeyV2.'
+            );
+        });
+
+        it('should throw RequiredError when apiName is missing', async () => {
+            const _params: CreateSubAccountApiKeyV2Request = {
+                email: '123@test.com',
+                apiName: 'my-fix-api',
+                status: 2,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.apiName;
+
+            await expect(client.createSubAccountApiKeyV2(params)).rejects.toThrow(
+                'Required parameter apiName was null or undefined when calling createSubAccountApiKeyV2.'
+            );
+        });
+
+        it('should throw RequiredError when status is missing', async () => {
+            const _params: CreateSubAccountApiKeyV2Request = {
+                email: '123@test.com',
+                apiName: 'my-fix-api',
+                status: 2,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.status;
+
+            await expect(client.createSubAccountApiKeyV2(params)).rejects.toThrow(
+                'Required parameter status was null or undefined when calling createSubAccountApiKeyV2.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: CreateSubAccountApiKeyV2Request = {
+                email: '123@test.com',
+                apiName: 'my-fix-api',
+                status: 2,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'createSubAccountApiKeyV2')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.createSubAccountApiKeyV2(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -675,6 +838,8 @@ describe('ApiManagementApi', () => {
                     canFuturesTrade: true,
                     canUniversalTransfer: false,
                     canVanillaOptions: false,
+                    canFixApiTrading: true,
+                    canFixApiReading: false,
                     timestamp: 1640000000000,
                 })
             );
@@ -702,6 +867,8 @@ describe('ApiManagementApi', () => {
                 canFuturesTrade: true,
                 canUniversalTransfer: false,
                 canVanillaOptions: false,
+                canFixApiTrading: true,
+                canFixApiReading: false,
                 recvWindow: 5000,
             };
 
@@ -714,6 +881,8 @@ describe('ApiManagementApi', () => {
                     canFuturesTrade: true,
                     canUniversalTransfer: false,
                     canVanillaOptions: false,
+                    canFixApiTrading: true,
+                    canFixApiReading: false,
                     timestamp: 1640000000000,
                 })
             );
@@ -802,6 +971,8 @@ describe('ApiManagementApi', () => {
                             canFuturesTrade: false,
                             canUniversalTransfer: false,
                             canVanillaOptions: false,
+                            canFixApiTrading: true,
+                            canFixApiReading: false,
                             timestamp: 1640000000000,
                         },
                     ],
@@ -844,6 +1015,8 @@ describe('ApiManagementApi', () => {
                             canFuturesTrade: false,
                             canUniversalTransfer: false,
                             canVanillaOptions: false,
+                            canFixApiTrading: true,
+                            canFixApiReading: false,
                             timestamp: 1640000000000,
                         },
                     ],

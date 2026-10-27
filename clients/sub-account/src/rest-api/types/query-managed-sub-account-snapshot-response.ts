@@ -25,13 +25,13 @@ import type { QueryManagedSubAccountSnapshotResponseSnapshotVosInner } from './q
  */
 export interface QueryManagedSubAccountSnapshotResponse {
     /**
-     *
+     * 200 for success; others are error codes
      * @type {number | bigint}
      * @memberof QueryManagedSubAccountSnapshotResponse
      */
     code?: number | bigint;
     /**
-     *
+     * error message
      * @type {string}
      * @memberof QueryManagedSubAccountSnapshotResponse
      */
