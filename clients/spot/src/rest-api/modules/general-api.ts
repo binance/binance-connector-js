@@ -355,7 +355,7 @@ export interface ExchangeInfoRequest {
 
     /**
      * Filters for symbols that have this `tradingStatus`. Cannot be used in combination with `symbols` or `symbol`.
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof GeneralApiExchangeInfo
      */
     readonly symbolStatus?: ExchangeInfoSymbolStatusEnum;
@@ -382,7 +382,7 @@ export interface ExecutionRulesRequest {
 
     /**
      * Query for all symbols with the specified status.
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof GeneralApiExecutionRules
      */
     readonly symbolStatus?: ExecutionRulesSymbolStatusEnum;
@@ -592,10 +592,12 @@ export enum ExchangeInfoSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum ExecutionRulesSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }

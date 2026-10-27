@@ -1,5 +1,38 @@
 # Changelog
 
+## 34.0.5 - 2026-10-27
+
+### Changed (2)
+
+#### REST API
+
+- Modified parameter `symbolStatus`:
+  - enum added: `CANCEL_ONLY`
+  - affected methods:
+    - `depth()` (`GET /api/v3/depth`)
+    - `exchangeInfo()` (`GET /api/v3/exchangeInfo`)
+    - `executionRules()` (`GET /api/v3/executionRules`)
+    - `referencePriceCalculation()` (`GET /api/v3/referencePrice/calculation`)
+    - `ticker()` (`GET /api/v3/ticker`)
+    - `ticker24hr()` (`GET /api/v3/ticker/24hr`)
+    - `tickerBookTicker()` (`GET /api/v3/ticker/bookTicker`)
+    - `tickerPrice()` (`GET /api/v3/ticker/price`)
+    - `tickerTradingDay()` (`GET /api/v3/ticker/tradingDay`)
+#### WebSocket API
+
+- Modified parameter `symbolStatus`:
+  - enum added: `CANCEL_ONLY`
+  - affected methods:
+    - `depth()` (`depth` method)
+    - `exchangeInfo()` (`exchangeInfo` method)
+    - `executionRules()` (`executionRules` method)
+    - `referencePriceCalculation()` (`referencePrice.calculation` method)
+    - `ticker()` (`ticker` method)
+    - `ticker24hr()` (`ticker.24hr` method)
+    - `tickerBook()` (`ticker.book` method)
+    - `tickerPrice()` (`ticker.price` method)
+    - `tickerTradingDay()` (`ticker.tradingDay` method)
+
 ## 34.0.4 - 2026-10-23
 
 ### Changed (2)

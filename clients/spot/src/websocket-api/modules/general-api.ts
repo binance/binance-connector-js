@@ -167,8 +167,8 @@ export interface ExchangeInfoRequest {
     readonly showPermissionSets?: boolean;
 
     /**
-     * Filters for symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK`. Cannot be used in combination with `symbol` or `symbols`.
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * Filters for symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK`, `CANCEL_ONLY`. Cannot be used in combination with `symbol` or `symbols`.
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof GeneralApiExchangeInfo
      */
     readonly symbolStatus?: ExchangeInfoSymbolStatusEnum;
@@ -201,8 +201,8 @@ export interface ExecutionRulesRequest {
     readonly symbols?: Array<string>;
 
     /**
-     * Query for all symbols with the specified status. Supported values: `TRADING`, `HALT`, `BREAK`
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * Query for all symbols with the specified status. Supported values: `TRADING`, `HALT`, `BREAK`, `CANCEL_ONLY`
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof GeneralApiExecutionRules
      */
     readonly symbolStatus?: ExecutionRulesSymbolStatusEnum;
@@ -375,10 +375,12 @@ export enum ExchangeInfoSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum ExecutionRulesSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }

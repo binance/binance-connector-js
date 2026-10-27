@@ -499,7 +499,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Query Reference Price Calculation
          * @param {string} symbol
-         * @param {ReferencePriceCalculationSymbolStatusEnum} [symbolStatus] Supported values: `TRADING`, `HALT`, `BREAK`
+         * @param {ReferencePriceCalculationSymbolStatusEnum} [symbolStatus] Supported values: `TRADING`, `HALT`, `BREAK`, `CANCEL_ONLY`
          *
          * @throws {RequiredError}
          */
@@ -1431,7 +1431,7 @@ export interface DepthRequest {
     /**
      * Filters for symbols that have this `tradingStatus`.
      * A status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof MarketApiDepth
      */
     readonly symbolStatus?: DepthSymbolStatusEnum;
@@ -1585,8 +1585,8 @@ export interface ReferencePriceCalculationRequest {
     readonly symbol: string;
 
     /**
-     * Supported values: `TRADING`, `HALT`, `BREAK`
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * Supported values: `TRADING`, `HALT`, `BREAK`, `CANCEL_ONLY`
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof MarketApiReferencePriceCalculation
      */
     readonly symbolStatus?: ReferencePriceCalculationSymbolStatusEnum;
@@ -1631,7 +1631,7 @@ export interface TickerRequest {
 
     /**
      *
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof MarketApiTicker
      */
     readonly symbolStatus?: TickerSymbolStatusEnum;
@@ -1669,7 +1669,7 @@ export interface Ticker24hrRequest {
 
     /**
      *
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof MarketApiTicker24hr
      */
     readonly symbolStatus?: Ticker24hrSymbolStatusEnum;
@@ -1701,7 +1701,7 @@ export interface TickerBookTickerRequest {
      * Filters for symbols that have this `tradingStatus`.
      * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
      * For multiple or all symbols, non-matching ones are simply excluded from the response.
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof MarketApiTickerBookTicker
      */
     readonly symbolStatus?: TickerBookTickerSymbolStatusEnum;
@@ -1733,7 +1733,7 @@ export interface TickerPriceRequest {
      * Filters for symbols that have this `tradingStatus`.
      * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
      * For multiple or all symbols, non-matching ones are simply excluded from the response.
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof MarketApiTickerPrice
      */
     readonly symbolStatus?: TickerPriceSymbolStatusEnum;
@@ -1778,7 +1778,7 @@ export interface TickerTradingDayRequest {
      * Filters for symbols that have this `tradingStatus`.
      * For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
      * For multiple symbols, non-matching ones are simply excluded from the response.
-     * @type {'TRADING' | 'HALT' | 'BREAK'}
+     * @type {'TRADING' | 'HALT' | 'BREAK' | 'CANCEL_ONLY'}
      * @memberof MarketApiTickerTradingDay
      */
     readonly symbolStatus?: TickerTradingDaySymbolStatusEnum;
@@ -2524,6 +2524,7 @@ export enum DepthSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum KlinesIntervalEnum {
@@ -2549,6 +2550,7 @@ export enum ReferencePriceCalculationSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum TickerWindowSizeEnum {
@@ -2652,6 +2654,7 @@ export enum TickerSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum Ticker24hrTypeEnum {
@@ -2663,18 +2666,21 @@ export enum Ticker24hrSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum TickerBookTickerSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum TickerPriceSymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum TickerTradingDayTypeEnum {
@@ -2686,6 +2692,7 @@ export enum TickerTradingDaySymbolStatusEnum {
     TRADING = 'TRADING',
     HALT = 'HALT',
     BREAK = 'BREAK',
+    CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
 export enum UiKlinesIntervalEnum {
