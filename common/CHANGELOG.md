@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.3 - 2026-11-05
+
+### Changed (1)
+
+- Resolve security vulnerabilities.
+
 ## 2.5.2 - 2026-10-23
 
 ### Changed (1)
