@@ -1,5 +1,12 @@
 # Changelog
 
+## 6.0.4 - 2026-11-09
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.5.3`.
+- Resolve security vulnerabilities.
+
 ## 6.0.3 - 2026-10-23
 
 ### Changed (2)
