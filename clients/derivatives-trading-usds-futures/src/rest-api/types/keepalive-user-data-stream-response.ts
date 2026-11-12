@@ -20,7 +20,7 @@
  */
 export interface KeepaliveUserDataStreamResponse {
     /**
-     *
+     * the listenkey which got extended
      * @type {string}
      * @memberof KeepaliveUserDataStreamResponse
      */

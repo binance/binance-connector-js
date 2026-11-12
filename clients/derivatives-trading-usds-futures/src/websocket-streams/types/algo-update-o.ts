@@ -175,4 +175,22 @@ export interface AlgoUpdateO {
      * @memberof AlgoUpdateO
      */
     ia?: boolean;
+    /**
+     * Sub price type, only meaningful for CHASE order
+     * @type {string}
+     * @memberof AlgoUpdateO
+     */
+    spt?: string;
+    /**
+     * Sub price value, only meaningful for CHASE order
+     * @type {string}
+     * @memberof AlgoUpdateO
+     */
+    spv?: string;
+    /**
+     * Sub price limit value, only meaningful for CHASE order
+     * @type {string}
+     * @memberof AlgoUpdateO
+     */
+    splv?: string;
 }

@@ -32,7 +32,7 @@ export interface AcceptTheOfferedQuoteResponse {
      */
     createTime?: number | bigint;
     /**
-     *
+     * PROCESS/ACCEPT_SUCCESS/SUCCESS/FAIL
      * @type {string}
      * @memberof AcceptTheOfferedQuoteResponse
      */

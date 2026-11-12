@@ -26,7 +26,7 @@ export interface ClassicPortfolioMarginAccountInformationResponse {
      */
     maxWithdrawAmountUSD?: string;
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof ClassicPortfolioMarginAccountInformationResponse
      */

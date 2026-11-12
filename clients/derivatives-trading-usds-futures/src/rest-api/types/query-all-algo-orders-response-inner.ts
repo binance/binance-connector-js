@@ -104,7 +104,7 @@ export interface QueryAllAlgoOrdersResponseInner {
      */
     price?: string;
     /**
-     *
+     * Reserved field, ignore.
      * @type {string}
      * @memberof QueryAllAlgoOrdersResponseInner
      */

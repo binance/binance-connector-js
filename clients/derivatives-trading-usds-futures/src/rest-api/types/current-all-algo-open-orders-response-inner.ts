@@ -104,7 +104,7 @@ export interface CurrentAllAlgoOpenOrdersResponseInner {
      */
     price?: string;
     /**
-     *
+     * Reserved field, ignore.
      * @type {string}
      * @memberof CurrentAllAlgoOpenOrdersResponseInner
      */

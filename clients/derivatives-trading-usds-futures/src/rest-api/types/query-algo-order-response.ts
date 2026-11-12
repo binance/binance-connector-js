@@ -116,7 +116,7 @@ export interface QueryAlgoOrderResponse {
      */
     price?: string;
     /**
-     *
+     * Reserved field, ignore.
      * @type {string}
      * @memberof QueryAlgoOrderResponse
      */

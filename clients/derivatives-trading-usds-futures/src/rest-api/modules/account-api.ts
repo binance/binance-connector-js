@@ -468,7 +468,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Security Type: USER_DATA
          *
          * Notes:
-         * - Request Limitation is 5 times per month, shared by front end download page and rest api
+         * - The request limit is 100 times per month, shared across the front end download page and rest api, as well as between USDⓈ-M and COIN-M contracts.
          * - The time between `startTime` and `endTime` can not be longer than 1 year
          *
          * @summary Get Download Id For Futures Transaction History (USER_DATA)
@@ -1122,7 +1122,7 @@ export interface AccountApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The request limit is 100 times per month, shared across the front end download page and rest api, as well as between USDⓈ-M and COIN-M contracts.
      * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For Futures Transaction History (USER_DATA)
@@ -2091,7 +2091,7 @@ export class AccountApi implements AccountApiInterface {
      * Security Type: USER_DATA
      *
      * Notes:
-     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The request limit is 100 times per month, shared across the front end download page and rest api, as well as between USDⓈ-M and COIN-M contracts.
      * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For Futures Transaction History (USER_DATA)

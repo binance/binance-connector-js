@@ -92,7 +92,7 @@ export interface NewAlgoOrderResponse {
      */
     price?: string;
     /**
-     *
+     * Reserved field, ignore.
      * @type {string}
      * @memberof NewAlgoOrderResponse
      */
