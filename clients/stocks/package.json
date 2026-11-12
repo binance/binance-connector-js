@@ -1,7 +1,7 @@
 {
     "name": "@binance/stocks",
     "description": "Official Binance Stocks Connector - A lightweight library that provides a convenient interface to Binance's Stocks REST API.",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",

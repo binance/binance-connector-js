@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.0.8 - 2026-11-12
+
+### Changed (2)
+
+#### WebSocket Streams
+
+- Modified response for `priceStream()` (`price` stream):
+  - `rates`.items: property `prc` added
+  - `rates`.items: property `lrc` added
+  - `rates`.items: item property `prc` added
+  - `rates`.items: item property `lrc` added
+
+- Modified response field `rates`:
+  - items: property `lrc` added
+  - items: property `prc` added
+  - items: item property `lrc` added
+  - items: item property `prc` added
+  - affected events:
+    - `priceStreamResponse`
+
 ## 1.0.7 - 2026-11-09
 
 ### Changed (2)

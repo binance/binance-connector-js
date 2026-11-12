@@ -44,17 +44,29 @@ export interface PriceStreamResponseRatesInner {
      */
     t?: number | bigint | null;
     /**
-     * Previous day\'s RTH close price (reference); absent when unknown.
+     * Previous trading day\'s close price; absent when unknown.
      * @type {string}
      * @memberof PriceStreamResponseRatesInner
      */
     pc?: string;
     /**
-     * Today\'s RTH close price; absent before After-Hours.
+     * Today\'s close price; absent before After-Hours.
      * @type {string}
      * @memberof PriceStreamResponseRatesInner
      */
     tc?: string;
+    /**
+     * Final close price of the most recent completed RTH trading day. Rolls forward only once the next trading day enters Post-Market and the 1-minute kline for the minute before that day\'s RTH close is available; while unavailable, the previous `lrc`/`prc` pair is retained.
+     * @type {string}
+     * @memberof PriceStreamResponseRatesInner
+     */
+    lrc?: string;
+    /**
+     * Final close price of the trading day before the `lrc` trading day. `null` when the symbol has only one completed RTH trading day (e.g. a new IPO).
+     * @type {string}
+     * @memberof PriceStreamResponseRatesInner
+     */
+    prc?: string | null;
     /**
      * Per-symbol market phase: `C` Closed, `ON` Overnight, `PRE` Pre-Market, `O` Market Open, `POST` Post-Market.
      * @type {string}
