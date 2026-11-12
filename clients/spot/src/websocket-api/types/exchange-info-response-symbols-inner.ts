@@ -143,6 +143,18 @@ export interface ExchangeInfoResponseSymbolsInner {
      * @type {boolean}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
+    marketQuoteNotionalLimitAllowed?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ExchangeInfoResponseSymbolsInner
+     */
+    limitQuoteNotionalLimitAllowed?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ExchangeInfoResponseSymbolsInner
+     */
     isSpotTradingAllowed?: boolean;
     /**
      *

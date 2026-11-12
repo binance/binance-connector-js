@@ -1546,7 +1546,8 @@ export class RestAPI {
     /**
      * Place an OPO.
      *
-     * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS`` filter and `MAX_NUM_ORDERS`` filter.
+     * - The working order must be `LIMIT` or `LIMIT_MAKER`.
+     * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      *
      * Weight(IP): 1
      *
@@ -1575,6 +1576,8 @@ export class RestAPI {
 
     /**
      * Place an OPOCO.
+     *
+     * - The working order must be `LIMIT` or `LIMIT_MAKER`.
      *
      * Weight(IP): 1
      *

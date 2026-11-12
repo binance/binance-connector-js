@@ -142,6 +142,8 @@ describe('GeneralApi', () => {
                                 cancelReplaceAllowed: true,
                                 amendAllowed: false,
                                 pegInstructionsAllowed: true,
+                                marketQuoteNotionalLimitAllowed: true,
+                                limitQuoteNotionalLimitAllowed: true,
                                 isSpotTradingAllowed: true,
                                 isMarginTradingAllowed: true,
                                 filters: [

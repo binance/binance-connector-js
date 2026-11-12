@@ -1,5 +1,114 @@
 # Changelog
 
+## 34.1.0 - 2026-11-12
+
+### Changed (23)
+
+#### REST API
+
+- Added parameter `aboveQuoteNotionalLimit`
+  - affected methods:
+    - `orderListOco()` (`POST /api/v3/orderList/oco`)
+- Added parameter `belowQuoteNotionalLimit`
+  - affected methods:
+    - `orderListOco()` (`POST /api/v3/orderList/oco`)
+- Added parameter `pendingAboveQuoteNotionalLimit`
+  - affected methods:
+    - `orderListOtoco()` (`POST /api/v3/orderList/otoco`)
+- Added parameter `pendingBelowQuoteNotionalLimit`
+  - affected methods:
+    - `orderListOtoco()` (`POST /api/v3/orderList/otoco`)
+- Added parameter `pendingQuoteNotionalLimit`
+  - affected methods:
+    - `orderListOto()` (`POST /api/v3/orderList/oto`)
+- Added parameter `quoteNotionalLimit`
+  - affected methods:
+    - `newOrder()` (`POST /api/v3/order`)
+    - `orderCancelReplace()` (`POST /api/v3/order/cancelReplace`)
+    - `orderTest()` (`POST /api/v3/order/test`)
+- Added parameter `workingQuoteNotionalLimit`
+  - affected methods:
+    - `orderListOpo()` (`POST /api/v3/orderList/opo`)
+    - `orderListOpoco()` (`POST /api/v3/orderList/opoco`)
+    - `orderListOto()` (`POST /api/v3/orderList/oto`)
+    - `orderListOtoco()` (`POST /api/v3/orderList/otoco`)
+- Modified response for `exchangeInfo()` (`GET /api/v3/exchangeInfo`):
+  - `symbols`.items: property `limitQuoteNotionalLimitAllowed` added
+  - `symbols`.items: property `marketQuoteNotionalLimitAllowed` added
+  - `symbols`.items: item property `limitQuoteNotionalLimitAllowed` added
+  - `symbols`.items: item property `marketQuoteNotionalLimitAllowed` added
+
+- Modified response field `symbols`:
+  - items: property `limitQuoteNotionalLimitAllowed` added
+  - items: property `marketQuoteNotionalLimitAllowed` added
+  - items: item property `limitQuoteNotionalLimitAllowed` added
+  - items: item property `marketQuoteNotionalLimitAllowed` added
+  - affected events:
+    - `exchangeInfoResponse`
+#### WebSocket API
+
+- Added parameter `aboveQuoteNotionalLimit`
+  - affected methods:
+    - `orderListPlaceOco()` (`orderList.place.oco` method)
+- Added parameter `belowQuoteNotionalLimit`
+  - affected methods:
+    - `orderListPlaceOco()` (`orderList.place.oco` method)
+- Added parameter `filter`
+  - affected methods:
+    - `userDataStreamSubscribe()` (`userDataStream.subscribe` method)
+    - `userDataStreamSubscribeSignature()` (`userDataStream.subscribe.signature` method)
+- Added parameter `pendingAboveQuoteNotionalLimit`
+  - affected methods:
+    - `orderListPlaceOtoco()` (`orderList.place.otoco` method)
+- Added parameter `pendingBelowQuoteNotionalLimit`
+  - affected methods:
+    - `orderListPlaceOtoco()` (`orderList.place.otoco` method)
+- Added parameter `pendingQuoteNotionalLimit`
+  - affected methods:
+    - `orderListPlaceOto()` (`orderList.place.oto` method)
+- Added parameter `quoteNotionalLimit`
+  - affected methods:
+    - `orderCancelReplace()` (`order.cancelReplace` method)
+    - `orderPlace()` (`order.place` method)
+    - `orderTest()` (`order.test` method)
+- Added parameter `workingQuoteNotionalLimit`
+  - affected methods:
+    - `orderListPlaceOpo()` (`orderList.place.opo` method)
+    - `orderListPlaceOpoco()` (`orderList.place.opoco` method)
+    - `orderListPlaceOto()` (`orderList.place.oto` method)
+    - `orderListPlaceOtoco()` (`orderList.place.otoco` method)
+- Modified response for `exchangeInfo()` (`exchangeInfo` method):
+  - `symbols`.items: property `limitQuoteNotionalLimitAllowed` added
+  - `symbols`.items: property `marketQuoteNotionalLimitAllowed` added
+  - `symbols`.items: item property `limitQuoteNotionalLimitAllowed` added
+  - `symbols`.items: item property `marketQuoteNotionalLimitAllowed` added
+
+- Added response field `Qq`
+  - affected events:
+    - `UserDataStreamEventsResponse`
+    - `executionReport`
+- Added response field `eV`
+  - affected events:
+    - `UserDataStreamEventsResponse`
+    - `executionReport`
+- Modified response field `symbols`:
+  - items: property `limitQuoteNotionalLimitAllowed` added
+  - items: property `marketQuoteNotionalLimitAllowed` added
+  - items: item property `limitQuoteNotionalLimitAllowed` added
+  - items: item property `marketQuoteNotionalLimitAllowed` added
+  - affected events:
+    - `exchangeInfoResponse`
+#### WebSocket Streams
+
+- Added response field `eV`
+  - affected events:
+    - `UserDataStreamEventsResponse`
+    - `executionReport`
+- Added response field `Qq`
+  - affected events:
+    - `UserDataStreamEventsResponse`
+    - `executionReport`
+
 ## 34.0.6 - 2026-11-09
 
 ### Changed (2)

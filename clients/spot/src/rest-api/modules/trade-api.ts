@@ -302,6 +302,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewOrderPegPriceTypeEnum} [pegPriceType] See Pegged Orders Info
          * @param {number} [pegOffsetValue] Price level to peg the price to (max: 100). See Pegged Orders Info
          * @param {NewOrderPegOffsetTypeEnum} [pegOffsetType] Only `PRICE_LEVEL` is supported. See Pegged Orders Info
+         * @param {number} [quoteNotionalLimit] For orders on the BUY side only. Maximum quote-asset notional the order may consume. See Quote Notional Limit.
          * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -325,6 +326,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pegPriceType?: NewOrderPegPriceTypeEnum,
             pegOffsetValue?: number,
             pegOffsetType?: NewOrderPegOffsetTypeEnum,
+            quoteNotionalLimit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -391,6 +393,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (pegOffsetType !== undefined && pegOffsetType !== null) {
                 localVarQueryParameter['pegOffsetType'] = pegOffsetType;
+            }
+            if (quoteNotionalLimit !== undefined && quoteNotionalLimit !== null) {
+                localVarQueryParameter['quoteNotionalLimit'] = quoteNotionalLimit;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -701,6 +706,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderCancelReplacePegPriceTypeEnum} [pegPriceType] `PRIMARY_PEG` or `MARKET_PEG` <br> See Pegged Orders
          * @param {number} [pegOffsetValue] Price level to peg the price to (max: 100) <br> See Pegged Orders
          * @param {OrderCancelReplacePegOffsetTypeEnum} [pegOffsetType] Only `PRICE_LEVEL` is supported <br> See Pegged Orders.
+         * @param {number} [quoteNotionalLimit] For replacement orders on the BUY side only. Maximum quote-asset notional the replacement order may consume. See Quote Notional Limit.
          * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -730,6 +736,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pegPriceType?: OrderCancelReplacePegPriceTypeEnum,
             pegOffsetValue?: number,
             pegOffsetType?: OrderCancelReplacePegOffsetTypeEnum,
+            quoteNotionalLimit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -817,6 +824,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if (pegOffsetType !== undefined && pegOffsetType !== null) {
                 localVarQueryParameter['pegOffsetType'] = pegOffsetType;
             }
+            if (quoteNotionalLimit !== undefined && quoteNotionalLimit !== null) {
+                localVarQueryParameter['quoteNotionalLimit'] = quoteNotionalLimit;
+            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -888,6 +898,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [belowPegOffsetValue]
          * @param {OrderListOcoNewOrderRespTypeEnum} [newOrderRespType] Select response format: `ACK`, `RESULT`, `FULL`.
          * @param {OrderListOcoSelfTradePreventionModeEnum} [selfTradePreventionMode] The allowed enums is dependent on what is configured on the symbol. Supported values: STP Modes
+         * @param {number} [aboveQuoteNotionalLimit] Quote notional limit for the above order (only for orders on the BUY side). See Quote Notional Limit.
+         * @param {number} [belowQuoteNotionalLimit] Quote notional limit for the below order (only for orders on the BUY side). See Quote Notional Limit.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -923,6 +935,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             belowPegOffsetValue?: number,
             newOrderRespType?: OrderListOcoNewOrderRespTypeEnum,
             selfTradePreventionMode?: OrderListOcoSelfTradePreventionModeEnum,
+            aboveQuoteNotionalLimit?: number,
+            belowQuoteNotionalLimit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1030,6 +1044,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
+            if (aboveQuoteNotionalLimit !== undefined && aboveQuoteNotionalLimit !== null) {
+                localVarQueryParameter['aboveQuoteNotionalLimit'] = aboveQuoteNotionalLimit;
+            }
+            if (belowQuoteNotionalLimit !== undefined && belowQuoteNotionalLimit !== null) {
+                localVarQueryParameter['belowQuoteNotionalLimit'] = belowQuoteNotionalLimit;
+            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1049,7 +1069,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Place an OPO.
          *
-         * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS`` filter and `MAX_NUM_ORDERS`` filter.
+         * - The working order must be `LIMIT` or `LIMIT_MAKER`.
+         * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
          *
          * Weight(IP): 1
          *
@@ -1093,6 +1114,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOpoPendingPegPriceTypeEnum} [pendingPegPriceType] See Pegged Orders
          * @param {OrderListOpoPendingPegOffsetTypeEnum} [pendingPegOffsetType]
          * @param {number} [pendingPegOffsetValue]
+         * @param {number} [workingQuoteNotionalLimit] Quote notional limit for the working LIMIT order on the BUY side. See Quote Notional Limit.
          * @param {number} [recvWindow] Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -1127,6 +1149,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingPegPriceType?: OrderListOpoPendingPegPriceTypeEnum,
             pendingPegOffsetType?: OrderListOpoPendingPegOffsetTypeEnum,
             pendingPegOffsetValue?: number,
+            workingQuoteNotionalLimit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1235,6 +1258,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if (pendingPegOffsetValue !== undefined && pendingPegOffsetValue !== null) {
                 localVarQueryParameter['pendingPegOffsetValue'] = pendingPegOffsetValue;
             }
+            if (workingQuoteNotionalLimit !== undefined && workingQuoteNotionalLimit !== null) {
+                localVarQueryParameter['workingQuoteNotionalLimit'] = workingQuoteNotionalLimit;
+            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1254,6 +1280,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Place an OPOCO.
          *
+         * - The working order must be `LIMIT` or `LIMIT_MAKER`.
+         *
          * Weight(IP): 1
          *
          * Unfilled Order Count: 3
@@ -1268,7 +1296,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary New Order List - OPOCO (TRADE)
          * @param {string} symbol
-         * @param {OrderListOpocoWorkingTypeEnum} workingType
+         * @param {OrderListOpocoWorkingTypeEnum} workingType Supported values: `LIMIT`, `LIMIT_MAKER`
          * @param {OrderListOpocoWorkingSideEnum} workingSide Supported values: Order Side
          * @param {number} workingPrice Price for the working order.
          * @param {number} workingQuantity Sets the quantity for the working order.
@@ -1308,6 +1336,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOpocoPendingBelowPegPriceTypeEnum} [pendingBelowPegPriceType] See Pegged Orders
          * @param {OrderListOpocoPendingBelowPegOffsetTypeEnum} [pendingBelowPegOffsetType]
          * @param {number} [pendingBelowPegOffsetValue]
+         * @param {number} [workingQuoteNotionalLimit] Quote notional limit for the working LIMIT order on the BUY side. See Quote Notional Limit.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -1354,6 +1383,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingBelowPegPriceType?: OrderListOpocoPendingBelowPegPriceTypeEnum,
             pendingBelowPegOffsetType?: OrderListOpocoPendingBelowPegOffsetTypeEnum,
             pendingBelowPegOffsetValue?: number,
+            workingQuoteNotionalLimit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1498,6 +1528,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if (pendingBelowPegOffsetValue !== undefined && pendingBelowPegOffsetValue !== null) {
                 localVarQueryParameter['pendingBelowPegOffsetValue'] = pendingBelowPegOffsetValue;
             }
+            if (workingQuoteNotionalLimit !== undefined && workingQuoteNotionalLimit !== null) {
+                localVarQueryParameter['workingQuoteNotionalLimit'] = workingQuoteNotionalLimit;
+            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1578,6 +1611,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtoPendingPegPriceTypeEnum} [pendingPegPriceType] See Pegged Orders
          * @param {OrderListOtoPendingPegOffsetTypeEnum} [pendingPegOffsetType]
          * @param {number} [pendingPegOffsetValue]
+         * @param {number} [workingQuoteNotionalLimit] Quote notional limit for the working order (only for orders on the BUY side). See Quote Notional Limit.
+         * @param {number} [pendingQuoteNotionalLimit] Quote notional limit for the pending order (only for orders on the BUY side). See Quote Notional Limit.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -1613,6 +1648,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingPegPriceType?: OrderListOtoPendingPegPriceTypeEnum,
             pendingPegOffsetType?: OrderListOtoPendingPegOffsetTypeEnum,
             pendingPegOffsetValue?: number,
+            workingQuoteNotionalLimit?: number,
+            pendingQuoteNotionalLimit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1726,6 +1763,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if (pendingPegOffsetValue !== undefined && pendingPegOffsetValue !== null) {
                 localVarQueryParameter['pendingPegOffsetValue'] = pendingPegOffsetValue;
             }
+            if (workingQuoteNotionalLimit !== undefined && workingQuoteNotionalLimit !== null) {
+                localVarQueryParameter['workingQuoteNotionalLimit'] = workingQuoteNotionalLimit;
+            }
+            if (pendingQuoteNotionalLimit !== undefined && pendingQuoteNotionalLimit !== null) {
+                localVarQueryParameter['pendingQuoteNotionalLimit'] = pendingQuoteNotionalLimit;
+            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1821,6 +1864,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtocoPendingBelowPegPriceTypeEnum} [pendingBelowPegPriceType] See Pegged Orders
          * @param {OrderListOtocoPendingBelowPegOffsetTypeEnum} [pendingBelowPegOffsetType]
          * @param {number} [pendingBelowPegOffsetValue]
+         * @param {number} [workingQuoteNotionalLimit] Quote notional limit for the working order (only for orders on the BUY side). See Quote Notional Limit.
+         * @param {number} [pendingAboveQuoteNotionalLimit] Quote notional limit for the pending above order (only for orders on the BUY side). See Quote Notional Limit.
+         * @param {number} [pendingBelowQuoteNotionalLimit] Quote notional limit for the pending below order (only for orders on the BUY side). See Quote Notional Limit.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -1868,6 +1914,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingBelowPegPriceType?: OrderListOtocoPendingBelowPegPriceTypeEnum,
             pendingBelowPegOffsetType?: OrderListOtocoPendingBelowPegOffsetTypeEnum,
             pendingBelowPegOffsetValue?: number,
+            workingQuoteNotionalLimit?: number,
+            pendingAboveQuoteNotionalLimit?: number,
+            pendingBelowQuoteNotionalLimit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -2016,6 +2065,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (pendingBelowPegOffsetValue !== undefined && pendingBelowPegOffsetValue !== null) {
                 localVarQueryParameter['pendingBelowPegOffsetValue'] = pendingBelowPegOffsetValue;
+            }
+            if (workingQuoteNotionalLimit !== undefined && workingQuoteNotionalLimit !== null) {
+                localVarQueryParameter['workingQuoteNotionalLimit'] = workingQuoteNotionalLimit;
+            }
+            if (
+                pendingAboveQuoteNotionalLimit !== undefined &&
+                pendingAboveQuoteNotionalLimit !== null
+            ) {
+                localVarQueryParameter['pendingAboveQuoteNotionalLimit'] =
+                    pendingAboveQuoteNotionalLimit;
+            }
+            if (
+                pendingBelowQuoteNotionalLimit !== undefined &&
+                pendingBelowQuoteNotionalLimit !== null
+            ) {
+                localVarQueryParameter['pendingBelowQuoteNotionalLimit'] =
+                    pendingBelowQuoteNotionalLimit;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -2224,6 +2290,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderTestPegPriceTypeEnum} [pegPriceType] `PRIMARY_PEG` or `MARKET_PEG`. See Pegged Orders
          * @param {number} [pegOffsetValue] Price level for pegging (max: 100). See Pegged Orders
          * @param {OrderTestPegOffsetTypeEnum} [pegOffsetType] Only `PRICE_LEVEL` is supported. See Pegged Orders
+         * @param {number} [quoteNotionalLimit] For orders on the BUY side only. Maximum quote-asset notional the order may consume. See Quote Notional Limit.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
@@ -2248,6 +2315,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pegPriceType?: OrderTestPegPriceTypeEnum,
             pegOffsetValue?: number,
             pegOffsetType?: OrderTestPegOffsetTypeEnum,
+            quoteNotionalLimit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -2317,6 +2385,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (pegOffsetType !== undefined && pegOffsetType !== null) {
                 localVarQueryParameter['pegOffsetType'] = pegOffsetType;
+            }
+            if (quoteNotionalLimit !== undefined && quoteNotionalLimit !== null) {
+                localVarQueryParameter['quoteNotionalLimit'] = quoteNotionalLimit;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -2973,7 +3044,8 @@ export interface TradeApiInterface {
     /**
      * Place an OPO.
      *
-     * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS`` filter and `MAX_NUM_ORDERS`` filter.
+     * - The working order must be `LIMIT` or `LIMIT_MAKER`.
+     * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      *
      * Weight(IP): 1
      *
@@ -2998,6 +3070,8 @@ export interface TradeApiInterface {
     ): Promise<RestApiResponse<OrderListOpoResponse>>;
     /**
      * Place an OPOCO.
+     *
+     * - The working order must be `LIMIT` or `LIMIT_MAKER`.
      *
      * Weight(IP): 1
      *
@@ -3449,6 +3523,13 @@ export interface NewOrderRequest {
     readonly pegOffsetType?: NewOrderPegOffsetTypeEnum;
 
     /**
+     * For orders on the BUY side only. Maximum quote-asset notional the order may consume. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiNewOrder
+     */
+    readonly quoteNotionalLimit?: number;
+
+    /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiNewOrder
@@ -3678,6 +3759,13 @@ export interface OrderCancelReplaceRequest {
     readonly pegOffsetType?: OrderCancelReplacePegOffsetTypeEnum;
 
     /**
+     * For replacement orders on the BUY side only. Maximum quote-asset notional the replacement order may consume. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly quoteNotionalLimit?: number;
+
+    /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
@@ -3901,6 +3989,20 @@ export interface OrderListOcoRequest {
     readonly selfTradePreventionMode?: OrderListOcoSelfTradePreventionModeEnum;
 
     /**
+     * Quote notional limit for the above order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly aboveQuoteNotionalLimit?: number;
+
+    /**
+     * Quote notional limit for the below order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly belowQuoteNotionalLimit?: number;
+
+    /**
      * The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListOco
@@ -4117,6 +4219,13 @@ export interface OrderListOpoRequest {
     readonly pendingPegOffsetValue?: number;
 
     /**
+     * Quote notional limit for the working LIMIT order on the BUY side. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingQuoteNotionalLimit?: number;
+
+    /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListOpo
@@ -4137,7 +4246,7 @@ export interface OrderListOpocoRequest {
     readonly symbol: string;
 
     /**
-     *
+     * Supported values: `LIMIT`, `LIMIT_MAKER`
      * @type {'LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiOrderListOpoco
      */
@@ -4417,6 +4526,13 @@ export interface OrderListOpocoRequest {
     readonly pendingBelowPegOffsetValue?: number;
 
     /**
+     * Quote notional limit for the working LIMIT order on the BUY side. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingQuoteNotionalLimit?: number;
+
+    /**
      * The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListOpoco
@@ -4638,6 +4754,20 @@ export interface OrderListOtoRequest {
      * @memberof TradeApiOrderListOto
      */
     readonly pendingPegOffsetValue?: number;
+
+    /**
+     * Quote notional limit for the working order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly workingQuoteNotionalLimit?: number;
+
+    /**
+     * Quote notional limit for the pending order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly pendingQuoteNotionalLimit?: number;
 
     /**
      * The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -4947,6 +5077,27 @@ export interface OrderListOtocoRequest {
     readonly pendingBelowPegOffsetValue?: number;
 
     /**
+     * Quote notional limit for the working order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly workingQuoteNotionalLimit?: number;
+
+    /**
+     * Quote notional limit for the pending above order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingAboveQuoteNotionalLimit?: number;
+
+    /**
+     * Quote notional limit for the pending below order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingBelowQuoteNotionalLimit?: number;
+
+    /**
      * The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
@@ -5237,6 +5388,13 @@ export interface OrderTestRequest {
      * @memberof TradeApiOrderTest
      */
     readonly pegOffsetType?: OrderTestPegOffsetTypeEnum;
+
+    /**
+     * For orders on the BUY side only. Maximum quote-asset notional the order may consume. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly quoteNotionalLimit?: number;
 
     /**
      * The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -5676,6 +5834,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pegPriceType,
             requestParameters?.pegOffsetValue,
             requestParameters?.pegOffsetType,
+            requestParameters?.quoteNotionalLimit,
             requestParameters?.recvWindow
         );
         return sendRequest<NewOrderResponse>(
@@ -5965,6 +6124,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pegPriceType,
             requestParameters?.pegOffsetValue,
             requestParameters?.pegOffsetType,
+            requestParameters?.quoteNotionalLimit,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderCancelReplaceResponse>(
@@ -6044,6 +6204,8 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.belowPegOffsetValue,
             requestParameters?.newOrderRespType,
             requestParameters?.selfTradePreventionMode,
+            requestParameters?.aboveQuoteNotionalLimit,
+            requestParameters?.belowQuoteNotionalLimit,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderListOcoResponse>(
@@ -6061,7 +6223,8 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Place an OPO.
      *
-     * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS`` filter and `MAX_NUM_ORDERS`` filter.
+     * - The working order must be `LIMIT` or `LIMIT_MAKER`.
+     * - OPOs add 2 orders to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      *
      * Weight(IP): 1
      *
@@ -6115,6 +6278,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pendingPegPriceType,
             requestParameters?.pendingPegOffsetType,
             requestParameters?.pendingPegOffsetValue,
+            requestParameters?.workingQuoteNotionalLimit,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderListOpoResponse>(
@@ -6131,6 +6295,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Place an OPOCO.
+     *
+     * - The working order must be `LIMIT` or `LIMIT_MAKER`.
      *
      * Weight(IP): 1
      *
@@ -6196,6 +6362,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pendingBelowPegPriceType,
             requestParameters?.pendingBelowPegOffsetType,
             requestParameters?.pendingBelowPegOffsetValue,
+            requestParameters?.workingQuoteNotionalLimit,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderListOpocoResponse>(
@@ -6284,6 +6451,8 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pendingPegPriceType,
             requestParameters?.pendingPegOffsetType,
             requestParameters?.pendingPegOffsetValue,
+            requestParameters?.workingQuoteNotionalLimit,
+            requestParameters?.pendingQuoteNotionalLimit,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderListOtoResponse>(
@@ -6387,6 +6556,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pendingBelowPegPriceType,
             requestParameters?.pendingBelowPegOffsetType,
             requestParameters?.pendingBelowPegOffsetValue,
+            requestParameters?.workingQuoteNotionalLimit,
+            requestParameters?.pendingAboveQuoteNotionalLimit,
+            requestParameters?.pendingBelowQuoteNotionalLimit,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderListOtocoResponse>(
@@ -6511,6 +6683,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pegPriceType,
             requestParameters?.pegOffsetValue,
             requestParameters?.pegOffsetType,
+            requestParameters?.quoteNotionalLimit,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderTestResponse>(

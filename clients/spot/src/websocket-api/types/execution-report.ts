@@ -296,6 +296,18 @@ export interface ExecutionReport {
      */
     pY?: string;
     /**
+     * Quote Notional Limit. Appears only if the order was placed with a quote notional limit.
+     * @type {string}
+     * @memberof ExecutionReport
+     */
+    Qq?: string;
+    /**
+     * Effective Self Trade Prevention Mode. Appears on prevented-match reports when the applied STP mode differs from the order\'s `selfTradePreventionMode`. Values: `EXPIRE_MAKER`, `EXPIRE_BOTH`, `DECREMENT`.
+     * @type {string}
+     * @memberof ExecutionReport
+     */
+    eV?: string;
+    /**
      * Match Type
      * @type {string}
      * @memberof ExecutionReport

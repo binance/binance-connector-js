@@ -488,6 +488,7 @@ export interface TradeApiInterface {
     /**
      * Place an OPO.
      *
+     * The working order must be `LIMIT` or `LIMIT_MAKER`.
      * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
      *
      * Weight(IP): 1
@@ -514,6 +515,8 @@ export interface TradeApiInterface {
 
     /**
      * Place an OPOCO.
+     *
+     * The working order must be `LIMIT` or `LIMIT_MAKER`.
      *
      * Weight(IP): 1
      *
@@ -1277,6 +1280,13 @@ export interface OrderCancelReplaceRequest {
     readonly pegOffsetType?: OrderCancelReplacePegOffsetTypeEnum;
 
     /**
+     * For replacement orders on the BUY side only. Maximum quote-asset notional the replacement order may consume. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly quoteNotionalLimit?: number;
+
+    /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
@@ -1708,6 +1718,20 @@ export interface OrderListPlaceOcoRequest {
     readonly selfTradePreventionMode?: OrderListPlaceOcoSelfTradePreventionModeEnum;
 
     /**
+     * Quote notional limit for the above order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly aboveQuoteNotionalLimit?: number;
+
+    /**
+     * Quote notional limit for the below order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly belowQuoteNotionalLimit?: number;
+
+    /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOco
@@ -1931,6 +1955,13 @@ export interface OrderListPlaceOpoRequest {
     readonly pendingPegOffsetValue?: number;
 
     /**
+     * Quote notional limit for the working LIMIT order on the BUY side. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingQuoteNotionalLimit?: number;
+
+    /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOpo
@@ -1951,7 +1982,7 @@ export interface OrderListPlaceOpocoRequest {
     readonly symbol: string;
 
     /**
-     *
+     * Supported values: `LIMIT`, `LIMIT_MAKER`
      * @type {'LIMIT' | 'LIMIT_MAKER'}
      * @memberof TradeApiOrderListPlaceOpoco
      */
@@ -2238,6 +2269,13 @@ export interface OrderListPlaceOpocoRequest {
     readonly pendingBelowPegOffsetValue?: number;
 
     /**
+     * Quote notional limit for the working LIMIT order on the BUY side. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingQuoteNotionalLimit?: number;
+
+    /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOpoco
@@ -2466,6 +2504,20 @@ export interface OrderListPlaceOtoRequest {
      * @memberof TradeApiOrderListPlaceOto
      */
     readonly pendingPegOffsetValue?: number;
+
+    /**
+     * Quote notional limit for the working order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly workingQuoteNotionalLimit?: number;
+
+    /**
+     * Quote notional limit for the pending order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly pendingQuoteNotionalLimit?: number;
 
     /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -2782,6 +2834,27 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingBelowPegOffsetValue?: number;
 
     /**
+     * Quote notional limit for the working order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly workingQuoteNotionalLimit?: number;
+
+    /**
+     * Quote notional limit for the pending above order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingAboveQuoteNotionalLimit?: number;
+
+    /**
+     * Quote notional limit for the pending below order (only for orders on the BUY side). See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingBelowQuoteNotionalLimit?: number;
+
+    /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
@@ -2926,6 +2999,13 @@ export interface OrderPlaceRequest {
      * @memberof TradeApiOrderPlace
      */
     readonly pegOffsetType?: OrderPlacePegOffsetTypeEnum;
+
+    /**
+     * For orders on the BUY side only. Maximum quote-asset notional the order may consume. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderPlace
+     */
+    readonly quoteNotionalLimit?: number;
 
     /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -3079,6 +3159,13 @@ export interface OrderTestRequest {
      * @memberof TradeApiOrderTest
      */
     readonly pegOffsetType?: OrderTestPegOffsetTypeEnum;
+
+    /**
+     * For orders on the BUY side only. Maximum quote-asset notional the order may consume. See Quote Notional Limit.
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly quoteNotionalLimit?: number;
 
     /**
      * Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -3809,6 +3896,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Place an OPO.
      *
+     * The working order must be `LIMIT` or `LIMIT_MAKER`.
      * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
      *
      * Weight(IP): 1
@@ -3841,6 +3929,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Place an OPOCO.
+     *
+     * The working order must be `LIMIT` or `LIMIT_MAKER`.
      *
      * Weight(IP): 1
      *

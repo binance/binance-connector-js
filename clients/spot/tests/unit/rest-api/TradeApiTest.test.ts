@@ -724,6 +724,7 @@ describe('TradeApi', () => {
                 pegPriceType: NewOrderPegPriceTypeEnum.PRIMARY_PEG,
                 pegOffsetValue: 1,
                 pegOffsetType: NewOrderPegOffsetTypeEnum.PRICE_LEVEL,
+                quoteNotionalLimit: 100,
                 recvWindow: 5000,
             };
 
@@ -1201,6 +1202,7 @@ describe('TradeApi', () => {
                 pegPriceType: OrderCancelReplacePegPriceTypeEnum.PRIMARY_PEG,
                 pegOffsetValue: 1,
                 pegOffsetType: OrderCancelReplacePegOffsetTypeEnum.PRICE_LEVEL,
+                quoteNotionalLimit: 100,
                 recvWindow: 5000,
             };
 
@@ -1487,6 +1489,8 @@ describe('TradeApi', () => {
                 belowPegOffsetValue: 1,
                 newOrderRespType: OrderListOcoNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: OrderListOcoSelfTradePreventionModeEnum.NONE,
+                aboveQuoteNotionalLimit: 100,
+                belowQuoteNotionalLimit: 100,
                 recvWindow: 5000,
             };
 
@@ -1774,6 +1778,7 @@ describe('TradeApi', () => {
                 pendingPegPriceType: OrderListOpoPendingPegPriceTypeEnum.PRIMARY_PEG,
                 pendingPegOffsetType: OrderListOpoPendingPegOffsetTypeEnum.PRICE_LEVEL,
                 pendingPegOffsetValue: 1,
+                workingQuoteNotionalLimit: 100,
                 recvWindow: 5000,
             };
 
@@ -2137,6 +2142,7 @@ describe('TradeApi', () => {
                 pendingBelowPegPriceType: OrderListOpocoPendingBelowPegPriceTypeEnum.PRIMARY_PEG,
                 pendingBelowPegOffsetType: OrderListOpocoPendingBelowPegOffsetTypeEnum.PRICE_LEVEL,
                 pendingBelowPegOffsetValue: 1,
+                workingQuoteNotionalLimit: 100,
                 recvWindow: 5000,
             };
 
@@ -2491,6 +2497,8 @@ describe('TradeApi', () => {
                 pendingPegPriceType: OrderListOtoPendingPegPriceTypeEnum.PRIMARY_PEG,
                 pendingPegOffsetType: OrderListOtoPendingPegOffsetTypeEnum.PRICE_LEVEL,
                 pendingPegOffsetValue: 1,
+                workingQuoteNotionalLimit: 100,
+                pendingQuoteNotionalLimit: 100,
                 recvWindow: 5000,
             };
 
@@ -2886,6 +2894,9 @@ describe('TradeApi', () => {
                 pendingBelowPegPriceType: OrderListOtocoPendingBelowPegPriceTypeEnum.PRIMARY_PEG,
                 pendingBelowPegOffsetType: OrderListOtocoPendingBelowPegOffsetTypeEnum.PRICE_LEVEL,
                 pendingBelowPegOffsetValue: 1,
+                workingQuoteNotionalLimit: 100,
+                pendingAboveQuoteNotionalLimit: 100,
+                pendingBelowQuoteNotionalLimit: 100,
                 recvWindow: 5000,
             };
 
@@ -3489,6 +3500,7 @@ describe('TradeApi', () => {
                 pegPriceType: OrderTestPegPriceTypeEnum.PRIMARY_PEG,
                 pegOffsetValue: 1,
                 pegOffsetType: OrderTestPegOffsetTypeEnum.PRICE_LEVEL,
+                quoteNotionalLimit: 100,
                 recvWindow: 5000,
             };
 

@@ -132,6 +132,13 @@ export interface UserDataStreamSubscribeRequest {
      * @memberof UserDataStreamApiUserDataStreamSubscribe
      */
     readonly id?: string;
+
+    /**
+     * Optional filter that controls which events are delivered on this subscription. See User Data Stream Subscription Filters. When omitted, all events for the subscribed account are delivered.
+     * @type {object}
+     * @memberof UserDataStreamApiUserDataStreamSubscribe
+     */
+    readonly filter?: object;
 }
 
 /**
@@ -152,6 +159,13 @@ export interface UserDataStreamSubscribeSignatureRequest {
      * @memberof UserDataStreamApiUserDataStreamSubscribeSignature
      */
     readonly recvWindow?: number;
+
+    /**
+     * Optional event filter. See User Data Stream Subscription Filters. When included, `filter` must be in the signed string with sorted keys and no whitespace between JSON elements.
+     * @type {object}
+     * @memberof UserDataStreamApiUserDataStreamSubscribeSignature
+     */
+    readonly filter?: object;
 }
 
 /**
