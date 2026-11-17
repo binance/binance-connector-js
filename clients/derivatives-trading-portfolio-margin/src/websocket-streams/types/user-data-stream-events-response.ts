@@ -53,9 +53,6 @@ import type { ListenKeyExpired } from './listen-key-expired';
 import type { OpenOrderLoss } from './open-order-loss';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OpenOrderLossOInner } from './open-order-loss-oinner';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { OrderTradeUpdate } from './order-trade-update';
 // May contain unused imports in some cases
 // @ts-ignore

@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Portfolio Margin WebSocket Market Streams
@@ -14,10 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OpenOrderLossOInner } from './open-order-loss-oinner';
-
 /**
  *
  * @export
@@ -31,9 +26,9 @@ export interface OpenOrderLoss {
      */
     E?: number | bigint;
     /**
-     * Update Data
-     * @type {Array<OpenOrderLossOInner>}
+     * Aggregated account-level open order loss, in USD
+     * @type {string}
      * @memberof OpenOrderLoss
      */
-    O?: Array<OpenOrderLossOInner>;
+    o?: string;
 }

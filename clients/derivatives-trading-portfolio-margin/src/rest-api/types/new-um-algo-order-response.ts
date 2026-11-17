@@ -128,13 +128,13 @@ export interface NewUmAlgoOrderResponse {
      */
     reduceOnly?: boolean;
     /**
-     *
+     * TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof NewUmAlgoOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof NewUmAlgoOrderResponse
      */

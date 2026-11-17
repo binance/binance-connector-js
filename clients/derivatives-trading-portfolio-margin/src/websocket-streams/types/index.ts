@@ -13,7 +13,6 @@ export * from './execution-report';
 export * from './liability-change';
 export * from './listen-key-expired';
 export * from './open-order-loss';
-export * from './open-order-loss-oinner';
 export * from './order-trade-update';
 export * from './order-trade-update-o';
 export * from './outbound-account-position';

@@ -1378,12 +1378,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - Condition orders will be triggered when:
          * - `STOP`, `STOP_MARKET`:
          * - BUY: "MARK_PRICE" >= `stopPrice`
-         * - SELL: "MARK_PRICE" = `stopPrice`
+         * - SELL: "MARK_PRICE" <= `stopPrice`
+         * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+         * - BUY: "MARK_PRICE" <= `stopPrice`
+         * - SELL: "MARK_PRICE" >= `stopPrice`
          * - `TRAILING_STOP_MARKET`:
-         * - BUY: the lowest mark price after order placed ``= the lowest mark price
-         * - (1 + `callbackRate`)
-         * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
-         * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+         * - BUY: the lowest mark price after order placed <= `activationPrice`, and the latest mark price >= the lowest mark price * (1 + `callbackRate`)
+         * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
+         * - For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
+         * - BUY: `activationPrice` should be smaller than latest mark price.
+         * - SELL: `activationPrice` should be larger than latest mark price.
          *
          * @summary New CM Conditional Order (TRADE)
          * @param {string} symbol Symbol
@@ -1738,7 +1742,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewUmAlgoOrderPriceProtectEnum} [priceProtect] Price protection. Default `false`
          * @param {NewUmAlgoOrderReduceOnlyEnum} [reduceOnly] Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
          * @param {number} [activatePrice] Used with `TRAILING_STOP_MARKET`, default as latest price
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET`, min 0.1, max 10 (1 = 1%)
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET`, min 0.1, max 20 (1 = 1%)
          * @param {string} [clientAlgoId] Unique id among open orders. Auto-generated if not sent
          * @param {NewUmAlgoOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {NewUmAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
@@ -4077,12 +4081,16 @@ export interface TradeApiInterface {
      * - Condition orders will be triggered when:
      * - `STOP`, `STOP_MARKET`:
      * - BUY: "MARK_PRICE" >= `stopPrice`
-     * - SELL: "MARK_PRICE" = `stopPrice`
+     * - SELL: "MARK_PRICE" <= `stopPrice`
+     * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     * - BUY: "MARK_PRICE" <= `stopPrice`
+     * - SELL: "MARK_PRICE" >= `stopPrice`
      * - `TRAILING_STOP_MARKET`:
-     * - BUY: the lowest mark price after order placed ``= the lowest mark price
-     * - (1 + `callbackRate`)
-     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
-     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+     * - BUY: the lowest mark price after order placed <= `activationPrice`, and the latest mark price >= the lowest mark price * (1 + `callbackRate`)
+     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
+     * - For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
+     * - BUY: `activationPrice` should be smaller than latest mark price.
+     * - SELL: `activationPrice` should be larger than latest mark price.
      *
      * @summary New CM Conditional Order (TRADE)
      * @param {NewCmConditionalOrderRequest} requestParameters Request parameters.
@@ -5990,7 +5998,7 @@ export interface NewUmAlgoOrderRequest {
     readonly activatePrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET`, min 0.1, max 10 (1 = 1%)
+     * Used with `TRAILING_STOP_MARKET`, min 0.1, max 20 (1 = 1%)
      * @type {number}
      * @memberof TradeApiNewUmAlgoOrder
      */
@@ -8064,12 +8072,16 @@ export class TradeApi implements TradeApiInterface {
      * - Condition orders will be triggered when:
      * - `STOP`, `STOP_MARKET`:
      * - BUY: "MARK_PRICE" >= `stopPrice`
-     * - SELL: "MARK_PRICE" = `stopPrice`
+     * - SELL: "MARK_PRICE" <= `stopPrice`
+     * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     * - BUY: "MARK_PRICE" <= `stopPrice`
+     * - SELL: "MARK_PRICE" >= `stopPrice`
      * - `TRAILING_STOP_MARKET`:
-     * - BUY: the lowest mark price after order placed ``= the lowest mark price
-     * - (1 + `callbackRate`)
-     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price = `stopPrice`
-     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") = `stopPrice`
+     * - BUY: the lowest mark price after order placed <= `activationPrice`, and the latest mark price >= the lowest mark price * (1 + `callbackRate`)
+     * - SELL: the highest mark price after order placed >= `activationPrice`, and the latest mark price <= the highest mark price * (1 - `callbackRate`)
+     * - For `TRAILING_STOP_MARKET`, if you got such error code. `{"code": -2021, "msg": "Order would immediately trigger."}` means that the parameters you send do not meet the following requirements:
+     * - BUY: `activationPrice` should be smaller than latest mark price.
+     * - SELL: `activationPrice` should be larger than latest mark price.
      *
      * @summary New CM Conditional Order (TRADE)
      * @param {NewCmConditionalOrderRequest} requestParameters Request parameters.
