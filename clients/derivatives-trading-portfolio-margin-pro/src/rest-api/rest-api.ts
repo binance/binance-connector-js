@@ -66,6 +66,7 @@ import type {
 } from './types';
 import type {
     GetPortfolioMarginAssetLeverageResponse,
+    GetPortfolioMarginTieredCollateralRatesResponse,
     PortfolioMarginCollateralRateResponse,
     PortfolioMarginProTieredCollateralRateResponse,
     QueryPortfolioMarginAssetIndexPriceResponse,
@@ -580,6 +581,25 @@ export class RestAPI {
         RestApiResponse<GetPortfolioMarginAssetLeverageResponse>
         > {
         return this.marketDataApi.getPortfolioMarginAssetLeverage();
+    }
+
+    /**
+     * Query the tiered collateral rate configurations for Portfolio Margin assets.
+     *
+     * Weight(IP): 50
+     *
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Portfolio Margin Tiered Collateral Rates (MARKET_DATA)
+     *
+     * @returns {Promise<RestApiResponse<GetPortfolioMarginTieredCollateralRatesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#get-portfolio-margin-tiered-collateral-rates Binance API Documentation}
+     */
+    getPortfolioMarginTieredCollateralRates(): Promise<
+        RestApiResponse<GetPortfolioMarginTieredCollateralRatesResponse>
+        > {
+        return this.marketDataApi.getPortfolioMarginTieredCollateralRates();
     }
 
     /**

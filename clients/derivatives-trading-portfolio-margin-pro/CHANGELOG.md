@@ -1,5 +1,19 @@
 # Changelog
 
+## 16.1.0 - 2026-11-17
+
+### Added (1)
+
+#### REST API
+
+- `getPortfolioMarginTieredCollateralRates()` (`GET /sapi/v2/portfolio/retail/collateralRate`)
+
+### Changed (1)
+
+#### REST API
+
+- Added response schema `getPortfolioMarginTieredCollateralRatesResponse`
+
 ## 16.0.2 - 2026-11-09
 
 ### Changed (2)

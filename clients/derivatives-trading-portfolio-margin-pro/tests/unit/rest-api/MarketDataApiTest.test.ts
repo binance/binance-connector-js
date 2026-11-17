@@ -22,6 +22,7 @@ import {
 } from '../../../src/rest-api';
 import type {
     GetPortfolioMarginAssetLeverageResponse,
+    GetPortfolioMarginTieredCollateralRatesResponse,
     PortfolioMarginCollateralRateResponse,
     PortfolioMarginProTieredCollateralRateResponse,
     QueryPortfolioMarginAssetIndexPriceResponse,
@@ -73,6 +74,60 @@ describe('MarketDataApi', () => {
                 .spyOn(client, 'getPortfolioMarginAssetLeverage')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getPortfolioMarginAssetLeverage()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getPortfolioMarginTieredCollateralRates()', () => {
+        it('should execute getPortfolioMarginTieredCollateralRates() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BNB',
+                        collateralInfo: [
+                            {
+                                tierFloor: '0.0000',
+                                tierCap: '1000.0000',
+                                collateralRate: '1.0000',
+                                cum: '0.0000',
+                            },
+                        ],
+                    },
+                ])
+            );
+
+            const spy = jest
+                .spyOn(client, 'getPortfolioMarginTieredCollateralRates')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<GetPortfolioMarginTieredCollateralRatesResponse>)
+                );
+            const response = await client.getPortfolioMarginTieredCollateralRates();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getPortfolioMarginTieredCollateralRates')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getPortfolioMarginTieredCollateralRates()).rejects.toThrow(
+                'ResponseError'
+            );
             spy.mockRestore();
         });
     });

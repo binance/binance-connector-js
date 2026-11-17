@@ -19,6 +19,7 @@ import {
 } from '@binance/common';
 import type {
     GetPortfolioMarginAssetLeverageResponse,
+    GetPortfolioMarginTieredCollateralRatesResponse,
     PortfolioMarginCollateralRateResponse,
     PortfolioMarginProTieredCollateralRateResponse,
     QueryPortfolioMarginAssetIndexPriceResponse,
@@ -50,6 +51,34 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/sapi/v1/portfolio/margin-asset-leverage',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query the tiered collateral rate configurations for Portfolio Margin assets.
+         *
+         * Weight(IP): 50
+         *
+         * Security Type: MARKET_DATA
+         *
+         * @summary Get Portfolio Margin Tiered Collateral Rates (MARKET_DATA)
+         *
+         * @throws {RequiredError}
+         */
+        getPortfolioMarginTieredCollateralRates: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/portfolio/retail/collateralRate',
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -178,6 +207,21 @@ export interface MarketDataApiInterface {
         RestApiResponse<GetPortfolioMarginAssetLeverageResponse>
     >;
     /**
+     * Query the tiered collateral rate configurations for Portfolio Margin assets.
+     *
+     * Weight(IP): 50
+     *
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Portfolio Margin Tiered Collateral Rates (MARKET_DATA)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    getPortfolioMarginTieredCollateralRates(): Promise<
+        RestApiResponse<GetPortfolioMarginTieredCollateralRatesResponse>
+    >;
+    /**
      * Portfolio Margin Collateral Rate
      *
      * Weight(IP): 50
@@ -293,6 +337,36 @@ export class MarketDataApi implements MarketDataApiInterface {
             localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
+        );
+    }
+
+    /**
+     * Query the tiered collateral rate configurations for Portfolio Margin assets.
+     *
+     * Weight(IP): 50
+     *
+     * Security Type: MARKET_DATA
+     *
+     * @summary Get Portfolio Margin Tiered Collateral Rates (MARKET_DATA)
+     * @returns {Promise<RestApiResponse<GetPortfolioMarginTieredCollateralRatesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin-pro/api/rest-api/market-data#get-portfolio-margin-tiered-collateral-rates Binance API Documentation}
+     */
+    public async getPortfolioMarginTieredCollateralRates(): Promise<
+        RestApiResponse<GetPortfolioMarginTieredCollateralRatesResponse>
+        > {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getPortfolioMarginTieredCollateralRates();
+        return sendRequest<GetPortfolioMarginTieredCollateralRatesResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
         );
     }
 
