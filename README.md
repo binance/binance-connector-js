@@ -52,6 +52,7 @@ nvm use 22.12.0
 - [@binance/simple-earn](./clients/simple-earn/) - Simple Earn connector
 - [@binance/spot](./clients/spot/) - Spot Trading connector
 - [@binance/staking](./clients/staking/) - Staking connector
+- [@binance/stock-options](./clients/stock-options/) - Stock Options connector
 - [@binance/stocks](./clients/stocks/) - Stocks connector
 - [@binance/sub-account](./clients/sub-account/) - Sub Account connector
 - [@binance/vip-loan](./clients/vip-loan/) - VIP Loan connector
