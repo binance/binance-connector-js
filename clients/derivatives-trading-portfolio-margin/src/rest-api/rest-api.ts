@@ -32,7 +32,13 @@ import type {
     GetAutoRepayFuturesStatusRequest,
     GetCmAccountDetailRequest,
     GetCmCurrentPositionModeRequest,
+    GetCmFuturesOrderDownloadLinkByIdRequest,
+    GetCmFuturesTradeDownloadLinkByIdRequest,
+    GetCmFuturesTransactionDownloadLinkByIdRequest,
     GetCmIncomeHistoryRequest,
+    GetDownloadIdForCmFuturesOrderHistoryRequest,
+    GetDownloadIdForCmFuturesTradeHistoryRequest,
+    GetDownloadIdForCmFuturesTransactionHistoryRequest,
     GetDownloadIdForUmFuturesOrderHistoryRequest,
     GetDownloadIdForUmFuturesTradeHistoryRequest,
     GetDownloadIdForUmFuturesTransactionHistoryRequest,
@@ -137,7 +143,13 @@ import type {
     GetAutoRepayFuturesStatusResponse,
     GetCmAccountDetailResponse,
     GetCmCurrentPositionModeResponse,
+    GetCmFuturesOrderDownloadLinkByIdResponse,
+    GetCmFuturesTradeDownloadLinkByIdResponse,
+    GetCmFuturesTransactionDownloadLinkByIdResponse,
     GetCmIncomeHistoryResponse,
+    GetDownloadIdForCmFuturesOrderHistoryResponse,
+    GetDownloadIdForCmFuturesTradeHistoryResponse,
+    GetDownloadIdForCmFuturesTransactionHistoryResponse,
     GetDownloadIdForUmFuturesOrderHistoryResponse,
     GetDownloadIdForUmFuturesTradeHistoryResponse,
     GetDownloadIdForUmFuturesTransactionHistoryResponse,
@@ -586,6 +598,75 @@ export class RestAPI {
     }
 
     /**
+     * Get CM futures order download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Order Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesOrderDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetCmFuturesOrderDownloadLinkByIdResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-futures-order-download-link-by-id Binance API Documentation}
+     */
+    getCmFuturesOrderDownloadLinkById(
+        requestParameters: GetCmFuturesOrderDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesOrderDownloadLinkByIdResponse>> {
+        return this.accountApi.getCmFuturesOrderDownloadLinkById(requestParameters);
+    }
+
+    /**
+     * Get CM futures trade download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Trade Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetCmFuturesTradeDownloadLinkByIdResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-futures-trade-download-link-by-id Binance API Documentation}
+     */
+    getCmFuturesTradeDownloadLinkById(
+        requestParameters: GetCmFuturesTradeDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesTradeDownloadLinkByIdResponse>> {
+        return this.accountApi.getCmFuturesTradeDownloadLinkById(requestParameters);
+    }
+
+    /**
+     * Get CM futures Transaction download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Transaction Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesTransactionDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetCmFuturesTransactionDownloadLinkByIdResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-futures-transaction-download-link-by-id Binance API Documentation}
+     */
+    getCmFuturesTransactionDownloadLinkById(
+        requestParameters: GetCmFuturesTransactionDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesTransactionDownloadLinkByIdResponse>> {
+        return this.accountApi.getCmFuturesTransactionDownloadLinkById(requestParameters);
+    }
+
+    /**
      * Get CM Income History.
      *
      * Weight(IP): 30
@@ -609,6 +690,78 @@ export class RestAPI {
         requestParameters: GetCmIncomeHistoryRequest = {}
     ): Promise<RestApiResponse<GetCmIncomeHistoryResponse>> {
         return this.accountApi.getCmIncomeHistory(requestParameters);
+    }
+
+    /**
+     * Get download id for CM futures order history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 10 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Order History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesOrderHistoryRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetDownloadIdForCmFuturesOrderHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-cm-futures-order-history Binance API Documentation}
+     */
+    getDownloadIdForCmFuturesOrderHistory(
+        requestParameters: GetDownloadIdForCmFuturesOrderHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesOrderHistoryResponse>> {
+        return this.accountApi.getDownloadIdForCmFuturesOrderHistory(requestParameters);
+    }
+
+    /**
+     * Get download id for CM futures trade history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Trade History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesTradeHistoryRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetDownloadIdForCmFuturesTradeHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-cm-futures-trade-history Binance API Documentation}
+     */
+    getDownloadIdForCmFuturesTradeHistory(
+        requestParameters: GetDownloadIdForCmFuturesTradeHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesTradeHistoryResponse>> {
+        return this.accountApi.getDownloadIdForCmFuturesTradeHistory(requestParameters);
+    }
+
+    /**
+     * Get download id for CM futures transaction history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Transaction History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesTransactionHistoryRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetDownloadIdForCmFuturesTransactionHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-cm-futures-transaction-history Binance API Documentation}
+     */
+    getDownloadIdForCmFuturesTransactionHistory(
+        requestParameters: GetDownloadIdForCmFuturesTransactionHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesTransactionHistoryResponse>> {
+        return this.accountApi.getDownloadIdForCmFuturesTransactionHistory(requestParameters);
     }
 
     /**

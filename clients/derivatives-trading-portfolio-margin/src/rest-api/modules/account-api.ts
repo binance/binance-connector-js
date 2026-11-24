@@ -33,7 +33,13 @@ import type {
     GetAutoRepayFuturesStatusResponse,
     GetCmAccountDetailResponse,
     GetCmCurrentPositionModeResponse,
+    GetCmFuturesOrderDownloadLinkByIdResponse,
+    GetCmFuturesTradeDownloadLinkByIdResponse,
+    GetCmFuturesTransactionDownloadLinkByIdResponse,
     GetCmIncomeHistoryResponse,
+    GetDownloadIdForCmFuturesOrderHistoryResponse,
+    GetDownloadIdForCmFuturesTradeHistoryResponse,
+    GetDownloadIdForCmFuturesTransactionHistoryResponse,
     GetDownloadIdForUmFuturesOrderHistoryResponse,
     GetDownloadIdForUmFuturesTradeHistoryResponse,
     GetDownloadIdForUmFuturesTransactionHistoryResponse,
@@ -656,6 +662,144 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         * Get CM futures order download link by Id
+         *
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Download link expiration: 7 days
+         *
+         * @summary Get CM Futures Order Download Link by Id (USER_DATA)
+         * @param {string} downloadId get by download id api
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getCmFuturesOrderDownloadLinkById: async (
+            downloadId: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'downloadId' is not null or undefined
+            assertParamExists('getCmFuturesOrderDownloadLinkById', 'downloadId', downloadId);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (downloadId !== undefined && downloadId !== null) {
+                localVarQueryParameter['downloadId'] = downloadId;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/papi/v1/cm/order/asyn/id',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get CM futures trade download link by Id
+         *
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Download link expiration: 7 days
+         *
+         * @summary Get CM Futures Trade Download Link by Id (USER_DATA)
+         * @param {string} downloadId get by download id api
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getCmFuturesTradeDownloadLinkById: async (
+            downloadId: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'downloadId' is not null or undefined
+            assertParamExists('getCmFuturesTradeDownloadLinkById', 'downloadId', downloadId);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (downloadId !== undefined && downloadId !== null) {
+                localVarQueryParameter['downloadId'] = downloadId;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/papi/v1/cm/trade/asyn/id',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get CM futures Transaction download link by Id
+         *
+         * Weight(IP): 10
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Download link expiration: 7 days
+         *
+         * @summary Get CM Futures Transaction Download Link by Id (USER_DATA)
+         * @param {string} downloadId get by download id api
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getCmFuturesTransactionDownloadLinkById: async (
+            downloadId: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'downloadId' is not null or undefined
+            assertParamExists('getCmFuturesTransactionDownloadLinkById', 'downloadId', downloadId);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (downloadId !== undefined && downloadId !== null) {
+                localVarQueryParameter['downloadId'] = downloadId;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/papi/v1/cm/income/asyn/id',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Get CM Income History.
          *
          * Weight(IP): 30
@@ -714,6 +858,172 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             return {
                 endpoint: '/papi/v1/cm/income',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get download id for CM futures order history
+         *
+         * Weight(IP): 1500
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Request Limitation is 10 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
+         *
+         * @summary Get Download Id For CM Futures Order History (USER_DATA)
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getDownloadIdForCmFuturesOrderHistory: async (
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'startTime' is not null or undefined
+            assertParamExists('getDownloadIdForCmFuturesOrderHistory', 'startTime', startTime);
+            // verify required parameter 'endTime' is not null or undefined
+            assertParamExists('getDownloadIdForCmFuturesOrderHistory', 'endTime', endTime);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/papi/v1/cm/order/asyn',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get download id for CM futures trade history
+         *
+         * Weight(IP): 1500
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Request Limitation is 5 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
+         *
+         * @summary Get Download Id For CM Futures Trade History (USER_DATA)
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getDownloadIdForCmFuturesTradeHistory: async (
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'startTime' is not null or undefined
+            assertParamExists('getDownloadIdForCmFuturesTradeHistory', 'startTime', startTime);
+            // verify required parameter 'endTime' is not null or undefined
+            assertParamExists('getDownloadIdForCmFuturesTradeHistory', 'endTime', endTime);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/papi/v1/cm/trade/asyn',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get download id for CM futures transaction history
+         *
+         * Weight(IP): 1500
+         *
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Request Limitation is 5 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
+         *
+         * @summary Get Download Id For CM Futures Transaction History (USER_DATA)
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getDownloadIdForCmFuturesTransactionHistory: async (
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'startTime' is not null or undefined
+            assertParamExists(
+                'getDownloadIdForCmFuturesTransactionHistory',
+                'startTime',
+                startTime
+            );
+            // verify required parameter 'endTime' is not null or undefined
+            assertParamExists('getDownloadIdForCmFuturesTransactionHistory', 'endTime', endTime);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/papi/v1/cm/income/asyn',
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -2277,6 +2587,63 @@ export interface AccountApiInterface {
         requestParameters?: GetCmCurrentPositionModeRequest
     ): Promise<RestApiResponse<GetCmCurrentPositionModeResponse>>;
     /**
+     * Get CM futures order download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Order Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesOrderDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getCmFuturesOrderDownloadLinkById(
+        requestParameters: GetCmFuturesOrderDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesOrderDownloadLinkByIdResponse>>;
+    /**
+     * Get CM futures trade download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Trade Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getCmFuturesTradeDownloadLinkById(
+        requestParameters: GetCmFuturesTradeDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesTradeDownloadLinkByIdResponse>>;
+    /**
+     * Get CM futures Transaction download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Transaction Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesTransactionDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getCmFuturesTransactionDownloadLinkById(
+        requestParameters: GetCmFuturesTransactionDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesTransactionDownloadLinkByIdResponse>>;
+    /**
      * Get CM Income History.
      *
      * Weight(IP): 30
@@ -2298,6 +2665,66 @@ export interface AccountApiInterface {
     getCmIncomeHistory(
         requestParameters?: GetCmIncomeHistoryRequest
     ): Promise<RestApiResponse<GetCmIncomeHistoryResponse>>;
+    /**
+     * Get download id for CM futures order history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 10 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Order History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesOrderHistoryRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getDownloadIdForCmFuturesOrderHistory(
+        requestParameters: GetDownloadIdForCmFuturesOrderHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesOrderHistoryResponse>>;
+    /**
+     * Get download id for CM futures trade history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Trade History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesTradeHistoryRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getDownloadIdForCmFuturesTradeHistory(
+        requestParameters: GetDownloadIdForCmFuturesTradeHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesTradeHistoryResponse>>;
+    /**
+     * Get download id for CM futures transaction history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Transaction History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesTransactionHistoryRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getDownloadIdForCmFuturesTransactionHistory(
+        requestParameters: GetDownloadIdForCmFuturesTransactionHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesTransactionHistoryResponse>>;
     /**
      * Get download id for UM futures order history
      *
@@ -3090,6 +3517,66 @@ export interface GetCmCurrentPositionModeRequest {
 }
 
 /**
+ * Request parameters for getCmFuturesOrderDownloadLinkById operation in AccountApi.
+ * @interface GetCmFuturesOrderDownloadLinkByIdRequest
+ */
+export interface GetCmFuturesOrderDownloadLinkByIdRequest {
+    /**
+     * get by download id api
+     * @type {string}
+     * @memberof AccountApiGetCmFuturesOrderDownloadLinkById
+     */
+    readonly downloadId: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AccountApiGetCmFuturesOrderDownloadLinkById
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getCmFuturesTradeDownloadLinkById operation in AccountApi.
+ * @interface GetCmFuturesTradeDownloadLinkByIdRequest
+ */
+export interface GetCmFuturesTradeDownloadLinkByIdRequest {
+    /**
+     * get by download id api
+     * @type {string}
+     * @memberof AccountApiGetCmFuturesTradeDownloadLinkById
+     */
+    readonly downloadId: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AccountApiGetCmFuturesTradeDownloadLinkById
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getCmFuturesTransactionDownloadLinkById operation in AccountApi.
+ * @interface GetCmFuturesTransactionDownloadLinkByIdRequest
+ */
+export interface GetCmFuturesTransactionDownloadLinkByIdRequest {
+    /**
+     * get by download id api
+     * @type {string}
+     * @memberof AccountApiGetCmFuturesTransactionDownloadLinkById
+     */
+    readonly downloadId: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AccountApiGetCmFuturesTransactionDownloadLinkById
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for getCmIncomeHistory operation in AccountApi.
  * @interface GetCmIncomeHistoryRequest
  */
@@ -3133,6 +3620,87 @@ export interface GetCmIncomeHistoryRequest {
      *
      * @type {number | bigint}
      * @memberof AccountApiGetCmIncomeHistory
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getDownloadIdForCmFuturesOrderHistory operation in AccountApi.
+ * @interface GetDownloadIdForCmFuturesOrderHistoryRequest
+ */
+export interface GetDownloadIdForCmFuturesOrderHistoryRequest {
+    /**
+     * Timestamp in ms
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesOrderHistory
+     */
+    readonly startTime: number | bigint;
+
+    /**
+     * Timestamp in ms
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesOrderHistory
+     */
+    readonly endTime: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesOrderHistory
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getDownloadIdForCmFuturesTradeHistory operation in AccountApi.
+ * @interface GetDownloadIdForCmFuturesTradeHistoryRequest
+ */
+export interface GetDownloadIdForCmFuturesTradeHistoryRequest {
+    /**
+     * Timestamp in ms
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesTradeHistory
+     */
+    readonly startTime: number | bigint;
+
+    /**
+     * Timestamp in ms
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesTradeHistory
+     */
+    readonly endTime: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesTradeHistory
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getDownloadIdForCmFuturesTransactionHistory operation in AccountApi.
+ * @interface GetDownloadIdForCmFuturesTransactionHistoryRequest
+ */
+export interface GetDownloadIdForCmFuturesTransactionHistoryRequest {
+    /**
+     * Timestamp in ms
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesTransactionHistory
+     */
+    readonly startTime: number | bigint;
+
+    /**
+     * Timestamp in ms
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesTransactionHistory
+     */
+    readonly endTime: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AccountApiGetDownloadIdForCmFuturesTransactionHistory
      */
     readonly recvWindow?: number | bigint;
 }
@@ -4325,6 +4893,117 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
+     * Get CM futures order download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Order Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesOrderDownloadLinkByIdRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetCmFuturesOrderDownloadLinkByIdResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-futures-order-download-link-by-id Binance API Documentation}
+     */
+    public async getCmFuturesOrderDownloadLinkById(
+        requestParameters: GetCmFuturesOrderDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesOrderDownloadLinkByIdResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getCmFuturesOrderDownloadLinkById(
+                requestParameters?.downloadId,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<GetCmFuturesOrderDownloadLinkByIdResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get CM futures trade download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Trade Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetCmFuturesTradeDownloadLinkByIdResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-futures-trade-download-link-by-id Binance API Documentation}
+     */
+    public async getCmFuturesTradeDownloadLinkById(
+        requestParameters: GetCmFuturesTradeDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesTradeDownloadLinkByIdResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getCmFuturesTradeDownloadLinkById(
+                requestParameters?.downloadId,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<GetCmFuturesTradeDownloadLinkByIdResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get CM futures Transaction download link by Id
+     *
+     * Weight(IP): 10
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get CM Futures Transaction Download Link by Id (USER_DATA)
+     * @param {GetCmFuturesTransactionDownloadLinkByIdRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetCmFuturesTransactionDownloadLinkByIdResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-cm-futures-transaction-download-link-by-id Binance API Documentation}
+     */
+    public async getCmFuturesTransactionDownloadLinkById(
+        requestParameters: GetCmFuturesTransactionDownloadLinkByIdRequest
+    ): Promise<RestApiResponse<GetCmFuturesTransactionDownloadLinkByIdResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getCmFuturesTransactionDownloadLinkById(
+                requestParameters?.downloadId,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<GetCmFuturesTransactionDownloadLinkByIdResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Get CM Income History.
      *
      * Weight(IP): 30
@@ -4356,6 +5035,123 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<GetCmIncomeHistoryResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get download id for CM futures order history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 10 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Order History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesOrderHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetDownloadIdForCmFuturesOrderHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-cm-futures-order-history Binance API Documentation}
+     */
+    public async getDownloadIdForCmFuturesOrderHistory(
+        requestParameters: GetDownloadIdForCmFuturesOrderHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesOrderHistoryResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getDownloadIdForCmFuturesOrderHistory(
+                requestParameters?.startTime,
+                requestParameters?.endTime,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<GetDownloadIdForCmFuturesOrderHistoryResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get download id for CM futures trade history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Trade History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesTradeHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetDownloadIdForCmFuturesTradeHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-cm-futures-trade-history Binance API Documentation}
+     */
+    public async getDownloadIdForCmFuturesTradeHistory(
+        requestParameters: GetDownloadIdForCmFuturesTradeHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesTradeHistoryResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getDownloadIdForCmFuturesTradeHistory(
+                requestParameters?.startTime,
+                requestParameters?.endTime,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<GetDownloadIdForCmFuturesTradeHistoryResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get download id for CM futures transaction history
+     *
+     * Weight(IP): 1500
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For CM Futures Transaction History (USER_DATA)
+     * @param {GetDownloadIdForCmFuturesTransactionHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetDownloadIdForCmFuturesTransactionHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-derivatives-trading-portfolio-margin/api/rest-api/account#get-download-id-for-cm-futures-transaction-history Binance API Documentation}
+     */
+    public async getDownloadIdForCmFuturesTransactionHistory(
+        requestParameters: GetDownloadIdForCmFuturesTransactionHistoryRequest
+    ): Promise<RestApiResponse<GetDownloadIdForCmFuturesTransactionHistoryResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getDownloadIdForCmFuturesTransactionHistory(
+                requestParameters?.startTime,
+                requestParameters?.endTime,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<GetDownloadIdForCmFuturesTransactionHistoryResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

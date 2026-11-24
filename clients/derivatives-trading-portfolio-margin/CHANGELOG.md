@@ -1,5 +1,29 @@
 # Changelog
 
+## 22.1.0 - 2026-11-24
+
+### Added (6)
+
+#### REST API
+
+- `getCmFuturesOrderDownloadLinkById()` (`GET /papi/v1/cm/order/asyn/id`)
+- `getCmFuturesTradeDownloadLinkById()` (`GET /papi/v1/cm/trade/asyn/id`)
+- `getCmFuturesTransactionDownloadLinkById()` (`GET /papi/v1/cm/income/asyn/id`)
+- `getDownloadIdForCmFuturesOrderHistory()` (`GET /papi/v1/cm/order/asyn`)
+- `getDownloadIdForCmFuturesTradeHistory()` (`GET /papi/v1/cm/trade/asyn`)
+- `getDownloadIdForCmFuturesTransactionHistory()` (`GET /papi/v1/cm/income/asyn`)
+
+### Changed (6)
+
+#### REST API
+
+- Added response schema `getDownloadIdForCmFuturesTradeHistoryResponse`
+- Added response schema `getDownloadIdForCmFuturesTransactionHistoryResponse`
+- Added response schema `getDownloadIdForCmFuturesOrderHistoryResponse`
+- Added response schema `getCmFuturesOrderDownloadLinkByIdResponse`
+- Added response schema `getCmFuturesTradeDownloadLinkByIdResponse`
+- Added response schema `getCmFuturesTransactionDownloadLinkByIdResponse`
+
 ## 22.0.4 - 2026-11-18
 
 ### Changed (2)

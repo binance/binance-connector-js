@@ -43,7 +43,13 @@ import {
     GetAutoRepayFuturesStatusRequest,
     GetCmAccountDetailRequest,
     GetCmCurrentPositionModeRequest,
+    GetCmFuturesOrderDownloadLinkByIdRequest,
+    GetCmFuturesTradeDownloadLinkByIdRequest,
+    GetCmFuturesTransactionDownloadLinkByIdRequest,
     GetCmIncomeHistoryRequest,
+    GetDownloadIdForCmFuturesOrderHistoryRequest,
+    GetDownloadIdForCmFuturesTradeHistoryRequest,
+    GetDownloadIdForCmFuturesTransactionHistoryRequest,
     GetDownloadIdForUmFuturesOrderHistoryRequest,
     GetDownloadIdForUmFuturesTradeHistoryRequest,
     GetDownloadIdForUmFuturesTransactionHistoryRequest,
@@ -87,7 +93,13 @@ import type {
     GetAutoRepayFuturesStatusResponse,
     GetCmAccountDetailResponse,
     GetCmCurrentPositionModeResponse,
+    GetCmFuturesOrderDownloadLinkByIdResponse,
+    GetCmFuturesTradeDownloadLinkByIdResponse,
+    GetCmFuturesTransactionDownloadLinkByIdResponse,
     GetCmIncomeHistoryResponse,
+    GetDownloadIdForCmFuturesOrderHistoryResponse,
+    GetDownloadIdForCmFuturesTradeHistoryResponse,
+    GetDownloadIdForCmFuturesTransactionHistoryResponse,
     GetDownloadIdForUmFuturesOrderHistoryResponse,
     GetDownloadIdForUmFuturesTradeHistoryResponse,
     GetDownloadIdForUmFuturesTransactionHistoryResponse,
@@ -1283,6 +1295,310 @@ describe('AccountApi', () => {
         });
     });
 
+    describe('getCmFuturesOrderDownloadLinkById()', () => {
+        it('should execute getCmFuturesOrderDownloadLinkById() successfully with required parameters only', async () => {
+            const params: GetCmFuturesOrderDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: 'null',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: 'null',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getCmFuturesOrderDownloadLinkById').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetCmFuturesOrderDownloadLinkByIdResponse>)
+            );
+            const response = await client.getCmFuturesOrderDownloadLinkById(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getCmFuturesOrderDownloadLinkById() successfully with optional parameters', async () => {
+            const params: GetCmFuturesOrderDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: 'null',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: 'null',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getCmFuturesOrderDownloadLinkById').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetCmFuturesOrderDownloadLinkByIdResponse>)
+            );
+            const response = await client.getCmFuturesOrderDownloadLinkById(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when downloadId is missing', async () => {
+            const _params: GetCmFuturesOrderDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.downloadId;
+
+            await expect(client.getCmFuturesOrderDownloadLinkById(params)).rejects.toThrow(
+                'Required parameter downloadId was null or undefined when calling getCmFuturesOrderDownloadLinkById.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetCmFuturesOrderDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getCmFuturesOrderDownloadLinkById')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getCmFuturesOrderDownloadLinkById(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('getCmFuturesTradeDownloadLinkById()', () => {
+        it('should execute getCmFuturesTradeDownloadLinkById() successfully with required parameters only', async () => {
+            const params: GetCmFuturesTradeDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: 'null',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: 'null',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getCmFuturesTradeDownloadLinkById').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetCmFuturesTradeDownloadLinkByIdResponse>)
+            );
+            const response = await client.getCmFuturesTradeDownloadLinkById(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getCmFuturesTradeDownloadLinkById() successfully with optional parameters', async () => {
+            const params: GetCmFuturesTradeDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: 'null',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: 'null',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getCmFuturesTradeDownloadLinkById').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetCmFuturesTradeDownloadLinkByIdResponse>)
+            );
+            const response = await client.getCmFuturesTradeDownloadLinkById(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when downloadId is missing', async () => {
+            const _params: GetCmFuturesTradeDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.downloadId;
+
+            await expect(client.getCmFuturesTradeDownloadLinkById(params)).rejects.toThrow(
+                'Required parameter downloadId was null or undefined when calling getCmFuturesTradeDownloadLinkById.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetCmFuturesTradeDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getCmFuturesTradeDownloadLinkById')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getCmFuturesTradeDownloadLinkById(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('getCmFuturesTransactionDownloadLinkById()', () => {
+        it('should execute getCmFuturesTransactionDownloadLinkById() successfully with required parameters only', async () => {
+            const params: GetCmFuturesTransactionDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: 'null',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: 'null',
+                })
+            );
+
+            const spy = jest
+                .spyOn(client, 'getCmFuturesTransactionDownloadLinkById')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<GetCmFuturesTransactionDownloadLinkByIdResponse>)
+                );
+            const response = await client.getCmFuturesTransactionDownloadLinkById(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getCmFuturesTransactionDownloadLinkById() successfully with optional parameters', async () => {
+            const params: GetCmFuturesTransactionDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: 'null',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: 'null',
+                })
+            );
+
+            const spy = jest
+                .spyOn(client, 'getCmFuturesTransactionDownloadLinkById')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<GetCmFuturesTransactionDownloadLinkByIdResponse>)
+                );
+            const response = await client.getCmFuturesTransactionDownloadLinkById(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when downloadId is missing', async () => {
+            const _params: GetCmFuturesTransactionDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.downloadId;
+
+            await expect(client.getCmFuturesTransactionDownloadLinkById(params)).rejects.toThrow(
+                'Required parameter downloadId was null or undefined when calling getCmFuturesTransactionDownloadLinkById.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetCmFuturesTransactionDownloadLinkByIdRequest = {
+                downloadId: '545923594199212032',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getCmFuturesTransactionDownloadLinkById')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getCmFuturesTransactionDownloadLinkById(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
     describe('getCmIncomeHistory()', () => {
         it('should execute getCmIncomeHistory() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
@@ -1365,6 +1681,335 @@ describe('AccountApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'getCmIncomeHistory').mockRejectedValueOnce(mockError);
             await expect(client.getCmIncomeHistory()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getDownloadIdForCmFuturesOrderHistory()', () => {
+        it('should execute getDownloadIdForCmFuturesOrderHistory() successfully with required parameters only', async () => {
+            const params: GetDownloadIdForCmFuturesOrderHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getDownloadIdForCmFuturesOrderHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetDownloadIdForCmFuturesOrderHistoryResponse>)
+            );
+            const response = await client.getDownloadIdForCmFuturesOrderHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getDownloadIdForCmFuturesOrderHistory() successfully with optional parameters', async () => {
+            const params: GetDownloadIdForCmFuturesOrderHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getDownloadIdForCmFuturesOrderHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetDownloadIdForCmFuturesOrderHistoryResponse>)
+            );
+            const response = await client.getDownloadIdForCmFuturesOrderHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when startTime is missing', async () => {
+            const _params: GetDownloadIdForCmFuturesOrderHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.startTime;
+
+            await expect(client.getDownloadIdForCmFuturesOrderHistory(params)).rejects.toThrow(
+                'Required parameter startTime was null or undefined when calling getDownloadIdForCmFuturesOrderHistory.'
+            );
+        });
+
+        it('should throw RequiredError when endTime is missing', async () => {
+            const _params: GetDownloadIdForCmFuturesOrderHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.endTime;
+
+            await expect(client.getDownloadIdForCmFuturesOrderHistory(params)).rejects.toThrow(
+                'Required parameter endTime was null or undefined when calling getDownloadIdForCmFuturesOrderHistory.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetDownloadIdForCmFuturesOrderHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getDownloadIdForCmFuturesOrderHistory')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getDownloadIdForCmFuturesOrderHistory(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('getDownloadIdForCmFuturesTradeHistory()', () => {
+        it('should execute getDownloadIdForCmFuturesTradeHistory() successfully with required parameters only', async () => {
+            const params: GetDownloadIdForCmFuturesTradeHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getDownloadIdForCmFuturesTradeHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetDownloadIdForCmFuturesTradeHistoryResponse>)
+            );
+            const response = await client.getDownloadIdForCmFuturesTradeHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getDownloadIdForCmFuturesTradeHistory() successfully with optional parameters', async () => {
+            const params: GetDownloadIdForCmFuturesTradeHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getDownloadIdForCmFuturesTradeHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetDownloadIdForCmFuturesTradeHistoryResponse>)
+            );
+            const response = await client.getDownloadIdForCmFuturesTradeHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when startTime is missing', async () => {
+            const _params: GetDownloadIdForCmFuturesTradeHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.startTime;
+
+            await expect(client.getDownloadIdForCmFuturesTradeHistory(params)).rejects.toThrow(
+                'Required parameter startTime was null or undefined when calling getDownloadIdForCmFuturesTradeHistory.'
+            );
+        });
+
+        it('should throw RequiredError when endTime is missing', async () => {
+            const _params: GetDownloadIdForCmFuturesTradeHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.endTime;
+
+            await expect(client.getDownloadIdForCmFuturesTradeHistory(params)).rejects.toThrow(
+                'Required parameter endTime was null or undefined when calling getDownloadIdForCmFuturesTradeHistory.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetDownloadIdForCmFuturesTradeHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getDownloadIdForCmFuturesTradeHistory')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getDownloadIdForCmFuturesTradeHistory(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('getDownloadIdForCmFuturesTransactionHistory()', () => {
+        it('should execute getDownloadIdForCmFuturesTransactionHistory() successfully with required parameters only', async () => {
+            const params: GetDownloadIdForCmFuturesTransactionHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
+
+            const spy = jest
+                .spyOn(client, 'getDownloadIdForCmFuturesTransactionHistory')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<GetDownloadIdForCmFuturesTransactionHistoryResponse>)
+                );
+            const response = await client.getDownloadIdForCmFuturesTransactionHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getDownloadIdForCmFuturesTransactionHistory() successfully with optional parameters', async () => {
+            const params: GetDownloadIdForCmFuturesTransactionHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
+
+            const spy = jest
+                .spyOn(client, 'getDownloadIdForCmFuturesTransactionHistory')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<GetDownloadIdForCmFuturesTransactionHistoryResponse>)
+                );
+            const response = await client.getDownloadIdForCmFuturesTransactionHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when startTime is missing', async () => {
+            const _params: GetDownloadIdForCmFuturesTransactionHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.startTime;
+
+            await expect(
+                client.getDownloadIdForCmFuturesTransactionHistory(params)
+            ).rejects.toThrow(
+                'Required parameter startTime was null or undefined when calling getDownloadIdForCmFuturesTransactionHistory.'
+            );
+        });
+
+        it('should throw RequiredError when endTime is missing', async () => {
+            const _params: GetDownloadIdForCmFuturesTransactionHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.endTime;
+
+            await expect(
+                client.getDownloadIdForCmFuturesTransactionHistory(params)
+            ).rejects.toThrow(
+                'Required parameter endTime was null or undefined when calling getDownloadIdForCmFuturesTransactionHistory.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetDownloadIdForCmFuturesTransactionHistoryRequest = {
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getDownloadIdForCmFuturesTransactionHistory')
+                .mockRejectedValueOnce(mockError);
+            await expect(
+                client.getDownloadIdForCmFuturesTransactionHistory(params)
+            ).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
