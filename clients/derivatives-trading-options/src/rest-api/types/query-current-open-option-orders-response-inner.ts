@@ -134,7 +134,7 @@ export interface QueryCurrentOpenOptionOrdersResponseInner {
      */
     mmp?: boolean;
     /**
-     *
+     * self trading prevention mode
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */

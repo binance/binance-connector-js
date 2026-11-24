@@ -307,7 +307,7 @@ describe('MarketApi', () => {
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<underlying>@openInterest@<expirationDate>'.slice(1), params as unknown as Record<string, OpenInterestRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<underlying>@optionOpenInterest@<expirationDate>'.slice(1), params as unknown as Record<string, OpenInterestRequest>)}`,
                 mockResponse
             );
         });
@@ -343,7 +343,7 @@ describe('MarketApi', () => {
             websocketStreamClient['onMessage'](
                 JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<underlying>@openInterest@<expirationDate>'.slice(1),
+                        '/<underlying>@optionOpenInterest@<expirationDate>'.slice(1),
                         params as unknown as Record<string, OpenInterestRequest>
                     ),
                     data: mockResponse,

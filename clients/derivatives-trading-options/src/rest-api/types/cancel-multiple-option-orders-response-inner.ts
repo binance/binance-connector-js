@@ -146,7 +146,7 @@ export interface CancelMultipleOptionOrdersResponseInner {
      */
     source?: string;
     /**
-     *
+     * self trading prevention mode
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */

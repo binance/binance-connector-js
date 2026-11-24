@@ -83,7 +83,7 @@ const MarketApiParamCreator = function () {
             return replaceWebsocketStreamsPlaceholders('/!optionSymbol'.slice(1), { id });
         },
         /**
-         * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@openInterest@221125
+         * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@optionOpenInterest@221125
          *
          * Update Speed: 60s
          *
@@ -101,7 +101,7 @@ const MarketApiParamCreator = function () {
             assertParamExists('openInterest', 'expirationDate', expirationDate);
 
             return replaceWebsocketStreamsPlaceholders(
-                '/<underlying>@openInterest@<expirationDate>'.slice(1),
+                '/<underlying>@optionOpenInterest@<expirationDate>'.slice(1),
                 { underlying, expirationDate, id }
             );
         },
@@ -180,7 +180,7 @@ export interface MarketApiInterface {
     newSymbolInfo(requestParameters?: NewSymbolInfoRequest): WebsocketStream<NewSymbolInfoResponse>;
 
     /**
-     * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@openInterest@221125
+     * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@optionOpenInterest@221125
      *
      * Update Speed: 60s
      *
@@ -404,7 +404,7 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@openInterest@221125
+     * Option open interest for specific underlying asset on specific expiration date. E.g.ethusdt@optionOpenInterest@221125
      *
      * Update Speed: 60s
      *

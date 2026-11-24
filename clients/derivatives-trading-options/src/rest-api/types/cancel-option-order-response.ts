@@ -140,7 +140,7 @@ export interface CancelOptionOrderResponse {
      */
     mmp?: boolean;
     /**
-     *
+     * self trading prevention mode
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */

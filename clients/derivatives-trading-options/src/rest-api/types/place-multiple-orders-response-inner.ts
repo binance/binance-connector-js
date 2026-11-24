@@ -146,7 +146,7 @@ export interface PlaceMultipleOrdersResponseInner {
      */
     mmp?: boolean;
     /**
-     *
+     * self trading prevention mode
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
