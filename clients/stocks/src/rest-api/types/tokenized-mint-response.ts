@@ -31,4 +31,10 @@ export interface TokenizedMintResponse {
      * @memberof TokenizedMintResponse
      */
     status?: string;
+    /**
+     * The wallet the tokenized asset is settled in: `MAIN` = Spot wallet, `CARD` = Funding wallet.
+     * @type {string}
+     * @memberof TokenizedMintResponse
+     */
+    tokenizedAssetSettleWalletType?: string;
 }

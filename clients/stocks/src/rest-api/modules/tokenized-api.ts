@@ -146,6 +146,7 @@ const TokenizedApiAxiosParamCreator = function (configuration: ConfigurationRest
          * @param {string} underlyingAsset Underlying US-equity ticker, e.g. `AAPL`, `TSLA`. Resolved against the active-symbol list; unknown tickers return `-26004`. The target tokenized asset is looked up from this field via `/market/tokenized-assets`.
          * @param {string} underlyingAssetAmount Quantity of the underlying asset to mint from. Must be > 0.
          * @param {string} [clientOrderId] Client order id for idempotency. Format `^[a-zA-Z0-9-_]{32,36}$`. Auto-generated when omitted.
+         * @param {TokenizedMintTokenizedAssetSettleWalletTypeEnum} [tokenizedAssetSettleWalletType] Wallet that receives the minted tokenized asset. `MAIN` = Spot wallet, `CARD` = Funding wallet. Default `CARD`. If `MAIN` is sent while Spot wallet settlement is not enabled, the request is rejected as an illegal parameter.
          * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`.
          *
          * @throws {RequiredError}
@@ -154,6 +155,7 @@ const TokenizedApiAxiosParamCreator = function (configuration: ConfigurationRest
             underlyingAsset: string,
             underlyingAssetAmount: string,
             clientOrderId?: string,
+            tokenizedAssetSettleWalletType?: TokenizedMintTokenizedAssetSettleWalletTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'underlyingAsset' is not null or undefined
@@ -173,6 +175,13 @@ const TokenizedApiAxiosParamCreator = function (configuration: ConfigurationRest
             }
             if (clientOrderId !== undefined && clientOrderId !== null) {
                 localVarQueryParameter['clientOrderId'] = clientOrderId;
+            }
+            if (
+                tokenizedAssetSettleWalletType !== undefined &&
+                tokenizedAssetSettleWalletType !== null
+            ) {
+                localVarQueryParameter['tokenizedAssetSettleWalletType'] =
+                    tokenizedAssetSettleWalletType;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -201,6 +210,7 @@ const TokenizedApiAxiosParamCreator = function (configuration: ConfigurationRest
          * @param {string} tokenizedAsset Tokenized asset to redeem, e.g. `AAPLB`. Not a US-equity ticker — this is the on-chain tokenized asset identifier. Unknown asset returns `-1102` (the message currently says the parameter was empty/malformed, but it was in fact sent — it is simply unknown). The target underlying ticker is looked up from this field via `/market/tokenized-assets`.
          * @param {string} tokenizedAssetAmount Quantity of the tokenized asset to redeem. Must be > 0.
          * @param {string} [clientOrderId] Client order id for idempotency. Format `^[a-zA-Z0-9-_]{32,36}$`. Auto-generated when omitted.
+         * @param {TokenizedRedeemTokenizedAssetSettleWalletTypeEnum} [tokenizedAssetSettleWalletType] Wallet the tokenized asset is deducted from on redeem. `MAIN` = Spot wallet, `CARD` = Funding wallet. Default `CARD`. If `MAIN` is sent while Spot wallet settlement is not enabled, the request is rejected as an illegal parameter.
          * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`.
          *
          * @throws {RequiredError}
@@ -209,6 +219,7 @@ const TokenizedApiAxiosParamCreator = function (configuration: ConfigurationRest
             tokenizedAsset: string,
             tokenizedAssetAmount: string,
             clientOrderId?: string,
+            tokenizedAssetSettleWalletType?: TokenizedRedeemTokenizedAssetSettleWalletTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'tokenizedAsset' is not null or undefined
@@ -228,6 +239,13 @@ const TokenizedApiAxiosParamCreator = function (configuration: ConfigurationRest
             }
             if (clientOrderId !== undefined && clientOrderId !== null) {
                 localVarQueryParameter['clientOrderId'] = clientOrderId;
+            }
+            if (
+                tokenizedAssetSettleWalletType !== undefined &&
+                tokenizedAssetSettleWalletType !== null
+            ) {
+                localVarQueryParameter['tokenizedAssetSettleWalletType'] =
+                    tokenizedAssetSettleWalletType;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -414,6 +432,13 @@ export interface TokenizedMintRequest {
     readonly clientOrderId?: string;
 
     /**
+     * Wallet that receives the minted tokenized asset. `MAIN` = Spot wallet, `CARD` = Funding wallet. Default `CARD`. If `MAIN` is sent while Spot wallet settlement is not enabled, the request is rejected as an illegal parameter.
+     * @type {'MAIN' | 'CARD'}
+     * @memberof TokenizedApiTokenizedMint
+     */
+    readonly tokenizedAssetSettleWalletType?: TokenizedMintTokenizedAssetSettleWalletTypeEnum;
+
+    /**
      * The value cannot be greater than `60000`.
      * @type {number | bigint}
      * @memberof TokenizedApiTokenizedMint
@@ -446,6 +471,13 @@ export interface TokenizedRedeemRequest {
      * @memberof TokenizedApiTokenizedRedeem
      */
     readonly clientOrderId?: string;
+
+    /**
+     * Wallet the tokenized asset is deducted from on redeem. `MAIN` = Spot wallet, `CARD` = Funding wallet. Default `CARD`. If `MAIN` is sent while Spot wallet settlement is not enabled, the request is rejected as an illegal parameter.
+     * @type {'MAIN' | 'CARD'}
+     * @memberof TokenizedApiTokenizedRedeem
+     */
+    readonly tokenizedAssetSettleWalletType?: TokenizedRedeemTokenizedAssetSettleWalletTypeEnum;
 
     /**
      * The value cannot be greater than `60000`.
@@ -559,6 +591,7 @@ export class TokenizedApi implements TokenizedApiInterface {
             requestParameters?.underlyingAsset,
             requestParameters?.underlyingAssetAmount,
             requestParameters?.clientOrderId,
+            requestParameters?.tokenizedAssetSettleWalletType,
             requestParameters?.recvWindow
         );
         return sendRequest<TokenizedMintResponse>(
@@ -594,6 +627,7 @@ export class TokenizedApi implements TokenizedApiInterface {
             requestParameters?.tokenizedAsset,
             requestParameters?.tokenizedAssetAmount,
             requestParameters?.clientOrderId,
+            requestParameters?.tokenizedAssetSettleWalletType,
             requestParameters?.recvWindow
         );
         return sendRequest<TokenizedRedeemResponse>(
@@ -612,4 +646,14 @@ export class TokenizedApi implements TokenizedApiInterface {
 export enum TokenizedConvertStatusConvertTypeEnum {
     MINT = 'MINT',
     REDEEM = 'REDEEM',
+}
+
+export enum TokenizedMintTokenizedAssetSettleWalletTypeEnum {
+    MAIN = 'MAIN',
+    CARD = 'CARD',
+}
+
+export enum TokenizedRedeemTokenizedAssetSettleWalletTypeEnum {
+    MAIN = 'MAIN',
+    CARD = 'CARD',
 }

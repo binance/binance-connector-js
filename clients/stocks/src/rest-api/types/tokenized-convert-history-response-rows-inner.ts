@@ -73,4 +73,10 @@ export interface TokenizedConvertHistoryResponseRowsInner {
      * @memberof TokenizedConvertHistoryResponseRowsInner
      */
     updatedAt?: number | bigint;
+    /**
+     * The wallet the tokenized asset is settled in: `MAIN` = Spot wallet, `CARD` = Funding wallet.
+     * @type {string}
+     * @memberof TokenizedConvertHistoryResponseRowsInner
+     */
+    tokenizedAssetSettleWalletType?: string;
 }

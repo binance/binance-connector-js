@@ -15,7 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { TokenizedApi, TokenizedConvertStatusConvertTypeEnum } from '../../../src/rest-api';
+import {
+    TokenizedApi,
+    TokenizedConvertStatusConvertTypeEnum,
+    TokenizedMintTokenizedAssetSettleWalletTypeEnum,
+    TokenizedRedeemTokenizedAssetSettleWalletTypeEnum,
+} from '../../../src/rest-api';
 import {
     TokenizedConvertHistoryRequest,
     TokenizedConvertStatusRequest,
@@ -58,6 +63,7 @@ describe('TokenizedApi', () => {
                             status: 'S',
                             createdAt: 1735900000000,
                             updatedAt: 1735900060000,
+                            tokenizedAssetSettleWalletType: 'CARD',
                         },
                     ],
                     hasMore: true,
@@ -101,6 +107,7 @@ describe('TokenizedApi', () => {
                             status: 'S',
                             createdAt: 1735900000000,
                             updatedAt: 1735900060000,
+                            tokenizedAssetSettleWalletType: 'CARD',
                         },
                     ],
                     hasMore: true,
@@ -158,6 +165,7 @@ describe('TokenizedApi', () => {
                     status: 'S',
                     createdAt: 1735900000000,
                     updatedAt: 1735900060000,
+                    tokenizedAssetSettleWalletType: 'CARD',
                 })
             );
 
@@ -193,6 +201,7 @@ describe('TokenizedApi', () => {
                     status: 'S',
                     createdAt: 1735900000000,
                     updatedAt: 1735900060000,
+                    tokenizedAssetSettleWalletType: 'CARD',
                 })
             );
 
@@ -267,7 +276,11 @@ describe('TokenizedApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ issuerRequestId: 'mint-20260505-8f3b9e1a2d3c4b5a', status: 'P' })
+                JSONStringify({
+                    issuerRequestId: 'mint-20260505-8f3b9e1a2d3c4b5a',
+                    status: 'P',
+                    tokenizedAssetSettleWalletType: 'CARD',
+                })
             );
 
             const spy = jest.spyOn(client, 'tokenizedMint').mockReturnValue(
@@ -289,11 +302,17 @@ describe('TokenizedApi', () => {
                 underlyingAsset: 'AAPL',
                 underlyingAssetAmount: '1',
                 clientOrderId: 'mint-client-id-32chars-0000000001',
+                tokenizedAssetSettleWalletType:
+                    TokenizedMintTokenizedAssetSettleWalletTypeEnum.MAIN,
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ issuerRequestId: 'mint-20260505-8f3b9e1a2d3c4b5a', status: 'P' })
+                JSONStringify({
+                    issuerRequestId: 'mint-20260505-8f3b9e1a2d3c4b5a',
+                    status: 'P',
+                    tokenizedAssetSettleWalletType: 'CARD',
+                })
             );
 
             const spy = jest.spyOn(client, 'tokenizedMint').mockReturnValue(
@@ -365,7 +384,11 @@ describe('TokenizedApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ issuerRequestId: 'redeem-20260505-a1b2c3d4e5f6', status: 'P' })
+                JSONStringify({
+                    issuerRequestId: 'redeem-20260505-a1b2c3d4e5f6',
+                    status: 'P',
+                    tokenizedAssetSettleWalletType: 'CARD',
+                })
             );
 
             const spy = jest.spyOn(client, 'tokenizedRedeem').mockReturnValue(
@@ -387,11 +410,17 @@ describe('TokenizedApi', () => {
                 tokenizedAsset: 'AAPLB',
                 tokenizedAssetAmount: '1',
                 clientOrderId: 'redeem-client-id-32chars-000000001',
+                tokenizedAssetSettleWalletType:
+                    TokenizedRedeemTokenizedAssetSettleWalletTypeEnum.MAIN,
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ issuerRequestId: 'redeem-20260505-a1b2c3d4e5f6', status: 'P' })
+                JSONStringify({
+                    issuerRequestId: 'redeem-20260505-a1b2c3d4e5f6',
+                    status: 'P',
+                    tokenizedAssetSettleWalletType: 'CARD',
+                })
             );
 
             const spy = jest.spyOn(client, 'tokenizedRedeem').mockReturnValue(

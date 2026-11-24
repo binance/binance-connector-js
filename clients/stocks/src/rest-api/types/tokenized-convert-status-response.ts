@@ -73,4 +73,10 @@ export interface TokenizedConvertStatusResponse {
      * @memberof TokenizedConvertStatusResponse
      */
     updatedAt?: number | bigint;
+    /**
+     * The wallet the tokenized asset is settled in: `MAIN` = Spot wallet, `CARD` = Funding wallet.
+     * @type {string}
+     * @memberof TokenizedConvertStatusResponse
+     */
+    tokenizedAssetSettleWalletType?: string;
 }

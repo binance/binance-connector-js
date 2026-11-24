@@ -44,19 +44,19 @@ export interface EquityOrderHistoryResponseRowsInner {
      */
     side?: string;
     /**
-     * `MARKET` / `LIMIT`.
+     * `MARKET` / `LIMIT`; stop-limit orders placed in the app are `STOP_LOSS_LIMIT` / `TAKE_PROFIT_LIMIT`, and stop-limit orders not placed through Binance are `STOP_LIMIT`.
      * @type {string}
      * @memberof EquityOrderHistoryResponseRowsInner
      */
     orderType?: string;
     /**
-     * Limit price (USD). Non-null for `LIMIT` orders, `null` for `MARKET`.
+     * Limit price (USD). Returned for `LIMIT` and stop-limit orders; `MARKET` orders have no limit price (`null`).
      * @type {string}
      * @memberof EquityOrderHistoryResponseRowsInner
      */
     limitPrice?: string | null;
     /**
-     * Average fill price (USD). `null` until the first fill. For `MARKET` orders this is the only meaningful price field.
+     * Average fill price (USD) as reported by the broker, returned for all order types. `null` until the first fill.
      * @type {string}
      * @memberof EquityOrderHistoryResponseRowsInner
      */

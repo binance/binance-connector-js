@@ -385,6 +385,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {PlaceEquityOrderWalletTypeEnum} [walletType] Payment wallet for `BUY` orders: `CARD` (default) / `MAIN`. `SELL` orders always settle to `CARD`.
          * @param {string} [clientOrderId] Client-supplied order id. Format `^[a-zA-Z0-9-_]{32,36}$`. Auto-generated when omitted.
          * @param {boolean} [tokenize] Whether to tokenize the purchased stock asset upon settlement. Default `true`. Only takes effect when the symbol is tokenization-enabled (check via `/market/tokenized-assets`); silently ignored for non-tokenized symbols, which always settle as traditional underlying-equity trades.
+         * @param {PlaceEquityOrderTokenizedAssetSettleWalletTypeEnum} [tokenizedAssetSettleWalletType] Wallet that receives the tokenized asset minted after the order fills. `MAIN` = Spot wallet, `CARD` = Funding wallet. Default `CARD`. Only applies when `side` = `BUY` and `tokenize` = `true`; ignored for `SELL` or `tokenize` = `false`. If `MAIN` is sent while Spot wallet settlement is not enabled, the request is rejected as an illegal parameter.
          * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`.
          *
          * @throws {RequiredError}
@@ -402,6 +403,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             walletType?: PlaceEquityOrderWalletTypeEnum,
             clientOrderId?: string,
             tokenize?: boolean,
+            tokenizedAssetSettleWalletType?: PlaceEquityOrderTokenizedAssetSettleWalletTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -450,6 +452,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (tokenize !== undefined && tokenize !== null) {
                 localVarQueryParameter['tokenize'] = tokenize;
+            }
+            if (
+                tokenizedAssetSettleWalletType !== undefined &&
+                tokenizedAssetSettleWalletType !== null
+            ) {
+                localVarQueryParameter['tokenizedAssetSettleWalletType'] =
+                    tokenizedAssetSettleWalletType;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -906,6 +915,13 @@ export interface PlaceEquityOrderRequest {
     readonly tokenize?: boolean;
 
     /**
+     * Wallet that receives the tokenized asset minted after the order fills. `MAIN` = Spot wallet, `CARD` = Funding wallet. Default `CARD`. Only applies when `side` = `BUY` and `tokenize` = `true`; ignored for `SELL` or `tokenize` = `false`. If `MAIN` is sent while Spot wallet settlement is not enabled, the request is rejected as an illegal parameter.
+     * @type {'MAIN' | 'CARD'}
+     * @memberof TradeApiPlaceEquityOrder
+     */
+    readonly tokenizedAssetSettleWalletType?: PlaceEquityOrderTokenizedAssetSettleWalletTypeEnum;
+
+    /**
      * The value cannot be greater than `60000`.
      * @type {number | bigint}
      * @memberof TradeApiPlaceEquityOrder
@@ -1189,6 +1205,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.walletType,
             requestParameters?.clientOrderId,
             requestParameters?.tokenize,
+            requestParameters?.tokenizedAssetSettleWalletType,
             requestParameters?.recvWindow
         );
         return sendRequest<PlaceEquityOrderResponse>(
@@ -1243,4 +1260,9 @@ export enum PlaceEquityOrderTradingSessionEnum {
 export enum PlaceEquityOrderWalletTypeEnum {
     CARD = 'CARD',
     MAIN = 'MAIN',
+}
+
+export enum PlaceEquityOrderTokenizedAssetSettleWalletTypeEnum {
+    MAIN = 'MAIN',
+    CARD = 'CARD',
 }

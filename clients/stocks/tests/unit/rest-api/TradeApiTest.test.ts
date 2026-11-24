@@ -25,6 +25,7 @@ import {
     PlaceEquityOrderTimeInForceEnum,
     PlaceEquityOrderTradingSessionEnum,
     PlaceEquityOrderWalletTypeEnum,
+    PlaceEquityOrderTokenizedAssetSettleWalletTypeEnum,
 } from '../../../src/rest-api';
 import {
     CancelAllEquityOrdersRequest,
@@ -741,6 +742,8 @@ describe('TradeApi', () => {
                 walletType: PlaceEquityOrderWalletTypeEnum.CARD,
                 clientOrderId: 'web_2c9c92b74f1e4a7c8f3b9e1a2d3c4b5a',
                 tokenize: true,
+                tokenizedAssetSettleWalletType:
+                    PlaceEquityOrderTokenizedAssetSettleWalletTypeEnum.MAIN,
                 recvWindow: 5000,
             };
 
