@@ -121,6 +121,96 @@ export interface NewOrderResponse {
      */
     selfTradePreventionMode?: string;
     /**
+     * Appears for STOP_LOSS, TAKE_PROFIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT orders.
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    stopPrice?: string;
+    /**
+     * Delta price change required before order activation.
+     * @type {number | bigint}
+     * @memberof NewOrderResponse
+     */
+    trailingDelta?: number | bigint;
+    /**
+     * Appears only if the parameter icebergQty was sent in the request.
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    icebergQty?: string;
+    /**
+     * Appears only if the strategyId parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof NewOrderResponse
+     */
+    strategyId?: number | bigint;
+    /**
+     * Appears only if the strategyType parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof NewOrderResponse
+     */
+    strategyType?: number | bigint;
+    /**
+     * Appears only if the order expired due to STP.
+     * @type {number | bigint}
+     * @memberof NewOrderResponse
+     */
+    preventedMatchId?: number | bigint;
+    /**
+     * Order quantity that expired due to STP.
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    preventedQuantity?: string;
+    /**
+     * Time when the trailing order is now active and tracking price changes.
+     * @type {number | bigint}
+     * @memberof NewOrderResponse
+     */
+    trailingTime?: number | bigint;
+    /**
+     * Field that determines whether order used SOR.
+     * @type {boolean}
+     * @memberof NewOrderResponse
+     */
+    usedSor?: boolean;
+    /**
+     * Determines whether the order is being filled by the SOR or by the order book.
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    workingFloor?: string;
+    /**
+     * Price peg type. Only for pegged orders.
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    pegPriceType?: string;
+    /**
+     * Price peg offset type. Only for pegged orders, if requested.
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    pegOffsetType?: string;
+    /**
+     * Price peg offset value. Only for pegged orders, if requested.
+     * @type {number | bigint}
+     * @memberof NewOrderResponse
+     */
+    pegOffsetValue?: number | bigint;
+    /**
+     * Current price order is pegged at. Only for pegged orders, once determined.
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    peggedPrice?: string;
+    /**
+     * Cause of the order\'s expiration. Appears when an order has expired.
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    expiryReason?: string;
+    /**
      *
      * @type {Array<NewOrderResponseFillsInner>}
      * @memberof NewOrderResponse

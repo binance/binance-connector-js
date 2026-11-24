@@ -84,7 +84,7 @@ describe('AuthApi', () => {
                     id: 'c174a2b1-3f51-4580-b200-8528bd237cb7',
                     status: 200,
                     result: {
-                        apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
+                        apiKey: 'YOUR_API_KEY',
                         authorizedSince: 1649729878532,
                         connectedSince: 1649729873021,
                         returnRateLimits: false,
@@ -400,7 +400,7 @@ describe('AuthApi', () => {
                     id: 'b50c16cd-62c9-4e29-89e4-37f10111f5bf',
                     status: 200,
                     result: {
-                        apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
+                        apiKey: 'YOUR_API_KEY',
                         authorizedSince: 1649729878532,
                         connectedSince: 1649729873021,
                         returnRateLimits: false,

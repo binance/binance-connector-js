@@ -13,6 +13,8 @@ export * from './all-orders-response-inner';
 export * from './avg-price-response';
 export * from './delete-open-orders-response';
 export * from './delete-open-orders-response-inner';
+export * from './delete-open-orders-response-inner-order-reports-inner';
+export * from './delete-open-orders-response-inner-orders-inner';
 export * from './delete-order-list-response';
 export * from './delete-order-list-response-order-reports-inner';
 export * from './delete-order-list-response-orders-inner';

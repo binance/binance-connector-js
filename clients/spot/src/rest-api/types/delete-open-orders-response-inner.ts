@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Spot REST API
@@ -13,6 +14,13 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DeleteOpenOrdersResponseInnerOrderReportsInner } from './delete-open-orders-response-inner-order-reports-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { DeleteOpenOrdersResponseInnerOrdersInner } from './delete-open-orders-response-inner-orders-inner';
+
 /**
  *
  * @export
@@ -21,10 +29,58 @@
 export interface DeleteOpenOrdersResponseInner {
     /**
      *
+     * @type {number | bigint}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    orderListId?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    contingencyType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    listStatusType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    listOrderStatus?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    listClientOrderId?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    transactionTime?: number | bigint;
+    /**
+     *
      * @type {string}
      * @memberof DeleteOpenOrdersResponseInner
      */
     symbol?: string;
+    /**
+     *
+     * @type {Array<DeleteOpenOrdersResponseInnerOrdersInner>}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    orders?: Array<DeleteOpenOrdersResponseInnerOrdersInner>;
+    /**
+     *
+     * @type {Array<DeleteOpenOrdersResponseInnerOrderReportsInner>}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    orderReports?: Array<DeleteOpenOrdersResponseInnerOrderReportsInner>;
     /**
      *
      * @type {string}
@@ -37,12 +93,6 @@ export interface DeleteOpenOrdersResponseInner {
      * @memberof DeleteOpenOrdersResponseInner
      */
     orderId?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof DeleteOpenOrdersResponseInner
-     */
-    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -110,9 +160,99 @@ export interface DeleteOpenOrdersResponseInner {
      */
     side?: string;
     /**
+     * Appears for STOP_LOSS, TAKE_PROFIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT orders.
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    stopPrice?: string;
+    /**
+     * Delta price change required before order activation.
+     * @type {number | bigint}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    trailingDelta?: number | bigint;
+    /**
+     * Time when the trailing order is now active and tracking price changes.
+     * @type {number | bigint}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    trailingTime?: number | bigint;
+    /**
+     * Appears only if the parameter icebergQty was sent in the request.
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    icebergQty?: string;
+    /**
+     * Appears only if the strategyId parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    strategyId?: number | bigint;
+    /**
+     * Appears only if the strategyType parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    strategyType?: number | bigint;
+    /**
      *
      * @type {string}
      * @memberof DeleteOpenOrdersResponseInner
      */
     selfTradePreventionMode?: string;
+    /**
+     * Appears only if the order expired due to STP.
+     * @type {number | bigint}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    preventedMatchId?: number | bigint;
+    /**
+     * Order quantity that expired due to STP.
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    preventedQuantity?: string;
+    /**
+     * Field that determines whether order used SOR.
+     * @type {boolean}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    usedSor?: boolean;
+    /**
+     * Determines whether the order is being filled by the SOR or by the order book.
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    workingFloor?: string;
+    /**
+     * Price peg type. Only for pegged orders.
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    pegPriceType?: string;
+    /**
+     * Price peg offset type. Only for pegged orders, if requested.
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    pegOffsetType?: string;
+    /**
+     * Price peg offset value. Only for pegged orders, if requested.
+     * @type {number | bigint}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    pegOffsetValue?: number | bigint;
+    /**
+     * Current price order is pegged at. Only for pegged orders, once determined.
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    peggedPrice?: string;
+    /**
+     * Cause of the order\'s expiration. Appears when an order has expired.
+     * @type {string}
+     * @memberof DeleteOpenOrdersResponseInner
+     */
+    expiryReason?: string;
 }

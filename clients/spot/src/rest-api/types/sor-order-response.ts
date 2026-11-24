@@ -138,4 +138,82 @@ export interface SorOrderResponse {
      * @memberof SorOrderResponse
      */
     usedSor?: boolean;
+    /**
+     * Appears for STOP_LOSS, TAKE_PROFIT, STOP_LOSS_LIMIT, and TAKE_PROFIT_LIMIT orders.
+     * @type {string}
+     * @memberof SorOrderResponse
+     */
+    stopPrice?: string;
+    /**
+     * Delta price change required before order activation.
+     * @type {number | bigint}
+     * @memberof SorOrderResponse
+     */
+    trailingDelta?: number | bigint;
+    /**
+     * Appears only if the parameter icebergQty was sent in the request.
+     * @type {string}
+     * @memberof SorOrderResponse
+     */
+    icebergQty?: string;
+    /**
+     * Appears only if the strategyId parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof SorOrderResponse
+     */
+    strategyId?: number | bigint;
+    /**
+     * Appears only if the strategyType parameter was provided upon order placement.
+     * @type {number | bigint}
+     * @memberof SorOrderResponse
+     */
+    strategyType?: number | bigint;
+    /**
+     * Appears only if the order expired due to STP.
+     * @type {number | bigint}
+     * @memberof SorOrderResponse
+     */
+    preventedMatchId?: number | bigint;
+    /**
+     * Order quantity that expired due to STP.
+     * @type {string}
+     * @memberof SorOrderResponse
+     */
+    preventedQuantity?: string;
+    /**
+     * Time when the trailing order is now active and tracking price changes.
+     * @type {number | bigint}
+     * @memberof SorOrderResponse
+     */
+    trailingTime?: number | bigint;
+    /**
+     * Price peg type. Only for pegged orders.
+     * @type {string}
+     * @memberof SorOrderResponse
+     */
+    pegPriceType?: string;
+    /**
+     * Price peg offset type. Only for pegged orders, if requested.
+     * @type {string}
+     * @memberof SorOrderResponse
+     */
+    pegOffsetType?: string;
+    /**
+     * Price peg offset value. Only for pegged orders, if requested.
+     * @type {number | bigint}
+     * @memberof SorOrderResponse
+     */
+    pegOffsetValue?: number | bigint;
+    /**
+     * Current price order is pegged at. Only for pegged orders, once determined.
+     * @type {string}
+     * @memberof SorOrderResponse
+     */
+    peggedPrice?: string;
+    /**
+     * Cause of the order\'s expiration. Appears when an order has expired.
+     * @type {string}
+     * @memberof SorOrderResponse
+     */
+    expiryReason?: string;
 }

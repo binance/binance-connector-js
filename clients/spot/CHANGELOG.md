@@ -1,5 +1,217 @@
 # Changelog
 
+## 35.0.0 - 2026-11-24
+
+### Changed (68)
+
+#### REST API
+
+- Modified parameter `aboveIcebergQty`:
+  - type `integer` → `number`
+  - format `int64` → `float`
+  - affected methods:
+    - `orderListOco()` (`POST /api/v3/orderList/oco`)
+- Modified parameter `belowIcebergQty`:
+  - type `integer` → `number`
+  - format `int64` → `float`
+  - affected methods:
+    - `orderListOco()` (`POST /api/v3/orderList/oco`)
+- Modified response for `deleteOpenOrders()` (`DELETE /api/v3/openOrders`):
+  - items: property `orderReports` added
+  - items: property `icebergQty` added
+  - items: property `orders` added
+  - items: property `strategyType` added
+  - items: property `workingFloor` added
+  - items: property `pegPriceType` added
+  - items: property `expiryReason` added
+  - items: property `trailingDelta` added
+  - items: property `preventedQuantity` added
+  - items: property `listStatusType` added
+  - items: property `stopPrice` added
+  - items: property `pegOffsetType` added
+  - items: property `peggedPrice` added
+  - items: property `preventedMatchId` added
+  - items: property `trailingTime` added
+  - items: property `contingencyType` added
+  - items: property `listClientOrderId` added
+  - items: property `pegOffsetValue` added
+  - items: property `transactionTime` added
+  - items: property `listOrderStatus` added
+  - items: property `strategyId` added
+  - items: property `usedSor` added
+  - items: item property `orderReports` added
+  - items: item property `icebergQty` added
+  - items: item property `orders` added
+  - items: item property `strategyType` added
+  - items: item property `workingFloor` added
+  - items: item property `pegPriceType` added
+  - items: item property `expiryReason` added
+  - items: item property `trailingDelta` added
+  - items: item property `preventedQuantity` added
+  - items: item property `listStatusType` added
+  - items: item property `stopPrice` added
+  - items: item property `pegOffsetType` added
+  - items: item property `peggedPrice` added
+  - items: item property `preventedMatchId` added
+  - items: item property `trailingTime` added
+  - items: item property `contingencyType` added
+  - items: item property `listClientOrderId` added
+  - items: item property `pegOffsetValue` added
+  - items: item property `transactionTime` added
+  - items: item property `listOrderStatus` added
+  - items: item property `strategyId` added
+  - items: item property `usedSor` added
+
+- Modified response for `newOrder()` (`POST /api/v3/order`):
+  - property `trailingTime` added
+  - property `usedSor` added
+  - property `pegOffsetValue` added
+  - property `preventedQuantity` added
+  - property `preventedMatchId` added
+  - property `peggedPrice` added
+  - property `icebergQty` added
+  - property `trailingDelta` added
+  - property `strategyType` added
+  - property `pegPriceType` added
+  - property `pegOffsetType` added
+  - property `stopPrice` added
+  - property `strategyId` added
+  - property `workingFloor` added
+  - property `expiryReason` added
+
+- Modified response for `sorOrder()` (`POST /api/v3/sor/order`):
+  - property `pegOffsetValue` added
+  - property `trailingDelta` added
+  - property `preventedQuantity` added
+  - property `icebergQty` added
+  - property `trailingTime` added
+  - property `strategyId` added
+  - property `pegPriceType` added
+  - property `stopPrice` added
+  - property `expiryReason` added
+  - property `pegOffsetType` added
+  - property `preventedMatchId` added
+  - property `peggedPrice` added
+  - property `strategyType` added
+
+- Added response field `strategyId`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `pegOffsetType`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `pegOffsetValue`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `icebergQty`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `trailingTime`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `expiryReason`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `stopPrice`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `peggedPrice`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `strategyType`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `workingFloor`
+  - affected events:
+    - `newOrderResponse`
+- Added response field `pegPriceType`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `usedSor`
+  - affected events:
+    - `newOrderResponse`
+- Added response field `preventedQuantity`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `preventedMatchId`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Added response field `trailingDelta`
+  - affected events:
+    - `newOrderResponse`
+    - `sorOrderResponse`
+- Modified response schema `deleteOpenOrdersResponse`:
+  - items: property `trailingDelta` added
+  - items: property `stopPrice` added
+  - items: property `contingencyType` added
+  - items: property `pegOffsetType` added
+  - items: property `pegPriceType` added
+  - items: property `peggedPrice` added
+  - items: property `expiryReason` added
+  - items: property `orderReports` added
+  - items: property `icebergQty` added
+  - items: property `listClientOrderId` added
+  - items: property `strategyId` added
+  - items: property `transactionTime` added
+  - items: property `orders` added
+  - items: property `listStatusType` added
+  - items: property `workingFloor` added
+  - items: property `trailingTime` added
+  - items: property `strategyType` added
+  - items: property `listOrderStatus` added
+  - items: property `preventedQuantity` added
+  - items: property `usedSor` added
+  - items: property `preventedMatchId` added
+  - items: property `pegOffsetValue` added
+  - items: item property `trailingDelta` added
+  - items: item property `stopPrice` added
+  - items: item property `contingencyType` added
+  - items: item property `pegOffsetType` added
+  - items: item property `pegPriceType` added
+  - items: item property `peggedPrice` added
+  - items: item property `expiryReason` added
+  - items: item property `orderReports` added
+  - items: item property `icebergQty` added
+  - items: item property `listClientOrderId` added
+  - items: item property `strategyId` added
+  - items: item property `transactionTime` added
+  - items: item property `orders` added
+  - items: item property `listStatusType` added
+  - items: item property `workingFloor` added
+  - items: item property `trailingTime` added
+  - items: item property `strategyType` added
+  - items: item property `listOrderStatus` added
+  - items: item property `preventedQuantity` added
+  - items: item property `usedSor` added
+  - items: item property `preventedMatchId` added
+  - items: item property `pegOffsetValue` added
+
+#### WebSocket API
+
+- Modified parameter `aboveIcebergQty`:
+  - type `integer` → `number`
+  - format `int64` → `float`
+  - affected methods:
+    - `orderListPlaceOco()` (`orderList.place.oco` method)
+- Modified parameter `belowIcebergQty`:
+  - type `integer` → `number`
+  - format `int64` → `float`
+  - affected methods:
+    - `orderListPlaceOco()` (`orderList.place.oco` method)
+- Marked `orderListPlace()` (`orderList.place` method) as deprecated.
+
 ## 34.1.1 - 2026-11-18
 
 ### Changed (2)

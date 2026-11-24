@@ -1558,10 +1558,10 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      * Note that this can only be used if `aboveTimeInForce` is `GTC`.
-     * @type {number | bigint}
+     * @type {number}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly aboveIcebergQty?: number | bigint;
+    readonly aboveIcebergQty?: number;
 
     /**
      * Can be used if `aboveType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -1635,10 +1635,10 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      * Note that this can only be used if `belowTimeInForce` is `GTC`.
-     * @type {number | bigint}
+     * @type {number}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly belowIcebergQty?: number | bigint;
+    readonly belowIcebergQty?: number;
 
     /**
      * Can be used if `belowType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.

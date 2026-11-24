@@ -875,7 +875,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOcoBelowTypeEnum} belowType Supported values: `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`
          * @param {string} [listClientOrderId] Arbitrary unique ID among open order lists. Automatically generated if not sent. A new order list with the same `listClientOrderId` is accepted only when the previous one is filled or completely expired. `listClientOrderId` is distinct from the `aboveClientOrderId` and the `belowClientOrderId`.
          * @param {string} [aboveClientOrderId] Arbitrary unique ID among open orders for the above order. Automatically generated if not sent.
-         * @param {number | bigint} [aboveIcebergQty] Note that this can only be used if `aboveTimeInForce` is `GTC`.
+         * @param {number} [aboveIcebergQty] Note that this can only be used if `aboveTimeInForce` is `GTC`.
          * @param {number} [abovePrice] Can be used if `aboveType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [aboveStopPrice] Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
          * @param {number | bigint} [aboveTrailingDelta] See Trailing Stop order FAQ
@@ -886,7 +886,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOcoAbovePegOffsetTypeEnum} [abovePegOffsetType]
          * @param {number} [abovePegOffsetValue]
          * @param {string} [belowClientOrderId] Arbitrary unique ID among open orders for the below order. Automatically generated if not sent.
-         * @param {number | bigint} [belowIcebergQty] Note that this can only be used if `belowTimeInForce` is `GTC`.
+         * @param {number} [belowIcebergQty] Note that this can only be used if `belowTimeInForce` is `GTC`.
          * @param {number} [belowPrice] Can be used if `belowType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [belowStopPrice] Can be used if `belowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. Either `belowStopPrice` or `belowTrailingDelta` or both, must be specified.
          * @param {number | bigint} [belowTrailingDelta] See Trailing Stop order FAQ
@@ -912,7 +912,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             belowType: OrderListOcoBelowTypeEnum,
             listClientOrderId?: string,
             aboveClientOrderId?: string,
-            aboveIcebergQty?: number | bigint,
+            aboveIcebergQty?: number,
             abovePrice?: number,
             aboveStopPrice?: number,
             aboveTrailingDelta?: number | bigint,
@@ -923,7 +923,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             abovePegOffsetType?: OrderListOcoAbovePegOffsetTypeEnum,
             abovePegOffsetValue?: number,
             belowClientOrderId?: string,
-            belowIcebergQty?: number | bigint,
+            belowIcebergQty?: number,
             belowPrice?: number,
             belowStopPrice?: number,
             belowTrailingDelta?: number | bigint,
@@ -3829,10 +3829,10 @@ export interface OrderListOcoRequest {
 
     /**
      * Note that this can only be used if `aboveTimeInForce` is `GTC`.
-     * @type {number | bigint}
+     * @type {number}
      * @memberof TradeApiOrderListOco
      */
-    readonly aboveIcebergQty?: number | bigint;
+    readonly aboveIcebergQty?: number;
 
     /**
      * Can be used if `aboveType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -3906,10 +3906,10 @@ export interface OrderListOcoRequest {
 
     /**
      * Note that this can only be used if `belowTimeInForce` is `GTC`.
-     * @type {number | bigint}
+     * @type {number}
      * @memberof TradeApiOrderListOco
      */
-    readonly belowIcebergQty?: number | bigint;
+    readonly belowIcebergQty?: number;
 
     /**
      * Can be used if `belowType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.

@@ -154,6 +154,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * 101-500| 25
          * 501-1000| 50
          * 1001-5000| 250
+         * 5001-7500| 500
          *
          * Security Type: NONE
          *
@@ -162,7 +163,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Order book
          * @param {string} symbol
-         * @param {number} [limit] If limit > 5000, only 5000 entries will be returned.
+         * @param {number} [limit] If limit > 7500, only 7500 entries will be returned.
          * @param {DepthSymbolStatusEnum} [symbolStatus] Filters for symbols that have this `tradingStatus`.
          * A status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.
          *
@@ -1017,6 +1018,7 @@ export interface MarketApiInterface {
      * 101-500| 25
      * 501-1000| 50
      * 1001-5000| 250
+     * 5001-7500| 500
      *
      * Security Type: NONE
      *
@@ -1422,7 +1424,7 @@ export interface DepthRequest {
     readonly symbol: string;
 
     /**
-     * If limit > 5000, only 5000 entries will be returned.
+     * If limit > 7500, only 7500 entries will be returned.
      * @type {number}
      * @memberof MarketApiDepth
      */
@@ -1932,6 +1934,7 @@ export class MarketApi implements MarketApiInterface {
      * 101-500| 25
      * 501-1000| 50
      * 1001-5000| 250
+     * 5001-7500| 500
      *
      * Security Type: NONE
      *

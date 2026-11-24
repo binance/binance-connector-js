@@ -893,6 +893,7 @@ export class WebsocketAPIConnection {
      * 101-500| 25
      * 501-1000| 50
      * 1001-5000| 250
+     * 5001-7500| 500
      *
      * Security Type: NONE
      *

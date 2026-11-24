@@ -93,6 +93,7 @@ export interface MarketApiInterface {
      * 101-500| 25
      * 501-1000| 50
      * 1001-5000| 250
+     * 5001-7500| 500
      *
      * Security Type: NONE
      *
@@ -609,7 +610,7 @@ export interface DepthRequest {
     readonly id?: string;
 
     /**
-     *
+     * If limit > 7500, only 7500 entries will be returned.
      * @type {number}
      * @memberof MarketApiDepth
      */
@@ -1178,6 +1179,7 @@ export class MarketApi implements MarketApiInterface {
      * 101-500| 25
      * 501-1000| 50
      * 1001-5000| 250
+     * 5001-7500| 500
      *
      * Security Type: NONE
      *
