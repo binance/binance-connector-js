@@ -1001,7 +1001,9 @@ export class RestAPI {
     /**
      * Get Funding Rate History
      *
-     * Weight: share 500/5min/IP rate limit with GET /fapi/v1/fundingInfo
+     * Weight: When `limit` ≤ 200: share 500/5min/IP rate limit with `GET /fapi/v1/fundingInfo`
+     *
+     * When `limit` > 200: 100/5min/IP rate limit
      *
      * Notes:
      * - If `startTime` and `endTime` are not sent, the most recent 200 records are returned.

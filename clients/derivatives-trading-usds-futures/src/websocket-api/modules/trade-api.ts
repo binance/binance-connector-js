@@ -506,8 +506,8 @@ export interface NewAlgoOrderRequest {
     readonly positionSide?: NewAlgoOrderPositionSideEnum;
 
     /**
-     * `IOC` or `GTC` or `FOK`, default `GTC`
-     * @type {'IOC' | 'GTC' | 'FOK'}
+     * `IOC` or `GTC` or `FOK` or `GTX` or `GTD`, default `GTC`
+     * @type {'IOC' | 'GTC' | 'FOK' | 'GTX' | 'GTD'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly timeInForce?: NewAlgoOrderTimeInForceEnum;
@@ -1205,6 +1205,8 @@ export enum NewAlgoOrderTimeInForceEnum {
     IOC = 'IOC',
     GTC = 'GTC',
     FOK = 'FOK',
+    GTX = 'GTX',
+    GTD = 'GTD',
 }
 
 export enum NewAlgoOrderWorkingTypeEnum {
