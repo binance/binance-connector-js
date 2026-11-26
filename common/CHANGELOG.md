@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.6 - 2026-11-26
+
+### Changed (1)
+
+- Fixed an unhandled `error` event that terminated the process when a WebSocket connection attempt failed and no `error` listener was registered. This affected the first `connect()` call, which now rejects with the underlying error, as well as reconnection attempts in `WebsocketAPIBase` and `WebsocketStreamsBase`.
+
 ## 2.5.5 - 2026-11-18
 
 ### Added (1)

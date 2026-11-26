@@ -94,6 +94,8 @@ export class WebsocketCommon extends WebsocketEventEmitter {
         connectionPool: WebsocketConnection[] = []
     ) {
         super();
+        // Socket errors are re-emitted on this emitter. Errors are already logged where they are received.
+        this.on('error', () => {});
         this.connectionPool = connectionPool;
         this.mode = this.configuration?.mode ?? 'single';
         this.poolSize =
